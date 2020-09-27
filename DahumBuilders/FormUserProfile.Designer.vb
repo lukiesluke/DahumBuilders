@@ -41,36 +41,60 @@ Partial Class FormUserProfile
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtMotherAddress = New System.Windows.Forms.TextBox()
+        Me.txtMotherName = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtFatherAddress = New System.Windows.Forms.TextBox()
+        Me.txtFatherName = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtCompanyName = New System.Windows.Forms.TextBox()
+        Me.txtOccupation = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.txtMobile = New System.Windows.Forms.TextBox()
+        Me.txtTelephone = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.txtCitizen = New System.Windows.Forms.TextBox()
         Me.txtPlaceBirth = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtTelephone = New System.Windows.Forms.TextBox()
-        Me.txtMobile = New System.Windows.Forms.TextBox()
-        Me.txtEmail = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.txtOccupation = New System.Windows.Forms.TextBox()
-        Me.txtCompanyName = New System.Windows.Forms.TextBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.txtFatherName = New System.Windows.Forms.TextBox()
-        Me.txtFatherAddress = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.txtMotherName = New System.Windows.Forms.TextBox()
-        Me.txtMotherAddress = New System.Windows.Forms.TextBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnAddChild = New System.Windows.Forms.Button()
+        Me.ListViewChild = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtChildSurname = New System.Windows.Forms.TextBox()
+        Me.txtChildMiddleName = New System.Windows.Forms.TextBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.txtChildName = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFirstName
@@ -259,6 +283,182 @@ Partial Class FormUserProfile
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.txtMotherAddress)
+        Me.GroupBox2.Controls.Add(Me.txtMotherName)
+        Me.GroupBox2.Controls.Add(Me.Label18)
+        Me.GroupBox2.Controls.Add(Me.Label17)
+        Me.GroupBox2.Controls.Add(Me.Label16)
+        Me.GroupBox2.Controls.Add(Me.txtFatherAddress)
+        Me.GroupBox2.Controls.Add(Me.txtFatherName)
+        Me.GroupBox2.Controls.Add(Me.Label15)
+        Me.GroupBox2.Location = New System.Drawing.Point(9, 197)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(481, 135)
+        Me.GroupBox2.TabIndex = 26
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Parent Information"
+        '
+        'txtMotherAddress
+        '
+        Me.txtMotherAddress.Location = New System.Drawing.Point(138, 102)
+        Me.txtMotherAddress.Name = "txtMotherAddress"
+        Me.txtMotherAddress.Size = New System.Drawing.Size(335, 20)
+        Me.txtMotherAddress.TabIndex = 7
+        '
+        'txtMotherName
+        '
+        Me.txtMotherName.Location = New System.Drawing.Point(85, 76)
+        Me.txtMotherName.Name = "txtMotherName"
+        Me.txtMotherName.Size = New System.Drawing.Size(388, 20)
+        Me.txtMotherName.TabIndex = 6
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(6, 109)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(123, 13)
+        Me.Label18.TabIndex = 5
+        Me.Label18.Text = "Mother Provicial address"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(6, 81)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(71, 13)
+        Me.Label17.TabIndex = 4
+        Me.Label17.Text = "Mother Name"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(6, 57)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(126, 13)
+        Me.Label16.TabIndex = 3
+        Me.Label16.Text = "Father Provincial address"
+        '
+        'txtFatherAddress
+        '
+        Me.txtFatherAddress.Location = New System.Drawing.Point(138, 50)
+        Me.txtFatherAddress.Name = "txtFatherAddress"
+        Me.txtFatherAddress.Size = New System.Drawing.Size(335, 20)
+        Me.txtFatherAddress.TabIndex = 2
+        '
+        'txtFatherName
+        '
+        Me.txtFatherName.Location = New System.Drawing.Point(85, 24)
+        Me.txtFatherName.Name = "txtFatherName"
+        Me.txtFatherName.Size = New System.Drawing.Size(388, 20)
+        Me.txtFatherName.TabIndex = 1
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(6, 31)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(68, 13)
+        Me.Label15.TabIndex = 0
+        Me.Label15.Text = "Father Name"
+        '
+        'txtCompanyName
+        '
+        Me.txtCompanyName.Location = New System.Drawing.Point(94, 168)
+        Me.txtCompanyName.Name = "txtCompanyName"
+        Me.txtCompanyName.Size = New System.Drawing.Size(396, 20)
+        Me.txtCompanyName.TabIndex = 25
+        '
+        'txtOccupation
+        '
+        Me.txtOccupation.Location = New System.Drawing.Point(94, 142)
+        Me.txtOccupation.Name = "txtOccupation"
+        Me.txtOccupation.Size = New System.Drawing.Size(396, 20)
+        Me.txtOccupation.TabIndex = 24
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(6, 175)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(82, 13)
+        Me.Label14.TabIndex = 23
+        Me.Label14.Text = "Company Name"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(6, 149)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(62, 13)
+        Me.Label13.TabIndex = 22
+        Me.Label13.Text = "Occupation"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtEmail)
+        Me.GroupBox1.Controls.Add(Me.txtMobile)
+        Me.GroupBox1.Controls.Add(Me.txtTelephone)
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.Controls.Add(Me.Label10)
+        Me.GroupBox1.Location = New System.Drawing.Point(9, 338)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(287, 112)
+        Me.GroupBox1.TabIndex = 21
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Contact Information"
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Location = New System.Drawing.Point(70, 78)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(203, 20)
+        Me.txtEmail.TabIndex = 5
+        '
+        'txtMobile
+        '
+        Me.txtMobile.Location = New System.Drawing.Point(70, 52)
+        Me.txtMobile.Name = "txtMobile"
+        Me.txtMobile.Size = New System.Drawing.Size(203, 20)
+        Me.txtMobile.TabIndex = 4
+        '
+        'txtTelephone
+        '
+        Me.txtTelephone.Location = New System.Drawing.Point(70, 26)
+        Me.txtTelephone.Name = "txtTelephone"
+        Me.txtTelephone.Size = New System.Drawing.Size(203, 20)
+        Me.txtTelephone.TabIndex = 3
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(6, 85)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(32, 13)
+        Me.Label12.TabIndex = 2
+        Me.Label12.Text = "Email"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(6, 59)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(38, 13)
+        Me.Label11.TabIndex = 1
+        Me.Label11.Text = "Mobile"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(6, 33)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(58, 13)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Telephone"
+        '
         'txtCitizen
         '
         Me.txtCitizen.Location = New System.Drawing.Point(354, 64)
@@ -302,189 +502,206 @@ Partial Class FormUserProfile
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.GroupBox3)
+        Me.TabPage2.Controls.Add(Me.Label22)
+        Me.TabPage2.Controls.Add(Me.TextBox5)
+        Me.TabPage2.Controls.Add(Me.TextBox4)
+        Me.TabPage2.Controls.Add(Me.TextBox3)
+        Me.TabPage2.Controls.Add(Me.TextBox2)
+        Me.TabPage2.Controls.Add(Me.TextBox1)
+        Me.TabPage2.Controls.Add(Me.Label21)
+        Me.TabPage2.Controls.Add(Me.Label20)
+        Me.TabPage2.Controls.Add(Me.Label19)
+        Me.TabPage2.Controls.Add(Me.Label23)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(523, 354)
+        Me.TabPage2.Size = New System.Drawing.Size(523, 455)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Spouse Information"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'GroupBox3
         '
-        Me.GroupBox1.Controls.Add(Me.txtEmail)
-        Me.GroupBox1.Controls.Add(Me.txtMobile)
-        Me.GroupBox1.Controls.Add(Me.txtTelephone)
-        Me.GroupBox1.Controls.Add(Me.Label12)
-        Me.GroupBox1.Controls.Add(Me.Label11)
-        Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Location = New System.Drawing.Point(9, 338)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(287, 112)
-        Me.GroupBox1.TabIndex = 21
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Contact Information"
+        Me.GroupBox3.Controls.Add(Me.btnAddChild)
+        Me.GroupBox3.Controls.Add(Me.ListViewChild)
+        Me.GroupBox3.Controls.Add(Me.Label26)
+        Me.GroupBox3.Controls.Add(Me.txtChildSurname)
+        Me.GroupBox3.Controls.Add(Me.txtChildMiddleName)
+        Me.GroupBox3.Controls.Add(Me.Label25)
+        Me.GroupBox3.Controls.Add(Me.txtChildName)
+        Me.GroupBox3.Controls.Add(Me.Label24)
+        Me.GroupBox3.Location = New System.Drawing.Point(9, 157)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(492, 245)
+        Me.GroupBox3.TabIndex = 10
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Childrens"
         '
-        'Label10
+        'btnAddChild
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(6, 33)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(58, 13)
-        Me.Label10.TabIndex = 0
-        Me.Label10.Text = "Telephone"
+        Me.btnAddChild.Location = New System.Drawing.Point(346, 69)
+        Me.btnAddChild.Name = "btnAddChild"
+        Me.btnAddChild.Size = New System.Drawing.Size(137, 23)
+        Me.btnAddChild.TabIndex = 7
+        Me.btnAddChild.Text = "Add Child"
+        Me.btnAddChild.UseVisualStyleBackColor = True
         '
-        'Label11
+        'ListViewChild
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(6, 59)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(38, 13)
-        Me.Label11.TabIndex = 1
-        Me.Label11.Text = "Mobile"
+        Me.ListViewChild.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.ListViewChild.FullRowSelect = True
+        Me.ListViewChild.GridLines = True
+        Me.ListViewChild.Location = New System.Drawing.Point(6, 97)
+        Me.ListViewChild.Name = "ListViewChild"
+        Me.ListViewChild.Size = New System.Drawing.Size(477, 135)
+        Me.ListViewChild.TabIndex = 6
+        Me.ListViewChild.UseCompatibleStateImageBehavior = False
+        Me.ListViewChild.View = System.Windows.Forms.View.Details
         '
-        'Label12
+        'ColumnHeader1
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(6, 85)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(32, 13)
-        Me.Label12.TabIndex = 2
-        Me.Label12.Text = "Email"
+        Me.ColumnHeader1.Text = "Name"
+        Me.ColumnHeader1.Width = 144
         '
-        'txtTelephone
+        'ColumnHeader2
         '
-        Me.txtTelephone.Location = New System.Drawing.Point(70, 26)
-        Me.txtTelephone.Name = "txtTelephone"
-        Me.txtTelephone.Size = New System.Drawing.Size(203, 20)
-        Me.txtTelephone.TabIndex = 3
+        Me.ColumnHeader2.Text = "Middle Name"
+        Me.ColumnHeader2.Width = 177
         '
-        'txtMobile
+        'ColumnHeader3
         '
-        Me.txtMobile.Location = New System.Drawing.Point(70, 52)
-        Me.txtMobile.Name = "txtMobile"
-        Me.txtMobile.Size = New System.Drawing.Size(203, 20)
-        Me.txtMobile.TabIndex = 4
+        Me.ColumnHeader3.Text = "Surname"
+        Me.ColumnHeader3.Width = 151
         '
-        'txtEmail
+        'Label26
         '
-        Me.txtEmail.Location = New System.Drawing.Point(70, 78)
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(203, 20)
-        Me.txtEmail.TabIndex = 5
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(6, 78)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(49, 13)
+        Me.Label26.TabIndex = 5
+        Me.Label26.Text = "Surname"
         '
-        'Label13
+        'txtChildSurname
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(6, 149)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(62, 13)
-        Me.Label13.TabIndex = 22
-        Me.Label13.Text = "Occupation"
+        Me.txtChildSurname.Location = New System.Drawing.Point(61, 71)
+        Me.txtChildSurname.Name = "txtChildSurname"
+        Me.txtChildSurname.Size = New System.Drawing.Size(251, 20)
+        Me.txtChildSurname.TabIndex = 4
         '
-        'Label14
+        'txtChildMiddleName
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(6, 175)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(82, 13)
-        Me.Label14.TabIndex = 23
-        Me.Label14.Text = "Company Name"
+        Me.txtChildMiddleName.Location = New System.Drawing.Point(61, 45)
+        Me.txtChildMiddleName.Name = "txtChildMiddleName"
+        Me.txtChildMiddleName.Size = New System.Drawing.Size(251, 20)
+        Me.txtChildMiddleName.TabIndex = 3
         '
-        'txtOccupation
+        'Label25
         '
-        Me.txtOccupation.Location = New System.Drawing.Point(94, 142)
-        Me.txtOccupation.Name = "txtOccupation"
-        Me.txtOccupation.Size = New System.Drawing.Size(396, 20)
-        Me.txtOccupation.TabIndex = 24
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(6, 52)
+        Me.Label25.Name = "Label25"
+        Me.Label25.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.Label25.Size = New System.Drawing.Size(38, 13)
+        Me.Label25.TabIndex = 2
+        Me.Label25.Text = "Middle"
         '
-        'txtCompanyName
+        'txtChildName
         '
-        Me.txtCompanyName.Location = New System.Drawing.Point(94, 168)
-        Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(396, 20)
-        Me.txtCompanyName.TabIndex = 25
+        Me.txtChildName.Location = New System.Drawing.Point(60, 19)
+        Me.txtChildName.Name = "txtChildName"
+        Me.txtChildName.Size = New System.Drawing.Size(252, 20)
+        Me.txtChildName.TabIndex = 1
         '
-        'GroupBox2
+        'Label24
         '
-        Me.GroupBox2.Controls.Add(Me.txtMotherAddress)
-        Me.GroupBox2.Controls.Add(Me.txtMotherName)
-        Me.GroupBox2.Controls.Add(Me.Label18)
-        Me.GroupBox2.Controls.Add(Me.Label17)
-        Me.GroupBox2.Controls.Add(Me.Label16)
-        Me.GroupBox2.Controls.Add(Me.txtFatherAddress)
-        Me.GroupBox2.Controls.Add(Me.txtFatherName)
-        Me.GroupBox2.Controls.Add(Me.Label15)
-        Me.GroupBox2.Location = New System.Drawing.Point(9, 197)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(481, 135)
-        Me.GroupBox2.TabIndex = 26
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Parent Information"
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(6, 26)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(35, 13)
+        Me.Label24.TabIndex = 0
+        Me.Label24.Text = "Name"
         '
-        'Label15
+        'Label22
         '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(6, 31)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(68, 13)
-        Me.Label15.TabIndex = 0
-        Me.Label15.Text = "Father Name"
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(6, 73)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(88, 13)
+        Me.Label22.TabIndex = 8
+        Me.Label22.Text = "Spouse Surname"
         '
-        'txtFatherName
+        'TextBox5
         '
-        Me.txtFatherName.Location = New System.Drawing.Point(85, 24)
-        Me.txtFatherName.Name = "txtFatherName"
-        Me.txtFatherName.Size = New System.Drawing.Size(388, 20)
-        Me.txtFatherName.TabIndex = 1
+        Me.TextBox5.Location = New System.Drawing.Point(120, 119)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(201, 20)
+        Me.TextBox5.TabIndex = 7
         '
-        'txtFatherAddress
+        'TextBox4
         '
-        Me.txtFatherAddress.Location = New System.Drawing.Point(138, 50)
-        Me.txtFatherAddress.Name = "txtFatherAddress"
-        Me.txtFatherAddress.Size = New System.Drawing.Size(335, 20)
-        Me.txtFatherAddress.TabIndex = 2
+        Me.TextBox4.Location = New System.Drawing.Point(120, 92)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(381, 20)
+        Me.TextBox4.TabIndex = 6
         '
-        'Label16
+        'TextBox3
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(6, 57)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(126, 13)
-        Me.Label16.TabIndex = 3
-        Me.Label16.Text = "Father Provincial address"
+        Me.TextBox3.Location = New System.Drawing.Point(120, 66)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(381, 20)
+        Me.TextBox3.TabIndex = 5
         '
-        'Label17
+        'TextBox2
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(6, 81)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(71, 13)
-        Me.Label17.TabIndex = 4
-        Me.Label17.Text = "Mother Name"
+        Me.TextBox2.Location = New System.Drawing.Point(120, 40)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(381, 20)
+        Me.TextBox2.TabIndex = 4
         '
-        'Label18
+        'TextBox1
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(6, 109)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(123, 13)
-        Me.Label18.TabIndex = 5
-        Me.Label18.Text = "Mother Provicial address"
+        Me.TextBox1.Location = New System.Drawing.Point(120, 14)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(381, 20)
+        Me.TextBox1.TabIndex = 3
         '
-        'txtMotherName
+        'Label21
         '
-        Me.txtMotherName.Location = New System.Drawing.Point(85, 76)
-        Me.txtMotherName.Name = "txtMotherName"
-        Me.txtMotherName.Size = New System.Drawing.Size(388, 20)
-        Me.txtMotherName.TabIndex = 6
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(6, 126)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(101, 13)
+        Me.Label21.TabIndex = 2
+        Me.Label21.Text = "Spouse Contact no."
         '
-        'txtMotherAddress
+        'Label20
         '
-        Me.txtMotherAddress.Location = New System.Drawing.Point(138, 102)
-        Me.txtMotherAddress.Name = "txtMotherAddress"
-        Me.txtMotherAddress.Size = New System.Drawing.Size(335, 20)
-        Me.txtMotherAddress.TabIndex = 7
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(6, 99)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(101, 13)
+        Me.Label20.TabIndex = 1
+        Me.Label20.Text = "Spouse Occupation"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(6, 21)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(74, 13)
+        Me.Label19.TabIndex = 0
+        Me.Label19.Text = "Spouse Name"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(6, 47)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(108, 13)
+        Me.Label23.TabIndex = 9
+        Me.Label23.Text = "Spouse Middle Name"
         '
         'FormUserProfile
         '
@@ -503,10 +720,14 @@ Partial Class FormUserProfile
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -556,4 +777,26 @@ Partial Class FormUserProfile
     Friend WithEvents txtMotherName As TextBox
     Friend WithEvents Label18 As Label
     Friend WithEvents Label17 As Label
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents Label26 As Label
+    Friend WithEvents txtChildSurname As TextBox
+    Friend WithEvents txtChildMiddleName As TextBox
+    Friend WithEvents Label25 As Label
+    Friend WithEvents txtChildName As TextBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents ListViewChild As ListView
+    Friend WithEvents ColumnHeader1 As ColumnHeader
+    Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents btnAddChild As Button
 End Class
