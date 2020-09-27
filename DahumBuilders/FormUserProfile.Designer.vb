@@ -70,6 +70,7 @@ Partial Class FormUserProfile
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnAddChild = New System.Windows.Forms.Button()
         Me.ListViewChild = New System.Windows.Forms.ListView()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -89,12 +90,28 @@ Partial Class FormUserProfile
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label23 = New System.Windows.Forms.Label()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.btnClearListBeneficiary = New System.Windows.Forms.Button()
+        Me.ListViewBeneficiary = New System.Windows.Forms.ListView()
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader6 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnAddBeneficiary = New System.Windows.Forms.Button()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.txtBeneficiarySurname = New System.Windows.Forms.TextBox()
+        Me.txtBeneficiaryMiddleName = New System.Windows.Forms.TextBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.btnClearListChild = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFirstName
@@ -243,6 +260,7 @@ Partial Class FormUserProfile
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Location = New System.Drawing.Point(12, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -518,11 +536,12 @@ Partial Class FormUserProfile
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(523, 455)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Spouse Information"
+        Me.TabPage2.Text = "Spouse & Child Information"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.btnClearListChild)
         Me.GroupBox3.Controls.Add(Me.btnAddChild)
         Me.GroupBox3.Controls.Add(Me.ListViewChild)
         Me.GroupBox3.Controls.Add(Me.Label26)
@@ -533,14 +552,14 @@ Partial Class FormUserProfile
         Me.GroupBox3.Controls.Add(Me.Label24)
         Me.GroupBox3.Location = New System.Drawing.Point(9, 157)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(492, 245)
+        Me.GroupBox3.Size = New System.Drawing.Size(492, 292)
         Me.GroupBox3.TabIndex = 10
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Childrens"
+        Me.GroupBox3.Text = "Children's"
         '
         'btnAddChild
         '
-        Me.btnAddChild.Location = New System.Drawing.Point(346, 69)
+        Me.btnAddChild.Location = New System.Drawing.Point(346, 43)
         Me.btnAddChild.Name = "btnAddChild"
         Me.btnAddChild.Size = New System.Drawing.Size(137, 23)
         Me.btnAddChild.TabIndex = 7
@@ -549,30 +568,35 @@ Partial Class FormUserProfile
         '
         'ListViewChild
         '
-        Me.ListViewChild.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
+        Me.ListViewChild.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3})
         Me.ListViewChild.FullRowSelect = True
         Me.ListViewChild.GridLines = True
-        Me.ListViewChild.Location = New System.Drawing.Point(6, 97)
+        Me.ListViewChild.Location = New System.Drawing.Point(6, 112)
         Me.ListViewChild.Name = "ListViewChild"
-        Me.ListViewChild.Size = New System.Drawing.Size(477, 135)
+        Me.ListViewChild.Size = New System.Drawing.Size(477, 162)
         Me.ListViewChild.TabIndex = 6
         Me.ListViewChild.UseCompatibleStateImageBehavior = False
         Me.ListViewChild.View = System.Windows.Forms.View.Details
         '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "No."
+        Me.ColumnHeader4.Width = 30
+        '
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Name"
-        Me.ColumnHeader1.Width = 144
+        Me.ColumnHeader1.Width = 126
         '
         'ColumnHeader2
         '
         Me.ColumnHeader2.Text = "Middle Name"
-        Me.ColumnHeader2.Width = 177
+        Me.ColumnHeader2.Width = 120
         '
         'ColumnHeader3
         '
         Me.ColumnHeader3.Text = "Surname"
-        Me.ColumnHeader3.Width = 151
+        Me.ColumnHeader3.Width = 159
         '
         'Label26
         '
@@ -672,9 +696,9 @@ Partial Class FormUserProfile
         Me.Label21.AutoSize = True
         Me.Label21.Location = New System.Drawing.Point(6, 126)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(101, 13)
+        Me.Label21.Size = New System.Drawing.Size(103, 13)
         Me.Label21.TabIndex = 2
-        Me.Label21.Text = "Spouse Contact no."
+        Me.Label21.Text = "Spouse Contact No."
         '
         'Label20
         '
@@ -703,6 +727,132 @@ Partial Class FormUserProfile
         Me.Label23.TabIndex = 9
         Me.Label23.Text = "Spouse Middle Name"
         '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.btnClearListBeneficiary)
+        Me.TabPage3.Controls.Add(Me.ListViewBeneficiary)
+        Me.TabPage3.Controls.Add(Me.btnAddBeneficiary)
+        Me.TabPage3.Controls.Add(Me.Label27)
+        Me.TabPage3.Controls.Add(Me.txtBeneficiarySurname)
+        Me.TabPage3.Controls.Add(Me.txtBeneficiaryMiddleName)
+        Me.TabPage3.Controls.Add(Me.Label28)
+        Me.TabPage3.Controls.Add(Me.txtBeneficiaryName)
+        Me.TabPage3.Controls.Add(Me.Label29)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(523, 455)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Beneficiaries Information"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'btnClearListBeneficiary
+        '
+        Me.btnClearListBeneficiary.Location = New System.Drawing.Point(351, 62)
+        Me.btnClearListBeneficiary.Name = "btnClearListBeneficiary"
+        Me.btnClearListBeneficiary.Size = New System.Drawing.Size(137, 23)
+        Me.btnClearListBeneficiary.TabIndex = 14
+        Me.btnClearListBeneficiary.Text = "Clear List Beneficiary"
+        Me.btnClearListBeneficiary.UseVisualStyleBackColor = True
+        '
+        'ListViewBeneficiary
+        '
+        Me.ListViewBeneficiary.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader5, Me.ColumnHeader6, Me.ColumnHeader7, Me.ColumnHeader8})
+        Me.ListViewBeneficiary.FullRowSelect = True
+        Me.ListViewBeneficiary.GridLines = True
+        Me.ListViewBeneficiary.Location = New System.Drawing.Point(11, 102)
+        Me.ListViewBeneficiary.Name = "ListViewBeneficiary"
+        Me.ListViewBeneficiary.Size = New System.Drawing.Size(477, 162)
+        Me.ListViewBeneficiary.TabIndex = 13
+        Me.ListViewBeneficiary.UseCompatibleStateImageBehavior = False
+        Me.ListViewBeneficiary.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "No."
+        Me.ColumnHeader5.Width = 30
+        '
+        'ColumnHeader6
+        '
+        Me.ColumnHeader6.Text = "Name"
+        Me.ColumnHeader6.Width = 126
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Middle Name"
+        Me.ColumnHeader7.Width = 120
+        '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Surname"
+        Me.ColumnHeader8.Width = 159
+        '
+        'btnAddBeneficiary
+        '
+        Me.btnAddBeneficiary.Location = New System.Drawing.Point(351, 36)
+        Me.btnAddBeneficiary.Name = "btnAddBeneficiary"
+        Me.btnAddBeneficiary.Size = New System.Drawing.Size(137, 23)
+        Me.btnAddBeneficiary.TabIndex = 12
+        Me.btnAddBeneficiary.Text = "Add Beneficiary"
+        Me.btnAddBeneficiary.UseVisualStyleBackColor = True
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(7, 72)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(49, 13)
+        Me.Label27.TabIndex = 11
+        Me.Label27.Text = "Surname"
+        '
+        'txtBeneficiarySurname
+        '
+        Me.txtBeneficiarySurname.Location = New System.Drawing.Point(62, 65)
+        Me.txtBeneficiarySurname.Name = "txtBeneficiarySurname"
+        Me.txtBeneficiarySurname.Size = New System.Drawing.Size(251, 20)
+        Me.txtBeneficiarySurname.TabIndex = 10
+        '
+        'txtBeneficiaryMiddleName
+        '
+        Me.txtBeneficiaryMiddleName.Location = New System.Drawing.Point(62, 39)
+        Me.txtBeneficiaryMiddleName.Name = "txtBeneficiaryMiddleName"
+        Me.txtBeneficiaryMiddleName.Size = New System.Drawing.Size(251, 20)
+        Me.txtBeneficiaryMiddleName.TabIndex = 9
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(7, 46)
+        Me.Label28.Name = "Label28"
+        Me.Label28.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.Label28.Size = New System.Drawing.Size(38, 13)
+        Me.Label28.TabIndex = 8
+        Me.Label28.Text = "Middle"
+        '
+        'txtBeneficiaryName
+        '
+        Me.txtBeneficiaryName.Location = New System.Drawing.Point(61, 13)
+        Me.txtBeneficiaryName.Name = "txtBeneficiaryName"
+        Me.txtBeneficiaryName.Size = New System.Drawing.Size(252, 20)
+        Me.txtBeneficiaryName.TabIndex = 7
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(7, 20)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(35, 13)
+        Me.Label29.TabIndex = 6
+        Me.Label29.Text = "Name"
+        '
+        'btnClearListChild
+        '
+        Me.btnClearListChild.Location = New System.Drawing.Point(346, 68)
+        Me.btnClearListChild.Name = "btnClearListChild"
+        Me.btnClearListChild.Size = New System.Drawing.Size(137, 23)
+        Me.btnClearListChild.TabIndex = 15
+        Me.btnClearListChild.Text = "Clear List Child"
+        Me.btnClearListChild.UseVisualStyleBackColor = True
+        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -728,6 +878,8 @@ Partial Class FormUserProfile
         Me.TabPage2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -799,4 +951,20 @@ Partial Class FormUserProfile
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents btnAddChild As Button
+    Friend WithEvents ColumnHeader4 As ColumnHeader
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents btnAddBeneficiary As Button
+    Friend WithEvents Label27 As Label
+    Friend WithEvents txtBeneficiarySurname As TextBox
+    Friend WithEvents txtBeneficiaryMiddleName As TextBox
+    Friend WithEvents Label28 As Label
+    Friend WithEvents txtBeneficiaryName As TextBox
+    Friend WithEvents Label29 As Label
+    Friend WithEvents ListViewBeneficiary As ListView
+    Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents ColumnHeader6 As ColumnHeader
+    Friend WithEvents ColumnHeader7 As ColumnHeader
+    Friend WithEvents ColumnHeader8 As ColumnHeader
+    Friend WithEvents btnClearListBeneficiary As Button
+    Friend WithEvents btnClearListChild As Button
 End Class
