@@ -33,9 +33,7 @@ Partial Class FormUserProfile
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.txtGender = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtCivilStatus = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -106,6 +104,8 @@ Partial Class FormUserProfile
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtUserId = New System.Windows.Forms.TextBox()
+        Me.ComboBoxGender = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxCivilStatus = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -217,15 +217,6 @@ Partial Class FormUserProfile
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
-        'txtGender
-        '
-        Me.txtGender.Location = New System.Drawing.Point(94, 138)
-        Me.txtGender.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtGender.Name = "txtGender"
-        Me.txtGender.Size = New System.Drawing.Size(186, 26)
-        Me.txtGender.TabIndex = 3
-        Me.txtGender.Text = "Male"
-        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -235,14 +226,6 @@ Partial Class FormUserProfile
         Me.Label5.Size = New System.Drawing.Size(63, 20)
         Me.Label5.TabIndex = 12
         Me.Label5.Text = "Gender"
-        '
-        'txtCivilStatus
-        '
-        Me.txtCivilStatus.Location = New System.Drawing.Point(531, 138)
-        Me.txtCivilStatus.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtCivilStatus.Name = "txtCivilStatus"
-        Me.txtCivilStatus.Size = New System.Drawing.Size(202, 26)
-        Me.txtCivilStatus.TabIndex = 13
         '
         'Label6
         '
@@ -289,6 +272,8 @@ Partial Class FormUserProfile
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.ComboBoxCivilStatus)
+        Me.TabPage1.Controls.Add(Me.ComboBoxGender)
         Me.TabPage1.Controls.Add(Me.GroupBox2)
         Me.TabPage1.Controls.Add(Me.txtCompanyName)
         Me.TabPage1.Controls.Add(Me.txtOccupation)
@@ -304,13 +289,11 @@ Partial Class FormUserProfile
         Me.TabPage1.Controls.Add(Me.txtFirstName)
         Me.TabPage1.Controls.Add(Me.DateTimePicker1)
         Me.TabPage1.Controls.Add(Me.txtMiddleName)
-        Me.TabPage1.Controls.Add(Me.txtCivilStatus)
         Me.TabPage1.Controls.Add(Me.Label4)
         Me.TabPage1.Controls.Add(Me.Label6)
         Me.TabPage1.Controls.Add(Me.txtAddress)
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.txtLastName)
-        Me.TabPage1.Controls.Add(Me.txtGender)
         Me.TabPage1.Controls.Add(Me.Label5)
         Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Location = New System.Drawing.Point(4, 29)
@@ -940,6 +923,24 @@ Partial Class FormUserProfile
         Me.txtUserId.Size = New System.Drawing.Size(85, 26)
         Me.txtUserId.TabIndex = 18
         '
+        'ComboBoxGender
+        '
+        Me.ComboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxGender.FormattingEnabled = True
+        Me.ComboBoxGender.Location = New System.Drawing.Point(94, 138)
+        Me.ComboBoxGender.Name = "ComboBoxGender"
+        Me.ComboBoxGender.Size = New System.Drawing.Size(298, 28)
+        Me.ComboBoxGender.TabIndex = 27
+        '
+        'ComboBoxCivilStatus
+        '
+        Me.ComboBoxCivilStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxCivilStatus.FormattingEnabled = True
+        Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(531, 138)
+        Me.ComboBoxCivilStatus.Name = "ComboBoxCivilStatus"
+        Me.ComboBoxCivilStatus.Size = New System.Drawing.Size(201, 28)
+        Me.ComboBoxCivilStatus.TabIndex = 28
+        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -985,9 +986,7 @@ Partial Class FormUserProfile
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents btnSearch As Button
-    Friend WithEvents txtGender As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtCivilStatus As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Button1 As Button
@@ -1058,4 +1057,6 @@ Partial Class FormUserProfile
     Friend WithEvents btnClearListBeneficiary As Button
     Friend WithEvents btnClearListChild As Button
     Friend WithEvents txtUserId As TextBox
+    Friend WithEvents ComboBoxGender As ComboBox
+    Friend WithEvents ComboBoxCivilStatus As ComboBox
 End Class

@@ -3,7 +3,18 @@
 Public Class FormUserProfile
 
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        With Me.ComboBoxGender.Items
+            .Add("Male")
+            .Add("Female")
+        End With
+        With Me.ComboBoxCivilStatus.Items
+            .Add("Single")
+            .Add("Married")
+            .Add("Separated")
+            .Add("Widow")
+        End With
+        ComboBoxGender.SelectedIndex = 0
+        ComboBoxCivilStatus.SelectedIndex = 0
         username = FormMainDahum.ToolStripStatusUsername.Text.Trim
 
     End Sub
@@ -26,9 +37,9 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@middle_name", MySqlDbType.VarChar).Value = txtMiddleName.Text.Trim
         sqlCommand.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = txtLastName.Text.Trim
         sqlCommand.Parameters.Add("@address", MySqlDbType.VarChar).Value = txtAddress.Text.Trim
-        sqlCommand.Parameters.Add("@gender", MySqlDbType.VarChar).Value = txtGender.Text.Trim
+        sqlCommand.Parameters.Add("@gender", MySqlDbType.VarChar).Value = ComboBoxGender.Text.Trim
 
-        sqlCommand.Parameters.Add("@civilStatus", MySqlDbType.VarChar).Value = txtCivilStatus.Text.Trim
+        sqlCommand.Parameters.Add("@civilStatus", MySqlDbType.VarChar).Value = ComboBoxCivilStatus.Text.Trim
         sqlCommand.Parameters.Add("@dateBirth", MySqlDbType.Date).Value = Format(DateTimePicker1.Value, "yyyy-MM-dd").ToString
         sqlCommand.Parameters.Add("@placeBirth", MySqlDbType.VarChar).Value = txtPlaceBirth.Text.Trim
         sqlCommand.Parameters.Add("@citizenship", MySqlDbType.VarChar).Value = txtCitizen.Text.Trim
@@ -166,11 +177,11 @@ Public Class FormUserProfile
                 txtFirstName.Text = table.Rows(0)("first_name")
                 txtMiddleName.Text = table.Rows(0)("middle_name")
                 txtLastName.Text = table.Rows(0)("last_name")
-                txtGender.Text = table.Rows(0)("gender")
+                ComboBoxGender.Text = table.Rows(0)("gender")
                 txtAddress.Text = table.Rows(0)("address")
                 DateTimePicker1.Value = table.Rows(0)("date_birth")
 
-                txtCivilStatus.Text = table.Rows(0)("civil_status")
+                ComboBoxCivilStatus.Text = table.Rows(0)("civil_status")
                 txtPlaceBirth.Text = table.Rows(0)("place_birth")
                 txtCitizen.Text = table.Rows(0)("citizenship")
                 txtTelephone.Text = table.Rows(0)("telephone_number")
@@ -319,10 +330,8 @@ end_of_if:
         txtFirstName.Text = ""
         txtMiddleName.Text = ""
         txtLastName.Text = ""
-        txtGender.Text = ""
         txtAddress.Text = ""
 
-        txtCivilStatus.Text = ""
         txtPlaceBirth.Text = ""
         txtCitizen.Text = ""
         txtTelephone.Text = ""

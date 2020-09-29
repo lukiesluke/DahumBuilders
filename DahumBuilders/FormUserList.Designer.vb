@@ -38,7 +38,7 @@ Partial Class FormUserList
         Me.ListViewUser.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderId, Me.ColumnHeaderLastName, Me.ColumnHeaderName, Me.ColumnHeaderMiddleName})
         Me.ListViewUser.FullRowSelect = True
         Me.ListViewUser.GridLines = True
-        Me.ListViewUser.Location = New System.Drawing.Point(16, 70)
+        Me.ListViewUser.Location = New System.Drawing.Point(12, 70)
         Me.ListViewUser.Name = "ListViewUser"
         Me.ListViewUser.Size = New System.Drawing.Size(891, 457)
         Me.ListViewUser.TabIndex = 0
