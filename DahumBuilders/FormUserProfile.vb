@@ -10,8 +10,8 @@ Public Class FormUserProfile
         `occupation`, `company_name`, `spouse_name`, `spouse_occupation`, `spouse_contact`, 
         `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`, `username`) 
          VALUES (@first_name, @middle_name, @last_name, @address, @gender, @civilStatus, @dateBirth,
-        @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, @companyName, '', '', '', 
-        @fatherName, @fatherAddress, @MotherName, @MotherAddress, @username)"
+        @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, @companyName, @spouseName, 
+        @spouseOccupation, @spouseContact, @fatherName, @fatherAddress, @MotherName, @MotherAddress, @username)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -32,6 +32,10 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@occupation", MySqlDbType.VarChar).Value = txtOccupation.Text.Trim
         sqlCommand.Parameters.Add("@companyName", MySqlDbType.VarChar).Value = txtCompanyName.Text.Trim
 
+        sqlCommand.Parameters.Add("@spouseName", MySqlDbType.VarChar).Value = txtSpouseName.Text.Trim
+        sqlCommand.Parameters.Add("@spouseOccupation", MySqlDbType.VarChar).Value = txtSpouseOccupation.Text.Trim
+        sqlCommand.Parameters.Add("@spouseContact", MySqlDbType.VarChar).Value = txtSpouseContactNumber.Text.Trim
+
         sqlCommand.Parameters.Add("@fatherName", MySqlDbType.VarChar).Value = txtFatherName.Text.Trim
         sqlCommand.Parameters.Add("@fatherAddress", MySqlDbType.VarChar).Value = txtFatherAddress.Text.Trim
         sqlCommand.Parameters.Add("@MotherName", MySqlDbType.VarChar).Value = txtMotherName.Text.Trim
@@ -45,8 +49,8 @@ Public Class FormUserProfile
                 txtLastName.Text = ""
                 txtGender.Text = ""
                 txtAddress.Text = ""
+                insertDataToChildAndBeneficiary(sqlCommand, sqlConnection, username)
                 MessageBox.Show("Successfully Saved")
-                MessageBox.Show("userid: " & getUserId(sqlCommand, sqlConnection, username))
 
             Else
                 MessageBox.Show("Data NOT Inserted. Please try again.")
@@ -61,7 +65,7 @@ Public Class FormUserProfile
 
     End Sub
 
-    Function getUserId(cmd As MySqlCommand, conn As MySqlConnection, user As String) As String
+    Function insertDataToChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, user As String)
         Dim table As New DataTable()
 
         sql = "SELECT MAX(id) AS id FROM db_user_profile WHERE username=@username"
@@ -103,8 +107,6 @@ Public Class FormUserProfile
                 cmd.ExecuteNonQuery()
             Next
         End If
-
-        Return table.Rows(0)("id").ToString
 
     End Function
 
