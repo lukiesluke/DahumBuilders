@@ -110,7 +110,6 @@ Partial Class FormUserList
         Me.Controls.Add(Me.ListViewUser)
         Me.Name = "FormUserList"
         Me.Text = "User List"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

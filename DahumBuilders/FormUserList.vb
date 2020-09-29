@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormUserList
+    Dim formUser As New FormUserProfile
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         With Me.ComboBoxSearch.Items
@@ -41,4 +42,22 @@ Public Class FormUserList
         End Try
     End Sub
 
+    Private Sub ListViewUser_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUser.MouseClick
+        Dim a As String = ListViewUser.SelectedItems(0).SubItems(1).Text
+
+        If formUser.Visible = False Then
+            formUser = New FormUserProfile
+            formUser.MdiParent = FormMainDahum
+
+            formUser.Show()
+            formUser.WindowState = FormWindowState.Normal
+            formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+            formUser.btnSearch.PerformClick()
+        Else
+            formUser.WindowState = FormWindowState.Normal
+            formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+            formUser.btnSearch.PerformClick()
+        End If
+
+    End Sub
 End Class

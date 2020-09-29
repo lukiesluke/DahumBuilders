@@ -10,7 +10,7 @@
             formUser.MdiParent = Me
             formUser.Show()
         End If
-        formUser.WindowState = FormWindowState.Maximized
+        'formUser.WindowState = FormWindowState.Maximized
     End Sub
 
     Private Sub UserListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserListToolStripMenuItem.Click
@@ -19,6 +19,6 @@
             formUserList.MdiParent = Me
             formUserList.Show()
         End If
-        formUserList.WindowState = FormWindowState.Maximized
+        'formUserList.WindowState = FormWindowState.Maximized
     End Sub
 End Class

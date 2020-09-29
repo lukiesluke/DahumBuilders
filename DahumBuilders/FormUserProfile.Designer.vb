@@ -39,6 +39,8 @@ Partial Class FormUserProfile
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.ComboBoxCivilStatus = New System.Windows.Forms.ComboBox()
+        Me.ComboBoxGender = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.txtMotherAddress = New System.Windows.Forms.TextBox()
         Me.txtMotherName = New System.Windows.Forms.TextBox()
@@ -104,8 +106,6 @@ Partial Class FormUserProfile
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtUserId = New System.Windows.Forms.TextBox()
-        Me.ComboBoxGender = New System.Windows.Forms.ComboBox()
-        Me.ComboBoxCivilStatus = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -304,6 +304,24 @@ Partial Class FormUserProfile
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'ComboBoxCivilStatus
+        '
+        Me.ComboBoxCivilStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxCivilStatus.FormattingEnabled = True
+        Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(531, 138)
+        Me.ComboBoxCivilStatus.Name = "ComboBoxCivilStatus"
+        Me.ComboBoxCivilStatus.Size = New System.Drawing.Size(201, 28)
+        Me.ComboBoxCivilStatus.TabIndex = 28
+        '
+        'ComboBoxGender
+        '
+        Me.ComboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxGender.FormattingEnabled = True
+        Me.ComboBoxGender.Location = New System.Drawing.Point(94, 138)
+        Me.ComboBoxGender.Name = "ComboBoxGender"
+        Me.ComboBoxGender.Size = New System.Drawing.Size(298, 28)
+        Me.ComboBoxGender.TabIndex = 27
         '
         'GroupBox2
         '
@@ -923,29 +941,11 @@ Partial Class FormUserProfile
         Me.txtUserId.Size = New System.Drawing.Size(85, 26)
         Me.txtUserId.TabIndex = 18
         '
-        'ComboBoxGender
-        '
-        Me.ComboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxGender.FormattingEnabled = True
-        Me.ComboBoxGender.Location = New System.Drawing.Point(94, 138)
-        Me.ComboBoxGender.Name = "ComboBoxGender"
-        Me.ComboBoxGender.Size = New System.Drawing.Size(298, 28)
-        Me.ComboBoxGender.TabIndex = 27
-        '
-        'ComboBoxCivilStatus
-        '
-        Me.ComboBoxCivilStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxCivilStatus.FormattingEnabled = True
-        Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(531, 138)
-        Me.ComboBoxCivilStatus.Name = "ComboBoxCivilStatus"
-        Me.ComboBoxCivilStatus.Size = New System.Drawing.Size(201, 28)
-        Me.ComboBoxCivilStatus.TabIndex = 28
-        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(852, 824)
+        Me.ClientSize = New System.Drawing.Size(852, 817)
         Me.Controls.Add(Me.txtUserId)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button1)
@@ -954,9 +954,9 @@ Partial Class FormUserProfile
         Me.Controls.Add(Me.btnSave)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "FormUserProfile"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "User Profile"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()

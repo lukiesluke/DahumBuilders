@@ -13,6 +13,8 @@ Public Class FormUserProfile
             .Add("Separated")
             .Add("Widow")
         End With
+
+        Me.Size = New Size(600, 570)
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
         username = FormMainDahum.ToolStripStatusUsername.Text.Trim
