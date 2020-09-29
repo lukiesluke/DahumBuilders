@@ -105,6 +105,7 @@ Partial Class FormUserProfile
         Me.Label28 = New System.Windows.Forms.Label()
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
+        Me.txtUserId = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -148,7 +149,7 @@ Partial Class FormUserProfile
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(184, 768)
+        Me.btnSave.Location = New System.Drawing.Point(578, 764)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(112, 35)
@@ -158,7 +159,7 @@ Partial Class FormUserProfile
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(428, 768)
+        Me.btnCancel.Location = New System.Drawing.Point(698, 764)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(112, 35)
@@ -208,7 +209,7 @@ Partial Class FormUserProfile
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(306, 768)
+        Me.btnSearch.Location = New System.Drawing.Point(22, 768)
         Me.btnSearch.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(112, 35)
@@ -265,13 +266,14 @@ Partial Class FormUserProfile
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(572, 768)
+        Me.Button1.Location = New System.Drawing.Point(458, 763)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(112, 35)
         Me.Button1.TabIndex = 16
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'TabControl1
         '
@@ -931,11 +933,19 @@ Partial Class FormUserProfile
         Me.Label29.TabIndex = 6
         Me.Label29.Text = "Name"
         '
+        'txtUserId
+        '
+        Me.txtUserId.Location = New System.Drawing.Point(141, 772)
+        Me.txtUserId.Name = "txtUserId"
+        Me.txtUserId.Size = New System.Drawing.Size(85, 26)
+        Me.txtUserId.TabIndex = 18
+        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(852, 824)
+        Me.Controls.Add(Me.txtUserId)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSearch)
@@ -960,6 +970,7 @@ Partial Class FormUserProfile
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -1046,4 +1057,5 @@ Partial Class FormUserProfile
     Friend WithEvents ColumnHeader8 As ColumnHeader
     Friend WithEvents btnClearListBeneficiary As Button
     Friend WithEvents btnClearListChild As Button
+    Friend WithEvents txtUserId As TextBox
 End Class

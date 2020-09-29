@@ -66,7 +66,7 @@ Public Class FormUserProfile
 
     End Sub
 
-    Function insertDataToChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, user As String)
+    Private Sub insertDataToChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, user As String)
         Dim table As New DataTable()
 
         sql = "SELECT MAX(id) AS id FROM db_user_profile WHERE username=@username"
@@ -110,8 +110,44 @@ Public Class FormUserProfile
             Next
         End If
 
-    End Function
+    End Sub
 
+    Private Sub getUserChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, userId As String)
+        Dim item As ListViewItem
+
+        sql = "SELECT * FROM `db_user_child` WHERE `userid` = @userid"
+        cmd.Dispose()
+        cmd = New MySqlCommand(sql, conn)
+        cmd.Parameters.Add("@userid", MySqlDbType.Int64).Value = userId
+        sqlDataReader = cmd.ExecuteReader()
+
+        ListViewChild.Items.Clear()
+        Do While sqlDataReader.Read = True
+            item = New ListViewItem(sqlDataReader("id").ToString)
+            item.SubItems.Add(sqlDataReader("first_name"))
+            item.SubItems.Add(sqlDataReader("middle_name"))
+            item.SubItems.Add(sqlDataReader("last_name"))
+            ListViewChild.Items.Add(item)
+        Loop
+        sqlDataReader.Dispose()
+
+        sql = "SELECT * FROM `db_user_beneficiary` WHERE `userid` = @userid"
+        cmd.Dispose()
+        cmd = New MySqlCommand(sql, conn)
+        cmd.Parameters.Add("@userid", MySqlDbType.Int64).Value = userId
+        sqlDataReader = cmd.ExecuteReader()
+
+        ListViewBeneficiary.Items.Clear()
+        Do While sqlDataReader.Read = True
+            item = New ListViewItem(sqlDataReader("id").ToString)
+            item.SubItems.Add(sqlDataReader("first_name"))
+            item.SubItems.Add(sqlDataReader("middle_name"))
+            item.SubItems.Add(sqlDataReader("last_name"))
+            ListViewBeneficiary.Items.Add(item)
+        Loop
+        sqlDataReader.Dispose()
+
+    End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Dim table As New DataTable()
@@ -119,9 +155,10 @@ Public Class FormUserProfile
         sql = "SELECT * FROM `db_user_profile` WHERE `Id` = @id"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = txtGender.Text.Trim
+        sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = txtUserId.Text.Trim
         sqlAdapter = New MySqlDataAdapter(sqlCommand)
 
+        sql = "SELECT * FROM `db_user_child` WHERE `userid` = @id"
         Try
             sqlAdapter.Fill(table)
 
@@ -152,14 +189,12 @@ Public Class FormUserProfile
                 txtFatherAddress.Text = table.Rows(0)("father_provincial_address")
                 txtMotherName.Text = table.Rows(0)("mother_name")
                 txtMotherAddress.Text = table.Rows(0)("mother_provincial_address")
+
+                getUserChildAndBeneficiary(sqlCommand, sqlConnection, txtUserId.Text.Trim)
             Else
-                txtFirstName.Text = ""
-                txtMiddleName.Text = ""
-                txtLastName.Text = ""
-                txtGender.Text = ""
-                txtAddress.Text = ""
                 MessageBox.Show("No Data Found")
             End If
+
         Catch ex As Exception
             MessageBox.Show("ERROR: " & ex.Message)
         Finally
@@ -319,4 +354,7 @@ end_of_if:
         ListViewBeneficiary.Clear()
     End Sub
 
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.Close()
+    End Sub
 End Class

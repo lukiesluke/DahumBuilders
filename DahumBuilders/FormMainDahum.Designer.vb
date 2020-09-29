@@ -29,6 +29,7 @@ Partial Class FormMainDahum
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.UserListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -52,7 +53,7 @@ Partial Class FormMainDahum
         '
         'UserSettingToolStripMenuItem
         '
-        Me.UserSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserRegistrationToolStripMenuItem})
+        Me.UserSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserRegistrationToolStripMenuItem, Me.UserListToolStripMenuItem})
         Me.UserSettingToolStripMenuItem.Name = "UserSettingToolStripMenuItem"
         Me.UserSettingToolStripMenuItem.Size = New System.Drawing.Size(210, 30)
         Me.UserSettingToolStripMenuItem.Text = "User Setting"
@@ -85,6 +86,12 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
         '
+        'UserListToolStripMenuItem
+        '
+        Me.UserListToolStripMenuItem.Name = "UserListToolStripMenuItem"
+        Me.UserListToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.UserListToolStripMenuItem.Text = "User List"
+        '
         'FormMainDahum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -113,4 +120,5 @@ Partial Class FormMainDahum
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusUsername As ToolStripStatusLabel
+    Friend WithEvents UserListToolStripMenuItem As ToolStripMenuItem
 End Class
