@@ -8,10 +8,10 @@ Public Class FormUserProfile
         (`first_name`, `middle_name`, `last_name`, `address`, `gender`, `civil_status`, `date_birth`, 
         `place_birth`, `citizenship`, `telephone_number`, `mobile_number`, `email_address`, 
         `occupation`, `company_name`, `spouse_name`, `spouse_occupation`, `spouse_contact`, 
-        `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`) 
+        `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`, `username`) 
          VALUES (@first_name, @middle_name, @last_name, @address, @gender, @civilStatus, @dateBirth,
         @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, @companyName, '', '', '', 
-        @fatherName, @fatherAddress, @MotherName, @MotherAddress)"
+        @fatherName, @fatherAddress, @MotherName, @MotherAddress, @username)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -36,6 +36,7 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@fatherAddress", MySqlDbType.VarChar).Value = txtFatherAddress.Text.Trim
         sqlCommand.Parameters.Add("@MotherName", MySqlDbType.VarChar).Value = txtMotherName.Text.Trim
         sqlCommand.Parameters.Add("@MotherAddress", MySqlDbType.VarChar).Value = txtMotherAddress.Text.Trim
+        sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
@@ -44,8 +45,9 @@ Public Class FormUserProfile
                 txtLastName.Text = ""
                 txtGender.Text = ""
                 txtAddress.Text = ""
-
                 MessageBox.Show("Successfully Saved")
+                MessageBox.Show("userid: " & getUserId(sqlCommand, sqlConnection, username))
+
             Else
                 MessageBox.Show("Data NOT Inserted. Please try again.")
             End If
@@ -58,6 +60,54 @@ Public Class FormUserProfile
         End Try
 
     End Sub
+
+    Function getUserId(cmd As MySqlCommand, conn As MySqlConnection, user As String) As String
+        Dim table As New DataTable()
+
+        sql = "SELECT MAX(id) AS id FROM db_user_profile WHERE username=@username"
+        cmd = New MySqlCommand(sql, conn)
+        sqlAdapter = New MySqlDataAdapter(cmd)
+        cmd.Parameters.Add("@username", MySqlDbType.VarChar).Value = user
+        sqlAdapter.Fill(table)
+
+        If ListViewChild.Items.Count > 0 Then
+
+            sql = "INSERT INTO `db_user_child` 
+            (`first_name`, `middle_name`, `last_name`, `userid`) 
+            VALUES (@firstName, @middleName, @lastName, @userid)"
+
+            For Each item As ListViewItem In Me.ListViewChild.Items
+                cmd = New MySqlCommand(sql, conn)
+                sqlAdapter = New MySqlDataAdapter(cmd)
+                cmd.Parameters.Add("@firstName", MySqlDbType.VarChar).Value = item.SubItems.Item(1).Text.Trim
+                cmd.Parameters.Add("@middleName", MySqlDbType.VarChar).Value = item.SubItems.Item(2).Text.Trim
+                cmd.Parameters.Add("@lastName", MySqlDbType.VarChar).Value = item.SubItems.Item(3).Text.Trim
+                cmd.Parameters.Add("@userid", MySqlDbType.VarChar).Value = table.Rows(0)("id").ToString
+                cmd.ExecuteNonQuery()
+            Next
+        End If
+
+        If ListViewBeneficiary.Items.Count > 0 Then
+
+            sql = "INSERT INTO `db_user_beneficiary` 
+            (`first_name`, `middle_name`, `last_name`, `userid`) 
+            VALUES (@firstName, @middleName, @lastName, @userid)"
+
+            For Each item As ListViewItem In Me.ListViewBeneficiary.Items
+                cmd = New MySqlCommand(sql, conn)
+                sqlAdapter = New MySqlDataAdapter(cmd)
+                cmd.Parameters.Add("@firstName", MySqlDbType.VarChar).Value = item.SubItems.Item(1).Text.Trim
+                cmd.Parameters.Add("@middleName", MySqlDbType.VarChar).Value = item.SubItems.Item(2).Text.Trim
+                cmd.Parameters.Add("@lastName", MySqlDbType.VarChar).Value = item.SubItems.Item(3).Text.Trim
+                cmd.Parameters.Add("@userid", MySqlDbType.VarChar).Value = table.Rows(0)("id").ToString
+                cmd.ExecuteNonQuery()
+            Next
+        End If
+
+        Return table.Rows(0)("id").ToString
+
+    End Function
+
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Dim table As New DataTable()
