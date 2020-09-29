@@ -6,7 +6,7 @@ Module ModuleConnection
     Public sqlCommand As MySqlCommand
     Public sqlDataReader As MySqlDataReader
     Public sqlAdapter As MySqlDataAdapter
-    Public username As String = "Admin88"
+    Public username As String
 
     Public Sub Connection()
         Try

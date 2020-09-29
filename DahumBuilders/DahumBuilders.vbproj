@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormMainDahum.Designer.vb">
+      <DependentUpon>FormMainDahum.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMainDahum.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormUserProfile.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormMainDahum.resx">
+      <DependentUpon>FormMainDahum.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormUserProfile.resx">
       <DependentUpon>FormUserProfile.vb</DependentUpon>
     </EmbeddedResource>

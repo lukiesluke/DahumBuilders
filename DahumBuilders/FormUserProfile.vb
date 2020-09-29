@@ -2,6 +2,12 @@
 
 Public Class FormUserProfile
 
+    Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        username = FormMainDahum.ToolStripStatusUsername.Text.Trim
+
+    End Sub
+
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         sql = "INSERT INTO `db_user_profile` 
@@ -44,14 +50,9 @@ Public Class FormUserProfile
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
-                txtFirstName.Text = ""
-                txtMiddleName.Text = ""
-                txtLastName.Text = ""
-                txtGender.Text = ""
-                txtAddress.Text = ""
                 insertDataToChildAndBeneficiary(sqlCommand, sqlConnection, username)
                 MessageBox.Show("Successfully Saved")
-
+                clearAllTextBox()
             Else
                 MessageBox.Show("Data NOT Inserted. Please try again.")
             End If
@@ -69,6 +70,7 @@ Public Class FormUserProfile
         Dim table As New DataTable()
 
         sql = "SELECT MAX(id) AS id FROM db_user_profile WHERE username=@username"
+
         cmd = New MySqlCommand(sql, conn)
         sqlAdapter = New MySqlDataAdapter(cmd)
         cmd.Parameters.Add("@username", MySqlDbType.VarChar).Value = user
@@ -117,7 +119,7 @@ Public Class FormUserProfile
         sql = "SELECT * FROM `db_user_profile` WHERE `Id` = @id"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = txtGender.Text
+        sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = txtGender.Text.Trim
         sqlAdapter = New MySqlDataAdapter(sqlCommand)
 
         Try
@@ -130,6 +132,26 @@ Public Class FormUserProfile
                 txtGender.Text = table.Rows(0)("gender")
                 txtAddress.Text = table.Rows(0)("address")
                 DateTimePicker1.Value = table.Rows(0)("date_birth")
+
+                txtCivilStatus.Text = table.Rows(0)("civil_status")
+                txtPlaceBirth.Text = table.Rows(0)("place_birth")
+                txtCitizen.Text = table.Rows(0)("citizenship")
+                txtTelephone.Text = table.Rows(0)("telephone_number")
+                txtMobile.Text = table.Rows(0)("mobile_number")
+                txtEmail.Text = table.Rows(0)("email_address")
+                txtOccupation.Text = table.Rows(0)("occupation")
+                txtCompanyName.Text = table.Rows(0)("company_name")
+
+                txtSpouseName.Text = table.Rows(0)("spouse_name")
+                txtSpouseMiddleName.Text = table.Rows(0)("spouse_name")
+                txtSpouseLastName.Text = table.Rows(0)("spouse_name")
+                txtSpouseOccupation.Text = table.Rows(0)("spouse_occupation")
+                txtSpouseContactNumber.Text = table.Rows(0)("spouse_contact")
+
+                txtFatherName.Text = table.Rows(0)("father_name")
+                txtFatherAddress.Text = table.Rows(0)("father_provincial_address")
+                txtMotherName.Text = table.Rows(0)("mother_name")
+                txtMotherAddress.Text = table.Rows(0)("mother_provincial_address")
             Else
                 txtFirstName.Text = ""
                 txtMiddleName.Text = ""
@@ -256,4 +278,45 @@ end_of_if:
             btnAddBeneficiary.PerformClick()
         End If
     End Sub
+
+    Private Sub clearAllTextBox()
+
+        txtFirstName.Text = ""
+        txtMiddleName.Text = ""
+        txtLastName.Text = ""
+        txtGender.Text = ""
+        txtAddress.Text = ""
+
+        txtCivilStatus.Text = ""
+        txtPlaceBirth.Text = ""
+        txtCitizen.Text = ""
+        txtTelephone.Text = ""
+        txtMobile.Text = ""
+        txtEmail.Text = ""
+        txtOccupation.Text = ""
+        txtCompanyName.Text = ""
+
+        txtSpouseName.Text = ""
+        txtSpouseMiddleName.Text = ""
+        txtSpouseLastName.Text = ""
+        txtSpouseOccupation.Text = ""
+        txtSpouseContactNumber.Text = ""
+
+        txtFatherName.Text = ""
+        txtFatherAddress.Text = ""
+        txtMotherName.Text = ""
+        txtMotherAddress.Text = ""
+
+        txtChildName.Text = ""
+        txtChildMiddleName.Text = ""
+        txtChildSurname.Text = ""
+
+        txtBeneficiaryName.Text = ""
+        txtBeneficiaryMiddleName.Text = ""
+        txtBeneficiarySurname.Text = ""
+
+        ListViewChild.Clear()
+        ListViewBeneficiary.Clear()
+    End Sub
+
 End Class
