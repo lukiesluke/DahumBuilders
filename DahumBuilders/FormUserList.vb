@@ -47,19 +47,36 @@ Public Class FormUserList
     Private Sub ListViewUser_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUser.MouseClick
         Dim a As String = ListViewUser.SelectedItems(0).SubItems(1).Text
 
-        If formUser.Visible = False Then
+        If Application.OpenForms().OfType(Of FormUserProfile).Any Then
+            formUser.Focus()
+            formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+            formUser.btnSearch.PerformClick()
+        Else
             formUser = New FormUserProfile
             formUser.MdiParent = FormMainDahum
-
             formUser.Show()
             formUser.WindowState = FormWindowState.Normal
             formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
             formUser.btnSearch.PerformClick()
-        Else
-            formUser.WindowState = FormWindowState.Normal
-            formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-            formUser.btnSearch.PerformClick()
         End If
+
+        'If formUser.Visible = False Then
+        '    formUser = New FormUserProfile
+        '    formUser.MdiParent = FormMainDahum
+
+        '    formUser.Show()
+        '    formUser.WindowState = FormWindowState.Normal
+        '    formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+        '    formUser.btnSearch.PerformClick()
+        'Else
+        '    formUser.WindowState = FormWindowState.Normal
+        '    formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+        '    formUser.btnSearch.PerformClick()
+        'End If
+
+    End Sub
+
+    Private Sub ListViewUser_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewUser.SelectedIndexChanged
 
     End Sub
 End Class

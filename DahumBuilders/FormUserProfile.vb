@@ -1,6 +1,8 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports System.Linq
 
 Public Class FormUserProfile
+    Dim formImageCapture As New FormImageCapture
 
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         With Me.ComboBoxGender.Items
@@ -367,5 +369,15 @@ end_of_if:
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        If Application.OpenForms().OfType(Of FormImageCapture).Any Then
+            formImageCapture.Focus()
+        Else
+            formImageCapture.MdiParent = FormMainDahum
+            formImageCapture.Show()
+        End If
+
     End Sub
 End Class
