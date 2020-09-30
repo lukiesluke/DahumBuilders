@@ -43,7 +43,7 @@ Public Class FormUserList
         labelRows.Text = "Row's: " & ListViewUser.Items.Count
     End Sub
 
-    Private Sub ListViewUser_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUser.MouseClick
+    Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
         Dim a As String = ListViewUser.SelectedItems(0).SubItems(1).Text
 
         If Application.OpenForms().OfType(Of FormUserProfile).Any Then
@@ -57,7 +57,5 @@ Public Class FormUserList
             formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
             formUser.btnSearch.PerformClick()
         End If
-
     End Sub
-
 End Class
