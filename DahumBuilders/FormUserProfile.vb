@@ -375,8 +375,8 @@ end_of_if:
         If Application.OpenForms().OfType(Of FormImageCapture).Any Then
             formImageCapture.Focus()
         Else
-            formImageCapture.MdiParent = FormMainDahum
-            formImageCapture.Show()
+            'formImageCapture.MdiParent = FormMainDahum
+            formImageCapture.ShowDialog()
         End If
 
     End Sub
