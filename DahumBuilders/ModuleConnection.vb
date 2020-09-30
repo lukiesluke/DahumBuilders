@@ -11,6 +11,7 @@ Module ModuleConnection
     Public sqlDataReader As MySqlDataReader
     Public sqlAdapter As MySqlDataAdapter
     Public username As String
+    Public fileLocationImage As String
 
     Public Sub Connection()
         Try

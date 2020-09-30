@@ -20,7 +20,7 @@ Public Class FormUserProfile
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
         username = FormMainDahum.ToolStripStatusUsername.Text.Trim
-        PictureBox1.ImageLocation = "C:\client_male_jpg.jpg"
+        PictureBox1.Image = My.Resources.client_male_jpg
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -29,10 +29,11 @@ Public Class FormUserProfile
         (`first_name`, `middle_name`, `last_name`, `address`, `gender`, `civil_status`, `date_birth`, 
         `place_birth`, `citizenship`, `telephone_number`, `mobile_number`, `email_address`, 
         `occupation`, `company_name`, `spouse_name`, `spouse_occupation`, `spouse_contact`, 
-        `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`, `username`) 
-         VALUES (@first_name, @middle_name, @last_name, @address, @gender, @civilStatus, @dateBirth,
-        @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, @companyName, @spouseName, 
-        @spouseOccupation, @spouseContact, @fatherName, @fatherAddress, @MotherName, @MotherAddress, @username)"
+        `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`,
+        `file_location_image`, `username`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
+        @civilStatus, @dateBirth, @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, 
+        @companyName, @spouseName, @spouseOccupation, @spouseContact, @fatherName, @fatherAddress, @MotherName, 
+        @MotherAddress, @fileLocationImage, @username)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -61,7 +62,9 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@fatherAddress", MySqlDbType.VarChar).Value = txtFatherAddress.Text.Trim
         sqlCommand.Parameters.Add("@MotherName", MySqlDbType.VarChar).Value = txtMotherName.Text.Trim
         sqlCommand.Parameters.Add("@MotherAddress", MySqlDbType.VarChar).Value = txtMotherAddress.Text.Trim
+        sqlCommand.Parameters.Add("@@fileLocationImage", MySqlDbType.VarChar).Value = fileLocationImage
         sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
+
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
@@ -204,6 +207,11 @@ Public Class FormUserProfile
                 txtFatherAddress.Text = table.Rows(0)("father_provincial_address")
                 txtMotherName.Text = table.Rows(0)("mother_name")
                 txtMotherAddress.Text = table.Rows(0)("mother_provincial_address")
+                If table.Rows(0)("file_location_image").ToString.Length < 3 Then
+                    PictureBox1.Image = My.Resources.client_male_jpg
+                Else
+                    PictureBox1.ImageLocation = table.Rows(0)("file_location_image")
+                End If
 
                 getUserChildAndBeneficiary(sqlCommand, sqlConnection, txtUserId.Text.Trim)
             Else
@@ -375,7 +383,6 @@ end_of_if:
         If Application.OpenForms().OfType(Of FormImageCapture).Any Then
             formImageCapture.Focus()
         Else
-            'formImageCapture.MdiParent = FormMainDahum
             formImageCapture.ShowDialog()
         End If
 

@@ -28,6 +28,7 @@ Partial Class FormImageCapture
         Me.bntCamera = New System.Windows.Forms.Button()
         Me.btnCaptureImage = New System.Windows.Forms.Button()
         Me.bntSaveImage = New System.Windows.Forms.Button()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -120,4 +121,5 @@ Partial Class FormImageCapture
     Friend WithEvents bntCamera As Button
     Friend WithEvents btnCaptureImage As Button
     Friend WithEvents bntSaveImage As Button
+    Friend WithEvents SaveFileDialog1 As SaveFileDialog
 End Class
