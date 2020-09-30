@@ -31,6 +31,7 @@ Partial Class FormUserList
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.ComboBoxSearch = New System.Windows.Forms.ComboBox()
+        Me.labelRows = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ListViewUser
@@ -40,7 +41,7 @@ Partial Class FormUserList
         Me.ListViewUser.GridLines = True
         Me.ListViewUser.Location = New System.Drawing.Point(12, 70)
         Me.ListViewUser.Name = "ListViewUser"
-        Me.ListViewUser.Size = New System.Drawing.Size(891, 457)
+        Me.ListViewUser.Size = New System.Drawing.Size(891, 536)
         Me.ListViewUser.TabIndex = 0
         Me.ListViewUser.UseCompatibleStateImageBehavior = False
         Me.ListViewUser.View = System.Windows.Forms.View.Details
@@ -98,11 +99,21 @@ Partial Class FormUserList
         Me.ComboBoxSearch.Size = New System.Drawing.Size(183, 28)
         Me.ComboBoxSearch.TabIndex = 4
         '
+        'labelRows
+        '
+        Me.labelRows.AutoSize = True
+        Me.labelRows.Location = New System.Drawing.Point(12, 613)
+        Me.labelRows.Name = "labelRows"
+        Me.labelRows.Size = New System.Drawing.Size(53, 20)
+        Me.labelRows.TabIndex = 5
+        Me.labelRows.Text = "Rows:"
+        '
         'FormUserList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(920, 636)
+        Me.ClientSize = New System.Drawing.Size(920, 679)
+        Me.Controls.Add(Me.labelRows)
         Me.Controls.Add(Me.ComboBoxSearch)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtSearch)
@@ -124,4 +135,5 @@ Partial Class FormUserList
     Friend WithEvents ColumnHeaderName As ColumnHeader
     Friend WithEvents ColumnHeaderMiddleName As ColumnHeader
     Friend WithEvents ComboBoxSearch As ComboBox
+    Friend WithEvents labelRows As Label
 End Class

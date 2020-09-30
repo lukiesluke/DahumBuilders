@@ -106,6 +106,8 @@ Partial Class FormUserProfile
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
         Me.txtUserId = New System.Windows.Forms.TextBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -113,64 +115,66 @@ Partial Class FormUserProfile
         Me.TabPage2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtFirstName
         '
-        Me.txtFirstName.Location = New System.Drawing.Point(94, 18)
+        Me.txtFirstName.Location = New System.Drawing.Point(112, 18)
         Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(298, 26)
-        Me.txtFirstName.TabIndex = 0
+        Me.txtFirstName.Size = New System.Drawing.Size(297, 26)
+        Me.txtFirstName.TabIndex = 1
         '
         'txtMiddleName
         '
-        Me.txtMiddleName.Location = New System.Drawing.Point(94, 58)
+        Me.txtMiddleName.Location = New System.Drawing.Point(112, 54)
         Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(298, 26)
-        Me.txtMiddleName.TabIndex = 1
+        Me.txtMiddleName.TabIndex = 2
         '
         'txtLastName
         '
-        Me.txtLastName.Location = New System.Drawing.Point(94, 98)
+        Me.txtLastName.Location = New System.Drawing.Point(112, 90)
         Me.txtLastName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.Size = New System.Drawing.Size(298, 26)
-        Me.txtLastName.TabIndex = 2
+        Me.txtLastName.TabIndex = 3
         '
         'txtAddress
         '
-        Me.txtAddress.Location = New System.Drawing.Point(94, 178)
+        Me.txtAddress.Location = New System.Drawing.Point(112, 269)
         Me.txtAddress.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(638, 26)
-        Me.txtAddress.TabIndex = 4
+        Me.txtAddress.Size = New System.Drawing.Size(618, 26)
+        Me.txtAddress.TabIndex = 9
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(578, 764)
+        Me.btnSave.Location = New System.Drawing.Point(547, 763)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(112, 35)
-        Me.btnSave.TabIndex = 5
+        Me.btnSave.TabIndex = 22
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(698, 764)
+        Me.btnCancel.Location = New System.Drawing.Point(667, 763)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(112, 35)
-        Me.btnCancel.TabIndex = 7
+        Me.btnCancel.TabIndex = 23
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(9, 29)
+        Me.Label1.Location = New System.Drawing.Point(9, 24)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(51, 20)
@@ -180,7 +184,7 @@ Partial Class FormUserProfile
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(9, 69)
+        Me.Label2.Location = New System.Drawing.Point(9, 60)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(55, 20)
@@ -190,7 +194,7 @@ Partial Class FormUserProfile
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(9, 109)
+        Me.Label3.Location = New System.Drawing.Point(9, 96)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(74, 20)
@@ -200,7 +204,7 @@ Partial Class FormUserProfile
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(9, 185)
+        Me.Label4.Location = New System.Drawing.Point(9, 275)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(68, 20)
@@ -213,14 +217,14 @@ Partial Class FormUserProfile
         Me.btnSearch.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(112, 35)
-        Me.btnSearch.TabIndex = 6
+        Me.btnSearch.TabIndex = 24
         Me.btnSearch.Text = "Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(9, 149)
+        Me.Label5.Location = New System.Drawing.Point(9, 132)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 20)
@@ -230,7 +234,7 @@ Partial Class FormUserProfile
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(418, 149)
+        Me.Label6.Location = New System.Drawing.Point(9, 169)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(87, 20)
@@ -241,15 +245,15 @@ Partial Class FormUserProfile
         '
         Me.DateTimePicker1.CustomFormat = "MMMM dd, yyyy"
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(531, 18)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(522, 234)
         Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(202, 26)
-        Me.DateTimePicker1.TabIndex = 15
+        Me.DateTimePicker1.Size = New System.Drawing.Size(208, 26)
+        Me.DateTimePicker1.TabIndex = 8
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(458, 763)
+        Me.Button1.Location = New System.Drawing.Point(427, 762)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(112, 35)
@@ -267,18 +271,16 @@ Partial Class FormUserProfile
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(796, 740)
-        Me.TabControl1.TabIndex = 17
+        Me.TabControl1.Size = New System.Drawing.Size(765, 740)
+        Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.PictureBox1)
+        Me.TabPage1.Controls.Add(Me.GroupBox4)
         Me.TabPage1.Controls.Add(Me.ComboBoxCivilStatus)
         Me.TabPage1.Controls.Add(Me.ComboBoxGender)
         Me.TabPage1.Controls.Add(Me.GroupBox2)
-        Me.TabPage1.Controls.Add(Me.txtCompanyName)
-        Me.TabPage1.Controls.Add(Me.txtOccupation)
-        Me.TabPage1.Controls.Add(Me.Label14)
-        Me.TabPage1.Controls.Add(Me.Label13)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
         Me.TabPage1.Controls.Add(Me.txtCitizen)
         Me.TabPage1.Controls.Add(Me.txtPlaceBirth)
@@ -300,7 +302,7 @@ Partial Class FormUserProfile
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TabPage1.Size = New System.Drawing.Size(788, 707)
+        Me.TabPage1.Size = New System.Drawing.Size(757, 707)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -309,19 +311,19 @@ Partial Class FormUserProfile
         '
         Me.ComboBoxCivilStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxCivilStatus.FormattingEnabled = True
-        Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(531, 138)
+        Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(112, 161)
         Me.ComboBoxCivilStatus.Name = "ComboBoxCivilStatus"
-        Me.ComboBoxCivilStatus.Size = New System.Drawing.Size(201, 28)
-        Me.ComboBoxCivilStatus.TabIndex = 28
+        Me.ComboBoxCivilStatus.Size = New System.Drawing.Size(297, 28)
+        Me.ComboBoxCivilStatus.TabIndex = 5
         '
         'ComboBoxGender
         '
         Me.ComboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxGender.FormattingEnabled = True
-        Me.ComboBoxGender.Location = New System.Drawing.Point(94, 138)
+        Me.ComboBoxGender.Location = New System.Drawing.Point(112, 124)
         Me.ComboBoxGender.Name = "ComboBoxGender"
         Me.ComboBoxGender.Size = New System.Drawing.Size(298, 28)
-        Me.ComboBoxGender.TabIndex = 27
+        Me.ComboBoxGender.TabIndex = 4
         '
         'GroupBox2
         '
@@ -333,12 +335,12 @@ Partial Class FormUserProfile
         Me.GroupBox2.Controls.Add(Me.txtFatherAddress)
         Me.GroupBox2.Controls.Add(Me.txtFatherName)
         Me.GroupBox2.Controls.Add(Me.Label15)
-        Me.GroupBox2.Location = New System.Drawing.Point(14, 303)
+        Me.GroupBox2.Location = New System.Drawing.Point(8, 486)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox2.Size = New System.Drawing.Size(722, 208)
-        Me.GroupBox2.TabIndex = 26
+        Me.GroupBox2.TabIndex = 17
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Parent Information"
         '
@@ -348,7 +350,7 @@ Partial Class FormUserProfile
         Me.txtMotherAddress.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtMotherAddress.Name = "txtMotherAddress"
         Me.txtMotherAddress.Size = New System.Drawing.Size(500, 26)
-        Me.txtMotherAddress.TabIndex = 7
+        Me.txtMotherAddress.TabIndex = 21
         '
         'txtMotherName
         '
@@ -356,7 +358,7 @@ Partial Class FormUserProfile
         Me.txtMotherName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtMotherName.Name = "txtMotherName"
         Me.txtMotherName.Size = New System.Drawing.Size(580, 26)
-        Me.txtMotherName.TabIndex = 6
+        Me.txtMotherName.TabIndex = 20
         '
         'Label18
         '
@@ -394,7 +396,7 @@ Partial Class FormUserProfile
         Me.txtFatherAddress.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFatherAddress.Name = "txtFatherAddress"
         Me.txtFatherAddress.Size = New System.Drawing.Size(500, 26)
-        Me.txtFatherAddress.TabIndex = 2
+        Me.txtFatherAddress.TabIndex = 19
         '
         'txtFatherName
         '
@@ -402,7 +404,7 @@ Partial Class FormUserProfile
         Me.txtFatherName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtFatherName.Name = "txtFatherName"
         Me.txtFatherName.Size = New System.Drawing.Size(580, 26)
-        Me.txtFatherName.TabIndex = 1
+        Me.txtFatherName.TabIndex = 18
         '
         'Label15
         '
@@ -416,24 +418,24 @@ Partial Class FormUserProfile
         '
         'txtCompanyName
         '
-        Me.txtCompanyName.Location = New System.Drawing.Point(141, 258)
+        Me.txtCompanyName.Location = New System.Drawing.Point(11, 111)
         Me.txtCompanyName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(592, 26)
-        Me.txtCompanyName.TabIndex = 25
+        Me.txtCompanyName.Size = New System.Drawing.Size(350, 26)
+        Me.txtCompanyName.TabIndex = 16
         '
         'txtOccupation
         '
-        Me.txtOccupation.Location = New System.Drawing.Point(141, 218)
+        Me.txtOccupation.Location = New System.Drawing.Point(105, 40)
         Me.txtOccupation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtOccupation.Name = "txtOccupation"
-        Me.txtOccupation.Size = New System.Drawing.Size(592, 26)
-        Me.txtOccupation.TabIndex = 24
+        Me.txtOccupation.Size = New System.Drawing.Size(256, 26)
+        Me.txtOccupation.TabIndex = 15
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(9, 269)
+        Me.Label14.Location = New System.Drawing.Point(7, 86)
         Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(122, 20)
@@ -443,7 +445,7 @@ Partial Class FormUserProfile
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(9, 229)
+        Me.Label13.Location = New System.Drawing.Point(7, 46)
         Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(90, 20)
@@ -458,12 +460,12 @@ Partial Class FormUserProfile
         Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.Label11)
         Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Location = New System.Drawing.Point(14, 520)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 304)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox1.Size = New System.Drawing.Size(430, 172)
-        Me.GroupBox1.TabIndex = 21
+        Me.GroupBox1.Size = New System.Drawing.Size(340, 172)
+        Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Contact Information"
         '
@@ -472,24 +474,24 @@ Partial Class FormUserProfile
         Me.txtEmail.Location = New System.Drawing.Point(105, 120)
         Me.txtEmail.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(302, 26)
-        Me.txtEmail.TabIndex = 5
+        Me.txtEmail.Size = New System.Drawing.Size(202, 26)
+        Me.txtEmail.TabIndex = 13
         '
         'txtMobile
         '
         Me.txtMobile.Location = New System.Drawing.Point(105, 80)
         Me.txtMobile.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtMobile.Name = "txtMobile"
-        Me.txtMobile.Size = New System.Drawing.Size(302, 26)
-        Me.txtMobile.TabIndex = 4
+        Me.txtMobile.Size = New System.Drawing.Size(202, 26)
+        Me.txtMobile.TabIndex = 12
         '
         'txtTelephone
         '
         Me.txtTelephone.Location = New System.Drawing.Point(105, 40)
         Me.txtTelephone.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtTelephone.Name = "txtTelephone"
-        Me.txtTelephone.Size = New System.Drawing.Size(302, 26)
-        Me.txtTelephone.TabIndex = 3
+        Me.txtTelephone.Size = New System.Drawing.Size(202, 26)
+        Me.txtTelephone.TabIndex = 11
         '
         'Label12
         '
@@ -523,24 +525,24 @@ Partial Class FormUserProfile
         '
         'txtCitizen
         '
-        Me.txtCitizen.Location = New System.Drawing.Point(531, 98)
+        Me.txtCitizen.Location = New System.Drawing.Point(112, 197)
         Me.txtCitizen.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtCitizen.Name = "txtCitizen"
-        Me.txtCitizen.Size = New System.Drawing.Size(202, 26)
-        Me.txtCitizen.TabIndex = 20
+        Me.txtCitizen.Size = New System.Drawing.Size(297, 26)
+        Me.txtCitizen.TabIndex = 6
         '
         'txtPlaceBirth
         '
-        Me.txtPlaceBirth.Location = New System.Drawing.Point(531, 58)
+        Me.txtPlaceBirth.Location = New System.Drawing.Point(112, 233)
         Me.txtPlaceBirth.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtPlaceBirth.Name = "txtPlaceBirth"
-        Me.txtPlaceBirth.Size = New System.Drawing.Size(202, 26)
-        Me.txtPlaceBirth.TabIndex = 19
+        Me.txtPlaceBirth.Size = New System.Drawing.Size(297, 26)
+        Me.txtPlaceBirth.TabIndex = 7
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(418, 109)
+        Me.Label9.Location = New System.Drawing.Point(9, 203)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(57, 20)
@@ -550,7 +552,7 @@ Partial Class FormUserProfile
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(418, 69)
+        Me.Label8.Location = New System.Drawing.Point(9, 239)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(101, 20)
@@ -560,7 +562,7 @@ Partial Class FormUserProfile
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(418, 31)
+        Me.Label7.Location = New System.Drawing.Point(417, 239)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(97, 20)
@@ -584,7 +586,7 @@ Partial Class FormUserProfile
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TabPage2.Size = New System.Drawing.Size(788, 707)
+        Me.TabPage2.Size = New System.Drawing.Size(757, 707)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Spouse & Child Information"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -615,7 +617,7 @@ Partial Class FormUserProfile
         Me.btnClearListChild.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClearListChild.Name = "btnClearListChild"
         Me.btnClearListChild.Size = New System.Drawing.Size(206, 35)
-        Me.btnClearListChild.TabIndex = 15
+        Me.btnClearListChild.TabIndex = 6
         Me.btnClearListChild.Text = "Clear List Child"
         Me.btnClearListChild.UseVisualStyleBackColor = True
         '
@@ -625,7 +627,7 @@ Partial Class FormUserProfile
         Me.btnAddChild.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddChild.Name = "btnAddChild"
         Me.btnAddChild.Size = New System.Drawing.Size(206, 35)
-        Me.btnAddChild.TabIndex = 7
+        Me.btnAddChild.TabIndex = 5
         Me.btnAddChild.Text = "Add Child"
         Me.btnAddChild.UseVisualStyleBackColor = True
         '
@@ -638,7 +640,7 @@ Partial Class FormUserProfile
         Me.ListViewChild.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ListViewChild.Name = "ListViewChild"
         Me.ListViewChild.Size = New System.Drawing.Size(714, 247)
-        Me.ListViewChild.TabIndex = 6
+        Me.ListViewChild.TabIndex = 7
         Me.ListViewChild.UseCompatibleStateImageBehavior = False
         Me.ListViewChild.View = System.Windows.Forms.View.Details
         '
@@ -821,7 +823,7 @@ Partial Class FormUserProfile
         Me.TabPage3.Location = New System.Drawing.Point(4, 29)
         Me.TabPage3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(788, 707)
+        Me.TabPage3.Size = New System.Drawing.Size(757, 707)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Beneficiaries Information"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -832,7 +834,7 @@ Partial Class FormUserProfile
         Me.btnClearListBeneficiary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnClearListBeneficiary.Name = "btnClearListBeneficiary"
         Me.btnClearListBeneficiary.Size = New System.Drawing.Size(206, 35)
-        Me.btnClearListBeneficiary.TabIndex = 14
+        Me.btnClearListBeneficiary.TabIndex = 12
         Me.btnClearListBeneficiary.Text = "Clear List Beneficiary"
         Me.btnClearListBeneficiary.UseVisualStyleBackColor = True
         '
@@ -875,7 +877,7 @@ Partial Class FormUserProfile
         Me.btnAddBeneficiary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnAddBeneficiary.Name = "btnAddBeneficiary"
         Me.btnAddBeneficiary.Size = New System.Drawing.Size(206, 35)
-        Me.btnAddBeneficiary.TabIndex = 12
+        Me.btnAddBeneficiary.TabIndex = 11
         Me.btnAddBeneficiary.Text = "Add Beneficiary"
         Me.btnAddBeneficiary.UseVisualStyleBackColor = True
         '
@@ -939,13 +941,38 @@ Partial Class FormUserProfile
         Me.txtUserId.Location = New System.Drawing.Point(141, 772)
         Me.txtUserId.Name = "txtUserId"
         Me.txtUserId.Size = New System.Drawing.Size(85, 26)
-        Me.txtUserId.TabIndex = 18
+        Me.txtUserId.TabIndex = 25
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.Label13)
+        Me.GroupBox4.Controls.Add(Me.Label14)
+        Me.GroupBox4.Controls.Add(Me.txtOccupation)
+        Me.GroupBox4.Controls.Add(Me.txtCompanyName)
+        Me.GroupBox4.Location = New System.Drawing.Point(355, 304)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(375, 172)
+        Me.GroupBox4.TabIndex = 14
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Employment Information"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PictureBox1.Image = Global.DahumBuilders.My.Resources.Resources.client_male_jpg
+        Me.PictureBox1.InitialImage = Global.DahumBuilders.My.Resources.Resources.client_male_jpg
+        Me.PictureBox1.Location = New System.Drawing.Point(421, 18)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(309, 205)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 30
+        Me.PictureBox1.TabStop = False
         '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(852, 817)
+        Me.ClientSize = New System.Drawing.Size(814, 817)
         Me.Controls.Add(Me.txtUserId)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button1)
@@ -970,6 +997,9 @@ Partial Class FormUserProfile
         Me.GroupBox3.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1059,4 +1089,6 @@ Partial Class FormUserProfile
     Friend WithEvents txtUserId As TextBox
     Friend WithEvents ComboBoxGender As ComboBox
     Friend WithEvents ComboBoxCivilStatus As ComboBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

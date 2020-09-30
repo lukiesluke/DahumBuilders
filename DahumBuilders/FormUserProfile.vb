@@ -18,7 +18,7 @@ Public Class FormUserProfile
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
         username = FormMainDahum.ToolStripStatusUsername.Text.Trim
-
+        PictureBox1.ImageLocation = "C:\client_male_jpg.jpg"
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click

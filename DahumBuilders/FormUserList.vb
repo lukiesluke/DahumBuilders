@@ -9,6 +9,7 @@ Public Class FormUserList
             .Add("Name")
         End With
         ComboBoxSearch.SelectedIndex = 0
+        labelRows.Text = "Row's: " & ListViewUser.Items.Count
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -40,6 +41,7 @@ Public Class FormUserList
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+        labelRows.Text = "Row's: " & ListViewUser.Items.Count
     End Sub
 
     Private Sub ListViewUser_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUser.MouseClick
