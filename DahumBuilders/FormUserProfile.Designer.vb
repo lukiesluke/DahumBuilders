@@ -312,9 +312,9 @@ Partial Class FormUserProfile
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.Image = Global.DahumBuilders.My.Resources.Resources.client_male_jpg
         Me.PictureBox1.InitialImage = Global.DahumBuilders.My.Resources.Resources.client_male_jpg
-        Me.PictureBox1.Location = New System.Drawing.Point(421, 18)
+        Me.PictureBox1.Location = New System.Drawing.Point(454, 18)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(309, 205)
+        Me.PictureBox1.Size = New System.Drawing.Size(276, 205)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 30
         Me.PictureBox1.TabStop = False

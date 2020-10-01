@@ -45,17 +45,18 @@ Public Class FormUserList
 
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
         Dim a As String = ListViewUser.SelectedItems(0).SubItems(1).Text
-
-        If Application.OpenForms().OfType(Of FormUserProfile).Any Then
-            mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-            mFormUserProfile.btnSearch.PerformClick()
-        Else
-            mFormUserProfile = New FormUserProfile
-            mFormUserProfile.MdiParent = FormMainDahum
-            mFormUserProfile.Show()
-            mFormUserProfile.WindowState = FormWindowState.Normal
-            mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-            mFormUserProfile.btnSearch.PerformClick()
+        If e.KeyCode = Keys.F1 Then
+            If Application.OpenForms().OfType(Of FormUserProfile).Any Then
+                mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+                mFormUserProfile.btnSearch.PerformClick()
+            Else
+                mFormUserProfile = New FormUserProfile
+                mFormUserProfile.MdiParent = FormMainDahum
+                mFormUserProfile.Show()
+                mFormUserProfile.WindowState = FormWindowState.Normal
+                mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+                mFormUserProfile.btnSearch.PerformClick()
+            End If
         End If
     End Sub
 End Class

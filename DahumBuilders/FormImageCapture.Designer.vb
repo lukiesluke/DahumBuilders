@@ -45,7 +45,7 @@ Partial Class FormImageCapture
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(938, 469)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(938, 356)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'PictureBox1
@@ -54,7 +54,7 @@ Partial Class FormImageCapture
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(463, 463)
+        Me.PictureBox1.Size = New System.Drawing.Size(463, 350)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
@@ -65,7 +65,7 @@ Partial Class FormImageCapture
         Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox2.Location = New System.Drawing.Point(472, 3)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(463, 463)
+        Me.PictureBox2.Size = New System.Drawing.Size(463, 350)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 1
         Me.PictureBox2.TabStop = False
@@ -101,12 +101,13 @@ Partial Class FormImageCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1003, 574)
+        Me.ClientSize = New System.Drawing.Size(992, 446)
         Me.Controls.Add(Me.btnSaveImage)
         Me.Controls.Add(Me.btnCaptureImage)
         Me.Controls.Add(Me.bntCamera)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "FormImageCapture"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Image Capture"
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()

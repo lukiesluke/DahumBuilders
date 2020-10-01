@@ -385,7 +385,5 @@ end_of_if:
         Else
             formImageCapture.ShowDialog()
         End If
-
-
     End Sub
 End Class
