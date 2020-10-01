@@ -27,7 +27,7 @@ Partial Class FormImageCapture
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.bntCamera = New System.Windows.Forms.Button()
         Me.btnCaptureImage = New System.Windows.Forms.Button()
-        Me.bntSaveImage = New System.Windows.Forms.Button()
+        Me.btnSaveImage = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -45,7 +45,7 @@ Partial Class FormImageCapture
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(768, 363)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(938, 469)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'PictureBox1
@@ -54,7 +54,7 @@ Partial Class FormImageCapture
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(378, 357)
+        Me.PictureBox1.Size = New System.Drawing.Size(463, 463)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
@@ -63,16 +63,16 @@ Partial Class FormImageCapture
         '
         Me.PictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PictureBox2.Location = New System.Drawing.Point(387, 3)
+        Me.PictureBox2.Location = New System.Drawing.Point(472, 3)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(378, 357)
+        Me.PictureBox2.Size = New System.Drawing.Size(463, 463)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 1
         Me.PictureBox2.TabStop = False
         '
         'bntCamera
         '
-        Me.bntCamera.Location = New System.Drawing.Point(26, 34)
+        Me.bntCamera.Location = New System.Drawing.Point(495, 34)
         Me.bntCamera.Name = "bntCamera"
         Me.bntCamera.Size = New System.Drawing.Size(142, 37)
         Me.bntCamera.TabIndex = 1
@@ -81,28 +81,28 @@ Partial Class FormImageCapture
         '
         'btnCaptureImage
         '
-        Me.btnCaptureImage.Location = New System.Drawing.Point(498, 34)
+        Me.btnCaptureImage.Location = New System.Drawing.Point(671, 37)
         Me.btnCaptureImage.Name = "btnCaptureImage"
         Me.btnCaptureImage.Size = New System.Drawing.Size(142, 37)
         Me.btnCaptureImage.TabIndex = 2
         Me.btnCaptureImage.Text = "C&apture"
         Me.btnCaptureImage.UseVisualStyleBackColor = True
         '
-        'bntSaveImage
+        'btnSaveImage
         '
-        Me.bntSaveImage.Location = New System.Drawing.Point(646, 34)
-        Me.bntSaveImage.Name = "bntSaveImage"
-        Me.bntSaveImage.Size = New System.Drawing.Size(142, 37)
-        Me.bntSaveImage.TabIndex = 3
-        Me.bntSaveImage.Text = "&Save Image"
-        Me.bntSaveImage.UseVisualStyleBackColor = True
+        Me.btnSaveImage.Location = New System.Drawing.Point(819, 37)
+        Me.btnSaveImage.Name = "btnSaveImage"
+        Me.btnSaveImage.Size = New System.Drawing.Size(142, 37)
+        Me.btnSaveImage.TabIndex = 3
+        Me.btnSaveImage.Text = "&Save Image"
+        Me.btnSaveImage.UseVisualStyleBackColor = True
         '
         'FormImageCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(803, 480)
-        Me.Controls.Add(Me.bntSaveImage)
+        Me.ClientSize = New System.Drawing.Size(1003, 574)
+        Me.Controls.Add(Me.btnSaveImage)
         Me.Controls.Add(Me.btnCaptureImage)
         Me.Controls.Add(Me.bntCamera)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -120,6 +120,6 @@ Partial Class FormImageCapture
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents bntCamera As Button
     Friend WithEvents btnCaptureImage As Button
-    Friend WithEvents bntSaveImage As Button
+    Friend WithEvents btnSaveImage As Button
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
 End Class

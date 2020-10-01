@@ -47,15 +47,15 @@ Public Class FormUserList
         Dim a As String = ListViewUser.SelectedItems(0).SubItems(1).Text
 
         If Application.OpenForms().OfType(Of FormUserProfile).Any Then
-            formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-            formUser.btnSearch.PerformClick()
+            mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+            mFormUserProfile.btnSearch.PerformClick()
         Else
-            formUser = New FormUserProfile
-            formUser.MdiParent = FormMainDahum
-            formUser.Show()
-            formUser.WindowState = FormWindowState.Normal
-            formUser.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-            formUser.btnSearch.PerformClick()
+            mFormUserProfile = New FormUserProfile
+            mFormUserProfile.MdiParent = FormMainDahum
+            mFormUserProfile.Show()
+            mFormUserProfile.WindowState = FormWindowState.Normal
+            mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+            mFormUserProfile.btnSearch.PerformClick()
         End If
     End Sub
 End Class

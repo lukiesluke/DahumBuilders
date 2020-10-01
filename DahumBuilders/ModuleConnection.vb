@@ -1,10 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Module ModuleConnection
-
-    Public formUser As New FormUserProfile
-    Public formUserList As New FormUserList
-
     Public sqlConnection As New MySqlConnection
     Public sql As String
     Public sqlCommand As MySqlCommand
