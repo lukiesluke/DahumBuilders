@@ -18,6 +18,7 @@ Public Class FormMainDahum
         If Application.OpenForms().OfType(Of FormUserList).Any Then
             mFormUserList.Focus()
         Else
+            mFormUserList = New FormUserList
             mFormUserList.MdiParent = Me
             mFormUserList.Show()
         End If

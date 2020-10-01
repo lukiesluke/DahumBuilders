@@ -97,15 +97,12 @@ Public Class FormUserProfile
         If ListViewChild.Items.Count > 0 Then
 
             sql = "INSERT INTO `db_user_child` 
-            (`first_name`, `middle_name`, `last_name`, `userid`) 
-            VALUES (@firstName, @middleName, @lastName, @userid)"
+            (`first_name`, `userid`) VALUES (@firstName, @userid)"
 
             For Each item As ListViewItem In Me.ListViewChild.Items
                 cmd = New MySqlCommand(sql, conn)
                 sqlAdapter = New MySqlDataAdapter(cmd)
                 cmd.Parameters.Add("@firstName", MySqlDbType.VarChar).Value = item.SubItems.Item(1).Text.Trim
-                cmd.Parameters.Add("@middleName", MySqlDbType.VarChar).Value = item.SubItems.Item(2).Text.Trim
-                cmd.Parameters.Add("@lastName", MySqlDbType.VarChar).Value = item.SubItems.Item(3).Text.Trim
                 cmd.Parameters.Add("@userid", MySqlDbType.VarChar).Value = table.Rows(0)("id").ToString
                 cmd.ExecuteNonQuery()
             Next
@@ -114,20 +111,16 @@ Public Class FormUserProfile
         If ListViewBeneficiary.Items.Count > 0 Then
 
             sql = "INSERT INTO `db_user_beneficiary` 
-            (`first_name`, `middle_name`, `last_name`, `userid`) 
-            VALUES (@firstName, @middleName, @lastName, @userid)"
+            (`first_name`, `userid`) VALUES (@firstName, @userid)"
 
             For Each item As ListViewItem In Me.ListViewBeneficiary.Items
                 cmd = New MySqlCommand(sql, conn)
                 sqlAdapter = New MySqlDataAdapter(cmd)
                 cmd.Parameters.Add("@firstName", MySqlDbType.VarChar).Value = item.SubItems.Item(1).Text.Trim
-                cmd.Parameters.Add("@middleName", MySqlDbType.VarChar).Value = item.SubItems.Item(2).Text.Trim
-                cmd.Parameters.Add("@lastName", MySqlDbType.VarChar).Value = item.SubItems.Item(3).Text.Trim
                 cmd.Parameters.Add("@userid", MySqlDbType.VarChar).Value = table.Rows(0)("id").ToString
                 cmd.ExecuteNonQuery()
             Next
         End If
-
     End Sub
 
     Private Sub getUserChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, userId As String)
@@ -198,8 +191,6 @@ Public Class FormUserProfile
                 txtCompanyName.Text = table.Rows(0)("company_name")
 
                 txtSpouseName.Text = table.Rows(0)("spouse_name")
-                txtSpouseMiddleName.Text = table.Rows(0)("spouse_name")
-                txtSpouseLastName.Text = table.Rows(0)("spouse_name")
                 txtSpouseOccupation.Text = table.Rows(0)("spouse_occupation")
                 txtSpouseContactNumber.Text = table.Rows(0)("spouse_contact")
 
@@ -233,74 +224,41 @@ Public Class FormUserProfile
 
     Private Sub btnAddChild_Click(sender As Object, e As EventArgs) Handles btnAddChild.Click
 
-        If txtChildName.Text.Trim.Length > 0 And txtChildSurname.Text.Trim.Length > 0 Then
+        If txtChildName.Text.Trim().Length > 0 Then
             Dim item As New ListViewItem(ListViewChild.Items.Count + 1)
             item.SubItems.Add(txtChildName.Text.Trim)
-            item.SubItems.Add(txtChildMiddleName.Text.Trim)
-            item.SubItems.Add(txtChildSurname.Text.Trim)
             ListViewChild.Items.Add(item)
 
             txtChildName.Text = ""
-            txtChildMiddleName.Text = txtChildMiddleName.Text.Trim
-            txtChildSurname.Text = txtChildSurname.Text.Trim
         Else
-            txtChildName.Text = txtChildName.Text.Trim()
-            txtChildMiddleName.Text = txtChildMiddleName.Text.Trim()
-            txtChildSurname.Text = txtChildSurname.Text.Trim()
-
-            If txtChildName.Text.Length < 1 Then
+            If txtChildName.Text.Trim().Length < 1 Then
                 MsgBox("Please Enter Child Name.", MsgBoxStyle.Information, "Child Information")
-                txtChildName.Focus()
-                GoTo end_of_if
             End If
-
-            If txtChildSurname.Text.Length < 1 Then
-                MsgBox("Please Enter Child Surname.", MsgBoxStyle.Information, "Child Information")
-                txtChildSurname.Focus()
-            End If
-end_of_if:
         End If
-
+        txtChildName.Focus()
     End Sub
 
     Private Sub btnAddBeneficiary_Click(sender As Object, e As EventArgs) Handles btnAddBeneficiary.Click
-        If txtBeneficiaryName.Text.Trim.Length > 0 And txtBeneficiarySurname.Text.Trim.Length > 0 Then
+        If txtBeneficiaryName.Text.Trim.Length > 0 Then
 
             Dim item As New ListViewItem(ListViewBeneficiary.Items.Count + 1)
             item.SubItems.Add(txtBeneficiaryName.Text.Trim)
-            item.SubItems.Add(txtBeneficiaryMiddleName.Text.Trim)
-            item.SubItems.Add(txtBeneficiarySurname.Text.Trim)
             ListViewBeneficiary.Items.Add(item)
-
             txtBeneficiaryName.Text = ""
-            txtBeneficiaryMiddleName.Text = ""
-            txtBeneficiarySurname.Text = ""
-
         Else
 
             If txtBeneficiaryName.Text.Trim.Length < 1 Then
                 MsgBox("Please Enter Beneficiary Name.", MsgBoxStyle.Information, "Beneficiary Information")
-                txtBeneficiaryName.Focus()
-                GoTo end_of_if
             End If
-
-            If txtBeneficiarySurname.Text.Trim.Length < 1 Then
-                MsgBox("Please Enter Beneficiary Surname.", MsgBoxStyle.Information, "Beneficiary Information")
-                txtBeneficiarySurname.Focus()
-            End If
-end_of_if:
-
         End If
+        txtBeneficiaryName.Focus()
     End Sub
 
     Private Sub btnClearListBeneficiary_Click(sender As Object, e As EventArgs) Handles btnClearListBeneficiary.Click
 
         ListViewBeneficiary.Items.Clear()
         txtBeneficiaryName.Focus()
-
         txtBeneficiaryName.Text = ""
-        txtBeneficiaryMiddleName.Text = ""
-        txtBeneficiarySurname.Text = ""
     End Sub
 
     Private Sub btnClearListChild_Click(sender As Object, e As EventArgs) Handles btnClearListChild.Click
@@ -309,8 +267,6 @@ end_of_if:
         txtChildName.Focus()
 
         txtChildName.Text = ""
-        txtChildMiddleName.Text = ""
-        txtChildSurname.Text = ""
     End Sub
 
     Private Sub txtChildName_KeyUp(sender As Object, e As KeyEventArgs) Handles txtChildName.KeyUp
@@ -319,7 +275,7 @@ end_of_if:
         End If
     End Sub
 
-    Private Sub txtChildSurname_KeyUp(sender As Object, e As KeyEventArgs) Handles txtChildSurname.KeyUp
+    Private Sub txtChildSurname_KeyUp(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             btnAddChild.PerformClick()
         End If
@@ -331,7 +287,7 @@ end_of_if:
         End If
     End Sub
 
-    Private Sub txtBeneficiarySurname_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBeneficiarySurname.KeyUp
+    Private Sub txtBeneficiarySurname_KeyUp(sender As Object, e As KeyEventArgs)
         If e.KeyCode = Keys.Enter Then
             btnAddBeneficiary.PerformClick()
         End If
@@ -353,8 +309,6 @@ end_of_if:
         txtCompanyName.Text = ""
 
         txtSpouseName.Text = ""
-        txtSpouseMiddleName.Text = ""
-        txtSpouseLastName.Text = ""
         txtSpouseOccupation.Text = ""
         txtSpouseContactNumber.Text = ""
 
@@ -364,12 +318,7 @@ end_of_if:
         txtMotherAddress.Text = ""
 
         txtChildName.Text = ""
-        txtChildMiddleName.Text = ""
-        txtChildSurname.Text = ""
-
         txtBeneficiaryName.Text = ""
-        txtBeneficiaryMiddleName.Text = ""
-        txtBeneficiarySurname.Text = ""
 
         ListViewChild.Clear()
         ListViewBeneficiary.Clear()
