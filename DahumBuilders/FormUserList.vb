@@ -47,6 +47,9 @@ Public Class FormUserList
         Dim a As String = ListViewUser.SelectedItems(0).SubItems(1).Text
         If e.KeyCode = Keys.F1 Then
             If Application.OpenForms().OfType(Of FormUserProfile).Any Then
+                If mFormUserProfile.WindowState = 1 Then
+                    mFormUserProfile.WindowState = 0
+                End If
                 mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
                 mFormUserProfile.btnSearch.PerformClick()
             Else

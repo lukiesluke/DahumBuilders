@@ -2,6 +2,7 @@
 Imports AForge.Video
 Imports AForge.Video.DirectShow
 Imports System.IO
+Imports System.ComponentModel
 
 Public Class FormImageCapture
     Dim videoCapture As VideoCaptureDevice
@@ -42,10 +43,16 @@ Public Class FormImageCapture
 
     Private Sub FormImageCapture_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         buttonEnableDisable(False)
+        PictureBox1.Image = Nothing
+        PictureBox2.Image = Nothing
     End Sub
 
     Private Sub buttonEnableDisable(value As Boolean)
         btnCaptureImage.Enabled = value
         btnSaveImage.Enabled = value
+    End Sub
+
+    Private Sub FormImageCapture_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        videoCapture.Stop()
     End Sub
 End Class
