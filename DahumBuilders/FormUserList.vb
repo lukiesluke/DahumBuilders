@@ -34,6 +34,9 @@ Public Class FormUserList
                 item.SubItems.Add(sqlDataReader("first_name"))
                 item.SubItems.Add(sqlDataReader("middle_name"))
                 item.SubItems.Add(sqlDataReader("gender"))
+                item.SubItems.Add(sqlDataReader("civil_status"))
+                item.SubItems.Add(sqlDataReader("address"))
+                item.SubItems.Add(Format(sqlDataReader("date_birth"), "MMMM dd, yyyy").ToString())
 
                 uAddress = sqlDataReader("address")
                 ListViewUser.Items.Add(item)
@@ -49,12 +52,14 @@ Public Class FormUserList
     End Sub
 
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
-        Dim name As String
 
         txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
         txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
         txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
         txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
+        txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
+        txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
+        txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
 
         If e.KeyCode = Keys.F1 Then
             If Application.OpenForms().OfType(Of FormUserProfile).Any Then

@@ -50,6 +50,9 @@ Partial Class FormUserList
         Me.txtDateOfBirth = New System.Windows.Forms.TextBox()
         Me.txtCivilStatus = New System.Windows.Forms.TextBox()
         Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.ColumnHeaderCivilStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderDateOfBirth = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,7 +60,7 @@ Partial Class FormUserList
         '
         'ListViewUser
         '
-        Me.ListViewUser.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderId, Me.ColumnHeaderLastName, Me.ColumnHeaderName, Me.ColumnHeaderMiddleName, Me.ColumnHeaderGender})
+        Me.ListViewUser.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderId, Me.ColumnHeaderLastName, Me.ColumnHeaderName, Me.ColumnHeaderMiddleName, Me.ColumnHeaderGender, Me.ColumnHeaderCivilStatus, Me.ColumnHeaderDateOfBirth, Me.ColumnHeaderAddress})
         Me.ListViewUser.FullRowSelect = True
         Me.ListViewUser.GridLines = True
         Me.ListViewUser.Location = New System.Drawing.Point(12, 70)
@@ -75,22 +78,22 @@ Partial Class FormUserList
         'ColumnHeaderLastName
         '
         Me.ColumnHeaderLastName.Text = "Surname"
-        Me.ColumnHeaderLastName.Width = 150
+        Me.ColumnHeaderLastName.Width = 110
         '
         'ColumnHeaderName
         '
         Me.ColumnHeaderName.Text = "Name"
-        Me.ColumnHeaderName.Width = 150
+        Me.ColumnHeaderName.Width = 100
         '
         'ColumnHeaderMiddleName
         '
         Me.ColumnHeaderMiddleName.Text = "Middle Name"
-        Me.ColumnHeaderMiddleName.Width = 100
+        Me.ColumnHeaderMiddleName.Width = 110
         '
         'ColumnHeaderGender
         '
         Me.ColumnHeaderGender.Text = "Gender"
-        Me.ColumnHeaderGender.Width = 100
+        Me.ColumnHeaderGender.Width = 70
         '
         'Label1
         '
@@ -293,6 +296,23 @@ Partial Class FormUserList
         Me.txtAddress.Size = New System.Drawing.Size(216, 26)
         Me.txtAddress.TabIndex = 20
         '
+        'ColumnHeaderCivilStatus
+        '
+        Me.ColumnHeaderCivilStatus.Text = "Civil Status"
+        Me.ColumnHeaderCivilStatus.Width = 90
+        '
+        'ColumnHeaderAddress
+        '
+        Me.ColumnHeaderAddress.DisplayIndex = 6
+        Me.ColumnHeaderAddress.Text = "Address"
+        Me.ColumnHeaderAddress.Width = 150
+        '
+        'ColumnHeaderDateOfBirth
+        '
+        Me.ColumnHeaderDateOfBirth.DisplayIndex = 7
+        Me.ColumnHeaderDateOfBirth.Text = "Birth Date"
+        Me.ColumnHeaderDateOfBirth.Width = 100
+        '
         'FormUserList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -344,4 +364,7 @@ Partial Class FormUserList
     Friend WithEvents txtSurname As TextBox
     Friend WithEvents txtMiddleName As TextBox
     Friend WithEvents txtName As TextBox
+    Friend WithEvents ColumnHeaderCivilStatus As ColumnHeader
+    Friend WithEvents ColumnHeaderAddress As ColumnHeader
+    Friend WithEvents ColumnHeaderDateOfBirth As ColumnHeader
 End Class
