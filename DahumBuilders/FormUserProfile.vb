@@ -2,10 +2,12 @@
 Imports System.Linq
 
 Public Class FormUserProfile
-    Dim formImageCapture As New FormImageCapture
 
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Location = New Point(My.Computer.Screen.Bounds.Top)
+        'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
+        Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
+        Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
+
         With Me.ComboBoxGender.Items
             .Add("Male")
             .Add("Female")
@@ -337,9 +339,10 @@ Public Class FormUserProfile
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
         If Application.OpenForms().OfType(Of FormImageCapture).Any Then
-            formImageCapture.Focus()
+            mFormImageCapture.Focus()
         Else
-            formImageCapture.ShowDialog()
+            mFormImageCapture = New FormImageCapture
+            mFormImageCapture.Show(Me)
         End If
     End Sub
 End Class

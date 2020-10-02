@@ -1,7 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormUserList
-    Dim uAddress As String
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Location = New Point(My.Computer.Screen.Bounds.Top)
@@ -35,10 +34,13 @@ Public Class FormUserList
                 item.SubItems.Add(sqlDataReader("middle_name"))
                 item.SubItems.Add(sqlDataReader("gender"))
                 item.SubItems.Add(sqlDataReader("civil_status"))
+                item.SubItems.Add(Format(sqlDataReader("date_birth"), "MMM dd, yyyy").ToString())
                 item.SubItems.Add(sqlDataReader("address"))
-                item.SubItems.Add(Format(sqlDataReader("date_birth"), "MMMM dd, yyyy").ToString())
-
-                uAddress = sqlDataReader("address")
+                If IsDBNull(sqlDataReader("file_location_image")) Then
+                    item.SubItems.Add("")
+                Else
+                    item.SubItems.Add(sqlDataReader("file_location_image"))
+                End If
                 ListViewUser.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -53,13 +55,21 @@ Public Class FormUserList
 
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
 
-        txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
-        txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
-        txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
-        txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
-        txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
-        txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
-        txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
+        If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
+            txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
+            txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
+            txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
+            txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
+            txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
+            txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
+            txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
+
+            If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
+                PictureBox1.Image = My.Resources.client_male_jpg
+            Else
+                PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
+            End If
+        End If
 
         If e.KeyCode = Keys.F1 Then
             If Application.OpenForms().OfType(Of FormUserProfile).Any Then
@@ -70,8 +80,8 @@ Public Class FormUserList
                 mFormUserProfile.btnSearch.PerformClick()
             Else
                 mFormUserProfile = New FormUserProfile
-                mFormUserProfile.MdiParent = FormMainDahum
-                mFormUserProfile.Show()
+                'mFormUserProfile.MdiParent = FormMainDahum
+                mFormUserProfile.ShowDialog()
                 mFormUserProfile.WindowState = FormWindowState.Normal
                 mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
                 mFormUserProfile.btnSearch.PerformClick()
@@ -79,7 +89,14 @@ Public Class FormUserList
         End If
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-
+    Private Sub ListViewUser_Click(sender As Object, e As EventArgs) Handles ListViewUser.Click
+        txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
+        txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
+        txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
+        txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
+        txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
+        txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
+        txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
+        PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
     End Sub
 End Class

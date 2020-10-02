@@ -10,7 +10,7 @@ Public Class FormImageCapture
 
     Private Sub bntCamera_Click(sender As Object, e As EventArgs) Handles bntCamera.Click
         Dim captureDeviceForm As VideoCaptureDeviceForm = New VideoCaptureDeviceForm()
-        If captureDeviceForm.ShowDialog() = DialogResult.OK Then
+        If captureDeviceForm.ShowDialog(Me) = DialogResult.OK Then
             videoCapture = captureDeviceForm.VideoDevice
             AddHandler videoCapture.NewFrame, New NewFrameEventHandler(AddressOf camera_capture)
             videoCapture.Start()
@@ -38,6 +38,8 @@ Public Class FormImageCapture
             PictureBox2.Image.Save(fileLocationImage, Imaging.ImageFormat.Jpeg)
 
             mFormUserProfile.PictureBox1.Image = PictureBox2.Image
+
+            videoCapture.SignalToStop()
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         End Try
@@ -55,11 +57,11 @@ Public Class FormImageCapture
         btnSaveImage.Enabled = value
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-    End Sub
-
     Private Sub FormImageCapture_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        videoCapture.SignalToStop()
+        Try
+            videoCapture.SignalToStop()
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class

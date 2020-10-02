@@ -8,8 +8,8 @@ Public Class FormMainDahum
             mFormUserProfile.Focus()
         Else
             mFormUserProfile = New FormUserProfile
-            mFormUserProfile.MdiParent = Me
-            mFormUserProfile.Show()
+            'mFormUserProfile.MdiParent = Me
+            mFormUserProfile.ShowDialog()
         End If
     End Sub
 
