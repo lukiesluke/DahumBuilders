@@ -5,6 +5,7 @@ Public Class FormUserProfile
     Dim formImageCapture As New FormImageCapture
 
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Location = New Point(My.Computer.Screen.Bounds.Top)
         With Me.ComboBoxGender.Items
             .Add("Male")
             .Add("Female")
@@ -15,12 +16,12 @@ Public Class FormUserProfile
             .Add("Separated")
             .Add("Widow")
         End With
-
         Me.Size = New Size(600, 570)
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
         username = FormMainDahum.ToolStripStatusUsername.Text.Trim
         PictureBox1.Image = My.Resources.client_male_jpg
+
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -215,6 +216,12 @@ Public Class FormUserProfile
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+
+        TabPage1.Controls.OfType(Of TextBox).All(Function(b)
+                                                     b.ReadOnly = True
+                                                     Return True
+                                                 End Function)
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

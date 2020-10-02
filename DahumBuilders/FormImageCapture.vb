@@ -14,7 +14,7 @@ Public Class FormImageCapture
             videoCapture = captureDeviceForm.VideoDevice
             AddHandler videoCapture.NewFrame, New NewFrameEventHandler(AddressOf camera_capture)
             videoCapture.Start()
-            buttonEnableDisable(True)
+            btnCaptureImage.Enabled = True
         End If
     End Sub
 
@@ -25,13 +25,16 @@ Public Class FormImageCapture
 
     Private Sub btnCaptureImage_Click(sender As Object, e As EventArgs) Handles btnCaptureImage.Click
         PictureBox2.Image = PictureBox1.Image
+        btnSaveImage.Enabled = True
     End Sub
 
     Private Sub bntSaveImage_Click(sender As Object, e As EventArgs) Handles btnSaveImage.Click
+
         Try
             Dim fileName = DateTime.Now.ToString("yyyyMMddHHmmss")
 
             fileLocationImage = "Z:\" & fileName & ".jpg"
+
             PictureBox2.Image.Save(fileLocationImage, Imaging.ImageFormat.Jpeg)
 
             mFormUserProfile.PictureBox1.Image = PictureBox2.Image
@@ -52,7 +55,11 @@ Public Class FormImageCapture
         btnSaveImage.Enabled = value
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+    End Sub
+
     Private Sub FormImageCapture_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        videoCapture.Stop()
+        videoCapture.SignalToStop()
     End Sub
 End Class

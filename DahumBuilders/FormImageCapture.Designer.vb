@@ -29,6 +29,7 @@ Partial Class FormImageCapture
         Me.btnCaptureImage = New System.Windows.Forms.Button()
         Me.btnSaveImage = New System.Windows.Forms.Button()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -97,11 +98,21 @@ Partial Class FormImageCapture
         Me.btnSaveImage.Text = "&Save Image"
         Me.btnSaveImage.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(228, 37)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FormImageCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(992, 446)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSaveImage)
         Me.Controls.Add(Me.btnCaptureImage)
         Me.Controls.Add(Me.bntCamera)
@@ -123,4 +134,5 @@ Partial Class FormImageCapture
     Friend WithEvents btnCaptureImage As Button
     Friend WithEvents btnSaveImage As Button
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents Button1 As Button
 End Class

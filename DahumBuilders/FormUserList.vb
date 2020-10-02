@@ -1,8 +1,10 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormUserList
+    Dim uAddress As String
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Location = New Point(My.Computer.Screen.Bounds.Top)
         With Me.ComboBoxSearch.Items
             .Add("Surname")
             .Add("Name")
@@ -31,6 +33,9 @@ Public Class FormUserList
                 item.SubItems.Add(sqlDataReader("last_name"))
                 item.SubItems.Add(sqlDataReader("first_name"))
                 item.SubItems.Add(sqlDataReader("middle_name"))
+                item.SubItems.Add(sqlDataReader("gender"))
+
+                uAddress = sqlDataReader("address")
                 ListViewUser.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -44,7 +49,13 @@ Public Class FormUserList
     End Sub
 
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
-        Dim a As String = ListViewUser.SelectedItems(0).SubItems(1).Text
+        Dim name As String
+
+        txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
+        txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
+        txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
+        txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
+
         If e.KeyCode = Keys.F1 Then
             If Application.OpenForms().OfType(Of FormUserProfile).Any Then
                 If mFormUserProfile.WindowState = 1 Then
@@ -61,5 +72,9 @@ Public Class FormUserList
                 mFormUserProfile.btnSearch.PerformClick()
             End If
         End If
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
     End Sub
 End Class
