@@ -10,6 +10,11 @@ Public Class FormUserList
         End With
         ComboBoxSearch.SelectedIndex = 0
         labelRows.Text = "Row's: " & ListViewUser.Items.Count
+
+        Panel1.Controls.OfType(Of TextBox).All(Function(b)
+                                                   b.ReadOnly = True
+                                                   Return True
+                                               End Function)
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -65,7 +70,11 @@ Public Class FormUserList
             txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
 
             If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
-                PictureBox1.Image = My.Resources.client_male_jpg
+                If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
+                    PictureBox1.Image = My.Resources.client_male
+                Else
+                    PictureBox1.Image = My.Resources.client_female
+                End If
             Else
                 PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
             End If
@@ -79,12 +88,8 @@ Public Class FormUserList
                 mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
                 mFormUserProfile.btnSearch.PerformClick()
             Else
-                mFormUserProfile = New FormUserProfile
-                'mFormUserProfile.MdiParent = FormMainDahum
+                mFormUserProfile = New FormUserProfile(ListViewUser.SelectedItems(0).Text)
                 mFormUserProfile.ShowDialog()
-                mFormUserProfile.WindowState = FormWindowState.Normal
-                mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-                mFormUserProfile.btnSearch.PerformClick()
             End If
         End If
     End Sub
@@ -97,6 +102,28 @@ Public Class FormUserList
         txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
         txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
         txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
-        PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
+
+        If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
+            If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
+                PictureBox1.Image = My.Resources.client_male
+            Else
+                PictureBox1.Image = My.Resources.client_female
+            End If
+        Else
+            PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
+        End If
+    End Sub
+
+    Private Sub btnProfileInfo_Click(sender As Object, e As EventArgs) Handles btnProfileInfo.Click
+        If Application.OpenForms().OfType(Of FormUserProfile).Any Then
+            If mFormUserProfile.WindowState = 1 Then
+                mFormUserProfile.WindowState = 0
+            End If
+            mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
+            mFormUserProfile.btnSearch.PerformClick()
+        Else
+            mFormUserProfile = New FormUserProfile(ListViewUser.SelectedItems(0).Text)
+            mFormUserProfile.ShowDialog()
+        End If
     End Sub
 End Class

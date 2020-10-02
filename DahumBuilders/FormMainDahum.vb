@@ -7,7 +7,7 @@ Public Class FormMainDahum
         If Application.OpenForms().OfType(Of FormUserProfile).Any Then
             mFormUserProfile.Focus()
         Else
-            mFormUserProfile = New FormUserProfile
+            mFormUserProfile = New FormUserProfile("MainDahum")
             'mFormUserProfile.MdiParent = Me
             mFormUserProfile.ShowDialog()
         End If

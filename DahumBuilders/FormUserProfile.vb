@@ -3,8 +3,33 @@ Imports System.Linq
 
 Public Class FormUserProfile
 
+    Private someMessage As String
+
+
+    Public Sub New(ByVal msg As String)
+        InitializeComponent()
+
+        If Not (String.IsNullOrEmpty(msg)) Then
+            someMessage = msg
+        End If
+    End Sub
+
+    Property Message() As String
+        Get
+            Return someMessage
+        End Get
+        Set(ByVal Value As String)
+            someMessage = Value
+        End Set
+    End Property
+
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
+        If someMessage.Length > 0 Then
+            txtUserId.Text = someMessage
+            btnSearch.PerformClick()
+        End If
+
         Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
         Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
 
@@ -22,7 +47,7 @@ Public Class FormUserProfile
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
         username = FormMainDahum.ToolStripStatusUsername.Text.Trim
-        PictureBox1.Image = My.Resources.client_male_jpg
+        PictureBox1.Image = My.Resources.client_male
 
     End Sub
 
@@ -202,7 +227,7 @@ Public Class FormUserProfile
                 txtMotherName.Text = table.Rows(0)("mother_name")
                 txtMotherAddress.Text = table.Rows(0)("mother_provincial_address")
                 If table.Rows(0)("file_location_image").ToString.Length < 3 Then
-                    PictureBox1.Image = My.Resources.client_male_jpg
+                    PictureBox1.Image = My.Resources.client_male
                 Else
                     PictureBox1.ImageLocation = table.Rows(0)("file_location_image")
                 End If

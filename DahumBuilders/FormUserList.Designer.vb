@@ -22,6 +22,7 @@ Partial Class FormUserList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormUserList))
         Me.ListViewUser = New System.Windows.Forms.ListView()
         Me.ColumnHeaderId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderLastName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -56,10 +57,16 @@ Partial Class FormUserList
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnPayment = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnProfileInfo = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListViewUser
@@ -139,7 +146,7 @@ Partial Class FormUserList
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(579, 27)
+        Me.btnSearch.Location = New System.Drawing.Point(582, 27)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(119, 38)
         Me.btnSearch.TabIndex = 3
@@ -166,23 +173,25 @@ Partial Class FormUserList
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.BackColor = System.Drawing.SystemColors.Control
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.White
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 2)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(724, 27)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 3
+        Me.TableLayoutPanel1.RowCount = 4
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.86747!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.13253!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 240.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 154.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(597, 573)
         Me.TableLayoutPanel1.TabIndex = 6
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.BackColor = System.Drawing.Color.CornflowerBlue
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.txtAddress)
         Me.Panel1.Controls.Add(Me.txtCivilStatus)
@@ -202,7 +211,7 @@ Partial Class FormUserList
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 59)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(591, 270)
+        Me.Panel1.Size = New System.Drawing.Size(591, 271)
         Me.Panel1.TabIndex = 7
         '
         'txtAddress
@@ -353,6 +362,76 @@ Partial Class FormUserList
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 4
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 159.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Button2, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Button3, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnProfileInfo, 3, 0)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 336)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(591, 121)
+        Me.TableLayoutPanel2.TabIndex = 9
+        '
+        'btnPayment
+        '
+        Me.btnPayment.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnPayment.Image = CType(resources.GetObject("btnPayment.Image"), System.Drawing.Image)
+        Me.btnPayment.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnPayment.Location = New System.Drawing.Point(3, 3)
+        Me.btnPayment.Name = "btnPayment"
+        Me.btnPayment.Size = New System.Drawing.Size(136, 115)
+        Me.btnPayment.TabIndex = 0
+        Me.btnPayment.Text = "Payment"
+        Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnPayment.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button2.Location = New System.Drawing.Point(145, 3)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(130, 115)
+        Me.Button2.TabIndex = 1
+        Me.Button2.Text = "SOA"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button3.Location = New System.Drawing.Point(281, 3)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(147, 115)
+        Me.Button3.TabIndex = 2
+        Me.Button3.Text = "Update Record"
+        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'btnProfileInfo
+        '
+        Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
+        Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnProfileInfo.Location = New System.Drawing.Point(434, 3)
+        Me.btnProfileInfo.Name = "btnProfileInfo"
+        Me.btnProfileInfo.Size = New System.Drawing.Size(154, 115)
+        Me.btnProfileInfo.TabIndex = 3
+        Me.btnProfileInfo.Text = "Profile Info"
+        Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnProfileInfo.UseVisualStyleBackColor = True
+        '
         'FormUserList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -373,6 +452,7 @@ Partial Class FormUserList
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -412,4 +492,9 @@ Partial Class FormUserList
     Friend WithEvents ColumnHeaderImageLocation As ColumnHeader
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label9 As Label
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents btnPayment As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents btnProfileInfo As Button
 End Class

@@ -294,8 +294,8 @@ Partial Class FormUserProfile
         'PictureBox1
         '
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Image = Global.DahumBuilders.My.Resources.Resources.client_male_jpg
-        Me.PictureBox1.InitialImage = Global.DahumBuilders.My.Resources.Resources.client_male_jpg
+        Me.PictureBox1.Image = Global.DahumBuilders.My.Resources.Resources.client_male
+        Me.PictureBox1.InitialImage = Global.DahumBuilders.My.Resources.Resources.client_male
         Me.PictureBox1.Location = New System.Drawing.Point(454, 18)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(276, 205)
