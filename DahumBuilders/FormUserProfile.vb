@@ -3,30 +3,30 @@ Imports System.Linq
 
 Public Class FormUserProfile
 
-    Private someMessage As String
+    Private currentUserId As String = ""
 
 
     Public Sub New(ByVal msg As String)
         InitializeComponent()
 
         If Not (String.IsNullOrEmpty(msg)) Then
-            someMessage = msg
+            currentUserId = msg
         End If
     End Sub
 
     Property Message() As String
         Get
-            Return someMessage
+            Return currentUserId
         End Get
         Set(ByVal Value As String)
-            someMessage = Value
+            currentUserId = Value
         End Set
     End Property
 
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
-        If someMessage.Length > 0 Then
-            txtUserId.Text = someMessage
+        If currentUserId.Length > 0 Then
+            btnSave.Visible = False
             btnSearch.PerformClick()
         End If
 
@@ -194,7 +194,7 @@ Public Class FormUserProfile
         sql = "SELECT * FROM `db_user_profile` WHERE `Id` = @id"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = txtUserId.Text.Trim
+        sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = currentUserId
         sqlAdapter = New MySqlDataAdapter(sqlCommand)
 
         sql = "SELECT * FROM `db_user_child` WHERE `userid` = @id"
@@ -232,7 +232,7 @@ Public Class FormUserProfile
                     PictureBox1.ImageLocation = table.Rows(0)("file_location_image")
                 End If
 
-                getUserChildAndBeneficiary(sqlCommand, sqlConnection, txtUserId.Text.Trim)
+                getUserChildAndBeneficiary(sqlCommand, sqlConnection, currentUserId)
             Else
                 MessageBox.Show("No Data Found")
             End If

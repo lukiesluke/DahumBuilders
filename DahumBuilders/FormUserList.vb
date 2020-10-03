@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormUserList
+    Dim currentUserId As String = ""
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Location = New Point(My.Computer.Screen.Bounds.Top)
@@ -15,6 +16,7 @@ Public Class FormUserList
                                                    b.ReadOnly = True
                                                    Return True
                                                End Function)
+        enableDisableClientButton(False)
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -61,6 +63,7 @@ Public Class FormUserList
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
 
         If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
+            currentUserId = ListViewUser.SelectedItems(0).Text
             txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
             txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
             txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
@@ -69,24 +72,28 @@ Public Class FormUserList
             txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
             txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
 
-            If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
-                If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
-                    PictureBox1.Image = My.Resources.client_male
-                Else
-                    PictureBox1.Image = My.Resources.client_female
-                End If
+            If currentUserId.Length > 0 Then
+                enableDisableClientButton(True)
             Else
-                PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
+                enableDisableClientButton(False)
             End If
-        End If
 
-        If e.KeyCode = Keys.F1 Then
+            If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
+                    If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
+                        PictureBox1.Image = My.Resources.client_male
+                    Else
+                        PictureBox1.Image = My.Resources.client_female
+                    End If
+                Else
+                    PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
+                End If
+            End If
+
+            If e.KeyCode = Keys.F1 Then
             If Application.OpenForms().OfType(Of FormUserProfile).Any Then
                 If mFormUserProfile.WindowState = 1 Then
                     mFormUserProfile.WindowState = 0
                 End If
-                mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-                mFormUserProfile.btnSearch.PerformClick()
             Else
                 mFormUserProfile = New FormUserProfile(ListViewUser.SelectedItems(0).Text)
                 mFormUserProfile.ShowDialog()
@@ -95,6 +102,7 @@ Public Class FormUserList
     End Sub
 
     Private Sub ListViewUser_Click(sender As Object, e As EventArgs) Handles ListViewUser.Click
+        currentUserId = ListViewUser.SelectedItems(0).Text
         txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
         txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
         txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
@@ -102,6 +110,12 @@ Public Class FormUserList
         txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
         txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
         txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
+
+        If currentUserId.Length > 0 Then
+            enableDisableClientButton(True)
+        Else
+            enableDisableClientButton(False)
+        End If
 
         If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
             If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
@@ -115,15 +129,25 @@ Public Class FormUserList
     End Sub
 
     Private Sub btnProfileInfo_Click(sender As Object, e As EventArgs) Handles btnProfileInfo.Click
+
+        If ListViewUser.Items.Count > 0 Then
+            currentUserId = ListViewUser.SelectedItems(0).Text
+        End If
+
         If Application.OpenForms().OfType(Of FormUserProfile).Any Then
             If mFormUserProfile.WindowState = 1 Then
                 mFormUserProfile.WindowState = 0
             End If
-            mFormUserProfile.txtUserId.Text = ListViewUser.SelectedItems(0).Text
-            mFormUserProfile.btnSearch.PerformClick()
         Else
-            mFormUserProfile = New FormUserProfile(ListViewUser.SelectedItems(0).Text)
+            mFormUserProfile = New FormUserProfile(currentUserId)
             mFormUserProfile.ShowDialog()
         End If
+    End Sub
+
+    Private Sub enableDisableClientButton(value As Boolean)
+        btnPayment.Enabled = value
+        btnProfileInfo.Enabled = value
+        btnStatementAccount.Enabled = value
+        btnUpdateRecord.Enabled = value
     End Sub
 End Class

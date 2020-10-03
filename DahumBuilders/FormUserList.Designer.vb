@@ -59,8 +59,8 @@ Partial Class FormUserList
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnPayment = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnStatementAccount = New System.Windows.Forms.Button()
+        Me.btnUpdateRecord = New System.Windows.Forms.Button()
         Me.btnProfileInfo = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -353,7 +353,7 @@ Partial Class FormUserList
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.DarkGreen
         Me.Label9.Location = New System.Drawing.Point(0, 0)
         Me.Label9.Name = "Label9"
@@ -364,14 +364,15 @@ Partial Class FormUserList
         '
         'TableLayoutPanel2
         '
+        Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
         Me.TableLayoutPanel2.ColumnCount = 4
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 159.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Button2, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Button3, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnProfileInfo, 3, 0)
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 336)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
@@ -385,48 +386,48 @@ Partial Class FormUserList
         Me.btnPayment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnPayment.Image = CType(resources.GetObject("btnPayment.Image"), System.Drawing.Image)
         Me.btnPayment.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnPayment.Location = New System.Drawing.Point(3, 3)
+        Me.btnPayment.Location = New System.Drawing.Point(4, 4)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(136, 115)
+        Me.btnPayment.Size = New System.Drawing.Size(134, 113)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnPayment.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnStatementAccount
         '
-        Me.Button2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button2.Location = New System.Drawing.Point(145, 3)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(130, 115)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "SOA"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
+        Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnStatementAccount.Location = New System.Drawing.Point(145, 4)
+        Me.btnStatementAccount.Name = "btnStatementAccount"
+        Me.btnStatementAccount.Size = New System.Drawing.Size(127, 113)
+        Me.btnStatementAccount.TabIndex = 1
+        Me.btnStatementAccount.Text = "SOA"
+        Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnStatementAccount.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnUpdateRecord
         '
-        Me.Button3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button3.Location = New System.Drawing.Point(281, 3)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(147, 115)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Update Record"
-        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
+        Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(279, 4)
+        Me.btnUpdateRecord.Name = "btnUpdateRecord"
+        Me.btnUpdateRecord.Size = New System.Drawing.Size(147, 113)
+        Me.btnUpdateRecord.TabIndex = 2
+        Me.btnUpdateRecord.Text = "Update Record"
+        Me.btnUpdateRecord.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnUpdateRecord.UseVisualStyleBackColor = True
         '
         'btnProfileInfo
         '
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(434, 3)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(433, 4)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(154, 115)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(154, 113)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -494,7 +495,7 @@ Partial Class FormUserList
     Friend WithEvents Label9 As Label
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents btnPayment As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnStatementAccount As Button
+    Friend WithEvents btnUpdateRecord As Button
     Friend WithEvents btnProfileInfo As Button
 End Class

@@ -173,7 +173,7 @@
         9T/adcqgGWm+ngAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnStatementAccount.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAACOZJREFUaEPV
         WGtwU8cVvqXT/slM/7R/8idJQx7DkEfTBxQCBRLaMkNn0gBtJmlnQjP5kU5/BBpoCSE0hJoJhoIJGAMG
@@ -217,7 +217,7 @@
         AAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Button3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnUpdateRecord.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAC8BJREFUaEPV
         mWlMXNcVxx+bMcuwjDFg4xDixCmJ/aGSkw+JrFZWU9VKW9FFbaWkkdoPTaPadeSqrRq1apvYjYPt2Ngw

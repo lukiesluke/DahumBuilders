@@ -91,7 +91,6 @@ Partial Class FormUserProfile
         Me.btnAddBeneficiary = New System.Windows.Forms.Button()
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.txtUserId = New System.Windows.Forms.TextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -803,19 +802,11 @@ Partial Class FormUserProfile
         Me.Label29.TabIndex = 6
         Me.Label29.Text = "Name"
         '
-        'txtUserId
-        '
-        Me.txtUserId.Location = New System.Drawing.Point(141, 772)
-        Me.txtUserId.Name = "txtUserId"
-        Me.txtUserId.Size = New System.Drawing.Size(85, 26)
-        Me.txtUserId.TabIndex = 25
-        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(814, 817)
-        Me.Controls.Add(Me.txtUserId)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSearch)
@@ -843,7 +834,6 @@ Partial Class FormUserProfile
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -912,7 +902,6 @@ Partial Class FormUserProfile
     Friend WithEvents ColumnHeader6 As ColumnHeader
     Friend WithEvents btnClearListBeneficiary As Button
     Friend WithEvents btnClearListChild As Button
-    Friend WithEvents txtUserId As TextBox
     Friend WithEvents ComboBoxGender As ComboBox
     Friend WithEvents ComboBoxCivilStatus As ComboBox
     Friend WithEvents GroupBox4 As GroupBox
