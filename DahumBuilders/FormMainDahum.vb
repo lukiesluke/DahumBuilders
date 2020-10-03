@@ -12,8 +12,7 @@ Public Class FormMainDahum
         End If
     End Sub
 
-    Private Sub UserListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserListToolStripMenuItem.Click
-
+    Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Application.OpenForms().OfType(Of FormUserList).Any Then
             mFormUserList.Focus()
         Else
@@ -22,4 +21,5 @@ Public Class FormMainDahum
             mFormUserList.Show()
         End If
     End Sub
+
 End Class

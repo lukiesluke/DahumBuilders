@@ -5,7 +5,6 @@ Public Class FormUserProfile
 
     Private currentUserId As String = ""
 
-
     Public Sub New(ByVal msg As String)
         InitializeComponent()
 
@@ -25,19 +24,9 @@ Public Class FormUserProfile
 
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
-        If currentUserId.Length > 0 Then
-            Me.Text = "Client Information Record"
-            btnSave.Visible = False
-            btnSearch.PerformClick()
-        Else
-            Me.Text = "Client Registration Form"
-            'Create new record
-            btnSave.Visible = True
-            btnSearch.Visible = False
-        End If
-
         Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
         Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
+        Me.Size = New Size(570, 570)
 
         With Me.ComboBoxGender.Items
             .Add("Male")
@@ -49,12 +38,23 @@ Public Class FormUserProfile
             .Add("Separated")
             .Add("Widow")
         End With
-        Me.Size = New Size(600, 570)
+
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
+
+        If currentUserId.Length > 0 Then
+            Me.Text = "Client Information Record"
+            disableAllCommandControl(True)
+            btnSave.Visible = False
+            btnSearch.PerformClick()
+        Else
+            Me.Text = "Client Registration Form"
+            btnSave.Visible = True
+            btnSearch.Visible = False
+        End If
+
         username = FormMainDahum.ToolStripStatusUsername.Text.Trim
         PictureBox1.Image = My.Resources.client_male
-
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -232,6 +232,7 @@ Public Class FormUserProfile
                 txtFatherAddress.Text = table.Rows(0)("father_provincial_address")
                 txtMotherName.Text = table.Rows(0)("mother_name")
                 txtMotherAddress.Text = table.Rows(0)("mother_provincial_address")
+
                 If table.Rows(0)("file_location_image").ToString.Length < 3 Then
                     PictureBox1.Image = My.Resources.client_male
                 Else
@@ -250,10 +251,7 @@ Public Class FormUserProfile
             sqlConnection.Close()
         End Try
 
-        TabPage1.Controls.OfType(Of TextBox).All(Function(b)
-                                                     b.ReadOnly = True
-                                                     Return True
-                                                 End Function)
+
 
     End Sub
 
@@ -375,5 +373,40 @@ Public Class FormUserProfile
             mFormImageCapture = New FormImageCapture
             mFormImageCapture.Show(Me)
         End If
+    End Sub
+
+    Private Sub disableAllCommandControl(value As Boolean)
+        TabPage1.Controls.OfType(Of TextBox).All(Function(b)
+                                                     b.ReadOnly = value
+                                                     Return True
+                                                 End Function)
+        TabPage2.Controls.OfType(Of TextBox).All(Function(b)
+                                                     b.ReadOnly = value
+                                                     Return True
+                                                 End Function)
+
+        TabPage3.Controls.OfType(Of TextBox).All(Function(b)
+                                                     b.ReadOnly = value
+                                                     Return True
+                                                 End Function)
+
+        gbContactInformation.Controls.OfType(Of TextBox).All(Function(b)
+                                                                 b.ReadOnly = value
+                                                                 Return True
+                                                             End Function)
+
+        gbEmploymentInfo.Controls.OfType(Of TextBox).All(Function(b)
+                                                             b.ReadOnly = value
+                                                             Return True
+                                                         End Function)
+
+        gbParentInfo.Controls.OfType(Of TextBox).All(Function(b)
+                                                         b.ReadOnly = value
+                                                         Return True
+                                                     End Function)
+        gbChilderName.Controls.OfType(Of TextBox).All(Function(b)
+                                                          b.ReadOnly = value
+                                                          Return True
+                                                      End Function)
     End Sub
 End Class

@@ -130,9 +130,17 @@ Public Class FormUserList
 
     Private Sub btnProfileInfo_Click(sender As Object, e As EventArgs) Handles btnProfileInfo.Click
 
-        If ListViewUser.Items.Count > 0 Then
-            currentUserId = ListViewUser.SelectedItems(0).Text
+        If Application.OpenForms().OfType(Of FormUserProfile).Any Then
+            If mFormUserProfile.WindowState = 1 Then
+                mFormUserProfile.WindowState = 0
+            End If
+        Else
+            mFormUserProfile = New FormUserProfile(currentUserId)
+            mFormUserProfile.ShowDialog()
         End If
+    End Sub
+
+    Private Sub btnUpdateRecord_Click(sender As Object, e As EventArgs) Handles btnUpdateRecord.Click
 
         If Application.OpenForms().OfType(Of FormUserProfile).Any Then
             If mFormUserProfile.WindowState = 1 Then

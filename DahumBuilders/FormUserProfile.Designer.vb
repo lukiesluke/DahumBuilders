@@ -40,14 +40,14 @@ Partial Class FormUserProfile
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.gbEmploymentInfo = New System.Windows.Forms.GroupBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtOccupation = New System.Windows.Forms.TextBox()
         Me.txtCompanyName = New System.Windows.Forms.TextBox()
         Me.ComboBoxCivilStatus = New System.Windows.Forms.ComboBox()
         Me.ComboBoxGender = New System.Windows.Forms.ComboBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.gbParentInfo = New System.Windows.Forms.GroupBox()
         Me.txtMotherAddress = New System.Windows.Forms.TextBox()
         Me.txtMotherName = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -56,7 +56,7 @@ Partial Class FormUserProfile
         Me.txtFatherAddress = New System.Windows.Forms.TextBox()
         Me.txtFatherName = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.gbContactInformation = New System.Windows.Forms.GroupBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtMobile = New System.Windows.Forms.TextBox()
         Me.txtTelephone = New System.Windows.Forms.TextBox()
@@ -69,7 +69,7 @@ Partial Class FormUserProfile
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.gbChilderName = New System.Windows.Forms.GroupBox()
         Me.btnClearListChild = New System.Windows.Forms.Button()
         Me.btnAddChild = New System.Windows.Forms.Button()
         Me.ListViewChild = New System.Windows.Forms.ListView()
@@ -94,11 +94,11 @@ Partial Class FormUserProfile
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.gbEmploymentInfo.SuspendLayout()
+        Me.gbParentInfo.SuspendLayout()
+        Me.gbContactInformation.SuspendLayout()
         Me.TabPage2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.gbChilderName.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -260,11 +260,11 @@ Partial Class FormUserProfile
         'TabPage1
         '
         Me.TabPage1.Controls.Add(Me.PictureBox1)
-        Me.TabPage1.Controls.Add(Me.GroupBox4)
+        Me.TabPage1.Controls.Add(Me.gbEmploymentInfo)
         Me.TabPage1.Controls.Add(Me.ComboBoxCivilStatus)
         Me.TabPage1.Controls.Add(Me.ComboBoxGender)
-        Me.TabPage1.Controls.Add(Me.GroupBox2)
-        Me.TabPage1.Controls.Add(Me.GroupBox1)
+        Me.TabPage1.Controls.Add(Me.gbParentInfo)
+        Me.TabPage1.Controls.Add(Me.gbContactInformation)
         Me.TabPage1.Controls.Add(Me.txtCitizen)
         Me.TabPage1.Controls.Add(Me.txtPlaceBirth)
         Me.TabPage1.Controls.Add(Me.Label9)
@@ -302,18 +302,18 @@ Partial Class FormUserProfile
         Me.PictureBox1.TabIndex = 30
         Me.PictureBox1.TabStop = False
         '
-        'GroupBox4
+        'gbEmploymentInfo
         '
-        Me.GroupBox4.Controls.Add(Me.Label13)
-        Me.GroupBox4.Controls.Add(Me.Label14)
-        Me.GroupBox4.Controls.Add(Me.txtOccupation)
-        Me.GroupBox4.Controls.Add(Me.txtCompanyName)
-        Me.GroupBox4.Location = New System.Drawing.Point(355, 304)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(375, 172)
-        Me.GroupBox4.TabIndex = 14
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Employment Information"
+        Me.gbEmploymentInfo.Controls.Add(Me.Label13)
+        Me.gbEmploymentInfo.Controls.Add(Me.Label14)
+        Me.gbEmploymentInfo.Controls.Add(Me.txtOccupation)
+        Me.gbEmploymentInfo.Controls.Add(Me.txtCompanyName)
+        Me.gbEmploymentInfo.Location = New System.Drawing.Point(355, 304)
+        Me.gbEmploymentInfo.Name = "gbEmploymentInfo"
+        Me.gbEmploymentInfo.Size = New System.Drawing.Size(375, 172)
+        Me.gbEmploymentInfo.TabIndex = 14
+        Me.gbEmploymentInfo.TabStop = False
+        Me.gbEmploymentInfo.Text = "Employment Information"
         '
         'Label13
         '
@@ -369,24 +369,24 @@ Partial Class FormUserProfile
         Me.ComboBoxGender.Size = New System.Drawing.Size(298, 28)
         Me.ComboBoxGender.TabIndex = 4
         '
-        'GroupBox2
+        'gbParentInfo
         '
-        Me.GroupBox2.Controls.Add(Me.txtMotherAddress)
-        Me.GroupBox2.Controls.Add(Me.txtMotherName)
-        Me.GroupBox2.Controls.Add(Me.Label18)
-        Me.GroupBox2.Controls.Add(Me.Label17)
-        Me.GroupBox2.Controls.Add(Me.Label16)
-        Me.GroupBox2.Controls.Add(Me.txtFatherAddress)
-        Me.GroupBox2.Controls.Add(Me.txtFatherName)
-        Me.GroupBox2.Controls.Add(Me.Label15)
-        Me.GroupBox2.Location = New System.Drawing.Point(8, 486)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox2.Size = New System.Drawing.Size(722, 208)
-        Me.GroupBox2.TabIndex = 17
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Parent Information"
+        Me.gbParentInfo.Controls.Add(Me.txtMotherAddress)
+        Me.gbParentInfo.Controls.Add(Me.txtMotherName)
+        Me.gbParentInfo.Controls.Add(Me.Label18)
+        Me.gbParentInfo.Controls.Add(Me.Label17)
+        Me.gbParentInfo.Controls.Add(Me.Label16)
+        Me.gbParentInfo.Controls.Add(Me.txtFatherAddress)
+        Me.gbParentInfo.Controls.Add(Me.txtFatherName)
+        Me.gbParentInfo.Controls.Add(Me.Label15)
+        Me.gbParentInfo.Location = New System.Drawing.Point(8, 486)
+        Me.gbParentInfo.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.gbParentInfo.Name = "gbParentInfo"
+        Me.gbParentInfo.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.gbParentInfo.Size = New System.Drawing.Size(722, 208)
+        Me.gbParentInfo.TabIndex = 17
+        Me.gbParentInfo.TabStop = False
+        Me.gbParentInfo.Text = "Parent Information"
         '
         'txtMotherAddress
         '
@@ -460,22 +460,22 @@ Partial Class FormUserProfile
         Me.Label15.TabIndex = 0
         Me.Label15.Text = "Father Name"
         '
-        'GroupBox1
+        'gbContactInformation
         '
-        Me.GroupBox1.Controls.Add(Me.txtEmail)
-        Me.GroupBox1.Controls.Add(Me.txtMobile)
-        Me.GroupBox1.Controls.Add(Me.txtTelephone)
-        Me.GroupBox1.Controls.Add(Me.Label12)
-        Me.GroupBox1.Controls.Add(Me.Label11)
-        Me.GroupBox1.Controls.Add(Me.Label10)
-        Me.GroupBox1.Location = New System.Drawing.Point(8, 304)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox1.Size = New System.Drawing.Size(340, 172)
-        Me.GroupBox1.TabIndex = 10
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Contact Information"
+        Me.gbContactInformation.Controls.Add(Me.txtEmail)
+        Me.gbContactInformation.Controls.Add(Me.txtMobile)
+        Me.gbContactInformation.Controls.Add(Me.txtTelephone)
+        Me.gbContactInformation.Controls.Add(Me.Label12)
+        Me.gbContactInformation.Controls.Add(Me.Label11)
+        Me.gbContactInformation.Controls.Add(Me.Label10)
+        Me.gbContactInformation.Location = New System.Drawing.Point(8, 304)
+        Me.gbContactInformation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.gbContactInformation.Name = "gbContactInformation"
+        Me.gbContactInformation.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.gbContactInformation.Size = New System.Drawing.Size(340, 172)
+        Me.gbContactInformation.TabIndex = 10
+        Me.gbContactInformation.TabStop = False
+        Me.gbContactInformation.Text = "Contact Information"
         '
         'txtEmail
         '
@@ -538,6 +538,7 @@ Partial Class FormUserProfile
         Me.txtCitizen.Name = "txtCitizen"
         Me.txtCitizen.Size = New System.Drawing.Size(297, 26)
         Me.txtCitizen.TabIndex = 6
+        Me.txtCitizen.Text = "Filipino"
         '
         'txtPlaceBirth
         '
@@ -579,7 +580,7 @@ Partial Class FormUserProfile
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.GroupBox3)
+        Me.TabPage2.Controls.Add(Me.gbChilderName)
         Me.TabPage2.Controls.Add(Me.txtSpouseContactNumber)
         Me.TabPage2.Controls.Add(Me.txtSpouseOccupation)
         Me.TabPage2.Controls.Add(Me.txtSpouseName)
@@ -595,21 +596,21 @@ Partial Class FormUserProfile
         Me.TabPage2.Text = "Spouse & Child Information"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'GroupBox3
+        'gbChilderName
         '
-        Me.GroupBox3.Controls.Add(Me.btnClearListChild)
-        Me.GroupBox3.Controls.Add(Me.btnAddChild)
-        Me.GroupBox3.Controls.Add(Me.ListViewChild)
-        Me.GroupBox3.Controls.Add(Me.txtChildName)
-        Me.GroupBox3.Controls.Add(Me.Label24)
-        Me.GroupBox3.Location = New System.Drawing.Point(13, 147)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox3.Size = New System.Drawing.Size(736, 305)
-        Me.GroupBox3.TabIndex = 10
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Children's"
+        Me.gbChilderName.Controls.Add(Me.btnClearListChild)
+        Me.gbChilderName.Controls.Add(Me.btnAddChild)
+        Me.gbChilderName.Controls.Add(Me.ListViewChild)
+        Me.gbChilderName.Controls.Add(Me.txtChildName)
+        Me.gbChilderName.Controls.Add(Me.Label24)
+        Me.gbChilderName.Location = New System.Drawing.Point(13, 147)
+        Me.gbChilderName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.gbChilderName.Name = "gbChilderName"
+        Me.gbChilderName.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.gbChilderName.Size = New System.Drawing.Size(736, 305)
+        Me.gbChilderName.TabIndex = 10
+        Me.gbChilderName.TabStop = False
+        Me.gbChilderName.Text = "Children's"
         '
         'btnClearListChild
         '
@@ -821,16 +822,16 @@ Partial Class FormUserProfile
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.gbEmploymentInfo.ResumeLayout(False)
+        Me.gbEmploymentInfo.PerformLayout()
+        Me.gbParentInfo.ResumeLayout(False)
+        Me.gbParentInfo.PerformLayout()
+        Me.gbContactInformation.ResumeLayout(False)
+        Me.gbContactInformation.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
+        Me.gbChilderName.ResumeLayout(False)
+        Me.gbChilderName.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         Me.ResumeLayout(False)
@@ -860,7 +861,7 @@ Partial Class FormUserProfile
     Friend WithEvents txtPlaceBirth As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents gbContactInformation As GroupBox
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtMobile As TextBox
     Friend WithEvents txtTelephone As TextBox
@@ -871,7 +872,7 @@ Partial Class FormUserProfile
     Friend WithEvents txtOccupation As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents gbParentInfo As GroupBox
     Friend WithEvents Label16 As Label
     Friend WithEvents txtFatherAddress As TextBox
     Friend WithEvents txtFatherName As TextBox
@@ -886,7 +887,7 @@ Partial Class FormUserProfile
     Friend WithEvents Label19 As Label
     Friend WithEvents txtSpouseContactNumber As TextBox
     Friend WithEvents txtSpouseOccupation As TextBox
-    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents gbChilderName As GroupBox
     Friend WithEvents txtChildName As TextBox
     Friend WithEvents Label24 As Label
     Friend WithEvents ListViewChild As ListView
@@ -904,6 +905,6 @@ Partial Class FormUserProfile
     Friend WithEvents btnClearListChild As Button
     Friend WithEvents ComboBoxGender As ComboBox
     Friend WithEvents ComboBoxCivilStatus As ComboBox
-    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents gbEmploymentInfo As GroupBox
     Friend WithEvents PictureBox1 As PictureBox
 End Class

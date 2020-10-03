@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMainDahum
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,12 @@ Partial Class FormMainDahum
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserRegistrationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UserListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
@@ -53,7 +52,7 @@ Partial Class FormMainDahum
         '
         'UserSettingToolStripMenuItem
         '
-        Me.UserSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserRegistrationToolStripMenuItem, Me.UserListToolStripMenuItem})
+        Me.UserSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserRegistrationToolStripMenuItem})
         Me.UserSettingToolStripMenuItem.Name = "UserSettingToolStripMenuItem"
         Me.UserSettingToolStripMenuItem.Size = New System.Drawing.Size(210, 30)
         Me.UserSettingToolStripMenuItem.Text = "User Setting"
@@ -63,12 +62,6 @@ Partial Class FormMainDahum
         Me.UserRegistrationToolStripMenuItem.Name = "UserRegistrationToolStripMenuItem"
         Me.UserRegistrationToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
         Me.UserRegistrationToolStripMenuItem.Text = "User Registration"
-        '
-        'UserListToolStripMenuItem
-        '
-        Me.UserListToolStripMenuItem.Name = "UserListToolStripMenuItem"
-        Me.UserListToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
-        Me.UserListToolStripMenuItem.Text = "User List"
         '
         'StatusStrip
         '
@@ -120,5 +113,4 @@ Partial Class FormMainDahum
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusUsername As ToolStripStatusLabel
-    Friend WithEvents UserListToolStripMenuItem As ToolStripMenuItem
 End Class
