@@ -25,10 +25,11 @@ Partial Class FormMainDahum
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UserRegistrationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClientRegistrationFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -36,7 +37,7 @@ Partial Class FormMainDahum
         'MenuStrip1
         '
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OpenToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1265, 33)
@@ -52,16 +53,9 @@ Partial Class FormMainDahum
         '
         'UserSettingToolStripMenuItem
         '
-        Me.UserSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserRegistrationToolStripMenuItem})
         Me.UserSettingToolStripMenuItem.Name = "UserSettingToolStripMenuItem"
         Me.UserSettingToolStripMenuItem.Size = New System.Drawing.Size(210, 30)
         Me.UserSettingToolStripMenuItem.Text = "User Setting"
-        '
-        'UserRegistrationToolStripMenuItem
-        '
-        Me.UserRegistrationToolStripMenuItem.Name = "UserRegistrationToolStripMenuItem"
-        Me.UserRegistrationToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
-        Me.UserRegistrationToolStripMenuItem.Text = "User Registration"
         '
         'StatusStrip
         '
@@ -84,6 +78,19 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Name = "ToolStripStatusUsername"
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
+        '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ClientRegistrationFormToolStripMenuItem})
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(68, 29)
+        Me.OpenToolStripMenuItem.Text = "Open"
+        '
+        'ClientRegistrationFormToolStripMenuItem
+        '
+        Me.ClientRegistrationFormToolStripMenuItem.Name = "ClientRegistrationFormToolStripMenuItem"
+        Me.ClientRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(286, 30)
+        Me.ClientRegistrationFormToolStripMenuItem.Text = "Client Registration Form"
         '
         'FormMainDahum
         '
@@ -109,8 +116,9 @@ Partial Class FormMainDahum
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UserSettingToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UserRegistrationToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusUsername As ToolStripStatusLabel
+    Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ClientRegistrationFormToolStripMenuItem As ToolStripMenuItem
 End Class

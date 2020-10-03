@@ -36,7 +36,7 @@ Partial Class FormUserProfile
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -234,16 +234,15 @@ Partial Class FormUserProfile
         Me.DateTimePicker1.Size = New System.Drawing.Size(208, 26)
         Me.DateTimePicker1.TabIndex = 8
         '
-        'Button1
+        'btnUpdate
         '
-        Me.Button1.Location = New System.Drawing.Point(427, 762)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(112, 35)
-        Me.Button1.TabIndex = 16
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
+        Me.btnUpdate.Location = New System.Drawing.Point(547, 764)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
+        Me.btnUpdate.TabIndex = 16
+        Me.btnUpdate.Text = "&Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'TabControl1
         '
@@ -809,7 +808,7 @@ Partial Class FormUserProfile
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(791, 817)
         Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -852,7 +851,7 @@ Partial Class FormUserProfile
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnUpdate As Button
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage

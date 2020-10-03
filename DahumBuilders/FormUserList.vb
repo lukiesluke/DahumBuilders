@@ -95,8 +95,8 @@ Public Class FormUserList
                     mFormUserProfile.WindowState = 0
                 End If
             Else
-                mFormUserProfile = New FormUserProfile(ListViewUser.SelectedItems(0).Text)
-                mFormUserProfile.ShowDialog()
+                mFormUserProfile = New FormUserProfile()
+                mFormUserProfile.ShowForm("VIEW", ListViewUser.SelectedItems(0).Text)
             End If
         End If
     End Sub
@@ -135,8 +135,8 @@ Public Class FormUserList
                 mFormUserProfile.WindowState = 0
             End If
         Else
-            mFormUserProfile = New FormUserProfile(currentUserId)
-            mFormUserProfile.ShowDialog()
+            mFormUserProfile = New FormUserProfile()
+            mFormUserProfile.ShowForm("VIEW", currentUserId)
         End If
     End Sub
 
@@ -147,8 +147,8 @@ Public Class FormUserList
                 mFormUserProfile.WindowState = 0
             End If
         Else
-            mFormUserProfile = New FormUserProfile(currentUserId)
-            mFormUserProfile.ShowDialog()
+            mFormUserProfile = New FormUserProfile
+            mFormUserProfile.ShowForm("UPDATE", currentUserId)
         End If
     End Sub
 

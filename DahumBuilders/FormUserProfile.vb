@@ -4,23 +4,13 @@ Imports System.Linq
 Public Class FormUserProfile
 
     Private currentUserId As String = ""
+    Private formViewType As String = ""
 
-    Public Sub New(ByVal msg As String)
-        InitializeComponent()
-
-        If Not (String.IsNullOrEmpty(msg)) Then
-            currentUserId = msg
-        End If
+    Public Sub ShowForm(formType As String, id As String)
+        currentUserId = id
+        formViewType = formType
+        Me.Show()
     End Sub
-
-    Property Message() As String
-        Get
-            Return currentUserId
-        End Get
-        Set(ByVal Value As String)
-            currentUserId = Value
-        End Set
-    End Property
 
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
@@ -41,19 +31,31 @@ Public Class FormUserProfile
 
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
-
-        If currentUserId.Length > 0 Then
-            Me.Text = "Client Information Record"
-            disableAllCommandControl(True)
-            btnSave.Visible = False
-            btnSearch.PerformClick()
-        Else
-            Me.Text = "Client Registration Form"
-            btnSave.Visible = True
-            btnSearch.Visible = False
-        End If
-
-        username = FormMainDahum.ToolStripStatusUsername.Text.Trim
+        Dim x As String = formViewType
+        Select Case x
+            Case "NEW"
+                Me.Text = "Client Registration Form - [New]"
+                btnSave.Visible = True
+                btnSearch.Visible = False
+                btnUpdate.Visible = False
+            Case "UPDATE"
+                If currentUserId.Length > 0 Then
+                    Me.Text = "Client Information Record - [Update]"
+                    disableAllCommandControl(False)
+                    btnSave.Visible = False
+                    btnSearch.PerformClick()
+                End If
+            Case "VIEW"
+                If currentUserId.Length > 0 Then
+                    Me.Text = "Client Information Record"
+                    disableAllCommandControl(True)
+                    btnSave.Visible = False
+                    btnUpdate.Visible = False
+                    btnSearch.PerformClick()
+                End If
+            Case Else
+                MessageBox.Show("Error: " & currentUserId, "Information")
+        End Select
         PictureBox1.Image = My.Resources.client_male
     End Sub
 
@@ -195,6 +197,7 @@ Public Class FormUserProfile
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Dim userGender As String = ""
         Dim table As New DataTable()
 
         sql = "SELECT * FROM `db_user_profile` WHERE `Id` = @id"
@@ -208,10 +211,11 @@ Public Class FormUserProfile
             sqlAdapter.Fill(table)
 
             If table.Rows.Count > 0 Then
+                userGender = table.Rows(0)("gender")
                 txtFirstName.Text = table.Rows(0)("first_name")
                 txtMiddleName.Text = table.Rows(0)("middle_name")
                 txtLastName.Text = table.Rows(0)("last_name")
-                ComboBoxGender.Text = table.Rows(0)("gender")
+                ComboBoxGender.Text = userGender
                 txtAddress.Text = table.Rows(0)("address")
                 DateTimePicker1.Value = table.Rows(0)("date_birth")
 
@@ -233,8 +237,18 @@ Public Class FormUserProfile
                 txtMotherName.Text = table.Rows(0)("mother_name")
                 txtMotherAddress.Text = table.Rows(0)("mother_provincial_address")
 
-                If table.Rows(0)("file_location_image").ToString.Length < 3 Then
+                If userGender = "Male" Then
                     PictureBox1.Image = My.Resources.client_male
+                Else
+                    PictureBox1.Image = My.Resources.client_female
+                End If
+
+                If table.Rows(0)("file_location_image").ToString.Length < 3 Then
+                    If userGender = "Male" Then
+                        PictureBox1.Image = My.Resources.client_male
+                    Else
+                        PictureBox1.Image = My.Resources.client_female
+                    End If
                 Else
                     PictureBox1.ImageLocation = table.Rows(0)("file_location_image")
                 End If
@@ -250,12 +264,9 @@ Public Class FormUserProfile
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
-
-
-
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         DateTimePicker1.Format = DateTimePickerFormat.Custom
         MessageBox.Show(Format(DateTimePicker1.Value, "MM-dd-yyyy"))
     End Sub
