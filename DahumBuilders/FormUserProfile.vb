@@ -26,8 +26,14 @@ Public Class FormUserProfile
     Private Sub FormUserProfile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
         If currentUserId.Length > 0 Then
+            Me.Text = "Client Information Record"
             btnSave.Visible = False
             btnSearch.PerformClick()
+        Else
+            Me.Text = "Client Registration Form"
+            'Create new record
+            btnSave.Visible = True
+            btnSearch.Visible = False
         End If
 
         Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)

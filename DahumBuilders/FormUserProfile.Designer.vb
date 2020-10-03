@@ -806,7 +806,7 @@ Partial Class FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(814, 817)
+        Me.ClientSize = New System.Drawing.Size(791, 817)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSearch)
