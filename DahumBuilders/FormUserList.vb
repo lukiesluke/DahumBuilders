@@ -2,6 +2,8 @@
 
 Public Class FormUserList
     Dim currentUserId As String = ""
+    Dim currentUserName As String = ""
+    Dim currentUserAddress As String = ""
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Location = New Point(My.Computer.Screen.Bounds.Top)
@@ -64,13 +66,16 @@ Public Class FormUserList
 
         If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
             currentUserId = ListViewUser.SelectedItems(0).Text
+            currentUserAddress = ListViewUser.SelectedItems(0).SubItems(7).Text
+
             txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
             txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
             txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
             txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
             txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
             txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
-            txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
+            txtAddress.Text = currentUserAddress
+            currentUserName = txtName.Text & " " & txtMiddleName.Text & " " & txtSurname.Text
 
             If currentUserId.Length > 0 Then
                 enableDisableClientButton(True)
@@ -103,13 +108,16 @@ Public Class FormUserList
 
     Private Sub ListViewUser_Click(sender As Object, e As EventArgs) Handles ListViewUser.Click
         currentUserId = ListViewUser.SelectedItems(0).Text
+        currentUserAddress = ListViewUser.SelectedItems(0).SubItems(7).Text
+
         txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
         txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
         txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
         txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
         txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
         txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
-        txtAddress.Text = ListViewUser.SelectedItems(0).SubItems(7).Text
+        txtAddress.Text = currentUserAddress
+        currentUserName = txtName.Text & " " & txtMiddleName.Text & " " & txtSurname.Text
 
         If currentUserId.Length > 0 Then
             enableDisableClientButton(True)
@@ -166,7 +174,7 @@ Public Class FormUserList
             End If
         Else
             mFormPayment = New FormPayment
-            mFormPayment.ShowForm("", "")
+            mFormPayment.ShowForm(currentUserId, currentUserName, currentUserAddress)
         End If
     End Sub
 End Class

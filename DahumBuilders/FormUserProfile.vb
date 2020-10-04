@@ -206,7 +206,7 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = currentUserId
         sqlAdapter = New MySqlDataAdapter(sqlCommand)
 
-        sql = "SELECT * FROM `db_user_child` WHERE `userid` = @id"
+        'sql = "SELECT * FROM `db_user_child` WHERE `userid` = @id"
         Try
             sqlAdapter.Fill(table)
 
