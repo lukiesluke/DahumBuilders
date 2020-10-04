@@ -8,8 +8,9 @@ Public Class FormProjectList
     Private Sub load_project_list()
         Dim table As New DataTable()
 
-        sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
-        db_project_list.`id`=db_project_item.`pro_id`"
+        sql = "SELECT id, proj_name, block_and_lot, lot_area, total_contract_price, 
+IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
+FROM `db_project_list` INNER JOIN `db_project_item` ON `db_project_list`.id=`db_project_item`.`pro_id`"
 
         Connection()
         Try
@@ -27,7 +28,7 @@ Public Class FormProjectList
                 item.SubItems.Add(sqlDataReader("block_and_lot"))
                 item.SubItems.Add(sqlDataReader("lot_area"))
                 item.SubItems.Add(tcp.ToString("N2"))
-                item.SubItems.Add(sqlDataReader("assigned_userid"))
+                item.SubItems.Add(sqlDataReader("assigned_name"))
                 ListViewProject.Items.Add(item)
             Loop
             sqlDataReader.Dispose()

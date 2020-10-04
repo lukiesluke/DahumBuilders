@@ -27,18 +27,18 @@ Partial Class FormProjectList
         Me.ColumnHeaderProjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDesciption = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderLotArea = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderAssignUser = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'ListViewProject
         '
-        Me.ListViewProject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderDesciption, Me.ColumnHeaderLotArea, Me.ColumnHeaderTCP, Me.ColumnHeaderStatus})
+        Me.ListViewProject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderDesciption, Me.ColumnHeaderLotArea, Me.ColumnHeaderTCP, Me.ColumnHeaderAssignUser})
         Me.ListViewProject.FullRowSelect = True
         Me.ListViewProject.GridLines = True
-        Me.ListViewProject.Location = New System.Drawing.Point(34, 76)
+        Me.ListViewProject.Location = New System.Drawing.Point(29, 76)
         Me.ListViewProject.Name = "ListViewProject"
-        Me.ListViewProject.Size = New System.Drawing.Size(1016, 451)
+        Me.ListViewProject.Size = New System.Drawing.Size(1032, 457)
         Me.ListViewProject.TabIndex = 0
         Me.ListViewProject.UseCompatibleStateImageBehavior = False
         Me.ListViewProject.View = System.Windows.Forms.View.Details
@@ -62,9 +62,10 @@ Partial Class FormProjectList
         '
         Me.ColumnHeaderLotArea.Text = "Lot Area"
         '
-        'ColumnHeaderStatus
+        'ColumnHeaderAssignUser
         '
-        Me.ColumnHeaderStatus.Text = "Status"
+        Me.ColumnHeaderAssignUser.Text = "Assigned"
+        Me.ColumnHeaderAssignUser.Width = 110
         '
         'ColumnHeaderTCP
         '
@@ -91,6 +92,6 @@ Partial Class FormProjectList
     Friend WithEvents ColumnHeaderProjectName As ColumnHeader
     Friend WithEvents ColumnHeaderDesciption As ColumnHeader
     Friend WithEvents ColumnHeaderLotArea As ColumnHeader
-    Friend WithEvents ColumnHeaderStatus As ColumnHeader
+    Friend WithEvents ColumnHeaderAssignUser As ColumnHeader
     Friend WithEvents ColumnHeaderTCP As ColumnHeader
 End Class
