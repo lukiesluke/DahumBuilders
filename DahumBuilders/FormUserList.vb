@@ -158,4 +158,15 @@ Public Class FormUserList
         btnStatementAccount.Enabled = value
         btnUpdateRecord.Enabled = value
     End Sub
+
+    Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
+        If Application.OpenForms().OfType(Of FormPayment).Any Then
+            If mFormUserProfile.WindowState = 1 Then
+                mFormUserProfile.WindowState = 0
+            End If
+        Else
+            mFormPayment = New FormPayment
+            mFormPayment.ShowForm("", "")
+        End If
+    End Sub
 End Class

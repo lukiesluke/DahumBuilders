@@ -445,7 +445,9 @@ Partial Class FormUserList
         Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ListViewUser)
+        Me.MinimizeBox = False
         Me.Name = "FormUserList"
+        Me.ShowIcon = False
         Me.Text = "User List"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.TableLayoutPanel1.ResumeLayout(False)

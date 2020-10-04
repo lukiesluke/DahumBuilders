@@ -39,7 +39,6 @@ Partial Class FormUserProfile
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.gbEmploymentInfo = New System.Windows.Forms.GroupBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -91,15 +90,16 @@ Partial Class FormUserProfile
         Me.btnAddBeneficiary = New System.Windows.Forms.Button()
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbEmploymentInfo.SuspendLayout()
         Me.gbParentInfo.SuspendLayout()
         Me.gbContactInformation.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.gbChilderName.SuspendLayout()
         Me.TabPage3.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtFirstName
@@ -288,18 +288,6 @@ Partial Class FormUserProfile
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Image = Global.DahumBuilders.My.Resources.Resources.client_male
-        Me.PictureBox1.InitialImage = Global.DahumBuilders.My.Resources.Resources.client_male
-        Me.PictureBox1.Location = New System.Drawing.Point(454, 18)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(276, 205)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox1.TabIndex = 30
-        Me.PictureBox1.TabStop = False
         '
         'gbEmploymentInfo
         '
@@ -802,6 +790,18 @@ Partial Class FormUserProfile
         Me.Label29.TabIndex = 6
         Me.Label29.Text = "Name"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PictureBox1.Image = Global.DahumBuilders.My.Resources.Resources.client_male
+        Me.PictureBox1.InitialImage = Global.DahumBuilders.My.Resources.Resources.client_male
+        Me.PictureBox1.Location = New System.Drawing.Point(454, 18)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(276, 205)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox1.TabIndex = 30
+        Me.PictureBox1.TabStop = False
+        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -813,14 +813,16 @@ Partial Class FormUserProfile
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FormUserProfile"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "User Profile"
         Me.TopMost = True
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbEmploymentInfo.ResumeLayout(False)
         Me.gbEmploymentInfo.PerformLayout()
         Me.gbParentInfo.ResumeLayout(False)
@@ -833,6 +835,7 @@ Partial Class FormUserProfile
         Me.gbChilderName.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
