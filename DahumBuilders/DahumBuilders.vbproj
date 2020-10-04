@@ -103,6 +103,12 @@
     <Compile Include="FormPayment.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormProjectList.Designer.vb">
+      <DependentUpon>FormProjectList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProjectList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormUserList.Designer.vb">
       <DependentUpon>FormUserList.vb</DependentUpon>
     </Compile>
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPayment.resx">
       <DependentUpon>FormPayment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProjectList.resx">
+      <DependentUpon>FormProjectList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUserList.resx">
       <DependentUpon>FormUserList.vb</DependentUpon>

@@ -55,9 +55,24 @@ Public Class FormPayment
                 item.SubItems.Add(tcp.ToString("N2"))
                 ListViewUserItem.Items.Add(item)
             Loop
+            sqlDataReader.Dispose()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         End Try
 
+    End Sub
+
+    Private Sub btnSearchProject_Click(sender As Object, e As EventArgs) Handles btnSearchProject.Click
+        If Application.OpenForms().OfType(Of FormProjectList).Any Then
+            If mFormUserProfile.WindowState = 1 Then
+                mFormUserProfile.WindowState = 0
+            End If
+        Else
+            mFormProjectList = New FormProjectList
+            mFormProjectList.ShowDialog(Me)
+        End If
     End Sub
 End Class

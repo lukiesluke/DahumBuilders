@@ -57,6 +57,7 @@ Partial Class FormPayment
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtAmountTendered = New System.Windows.Forms.TextBox()
         Me.btnConfirm = New System.Windows.Forms.Button()
+        Me.btnSearchProject = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -194,6 +195,7 @@ Partial Class FormPayment
         'PanelInformation
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.PanelInformation.Controls.Add(Me.btnSearchProject)
         Me.PanelInformation.Controls.Add(Me.ListViewUserItem)
         Me.PanelInformation.Controls.Add(Me.Label8)
         Me.PanelInformation.Controls.Add(Me.DateTimePicker1)
@@ -213,7 +215,8 @@ Partial Class FormPayment
         '
         Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader5, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
         Me.ListViewUserItem.FullRowSelect = True
-        Me.ListViewUserItem.Location = New System.Drawing.Point(16, 187)
+        Me.ListViewUserItem.GridLines = True
+        Me.ListViewUserItem.Location = New System.Drawing.Point(16, 223)
         Me.ListViewUserItem.Name = "ListViewUserItem"
         Me.ListViewUserItem.Size = New System.Drawing.Size(871, 169)
         Me.ListViewUserItem.TabIndex = 12
@@ -249,7 +252,7 @@ Partial Class FormPayment
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(587, 153)
+        Me.Label8.Location = New System.Drawing.Point(385, 191)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(53, 22)
         Me.Label8.TabIndex = 11
@@ -260,7 +263,7 @@ Partial Class FormPayment
         Me.DateTimePicker1.CustomFormat = "MMMM dd, yyyy"
         Me.DateTimePicker1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(646, 147)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(444, 185)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(241, 31)
         Me.DateTimePicker1.TabIndex = 10
@@ -268,7 +271,7 @@ Partial Class FormPayment
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(187, 150)
+        Me.TextBox1.Location = New System.Drawing.Point(187, 186)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(112, 31)
         Me.TextBox1.TabIndex = 9
@@ -278,7 +281,7 @@ Partial Class FormPayment
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(12, 155)
+        Me.Label5.Location = New System.Drawing.Point(12, 191)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(169, 22)
         Me.Label5.TabIndex = 4
@@ -419,6 +422,15 @@ Partial Class FormPayment
         Me.btnConfirm.Text = "CONFIRM"
         Me.btnConfirm.UseVisualStyleBackColor = True
         '
+        'btnSearchProject
+        '
+        Me.btnSearchProject.Location = New System.Drawing.Point(727, 182)
+        Me.btnSearchProject.Name = "btnSearchProject"
+        Me.btnSearchProject.Size = New System.Drawing.Size(160, 34)
+        Me.btnSearchProject.TabIndex = 13
+        Me.btnSearchProject.Text = "Search Project"
+        Me.btnSearchProject.UseVisualStyleBackColor = True
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -482,4 +494,5 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents ColumnHeader4 As ColumnHeader
     Friend WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents btnSearchProject As Button
 End Class
