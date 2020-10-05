@@ -8,7 +8,7 @@ Public Class FormProjectList
     Private Sub load_project_list()
         Dim table As New DataTable()
 
-        sql = "SELECT id, proj_name, block_and_lot, lot_area, total_contract_price, 
+        sql = "SELECT id, proj_name, block , lot, sqm, price, 
 IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
 FROM `db_project_list` INNER JOIN `db_project_item` ON `db_project_list`.id=`db_project_item`.`pro_id`"
 
@@ -22,12 +22,13 @@ FROM `db_project_list` INNER JOIN `db_project_item` ON `db_project_list`.id=`db_
             ListViewProject.Items.Clear()
             Do While sqlDataReader.Read = True
                 item = New ListViewItem(sqlDataReader("id").ToString)
-                Dim tcp As Double = sqlDataReader("total_contract_price")
+                Dim price As Double = sqlDataReader("price")
 
                 item.SubItems.Add(sqlDataReader("proj_name"))
-                item.SubItems.Add(sqlDataReader("block_and_lot"))
-                item.SubItems.Add(sqlDataReader("lot_area"))
-                item.SubItems.Add(tcp.ToString("N2"))
+                item.SubItems.Add(sqlDataReader("block"))
+                item.SubItems.Add(sqlDataReader("lot"))
+                item.SubItems.Add(sqlDataReader("sqm"))
+                item.SubItems.Add(price.ToString("N2"))
                 item.SubItems.Add(sqlDataReader("assigned_name"))
                 ListViewProject.Items.Add(item)
             Loop

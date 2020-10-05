@@ -191,7 +191,7 @@ Partial Class FormUserList
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.txtAddress)
         Me.Panel1.Controls.Add(Me.txtCivilStatus)

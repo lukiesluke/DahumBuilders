@@ -25,15 +25,16 @@ Partial Class FormProjectList
         Me.ListViewProject = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderDesciption = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderLotArea = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderBlock = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderLot = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderSQM = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAssignUser = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPrice = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'ListViewProject
         '
-        Me.ListViewProject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderDesciption, Me.ColumnHeaderLotArea, Me.ColumnHeaderTCP, Me.ColumnHeaderAssignUser})
+        Me.ListViewProject.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderPrice, Me.ColumnHeaderAssignUser})
         Me.ListViewProject.FullRowSelect = True
         Me.ListViewProject.GridLines = True
         Me.ListViewProject.Location = New System.Drawing.Point(29, 76)
@@ -53,24 +54,30 @@ Partial Class FormProjectList
         Me.ColumnHeaderProjectName.Text = "Project Name"
         Me.ColumnHeaderProjectName.Width = 110
         '
-        'ColumnHeaderDesciption
+        'ColumnHeaderBlock
         '
-        Me.ColumnHeaderDesciption.Text = "Description"
-        Me.ColumnHeaderDesciption.Width = 100
+        Me.ColumnHeaderBlock.Text = "Block"
+        Me.ColumnHeaderBlock.Width = 50
         '
-        'ColumnHeaderLotArea
+        'ColumnHeaderLot
         '
-        Me.ColumnHeaderLotArea.Text = "Lot Area"
+        Me.ColumnHeaderLot.Text = "Lot"
+        Me.ColumnHeaderLot.Width = 50
+        '
+        'ColumnHeaderSQM
+        '
+        Me.ColumnHeaderSQM.Text = "sqm"
+        Me.ColumnHeaderSQM.Width = 50
         '
         'ColumnHeaderAssignUser
         '
         Me.ColumnHeaderAssignUser.Text = "Assigned"
-        Me.ColumnHeaderAssignUser.Width = 110
+        Me.ColumnHeaderAssignUser.Width = 150
         '
-        'ColumnHeaderTCP
+        'ColumnHeaderPrice
         '
-        Me.ColumnHeaderTCP.Text = "TCP"
-        Me.ColumnHeaderTCP.Width = 80
+        Me.ColumnHeaderPrice.Text = "Price"
+        Me.ColumnHeaderPrice.Width = 80
         '
         'FormProjectList
         '
@@ -90,8 +97,9 @@ Partial Class FormProjectList
     Friend WithEvents ListViewProject As ListView
     Friend WithEvents ColumnHeaderID As ColumnHeader
     Friend WithEvents ColumnHeaderProjectName As ColumnHeader
-    Friend WithEvents ColumnHeaderDesciption As ColumnHeader
-    Friend WithEvents ColumnHeaderLotArea As ColumnHeader
+    Friend WithEvents ColumnHeaderBlock As ColumnHeader
+    Friend WithEvents ColumnHeaderLot As ColumnHeader
     Friend WithEvents ColumnHeaderAssignUser As ColumnHeader
-    Friend WithEvents ColumnHeaderTCP As ColumnHeader
+    Friend WithEvents ColumnHeaderSQM As ColumnHeader
+    Friend WithEvents ColumnHeaderPrice As ColumnHeader
 End Class
