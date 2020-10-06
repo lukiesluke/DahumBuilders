@@ -34,8 +34,6 @@ Partial Class FormPayment
         Me.PanelEquity = New System.Windows.Forms.Panel()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.txtEquityAmount = New System.Windows.Forms.TextBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.lblEquityMonthlyAmortization = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.cbEquityBalanceMonthToPay = New System.Windows.Forms.ComboBox()
@@ -47,7 +45,7 @@ Partial Class FormPayment
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.PanelDownpayment = New System.Windows.Forms.Panel()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.lblMonthlyAmortization = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -117,6 +115,8 @@ Partial Class FormPayment
         'PanelTotal
         '
         Me.PanelTotal.BackColor = System.Drawing.Color.White
+        Me.PanelTotal.Controls.Add(Me.cbPaymentType)
+        Me.PanelTotal.Controls.Add(Me.Label13)
         Me.PanelTotal.Controls.Add(Me.btnConfirm)
         Me.PanelTotal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelTotal.Location = New System.Drawing.Point(0, 431)
@@ -126,7 +126,7 @@ Partial Class FormPayment
         '
         'btnConfirm
         '
-        Me.btnConfirm.Location = New System.Drawing.Point(36, 112)
+        Me.btnConfirm.Location = New System.Drawing.Point(36, 115)
         Me.btnConfirm.Name = "btnConfirm"
         Me.btnConfirm.Size = New System.Drawing.Size(343, 48)
         Me.btnConfirm.TabIndex = 34
@@ -214,8 +214,6 @@ Partial Class FormPayment
         Me.PanelEquity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PanelEquity.Controls.Add(Me.Label21)
         Me.PanelEquity.Controls.Add(Me.txtEquityAmount)
-        Me.PanelEquity.Controls.Add(Me.ComboBox2)
-        Me.PanelEquity.Controls.Add(Me.Label14)
         Me.PanelEquity.Controls.Add(Me.lblEquityMonthlyAmortization)
         Me.PanelEquity.Controls.Add(Me.Label16)
         Me.PanelEquity.Controls.Add(Me.cbEquityBalanceMonthToPay)
@@ -227,9 +225,9 @@ Partial Class FormPayment
         Me.PanelEquity.Controls.Add(Me.Label24)
         Me.PanelEquity.Controls.Add(Me.Label25)
         Me.PanelEquity.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelEquity.Location = New System.Drawing.Point(0, 430)
+        Me.PanelEquity.Location = New System.Drawing.Point(0, 291)
         Me.PanelEquity.Name = "PanelEquity"
-        Me.PanelEquity.Size = New System.Drawing.Size(904, 107)
+        Me.PanelEquity.Size = New System.Drawing.Size(904, 273)
         Me.PanelEquity.TabIndex = 19
         '
         'Label21
@@ -251,27 +249,6 @@ Partial Class FormPayment
         Me.txtEquityAmount.TabIndex = 34
         Me.txtEquityAmount.Text = "300000"
         Me.txtEquityAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
-        Me.ComboBox2.Location = New System.Drawing.Point(244, 261)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(206, 30)
-        Me.ComboBox2.TabIndex = 33
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(83, 264)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(139, 22)
-        Me.Label14.TabIndex = 32
-        Me.Label14.Text = "Payment Type"
         '
         'lblEquityMonthlyAmortization
         '
@@ -299,7 +276,7 @@ Partial Class FormPayment
         Me.cbEquityBalanceMonthToPay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEquityBalanceMonthToPay.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbEquityBalanceMonthToPay.FormattingEnabled = True
-        Me.cbEquityBalanceMonthToPay.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "18", "24"})
+        Me.cbEquityBalanceMonthToPay.Items.AddRange(New Object() {"0", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "18", "24"})
         Me.cbEquityBalanceMonthToPay.Location = New System.Drawing.Point(244, 177)
         Me.cbEquityBalanceMonthToPay.Name = "cbEquityBalanceMonthToPay"
         Me.cbEquityBalanceMonthToPay.Size = New System.Drawing.Size(206, 30)
@@ -352,7 +329,7 @@ Partial Class FormPayment
         Me.cbEquityMonthsToPay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbEquityMonthsToPay.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbEquityMonthsToPay.FormattingEnabled = True
-        Me.cbEquityMonthsToPay.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
+        Me.cbEquityMonthsToPay.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"})
         Me.cbEquityMonthsToPay.Location = New System.Drawing.Point(626, 61)
         Me.cbEquityMonthsToPay.Name = "cbEquityMonthsToPay"
         Me.cbEquityMonthsToPay.Size = New System.Drawing.Size(166, 30)
@@ -381,8 +358,6 @@ Partial Class FormPayment
         'PanelDownpayment
         '
         Me.PanelDownpayment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelDownpayment.Controls.Add(Me.ComboBox1)
-        Me.PanelDownpayment.Controls.Add(Me.Label13)
         Me.PanelDownpayment.Controls.Add(Me.lblMonthlyAmortization)
         Me.PanelDownpayment.Controls.Add(Me.Label12)
         Me.PanelDownpayment.Controls.Add(Me.cbMonthsToPay)
@@ -398,27 +373,27 @@ Partial Class FormPayment
         Me.PanelDownpayment.Controls.Add(Me.cbDownpaymentType)
         Me.PanelDownpayment.Controls.Add(Me.Label2)
         Me.PanelDownpayment.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 537)
+        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 564)
         Me.PanelDownpayment.Name = "PanelDownpayment"
-        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 309)
+        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 282)
         Me.PanelDownpayment.TabIndex = 18
         '
-        'ComboBox1
+        'cbPaymentType
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
-        Me.ComboBox1.Location = New System.Drawing.Point(244, 261)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(206, 30)
-        Me.ComboBox1.TabIndex = 33
+        Me.cbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPaymentType.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPaymentType.FormattingEnabled = True
+        Me.cbPaymentType.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
+        Me.cbPaymentType.Location = New System.Drawing.Point(201, 76)
+        Me.cbPaymentType.Name = "cbPaymentType"
+        Me.cbPaymentType.Size = New System.Drawing.Size(175, 30)
+        Me.cbPaymentType.TabIndex = 33
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(83, 264)
+        Me.Label13.Location = New System.Drawing.Point(32, 79)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(139, 22)
         Me.Label13.TabIndex = 32
@@ -450,7 +425,7 @@ Partial Class FormPayment
         Me.cbMonthsToPay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMonthsToPay.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbMonthsToPay.FormattingEnabled = True
-        Me.cbMonthsToPay.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "18", "24"})
+        Me.cbMonthsToPay.Items.AddRange(New Object() {"0", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "18", "24"})
         Me.cbMonthsToPay.Location = New System.Drawing.Point(244, 177)
         Me.cbMonthsToPay.Name = "cbMonthsToPay"
         Me.cbMonthsToPay.Size = New System.Drawing.Size(206, 30)
@@ -556,7 +531,7 @@ Partial Class FormPayment
         Me.cbDownpaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDownpaymentType.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbDownpaymentType.FormattingEnabled = True
-        Me.cbDownpaymentType.Items.AddRange(New Object() {"0", "25", "30", "40", "50", "60", "70", "80"})
+        Me.cbDownpaymentType.Items.AddRange(New Object() {"0", "25", "30", "40", "50", "60", "70", "80", "100"})
         Me.cbDownpaymentType.Location = New System.Drawing.Point(432, 17)
         Me.cbDownpaymentType.Name = "cbDownpaymentType"
         Me.cbDownpaymentType.Size = New System.Drawing.Size(170, 30)
@@ -775,6 +750,7 @@ Partial Class FormPayment
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.PanelTotal.ResumeLayout(False)
+        Me.PanelTotal.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
@@ -829,11 +805,9 @@ Partial Class FormPayment
     Friend WithEvents cbMonthsToPay As ComboBox
     Friend WithEvents lblMonthlyAmortization As Label
     Friend WithEvents Label12 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cbPaymentType As ComboBox
     Friend WithEvents Label13 As Label
     Friend WithEvents PanelEquity As Panel
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents Label14 As Label
     Friend WithEvents lblEquityMonthlyAmortization As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents cbEquityBalanceMonthToPay As ComboBox

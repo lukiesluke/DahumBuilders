@@ -24,6 +24,7 @@ Public Class FormPayment
         cbParticular.SelectedIndex = -1
         PanelDownpayment.Visible = False
         PanelEquity.Visible = False
+        btnConfirm.Enabled = False
 
         Dim totalEquityAmount As Double = txtEquityAmount.Text
         txtEquityAmount.Text = totalEquityAmount.ToString("N2")
@@ -144,7 +145,7 @@ Public Class FormPayment
     Private Sub cbDownpaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDownpaymentType.SelectedIndexChanged
 
         If cbDownpaymentType.SelectedIndex > -1 Then
-            lblDownpaymentAmount.Text = computeDownpayment(sumOfTotalContractPrice, Double.Parse(cbDownpaymentType.Text)).ToString("N2")
+            lblDownpaymentAmount.Text = computePercentage(sumOfTotalContractPrice, cbDownpaymentType).ToString("N2")
         End If
         If cbDiscountType.SelectedIndex < 0 Then
             cbDiscountType.SelectedIndex = 0
@@ -154,37 +155,35 @@ Public Class FormPayment
 
     Private Sub cbDiscountType_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbDiscountType.SelectedIndexChanged
         If cbDiscountType.SelectedIndex > -1 Then
-            lblDiscountAmount.Text = computeDiscount(Double.Parse(lblDownpaymentAmount.Text), Double.Parse(cbDiscountType.Text)).ToString("N2")
+            lblDiscountAmount.Text = computePercentage(Double.Parse(lblDownpaymentAmount.Text), cbDiscountType).ToString("N2")
         End If
         amountToPay()
     End Sub
 
-    Private Function computeDownpayment(totalPrice As Double, downPayment As Double) As Double
-        Dim percentageDownpayment As Double = downPayment / 100
+    Private Function computePercentage(totalPrice As Double, value As ComboBox) As Double
+        Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100
         Return totalPrice * percentageDownpayment
-    End Function
-
-    Private Function computeDiscount(totalPrice As Double, discount As Double) As Double
-        Dim percentageDiscount As Double = discount / 100
-        Return totalPrice * percentageDiscount
     End Function
 
     Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMonthsToPay.SelectedIndexChanged
         amountToPay()
     End Sub
     Private Sub amountToPay()
-
         'Downpayment
         lblAmountToPay.Text = (Double.Parse(lblDownpaymentAmount.Text) - Double.Parse(lblDiscountAmount.Text)).ToString("N2")
         lblBalanceAmountPay.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblDownpaymentAmount.Text)).ToString("N2")
-        If cbMonthsToPay.SelectedIndex > -1 Then
+        If cbMonthsToPay.SelectedIndex > 0 Then
             lblMonthlyAmortization.Text = (Double.Parse(lblBalanceAmountPay.Text) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
+        Else
+            lblMonthlyAmortization.Text = 0.ToString("N2")
         End If
 
         'Equity
         Dim totalEquityAmount As Double = txtEquityAmount.Text
-        If cbEquityMonthsToPay.SelectedIndex > -1 Then
+        If cbEquityMonthsToPay.SelectedIndex > 0 Then
             lblMonthlyEquity.Text = (totalEquityAmount / Integer.Parse(cbEquityMonthsToPay.Text)).ToString("N2")
+        Else
+            lblEquityMonthlyAmortization.Text = 0.ToString("N2")
         End If
         lblEquityBalanceToPay.Text = (sumOfTotalContractPrice - Double.Parse(txtEquityAmount.Text)).ToString("N2")
         txtEquityAmount.Text = totalEquityAmount.ToString("N2")
@@ -217,12 +216,25 @@ Public Class FormPayment
                 PanelDownpayment.Visible = False
                 If PanelEquity.Visible = False Then
                     PanelEquity.Visible = True
+
+                    'Clear PanelDownpayment 
+                    cbPaymentType.SelectedIndex = -1
+                    cbDownpaymentType.SelectedIndex = 0
+                    cbDiscountType.SelectedIndex = 0
+                    cbMonthsToPay.SelectedIndex = 0
+
+                    lblBalanceAmountPay.Text = 0.ToString("N2")
+                    lblMonthlyAmortization.Text = 0.ToString("N2")
+                    lblDownpaymentAmount.Text = 0.ToString("N2")
+                    lblDiscountAmount.Text = 0.ToString("N2")
+                    lblAmountToPay.Text = 0.ToString("N2")
                 End If
         End Select
 
     End Sub
 
     Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs) Handles btnConfirm.Click
+
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `amount_paid`, `tcp`, `particular`, 
         `downpayment_type`, `downpayment_amount`, `discount_type`, `discount_amount`, `balance_amount_to_pay`, `balance_month_to_pay`, 
         `monthly_amortization`, `payment_type`, `userid`) VALUES (@OR, @DatePaid, @AmountPaid, @TCP, @Particular, 
@@ -243,7 +255,7 @@ Public Class FormPayment
         sqlCommand.Parameters.Add("@BalanceAmountPay", MySqlDbType.Double).Value = Double.Parse(lblBalanceAmountPay.Text.Trim)
         sqlCommand.Parameters.Add("@BalanceMonthPay", MySqlDbType.Int24).Value = cbMonthsToPay.Text.Trim
         sqlCommand.Parameters.Add("@MonthlyAmortization", MySqlDbType.Double).Value = Double.Parse(lblMonthlyAmortization.Text.Trim)
-        sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = 0
+        sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = cbPaymentType.SelectedIndex
         sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = userId
 
         Try
@@ -259,5 +271,14 @@ Public Class FormPayment
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+    End Sub
+
+
+    Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
+        If cbPaymentType.SelectedIndex > -1 Then
+            btnConfirm.Enabled = True
+        Else
+            btnConfirm.Enabled = False
+        End If
     End Sub
 End Class
