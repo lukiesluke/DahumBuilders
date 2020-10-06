@@ -88,11 +88,23 @@ Public Class FormPayment
             Dim item As ListViewItem
             For i = 0 To table.Rows.Count - 1
                 item = New ListViewItem(table.Rows(i)("id").ToString)
+
+
+
                 item.SubItems.Add(table.Rows(i)("proj_name"))
                 item.SubItems.Add(table.Rows(i)("block"))
                 item.SubItems.Add(table.Rows(i)("lot"))
                 item.SubItems.Add(table.Rows(i)("sqm"))
                 item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
+                item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
+
+                'If lvi.SubItems(8).Text = "True" Then
+                '    lvi.UseItemStyleForSubItems = False
+                '    For i As Integer = 0 To 8
+                '        lvi.SubItems(i).ForeColor = Color.Red
+                '    Next
+                'End If
+
                 ListViewUserItem.Items.Add(item)
 
             Next
@@ -132,7 +144,7 @@ Public Class FormPayment
     Private Sub cbDownpaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDownpaymentType.SelectedIndexChanged
 
         If cbDownpaymentType.SelectedIndex > -1 Then
-            lblAmountDownpayment.Text = computeDownpayment(sumOfTotalContractPrice, Double.Parse(cbDownpaymentType.Text)).ToString("N2")
+            lblDownpaymentAmount.Text = computeDownpayment(sumOfTotalContractPrice, Double.Parse(cbDownpaymentType.Text)).ToString("N2")
         End If
         If cbDiscountType.SelectedIndex < 0 Then
             cbDiscountType.SelectedIndex = 0
@@ -142,7 +154,7 @@ Public Class FormPayment
 
     Private Sub cbDiscountType_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbDiscountType.SelectedIndexChanged
         If cbDiscountType.SelectedIndex > -1 Then
-            lblAmountDiscount.Text = computeDiscount(Double.Parse(lblAmountDownpayment.Text), Double.Parse(cbDiscountType.Text)).ToString("N2")
+            lblDiscountAmount.Text = computeDiscount(Double.Parse(lblDownpaymentAmount.Text), Double.Parse(cbDiscountType.Text)).ToString("N2")
         End If
         amountToPay()
     End Sub
@@ -161,11 +173,12 @@ Public Class FormPayment
         amountToPay()
     End Sub
     Private Sub amountToPay()
+
         'Downpayment
-        lblAmountToPay.Text = (Double.Parse(lblAmountDownpayment.Text) - Double.Parse(lblAmountDiscount.Text)).ToString("N2")
-        lblBalance.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblAmountDownpayment.Text)).ToString("N2")
+        lblAmountToPay.Text = (Double.Parse(lblDownpaymentAmount.Text) - Double.Parse(lblDiscountAmount.Text)).ToString("N2")
+        lblBalanceAmountPay.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblDownpaymentAmount.Text)).ToString("N2")
         If cbMonthsToPay.SelectedIndex > -1 Then
-            lblMonthly.Text = (Double.Parse(lblBalance.Text) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
+            lblMonthlyAmortization.Text = (Double.Parse(lblBalanceAmountPay.Text) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
         End If
 
         'Equity
@@ -209,4 +222,42 @@ Public Class FormPayment
 
     End Sub
 
+    Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs) Handles btnConfirm.Click
+        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `amount_paid`, `tcp`, `particular`, 
+        `downpayment_type`, `downpayment_amount`, `discount_type`, `discount_amount`, `balance_amount_to_pay`, `balance_month_to_pay`, 
+        `monthly_amortization`, `payment_type`, `userid`) VALUES (@OR, @DatePaid, @AmountPaid, @TCP, @Particular, 
+        @DownpaymentType, @DownpaymentAmount, @DiscountType, @DiscountAmount, @BalanceAmountPay, @BalanceMonthPay, 
+        @MonthlyAmortization, @PaymentType, @userid)"
+
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = txtOfficialReceipt.Text.Trim
+        sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
+        sqlCommand.Parameters.Add("@AmountPaid", MySqlDbType.Double).Value = txtAmountPaid.Text.Trim
+        sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = sumOfTotalContractPrice
+        sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = cbParticular.SelectedIndex
+        sqlCommand.Parameters.Add("@DownpaymentType", MySqlDbType.Int24).Value = cbDownpaymentType.Text.Trim
+        sqlCommand.Parameters.Add("@DownpaymentAmount", MySqlDbType.Double).Value = Double.Parse(lblDownpaymentAmount.Text.Trim)
+        sqlCommand.Parameters.Add("@DiscountType", MySqlDbType.Int24).Value = cbDiscountType.Text.Trim
+        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = Double.Parse(lblDiscountAmount.Text.Trim)
+        sqlCommand.Parameters.Add("@BalanceAmountPay", MySqlDbType.Double).Value = Double.Parse(lblBalanceAmountPay.Text.Trim)
+        sqlCommand.Parameters.Add("@BalanceMonthPay", MySqlDbType.Int24).Value = cbMonthsToPay.Text.Trim
+        sqlCommand.Parameters.Add("@MonthlyAmortization", MySqlDbType.Double).Value = Double.Parse(lblMonthlyAmortization.Text.Trim)
+        sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = 0
+        sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = userId
+
+        Try
+            If sqlCommand.ExecuteNonQuery() = 1 Then
+                MessageBox.Show("Successfully Saved")
+            Else
+                MessageBox.Show("Data NOT Inserted. Please try again.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("ERROR: " & ex.Message)
+
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
 End Class
