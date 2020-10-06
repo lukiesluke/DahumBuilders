@@ -23,6 +23,10 @@ Public Class FormPayment
         load_userId_info_data_reader()
         cbParticular.SelectedIndex = -1
         PanelDownpayment.Visible = False
+        PanelEquity.Visible = False
+
+        Dim totalEquityAmount As Double = txtEquityAmount.Text
+        txtEquityAmount.Text = totalEquityAmount.ToString("N2")
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
@@ -153,24 +157,54 @@ Public Class FormPayment
         Return totalPrice * percentageDiscount
     End Function
 
+    Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMonthsToPay.SelectedIndexChanged
+        amountToPay()
+    End Sub
     Private Sub amountToPay()
+        'Downpayment
         lblAmountToPay.Text = (Double.Parse(lblAmountDownpayment.Text) - Double.Parse(lblAmountDiscount.Text)).ToString("N2")
         lblBalance.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblAmountDownpayment.Text)).ToString("N2")
+        If cbMonthsToPay.SelectedIndex > -1 Then
+            lblMonthly.Text = (Double.Parse(lblBalance.Text) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
+        End If
+
+        'Equity
+        Dim totalEquityAmount As Double = txtEquityAmount.Text
+        If cbEquityMonthsToPay.SelectedIndex > -1 Then
+            lblMonthlyEquity.Text = (totalEquityAmount / Integer.Parse(cbEquityMonthsToPay.Text)).ToString("N2")
+        End If
+        lblEquityBalanceToPay.Text = (sumOfTotalContractPrice - Double.Parse(txtEquityAmount.Text)).ToString("N2")
+        txtEquityAmount.Text = totalEquityAmount.ToString("N2")
+
+        If cbEquityBalanceMonthToPay.SelectedIndex > -1 Then
+            lblEquityMonthlyAmortization.Text = (Double.Parse(lblEquityBalanceToPay.Text) / Integer.Parse(cbEquityBalanceMonthToPay.Text)).ToString("N2")
+        End If
     End Sub
 
-    Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMonthsToPay.SelectedIndexChanged
-        lblMonthly.Text = (Double.Parse(lblBalance.Text) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
+    Private Sub cbEquityMonths_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEquityMonthsToPay.SelectedIndexChanged
+        amountToPay()
     End Sub
+
+    Private Sub cbEquityBalanceMonthToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEquityBalanceMonthToPay.SelectedIndexChanged
+        amountToPay()
+    End Sub
+
     Private Sub cbParticular_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbParticular.SelectedIndexChanged
         Select Case cbParticular.SelectedIndex
             Case -1
                 PanelDownpayment.Visible = False
+                PanelEquity.Visible = False
             Case 0 'Downpayment
+                PanelEquity.Visible = False
                 If PanelDownpayment.Visible = False Then
                     PanelDownpayment.Visible = True
                 End If
-            Case 1
+
+            Case 1 'Equity
                 PanelDownpayment.Visible = False
+                If PanelEquity.Visible = False Then
+                    PanelEquity.Visible = True
+                End If
         End Select
 
     End Sub
