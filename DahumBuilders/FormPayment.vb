@@ -157,39 +157,37 @@ Public Class FormPayment
         If cbDiscountType.SelectedIndex > -1 Then
             lblDiscountAmount.Text = computePercentage(Double.Parse(lblDownpaymentAmount.Text), cbDiscountType).ToString("N2")
         End If
+        If toDouble(lblBalanceAmountPay) < 1 Then
+            cbMonthsToPay.SelectedIndex = 0
+        End If
         amountToPay()
     End Sub
-
-    Private Function computePercentage(totalPrice As Double, value As ComboBox) As Double
-        Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100
-        Return totalPrice * percentageDownpayment
-    End Function
 
     Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMonthsToPay.SelectedIndexChanged
         amountToPay()
     End Sub
     Private Sub amountToPay()
         'Downpayment
-        lblAmountToPay.Text = (Double.Parse(lblDownpaymentAmount.Text) - Double.Parse(lblDiscountAmount.Text)).ToString("N2")
+        lblAmountToPay.Text = (toDouble(lblDownpaymentAmount) - toDouble(lblDiscountAmount)).ToString("N2")
         lblBalanceAmountPay.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblDownpaymentAmount.Text)).ToString("N2")
         If cbMonthsToPay.SelectedIndex > 0 Then
-            lblMonthlyAmortization.Text = (Double.Parse(lblBalanceAmountPay.Text) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
+            lblMonthlyAmortization.Text = (toDouble(lblBalanceAmountPay) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
         Else
             lblMonthlyAmortization.Text = 0.ToString("N2")
         End If
 
         'Equity
-        Dim totalEquityAmount As Double = txtEquityAmount.Text
+        Dim totalEquityAmount As Double = txtEquityAmount.Text.Trim()
         If cbEquityMonthsToPay.SelectedIndex > 0 Then
-            lblMonthlyEquity.Text = (totalEquityAmount / Integer.Parse(cbEquityMonthsToPay.Text)).ToString("N2")
+            lblEquityMonthly.Text = (totalEquityAmount / Integer.Parse(cbEquityMonthsToPay.Text)).ToString("N2")
         Else
             lblEquityMonthlyAmortization.Text = 0.ToString("N2")
         End If
-        lblEquityBalanceToPay.Text = (sumOfTotalContractPrice - Double.Parse(txtEquityAmount.Text)).ToString("N2")
+        lblEquityBalanceToPay.Text = (sumOfTotalContractPrice - toDouble(txtEquityAmount)).ToString("N2")
         txtEquityAmount.Text = totalEquityAmount.ToString("N2")
 
         If cbEquityBalanceMonthToPay.SelectedIndex > -1 Then
-            lblEquityMonthlyAmortization.Text = (Double.Parse(lblEquityBalanceToPay.Text) / Integer.Parse(cbEquityBalanceMonthToPay.Text)).ToString("N2")
+            lblEquityMonthlyAmortization.Text = (toDouble(lblEquityBalanceToPay) / Integer.Parse(cbEquityBalanceMonthToPay.Text)).ToString("N2")
         End If
     End Sub
 
@@ -210,6 +208,13 @@ Public Class FormPayment
                 PanelEquity.Visible = False
                 If PanelDownpayment.Visible = False Then
                     PanelDownpayment.Visible = True
+                    cbEquityMonthsToPay.SelectedIndex = -1
+                    cbEquityBalanceMonthToPay.SelectedIndex = -1
+
+                    txtEquityAmount.Text = 0.ToString("N2")
+                    lblEquityMonthly.Text = 0.ToString("N2")
+                    lblEquityBalanceToPay.Text = 0.ToString("N2")
+                    lblEquityMonthlyAmortization.Text = 0.ToString("N2")
                 End If
 
             Case 1 'Equity
@@ -233,13 +238,34 @@ Public Class FormPayment
 
     End Sub
 
+    Function downpaymentAmount(particular As ComboBox, dp As Label, equityAmount As TextBox) As Double
+        Dim value As Double = 0
+        Select Case particular.SelectedIndex
+            Case 0 'Downpayment
+                value = toDouble(dp)
+            Case 1 'Equity
+                value = toDouble(equityAmount)
+        End Select
+        Return value
+    End Function
+
+    Function monthlyAmortization(particular As ComboBox, dp As Label, equityAmount As TextBox) As Double
+        Dim value As Double = 0
+        Select Case particular.SelectedIndex
+            Case 0 'Downpayment
+                value = toDouble(dp)
+            Case 1 'Equity
+                value = toDouble(equityAmount)
+        End Select
+        Return value
+    End Function
     Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs) Handles btnConfirm.Click
 
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `amount_paid`, `tcp`, `particular`, 
-        `downpayment_type`, `downpayment_amount`, `discount_type`, `discount_amount`, `balance_amount_to_pay`, `balance_month_to_pay`, 
-        `monthly_amortization`, `payment_type`, `userid`) VALUES (@OR, @DatePaid, @AmountPaid, @TCP, @Particular, 
-        @DownpaymentType, @DownpaymentAmount, @DiscountType, @DiscountAmount, @BalanceAmountPay, @BalanceMonthPay, 
-        @MonthlyAmortization, @PaymentType, @userid)"
+        `eq_month_to_pay`, `eq_monthly`,`downpayment_type`, `downpayment_amount`, `discount_type`, `discount_amount`, 
+        `balance_amount_to_pay`, `balance_month_to_pay`, `monthly_amortization`, `payment_type`, `userid`) VALUES 
+        (@OR, @DatePaid, @AmountPaid, @TCP, @Particular, @EqMonthToPay, @EqMonthly, @DownpaymentType, @DownpaymentAmount, @DiscountType, 
+        @DiscountAmount, @BalanceAmountPay, @BalanceMonthToPay, @MonthlyAmortization, @PaymentType, @userid)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -248,13 +274,17 @@ Public Class FormPayment
         sqlCommand.Parameters.Add("@AmountPaid", MySqlDbType.Double).Value = txtAmountPaid.Text.Trim
         sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = sumOfTotalContractPrice
         sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = cbParticular.SelectedIndex
+
+        sqlCommand.Parameters.Add("@EqMonthToPay", MySqlDbType.Int24).Value = cbEquityBalanceMonthToPay.Text.Trim
+        sqlCommand.Parameters.Add("@EqMonthly", MySqlDbType.Double).Value = toDouble(lblEquityMonthly)
+
         sqlCommand.Parameters.Add("@DownpaymentType", MySqlDbType.Int24).Value = cbDownpaymentType.Text.Trim
-        sqlCommand.Parameters.Add("@DownpaymentAmount", MySqlDbType.Double).Value = Double.Parse(lblDownpaymentAmount.Text.Trim)
+        sqlCommand.Parameters.Add("@DownpaymentAmount", MySqlDbType.Double).Value = downpaymentAmount(cbParticular, lblDownpaymentAmount, txtEquityAmount) 'toDouble(lblDownpaymentAmount)
         sqlCommand.Parameters.Add("@DiscountType", MySqlDbType.Int24).Value = cbDiscountType.Text.Trim
-        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = Double.Parse(lblDiscountAmount.Text.Trim)
-        sqlCommand.Parameters.Add("@BalanceAmountPay", MySqlDbType.Double).Value = Double.Parse(lblBalanceAmountPay.Text.Trim)
-        sqlCommand.Parameters.Add("@BalanceMonthPay", MySqlDbType.Int24).Value = cbMonthsToPay.Text.Trim
-        sqlCommand.Parameters.Add("@MonthlyAmortization", MySqlDbType.Double).Value = Double.Parse(lblMonthlyAmortization.Text.Trim)
+        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = toDouble(lblDiscountAmount)
+        sqlCommand.Parameters.Add("@BalanceAmountPay", MySqlDbType.Double).Value = toDouble(lblBalanceAmountPay)
+        sqlCommand.Parameters.Add("@BalanceMonthToPay", MySqlDbType.Int24).Value = cbMonthsToPay.Text.Trim
+        sqlCommand.Parameters.Add("@MonthlyAmortization", MySqlDbType.Double).Value = toDouble(lblMonthlyAmortization)
         sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = cbPaymentType.SelectedIndex
         sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = userId
 
@@ -280,5 +310,19 @@ Public Class FormPayment
         Else
             btnConfirm.Enabled = False
         End If
+    End Sub
+
+    Private Sub txtEquityAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEquityAmount.KeyPress
+        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
+        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
+                     Asc(e.KeyChar) = 8 Or
+                     (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
+    End Sub
+
+    Private Sub txtAmountPaid_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmountPaid.KeyPress
+        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
+        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
+                         Asc(e.KeyChar) = 8 Or
+                         (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 End Class
