@@ -4,6 +4,7 @@ Public Class FormPayment
     Dim userId As String = ""
     Dim userName As String = ""
     Dim userAddress As String = ""
+    Dim sumOfTotalContractPrice As Double = 0
 
     Public Sub ShowForm(id As String, name As String, address As String)
         userId = id
@@ -18,7 +19,10 @@ Public Class FormPayment
         Me.Size = New Size(950, 650)
         lblName.Text = userName
         lblAddress.Text = userAddress
-        load_userId_info()
+        'load_userId_info()
+        load_userId_info_data_reader()
+        cbParticular.SelectedIndex = -1
+        PanelDownpayment.Visible = False
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
@@ -60,6 +64,56 @@ Public Class FormPayment
 
     End Sub
 
+    Private Sub load_userId_info_data_reader()
+
+        sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
+        db_project_list.`id`=db_project_item.`pro_id` WHERE `db_project_item`.`assigned_userid` = @userId"
+
+        Connection()
+        Try
+            Dim table As New DataTable()
+
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = userId
+            sqlAdapter = New MySqlDataAdapter
+            With sqlAdapter
+                .SelectCommand = sqlCommand
+                .Fill(table)
+            End With
+
+            Dim item As ListViewItem
+            For i = 0 To table.Rows.Count - 1
+                item = New ListViewItem(table.Rows(i)("id").ToString)
+                item.SubItems.Add(table.Rows(i)("proj_name"))
+                item.SubItems.Add(table.Rows(i)("block"))
+                item.SubItems.Add(table.Rows(i)("lot"))
+                item.SubItems.Add(table.Rows(i)("sqm"))
+                item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
+                ListViewUserItem.Items.Add(item)
+
+            Next
+
+            sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", String.Empty))
+            With ListViewUserItem
+                .Items.Add("")
+                With .Items(.Items.Count - 1).SubItems
+                    .Add("")
+                    .Add("")
+                    .Add("")
+                    .Add("")
+                    .Add("")
+                    .Add(String.Format("{0:n}", sumOfTotalContractPrice))
+                End With
+            End With
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+
+    End Sub
     Private Sub btnSearchProject_Click(sender As Object, e As EventArgs) Handles btnSearchProject.Click
         If Application.OpenForms().OfType(Of FormProjectList).Any Then
             If mFormUserProfile.WindowState = 1 Then
@@ -73,12 +127,8 @@ Public Class FormPayment
 
     Private Sub cbDownpaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDownpaymentType.SelectedIndexChanged
 
-        Dim TotalSum As Double = 0
-        For Each item As ListViewItem In Me.ListViewUserItem.Items
-            TotalSum += CDbl(item.SubItems.Item(5).Text.Trim())
-        Next
         If cbDownpaymentType.SelectedIndex > -1 Then
-            lblAmountDownpayment.Text = computeDownpayment(TotalSum, Double.Parse(cbDownpaymentType.Text)).ToString("N2")
+            lblAmountDownpayment.Text = computeDownpayment(sumOfTotalContractPrice, Double.Parse(cbDownpaymentType.Text)).ToString("N2")
         End If
         If cbDiscountType.SelectedIndex < 0 Then
             cbDiscountType.SelectedIndex = 0
@@ -105,6 +155,24 @@ Public Class FormPayment
 
     Private Sub amountToPay()
         lblAmountToPay.Text = (Double.Parse(lblAmountDownpayment.Text) - Double.Parse(lblAmountDiscount.Text)).ToString("N2")
+        lblBalance.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblAmountDownpayment.Text)).ToString("N2")
+    End Sub
+
+    Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMonthsToPay.SelectedIndexChanged
+        lblMonthly.Text = (Double.Parse(lblBalance.Text) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
+    End Sub
+    Private Sub cbParticular_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbParticular.SelectedIndexChanged
+        Select Case cbParticular.SelectedIndex
+            Case -1
+                PanelDownpayment.Visible = False
+            Case 0 'Downpayment
+                If PanelDownpayment.Visible = False Then
+                    PanelDownpayment.Visible = True
+                End If
+            Case 1
+                PanelDownpayment.Visible = False
+        End Select
+
     End Sub
 
 End Class
