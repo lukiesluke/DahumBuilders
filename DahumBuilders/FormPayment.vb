@@ -19,54 +19,13 @@ Public Class FormPayment
         Me.Size = New Size(950, 650)
         lblName.Text = userName
         lblAddress.Text = userAddress
-        'load_userId_info()
         load_userId_info_data_reader()
         cbParticular.SelectedIndex = -1
-        PanelDownpayment.Visible = False
-        PanelEquity.Visible = False
         btnConfirm.Enabled = False
-
-        Dim totalEquityAmount As Double = txtEquityAmount.Text
-        txtEquityAmount.Text = totalEquityAmount.ToString("N2")
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
         Me.Close()
-    End Sub
-
-    Private Sub load_userId_info()
-        Dim table As New DataTable()
-
-        sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
-        db_project_list.`id`=db_project_item.`pro_id` WHERE `db_project_item`.`assigned_userid` = @userId"
-
-        Connection()
-        Try
-            sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = userId
-            sqlDataReader = sqlCommand.ExecuteReader()
-
-            Dim item As ListViewItem
-            ListViewUserItem.Items.Clear()
-            Do While sqlDataReader.Read = True
-                item = New ListViewItem(sqlDataReader("id").ToString)
-                Dim price As Double = sqlDataReader("price")
-
-                item.SubItems.Add(sqlDataReader("proj_name"))
-                item.SubItems.Add(sqlDataReader("block"))
-                item.SubItems.Add(sqlDataReader("lot"))
-                item.SubItems.Add(sqlDataReader("sqm"))
-                item.SubItems.Add(price.ToString("N2"))
-                ListViewUserItem.Items.Add(item)
-            Loop
-            sqlDataReader.Dispose()
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        Finally
-            sqlCommand.Dispose()
-            sqlConnection.Close()
-        End Try
-
     End Sub
 
     Private Sub load_userId_info_data_reader()
@@ -137,131 +96,34 @@ Public Class FormPayment
         End If
     End Sub
 
-    Private Sub cbDownpaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDownpaymentType.SelectedIndexChanged
-
-        If cbDownpaymentType.SelectedIndex > -1 Then
-            lblDownpaymentAmount.Text = computePercentage(sumOfTotalContractPrice, cbDownpaymentType).ToString("N2")
-        End If
-        If cbDiscountType.SelectedIndex < 0 Then
-            cbDiscountType.SelectedIndex = 0
-        End If
-        amountToPay()
-    End Sub
-
-    Private Sub cbDiscountType_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cbDiscountType.SelectedIndexChanged
-        If cbDiscountType.SelectedIndex > -1 Then
-            lblDiscountAmount.Text = computePercentage(Double.Parse(lblDownpaymentAmount.Text), cbDiscountType).ToString("N2")
-        End If
-        If toDouble(lblBalanceAmountPay) < 1 Then
-            cbBalanceMonthsToPay.SelectedIndex = 0
-        End If
-        amountToPay()
-    End Sub
-
-    Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBalanceMonthsToPay.SelectedIndexChanged
-        amountToPay()
-    End Sub
-    Private Sub amountToPay()
-        'Downpayment
-        lblAmountToPay.Text = (toDouble(lblDownpaymentAmount) - toDouble(lblDiscountAmount)).ToString("N2")
-        lblBalanceAmountPay.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblDownpaymentAmount.Text)).ToString("N2")
-        If cbBalanceMonthsToPay.SelectedIndex > 0 Then
-            lblMonthlyAmortization.Text = (toDouble(lblBalanceAmountPay) / Integer.Parse(cbBalanceMonthsToPay.Text)).ToString("N2")
+    Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
+        If cbPaymentType.SelectedIndex > -1 Then
+            btnConfirm.Enabled = True
         Else
-            lblMonthlyAmortization.Text = 0.ToString("N2")
-        End If
-
-        'Equity
-        Dim totalEquityAmount As Double = txtEquityAmount.Text.Trim()
-        If cbEquityMonthsToPay.SelectedIndex > 0 Then
-            lblEquityMonthly.Text = (totalEquityAmount / Integer.Parse(cbEquityMonthsToPay.Text)).ToString("N2")
-        Else
-            lblEquityMonthlyAmortization.Text = 0.ToString("N2")
-        End If
-        lblEquityBalanceToPay.Text = (sumOfTotalContractPrice - toDouble(txtEquityAmount)).ToString("N2")
-        txtEquityAmount.Text = totalEquityAmount.ToString("N2")
-
-        If cbEquityBalanceMonthToPay.SelectedIndex > -1 Then
-            lblEquityMonthlyAmortization.Text = (toDouble(lblEquityBalanceToPay) / Integer.Parse(cbEquityBalanceMonthToPay.Text)).ToString("N2")
+            btnConfirm.Enabled = False
         End If
     End Sub
 
-    Private Sub cbEquityMonths_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEquityMonthsToPay.SelectedIndexChanged
-        amountToPay()
-    End Sub
-
-    Private Sub cbEquityBalanceMonthToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbEquityBalanceMonthToPay.SelectedIndexChanged
-        amountToPay()
-    End Sub
-
-    Private Sub cbParticular_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbParticular.SelectedIndexChanged
-        Select Case cbParticular.SelectedIndex
-            Case -1
-                PanelDownpayment.Visible = False
-                PanelEquity.Visible = False
-            Case 0 'Downpayment
-                PanelEquity.Visible = False
-                If PanelDownpayment.Visible = False Then
-                    PanelDownpayment.Visible = True
-                    cbEquityMonthsToPay.SelectedIndex = 0
-                    cbEquityBalanceMonthToPay.SelectedIndex = 0
-
-                    txtEquityAmount.Text = 0.ToString("N2")
-                    lblEquityMonthly.Text = 0.ToString("N2")
-                    lblEquityBalanceToPay.Text = 0.ToString("N2")
-                    lblEquityMonthlyAmortization.Text = 0.ToString("N2")
-                End If
-
-            Case 1 'Equity
-                PanelDownpayment.Visible = False
-                If PanelEquity.Visible = False Then
-                    PanelEquity.Visible = True
-
-                    'Clear PanelDownpayment 
-                    cbPaymentType.SelectedIndex = -1
-                    cbDownpaymentType.SelectedIndex = 0
-                    cbDiscountType.SelectedIndex = 0
-                    cbBalanceMonthsToPay.SelectedIndex = 0
-
-                    lblBalanceAmountPay.Text = 0.ToString("N2")
-                    lblMonthlyAmortization.Text = 0.ToString("N2")
-                    lblDownpaymentAmount.Text = 0.ToString("N2")
-                    lblDiscountAmount.Text = 0.ToString("N2")
-                    lblAmountToPay.Text = 0.ToString("N2")
-                End If
-        End Select
-
+    Private Sub txtAmountPaid_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPaidAmount.KeyPress
+        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
+        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
+                         Asc(e.KeyChar) = 8 Or
+                         (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 
     Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs) Handles btnConfirm.Click
-
-        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `amount_paid`, `tcp`, `particular`, 
-        `eq_month_to_pay`, `eq_monthly`,`downpayment_type`, `downpayment_amount`, `discount_type`, `discount_amount`, 
-        `balance_amount_to_pay`, `balance_month_to_pay`, `monthly_amortization`, `payment_type`, `userid`) VALUES 
-        (@OR, @DatePaid, @AmountPaid, @TCP, @Particular, @EqMonthToPay, @EqMonthly, @DownpaymentType, @DownpaymentAmount, @DiscountType, 
-        @DiscountAmount, @BalanceAmountPay, @BalanceMonthToPay, @MonthlyAmortization, @PaymentType, @userid)"
-
+        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `tcp`, `particular`, 
+        `part_no`, `payment_type`, `userid`) VALUES (@OR, @DatePaid, @PaidAmount, @TCP, @Particular, @PartNo, @PaymentType, @userid)"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = txtOfficialReceipt.Text.Trim
         sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
-        sqlCommand.Parameters.Add("@AmountPaid", MySqlDbType.Double).Value = txtAmountPaid.Text.Trim
+        sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = txtPaidAmount.Text.Trim
         sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = sumOfTotalContractPrice
         sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = Integer.Parse(cbParticular.SelectedIndex)
-
-        sqlCommand.Parameters.Add("@EqMonthToPay", MySqlDbType.Int24).Value = Integer.Parse(cbEquityMonthsToPay.Text.Trim)
-        sqlCommand.Parameters.Add("@EqMonthly", MySqlDbType.Double).Value = toDouble(lblEquityMonthly)
-
-        sqlCommand.Parameters.Add("@DownpaymentType", MySqlDbType.Int24).Value = cbDownpaymentType.Text.Trim
-        sqlCommand.Parameters.Add("@DownpaymentAmount", MySqlDbType.Double).Value = toDouble(lblDownpaymentAmount) 'downpaymentAmount(cbParticular, lblDownpaymentAmount, txtEquityAmount)
-        sqlCommand.Parameters.Add("@DiscountType", MySqlDbType.Int24).Value = Integer.Parse(cbDiscountType.Text.Trim)
-        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = toDouble(lblDiscountAmount)
-        sqlCommand.Parameters.Add("@BalanceAmountPay", MySqlDbType.Double).Value = toDouble(lblBalanceAmountPay) 'monthlyAmortization(cbParticular, lblBalanceAmountPay, lblEquityBalanceToPay) 
-        sqlCommand.Parameters.Add("@BalanceMonthToPay", MySqlDbType.Int24).Value = cbBalanceMonthsToPay.Text.Trim
-        sqlCommand.Parameters.Add("@MonthlyAmortization", MySqlDbType.Double).Value = toDouble(lblMonthlyAmortization) 'monthlyAmortization(cbParticular, lblMonthlyAmortization, lblEquityMonthlyAmortization) 
+        sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = Integer.Parse(txtPart.Text)
         sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = cbPaymentType.SelectedIndex
         sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = userId
-
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 MessageBox.Show("Successfully Saved")
@@ -277,26 +139,11 @@ Public Class FormPayment
         End Try
     End Sub
 
-
-    Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
-        If cbPaymentType.SelectedIndex > -1 Then
-            btnConfirm.Enabled = True
-        Else
-            btnConfirm.Enabled = False
+    Private Sub txtMonthOf_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPart.KeyPress
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
         End If
-    End Sub
-
-    Private Sub txtEquityAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEquityAmount.KeyPress
-        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
-        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
-                     Asc(e.KeyChar) = 8 Or
-                     (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
-    End Sub
-
-    Private Sub txtAmountPaid_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmountPaid.KeyPress
-        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
-        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
-                         Asc(e.KeyChar) = 8 Or
-                         (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 End Class
