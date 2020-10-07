@@ -49,7 +49,7 @@ Partial Class FormPayment
         Me.PanelDownpayment = New System.Windows.Forms.Panel()
         Me.lblMonthlyAmortization = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.cbMonthsToPay = New System.Windows.Forms.ComboBox()
+        Me.cbBalanceMonthsToPay = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblBalanceAmountPay = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -73,7 +73,6 @@ Partial Class FormPayment
         Me.ColumnHeaderLot = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderSQM = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderTotal = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
         Me.txtOfficialReceipt = New System.Windows.Forms.TextBox()
@@ -246,9 +245,9 @@ Partial Class FormPayment
         Me.PanelEquity.Controls.Add(Me.Label24)
         Me.PanelEquity.Controls.Add(Me.Label25)
         Me.PanelEquity.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelEquity.Location = New System.Drawing.Point(0, 399)
+        Me.PanelEquity.Location = New System.Drawing.Point(0, 326)
         Me.PanelEquity.Name = "PanelEquity"
-        Me.PanelEquity.Size = New System.Drawing.Size(904, 165)
+        Me.PanelEquity.Size = New System.Drawing.Size(904, 260)
         Me.PanelEquity.TabIndex = 19
         '
         'Label21
@@ -381,7 +380,7 @@ Partial Class FormPayment
         Me.PanelDownpayment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PanelDownpayment.Controls.Add(Me.lblMonthlyAmortization)
         Me.PanelDownpayment.Controls.Add(Me.Label12)
-        Me.PanelDownpayment.Controls.Add(Me.cbMonthsToPay)
+        Me.PanelDownpayment.Controls.Add(Me.cbBalanceMonthsToPay)
         Me.PanelDownpayment.Controls.Add(Me.Label11)
         Me.PanelDownpayment.Controls.Add(Me.lblBalanceAmountPay)
         Me.PanelDownpayment.Controls.Add(Me.Label4)
@@ -394,9 +393,9 @@ Partial Class FormPayment
         Me.PanelDownpayment.Controls.Add(Me.cbDownpaymentType)
         Me.PanelDownpayment.Controls.Add(Me.Label2)
         Me.PanelDownpayment.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 564)
+        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 586)
         Me.PanelDownpayment.Name = "PanelDownpayment"
-        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 282)
+        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 260)
         Me.PanelDownpayment.TabIndex = 18
         '
         'lblMonthlyAmortization
@@ -420,16 +419,16 @@ Partial Class FormPayment
         Me.Label12.TabIndex = 30
         Me.Label12.Text = "Monthly amortization"
         '
-        'cbMonthsToPay
+        'cbBalanceMonthsToPay
         '
-        Me.cbMonthsToPay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMonthsToPay.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbMonthsToPay.FormattingEnabled = True
-        Me.cbMonthsToPay.Items.AddRange(New Object() {"0", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "18", "24"})
-        Me.cbMonthsToPay.Location = New System.Drawing.Point(244, 177)
-        Me.cbMonthsToPay.Name = "cbMonthsToPay"
-        Me.cbMonthsToPay.Size = New System.Drawing.Size(206, 30)
-        Me.cbMonthsToPay.TabIndex = 29
+        Me.cbBalanceMonthsToPay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbBalanceMonthsToPay.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbBalanceMonthsToPay.FormattingEnabled = True
+        Me.cbBalanceMonthsToPay.Items.AddRange(New Object() {"0", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "18", "24"})
+        Me.cbBalanceMonthsToPay.Location = New System.Drawing.Point(244, 177)
+        Me.cbBalanceMonthsToPay.Name = "cbBalanceMonthsToPay"
+        Me.cbBalanceMonthsToPay.Size = New System.Drawing.Size(206, 30)
+        Me.cbBalanceMonthsToPay.TabIndex = 29
         '
         'Label11
         '
@@ -599,7 +598,7 @@ Partial Class FormPayment
         '
         'ListViewUserItem
         '
-        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderTotal})
+        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP})
         Me.ListViewUserItem.FullRowSelect = True
         Me.ListViewUserItem.GridLines = True
         Me.ListViewUserItem.Location = New System.Drawing.Point(16, 145)
@@ -639,12 +638,6 @@ Partial Class FormPayment
         Me.ColumnHeaderTCP.Text = "TCP"
         Me.ColumnHeaderTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderTCP.Width = 100
-        '
-        'ColumnHeaderTotal
-        '
-        Me.ColumnHeaderTotal.Text = "Total"
-        Me.ColumnHeaderTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderTotal.Width = 100
         '
         'Label8
         '
@@ -797,12 +790,11 @@ Partial Class FormPayment
     Friend WithEvents lblDownpaymentAmount As Label
     Friend WithEvents lblDiscountAmount As Label
     Friend WithEvents lblAmountToPay As Label
-    Friend WithEvents ColumnHeaderTotal As ColumnHeader
     Friend WithEvents PanelTotal As Panel
     Friend WithEvents Label4 As Label
     Friend WithEvents lblBalanceAmountPay As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents cbMonthsToPay As ComboBox
+    Friend WithEvents cbBalanceMonthsToPay As ComboBox
     Friend WithEvents lblMonthlyAmortization As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents cbPaymentType As ComboBox

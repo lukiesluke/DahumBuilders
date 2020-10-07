@@ -89,42 +89,37 @@ Public Class FormPayment
             Dim item As ListViewItem
             For i = 0 To table.Rows.Count - 1
                 item = New ListViewItem(table.Rows(i)("id").ToString)
-
-
-
                 item.SubItems.Add(table.Rows(i)("proj_name"))
                 item.SubItems.Add(table.Rows(i)("block"))
                 item.SubItems.Add(table.Rows(i)("lot"))
                 item.SubItems.Add(table.Rows(i)("sqm"))
                 item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
                 item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
-
-                'If lvi.SubItems(8).Text = "True" Then
-                '    lvi.UseItemStyleForSubItems = False
-                '    For i As Integer = 0 To 8
-                '        lvi.SubItems(i).ForeColor = Color.Red
-                '    Next
-                'End If
-
                 ListViewUserItem.Items.Add(item)
-
             Next
 
-            sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", String.Empty))
-            With ListViewUserItem
-                .Items.Add("")
-                With .Items(.Items.Count - 1).SubItems
-                    .Add("")
-                    .Add("")
-                    .Add("")
-                    .Add("")
-                    .Add("")
-                    .Add(String.Format("{0:n}", sumOfTotalContractPrice))
-                End With
-            End With
-
+            sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "id > 0"))
+            Dim a As Integer
+            For a = 0 To 1
+                item = New ListViewItem
+                item.UseItemStyleForSubItems = False
+                item.SubItems.Add(String.Empty)
+                item.SubItems.Add(String.Empty)
+                item.SubItems.Add(String.Empty)
+                If a > 0 Then
+                    With item.SubItems.Add("Total")
+                        .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
+                        .ForeColor = Color.Red
+                    End With
+                    With item.SubItems.Add(String.Format("{0:n}", sumOfTotalContractPrice))
+                        .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
+                        .ForeColor = Color.Red
+                    End With
+                End If
+                ListViewUserItem.Items.Add(item)
+            Next
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MessageBox.Show("User Information: " & ex.Message)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
@@ -158,20 +153,20 @@ Public Class FormPayment
             lblDiscountAmount.Text = computePercentage(Double.Parse(lblDownpaymentAmount.Text), cbDiscountType).ToString("N2")
         End If
         If toDouble(lblBalanceAmountPay) < 1 Then
-            cbMonthsToPay.SelectedIndex = 0
+            cbBalanceMonthsToPay.SelectedIndex = 0
         End If
         amountToPay()
     End Sub
 
-    Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbMonthsToPay.SelectedIndexChanged
+    Private Sub cbMonthsToPay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbBalanceMonthsToPay.SelectedIndexChanged
         amountToPay()
     End Sub
     Private Sub amountToPay()
         'Downpayment
         lblAmountToPay.Text = (toDouble(lblDownpaymentAmount) - toDouble(lblDiscountAmount)).ToString("N2")
         lblBalanceAmountPay.Text = (sumOfTotalContractPrice - Convert.ToDouble(lblDownpaymentAmount.Text)).ToString("N2")
-        If cbMonthsToPay.SelectedIndex > 0 Then
-            lblMonthlyAmortization.Text = (toDouble(lblBalanceAmountPay) / Integer.Parse(cbMonthsToPay.Text)).ToString("N2")
+        If cbBalanceMonthsToPay.SelectedIndex > 0 Then
+            lblMonthlyAmortization.Text = (toDouble(lblBalanceAmountPay) / Integer.Parse(cbBalanceMonthsToPay.Text)).ToString("N2")
         Else
             lblMonthlyAmortization.Text = 0.ToString("N2")
         End If
@@ -208,8 +203,8 @@ Public Class FormPayment
                 PanelEquity.Visible = False
                 If PanelDownpayment.Visible = False Then
                     PanelDownpayment.Visible = True
-                    cbEquityMonthsToPay.SelectedIndex = -1
-                    cbEquityBalanceMonthToPay.SelectedIndex = -1
+                    cbEquityMonthsToPay.SelectedIndex = 0
+                    cbEquityBalanceMonthToPay.SelectedIndex = 0
 
                     txtEquityAmount.Text = 0.ToString("N2")
                     lblEquityMonthly.Text = 0.ToString("N2")
@@ -226,7 +221,7 @@ Public Class FormPayment
                     cbPaymentType.SelectedIndex = -1
                     cbDownpaymentType.SelectedIndex = 0
                     cbDiscountType.SelectedIndex = 0
-                    cbMonthsToPay.SelectedIndex = 0
+                    cbBalanceMonthsToPay.SelectedIndex = 0
 
                     lblBalanceAmountPay.Text = 0.ToString("N2")
                     lblMonthlyAmortization.Text = 0.ToString("N2")
@@ -238,27 +233,6 @@ Public Class FormPayment
 
     End Sub
 
-    Function downpaymentAmount(particular As ComboBox, dp As Label, equityAmount As TextBox) As Double
-        Dim value As Double = 0
-        Select Case particular.SelectedIndex
-            Case 0 'Downpayment
-                value = toDouble(dp)
-            Case 1 'Equity
-                value = toDouble(equityAmount)
-        End Select
-        Return value
-    End Function
-
-    Function monthlyAmortization(particular As ComboBox, dp As Label, equityAmount As TextBox) As Double
-        Dim value As Double = 0
-        Select Case particular.SelectedIndex
-            Case 0 'Downpayment
-                value = toDouble(dp)
-            Case 1 'Equity
-                value = toDouble(equityAmount)
-        End Select
-        Return value
-    End Function
     Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs) Handles btnConfirm.Click
 
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `amount_paid`, `tcp`, `particular`, 
@@ -273,18 +247,18 @@ Public Class FormPayment
         sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
         sqlCommand.Parameters.Add("@AmountPaid", MySqlDbType.Double).Value = txtAmountPaid.Text.Trim
         sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = sumOfTotalContractPrice
-        sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = cbParticular.SelectedIndex
+        sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = Integer.Parse(cbParticular.SelectedIndex)
 
-        sqlCommand.Parameters.Add("@EqMonthToPay", MySqlDbType.Int24).Value = cbEquityBalanceMonthToPay.Text.Trim
+        sqlCommand.Parameters.Add("@EqMonthToPay", MySqlDbType.Int24).Value = Integer.Parse(cbEquityMonthsToPay.Text.Trim)
         sqlCommand.Parameters.Add("@EqMonthly", MySqlDbType.Double).Value = toDouble(lblEquityMonthly)
 
         sqlCommand.Parameters.Add("@DownpaymentType", MySqlDbType.Int24).Value = cbDownpaymentType.Text.Trim
-        sqlCommand.Parameters.Add("@DownpaymentAmount", MySqlDbType.Double).Value = downpaymentAmount(cbParticular, lblDownpaymentAmount, txtEquityAmount) 'toDouble(lblDownpaymentAmount)
-        sqlCommand.Parameters.Add("@DiscountType", MySqlDbType.Int24).Value = cbDiscountType.Text.Trim
+        sqlCommand.Parameters.Add("@DownpaymentAmount", MySqlDbType.Double).Value = toDouble(lblDownpaymentAmount) 'downpaymentAmount(cbParticular, lblDownpaymentAmount, txtEquityAmount)
+        sqlCommand.Parameters.Add("@DiscountType", MySqlDbType.Int24).Value = Integer.Parse(cbDiscountType.Text.Trim)
         sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = toDouble(lblDiscountAmount)
-        sqlCommand.Parameters.Add("@BalanceAmountPay", MySqlDbType.Double).Value = toDouble(lblBalanceAmountPay)
-        sqlCommand.Parameters.Add("@BalanceMonthToPay", MySqlDbType.Int24).Value = cbMonthsToPay.Text.Trim
-        sqlCommand.Parameters.Add("@MonthlyAmortization", MySqlDbType.Double).Value = toDouble(lblMonthlyAmortization)
+        sqlCommand.Parameters.Add("@BalanceAmountPay", MySqlDbType.Double).Value = toDouble(lblBalanceAmountPay) 'monthlyAmortization(cbParticular, lblBalanceAmountPay, lblEquityBalanceToPay) 
+        sqlCommand.Parameters.Add("@BalanceMonthToPay", MySqlDbType.Int24).Value = cbBalanceMonthsToPay.Text.Trim
+        sqlCommand.Parameters.Add("@MonthlyAmortization", MySqlDbType.Double).Value = toDouble(lblMonthlyAmortization) 'monthlyAmortization(cbParticular, lblMonthlyAmortization, lblEquityMonthlyAmortization) 
         sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = cbPaymentType.SelectedIndex
         sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = userId
 
