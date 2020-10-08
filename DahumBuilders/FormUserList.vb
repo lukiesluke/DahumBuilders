@@ -177,4 +177,15 @@ Public Class FormUserList
             mFormPayment.ShowForm(currentUserId, currentUserName, currentUserAddress)
         End If
     End Sub
+
+    Private Sub btnStatementAccount_Click(sender As Object, e As EventArgs) Handles btnStatementAccount.Click
+        If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
+            If mFormUserProfile.WindowState = 1 Then
+                mFormUserProfile.WindowState = 0
+            End If
+        Else
+            mFormRptTransaction = New FormRptTransaction
+            mFormRptTransaction.ShowForm(currentUserId, currentUserName, currentUserAddress)
+        End If
+    End Sub
 End Class

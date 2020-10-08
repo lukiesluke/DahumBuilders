@@ -59,11 +59,14 @@
       <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="MySql.Data, Version=8.0.21.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -85,6 +88,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customer.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.vb">
+      <DependentUpon>Customer.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FormImageCapture.Designer.vb">
       <DependentUpon>FormImageCapture.vb</DependentUpon>
     </Compile>
@@ -107,6 +118,12 @@
       <DependentUpon>FormProjectList.vb</DependentUpon>
     </Compile>
     <Compile Include="FormProjectList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRptTransaction.Designer.vb">
+      <DependentUpon>FormRptTransaction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormRptTransaction.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormUserList.Designer.vb">
@@ -153,6 +170,9 @@
     <EmbeddedResource Include="FormProjectList.resx">
       <DependentUpon>FormProjectList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormRptTransaction.resx">
+      <DependentUpon>FormRptTransaction.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormUserList.resx">
       <DependentUpon>FormUserList.vb</DependentUpon>
     </EmbeddedResource>
@@ -165,9 +185,21 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Customer.xsc">
+      <DependentUpon>Customer.xsd</DependentUpon>
+    </None>
+    <None Include="Customer.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Customer.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Customer.xss">
+      <DependentUpon>Customer.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

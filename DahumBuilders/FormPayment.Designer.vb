@@ -30,6 +30,16 @@ Partial Class FormPayment
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelInformation = New System.Windows.Forms.Panel()
+        Me.lblDPAmountToPay = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.lblDiscountAmount = New System.Windows.Forms.Label()
+        Me.lblDownpaymentAmount = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cbDiscount = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cbDownpayment = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtPart = New System.Windows.Forms.TextBox()
@@ -55,18 +65,14 @@ Partial Class FormPayment
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.cbDownpayment = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cbDiscount = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.lblTotalTCP = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.PanelDownpayment = New System.Windows.Forms.Panel()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.PanelInformation.SuspendLayout()
+        Me.PanelDownpayment.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -151,12 +157,7 @@ Partial Class FormPayment
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelInformation.Controls.Add(Me.lblTotalTCP)
-        Me.PanelInformation.Controls.Add(Me.Label11)
-        Me.PanelInformation.Controls.Add(Me.cbDiscount)
-        Me.PanelInformation.Controls.Add(Me.Label4)
-        Me.PanelInformation.Controls.Add(Me.cbDownpayment)
-        Me.PanelInformation.Controls.Add(Me.Label3)
+        Me.PanelInformation.Controls.Add(Me.PanelDownpayment)
         Me.PanelInformation.Controls.Add(Me.cbPaymentType)
         Me.PanelInformation.Controls.Add(Me.Label2)
         Me.PanelInformation.Controls.Add(Me.txtPart)
@@ -181,6 +182,111 @@ Partial Class FormPayment
         Me.PanelInformation.Name = "PanelInformation"
         Me.PanelInformation.Size = New System.Drawing.Size(906, 848)
         Me.PanelInformation.TabIndex = 2
+        '
+        'lblDPAmountToPay
+        '
+        Me.lblDPAmountToPay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblDPAmountToPay.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDPAmountToPay.Location = New System.Drawing.Point(668, 120)
+        Me.lblDPAmountToPay.Name = "lblDPAmountToPay"
+        Me.lblDPAmountToPay.Size = New System.Drawing.Size(193, 31)
+        Me.lblDPAmountToPay.TabIndex = 45
+        Me.lblDPAmountToPay.Text = "100,00.00"
+        Me.lblDPAmountToPay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(481, 124)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(171, 22)
+        Me.Label14.TabIndex = 46
+        Me.Label14.Text = "DP Amount to Pay"
+        '
+        'lblDiscountAmount
+        '
+        Me.lblDiscountAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblDiscountAmount.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDiscountAmount.Location = New System.Drawing.Point(668, 77)
+        Me.lblDiscountAmount.Name = "lblDiscountAmount"
+        Me.lblDiscountAmount.Size = New System.Drawing.Size(193, 31)
+        Me.lblDiscountAmount.TabIndex = 43
+        Me.lblDiscountAmount.Text = "0.00"
+        Me.lblDiscountAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblDownpaymentAmount
+        '
+        Me.lblDownpaymentAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblDownpaymentAmount.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDownpaymentAmount.Location = New System.Drawing.Point(668, 34)
+        Me.lblDownpaymentAmount.Name = "lblDownpaymentAmount"
+        Me.lblDownpaymentAmount.Size = New System.Drawing.Size(193, 31)
+        Me.lblDownpaymentAmount.TabIndex = 42
+        Me.lblDownpaymentAmount.Text = "100,00.00"
+        Me.lblDownpaymentAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(481, 81)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(164, 22)
+        Me.Label12.TabIndex = 44
+        Me.Label12.Text = "Discount Amount"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(428, 38)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(217, 22)
+        Me.Label11.TabIndex = 41
+        Me.Label11.Text = "Downpayment Amount"
+        '
+        'cbDiscount
+        '
+        Me.cbDiscount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDiscount.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbDiscount.FormattingEnabled = True
+        Me.cbDiscount.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"})
+        Me.cbDiscount.Location = New System.Drawing.Point(184, 78)
+        Me.cbDiscount.Name = "cbDiscount"
+        Me.cbDiscount.Size = New System.Drawing.Size(215, 30)
+        Me.cbDiscount.TabIndex = 40
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(89, 81)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(89, 22)
+        Me.Label4.TabIndex = 39
+        Me.Label4.Text = "Discount"
+        '
+        'cbDownpayment
+        '
+        Me.cbDownpayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDownpayment.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbDownpayment.FormattingEnabled = True
+        Me.cbDownpayment.Items.AddRange(New Object() {"0", "30", "40", "50", "60", "70", "80"})
+        Me.cbDownpayment.Location = New System.Drawing.Point(184, 35)
+        Me.cbDownpayment.Name = "cbDownpayment"
+        Me.cbDownpayment.Size = New System.Drawing.Size(215, 30)
+        Me.cbDownpayment.TabIndex = 38
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(36, 38)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(142, 22)
+        Me.Label3.TabIndex = 37
+        Me.Label3.Text = "Downpayment"
         '
         'cbPaymentType
         '
@@ -255,12 +361,12 @@ Partial Class FormPayment
         '
         'txtPaidAmount
         '
+        Me.txtPaidAmount.BackColor = System.Drawing.Color.MistyRose
         Me.txtPaidAmount.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPaidAmount.Location = New System.Drawing.Point(608, 436)
         Me.txtPaidAmount.Name = "txtPaidAmount"
         Me.txtPaidAmount.Size = New System.Drawing.Size(241, 31)
         Me.txtPaidAmount.TabIndex = 15
-        Me.txtPaidAmount.Text = "800788"
         Me.txtPaidAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label9
@@ -412,67 +518,24 @@ Partial Class FormPayment
         Me.Label13.TabIndex = 32
         Me.Label13.Text = "Payment Type"
         '
-        'cbDownpayment
+        'PanelDownpayment
         '
-        Me.cbDownpayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDownpayment.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbDownpayment.FormattingEnabled = True
-        Me.cbDownpayment.Items.AddRange(New Object() {"30", "40", "50", "60", "70", "80"})
-        Me.cbDownpayment.Location = New System.Drawing.Point(172, 548)
-        Me.cbDownpayment.Name = "cbDownpayment"
-        Me.cbDownpayment.Size = New System.Drawing.Size(241, 30)
-        Me.cbDownpayment.TabIndex = 38
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(24, 551)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(142, 22)
-        Me.Label3.TabIndex = 37
-        Me.Label3.Text = "Downpayment"
-        '
-        'cbDiscount
-        '
-        Me.cbDiscount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDiscount.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbDiscount.FormattingEnabled = True
-        Me.cbDiscount.Items.AddRange(New Object() {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"})
-        Me.cbDiscount.Location = New System.Drawing.Point(172, 591)
-        Me.cbDiscount.Name = "cbDiscount"
-        Me.cbDiscount.Size = New System.Drawing.Size(241, 30)
-        Me.cbDiscount.TabIndex = 40
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(77, 594)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(89, 22)
-        Me.Label4.TabIndex = 39
-        Me.Label4.Text = "Discount"
-        '
-        'lblTotalTCP
-        '
-        Me.lblTotalTCP.AutoSize = True
-        Me.lblTotalTCP.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalTCP.Location = New System.Drawing.Point(604, 551)
-        Me.lblTotalTCP.Name = "lblTotalTCP"
-        Me.lblTotalTCP.Size = New System.Drawing.Size(99, 22)
-        Me.lblTotalTCP.TabIndex = 42
-        Me.lblTotalTCP.Text = "100,00.00"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(437, 551)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(97, 22)
-        Me.Label11.TabIndex = 41
-        Me.Label11.Text = "Total TCP"
+        Me.PanelDownpayment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelDownpayment.Controls.Add(Me.cbDownpayment)
+        Me.PanelDownpayment.Controls.Add(Me.Label12)
+        Me.PanelDownpayment.Controls.Add(Me.lblDPAmountToPay)
+        Me.PanelDownpayment.Controls.Add(Me.Label14)
+        Me.PanelDownpayment.Controls.Add(Me.lblDiscountAmount)
+        Me.PanelDownpayment.Controls.Add(Me.Label4)
+        Me.PanelDownpayment.Controls.Add(Me.lblDownpaymentAmount)
+        Me.PanelDownpayment.Controls.Add(Me.cbDiscount)
+        Me.PanelDownpayment.Controls.Add(Me.Label11)
+        Me.PanelDownpayment.Controls.Add(Me.Label3)
+        Me.PanelDownpayment.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 538)
+        Me.PanelDownpayment.Name = "PanelDownpayment"
+        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 308)
+        Me.PanelDownpayment.TabIndex = 47
         '
         'FormPayment
         '
@@ -494,6 +557,8 @@ Partial Class FormPayment
         Me.Panel3.ResumeLayout(False)
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
+        Me.PanelDownpayment.ResumeLayout(False)
+        Me.PanelDownpayment.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -534,6 +599,11 @@ Partial Class FormPayment
     Friend WithEvents Label3 As Label
     Friend WithEvents cbDiscount As ComboBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents lblTotalTCP As Label
+    Friend WithEvents lblDownpaymentAmount As Label
     Friend WithEvents Label11 As Label
+    Friend WithEvents lblDiscountAmount As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents lblDPAmountToPay As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents PanelDownpayment As Panel
 End Class

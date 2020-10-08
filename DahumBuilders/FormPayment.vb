@@ -19,9 +19,15 @@ Public Class FormPayment
         Me.Size = New Size(950, 650)
         lblName.Text = userName
         lblAddress.Text = userAddress
-        load_userId_info_data_reader()
+
         cbParticular.SelectedIndex = -1
+        cbDownpayment.SelectedIndex = 0
+        cbDiscount.SelectedIndex = 0
+
         btnConfirm.Enabled = False
+        PanelDownpayment.Visible = False
+
+        load_userId_info_data_reader()
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
@@ -58,6 +64,7 @@ Public Class FormPayment
             Next
 
             sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "id > 0"))
+            lblDownpaymentAmount.Text = sumOfTotalContractPrice.ToString("N2")
             Dim a As Integer
             For a = 0 To 1
                 item = New ListViewItem
@@ -83,7 +90,6 @@ Public Class FormPayment
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
-
     End Sub
     Private Sub btnSearchProject_Click(sender As Object, e As EventArgs) Handles btnSearchProject.Click
         If Application.OpenForms().OfType(Of FormProjectList).Any Then
@@ -145,5 +151,34 @@ Public Class FormPayment
                 e.Handled = True
             End If
         End If
+    End Sub
+
+    Private Sub cbDownpayment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDownpayment.SelectedIndexChanged
+        If cbDownpayment.SelectedIndex < 0 Then
+            lblDownpaymentAmount.Text = 0.ToString("N2")
+            Exit Sub
+        End If
+        Dim percent As Double = Double.Parse(cbDownpayment.Text) / 100
+        lblDownpaymentAmount.Text = ((sumOfTotalContractPrice) * percent).ToString("N2")
+    End Sub
+
+    Private Sub computePaymentDiscount()
+        Dim percentDiscount As Double = Double.Parse(cbDiscount.Text) / 100
+        lblDiscountAmount.Text = (Double.Parse(lblDownpaymentAmount.Text) * percentDiscount).ToString("N2")
+        lblDPAmountToPay.Text = ((Double.Parse(lblDownpaymentAmount.Text) - Double.Parse(lblDiscountAmount.Text))).ToString("N2")
+    End Sub
+    Private Sub cbDiscount_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDiscount.SelectedIndexChanged
+        computePaymentDiscount()
+    End Sub
+
+    Private Sub cbParticular_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbParticular.SelectedIndexChanged
+        Select Case cbParticular.SelectedIndex
+            Case 0
+                If PanelDownpayment.Visible = False Then
+                    PanelDownpayment.Visible = True
+                End If
+            Case Else
+                PanelDownpayment.Visible = False
+        End Select
     End Sub
 End Class

@@ -4,7 +4,7 @@
     Public mFormImageCapture As FormImageCapture
     Public mFormPayment As FormPayment
     Public mFormProjectList As FormProjectList
-
+    Public mFormRptTransaction As FormRptTransaction
 
     Public Function computePercentage(totalPrice As Double, value As ComboBox) As Double
         Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100
@@ -20,7 +20,7 @@
     End Function
 
     Public Function toDouble(control As ComboBox) As Double
-        Return Double.Parse(control.Text.Trim())
+        Return Double.Parse(control.Text)
     End Function
 
     Public Function downpaymentAmount(particular As ComboBox, dp As Label, equityAmount As TextBox) As Double
