@@ -23,25 +23,13 @@ Partial Class FormRptTransaction
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ReportDataSource2 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
-        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
+        Dim ReportDataSource1 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
         Me.CustomerBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Customer = New DahumBuilders.Customer()
+        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         CType(Me.CustomerBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Customer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ReportViewer1
-        '
-        Me.ReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        ReportDataSource2.Name = "Customer"
-        ReportDataSource2.Value = Me.CustomerBindingSource
-        Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource2)
-        Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "DahumBuilders.Report1.rdlc"
-        Me.ReportViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.ReportViewer1.Name = "ReportViewer1"
-        Me.ReportViewer1.Size = New System.Drawing.Size(1003, 508)
-        Me.ReportViewer1.TabIndex = 0
         '
         'CustomerBindingSource
         '
@@ -53,6 +41,18 @@ Partial Class FormRptTransaction
         Me.Customer.DataSetName = "Customer"
         Me.Customer.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'ReportViewer1
+        '
+        Me.ReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
+        ReportDataSource1.Name = "Customer"
+        ReportDataSource1.Value = Me.CustomerBindingSource
+        Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource1)
+        Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "DahumBuilders.Report1.rdlc"
+        Me.ReportViewer1.Location = New System.Drawing.Point(0, 0)
+        Me.ReportViewer1.Name = "ReportViewer1"
+        Me.ReportViewer1.Size = New System.Drawing.Size(1003, 508)
+        Me.ReportViewer1.TabIndex = 0
+        '
         'FormRptTransaction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -60,7 +60,7 @@ Partial Class FormRptTransaction
         Me.ClientSize = New System.Drawing.Size(1003, 508)
         Me.Controls.Add(Me.ReportViewer1)
         Me.Name = "FormRptTransaction"
-        Me.Text = "FormRptTransaction"
+        Me.Text = "Transactions History"
         CType(Me.CustomerBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Customer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
