@@ -206,7 +206,6 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@id", MySqlDbType.Int64).Value = currentUserId
         sqlAdapter = New MySqlDataAdapter(sqlCommand)
 
-        'sql = "SELECT * FROM `db_user_child` WHERE `userid` = @id"
         Try
             sqlAdapter.Fill(table)
 
@@ -250,7 +249,8 @@ Public Class FormUserProfile
                         PictureBox1.Image = My.Resources.client_female
                     End If
                 Else
-                    PictureBox1.ImageLocation = table.Rows(0)("file_location_image")
+                    fileLocationImage = table.Rows(0)("file_location_image")
+                    PictureBox1.ImageLocation = fileLocationImage
                 End If
 
                 getUserChildAndBeneficiary(sqlCommand, sqlConnection, currentUserId)
@@ -267,8 +267,60 @@ Public Class FormUserProfile
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        DateTimePicker1.Format = DateTimePickerFormat.Custom
-        MessageBox.Show(Format(DateTimePicker1.Value, "MM-dd-yyyy"))
+        sql = "UPDATE `db_user_profile` p SET `first_name`=@first_name, `middle_name`=@middle_name, 
+        `last_name`=@last_name, `address`=@address, `gender`=@gender,
+        `civil_status`=@civilStatus, `date_birth`=@dateBirth, `place_birth`=@placeBirth, 
+        `citizenship`=@citizenship, `telephone_number`=@telephone, `mobile_number`=@mobile,
+        `email_address`=@email, `occupation`=@occupation, `company_name`=@companyName, `spouse_name`=@spouseName,
+        `spouse_occupation`=@spouseOccupation, `spouse_contact`=@spouseContact, `father_name`=@fatherName,
+        `father_provincial_address`=@fatherAddress, `mother_name`=@MotherName, `mother_provincial_address`=@MotherAddress,
+        `file_location_image`=@fileLocationImage, `username`=@username WHERE p.`id`=@currentUserId"
+
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+
+        sqlCommand.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = txtFirstName.Text.Trim
+        sqlCommand.Parameters.Add("@middle_name", MySqlDbType.VarChar).Value = txtMiddleName.Text.Trim
+        sqlCommand.Parameters.Add("@last_name", MySqlDbType.VarChar).Value = txtLastName.Text.Trim
+        sqlCommand.Parameters.Add("@address", MySqlDbType.VarChar).Value = txtAddress.Text.Trim
+        sqlCommand.Parameters.Add("@gender", MySqlDbType.VarChar).Value = ComboBoxGender.Text.Trim
+
+        sqlCommand.Parameters.Add("@civilStatus", MySqlDbType.VarChar).Value = ComboBoxCivilStatus.Text.Trim
+        sqlCommand.Parameters.Add("@dateBirth", MySqlDbType.Date).Value = Format(DateTimePicker1.Value, "yyyy-MM-dd").ToString
+        sqlCommand.Parameters.Add("@placeBirth", MySqlDbType.VarChar).Value = txtPlaceBirth.Text.Trim
+        sqlCommand.Parameters.Add("@citizenship", MySqlDbType.VarChar).Value = txtCitizen.Text.Trim
+        sqlCommand.Parameters.Add("@telephone", MySqlDbType.VarChar).Value = txtTelephone.Text.Trim
+        sqlCommand.Parameters.Add("@mobile", MySqlDbType.VarChar).Value = txtMobile.Text.Trim
+        sqlCommand.Parameters.Add("@email", MySqlDbType.VarChar).Value = txtEmail.Text.Trim
+        sqlCommand.Parameters.Add("@occupation", MySqlDbType.VarChar).Value = txtOccupation.Text.Trim
+        sqlCommand.Parameters.Add("@companyName", MySqlDbType.VarChar).Value = txtCompanyName.Text.Trim
+
+        sqlCommand.Parameters.Add("@spouseName", MySqlDbType.VarChar).Value = txtSpouseName.Text.Trim
+        sqlCommand.Parameters.Add("@spouseOccupation", MySqlDbType.VarChar).Value = txtSpouseOccupation.Text.Trim
+        sqlCommand.Parameters.Add("@spouseContact", MySqlDbType.VarChar).Value = txtSpouseContactNumber.Text.Trim
+
+        sqlCommand.Parameters.Add("@fatherName", MySqlDbType.VarChar).Value = txtFatherName.Text.Trim
+        sqlCommand.Parameters.Add("@fatherAddress", MySqlDbType.VarChar).Value = txtFatherAddress.Text.Trim
+        sqlCommand.Parameters.Add("@MotherName", MySqlDbType.VarChar).Value = txtMotherName.Text.Trim
+        sqlCommand.Parameters.Add("@MotherAddress", MySqlDbType.VarChar).Value = txtMotherAddress.Text.Trim
+        sqlCommand.Parameters.Add("@@fileLocationImage", MySqlDbType.VarChar).Value = fileLocationImage
+        sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
+        sqlCommand.Parameters.Add("@currentUserId", MySqlDbType.Int32).Value = currentUserId
+
+        Try
+            If sqlCommand.ExecuteNonQuery() = 1 Then
+                MessageBox.Show("User Profile Successfully Updated")
+                clearAllTextBox()
+                Me.Close()
+            Else
+                MessageBox.Show("Data was not updated. Please try again.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("ERROR: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
     End Sub
 
     Private Sub btnAddChild_Click(sender As Object, e As EventArgs) Handles btnAddChild.Click
