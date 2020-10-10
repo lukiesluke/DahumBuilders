@@ -26,7 +26,7 @@ Public Class FormPayment
 
         btnConfirm.Enabled = False
         PanelDownpayment.Visible = False
-
+        setPartVisibility()
         load_userId_info_data_reader()
     End Sub
 
@@ -59,7 +59,7 @@ Public Class FormPayment
                 item.SubItems.Add(table.Rows(i)("lot"))
                 item.SubItems.Add(table.Rows(i)("sqm"))
                 item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
-                item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
+                item.SubItems.Add(table.Rows(i)("pro_id")) 'Project Id
                 ListViewUserItem.Items.Add(item)
             Next
 
@@ -180,5 +180,16 @@ Public Class FormPayment
             Case Else
                 PanelDownpayment.Visible = False
         End Select
+        setPartVisibility()
+    End Sub
+
+    Private Sub setPartVisibility()
+        If cbParticular.SelectedIndex > 0 And cbParticular.SelectedIndex < 3 Then
+            lblPart.Visible = True
+            txtPart.Visible = True
+        Else
+            lblPart.Visible = False
+            txtPart.Visible = False
+        End If
     End Sub
 End Class
