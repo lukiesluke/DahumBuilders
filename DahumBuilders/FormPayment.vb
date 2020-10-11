@@ -5,7 +5,9 @@ Public Class FormPayment
     Dim userName As String = ""
     Dim userAddress As String = ""
     Dim sumOfTotalContractPrice As Double = 0
-    Dim comboBoxColumn As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
+    Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular"}
+    Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment"}
+    Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount"}
 
 
     Public Sub ShowForm(id As String, name As String, address As String)
@@ -30,12 +32,52 @@ Public Class FormPayment
         PanelDownpayment.Visible = False
         setPartVisibility()
         load_userId_info_data_reader()
+
+
+
+        cbb.Items.Add("Downpayment")
+        cbb.Items.Add("Equity")
+        cbb.Items.Add("Monthly")
+        cbb.Items.Add("Reservation")
+        cbb.Items.Add("Cash")
+
+        With cbbDownpayment
+            .Items.Add("50")
+            .Items.Add("60")
+        End With
+
+        With cbbDiscount
+            .Items.Add("0")
+            .Items.Add("5")
+            .Items.Add("6")
+            .Items.Add("7")
+            .Items.Add("8")
+            .Items.Add("9")
+            .Items.Add("10")
+            .Items.Add("11")
+            .Items.Add("12")
+            .Items.Add("13")
+            .Items.Add("14")
+            .Items.Add("15")
+        End With
+
+        DataGridView1.Columns.Clear()
+        DataGridView1.Columns.Insert(0, cbb)
+        DataGridView1.Columns.Add("", "Price")
+        DataGridView1.Columns.Insert(2, cbbDownpayment)
+        DataGridView1.Columns.Add("", "Downpayment Amount")
+        DataGridView1.Columns.Insert(4, cbbDiscount)
+        DataGridView1.Columns.Add("", "Discount Amount")
+
+
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
+    Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
 
+    End Sub
     Private Sub load_userId_info_data_reader()
 
 
@@ -53,28 +95,6 @@ Public Class FormPayment
                 .SelectCommand = sqlCommand
                 .Fill(table)
             End With
-
-            'For i As Integer = 0 To table.Rows.Count - 1
-            '    DataGridClientList.Rows.Add()
-            '    DataGridClientList.Rows(i).Cells(0).Value = table.Rows(i).ItemArray(0)
-            '    DataGridClientList.Rows(i).Cells(1).Value = table.Rows(i).ItemArray(1)
-            '    DataGridClientList.Rows(i).Cells(2).Value = table.Rows(i).ItemArray(2)
-            '    DataGridClientList.Rows(i).Cells(3).Value = table.Rows(i).ItemArray(3)
-            '    DataGridClientList.Rows(i).Cells(4).Value = table.Rows(i).ItemArray(4)
-
-            '    'Set the Default Value as the Selected Value.
-            '    comboBoxCell.Value = "Select Country"
-
-            '    Dim comboBoxCell As New DataGridViewComboBoxCell
-            '    comboBoxCell.Items.Add("Select Country")
-            '    For cb As Integer = 0 To table.Rows.Count - 1
-            '        comboBoxCell.Items.Add(table.Rows(i).ItemArray(5))
-            '    Next
-            '    comboBoxCell.Value = 0
-            '    'Dim cell As DataGridViewComboBoxCell = DirectCast(DataGridClientList.Rows(i).Cells(5), DataGridViewComboBoxCell)
-            '    'cell.Value = "18"
-
-            'Next
 
             Dim item As ListViewItem
             For i As Integer = 0 To table.Rows.Count - 1
@@ -219,32 +239,27 @@ Public Class FormPayment
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        comboBoxColumn.HeaderText = "Country"
-        comboBoxColumn.Width = 100
-        comboBoxColumn.Name = "ComboIto"
-        'DataGridClientList.Columns.Add(comboBoxColumn)
 
-        Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular"}
-        cbb.Items.Add("Downpayment")
-        cbb.Items.Add("Equity")
-        cbb.Items.Add("Monthly")
-        cbb.Items.Add("Reservation")
-        cbb.Items.Add("Cash")
+        Dim id = DataGridView1.Rows.Add
+        Dim row As DataGridViewRow = DataGridView1.Rows(id)
 
-        DataGridView1.Columns.Clear()
-
-        DataGridView1.Columns.Insert(0, cbb)
-        DataGridView1.Columns.Add("Amount.", "Amount")
-        DataGridView1.Columns.Add("assa.", "assa")
-
-
-        'Dim comboBoxCell As DataGridViewComboBoxCell = CType(row.Cells(0), DataGridViewComboBoxCell)
-        DataGridView1.Rows.Add()
-        Dim comboBoxCell As DataGridViewComboBoxCell = DirectCast(DataGridView1.Rows(0).Cells(0), DataGridViewComboBoxCell)
+        Dim comboBoxCell As DataGridViewComboBoxCell = DirectCast(row.Cells(0), DataGridViewComboBoxCell)
         comboBoxCell.Value = "Downpayment"
-        DataGridView1.Rows(0).Cells(1).Value = "Dooooooo"
-        DataGridView1.Rows(0).Cells(2).Value = "asass"
-        DataGridView1.Columns(2).ReadOnly = True
+        row.Cells(1).Value = (220000).ToString("N2")
+
+        Dim cbcDownpayment As DataGridViewComboBoxCell = DirectCast(row.Cells(2), DataGridViewComboBoxCell)
+        cbcDownpayment.Value = "50"
+
+        row.Cells(3).Value = (Double.Parse(row.Cells(1).Value) * Double.Parse(cbcDownpayment.Value) / 100).ToString("N2")
+
+        Dim cbcDiscount As DataGridViewComboBoxCell = DirectCast(row.Cells(4), DataGridViewComboBoxCell)
+        cbcDiscount.Value = "0"
+        row.Cells(4).Value = "0"
+        row.Cells(5).Value = (Double.Parse(row.Cells(3).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
+
+        DataGridView1.Columns(1).ReadOnly = True
+        DataGridView1.Columns(3).ReadOnly = True
+        DataGridView1.Columns(5).ReadOnly = True
 
     End Sub
 
@@ -274,4 +289,67 @@ Public Class FormPayment
             End If
         End If
     End Sub
+
+    Private Sub DataGridView1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
+        If e.ColumnIndex = 0 Then 'ComoboBox Particular
+            If DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Downpayment") Then
+                DataGridView1.Rows(e.RowIndex).Cells(1).Value = (220000).ToString("N2")
+                DataGridView1.Rows(e.RowIndex).Cells(2).Value = "50"
+                DataGridView1.Rows(e.RowIndex).Cells(3).Value = (Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(2).Value) / 100).ToString("N2")
+                DataGridView1.Rows(e.RowIndex).Cells(4).Value = "0"
+
+                Dim price As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
+                Dim discount As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value) / 100
+                DataGridView1.Rows(e.RowIndex).Cells(5).Value = (price * discount).ToString("N2")
+
+                'DataGridView1.Columns(1).Visible = True
+                'DataGridView1.Columns(2).Visible = False
+                DataGridView1.Rows(e.RowIndex).Cells(0).Tag = 0
+            ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Equity") Then
+                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = "Equity"
+            ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Monthly") Then
+                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = "Monthly"
+            ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Reservation") Then
+                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = "Reservation"
+            ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Cash") Then
+                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = DataGridView1.Rows(e.RowIndex).Cells(1).Tag
+            End If
+        ElseIf e.ColumnIndex = 2 Then 'ComoboBox Downpament
+
+            Dim downpamentAmount As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(2).Value) / 100
+            DataGridView1.Rows(e.RowIndex).Cells(3).Value = downpamentAmount.ToString("N2")
+
+        ElseIf e.ColumnIndex = 4 Then 'ComoboBox Discount
+
+            Dim price As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value)
+            Dim discount As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value) / 100
+            DataGridView1.Rows(e.RowIndex).Cells(5).Value = (price * discount).ToString("N2")
+        End If
+    End Sub
+
+    Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit
+        If e.ColumnIndex = 0 Then
+            DataGridView1.Rows(e.RowIndex).Cells(1).Tag = "hello world"
+        End If
+    End Sub
+
+    Private Sub DataGridView1_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles DataGridView1.EditingControlShowing
+        'Try
+        '    Dim c As ComboBox = CType(e.Control, ComboBox)
+        '    If e.Control Is c Then
+        '        MessageBox.Show("DataGridView1.CurrentCell.RowIndex: " & DataGridView1.CurrentCell.RowIndex)
+
+        '        MessageBox.Show("ComboBox: " & c.SelectedIndex)
+        '    End If
+        'Catch ex As Exception
+        '    MessageBox.Show(ex.Message)
+        'End Try
+    End Sub
+
+    Private Sub DataGridView1_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellDirtyStateChanged
+        'CurrentCellDirtyStateChanged event and force a commit edit on the grid
+        DataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
+
+    End Sub
+
 End Class
