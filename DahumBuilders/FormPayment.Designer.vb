@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormPayment
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormPayment
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.PanelTotal = New System.Windows.Forms.Panel()
@@ -30,6 +30,8 @@ Partial Class FormPayment
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelInformation = New System.Windows.Forms.Panel()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.PanelDownpayment = New System.Windows.Forms.Panel()
         Me.cbDownpayment = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -57,6 +59,7 @@ Partial Class FormPayment
         Me.ColumnHeaderLot = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderSQM = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
         Me.txtOfficialReceipt = New System.Windows.Forms.TextBox()
@@ -66,13 +69,13 @@ Partial Class FormPayment
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.PanelInformation.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelDownpayment.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -158,6 +161,8 @@ Partial Class FormPayment
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelInformation.Controls.Add(Me.DataGridView1)
+        Me.PanelInformation.Controls.Add(Me.Button2)
         Me.PanelInformation.Controls.Add(Me.PanelDownpayment)
         Me.PanelInformation.Controls.Add(Me.cbPaymentType)
         Me.PanelInformation.Controls.Add(Me.lblPart)
@@ -184,6 +189,26 @@ Partial Class FormPayment
         Me.PanelInformation.Size = New System.Drawing.Size(906, 848)
         Me.PanelInformation.TabIndex = 2
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(16, 528)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowTemplate.Height = 28
+        Me.DataGridView1.Size = New System.Drawing.Size(871, 231)
+        Me.DataGridView1.TabIndex = 50
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(41, 127)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 49
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'PanelDownpayment
         '
         Me.PanelDownpayment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -198,9 +223,9 @@ Partial Class FormPayment
         Me.PanelDownpayment.Controls.Add(Me.Label11)
         Me.PanelDownpayment.Controls.Add(Me.Label3)
         Me.PanelDownpayment.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 538)
+        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 765)
         Me.PanelDownpayment.Name = "PanelDownpayment"
-        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 308)
+        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 81)
         Me.PanelDownpayment.TabIndex = 47
         '
         'cbDownpayment
@@ -442,15 +467,20 @@ Partial Class FormPayment
         Me.ColumnHeaderTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderTCP.Width = 100
         '
+        'ColumnHeaderProjID
+        '
+        Me.ColumnHeaderProjID.Text = "ProjectID"
+        Me.ColumnHeaderProjID.Width = 0
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(101, 353)
+        Me.Label8.Location = New System.Drawing.Point(68, 353)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(53, 22)
+        Me.Label8.Size = New System.Drawing.Size(86, 22)
         Me.Label8.TabIndex = 11
-        Me.Label8.Text = "Date"
+        Me.Label8.Text = "OR Date"
         '
         'dtpDatePaid
         '
@@ -538,11 +568,6 @@ Partial Class FormPayment
         Me.Label13.TabIndex = 32
         Me.Label13.Text = "Payment Type"
         '
-        'ColumnHeaderProjID
-        '
-        Me.ColumnHeaderProjID.Text = "ProjectID"
-        Me.ColumnHeaderProjID.Width = 0
-        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -563,6 +588,7 @@ Partial Class FormPayment
         Me.Panel3.ResumeLayout(False)
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelDownpayment.ResumeLayout(False)
         Me.PanelDownpayment.PerformLayout()
         Me.ResumeLayout(False)
@@ -613,4 +639,6 @@ Partial Class FormPayment
     Friend WithEvents Label14 As Label
     Friend WithEvents PanelDownpayment As Panel
     Friend WithEvents ColumnHeaderProjID As ColumnHeader
+    Friend WithEvents Button2 As Button
+    Friend WithEvents DataGridView1 As DataGridView
 End Class

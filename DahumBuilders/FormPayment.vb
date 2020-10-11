@@ -5,6 +5,8 @@ Public Class FormPayment
     Dim userName As String = ""
     Dim userAddress As String = ""
     Dim sumOfTotalContractPrice As Double = 0
+    Dim comboBoxColumn As DataGridViewComboBoxColumn = New DataGridViewComboBoxColumn
+
 
     Public Sub ShowForm(id As String, name As String, address As String)
         userId = id
@@ -36,8 +38,9 @@ Public Class FormPayment
 
     Private Sub load_userId_info_data_reader()
 
+
         sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
-        db_project_list.`id`=db_project_item.`pro_id` WHERE `db_project_item`.`assigned_userid` = @userId"
+        db_project_list.`id`=db_project_item.`proj_id` WHERE `db_project_item`.`assigned_userid` = @userId"
 
         Connection()
         Try
@@ -51,22 +54,44 @@ Public Class FormPayment
                 .Fill(table)
             End With
 
+            'For i As Integer = 0 To table.Rows.Count - 1
+            '    DataGridClientList.Rows.Add()
+            '    DataGridClientList.Rows(i).Cells(0).Value = table.Rows(i).ItemArray(0)
+            '    DataGridClientList.Rows(i).Cells(1).Value = table.Rows(i).ItemArray(1)
+            '    DataGridClientList.Rows(i).Cells(2).Value = table.Rows(i).ItemArray(2)
+            '    DataGridClientList.Rows(i).Cells(3).Value = table.Rows(i).ItemArray(3)
+            '    DataGridClientList.Rows(i).Cells(4).Value = table.Rows(i).ItemArray(4)
+
+            '    'Set the Default Value as the Selected Value.
+            '    comboBoxCell.Value = "Select Country"
+
+            '    Dim comboBoxCell As New DataGridViewComboBoxCell
+            '    comboBoxCell.Items.Add("Select Country")
+            '    For cb As Integer = 0 To table.Rows.Count - 1
+            '        comboBoxCell.Items.Add(table.Rows(i).ItemArray(5))
+            '    Next
+            '    comboBoxCell.Value = 0
+            '    'Dim cell As DataGridViewComboBoxCell = DirectCast(DataGridClientList.Rows(i).Cells(5), DataGridViewComboBoxCell)
+            '    'cell.Value = "18"
+
+            'Next
+
             Dim item As ListViewItem
-            For i = 0 To table.Rows.Count - 1
+            For i As Integer = 0 To table.Rows.Count - 1
                 item = New ListViewItem(table.Rows(i)("id").ToString)
                 item.SubItems.Add(table.Rows(i)("proj_name"))
                 item.SubItems.Add(table.Rows(i)("block"))
                 item.SubItems.Add(table.Rows(i)("lot"))
                 item.SubItems.Add(table.Rows(i)("sqm"))
                 item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
-                item.SubItems.Add(table.Rows(i)("pro_id")) 'Project Id
+                item.SubItems.Add(table.Rows(i)("proj_id"))
                 ListViewUserItem.Items.Add(item)
             Next
 
             sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "id > 0"))
             lblDownpaymentAmount.Text = sumOfTotalContractPrice.ToString("N2")
-            Dim a As Integer
-            For a = 0 To 1
+
+            For a As Integer = 0 To 1
                 item = New ListViewItem
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(String.Empty)
@@ -190,6 +215,63 @@ Public Class FormPayment
         Else
             lblPart.Visible = False
             txtPart.Visible = False
+        End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        comboBoxColumn.HeaderText = "Country"
+        comboBoxColumn.Width = 100
+        comboBoxColumn.Name = "ComboIto"
+        'DataGridClientList.Columns.Add(comboBoxColumn)
+
+        Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular"}
+        cbb.Items.Add("Downpayment")
+        cbb.Items.Add("Equity")
+        cbb.Items.Add("Monthly")
+        cbb.Items.Add("Reservation")
+        cbb.Items.Add("Cash")
+
+        DataGridView1.Columns.Clear()
+
+        DataGridView1.Columns.Insert(0, cbb)
+        DataGridView1.Columns.Add("Amount.", "Amount")
+        DataGridView1.Columns.Add("assa.", "assa")
+
+
+        'Dim comboBoxCell As DataGridViewComboBoxCell = CType(row.Cells(0), DataGridViewComboBoxCell)
+        DataGridView1.Rows.Add()
+        Dim comboBoxCell As DataGridViewComboBoxCell = DirectCast(DataGridView1.Rows(0).Cells(0), DataGridViewComboBoxCell)
+        comboBoxCell.Value = "Downpayment"
+        DataGridView1.Rows(0).Cells(1).Value = "Dooooooo"
+        DataGridView1.Rows(0).Cells(2).Value = "asass"
+        DataGridView1.Columns(2).ReadOnly = True
+
+    End Sub
+
+    Private Sub DataGridView1_MouseMove(sender As Object, e As MouseEventArgs) Handles DataGridView1.MouseMove
+        Dim ht As DataGridView.HitTestInfo = DataGridView1.HitTest(e.X, e.Y)
+
+        ' Can use this to auto-activate the control
+        If Not ht Is DataGridView.HitTestInfo.Nowhere Then
+            If ht.ColumnIndex >= 0 AndAlso ht.ColumnIndex < dataGridView1.Columns.Count Then
+                Dim col As DataGridViewColumn = DataGridView1.Columns(ht.ColumnIndex)
+
+                If TypeOf (col) Is DataGridViewComboBoxColumn Then
+                    If Not ht.RowIndex = DataGridView1.NewRowIndex AndAlso ht.RowIndex >= 0 _
+                        AndAlso ht.RowIndex < DataGridView1.RowCount Then
+                        DataGridView1.CurrentCell = DataGridView1.Rows(ht.RowIndex).Cells(ht.ColumnIndex)
+                        DataGridView1.BeginEdit(True)
+                    End If
+                End If
+
+                If TypeOf (col) Is DataGridViewTextBoxColumn Then
+                    If Not ht.RowIndex = DataGridView1.NewRowIndex AndAlso ht.RowIndex >= 0 _
+                        AndAlso ht.RowIndex < DataGridView1.RowCount Then
+                        DataGridView1.CurrentCell = DataGridView1.Rows(ht.RowIndex).Cells(ht.ColumnIndex)
+                        DataGridView1.BeginEdit(True)
+                    End If
+                End If
+            End If
         End If
     End Sub
 End Class

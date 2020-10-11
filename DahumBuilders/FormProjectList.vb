@@ -9,13 +9,12 @@ Public Class FormProjectList
         Dim table As New DataTable()
 
         sql = "SELECT id, proj_name, block , lot, sqm, price, 
-IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
-FROM `db_project_list` INNER JOIN `db_project_item` ON `db_project_list`.id=`db_project_item`.`pro_id`"
+        IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
+        FROM `db_project_list` INNER JOIN `db_project_item` ON `db_project_list`.id=`db_project_item`.`proj_id`"
 
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            'sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = userId
             sqlDataReader = sqlCommand.ExecuteReader()
 
             Dim item As ListViewItem
