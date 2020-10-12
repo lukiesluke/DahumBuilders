@@ -427,7 +427,9 @@ Public Class FormPayment
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         End With
 
         With DataGridView1
