@@ -93,7 +93,7 @@ Partial Class FormPayment
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PanelInformation)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1334, 848)
+        Me.SplitContainer1.Size = New System.Drawing.Size(1334, 733)
         Me.SplitContainer1.SplitterDistance = 424
         Me.SplitContainer1.TabIndex = 1
         '
@@ -103,7 +103,7 @@ Partial Class FormPayment
         Me.PanelTotal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelTotal.Location = New System.Drawing.Point(0, 431)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.Size = New System.Drawing.Size(424, 257)
+        Me.PanelTotal.Size = New System.Drawing.Size(424, 142)
         Me.PanelTotal.TabIndex = 3
         '
         'Panel3
@@ -112,7 +112,7 @@ Partial Class FormPayment
         Me.Panel3.Controls.Add(Me.btnPayment)
         Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 688)
+        Me.Panel3.Location = New System.Drawing.Point(0, 573)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(424, 160)
         Me.Panel3.TabIndex = 2
@@ -160,7 +160,6 @@ Partial Class FormPayment
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelInformation.Controls.Add(Me.DataGridView1)
         Me.PanelInformation.Controls.Add(Me.PanelDownpayment)
         Me.PanelInformation.Controls.Add(Me.cbPaymentType)
         Me.PanelInformation.Controls.Add(Me.lblPart)
@@ -184,19 +183,18 @@ Partial Class FormPayment
         Me.PanelInformation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelInformation.Location = New System.Drawing.Point(0, 0)
         Me.PanelInformation.Name = "PanelInformation"
-        Me.PanelInformation.Size = New System.Drawing.Size(906, 848)
+        Me.PanelInformation.Size = New System.Drawing.Size(906, 733)
         Me.PanelInformation.TabIndex = 2
         '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(16, 528)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 749)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(871, 231)
+        Me.DataGridView1.Size = New System.Drawing.Size(1334, 186)
         Me.DataGridView1.TabIndex = 50
         '
         'PanelDownpayment
@@ -213,9 +211,9 @@ Partial Class FormPayment
         Me.PanelDownpayment.Controls.Add(Me.Label11)
         Me.PanelDownpayment.Controls.Add(Me.Label3)
         Me.PanelDownpayment.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 765)
+        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 528)
         Me.PanelDownpayment.Name = "PanelDownpayment"
-        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 81)
+        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 203)
         Me.PanelDownpayment.TabIndex = 47
         '
         'cbDownpayment
@@ -562,7 +560,8 @@ Partial Class FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1516, 890)
+        Me.ClientSize = New System.Drawing.Size(1516, 992)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
