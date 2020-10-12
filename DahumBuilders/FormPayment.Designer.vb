@@ -30,9 +30,7 @@ Partial Class FormPayment
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelInformation = New System.Windows.Forms.Panel()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.PanelDownpayment = New System.Windows.Forms.Panel()
         Me.cbDownpayment = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -162,9 +160,7 @@ Partial Class FormPayment
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PanelInformation.Controls.Add(Me.Button3)
         Me.PanelInformation.Controls.Add(Me.DataGridView1)
-        Me.PanelInformation.Controls.Add(Me.Button2)
         Me.PanelInformation.Controls.Add(Me.PanelDownpayment)
         Me.PanelInformation.Controls.Add(Me.cbPaymentType)
         Me.PanelInformation.Controls.Add(Me.lblPart)
@@ -191,35 +187,17 @@ Partial Class FormPayment
         Me.PanelInformation.Size = New System.Drawing.Size(906, 848)
         Me.PanelInformation.TabIndex = 2
         '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(149, 136)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 33)
-        Me.Button3.TabIndex = 51
-        Me.Button3.Text = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(16, 528)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
         Me.DataGridView1.Size = New System.Drawing.Size(871, 231)
         Me.DataGridView1.TabIndex = 50
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(41, 136)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 33)
-        Me.Button2.TabIndex = 49
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'PanelDownpayment
         '
@@ -651,7 +629,5 @@ Partial Class FormPayment
     Friend WithEvents Label14 As Label
     Friend WithEvents PanelDownpayment As Panel
     Friend WithEvents ColumnHeaderProjID As ColumnHeader
-    Friend WithEvents Button2 As Button
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Button3 As Button
 End Class

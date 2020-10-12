@@ -32,59 +32,14 @@ Public Class FormPayment
         PanelDownpayment.Visible = False
         setPartVisibility()
         load_userId_info_data_reader()
-
-        With cbb
-            .Items.Add("Downpayment")
-            .Items.Add("Equity")
-            .Items.Add("Monthly")
-            .Items.Add("Reservation")
-            .Items.Add("Cash")
-        End With
-
-        With cbbDownpayment
-            .Items.Add("50")
-            .Items.Add("60")
-        End With
-
-        With cbbDiscount
-            .Items.Add("0")
-            .Items.Add("5")
-            .Items.Add("6")
-            .Items.Add("7")
-            .Items.Add("8")
-            .Items.Add("9")
-            .Items.Add("10")
-            .Items.Add("11")
-            .Items.Add("12")
-            .Items.Add("13")
-            .Items.Add("14")
-            .Items.Add("15")
-        End With
-
-        DataGridView1.Columns.Clear()
-        DataGridView1.Columns.Insert(0, cbb)
-        DataGridView1.Columns.Add("", "TCP")
-        DataGridView1.Columns.Insert(2, cbbDownpayment)
-        DataGridView1.Columns.Add("", "Downpayment Amount")
-        DataGridView1.Columns.Insert(4, cbbDiscount)
-        DataGridView1.Columns.Add("", "Discount Amount")
-
-        With DataGridView1
-            .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-        End With
-
+        setDataGridView()
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
-    Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
 
-    End Sub
     Private Sub load_userId_info_data_reader()
-
 
         sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
         db_project_list.`id`=db_project_item.`proj_id` WHERE `db_project_item`.`assigned_userid` = @userId"
@@ -103,7 +58,7 @@ Public Class FormPayment
 
             Dim item As ListViewItem
             For i As Integer = 0 To table.Rows.Count - 1
-                item = New ListViewItem(table.Rows(i)("id").ToString)
+                item = New ListViewItem(table.Rows(i)("item_id").ToString)
                 item.SubItems.Add(table.Rows(i)("proj_name"))
                 item.SubItems.Add(table.Rows(i)("block"))
                 item.SubItems.Add(table.Rows(i)("lot"))
@@ -116,7 +71,7 @@ Public Class FormPayment
             sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "id > 0"))
             lblDownpaymentAmount.Text = sumOfTotalContractPrice.ToString("N2")
 
-            For a As Integer = 0 To 1
+            For a As Integer = 1 To 1
                 item = New ListViewItem
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(String.Empty)
@@ -243,31 +198,6 @@ Public Class FormPayment
         End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-
-        Dim id = DataGridView1.Rows.Add
-        Dim row As DataGridViewRow = DataGridView1.Rows(id)
-
-        Dim comboBoxCell As DataGridViewComboBoxCell = DirectCast(row.Cells(0), DataGridViewComboBoxCell)
-        comboBoxCell.Value = "Downpayment"
-        row.Cells(1).Value = (220000).ToString("N2")
-
-        Dim cbcDownpayment As DataGridViewComboBoxCell = DirectCast(row.Cells(2), DataGridViewComboBoxCell)
-        cbcDownpayment.Value = "50"
-
-        row.Cells(3).Value = (Double.Parse(row.Cells(1).Value) * Double.Parse(cbcDownpayment.Value) / 100).ToString("N2")
-
-        Dim cbcDiscount As DataGridViewComboBoxCell = DirectCast(row.Cells(4), DataGridViewComboBoxCell)
-        cbcDiscount.Value = "0"
-        row.Cells(4).Value = "0"
-        row.Cells(5).Value = (Double.Parse(row.Cells(3).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
-
-        DataGridView1.Columns(1).ReadOnly = True
-        DataGridView1.Columns(3).ReadOnly = True
-        DataGridView1.Columns(5).ReadOnly = True
-
-    End Sub
-
     Private Sub DataGridView1_MouseMove(sender As Object, e As MouseEventArgs) Handles DataGridView1.MouseMove
         Dim ht As DataGridView.HitTestInfo = DataGridView1.HitTest(e.X, e.Y)
 
@@ -299,9 +229,10 @@ Public Class FormPayment
         Dim tcp As Double = 0
         Dim discount As Double = 0
         Dim downpamentAmount As Double = 0
-
         If e.ColumnIndex = 0 Then 'ComoboBox Particular
             If DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Downpayment") Then
+                DataGridView1.Rows(e.RowIndex).Cells(0).Tag = 0
+
                 DataGridView1.Rows(e.RowIndex).Cells(1).Value = (220000).ToString("N2")
                 DataGridView1.Rows(e.RowIndex).Cells(2).Value = "50"
                 DataGridView1.Rows(e.RowIndex).Cells(3).Value = (Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(2).Value) / 100).ToString("N2")
@@ -312,15 +243,17 @@ Public Class FormPayment
                 DataGridView1.Rows(e.RowIndex).Cells(5).Value = (tcp * discount).ToString("N2")
                 'DataGridView1.Columns(1).Visible = True
                 'DataGridView1.Columns(2).Visible = False
-                DataGridView1.Rows(e.RowIndex).Cells(0).Tag = 0
             ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Equity") Then
-                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = "Equity"
+                DataGridView1.Rows(e.RowIndex).Cells(1).Tag = 1
+
             ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Monthly") Then
-                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = "Monthly"
+                DataGridView1.Rows(e.RowIndex).Cells(2).Tag = 2
+
             ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Reservation") Then
-                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = "Reservation"
+                DataGridView1.Rows(e.RowIndex).Cells(3).Tag = 3
+
             ElseIf DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Cash") Then
-                'DataGridView1.Rows(e.RowIndex).Cells(2).Value = DataGridView1.Rows(e.RowIndex).Cells(1).Tag
+                DataGridView1.Rows(e.RowIndex).Cells(4).Tag = 4
             End If
         ElseIf e.ColumnIndex = 2 Then 'ComoboBox Downpament
             DataGridView1.Rows(e.RowIndex).Cells(4).Value = "0"
@@ -367,6 +300,125 @@ Public Class FormPayment
     Private Sub DataGridView1_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellDirtyStateChanged
         'CurrentCellDirtyStateChanged event and force a commit edit on the grid
         DataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
+    End Sub
+
+    Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(0, row.Index), DataGridViewComboBoxCell)
+                Console.WriteLine(row.Index & ". " & row.Cells(0).Value.ToString & " Tag: " & c.Items.IndexOf(c.Value) & " ," & row.Cells(1).Value)
+            End If
+        Next
+    End Sub
+    Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
+        Dim itemID As String = ""
+        Dim name As String = ""
+        Dim block As String = ""
+        Dim lot As String = ""
+        Dim sqm As String = ""
+        Dim tcp As String = ""
+        Dim projID As String = ""
+        Dim description As String = ""
+
+        If e.KeyCode = Keys.KeyCode.Enter Then
+            If ListViewUserItem.Items.Count > 0 Then
+                itemID = ListViewUserItem.SelectedItems.Item(0).Text
+                name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
+                block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+                lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+                sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
+                tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
+                projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+                description = name & " " & block & " " & lot & " " & sqm
+                addPurchaseItem(itemID, projID, tcp, description)
+                Console.WriteLine("ID " & itemID & " - " & name & " " & block & " " & lot & " " & sqm & " " & tcp & " " & projId)
+            End If
+        End If
+
+        'item = New ListViewItem(table.Rows(i)("id").ToString)
+        'item.SubItems.Add(table.Rows(i)("proj_name"))
+        'item.SubItems.Add(table.Rows(i)("block"))
+        'item.SubItems.Add(table.Rows(i)("lot"))
+        'item.SubItems.Add(table.Rows(i)("sqm"))
+        'item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
+        'item.SubItems.Add(table.Rows(i)("proj_id"))
+    End Sub
+
+    Private Sub addPurchaseItem(itemID As String, projID As String, tcp As String, description As String)
+
+        Dim id = DataGridView1.Rows.Add
+        Dim row As DataGridViewRow = DataGridView1.Rows(id)
+
+        Dim comboBoxCell As DataGridViewComboBoxCell = DirectCast(row.Cells(0), DataGridViewComboBoxCell)
+        comboBoxCell.Value = "Downpayment"
+        row.Cells(1).Value = Double.Parse(tcp).ToString("N2")
+
+        Dim cbcDownpayment As DataGridViewComboBoxCell = DirectCast(row.Cells(2), DataGridViewComboBoxCell)
+        cbcDownpayment.Value = "50"
+
+        row.Cells(3).Value = (Double.Parse(row.Cells(1).Value) * (Double.Parse(cbcDownpayment.Value) / 100)).ToString("N2")
+
+        Dim cbcDiscount As DataGridViewComboBoxCell = DirectCast(row.Cells(4), DataGridViewComboBoxCell)
+        cbcDiscount.Value = "0"
+
+        row.Cells(5).Value = (Double.Parse(row.Cells(3).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
+        row.Cells(6).Value = itemID
+        row.Cells(7).Value = projID
+        row.Cells(8).Value = description
+
+        DataGridView1.Columns(1).ReadOnly = True
+        DataGridView1.Columns(3).ReadOnly = True
+        DataGridView1.Columns(5).ReadOnly = True
+        DataGridView1.Columns(8).ReadOnly = True
+        DataGridView1.Columns(6).Visible = False
+        DataGridView1.Columns(7).Visible = False
+
+    End Sub
+    Private Sub setDataGridView()
+        With cbb
+            .Items.Add("Downpayment")
+            .Items.Add("Equity")
+            .Items.Add("Monthly")
+            .Items.Add("Reservation")
+            .Items.Add("Cash")
+        End With
+
+        With cbbDownpayment
+            .Items.Add("50")
+            .Items.Add("60")
+        End With
+
+        With cbbDiscount
+            .Items.Add("0")
+            .Items.Add("5")
+            .Items.Add("6")
+            .Items.Add("7")
+            .Items.Add("8")
+            .Items.Add("9")
+            .Items.Add("10")
+            .Items.Add("11")
+            .Items.Add("12")
+            .Items.Add("13")
+            .Items.Add("14")
+            .Items.Add("15")
+        End With
+
+        DataGridView1.Columns.Clear()
+        DataGridView1.Columns.Insert(0, cbb)
+        DataGridView1.Columns.Add("", "TCP")
+        DataGridView1.Columns.Insert(2, cbbDownpayment)
+        DataGridView1.Columns.Add("", "Downpayment Amount")
+        DataGridView1.Columns.Insert(4, cbbDiscount)
+        DataGridView1.Columns.Add("", "Discount Amount")
+        DataGridView1.Columns.Add("", "ItemID")
+        DataGridView1.Columns.Add("", "ProjectID")
+        DataGridView1.Columns.Add("", "Desciption")
+
+        With DataGridView1
+            .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        End With
     End Sub
 
 End Class
