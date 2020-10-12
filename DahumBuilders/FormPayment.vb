@@ -33,13 +33,13 @@ Public Class FormPayment
         setPartVisibility()
         load_userId_info_data_reader()
 
-
-
-        cbb.Items.Add("Downpayment")
-        cbb.Items.Add("Equity")
-        cbb.Items.Add("Monthly")
-        cbb.Items.Add("Reservation")
-        cbb.Items.Add("Cash")
+        With cbb
+            .Items.Add("Downpayment")
+            .Items.Add("Equity")
+            .Items.Add("Monthly")
+            .Items.Add("Reservation")
+            .Items.Add("Cash")
+        End With
 
         With cbbDownpayment
             .Items.Add("50")
@@ -63,12 +63,17 @@ Public Class FormPayment
 
         DataGridView1.Columns.Clear()
         DataGridView1.Columns.Insert(0, cbb)
-        DataGridView1.Columns.Add("", "Price")
+        DataGridView1.Columns.Add("", "TCP")
         DataGridView1.Columns.Insert(2, cbbDownpayment)
         DataGridView1.Columns.Add("", "Downpayment Amount")
         DataGridView1.Columns.Insert(4, cbbDiscount)
         DataGridView1.Columns.Add("", "Discount Amount")
 
+        With DataGridView1
+            .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+        End With
 
     End Sub
 
@@ -291,17 +296,20 @@ Public Class FormPayment
     End Sub
 
     Private Sub DataGridView1_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellValueChanged
+        Dim tcp As Double = 0
+        Dim discount As Double = 0
+        Dim downpamentAmount As Double = 0
+
         If e.ColumnIndex = 0 Then 'ComoboBox Particular
             If DataGridView1.Rows(e.RowIndex).Cells(0).Value.Equals("Downpayment") Then
                 DataGridView1.Rows(e.RowIndex).Cells(1).Value = (220000).ToString("N2")
                 DataGridView1.Rows(e.RowIndex).Cells(2).Value = "50"
                 DataGridView1.Rows(e.RowIndex).Cells(3).Value = (Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(2).Value) / 100).ToString("N2")
                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = "0"
-
-                Dim price As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
-                Dim discount As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value) / 100
-                DataGridView1.Rows(e.RowIndex).Cells(5).Value = (price * discount).ToString("N2")
-
+                DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
+                tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
+                discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value) / 100
+                DataGridView1.Rows(e.RowIndex).Cells(5).Value = (tcp * discount).ToString("N2")
                 'DataGridView1.Columns(1).Visible = True
                 'DataGridView1.Columns(2).Visible = False
                 DataGridView1.Rows(e.RowIndex).Cells(0).Tag = 0
@@ -315,16 +323,26 @@ Public Class FormPayment
                 'DataGridView1.Rows(e.RowIndex).Cells(2).Value = DataGridView1.Rows(e.RowIndex).Cells(1).Tag
             End If
         ElseIf e.ColumnIndex = 2 Then 'ComoboBox Downpament
+            DataGridView1.Rows(e.RowIndex).Cells(4).Value = "0"
+            downpamentAmount = Double.Parse(Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(2).Value) / 100)
+            discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value) / 100
 
-            Dim downpamentAmount As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(2).Value) / 100
             DataGridView1.Rows(e.RowIndex).Cells(3).Value = downpamentAmount.ToString("N2")
-
+            DataGridView1.Rows(e.RowIndex).Cells(5).Value = (downpamentAmount * discount).ToString("N2")
+        ElseIf e.ColumnIndex = 3 Then 'Textbox downpament Amount
+            downpamentAmount = Double.Parse(Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(2).Value) / 100)
+            DataGridView1.Rows(e.RowIndex).Cells(3).Value = (downpamentAmount).ToString("N2")
         ElseIf e.ColumnIndex = 4 Then 'ComoboBox Discount
-
-            Dim price As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value)
-            Dim discount As Double = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value) / 100
-            DataGridView1.Rows(e.RowIndex).Cells(5).Value = (price * discount).ToString("N2")
+            downpamentAmount = DataGridView1.Rows(e.RowIndex).Cells(3).Value
+            discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value) / 100
+            DataGridView1.Rows(e.RowIndex).Cells(5).Value = (downpamentAmount * discount).ToString("N2")
         End If
+        'DataGridView1.Columns.Insert(0, cbb)
+        'DataGridView1.Columns.Add("", "Price")
+        'DataGridView1.Columns.Insert(2, cbbDownpayment)
+        'DataGridView1.Columns.Add("", "Downpayment Amount")
+        'DataGridView1.Columns.Insert(4, cbbDiscount)
+        'DataGridView1.Columns.Add("", "Discount Amount")
     End Sub
 
     Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit
@@ -349,7 +367,6 @@ Public Class FormPayment
     Private Sub DataGridView1_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellDirtyStateChanged
         'CurrentCellDirtyStateChanged event and force a commit edit on the grid
         DataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
-
     End Sub
 
 End Class
