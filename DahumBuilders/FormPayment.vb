@@ -20,7 +20,7 @@ Public Class FormPayment
     Private Sub FormPayment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Top = (20)
         Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
-        Me.Size = New Size(950, 650)
+        Me.Size = New Size(1050, 650)
         lblName.Text = userName
         lblAddress.Text = userAddress
 
@@ -28,7 +28,6 @@ Public Class FormPayment
         cbDownpayment.SelectedIndex = 0
         cbDiscount.SelectedIndex = 0
 
-        btnConfirm.Enabled = False
         PanelDownpayment.Visible = False
         setPartVisibility()
         load_userId_info_data_reader()
@@ -107,14 +106,6 @@ Public Class FormPayment
         End If
     End Sub
 
-    Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
-        If cbPaymentType.SelectedIndex > -1 Then
-            btnConfirm.Enabled = True
-        Else
-            btnConfirm.Enabled = False
-        End If
-    End Sub
-
     Private Sub txtAmountPaid_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPaidAmount.KeyPress
         Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
         e.Handled = Not (Char.IsDigit(e.KeyChar) Or
@@ -122,7 +113,7 @@ Public Class FormPayment
                          (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 
-    Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs) Handles btnConfirm.Click
+    Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs)
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `tcp`, `particular`, 
         `part_no`, `payment_type`, `userid`) VALUES (@OR, @DatePaid, @PaidAmount, @TCP, @Particular, @PartNo, @PaymentType, @userid)"
         Connection()
@@ -310,36 +301,21 @@ Public Class FormPayment
         DataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
     End Sub
 
-    Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
-        For Each row As DataGridViewRow In DataGridView1.Rows
-            If Not row.IsNewRow Then
-                Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(0, row.Index), DataGridViewComboBoxCell)
-                Console.WriteLine(row.Index & ". " & row.Cells(0).Value.ToString & " Tag: " & c.Items.IndexOf(c.Value) & " ," & row.Cells(1).Value)
-            End If
-        Next
-    End Sub
     Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
-        Dim itemID As String = ""
-        Dim name As String = ""
-        Dim block As String = ""
-        Dim lot As String = ""
-        Dim sqm As String = ""
-        Dim tcp As String = ""
-        Dim projID As String = ""
-        Dim description As String = ""
+        Dim project As Project = New Project()
 
         If e.KeyCode = Keys.KeyCode.Enter Then
             If ListViewUserItem.Items.Count > 0 Then
-                itemID = ListViewUserItem.SelectedItems.Item(0).Text
-                name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
-                block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
-                lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
-                sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
-                tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
-                projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
-                description = name & " " & block & " " & lot & " " & sqm
-                addPurchaseItem(itemID, projID, tcp, description)
-                Console.WriteLine("ID " & itemID & " - " & name & " " & block & " " & lot & " " & sqm & " " & tcp & " " & projId)
+                project.itemID = ListViewUserItem.SelectedItems.Item(0).Text
+                project.name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
+                project.block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+                project.lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+                project.sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
+                project.tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
+                project.projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+                project.description = project.name & " " & project.block & " " & project.lot & " " & project.sqm
+                addPurchaseItem(project)
+                Console.WriteLine("ID " & project.itemID & " - " & project.name & " " & project.block & " " & project.lot & " " & project.sqm & " " & project.tcp & " " & project.projID)
             End If
         End If
 
@@ -352,13 +328,22 @@ Public Class FormPayment
         'item.SubItems.Add(table.Rows(i)("proj_id"))
     End Sub
 
-    Private Sub addPurchaseItem(itemID As String, projID As String, tcp As String, description As String)
+    Private Sub addPurchaseItem(ByVal project As Project)
+
+        If DataGridView1.Rows.Count > 0 Then
+            For Each dRow As DataGridViewRow In DataGridView1.Rows
+                If dRow.Cells(7).Value.Equals(project.itemID) And dRow.Cells(8).Value.Equals(project.projID) Then
+                    Console.WriteLine(String.Format("Already exist Project ID {0} and ItemID {1}", project.projID, project.itemID))
+                    Exit Sub
+                End If
+            Next
+        End If
 
         Dim id = DataGridView1.Rows.Add
         Dim row As DataGridViewRow = DataGridView1.Rows(id)
 
-        row.Cells(0).Value = description
-        row.Cells(1).Value = Double.Parse(tcp).ToString("N2")
+        row.Cells(0).Value = project.description
+        row.Cells(1).Value = Double.Parse(project.tcp).ToString("N2")
 
         Dim comboBoxCell As DataGridViewComboBoxCell = DirectCast(row.Cells(2), DataGridViewComboBoxCell)
         comboBoxCell.Value = "Downpayment"
@@ -372,19 +357,11 @@ Public Class FormPayment
         cbcDiscount.Value = "0"
 
         row.Cells(6).Value = (Double.Parse(row.Cells(4).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
-        row.Cells(7).Value = itemID
-        row.Cells(8).Value = projID
-
-        DataGridView1.Columns(0).ReadOnly = True
-        DataGridView1.Columns(1).ReadOnly = True
-        DataGridView1.Columns(4).ReadOnly = True
-        DataGridView1.Columns(6).ReadOnly = True
-
-        DataGridView1.Columns(7).Visible = False
-        DataGridView1.Columns(8).Visible = False
-
+        row.Cells(7).Value = project.itemID
+        row.Cells(8).Value = project.projID
     End Sub
     Private Sub setDataGridView()
+
         With cbb
             .Items.Add("Downpayment")
             .Items.Add("Equity")
@@ -443,6 +420,122 @@ Public Class FormPayment
             .Columns(7).Width = 100
             .Columns(8).Width = 100
         End With
+
+        DataGridView1.Columns(0).ReadOnly = True
+        DataGridView1.Columns(1).ReadOnly = True
+        DataGridView1.Columns(4).ReadOnly = True
+        DataGridView1.Columns(6).ReadOnly = True
+        DataGridView1.Columns(7).ReadOnly = True
+        DataGridView1.Columns(8).ReadOnly = True
+
+        'DataGridView1.Columns(7).Visible = False
+        'DataGridView1.Columns(8).Visible = False
+
     End Sub
 
+    Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
+        If txtOfficialReceipt.Text.Trim.Length < 1 Or txtOfficialReceipt.Text.Trim.Equals(String.Empty) Then
+            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter Official Receipt number.", "Official Receipt", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            Select Case ret
+                Case DialogResult.OK
+                    txtOfficialReceipt.Text = String.Empty
+                    txtOfficialReceipt.Focus()
+                    Exit Sub
+            End Select
+        End If
+
+        If cbPaymentType.SelectedIndex < 0 Then
+            Dim ret As DialogResult = MessageBox.Show(Me, "Please select Payment type.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Select Case ret
+                Case DialogResult.OK
+                    cbPaymentType.DroppedDown = True
+                    cbPaymentType.Focus()
+                    Exit Sub
+            End Select
+        End If
+
+        If txtPaidAmount.Text.Trim.Length < 1 Or txtPaidAmount.Text.Trim.Equals(String.Empty) Then
+            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter payment amount.", "Please enter amount", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            Select Case ret
+                Case DialogResult.OK
+                    txtPaidAmount.Text = String.Empty
+                    txtPaidAmount.Focus()
+                    Exit Sub
+            End Select
+        End If
+
+        If DataGridView1.Rows.Count() < 1 Then
+            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter project name.", "Project Name", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            Select Case ret
+                Case DialogResult.OK
+                    If ListViewUserItem.Items.Count > 0 Then
+                        ListViewUserItem.Focus()
+                        ListViewUserItem.Items(0).Selected = True
+                        ListViewUserItem.Items(0).Focused = True
+                    End If
+                    Exit Sub
+            End Select
+            Exit Sub
+        End If
+
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            Dim trans As Transaction = New Transaction()
+            Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(2, row.Index), DataGridViewComboBoxCell)
+            trans._or = txtOfficialReceipt.Text.Trim
+            trans._datePaid = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
+            trans._paidAmount = txtPaidAmount.Text.Trim.Trim.Trim
+            trans._tcp = row.Cells(1).Value
+            trans._particular = c.Items.IndexOf(c.Value)
+            trans._partNo = txtPart.Text.Trim
+            trans._paymentType = cbPaymentType.SelectedIndex
+            trans._clientId = userId
+            trans._projectItemId = row.Cells(7).Value
+            trans._projectId = row.Cells(8).Value
+            insertPurchase(trans)
+        Next
+        cbPaymentType.SelectedIndex = -1
+        txtPaidAmount.Text = String.Empty
+        txtOfficialReceipt.Text = String.Empty
+        DataGridView1.Rows.Clear()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(2, row.Index), DataGridViewComboBoxCell)
+                Console.WriteLine(row.Index & ". " & row.Cells(2).Value.ToString & " Tag: " & c.Items.IndexOf(c.Value) & " ," & row.Cells(1).Value)
+            End If
+        Next
+    End Sub
+
+    Private Sub insertPurchase(ByVal trans As Transaction)
+        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `tcp`, `particular`, 
+        `part_no`, `payment_type`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @TCP, 
+        @Particular, @PartNo, @PaymentType, @userid, @ProjId, @ProjItemId)"
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = trans._or 'txtOfficialReceipt.Text.Trim
+        sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(trans._datePaid, "yyyy-MM-dd").ToString 'Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
+        sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = trans._paidAmount 'txtPaidAmount.Text.Trim
+        sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = trans._tcp
+        sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = trans._particular 'Integer.Parse(cbParticular.SelectedIndex)
+        sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = trans._partNo 'Integer.Parse(txtPart.Text)
+        sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = trans._paymentType 'cbPaymentType.SelectedIndex
+        sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = trans._clientId 'userId
+        sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int24).Value = trans._projectId
+        sqlCommand.Parameters.Add("@ProjItemId", MySqlDbType.Int24).Value = trans._projectItemId
+        Try
+            If sqlCommand.ExecuteNonQuery() = 1 Then
+                MessageBox.Show("Successfully Saved")
+            Else
+                MessageBox.Show("Data NOT Inserted. Please try again.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("ERROR: " & ex.Message)
+
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
 End Class

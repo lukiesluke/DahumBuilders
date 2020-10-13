@@ -30,7 +30,6 @@ Partial Class FormPayment
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelInformation = New System.Windows.Forms.Panel()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.PanelDownpayment = New System.Windows.Forms.Panel()
         Me.cbDownpayment = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -45,7 +44,6 @@ Partial Class FormPayment
         Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.lblPart = New System.Windows.Forms.Label()
         Me.txtPart = New System.Windows.Forms.TextBox()
-        Me.btnConfirm = New System.Windows.Forms.Button()
         Me.btnSearchProject = New System.Windows.Forms.Button()
         Me.cbParticular = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -68,14 +66,15 @@ Partial Class FormPayment
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.PanelInformation.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelDownpayment.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -93,8 +92,8 @@ Partial Class FormPayment
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PanelInformation)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1334, 733)
-        Me.SplitContainer1.SplitterDistance = 424
+        Me.SplitContainer1.Size = New System.Drawing.Size(1464, 665)
+        Me.SplitContainer1.SplitterDistance = 465
         Me.SplitContainer1.TabIndex = 1
         '
         'PanelTotal
@@ -103,7 +102,7 @@ Partial Class FormPayment
         Me.PanelTotal.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelTotal.Location = New System.Drawing.Point(0, 431)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.Size = New System.Drawing.Size(424, 142)
+        Me.PanelTotal.Size = New System.Drawing.Size(465, 74)
         Me.PanelTotal.TabIndex = 3
         '
         'Panel3
@@ -112,9 +111,9 @@ Partial Class FormPayment
         Me.Panel3.Controls.Add(Me.btnPayment)
         Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 573)
+        Me.Panel3.Location = New System.Drawing.Point(0, 505)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(424, 160)
+        Me.Panel3.Size = New System.Drawing.Size(465, 160)
         Me.Panel3.TabIndex = 2
         '
         'btnPayment
@@ -144,7 +143,7 @@ Partial Class FormPayment
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 100)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(424, 331)
+        Me.Panel2.Size = New System.Drawing.Size(465, 331)
         Me.Panel2.TabIndex = 1
         '
         'Panel1
@@ -153,7 +152,7 @@ Partial Class FormPayment
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(424, 100)
+        Me.Panel1.Size = New System.Drawing.Size(465, 100)
         Me.Panel1.TabIndex = 0
         '
         'PanelInformation
@@ -164,7 +163,6 @@ Partial Class FormPayment
         Me.PanelInformation.Controls.Add(Me.cbPaymentType)
         Me.PanelInformation.Controls.Add(Me.lblPart)
         Me.PanelInformation.Controls.Add(Me.txtPart)
-        Me.PanelInformation.Controls.Add(Me.btnConfirm)
         Me.PanelInformation.Controls.Add(Me.btnSearchProject)
         Me.PanelInformation.Controls.Add(Me.cbParticular)
         Me.PanelInformation.Controls.Add(Me.Label1)
@@ -183,19 +181,8 @@ Partial Class FormPayment
         Me.PanelInformation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelInformation.Location = New System.Drawing.Point(0, 0)
         Me.PanelInformation.Name = "PanelInformation"
-        Me.PanelInformation.Size = New System.Drawing.Size(906, 733)
+        Me.PanelInformation.Size = New System.Drawing.Size(995, 665)
         Me.PanelInformation.TabIndex = 2
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 749)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(1334, 186)
-        Me.DataGridView1.TabIndex = 50
         '
         'PanelDownpayment
         '
@@ -211,9 +198,9 @@ Partial Class FormPayment
         Me.PanelDownpayment.Controls.Add(Me.Label11)
         Me.PanelDownpayment.Controls.Add(Me.Label3)
         Me.PanelDownpayment.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 528)
+        Me.PanelDownpayment.Location = New System.Drawing.Point(0, 480)
         Me.PanelDownpayment.Name = "PanelDownpayment"
-        Me.PanelDownpayment.Size = New System.Drawing.Size(904, 203)
+        Me.PanelDownpayment.Size = New System.Drawing.Size(993, 183)
         Me.PanelDownpayment.TabIndex = 47
         '
         'cbDownpayment
@@ -353,15 +340,6 @@ Partial Class FormPayment
         Me.txtPart.Text = "0"
         Me.txtPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'btnConfirm
-        '
-        Me.btnConfirm.Location = New System.Drawing.Point(608, 474)
-        Me.btnConfirm.Name = "btnConfirm"
-        Me.btnConfirm.Size = New System.Drawing.Size(241, 48)
-        Me.btnConfirm.TabIndex = 34
-        Me.btnConfirm.Text = "&Confirm"
-        Me.btnConfirm.UseVisualStyleBackColor = True
-        '
         'btnSearchProject
         '
         Me.btnSearchProject.Location = New System.Drawing.Point(727, 136)
@@ -482,8 +460,10 @@ Partial Class FormPayment
         '
         'txtOfficialReceipt
         '
+        Me.txtOfficialReceipt.BackColor = System.Drawing.Color.MistyRose
         Me.txtOfficialReceipt.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOfficialReceipt.Location = New System.Drawing.Point(608, 350)
+        Me.txtOfficialReceipt.MaxLength = 12
         Me.txtOfficialReceipt.Name = "txtOfficialReceipt"
         Me.txtOfficialReceipt.Size = New System.Drawing.Size(241, 31)
         Me.txtOfficialReceipt.TabIndex = 9
@@ -556,6 +536,17 @@ Partial Class FormPayment
         Me.Label13.TabIndex = 32
         Me.Label13.Text = "Payment Type"
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 683)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowTemplate.Height = 28
+        Me.DataGridView1.Size = New System.Drawing.Size(1463, 252)
+        Me.DataGridView1.TabIndex = 50
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -577,9 +568,9 @@ Partial Class FormPayment
         Me.Panel3.ResumeLayout(False)
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelDownpayment.ResumeLayout(False)
         Me.PanelDownpayment.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -613,7 +604,6 @@ Partial Class FormPayment
     Friend WithEvents PanelTotal As Panel
     Friend WithEvents cbPaymentType As ComboBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents btnConfirm As Button
     Friend WithEvents txtPart As TextBox
     Friend WithEvents lblPart As Label
     Friend WithEvents cbDownpayment As ComboBox
