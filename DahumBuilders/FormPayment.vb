@@ -5,9 +5,9 @@ Public Class FormPayment
     Dim userName As String = ""
     Dim userAddress As String = ""
     Dim sumOfTotalContractPrice As Double = 0
-    Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular"}
-    Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment"}
-    Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount"}
+    Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
+    Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
+    Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
 
 
     Public Sub ShowForm(id As String, name As String, address As String)
@@ -71,7 +71,7 @@ Public Class FormPayment
             lblDownpaymentAmount.Text = sumOfTotalContractPrice.ToString("N2")
 
             For a As Integer = 1 To 1
-                item = New ListViewItem
+                item = New ListViewItem(String.Empty)
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(String.Empty)
                 item.SubItems.Add(String.Empty)
@@ -306,9 +306,8 @@ Public Class FormPayment
 
     Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
         Dim project As Project = New Project()
-
         If e.KeyCode = Keys.KeyCode.Enter Then
-            If ListViewUserItem.Items.Count > 0 Then
+            If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
                 project.itemID = ListViewUserItem.SelectedItems.Item(0).Text
                 project.name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
                 project.block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
@@ -321,7 +320,6 @@ Public Class FormPayment
                 Console.WriteLine("ID " & project.itemID & " - " & project.name & " " & project.block & " " & project.lot & " " & project.sqm & " " & project.tcp & " " & project.projID)
             End If
         End If
-
         'item = New ListViewItem(table.Rows(i)("id").ToString)
         'item.SubItems.Add(table.Rows(i)("proj_name"))
         'item.SubItems.Add(table.Rows(i)("block"))
@@ -362,6 +360,8 @@ Public Class FormPayment
         row.Cells(6).Value = (Double.Parse(row.Cells(4).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
         row.Cells(7).Value = project.itemID
         row.Cells(8).Value = project.projID
+        row.Cells(9).Value = 0.ToString("N2")
+
     End Sub
     Private Sub setDataGridView()
 
@@ -408,10 +408,10 @@ Public Class FormPayment
 
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         End With
 
         With DataGridView1
