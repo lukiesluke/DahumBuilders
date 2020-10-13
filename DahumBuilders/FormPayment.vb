@@ -113,6 +113,14 @@ Public Class FormPayment
                          (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 
+    Private Sub txtMonthOf_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPart.KeyPress
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
     Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs)
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `tcp`, `particular`, 
         `part_no`, `payment_type`, `userid`) VALUES (@OR, @DatePaid, @PaidAmount, @TCP, @Particular, @PartNo, @PaymentType, @userid)"
@@ -139,14 +147,6 @@ Public Class FormPayment
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
-    End Sub
-
-    Private Sub txtMonthOf_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPart.KeyPress
-        If Asc(e.KeyChar) <> 8 Then
-            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
-                e.Handled = True
-            End If
-        End If
     End Sub
 
     Private Sub cbDownpayment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDownpayment.SelectedIndexChanged
@@ -294,6 +294,9 @@ Public Class FormPayment
         'Catch ex As Exception
         '    MessageBox.Show(ex.Message)
         'End Try
+        If DataGridView1.CurrentCell.ColumnIndex = 9 Or DataGridView1.CurrentCell.ColumnIndex = 10 Then 'Part
+            AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtMonthOf_KeyPress
+        End If
     End Sub
 
     Private Sub DataGridView1_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles DataGridView1.CurrentCellDirtyStateChanged
@@ -400,6 +403,8 @@ Public Class FormPayment
         DataGridView1.Columns.Add("", "Discount Amount")
         DataGridView1.Columns.Add("", "ItemID")
         DataGridView1.Columns.Add("", "ProjectID")
+        DataGridView1.Columns.Add("", "Monthly")
+        DataGridView1.Columns.Add("", "Part")
 
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -411,14 +416,16 @@ Public Class FormPayment
 
         With DataGridView1
             .Columns(0).Width = 150
-            .Columns(1).Width = 100
+            .Columns(1).Width = 90 'TCP
             .Columns(2).Width = 100
             .Columns(3).Width = 100
-            .Columns(4).Width = 100
-            .Columns(5).Width = 100
-            .Columns(6).Width = 100
-            .Columns(7).Width = 100
-            .Columns(8).Width = 100
+            .Columns(4).Width = 90 'Downpayment Amount
+            .Columns(5).Width = 80
+            .Columns(6).Width = 90 'Discount Amount
+            .Columns(7).Width = 50 'ItemID
+            .Columns(8).Width = 50 'ProjectID
+            .Columns(9).Width = 90 'Monthly
+            .Columns(10).Width = 50 'Part
         End With
 
         DataGridView1.Columns(0).ReadOnly = True
@@ -427,10 +434,9 @@ Public Class FormPayment
         DataGridView1.Columns(6).ReadOnly = True
         DataGridView1.Columns(7).ReadOnly = True
         DataGridView1.Columns(8).ReadOnly = True
-
-        'DataGridView1.Columns(7).Visible = False
-        'DataGridView1.Columns(8).Visible = False
-
+        DataGridView1.Columns(7).Visible = False
+        DataGridView1.Columns(8).Visible = False
+        CType(DataGridView1.Columns(10), DataGridViewTextBoxColumn).MaxInputLength = 3
     End Sub
 
     Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
@@ -493,6 +499,7 @@ Public Class FormPayment
             trans._projectId = row.Cells(8).Value
             insertPurchase(trans)
         Next
+
         cbPaymentType.SelectedIndex = -1
         txtPaidAmount.Text = String.Empty
         txtOfficialReceipt.Text = String.Empty
@@ -524,15 +531,14 @@ Public Class FormPayment
         sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = trans._clientId 'userId
         sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int24).Value = trans._projectId
         sqlCommand.Parameters.Add("@ProjItemId", MySqlDbType.Int24).Value = trans._projectItemId
+
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
-                MessageBox.Show("Successfully Saved")
             Else
-                MessageBox.Show("Data NOT Inserted. Please try again.")
+                MessageBox.Show(Me, "Data NOT Inserted. Please try again.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If
         Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
-
+            MessageBox.Show(Me, "ERROR: ", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
