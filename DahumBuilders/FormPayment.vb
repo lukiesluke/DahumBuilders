@@ -23,7 +23,6 @@ Public Class FormPayment
         lblName.Text = userName
         lblAddress.Text = userAddress
 
-        cbParticular.SelectedIndex = -1
         load_userId_info_data_reader()
         setDataGridView()
     End Sub
@@ -98,7 +97,7 @@ Public Class FormPayment
         End If
     End Sub
 
-    Private Sub txtAmountPaid_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPaidAmount.KeyPress
+    Private Sub txtAmountPaid_KeyPress(sender As Object, e As KeyPressEventArgs)
         Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
         e.Handled = Not (Char.IsDigit(e.KeyChar) Or
                          Asc(e.KeyChar) = 8 Or
@@ -390,16 +389,6 @@ Public Class FormPayment
             End Select
         End If
 
-        If txtPaidAmount.Text.Trim.Length < 1 Or txtPaidAmount.Text.Trim.Equals(String.Empty) Then
-            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter payment amount.", "Please enter amount", MessageBoxButtons.OK, MessageBoxIcon.Question)
-            Select Case ret
-                Case DialogResult.OK
-                    txtPaidAmount.Text = String.Empty
-                    txtPaidAmount.Focus()
-                    Exit Sub
-            End Select
-        End If
-
         If DataGridView1.Rows.Count() < 1 Then
             Dim ret As DialogResult = MessageBox.Show(Me, "Please enter project name.", "Project Name", MessageBoxButtons.OK, MessageBoxIcon.Question)
             Select Case ret
@@ -415,11 +404,29 @@ Public Class FormPayment
         End If
 
         For Each row As DataGridViewRow In DataGridView1.Rows
+            If row.Cells(11).Value Is Nothing Then
+                row.DefaultCellStyle.BackColor = Color.MistyRose
+            Else
+                row.DefaultCellStyle.BackColor = Color.White
+            End If
+        Next
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If row.Cells(11).Value Is Nothing Then
+                Dim ret As DialogResult = MessageBox.Show(Me, "Please enter amount to pay.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Question)
+                Select Case ret
+                    Case DialogResult.OK
+                        If DataGridView1.RowCount > 0 Then
+                            DataGridView1.Focus()
+                            row.Cells(11).Selected = True
+                        End If
+                End Select
+                Exit Sub
+            End If
             Dim trans As Transaction = New Transaction()
             Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(2, row.Index), DataGridViewComboBoxCell)
             trans._or = txtOfficialReceipt.Text.Trim
             trans._datePaid = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
-            trans._paidAmount = txtPaidAmount.Text.Trim.Trim.Trim
+            trans._paidAmount = row.Cells(11).Value
             trans._tcp = row.Cells(1).Value
             trans._particular = c.Items.IndexOf(c.Value)
             trans._partNo = row.Cells(10).Value
@@ -431,7 +438,6 @@ Public Class FormPayment
         Next
 
         cbPaymentType.SelectedIndex = -1
-        txtPaidAmount.Text = String.Empty
         txtOfficialReceipt.Text = String.Empty
         DataGridView1.Rows.Clear()
     End Sub

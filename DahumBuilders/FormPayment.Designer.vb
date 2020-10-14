@@ -34,10 +34,6 @@ Partial Class FormPayment
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.btnSearchProject = New System.Windows.Forms.Button()
-        Me.cbParticular = New System.Windows.Forms.ComboBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtPaidAmount = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.ListViewUserItem = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -81,7 +77,7 @@ Partial Class FormPayment
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PanelInformation)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1302, 502)
+        Me.SplitContainer1.Size = New System.Drawing.Size(1302, 406)
         Me.SplitContainer1.SplitterDistance = 362
         Me.SplitContainer1.TabIndex = 1
         '
@@ -92,7 +88,7 @@ Partial Class FormPayment
         Me.PanelTotal.Location = New System.Drawing.Point(0, 345)
         Me.PanelTotal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.Size = New System.Drawing.Size(362, 29)
+        Me.PanelTotal.Size = New System.Drawing.Size(362, 0)
         Me.PanelTotal.TabIndex = 3
         '
         'Panel3
@@ -101,7 +97,7 @@ Partial Class FormPayment
         Me.Panel3.Controls.Add(Me.btnPayment)
         Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 374)
+        Me.Panel3.Location = New System.Drawing.Point(0, 278)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(362, 128)
@@ -158,10 +154,6 @@ Partial Class FormPayment
         Me.PanelInformation.Controls.Add(Me.Label2)
         Me.PanelInformation.Controls.Add(Me.cbPaymentType)
         Me.PanelInformation.Controls.Add(Me.btnSearchProject)
-        Me.PanelInformation.Controls.Add(Me.cbParticular)
-        Me.PanelInformation.Controls.Add(Me.Label1)
-        Me.PanelInformation.Controls.Add(Me.txtPaidAmount)
-        Me.PanelInformation.Controls.Add(Me.Label9)
         Me.PanelInformation.Controls.Add(Me.ListViewUserItem)
         Me.PanelInformation.Controls.Add(Me.Label8)
         Me.PanelInformation.Controls.Add(Me.dtpDatePaid)
@@ -176,7 +168,7 @@ Partial Class FormPayment
         Me.PanelInformation.Location = New System.Drawing.Point(0, 0)
         Me.PanelInformation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelInformation.Name = "PanelInformation"
-        Me.PanelInformation.Size = New System.Drawing.Size(936, 502)
+        Me.PanelInformation.Size = New System.Drawing.Size(936, 406)
         Me.PanelInformation.TabIndex = 2
         '
         'lblContact
@@ -209,7 +201,7 @@ Partial Class FormPayment
         Me.cbPaymentType.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPaymentType.FormattingEnabled = True
         Me.cbPaymentType.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
-        Me.cbPaymentType.Location = New System.Drawing.Point(574, 284)
+        Me.cbPaymentType.Location = New System.Drawing.Point(187, 284)
         Me.cbPaymentType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cbPaymentType.Name = "cbPaymentType"
         Me.cbPaymentType.Size = New System.Drawing.Size(215, 25)
@@ -224,49 +216,6 @@ Partial Class FormPayment
         Me.btnSearchProject.TabIndex = 13
         Me.btnSearchProject.Text = "&Add Project"
         Me.btnSearchProject.UseVisualStyleBackColor = True
-        '
-        'cbParticular
-        '
-        Me.cbParticular.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbParticular.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbParticular.FormattingEnabled = True
-        Me.cbParticular.Items.AddRange(New Object() {"Downpayment", "Equity", "Monthly Amortization", "Cash Payment", "Reservation"})
-        Me.cbParticular.Location = New System.Drawing.Point(187, 284)
-        Me.cbParticular.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.cbParticular.Name = "cbParticular"
-        Me.cbParticular.Size = New System.Drawing.Size(215, 25)
-        Me.cbParticular.TabIndex = 17
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(102, 287)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(77, 17)
-        Me.Label1.TabIndex = 16
-        Me.Label1.Text = "Particular"
-        '
-        'txtPaidAmount
-        '
-        Me.txtPaidAmount.BackColor = System.Drawing.Color.MistyRose
-        Me.txtPaidAmount.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPaidAmount.Location = New System.Drawing.Point(574, 320)
-        Me.txtPaidAmount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtPaidAmount.Name = "txtPaidAmount"
-        Me.txtPaidAmount.Size = New System.Drawing.Size(215, 25)
-        Me.txtPaidAmount.TabIndex = 15
-        Me.txtPaidAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(504, 322)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(63, 17)
-        Me.Label9.TabIndex = 14
-        Me.Label9.Text = "Amount"
         '
         'ListViewUserItem
         '
@@ -411,7 +360,7 @@ Partial Class FormPayment
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(457, 287)
+        Me.Label13.Location = New System.Drawing.Point(71, 287)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(108, 17)
         Me.Label13.TabIndex = 32
@@ -423,7 +372,7 @@ Partial Class FormPayment
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ScrollBar
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(11, 516)
+        Me.DataGridView1.Location = New System.Drawing.Point(11, 420)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
@@ -435,7 +384,7 @@ Partial Class FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1141, 755)
+        Me.ClientSize = New System.Drawing.Size(1327, 755)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -478,10 +427,6 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderProjectName As ColumnHeader
     Friend WithEvents btnSearchProject As Button
     Friend WithEvents ColumnHeaderSQM As ColumnHeader
-    Friend WithEvents txtPaidAmount As TextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents cbParticular As ComboBox
     Friend WithEvents PanelTotal As Panel
     Friend WithEvents cbPaymentType As ComboBox
     Friend WithEvents Label13 As Label
