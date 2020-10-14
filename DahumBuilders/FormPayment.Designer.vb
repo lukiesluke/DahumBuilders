@@ -52,6 +52,9 @@ Partial Class FormPayment
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -59,11 +62,12 @@ Partial Class FormPayment
         Me.Panel3.SuspendLayout()
         Me.PanelInformation.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
         '
-        Me.SplitContainer1.Location = New System.Drawing.Point(11, 10)
+        Me.SplitContainer1.Location = New System.Drawing.Point(11, 44)
         Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
@@ -372,13 +376,36 @@ Partial Class FormPayment
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ScrollBar
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(11, 420)
+        Me.DataGridView1.Location = New System.Drawing.Point(11, 454)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
         Me.DataGridView1.Size = New System.Drawing.Size(1302, 202)
         Me.DataGridView1.TabIndex = 50
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1327, 28)
+        Me.MenuStrip1.TabIndex = 51
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ViewToolStripMenuItem
+        '
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransactionHistoryToolStripMenuItem})
+        Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+        Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(53, 24)
+        Me.ViewToolStripMenuItem.Text = "View"
+        '
+        'TransactionHistoryToolStripMenuItem
+        '
+        Me.TransactionHistoryToolStripMenuItem.Name = "TransactionHistoryToolStripMenuItem"
+        Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
         'FormPayment
         '
@@ -387,7 +414,9 @@ Partial Class FormPayment
         Me.ClientSize = New System.Drawing.Size(1327, 755)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.SplitContainer1)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormPayment"
         Me.ShowIcon = False
@@ -401,7 +430,10 @@ Partial Class FormPayment
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents SplitContainer1 As SplitContainer
@@ -434,4 +466,7 @@ Partial Class FormPayment
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label2 As Label
     Friend WithEvents lblContact As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TransactionHistoryToolStripMenuItem As ToolStripMenuItem
 End Class

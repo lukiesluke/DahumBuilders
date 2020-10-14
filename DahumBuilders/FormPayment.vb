@@ -494,4 +494,15 @@ Public Class FormPayment
             sqlConnection.Close()
         End Try
     End Sub
+
+    Private Sub TransactionHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransactionHistoryToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
+            If mFormUserProfile.WindowState = 1 Then
+                mFormUserProfile.WindowState = 0
+            End If
+        Else
+            mFormRptTransaction = New FormRptTransaction
+            mFormRptTransaction.ShowForm(userId, userName, userAddress)
+        End If
+    End Sub
 End Class
