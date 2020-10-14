@@ -25,7 +25,7 @@ Public Class FormRptTransaction
         IF(t.`part_no`=0,'',t.`part_no`) AS part_no, pa.`name` AS `particular`, `date_paid` 
         FROM `db_transaction` t INNER JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         INNER JOIN `db_particular_type` pa ON t.`particular` = pa.`id`
-        WHERE t.`userid`=@userId ORDER BY date_paid, t.`particular`, t.`part_no` ASC"
+        WHERE t.`userid`=@userId ORDER BY date_paid, t.`particular`, t.`part_no`, t.`official_receipt_no` ASC"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
