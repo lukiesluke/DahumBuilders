@@ -144,15 +144,20 @@ Public Class FormPayment
         Dim discount As Double = 0
         Dim downpamentAmount As Double = 0
 
-        'DataGridView1.Columns.Add("", "Desciption")  0
-        'DataGridView1.Columns.Add("", "TCP")   1
-        'DataGridView1.Columns.Insert(2, cbb)   2
-        'DataGridView1.Columns.Insert(3, cbbDownpayment) 3
-        'DataGridView1.Columns.Add("", "Downpayment Amount") 4
-        'DataGridView1.Columns.Insert(5, cbbDiscount) 5
-        'DataGridView1.Columns.Add("", "Discount Amount") 6
-        'DataGridView1.Columns.Add("", "ItemID") 7
-        'DataGridView1.Columns.Add("", "ProjectID") 8
+        'With DataGridView1
+        '    .Columns(0).Width = 150
+        '    .Columns(1).Width = 90 'TCP
+        '    .Columns(2).Width = 100
+        '    .Columns(3).Width = 100
+        '    .Columns(4).Width = 90 'Downpayment Amount
+        '    .Columns(5).Width = 80
+        '    .Columns(6).Width = 115 'Discount Amount
+        '    .Columns(7).Width = 50 'ItemID
+        '    .Columns(8).Width = 50 'ProjectID
+        '    .Columns(9).Width = 90 'Monthly
+        '    .Columns(10).Width = 50 'Part
+        '    .Columns(11).Width = 110 'Amount to Pay
+        'End With
 
         Select Case e.ColumnIndex
             Case 2 'ComoboBox Particular
@@ -165,8 +170,10 @@ Public Class FormPayment
                         tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
                         discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = (tcp * discount).ToString("N2")
-                        DataGridView1.Columns(3).Visible = True
-                        DataGridView1.Columns(4).Visible = True
+                        DataGridView1.Columns(3).Visible = True 'cbb Downpayment
+                        DataGridView1.Columns(4).Visible = True 'Downpayment Amount
+                        DataGridView1.Columns(9).Visible = True 'Monthly
+                        DataGridView1.Columns(10).Visible = True 'Part
                         Console.WriteLine("Downpayment")
                     Case "Equity"
                         Console.WriteLine("Equity")
@@ -176,8 +183,10 @@ Public Class FormPayment
                         Console.WriteLine("Reservation")
                     Case "Cash"
                         Console.WriteLine("Cash")
-                        DataGridView1.Columns(3).Visible = False
-                        DataGridView1.Columns(4).Visible = False
+                        DataGridView1.Columns(3).Visible = False 'cbb Downpayment
+                        DataGridView1.Columns(4).Visible = False 'Downpayment Amount
+                        DataGridView1.Columns(9).Visible = False 'Monthly
+                        DataGridView1.Columns(10).Visible = False 'Part
                 End Select
             Case 3 'ComoboBox Downpayment
                 DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
@@ -346,7 +355,7 @@ Public Class FormPayment
             .Columns(2).Width = 100
             .Columns(3).Width = 100
             .Columns(4).Width = 90 'Downpayment Amount
-            .Columns(5).Width = 80
+            .Columns(5).Width = 70
             .Columns(6).Width = 115 'Discount Amount
             .Columns(7).Width = 50 'ItemID
             .Columns(8).Width = 50 'ProjectID
@@ -455,6 +464,11 @@ Public Class FormPayment
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `tcp`, `particular`, 
         `part_no`, `payment_type`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @TCP, 
         @Particular, @PartNo, @PaymentType, @userid, @ProjId, @ProjItemId)"
+
+        If trans._particular.Equals("0") Or trans._particular.Equals("3") Or trans._particular.Equals("4") Then
+            trans._partNo = "0"
+        End If
+
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = trans._or 'txtOfficialReceipt.Text.Trim
