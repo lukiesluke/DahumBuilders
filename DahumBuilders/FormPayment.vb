@@ -301,8 +301,8 @@ Public Class FormPayment
             .Items.Add("Downpayment")
             .Items.Add("Equity")
             .Items.Add("Monthly")
-            .Items.Add("Reservation")
             .Items.Add("Cash")
+            .Items.Add("Reservation")
         End With
 
         With cbbDownpayment
