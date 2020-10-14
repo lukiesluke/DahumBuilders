@@ -65,17 +65,28 @@ Public Class FormUserList
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
 
         If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
-            currentUserId = ListViewUser.SelectedItems(0).Text
-            currentUserAddress = ListViewUser.SelectedItems(0).SubItems(7).Text
+            Dim user As User = New User()
+            user._id = ListViewUser.SelectedItems(0).Text
+            user._surname = ListViewUser.SelectedItems(0).SubItems(1).Text
+            user._name = ListViewUser.SelectedItems(0).SubItems(2).Text
+            user._middleName = ListViewUser.SelectedItems(0).SubItems(3).Text
+            user._gender = ListViewUser.SelectedItems(0).SubItems(4).Text
+            user._civilStatus = ListViewUser.SelectedItems(0).SubItems(5).Text
+            user._dateOfBirth = ListViewUser.SelectedItems(0).SubItems(6).Text
+            user._address = ListViewUser.SelectedItems(0).SubItems(7).Text
+            user._image_location = ListViewUser.SelectedItems(0).SubItems(8).Text
 
-            txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
-            txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
-            txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
-            txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
-            txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
-            txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
+            currentUserId = user._id
+            currentUserAddress = user._address
+            currentUserName = user._name & " " & user._middleName & " " & user._surname
+
+            txtName.Text = user._name
+            txtSurname.Text = user._surname
+            txtMiddleName.Text = user._middleName
+            txtGender.Text = user._gender
+            txtCivilStatus.Text = user._civilStatus
+            txtDateOfBirth.Text = user._dateOfBirth
             txtAddress.Text = currentUserAddress
-            currentUserName = txtName.Text & " " & txtMiddleName.Text & " " & txtSurname.Text
 
             If currentUserId.Length > 0 Then
                 enableDisableClientButton(True)
@@ -83,18 +94,18 @@ Public Class FormUserList
                 enableDisableClientButton(False)
             End If
 
-            If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
-                    If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
-                        PictureBox1.Image = My.Resources.client_male
-                    Else
-                        PictureBox1.Image = My.Resources.client_female
-                    End If
+            If user._image_location.Length < 3 Then
+                If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
+                    PictureBox1.Image = My.Resources.client_male
                 Else
-                    PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
+                    PictureBox1.Image = My.Resources.client_female
                 End If
+            Else
+                PictureBox1.ImageLocation = user._image_location
             End If
+        End If
 
-            If e.KeyCode = Keys.F1 Then
+        If e.KeyCode = Keys.F1 Then
             If Application.OpenForms().OfType(Of FormUserProfile).Any Then
                 If mFormUserProfile.WindowState = 1 Then
                     mFormUserProfile.WindowState = 0
@@ -107,17 +118,28 @@ Public Class FormUserList
     End Sub
 
     Private Sub ListViewUser_Click(sender As Object, e As EventArgs) Handles ListViewUser.Click
-        currentUserId = ListViewUser.SelectedItems(0).Text
-        currentUserAddress = ListViewUser.SelectedItems(0).SubItems(7).Text
+        Dim user As User = New User()
+        user._id = ListViewUser.SelectedItems(0).Text
+        user._surname = ListViewUser.SelectedItems(0).SubItems(1).Text
+        user._name = ListViewUser.SelectedItems(0).SubItems(2).Text
+        user._middleName = ListViewUser.SelectedItems(0).SubItems(3).Text
+        user._gender = ListViewUser.SelectedItems(0).SubItems(4).Text
+        user._civilStatus = ListViewUser.SelectedItems(0).SubItems(5).Text
+        user._dateOfBirth = ListViewUser.SelectedItems(0).SubItems(6).Text
+        user._address = ListViewUser.SelectedItems(0).SubItems(7).Text
+        user._image_location = ListViewUser.SelectedItems(0).SubItems(8).Text
 
-        txtName.Text = ListViewUser.SelectedItems(0).SubItems(2).Text
-        txtSurname.Text = ListViewUser.SelectedItems(0).SubItems(1).Text
-        txtMiddleName.Text = ListViewUser.SelectedItems(0).SubItems(3).Text
-        txtGender.Text = ListViewUser.SelectedItems(0).SubItems(4).Text
-        txtCivilStatus.Text = ListViewUser.SelectedItems(0).SubItems(5).Text
-        txtDateOfBirth.Text = ListViewUser.SelectedItems(0).SubItems(6).Text
+        currentUserId = user._id
+        currentUserAddress = user._address
+        currentUserName = user._name & " " & user._middleName & " " & user._surname
+
+        txtName.Text = user._name
+        txtSurname.Text = user._surname
+        txtMiddleName.Text = user._middleName
+        txtGender.Text = user._gender
+        txtCivilStatus.Text = user._civilStatus
+        txtDateOfBirth.Text = user._dateOfBirth
         txtAddress.Text = currentUserAddress
-        currentUserName = txtName.Text & " " & txtMiddleName.Text & " " & txtSurname.Text
 
         If currentUserId.Length > 0 Then
             enableDisableClientButton(True)
@@ -125,14 +147,14 @@ Public Class FormUserList
             enableDisableClientButton(False)
         End If
 
-        If ListViewUser.SelectedItems(0).SubItems(8).Text.Length < 3 Then
+        If user._image_location.Length < 3 Then
             If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
                 PictureBox1.Image = My.Resources.client_male
             Else
                 PictureBox1.Image = My.Resources.client_female
             End If
         Else
-            PictureBox1.ImageLocation = ListViewUser.SelectedItems(0).SubItems(8).Text
+            PictureBox1.ImageLocation = user._image_location
         End If
     End Sub
 
@@ -169,12 +191,16 @@ Public Class FormUserList
 
     Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
         If Application.OpenForms().OfType(Of FormPayment).Any Then
-            If mFormUserProfile.WindowState = 1 Then
-                mFormUserProfile.WindowState = 0
-            End If
+            mFormPayment.WindowState = FormWindowState.Maximized
+            mFormPayment.Focus()
         Else
             mFormPayment = New FormPayment
-            mFormPayment.ShowForm(currentUserId, currentUserName, currentUserAddress)
+            mFormPayment.MdiParent = FormMainDahum
+            mFormPayment.userId = currentUserId
+            mFormPayment.userName = currentUserName
+            mFormPayment.userAddress = currentUserAddress
+            mFormPayment.Show()
+            'mFormPayment.ShowForm(currentUserId, currentUserName, currentUserAddress)
         End If
     End Sub
 

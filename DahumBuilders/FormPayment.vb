@@ -1,14 +1,13 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormPayment
-    Dim userId As String = ""
-    Dim userName As String = ""
-    Dim userAddress As String = ""
+    Public Property userId As String = ""
+    Public Property userName As String = ""
+    Public Property userAddress As String = ""
     Dim sumOfTotalContractPrice As Double = 0
     Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
-
 
     Public Sub ShowForm(id As String, name As String, address As String)
         userId = id
@@ -18,18 +17,13 @@ Public Class FormPayment
     End Sub
 
     Private Sub FormPayment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Top = (20)
-        Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
-        Me.Size = New Size(1050, 650)
+        'Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2) - 80
+        'Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2) - 120
+        Me.Size = New Size(1024, 670)
         lblName.Text = userName
         lblAddress.Text = userAddress
 
         cbParticular.SelectedIndex = -1
-        cbDownpayment.SelectedIndex = 0
-        cbDiscount.SelectedIndex = 0
-
-        PanelDownpayment.Visible = False
-        setPartVisibility()
         load_userId_info_data_reader()
         setDataGridView()
     End Sub
@@ -68,8 +62,6 @@ Public Class FormPayment
             Next
 
             sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "id > 0"))
-            lblDownpaymentAmount.Text = sumOfTotalContractPrice.ToString("N2")
-
             For a As Integer = 1 To 1
                 item = New ListViewItem(String.Empty)
                 item.UseItemStyleForSubItems = False
@@ -113,79 +105,11 @@ Public Class FormPayment
                          (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 
-    Private Sub txtMonthOf_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPart.KeyPress
+    Private Sub txtMonthOf_KeyPress(sender As Object, e As KeyPressEventArgs)
         If Asc(e.KeyChar) <> 8 Then
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
                 e.Handled = True
             End If
-        End If
-    End Sub
-
-    Private Sub btnConfirm_Click_1(sender As Object, e As EventArgs)
-        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `userid`) VALUES (@OR, @DatePaid, @PaidAmount, @TCP, @Particular, @PartNo, @PaymentType, @userid)"
-        Connection()
-        sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = txtOfficialReceipt.Text.Trim
-        sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
-        sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = txtPaidAmount.Text.Trim
-        sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = sumOfTotalContractPrice
-        sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = Integer.Parse(cbParticular.SelectedIndex)
-        sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = Integer.Parse(txtPart.Text)
-        sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = cbPaymentType.SelectedIndex
-        sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = userId
-        Try
-            If sqlCommand.ExecuteNonQuery() = 1 Then
-                MessageBox.Show("Successfully Saved")
-            Else
-                MessageBox.Show("Data NOT Inserted. Please try again.")
-            End If
-        Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
-
-        Finally
-            sqlCommand.Dispose()
-            sqlConnection.Close()
-        End Try
-    End Sub
-
-    Private Sub cbDownpayment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDownpayment.SelectedIndexChanged
-        If cbDownpayment.SelectedIndex < 0 Then
-            lblDownpaymentAmount.Text = 0.ToString("N2")
-            Exit Sub
-        End If
-        Dim percent As Double = Double.Parse(cbDownpayment.Text) / 100
-        lblDownpaymentAmount.Text = ((sumOfTotalContractPrice) * percent).ToString("N2")
-    End Sub
-
-    Private Sub computePaymentDiscount()
-        Dim percentDiscount As Double = Double.Parse(cbDiscount.Text) / 100
-        lblDiscountAmount.Text = (Double.Parse(lblDownpaymentAmount.Text) * percentDiscount).ToString("N2")
-        lblDPAmountToPay.Text = ((Double.Parse(lblDownpaymentAmount.Text) - Double.Parse(lblDiscountAmount.Text))).ToString("N2")
-    End Sub
-    Private Sub cbDiscount_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDiscount.SelectedIndexChanged
-        computePaymentDiscount()
-    End Sub
-
-    Private Sub cbParticular_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbParticular.SelectedIndexChanged
-        Select Case cbParticular.SelectedIndex
-            Case 0
-                If PanelDownpayment.Visible = False Then
-                    PanelDownpayment.Visible = True
-                End If
-            Case Else
-                PanelDownpayment.Visible = False
-        End Select
-        setPartVisibility()
-    End Sub
-
-    Private Sub setPartVisibility()
-        If cbParticular.SelectedIndex > 0 And cbParticular.SelectedIndex < 3 Then
-            lblPart.Visible = True
-            txtPart.Visible = True
-        Else
-            lblPart.Visible = False
-            txtPart.Visible = False
         End If
     End Sub
 
@@ -194,7 +118,7 @@ Public Class FormPayment
 
         ' Can use this to auto-activate the control
         If Not ht Is DataGridView.HitTestInfo.Nowhere Then
-            If ht.ColumnIndex >= 0 AndAlso ht.ColumnIndex < dataGridView1.Columns.Count Then
+            If ht.ColumnIndex >= 0 AndAlso ht.ColumnIndex < DataGridView1.Columns.Count Then
                 Dim col As DataGridViewColumn = DataGridView1.Columns(ht.ColumnIndex)
 
                 If TypeOf (col) Is DataGridViewComboBoxColumn Then
@@ -405,6 +329,7 @@ Public Class FormPayment
         DataGridView1.Columns.Add("", "ProjectID")
         DataGridView1.Columns.Add("", "Monthly")
         DataGridView1.Columns.Add("", "Part")
+        DataGridView1.Columns.Add("", "Amount to Pay")
 
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -412,6 +337,8 @@ Public Class FormPayment
             .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
         End With
 
         With DataGridView1
@@ -421,11 +348,12 @@ Public Class FormPayment
             .Columns(3).Width = 100
             .Columns(4).Width = 90 'Downpayment Amount
             .Columns(5).Width = 80
-            .Columns(6).Width = 90 'Discount Amount
+            .Columns(6).Width = 115 'Discount Amount
             .Columns(7).Width = 50 'ItemID
             .Columns(8).Width = 50 'ProjectID
             .Columns(9).Width = 90 'Monthly
             .Columns(10).Width = 50 'Part
+            .Columns(11).Width = 110 'Amount to Pay
         End With
 
         DataGridView1.Columns(0).ReadOnly = True
@@ -434,9 +362,11 @@ Public Class FormPayment
         DataGridView1.Columns(6).ReadOnly = True
         DataGridView1.Columns(7).ReadOnly = True
         DataGridView1.Columns(8).ReadOnly = True
+        DataGridView1.Columns(9).ReadOnly = True
         DataGridView1.Columns(7).Visible = False
         DataGridView1.Columns(8).Visible = False
         CType(DataGridView1.Columns(10), DataGridViewTextBoxColumn).MaxInputLength = 3
+        CType(DataGridView1.Columns(11), DataGridViewTextBoxColumn).MaxInputLength = 20
     End Sub
 
     Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
@@ -492,7 +422,7 @@ Public Class FormPayment
             trans._paidAmount = txtPaidAmount.Text.Trim.Trim.Trim
             trans._tcp = row.Cells(1).Value
             trans._particular = c.Items.IndexOf(c.Value)
-            trans._partNo = txtPart.Text.Trim
+            trans._partNo = row.Cells(10).Value
             trans._paymentType = cbPaymentType.SelectedIndex
             trans._clientId = userId
             trans._projectItemId = row.Cells(7).Value

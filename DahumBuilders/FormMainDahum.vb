@@ -21,4 +21,14 @@ Public Class FormMainDahum
             mFormUserProfile.ShowForm("NEW", Nothing)
         End If
     End Sub
+
+    Private Sub CientListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CientListToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormUserList).Any Then
+            mFormUserList.Focus()
+        Else
+            mFormUserList = New FormUserList
+            mFormUserList.MdiParent = Me
+            mFormUserList.Show()
+        End If
+    End Sub
 End Class
