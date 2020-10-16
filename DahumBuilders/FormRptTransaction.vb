@@ -21,7 +21,7 @@ Public Class FormRptTransaction
 
     Private Sub generate_report()
         Dim table As New DataTable()
-        sql = "SELECT `official_receipt_no`,`paid_amount`, pt.`name` AS `payment_type`, 
+        sql = "SELECT `official_receipt_no`,`paid_amount`, t.`discount_amount`, pt.`name` AS `payment_type`, 
         IF(t.`part_no`=0,'',t.`part_no`) AS part_no, pa.`name` AS `particular`, `date_paid` 
         FROM `db_transaction` t INNER JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         INNER JOIN `db_particular_type` pa ON t.`particular` = pa.`id`

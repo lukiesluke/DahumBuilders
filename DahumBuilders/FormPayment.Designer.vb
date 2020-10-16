@@ -30,6 +30,7 @@ Partial Class FormPayment
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelInformation = New System.Windows.Forms.Panel()
+        Me.lblBalance = New System.Windows.Forms.Label()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cbPaymentType = New System.Windows.Forms.ComboBox()
@@ -154,6 +155,7 @@ Partial Class FormPayment
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelInformation.Controls.Add(Me.lblBalance)
         Me.PanelInformation.Controls.Add(Me.lblContact)
         Me.PanelInformation.Controls.Add(Me.Label2)
         Me.PanelInformation.Controls.Add(Me.cbPaymentType)
@@ -174,6 +176,15 @@ Partial Class FormPayment
         Me.PanelInformation.Name = "PanelInformation"
         Me.PanelInformation.Size = New System.Drawing.Size(1054, 508)
         Me.PanelInformation.TabIndex = 2
+        '
+        'lblBalance
+        '
+        Me.lblBalance.AutoSize = True
+        Me.lblBalance.Location = New System.Drawing.Point(84, 414)
+        Me.lblBalance.Name = "lblBalance"
+        Me.lblBalance.Size = New System.Drawing.Size(67, 20)
+        Me.lblBalance.TabIndex = 50
+        Me.lblBalance.Text = "Balance"
         '
         'lblContact
         '
@@ -470,4 +481,5 @@ Partial Class FormPayment
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TransactionHistoryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents lblBalance As Label
 End Class

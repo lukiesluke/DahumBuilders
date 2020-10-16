@@ -79,6 +79,10 @@ Public Class FormPayment
                 End If
                 ListViewUserItem.Items.Add(item)
             Next
+            sqlAdapter.Dispose()
+
+            lblBalance.Text = getClientBalance(sqlCommand, userId).ToString("N2")
+
         Catch ex As Exception
             MessageBox.Show("User Information: " & ex.Message)
         Finally
@@ -150,13 +154,14 @@ Public Class FormPayment
         '    .Columns(2).Width = 100
         '    .Columns(3).Width = 100
         '    .Columns(4).Width = 90 'Downpayment Amount
-        '    .Columns(5).Width = 80
+        '    .Columns(5).Width = 80 'cbbDiscount
         '    .Columns(6).Width = 115 'Discount Amount
         '    .Columns(7).Width = 50 'ItemID
         '    .Columns(8).Width = 50 'ProjectID
         '    .Columns(9).Width = 90 'Monthly
         '    .Columns(10).Width = 50 'Part
         '    .Columns(11).Width = 110 'Amount to Pay
+        '    .Columns(12).Width = 110 'Tender Amount
         'End With
 
         Select Case e.ColumnIndex
@@ -195,16 +200,18 @@ Public Class FormPayment
             Case 4 'Textbox downpayment Amount
                 downpamentAmount = Double.Parse(Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100)
                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = (downpamentAmount).ToString("N2") ''Downpayment Amount
-            Case 5
+            Case 5 'ComboBox Discount
                 Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value
                     Case "Downpayment"
                         downpamentAmount = DataGridView1.Rows(e.RowIndex).Cells(4).Value 'Downpayment Amount
                         discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
+                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                     Case "Cash"
                         tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) 'tcp
                         discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = (tcp * discount).ToString("N2") 'Discount Amount
+                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = (tcp - (tcp * discount)).ToString("N2") 'Amount to pay
                 End Select
         End Select
     End Sub
@@ -338,6 +345,7 @@ Public Class FormPayment
         DataGridView1.Columns.Add("", "Monthly")
         DataGridView1.Columns.Add("", "Part")
         DataGridView1.Columns.Add("", "Amount to Pay")
+        DataGridView1.Columns.Add("", "Tender Amount")
 
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -346,6 +354,7 @@ Public Class FormPayment
             .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
 
         End With
 
@@ -356,12 +365,13 @@ Public Class FormPayment
             .Columns(3).Width = 100
             .Columns(4).Width = 90 'Downpayment Amount
             .Columns(5).Width = 70
-            .Columns(6).Width = 115 'Discount Amount
+            .Columns(6).Width = 90 'Discount Amount
             .Columns(7).Width = 50 'ItemID
             .Columns(8).Width = 50 'ProjectID
             .Columns(9).Width = 90 'Monthly
             .Columns(10).Width = 50 'Part
             .Columns(11).Width = 110 'Amount to Pay
+            .Columns(12).Width = 110 'Tender Amount
         End With
 
         DataGridView1.Columns(0).ReadOnly = True
@@ -371,10 +381,14 @@ Public Class FormPayment
         DataGridView1.Columns(7).ReadOnly = True
         DataGridView1.Columns(8).ReadOnly = True
         DataGridView1.Columns(9).ReadOnly = True
+        DataGridView1.Columns(11).ReadOnly = True
+
         DataGridView1.Columns(7).Visible = False
         DataGridView1.Columns(8).Visible = False
+
         CType(DataGridView1.Columns(10), DataGridViewTextBoxColumn).MaxInputLength = 3
-        CType(DataGridView1.Columns(11), DataGridViewTextBoxColumn).MaxInputLength = 20
+        CType(DataGridView1.Columns(12), DataGridViewTextBoxColumn).MaxInputLength = 20
+
     End Sub
 
     Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
@@ -413,20 +427,20 @@ Public Class FormPayment
         End If
 
         For Each row As DataGridViewRow In DataGridView1.Rows
-            If row.Cells(11).Value Is Nothing Then
+            If row.Cells(12).Value Is Nothing Then
                 row.DefaultCellStyle.BackColor = Color.MistyRose
             Else
                 row.DefaultCellStyle.BackColor = Color.White
             End If
         Next
         For Each row As DataGridViewRow In DataGridView1.Rows
-            If row.Cells(11).Value Is Nothing Then
-                Dim ret As DialogResult = MessageBox.Show(Me, "Please enter amount to pay.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            If row.Cells(12).Value Is Nothing Then
+                Dim ret As DialogResult = MessageBox.Show(Me, "Please enter Tender Amount.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Question)
                 Select Case ret
                     Case DialogResult.OK
                         If DataGridView1.RowCount > 0 Then
                             DataGridView1.Focus()
-                            row.Cells(11).Selected = True
+                            row.Cells(12).Selected = True
                         End If
                 End Select
                 Exit Sub
@@ -435,8 +449,9 @@ Public Class FormPayment
             Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(2, row.Index), DataGridViewComboBoxCell)
             trans._or = txtOfficialReceipt.Text.Trim
             trans._datePaid = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
-            trans._paidAmount = row.Cells(11).Value
             trans._tcp = row.Cells(1).Value
+            trans._DiscountAmount = row.Cells(6).Value
+            trans._paidAmount = row.Cells(12).Value 'Tender Amount
             trans._particular = c.Items.IndexOf(c.Value)
             trans._partNo = row.Cells(10).Value
             trans._paymentType = cbPaymentType.SelectedIndex
@@ -461,8 +476,8 @@ Public Class FormPayment
     End Sub
 
     Private Sub insertPurchase(ByVal trans As Transaction)
-        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @TCP, 
+        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `tcp`, `particular`, 
+        `part_no`, `payment_type`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @DiscountAmount, @TCP, 
         @Particular, @PartNo, @PaymentType, @userid, @ProjId, @ProjItemId)"
 
         If trans._particular.Equals("0") Or trans._particular.Equals("3") Or trans._particular.Equals("4") Then
@@ -474,6 +489,7 @@ Public Class FormPayment
         sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = trans._or 'txtOfficialReceipt.Text.Trim
         sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(trans._datePaid, "yyyy-MM-dd").ToString 'Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
         sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = trans._paidAmount 'txtPaidAmount.Text.Trim
+        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = trans._DiscountAmount 'txtPaidAmount.Text.Trim
         sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = trans._tcp
         sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = trans._particular 'Integer.Parse(cbParticular.SelectedIndex)
         sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = trans._partNo 'Integer.Parse(txtPart.Text)

@@ -1,4 +1,6 @@
-﻿Module ModuleForm
+﻿Imports MySql.Data.MySqlClient
+
+Module ModuleForm
     Public mFormUserProfile As New FormUserProfile
     Public mFormUserList As New FormUserList
     Public mFormImageCapture As FormImageCapture
@@ -54,5 +56,20 @@
                 value = toDouble(equityAmount)
         End Select
         Return value
+    End Function
+
+    Public Function getClientBalance(ByVal cmd As MySqlCommand, ByVal clientId As String) As Double
+        Dim totalBalance As Double = 0
+        sql = "SELECT `tcp`, (`tcp`-SUM(`paid_amount`)-`discount_amount`) AS 'Balance' FROM `db_transaction` t WHERE t.`userid`=@userId"
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        With sqlCommand
+            .CommandText = sql
+            .Parameters.Add("@userId", MySqlDbType.Int64).Value = clientId
+        End With
+        Dim sqlReader As MySqlDataReader = sqlCommand.ExecuteReader()
+        While sqlReader.Read()
+            totalBalance = sqlReader("Balance")
+        End While
+        Return totalBalance
     End Function
 End Module
