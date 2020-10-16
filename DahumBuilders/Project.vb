@@ -1,10 +1,10 @@
 ﻿Public Class Project
-    Public Property itemID As String = ""
-    Public Property name As String = ""
-    Public Property block As String = ""
-    Public Property lot As String = ""
-    Public Property sqm As String = ""
-    Public Property tcp As String = ""
-    Public Property projID As String = ""
-    Public Property description As String = ""
+    Public Property _itemID As String = ""
+    Public Property _name As String = ""
+    Public Property _block As String = ""
+    Public Property _lot As String = ""
+    Public Property _sqm As String = ""
+    Public Property _tcp As Double = 0
+    Public Property _projID As String = ""
+    Public Property _description As String = ""
 End Class

@@ -39,6 +39,7 @@ Public Class FormPayment
         Connection()
         Try
             Dim table As New DataTable()
+            Dim project As Project = New Project()
 
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = userId
@@ -50,13 +51,22 @@ Public Class FormPayment
 
             Dim item As ListViewItem
             For i As Integer = 0 To table.Rows.Count - 1
-                item = New ListViewItem(table.Rows(i)("item_id").ToString)
-                item.SubItems.Add(table.Rows(i)("proj_name"))
-                item.SubItems.Add(table.Rows(i)("block"))
-                item.SubItems.Add(table.Rows(i)("lot"))
-                item.SubItems.Add(table.Rows(i)("sqm"))
-                item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
-                item.SubItems.Add(table.Rows(i)("proj_id"))
+                project._itemID = table.Rows(i)("item_id")
+                project._projID = table.Rows(i)("proj_id")
+                project._name = table.Rows(i)("proj_name")
+                project._block = table.Rows(i)("block")
+                project._lot = table.Rows(i)("lot")
+                project._sqm = table.Rows(i)("sqm")
+                project._tcp = table.Rows(i)("price")
+
+                item = New ListViewItem(project._itemID)
+                item.SubItems.Add(project._name)
+                item.SubItems.Add(project._block)
+                item.SubItems.Add(project._lot)
+                item.SubItems.Add(project._sqm)
+                item.SubItems.Add(project._tcp.ToString("N2"))
+                item.SubItems.Add(project._projID)
+                item.SubItems.Add(getClientBalance(userId, project).ToString("N2"))
                 ListViewUserItem.Items.Add(item)
             Next
 
@@ -79,10 +89,6 @@ Public Class FormPayment
                 End If
                 ListViewUserItem.Items.Add(item)
             Next
-            sqlAdapter.Dispose()
-
-            lblBalance.Text = getClientBalance(sqlCommand, userId).ToString("N2")
-
         Catch ex As Exception
             MessageBox.Show("User Information: " & ex.Message)
         Finally
@@ -168,7 +174,6 @@ Public Class FormPayment
             Case 2 'ComoboBox Particular
                 DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
                 DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
-
                 Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                     Case "Downpayment"
                         DataGridView1.Rows(e.RowIndex).Cells(4).Value = (Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
@@ -179,15 +184,19 @@ Public Class FormPayment
                         DataGridView1.Columns(4).Visible = True 'Downpayment Amount
                         DataGridView1.Columns(9).Visible = True 'Monthly
                         DataGridView1.Columns(10).Visible = True 'Part
-                        Console.WriteLine("Downpayment")
                     Case "Equity"
-                        Console.WriteLine("Equity")
+                        DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
+                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2")
+                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                     Case "Monthly"
-                        Console.WriteLine("Monthly")
+                        DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
+                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2")
+                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                     Case "Reservation"
-                        Console.WriteLine("Reservation")
+                        DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
+                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2")
+                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                     Case "Cash"
-                        Console.WriteLine("Cash")
                         DataGridView1.Columns(3).Visible = False 'cbb Downpayment
                         DataGridView1.Columns(4).Visible = False 'Downpayment Amount
                         DataGridView1.Columns(9).Visible = False 'Monthly
@@ -247,33 +256,25 @@ Public Class FormPayment
         Dim project As Project = New Project()
         If e.KeyCode = Keys.KeyCode.Enter Then
             If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
-                project.itemID = ListViewUserItem.SelectedItems.Item(0).Text
-                project.name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
-                project.block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
-                project.lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
-                project.sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
-                project.tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
-                project.projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
-                project.description = project.name & " " & project.block & " " & project.lot & " " & project.sqm
+                project._itemID = ListViewUserItem.SelectedItems.Item(0).Text
+                project._name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
+                project._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+                project._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+                project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
+                project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
+                project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+                project._description = project._name & " " & project._block & " " & project._lot & " " & project._sqm
                 addPurchaseItem(project)
-                Console.WriteLine("ID " & project.itemID & " - " & project.name & " " & project.block & " " & project.lot & " " & project.sqm & " " & project.tcp & " " & project.projID)
             End If
         End If
-        'item = New ListViewItem(table.Rows(i)("id").ToString)
-        'item.SubItems.Add(table.Rows(i)("proj_name"))
-        'item.SubItems.Add(table.Rows(i)("block"))
-        'item.SubItems.Add(table.Rows(i)("lot"))
-        'item.SubItems.Add(table.Rows(i)("sqm"))
-        'item.SubItems.Add(String.Format("{0:n}", table.Rows(i)("price")))
-        'item.SubItems.Add(table.Rows(i)("proj_id"))
     End Sub
 
     Private Sub addPurchaseItem(ByVal project As Project)
 
         If DataGridView1.Rows.Count > 0 Then
             For Each dRow As DataGridViewRow In DataGridView1.Rows
-                If dRow.Cells(7).Value.Equals(project.itemID) And dRow.Cells(8).Value.Equals(project.projID) Then
-                    Console.WriteLine(String.Format("Already exist Project ID {0} and ItemID {1}", project.projID, project.itemID))
+                If dRow.Cells(7).Value.Equals(project._itemID) And dRow.Cells(8).Value.Equals(project._projID) Then
+                    Console.WriteLine(String.Format("Already exist Project ID {0} and ItemID {1}", project._projID, project._itemID))
                     Exit Sub
                 End If
             Next
@@ -282,8 +283,8 @@ Public Class FormPayment
         Dim id = DataGridView1.Rows.Add
         Dim row As DataGridViewRow = DataGridView1.Rows(id)
 
-        row.Cells(0).Value = project.description
-        row.Cells(1).Value = Double.Parse(project.tcp).ToString("N2")
+        row.Cells(0).Value = project._description
+        row.Cells(1).Value = Double.Parse(project._tcp).ToString("N2")
 
         Dim comboBoxCell As DataGridViewComboBoxCell = DirectCast(row.Cells(2), DataGridViewComboBoxCell)
         comboBoxCell.Value = "Downpayment"
@@ -297,8 +298,8 @@ Public Class FormPayment
         cbcDiscount.Value = "0"
 
         row.Cells(6).Value = (Double.Parse(row.Cells(4).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
-        row.Cells(7).Value = project.itemID
-        row.Cells(8).Value = project.projID
+        row.Cells(7).Value = project._itemID
+        row.Cells(8).Value = project._projID
         row.Cells(9).Value = 0.ToString("N2")
 
     End Sub
@@ -370,7 +371,7 @@ Public Class FormPayment
             .Columns(8).Width = 50 'ProjectID
             .Columns(9).Width = 90 'Monthly
             .Columns(10).Width = 50 'Part
-            .Columns(11).Width = 110 'Amount to Pay
+            .Columns(11).Width = 100 'Amount to Pay
             .Columns(12).Width = 110 'Tender Amount
         End With
 

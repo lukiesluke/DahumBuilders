@@ -56,6 +56,7 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -234,7 +235,7 @@ Partial Class FormPayment
         '
         'ListViewUserItem
         '
-        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID})
+        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance})
         Me.ListViewUserItem.FullRowSelect = True
         Me.ListViewUserItem.GridLines = True
         Me.ListViewUserItem.Location = New System.Drawing.Point(16, 146)
@@ -268,6 +269,7 @@ Partial Class FormPayment
         'ColumnHeaderSQM
         '
         Me.ColumnHeaderSQM.Text = "sqm"
+        Me.ColumnHeaderSQM.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnHeaderSQM.Width = 50
         '
         'ColumnHeaderTCP
@@ -419,6 +421,12 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
+        'ColumnHeaderBalance
+        '
+        Me.ColumnHeaderBalance.Text = "Balance"
+        Me.ColumnHeaderBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderBalance.Width = 100
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -482,4 +490,5 @@ Partial Class FormPayment
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TransactionHistoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents lblBalance As Label
+    Friend WithEvents ColumnHeaderBalance As ColumnHeader
 End Class
