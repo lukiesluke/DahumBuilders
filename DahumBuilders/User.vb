@@ -5,8 +5,9 @@
     Public Property _middleName As String = ""
     Public Property _gender As String = ""
     Public Property _civilStatus As String = ""
-    Public Property _dateOfBirth As String = ""
+    Public Property _dateOfBirth As DateTime = New DateTime()
     Public Property _address As String = ""
     Public Property _mobile As String = ""
     Public Property _image_location As String = ""
+
 End Class

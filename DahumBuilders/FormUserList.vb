@@ -1,9 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormUserList
-    Dim currentUserId As String = ""
-    Dim currentUserName As String = ""
-    Dim currentUserAddress As String = ""
+    Dim mUser As User
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Location = New Point(My.Computer.Screen.Bounds.Top)
@@ -37,19 +35,32 @@ Public Class FormUserList
             sqlCommand.Parameters.Add("@valueSearch", MySqlDbType.VarChar).Value = "%" & txtSearch.Text.Trim & "%"
             sqlDataReader = sqlCommand.ExecuteReader()
             Do While sqlDataReader.Read = True
-                item = New ListViewItem(sqlDataReader("id").ToString)
-                item.SubItems.Add(sqlDataReader("last_name"))
-                item.SubItems.Add(sqlDataReader("first_name"))
-                item.SubItems.Add(sqlDataReader("middle_name"))
-                item.SubItems.Add(sqlDataReader("gender"))
-                item.SubItems.Add(sqlDataReader("civil_status"))
-                item.SubItems.Add(Format(sqlDataReader("date_birth"), "MMM dd, yyyy").ToString())
-                item.SubItems.Add(sqlDataReader("address"))
-                If IsDBNull(sqlDataReader("file_location_image")) Then
+                Dim user As User = New User()
+                user._id = sqlDataReader("id")
+                user._surname = sqlDataReader("last_name")
+                user._middleName = sqlDataReader("middle_name")
+                user._name = sqlDataReader("first_name")
+                user._gender = sqlDataReader("gender")
+                user._civilStatus = sqlDataReader("civil_status")
+                user._dateOfBirth = sqlDataReader("date_birth")
+                user._address = sqlDataReader("address")
+                user._mobile = sqlDataReader("mobile_number")
+                user._image_location = IIf(IsDBNull(sqlDataReader("file_location_image")), "", sqlDataReader("file_location_image"))
+
+                item = New ListViewItem(user._id)
+                item.SubItems.Add(user._surname)
+                item.SubItems.Add(user._name)
+                item.SubItems.Add(user._middleName)
+                item.SubItems.Add(user._gender)
+                item.SubItems.Add(user._civilStatus)
+                item.SubItems.Add(user._dateOfBirth.ToString("MMM dd, yyyy"))
+                item.SubItems.Add(user._address)
+                If IsDBNull(user._image_location) Or user._image_location.Length.Equals(String.Empty) Then
                     item.SubItems.Add("")
                 Else
-                    item.SubItems.Add(sqlDataReader("file_location_image"))
+                    item.SubItems.Add(user._image_location)
                 End If
+                item.SubItems.Add(user._mobile)
                 ListViewUser.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -65,43 +76,41 @@ Public Class FormUserList
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
 
         If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
-            Dim user As User = New User()
-            user._id = ListViewUser.SelectedItems(0).Text
-            user._surname = ListViewUser.SelectedItems(0).SubItems(1).Text
-            user._name = ListViewUser.SelectedItems(0).SubItems(2).Text
-            user._middleName = ListViewUser.SelectedItems(0).SubItems(3).Text
-            user._gender = ListViewUser.SelectedItems(0).SubItems(4).Text
-            user._civilStatus = ListViewUser.SelectedItems(0).SubItems(5).Text
-            user._dateOfBirth = ListViewUser.SelectedItems(0).SubItems(6).Text
-            user._address = ListViewUser.SelectedItems(0).SubItems(7).Text
-            user._image_location = ListViewUser.SelectedItems(0).SubItems(8).Text
+            mUser = New User()
+            mUser._id = ListViewUser.SelectedItems(0).Text
+            mUser._surname = ListViewUser.SelectedItems(0).SubItems(1).Text
+            mUser._name = ListViewUser.SelectedItems(0).SubItems(2).Text
+            mUser._middleName = ListViewUser.SelectedItems(0).SubItems(3).Text
+            mUser._gender = ListViewUser.SelectedItems(0).SubItems(4).Text
+            mUser._civilStatus = ListViewUser.SelectedItems(0).SubItems(5).Text
+            mUser._dateOfBirth = ListViewUser.SelectedItems(0).SubItems(6).Text
+            mUser._address = ListViewUser.SelectedItems(0).SubItems(7).Text
+            mUser._image_location = ListViewUser.SelectedItems(0).SubItems(8).Text
+            mUser._mobile = ListViewUser.SelectedItems(0).SubItems(9).Text
 
-            currentUserId = user._id
-            currentUserAddress = user._address
-            currentUserName = user._name & " " & user._middleName & " " & user._surname
+            txtName.Text = mUser._name
+            txtSurname.Text = mUser._surname
+            txtMiddleName.Text = mUser._middleName
+            txtGender.Text = mUser._gender
+            txtCivilStatus.Text = mUser._civilStatus
+            txtDateOfBirth.Text = mUser._dateOfBirth.ToString("MMMM dd, yyyy")
+            txtAddress.Text = mUser._address
+            txtMobileContact.Text = mUser._mobile
 
-            txtName.Text = user._name
-            txtSurname.Text = user._surname
-            txtMiddleName.Text = user._middleName
-            txtGender.Text = user._gender
-            txtCivilStatus.Text = user._civilStatus
-            txtDateOfBirth.Text = user._dateOfBirth
-            txtAddress.Text = currentUserAddress
-
-            If currentUserId.Length > 0 Then
+            If mUser._id.Length > 0 Then
                 enableDisableClientButton(True)
             Else
                 enableDisableClientButton(False)
             End If
 
-            If user._image_location.Length < 3 Then
+            If mUser._image_location.Length < 3 Then
                 If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
                     PictureBox1.Image = My.Resources.client_male
                 Else
                     PictureBox1.Image = My.Resources.client_female
                 End If
             Else
-                PictureBox1.ImageLocation = user._image_location
+                PictureBox1.ImageLocation = mUser._image_location
             End If
         End If
 
@@ -118,43 +127,41 @@ Public Class FormUserList
     End Sub
 
     Private Sub ListViewUser_Click(sender As Object, e As EventArgs) Handles ListViewUser.Click
-        Dim user As User = New User()
-        user._id = ListViewUser.SelectedItems(0).Text
-        user._surname = ListViewUser.SelectedItems(0).SubItems(1).Text
-        user._name = ListViewUser.SelectedItems(0).SubItems(2).Text
-        user._middleName = ListViewUser.SelectedItems(0).SubItems(3).Text
-        user._gender = ListViewUser.SelectedItems(0).SubItems(4).Text
-        user._civilStatus = ListViewUser.SelectedItems(0).SubItems(5).Text
-        user._dateOfBirth = ListViewUser.SelectedItems(0).SubItems(6).Text
-        user._address = ListViewUser.SelectedItems(0).SubItems(7).Text
-        user._image_location = ListViewUser.SelectedItems(0).SubItems(8).Text
+        mUser = New User()
+        mUser._id = ListViewUser.SelectedItems(0).Text
+        mUser._surname = ListViewUser.SelectedItems(0).SubItems(1).Text
+        mUser._name = ListViewUser.SelectedItems(0).SubItems(2).Text
+        mUser._middleName = ListViewUser.SelectedItems(0).SubItems(3).Text
+        mUser._gender = ListViewUser.SelectedItems(0).SubItems(4).Text
+        mUser._civilStatus = ListViewUser.SelectedItems(0).SubItems(5).Text
+        mUser._dateOfBirth = ListViewUser.SelectedItems(0).SubItems(6).Text
+        mUser._address = ListViewUser.SelectedItems(0).SubItems(7).Text
+        mUser._image_location = ListViewUser.SelectedItems(0).SubItems(8).Text
+        mUser._mobile = ListViewUser.SelectedItems(0).SubItems(9).Text
 
-        currentUserId = user._id
-        currentUserAddress = user._address
-        currentUserName = user._name & " " & user._middleName & " " & user._surname
+        txtName.Text = mUser._name
+        txtSurname.Text = mUser._surname
+        txtMiddleName.Text = mUser._middleName
+        txtGender.Text = mUser._gender
+        txtCivilStatus.Text = mUser._civilStatus
+        txtDateOfBirth.Text = mUser._dateOfBirth.ToString("MMMM dd, yyyy")
+        txtAddress.Text = mUser._address
+        txtMobileContact.Text = mUser._mobile
 
-        txtName.Text = user._name
-        txtSurname.Text = user._surname
-        txtMiddleName.Text = user._middleName
-        txtGender.Text = user._gender
-        txtCivilStatus.Text = user._civilStatus
-        txtDateOfBirth.Text = user._dateOfBirth
-        txtAddress.Text = currentUserAddress
-
-        If currentUserId.Length > 0 Then
+        If mUser._id.Length > 0 Then
             enableDisableClientButton(True)
         Else
             enableDisableClientButton(False)
         End If
 
-        If user._image_location.Length < 3 Then
+        If mUser._image_location.Length < 3 Then
             If ListViewUser.SelectedItems(0).SubItems(4).Text = "Male" Then
                 PictureBox1.Image = My.Resources.client_male
             Else
                 PictureBox1.Image = My.Resources.client_female
             End If
         Else
-            PictureBox1.ImageLocation = user._image_location
+            PictureBox1.ImageLocation = mUser._image_location
         End If
     End Sub
 
@@ -166,7 +173,7 @@ Public Class FormUserList
             End If
         Else
             mFormUserProfile = New FormUserProfile()
-            mFormUserProfile.ShowForm("VIEW", currentUserId)
+            mFormUserProfile.ShowForm("VIEW", mUser._id)
         End If
     End Sub
 
@@ -178,7 +185,7 @@ Public Class FormUserList
             End If
         Else
             mFormUserProfile = New FormUserProfile
-            mFormUserProfile.ShowForm("UPDATE", currentUserId)
+            mFormUserProfile.ShowForm("UPDATE", mUser._id)
         End If
     End Sub
 
@@ -196,11 +203,8 @@ Public Class FormUserList
         Else
             mFormPayment = New FormPayment
             mFormPayment.MdiParent = FormMainDahum
-            mFormPayment.userId = currentUserId
-            mFormPayment.userName = currentUserName
-            mFormPayment.userAddress = currentUserAddress
+            mFormPayment.mUser = mUser
             mFormPayment.Show()
-            'mFormPayment.ShowForm(currentUserId, currentUserName, currentUserAddress)
         End If
     End Sub
 
@@ -211,7 +215,9 @@ Public Class FormUserList
             End If
         Else
             mFormRptTransaction = New FormRptTransaction
-            mFormRptTransaction.ShowForm(currentUserId, currentUserName, currentUserAddress)
+            mFormRptTransaction.mUser = mUser
+            mFormRptTransaction.ShowDialog()
         End If
     End Sub
+
 End Class

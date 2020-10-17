@@ -33,6 +33,7 @@ Partial Class FormUserList
         Me.ColumnHeaderDateOfBirth = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderImageLocation = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderMobile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -40,6 +41,8 @@ Partial Class FormUserList
         Me.labelRows = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtMobileContact = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.txtCivilStatus = New System.Windows.Forms.TextBox()
         Me.txtDateOfBirth = New System.Windows.Forms.TextBox()
@@ -78,14 +81,14 @@ Partial Class FormUserList
         'ListViewUser
         '
         Me.ListViewUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ListViewUser.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderId, Me.ColumnHeaderLastName, Me.ColumnHeaderName, Me.ColumnHeaderMiddleName, Me.ColumnHeaderGender, Me.ColumnHeaderCivilStatus, Me.ColumnHeaderDateOfBirth, Me.ColumnHeaderAddress, Me.ColumnHeaderImageLocation})
+        Me.ListViewUser.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderId, Me.ColumnHeaderLastName, Me.ColumnHeaderName, Me.ColumnHeaderMiddleName, Me.ColumnHeaderGender, Me.ColumnHeaderCivilStatus, Me.ColumnHeaderDateOfBirth, Me.ColumnHeaderAddress, Me.ColumnHeaderImageLocation, Me.ColumnHeaderMobile})
         Me.ListViewUser.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ListViewUser.FullRowSelect = True
         Me.ListViewUser.GridLines = True
-        Me.ListViewUser.Location = New System.Drawing.Point(0, 49)
+        Me.ListViewUser.Location = New System.Drawing.Point(0, 62)
         Me.ListViewUser.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUser.Name = "ListViewUser"
-        Me.ListViewUser.Size = New System.Drawing.Size(677, 448)
+        Me.ListViewUser.Size = New System.Drawing.Size(763, 560)
         Me.ListViewUser.TabIndex = 4
         Me.ListViewUser.UseCompatibleStateImageBehavior = False
         Me.ListViewUser.View = System.Windows.Forms.View.Details
@@ -137,29 +140,34 @@ Partial Class FormUserList
         Me.ColumnHeaderImageLocation.Text = "Image Location"
         Me.ColumnHeaderImageLocation.Width = 0
         '
+        'ColumnHeaderMobile
+        '
+        Me.ColumnHeaderMobile.Text = "Mobile"
+        Me.ColumnHeaderMobile.Width = 80
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(11, 19)
+        Me.Label1.Location = New System.Drawing.Point(12, 24)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(53, 17)
+        Me.Label1.Size = New System.Drawing.Size(60, 20)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Search"
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(70, 14)
+        Me.txtSearch.Location = New System.Drawing.Point(79, 18)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(274, 22)
+        Me.txtSearch.Size = New System.Drawing.Size(308, 26)
         Me.txtSearch.TabIndex = 1
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(544, 10)
+        Me.btnSearch.Location = New System.Drawing.Point(612, 12)
         Me.btnSearch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(106, 30)
+        Me.btnSearch.Size = New System.Drawing.Size(119, 38)
         Me.btnSearch.TabIndex = 3
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
@@ -168,18 +176,18 @@ Partial Class FormUserList
         '
         Me.ComboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxSearch.FormattingEnabled = True
-        Me.ComboBoxSearch.Location = New System.Drawing.Point(362, 14)
+        Me.ComboBoxSearch.Location = New System.Drawing.Point(407, 18)
         Me.ComboBoxSearch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ComboBoxSearch.Name = "ComboBoxSearch"
-        Me.ComboBoxSearch.Size = New System.Drawing.Size(165, 24)
+        Me.ComboBoxSearch.Size = New System.Drawing.Size(185, 28)
         Me.ComboBoxSearch.TabIndex = 2
         '
         'labelRows
         '
         Me.labelRows.AutoSize = True
-        Me.labelRows.Location = New System.Drawing.Point(1127, 513)
+        Me.labelRows.Location = New System.Drawing.Point(1268, 641)
         Me.labelRows.Name = "labelRows"
-        Me.labelRows.Size = New System.Drawing.Size(46, 17)
+        Me.labelRows.Size = New System.Drawing.Size(53, 20)
         Me.labelRows.TabIndex = 5
         Me.labelRows.Text = "Rows:"
         '
@@ -199,13 +207,15 @@ Partial Class FormUserList
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.86747!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.13253!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(520, 497)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 139.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(585, 622)
         Me.TableLayoutPanel1.TabIndex = 6
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.txtMobileContact)
+        Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.txtAddress)
         Me.Panel1.Controls.Add(Me.txtCivilStatus)
         Me.Panel1.Controls.Add(Me.txtDateOfBirth)
@@ -222,140 +232,157 @@ Partial Class FormUserList
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(4, 68)
+        Me.Panel1.Location = New System.Drawing.Point(4, 84)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(512, 313)
+        Me.Panel1.Size = New System.Drawing.Size(577, 394)
         Me.Panel1.TabIndex = 7
+        '
+        'txtMobileContact
+        '
+        Me.txtMobileContact.Location = New System.Drawing.Point(124, 252)
+        Me.txtMobileContact.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtMobileContact.Name = "txtMobileContact"
+        Me.txtMobileContact.Size = New System.Drawing.Size(438, 26)
+        Me.txtMobileContact.TabIndex = 22
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(16, 255)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(55, 20)
+        Me.Label10.TabIndex = 21
+        Me.Label10.Text = "Mobile"
         '
         'txtAddress
         '
-        Me.txtAddress.Location = New System.Drawing.Point(111, 176)
+        Me.txtAddress.Location = New System.Drawing.Point(125, 219)
         Me.txtAddress.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(390, 22)
+        Me.txtAddress.Size = New System.Drawing.Size(438, 26)
         Me.txtAddress.TabIndex = 20
         '
         'txtCivilStatus
         '
-        Me.txtCivilStatus.Location = New System.Drawing.Point(111, 149)
+        Me.txtCivilStatus.Location = New System.Drawing.Point(125, 186)
         Me.txtCivilStatus.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtCivilStatus.Name = "txtCivilStatus"
-        Me.txtCivilStatus.Size = New System.Drawing.Size(192, 22)
+        Me.txtCivilStatus.Size = New System.Drawing.Size(216, 26)
         Me.txtCivilStatus.TabIndex = 19
         '
         'txtDateOfBirth
         '
-        Me.txtDateOfBirth.Location = New System.Drawing.Point(111, 122)
+        Me.txtDateOfBirth.Location = New System.Drawing.Point(125, 152)
         Me.txtDateOfBirth.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtDateOfBirth.Name = "txtDateOfBirth"
-        Me.txtDateOfBirth.Size = New System.Drawing.Size(192, 22)
+        Me.txtDateOfBirth.Size = New System.Drawing.Size(216, 26)
         Me.txtDateOfBirth.TabIndex = 18
         '
         'txtGender
         '
-        Me.txtGender.Location = New System.Drawing.Point(111, 94)
+        Me.txtGender.Location = New System.Drawing.Point(125, 118)
         Me.txtGender.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtGender.Name = "txtGender"
-        Me.txtGender.Size = New System.Drawing.Size(192, 22)
+        Me.txtGender.Size = New System.Drawing.Size(216, 26)
         Me.txtGender.TabIndex = 17
         '
         'txtSurname
         '
-        Me.txtSurname.Location = New System.Drawing.Point(111, 67)
+        Me.txtSurname.Location = New System.Drawing.Point(125, 84)
         Me.txtSurname.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtSurname.Name = "txtSurname"
-        Me.txtSurname.Size = New System.Drawing.Size(192, 22)
+        Me.txtSurname.Size = New System.Drawing.Size(216, 26)
         Me.txtSurname.TabIndex = 16
         '
         'txtMiddleName
         '
-        Me.txtMiddleName.Location = New System.Drawing.Point(111, 40)
+        Me.txtMiddleName.Location = New System.Drawing.Point(125, 50)
         Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(192, 22)
+        Me.txtMiddleName.Size = New System.Drawing.Size(216, 26)
         Me.txtMiddleName.TabIndex = 15
         '
         'PictureBox1
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox1.Location = New System.Drawing.Point(308, 13)
+        Me.PictureBox1.Location = New System.Drawing.Point(346, 16)
         Me.PictureBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(192, 161)
+        Me.PictureBox1.Size = New System.Drawing.Size(216, 196)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 12
         Me.PictureBox1.TabStop = False
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(111, 13)
+        Me.txtName.Location = New System.Drawing.Point(125, 16)
         Me.txtName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(192, 22)
+        Me.txtName.Size = New System.Drawing.Size(216, 26)
         Me.txtName.TabIndex = 14
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(14, 99)
+        Me.Label8.Location = New System.Drawing.Point(16, 124)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(56, 17)
+        Me.Label8.Size = New System.Drawing.Size(63, 20)
         Me.Label8.TabIndex = 13
         Me.Label8.Text = "Gender"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(14, 126)
+        Me.Label6.Location = New System.Drawing.Point(16, 158)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(87, 17)
+        Me.Label6.Size = New System.Drawing.Size(99, 20)
         Me.Label6.TabIndex = 8
         Me.Label6.Text = "Date of Birth"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(14, 154)
+        Me.Label7.Location = New System.Drawing.Point(16, 192)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(77, 17)
+        Me.Label7.Size = New System.Drawing.Size(87, 20)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "Civil Status"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(14, 45)
+        Me.Label5.Location = New System.Drawing.Point(16, 56)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(90, 17)
+        Me.Label5.Size = New System.Drawing.Size(101, 20)
         Me.Label5.TabIndex = 6
         Me.Label5.Text = "Middle Name"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(14, 72)
+        Me.Label4.Location = New System.Drawing.Point(16, 90)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(65, 17)
+        Me.Label4.Size = New System.Drawing.Size(74, 20)
         Me.Label4.TabIndex = 5
         Me.Label4.Text = "Surname"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(14, 181)
+        Me.Label3.Location = New System.Drawing.Point(16, 222)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(60, 17)
+        Me.Label3.Size = New System.Drawing.Size(68, 20)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Address" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(14, 18)
+        Me.Label2.Location = New System.Drawing.Point(16, 22)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 17)
+        Me.Label2.Size = New System.Drawing.Size(51, 20)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Name"
         '
@@ -367,7 +394,7 @@ Partial Class FormUserList
         Me.Panel2.Location = New System.Drawing.Point(4, 3)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(512, 60)
+        Me.Panel2.Size = New System.Drawing.Size(577, 76)
         Me.Panel2.TabIndex = 8
         '
         'Label9
@@ -379,7 +406,7 @@ Partial Class FormUserList
         Me.Label9.ForeColor = System.Drawing.Color.DarkGreen
         Me.Label9.Location = New System.Drawing.Point(0, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(512, 60)
+        Me.Label9.Size = New System.Drawing.Size(577, 76)
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -390,19 +417,19 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnCount = 4
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnProfileInfo, 3, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 386)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 483)
         Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(512, 108)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(577, 136)
         Me.TableLayoutPanel2.TabIndex = 9
         '
         'btnPayment
@@ -413,7 +440,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(4, 3)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(114, 102)
+        Me.btnPayment.Size = New System.Drawing.Size(127, 130)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -424,10 +451,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(125, 3)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(138, 3)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(108, 102)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(120, 130)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -438,10 +465,10 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(240, 3)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(265, 3)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
-        Me.btnUpdateRecord.Size = New System.Drawing.Size(133, 102)
+        Me.btnUpdateRecord.Size = New System.Drawing.Size(150, 130)
         Me.btnUpdateRecord.TabIndex = 2
         Me.btnUpdateRecord.Text = "Update Record"
         Me.btnUpdateRecord.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -452,10 +479,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(380, 3)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(422, 3)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(128, 102)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(151, 130)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -468,12 +495,12 @@ Partial Class FormUserList
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.47059!))
         Me.TableLayoutPanel3.Controls.Add(Me.Panel3, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel1, 0, 0)
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(11, 10)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1209, 501)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1360, 626)
         Me.TableLayoutPanel3.TabIndex = 7
         '
         'Panel3
@@ -481,10 +508,10 @@ Partial Class FormUserList
         Me.Panel3.Controls.Add(Me.Panel4)
         Me.Panel3.Controls.Add(Me.ListViewUser)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(529, 2)
+        Me.Panel3.Location = New System.Drawing.Point(594, 2)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(677, 497)
+        Me.Panel3.Size = New System.Drawing.Size(763, 622)
         Me.Panel3.TabIndex = 9
         '
         'Panel4
@@ -498,15 +525,15 @@ Partial Class FormUserList
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(677, 51)
+        Me.Panel4.Size = New System.Drawing.Size(763, 63)
         Me.Panel4.TabIndex = 0
         '
         'FormUserList
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1241, 687)
+        Me.ClientSize = New System.Drawing.Size(1396, 859)
         Me.Controls.Add(Me.TableLayoutPanel3)
         Me.Controls.Add(Me.labelRows)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -572,4 +599,7 @@ Partial Class FormUserList
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents ColumnHeaderMobile As ColumnHeader
+    Friend WithEvents txtMobileContact As TextBox
+    Friend WithEvents Label10 As Label
 End Class

@@ -1,16 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports Microsoft.Reporting.WinForms
 Public Class FormRptTransaction
-    Dim userId As String = ""
-    Dim userName As String = ""
-    Dim userAddress As String = ""
-
-    Public Sub ShowForm(id As String, name As String, address As String)
-        userId = id
-        userName = name
-        userAddress = address
-        Me.ShowDialog()
-    End Sub
+    Public Property mUser As User = New User()
 
     Private Sub FormRptTransaction_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Top = (20)
@@ -29,7 +20,7 @@ Public Class FormRptTransaction
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = userId
+            sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = mUser._id
             sqlAdapter = New MySqlDataAdapter
             With sqlAdapter
                 .SelectCommand = sqlCommand
@@ -41,10 +32,10 @@ Public Class FormRptTransaction
 
             Me.ReportViewer1.LocalReport.DataSources.Clear()
             Me.ReportViewer1.LocalReport.DataSources.Add(rpt)
-            rParam.Add(New ReportParameter("ReportParameterClientName", userName))
-            rParam.Add(New ReportParameter("ReportParameterAddress", userAddress))
+            rParam.Add(New ReportParameter("ReportParameterClientName", mUser._name & " " & mUser._middleName & " " & mUser._surname))
+            rParam.Add(New ReportParameter("ReportParameterAddress", mUser._address))
+            rParam.Add(New ReportParameter("ReportParameterMobile", mUser._mobile))
             Me.ReportViewer1.LocalReport.SetParameters(rParam)
-
             Me.ReportViewer1.RefreshReport()
             ''ReportViewer1.RefreshReport()
             ''ReportViewer1.SetDisplayMode(DisplayMode.PrintLayout)

@@ -1,28 +1,19 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormPayment
-    Public Property userId As String = ""
-    Public Property userName As String = ""
-    Public Property userAddress As String = ""
+    Public Property mUser As User = New User()
     Dim sumOfTotalContractPrice As Double = 0
     Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
 
-    Public Sub ShowForm(id As String, name As String, address As String)
-        userId = id
-        userName = name
-        userAddress = address
-        Me.ShowDialog()
-    End Sub
-
     Private Sub FormPayment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2) - 80
         'Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2) - 120
         Me.Size = New Size(1024, 670)
-        lblName.Text = userName
-        lblAddress.Text = userAddress
-
+        lblName.Text = mUser._name & " " & mUser._middleName & " " & mUser._surname
+        lblAddress.Text = mUser._address
+        lblContact.Text = mUser._mobile
         load_userId_info_data_reader()
         setDataGridView()
     End Sub
@@ -42,7 +33,7 @@ Public Class FormPayment
             Dim project As Project = New Project()
 
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = userId
+            sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = mUser._id
             sqlAdapter = New MySqlDataAdapter
             With sqlAdapter
                 .SelectCommand = sqlCommand
@@ -66,8 +57,8 @@ Public Class FormPayment
                 item.SubItems.Add(project._sqm)
                 item.SubItems.Add(project._tcp.ToString("N2"))
                 item.SubItems.Add(project._projID)
-                item.SubItems.Add(getClientBalance(userId, project).ToString("N2"))
-                item.SubItems.Add(getClientTotalPaid(userId, project).ToString("N2"))
+                item.SubItems.Add(getClientBalance(mUser._id, project).ToString("N2"))
+                item.SubItems.Add(getClientTotalPaid(mUser._id, project).ToString("N2"))
 
                 ListViewUserItem.Items.Add(item)
             Next
@@ -455,7 +446,7 @@ Public Class FormPayment
             trans._particular = c.Items.IndexOf(c.Value)
             trans._partNo = row.Cells(10).Value
             trans._paymentType = cbPaymentType.SelectedIndex
-            trans._clientId = userId
+            trans._clientId = mUser._id
             trans._projectItemId = row.Cells(7).Value
             trans._projectId = row.Cells(8).Value
             insertPurchase(trans)
@@ -519,7 +510,8 @@ Public Class FormPayment
             End If
         Else
             mFormRptTransaction = New FormRptTransaction
-            mFormRptTransaction.ShowForm(userId, userName, userAddress)
+            mFormRptTransaction.mUser = mUser
+            mFormRptTransaction.ShowDialog()
         End If
     End Sub
 End Class
