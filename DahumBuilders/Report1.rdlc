@@ -638,7 +638,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Official Receipt no</Value>
+                            <Value>OR No.</Value>
                             <Style />
                           </TextRun>
                         </TextRuns>

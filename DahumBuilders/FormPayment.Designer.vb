@@ -43,6 +43,7 @@ Partial Class FormPayment
         Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTotalPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
         Me.txtOfficialReceipt = New System.Windows.Forms.TextBox()
@@ -224,13 +225,13 @@ Partial Class FormPayment
         '
         'ListViewUserItem
         '
-        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance})
+        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderTotalPaid})
         Me.ListViewUserItem.FullRowSelect = True
         Me.ListViewUserItem.GridLines = True
         Me.ListViewUserItem.Location = New System.Drawing.Point(16, 146)
         Me.ListViewUserItem.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUserItem.Name = "ListViewUserItem"
-        Me.ListViewUserItem.Size = New System.Drawing.Size(871, 155)
+        Me.ListViewUserItem.Size = New System.Drawing.Size(1019, 155)
         Me.ListViewUserItem.TabIndex = 12
         Me.ListViewUserItem.UseCompatibleStateImageBehavior = False
         Me.ListViewUserItem.View = System.Windows.Forms.View.Details
@@ -277,6 +278,12 @@ Partial Class FormPayment
         Me.ColumnHeaderBalance.Text = "Balance"
         Me.ColumnHeaderBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderBalance.Width = 100
+        '
+        'ColumnHeaderTotalPaid
+        '
+        Me.ColumnHeaderTotalPaid.Text = "Paid Amount"
+        Me.ColumnHeaderTotalPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTotalPaid.Width = 110
         '
         'Label8
         '
@@ -479,4 +486,5 @@ Partial Class FormPayment
     Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TransactionHistoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderBalance As ColumnHeader
+    Friend WithEvents ColumnHeaderTotalPaid As ColumnHeader
 End Class

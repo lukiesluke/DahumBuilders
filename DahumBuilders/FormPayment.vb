@@ -35,7 +35,7 @@ Public Class FormPayment
 
         sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
         db_project_list.`id`=db_project_item.`proj_id` WHERE `db_project_item`.`assigned_userid` = @userId"
-
+        ListViewUserItem.Items.Clear()
         Connection()
         Try
             Dim table As New DataTable()
@@ -67,6 +67,8 @@ Public Class FormPayment
                 item.SubItems.Add(project._tcp.ToString("N2"))
                 item.SubItems.Add(project._projID)
                 item.SubItems.Add(getClientBalance(userId, project).ToString("N2"))
+                item.SubItems.Add(getClientTotalPaid(userId, project).ToString("N2"))
+
                 ListViewUserItem.Items.Add(item)
             Next
 
@@ -167,18 +169,22 @@ Public Class FormPayment
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                     Case "Equity"
+                        DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                         DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                     Case "Monthly"
+                        DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                         DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                     Case "Reservation"
+                        DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                         DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                     Case "Cash"
+                        DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                         DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                         balance = DataGridView1.Rows(e.RowIndex).Cells(13).Value 'balance
                         tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
@@ -302,6 +308,7 @@ Public Class FormPayment
         End With
 
         With cbbDownpayment
+            .Items.Add("0")
             .Items.Add("50")
             .Items.Add("60")
         End With
@@ -377,6 +384,7 @@ Public Class FormPayment
 
         DataGridView1.Columns(7).Visible = False
         DataGridView1.Columns(8).Visible = False
+        DataGridView1.Columns(13).Visible = False 'Balance
 
         CType(DataGridView1.Columns(10), DataGridViewTextBoxColumn).MaxInputLength = 3
         CType(DataGridView1.Columns(12), DataGridViewTextBoxColumn).MaxInputLength = 20
@@ -456,6 +464,7 @@ Public Class FormPayment
         cbPaymentType.SelectedIndex = -1
         txtOfficialReceipt.Text = String.Empty
         DataGridView1.Rows.Clear()
+        load_userId_info_data_reader()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
