@@ -189,6 +189,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="Report2.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

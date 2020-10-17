@@ -32,8 +32,10 @@ Public Class FormRptTransaction
 
             Me.ReportViewer1.LocalReport.DataSources.Clear()
             Me.ReportViewer1.LocalReport.DataSources.Add(rpt)
-            rParam.Add(New ReportParameter("ReportParameterClientName", mUser._name))
+            rParam.Add(New ReportParameter("ReportParameterClientName", mUser._name & " " & mUser._middleName & " " & mUser._surname))
             rParam.Add(New ReportParameter("ReportParameterAddress", mUser._address))
+            rParam.Add(New ReportParameter("ReportParameterMobile", mUser._mobile))
+
             Me.ReportViewer1.LocalReport.SetParameters(rParam)
             Me.ReportViewer1.RefreshReport()
             ''ReportViewer1.RefreshReport()
