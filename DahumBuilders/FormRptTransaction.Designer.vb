@@ -50,14 +50,14 @@ Partial Class FormRptTransaction
         Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "DahumBuilders.Report1.rdlc"
         Me.ReportViewer1.Location = New System.Drawing.Point(0, 0)
         Me.ReportViewer1.Name = "ReportViewer1"
-        Me.ReportViewer1.Size = New System.Drawing.Size(1003, 508)
+        Me.ReportViewer1.Size = New System.Drawing.Size(1137, 593)
         Me.ReportViewer1.TabIndex = 0
         '
         'FormRptTransaction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1003, 508)
+        Me.ClientSize = New System.Drawing.Size(1137, 593)
         Me.Controls.Add(Me.ReportViewer1)
         Me.Name = "FormRptTransaction"
         Me.Text = "Transactions History"

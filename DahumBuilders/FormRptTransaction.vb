@@ -44,7 +44,16 @@ Public Class FormRptTransaction
             rParam.Add(New ReportParameter("ReportParameterClientName", userName))
             rParam.Add(New ReportParameter("ReportParameterAddress", userAddress))
             Me.ReportViewer1.LocalReport.SetParameters(rParam)
+
             Me.ReportViewer1.RefreshReport()
+            ''ReportViewer1.RefreshReport()
+            ''ReportViewer1.SetDisplayMode(DisplayMode.PrintLayout)
+            'Me.ReportViewer1.SetDisplayMode(DisplayMode.PrintLayout)
+            'Me.ReportViewer1.SetDisplayMode(DisplayMode.Normal)
+
+            Dim pageSettings As Printing.PageSettings = New Printing.PageSettings
+            Console.WriteLine(" Default height: " & pageSettings.PaperSize.Height)
+            Console.WriteLine(" Default width: " & pageSettings.PaperSize.Width)
 
         Catch ex As Exception
             sqlCommand.Dispose()
