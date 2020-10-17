@@ -511,7 +511,7 @@ Public Class FormPayment
         Else
             mFormRptTransaction = New FormRptTransaction
             mFormRptTransaction.mUser = mUser
-            mFormRptTransaction.ShowDialog()
+            mFormRptTransaction.Show()
         End If
     End Sub
 End Class
