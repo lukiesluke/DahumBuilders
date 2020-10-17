@@ -151,7 +151,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>particular</Value>
+                              <Value>Particular</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -181,7 +181,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>payment type</Value>
+                              <Value>Payment Type</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -211,7 +211,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>part no</Value>
+                              <Value>Part No.</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -241,7 +241,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>discount amount</Value>
+                              <Value>Discount amount</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -271,7 +271,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>paid amount</Value>
+                              <Value>Paid Amount</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -638,7 +638,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>official receipt no</Value>
+                            <Value>Official Receipt no</Value>
                             <Style />
                           </TextRun>
                         </TextRuns>
@@ -671,7 +671,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>date paid</Value>
+                                <Value>Date Paid</Value>
                                 <Style />
                               </TextRun>
                             </TextRuns>

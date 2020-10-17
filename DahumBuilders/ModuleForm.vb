@@ -62,7 +62,7 @@ Module ModuleForm
         Connection()
         Dim totalBalance As Double = 0
         Try
-            sql = "SELECT `tcp`, (`tcp`-SUM(`paid_amount`)-`discount_amount`) AS 'Balance' 
+            sql = "SELECT `tcp`, (`tcp`-SUM(`paid_amount`)-SUM(`discount_amount`)) AS 'Balance' 
                    FROM `db_transaction` WHERE `userid`=@userId AND `proj_id`=@ProjId AND `proj_itemId`=@ProjItemId"
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             With sqlCommand

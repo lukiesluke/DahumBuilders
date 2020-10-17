@@ -153,8 +153,7 @@ Public Class FormPayment
         Dim tcp As Double = 0
         Dim discount As Double = 0
         Dim downpamentAmount As Double = 0
-
-        'With DataGridView1
+        Dim balance As Double = 0
         '    .Columns(0).Width = 150
         '    .Columns(1).Width = 90 'TCP
         '    .Columns(2).Width = 100
@@ -168,12 +167,12 @@ Public Class FormPayment
         '    .Columns(10).Width = 50 'Part
         '    .Columns(11).Width = 110 'Amount to Pay
         '    .Columns(12).Width = 110 'Tender Amount
-        'End With
 
         Select Case e.ColumnIndex
             Case 2 'ComoboBox Particular
                 DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
                 DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
+
                 Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                     Case "Downpayment"
                         tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
@@ -199,10 +198,15 @@ Public Class FormPayment
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2")
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                     Case "Cash"
-                        DataGridView1.Columns(3).Visible = False 'cbb Downpayment
-                        DataGridView1.Columns(4).Visible = False 'Downpayment Amount
-                        DataGridView1.Columns(9).Visible = False 'Monthly
-                        DataGridView1.Columns(10).Visible = False 'Part
+                        DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
+                        balance = DataGridView1.Rows(e.RowIndex).Cells(13).Value 'balance
+                        tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
+                        If balance < 1 Then
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = tcp.ToString("N2") 'Amount to pay
+                        Else
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = balance.ToString("N2") 'Amount to pay
+                        End If
+                        Console.WriteLine("{ComoboBox Particular...} balance: " & balance)
                 End Select
             Case 3 'ComoboBox Downpayment
                 DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
@@ -222,10 +226,20 @@ Public Class FormPayment
                         DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                     Case "Cash"
-                        tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) 'tcp
-                        discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
-                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = (tcp * discount).ToString("N2") 'Discount Amount
-                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = (tcp - (tcp * discount)).ToString("N2") 'Amount to pay
+                        balance = DataGridView1.Rows(e.RowIndex).Cells(13).Value 'balance
+                        Console.WriteLine("balance: " & balance)
+                        If balance < 1 Then
+                            Console.WriteLine("balance:  balance < 1")
+                            tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) 'tcp
+                            discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
+                            DataGridView1.Rows(e.RowIndex).Cells(6).Value = (tcp * discount).ToString("N2") 'Discount Amount
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = (tcp - (tcp * discount)).ToString("N2") 'Amount to pay
+                        Else
+                            Console.WriteLine("balance:  Else > 1")
+                            discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
+                            DataGridView1.Rows(e.RowIndex).Cells(6).Value = (balance * discount).ToString("N2") 'Discount Amount
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = (balance - (balance * discount)).ToString("N2") 'Amount to pay
+                        End If
                 End Select
         End Select
     End Sub
@@ -268,6 +282,7 @@ Public Class FormPayment
                 project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
                 project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
                 project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+                project._balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
                 project._description = project._name & " " & project._block & " " & project._lot & " " & project._sqm
                 addPurchaseItem(project)
             End If
@@ -306,6 +321,7 @@ Public Class FormPayment
         row.Cells(7).Value = project._itemID
         row.Cells(8).Value = project._projID
         row.Cells(9).Value = 0.ToString("N2")
+        row.Cells(13).Value = project._balance.ToString("N2") 'Balance Amount
 
     End Sub
     Private Sub setDataGridView()
@@ -352,6 +368,7 @@ Public Class FormPayment
         DataGridView1.Columns.Add("", "Part")
         DataGridView1.Columns.Add("", "Amount to Pay")
         DataGridView1.Columns.Add("", "Tender Amount")
+        DataGridView1.Columns.Add("", "Balance Amount")
 
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -361,7 +378,6 @@ Public Class FormPayment
             .Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-
         End With
 
         With DataGridView1
@@ -388,6 +404,7 @@ Public Class FormPayment
         DataGridView1.Columns(8).ReadOnly = True
         DataGridView1.Columns(9).ReadOnly = True
         DataGridView1.Columns(11).ReadOnly = True
+        DataGridView1.Columns(13).ReadOnly = True 'Balance
 
         DataGridView1.Columns(7).Visible = False
         DataGridView1.Columns(8).Visible = False
