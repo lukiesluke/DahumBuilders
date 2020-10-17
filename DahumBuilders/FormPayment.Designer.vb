@@ -43,6 +43,7 @@ Partial Class FormPayment
         Me.ColumnHeaderSQM = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
         Me.txtOfficialReceipt = New System.Windows.Forms.TextBox()
@@ -56,7 +57,6 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -283,6 +283,12 @@ Partial Class FormPayment
         Me.ColumnHeaderProjID.Text = "ProjectID"
         Me.ColumnHeaderProjID.Width = 0
         '
+        'ColumnHeaderBalance
+        '
+        Me.ColumnHeaderBalance.Text = "Balance"
+        Me.ColumnHeaderBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderBalance.Width = 100
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -420,12 +426,6 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Name = "TransactionHistoryToolStripMenuItem"
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
-        '
-        'ColumnHeaderBalance
-        '
-        Me.ColumnHeaderBalance.Text = "Balance"
-        Me.ColumnHeaderBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderBalance.Width = 100
         '
         'FormPayment
         '
