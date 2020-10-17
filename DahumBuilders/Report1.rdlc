@@ -859,7 +859,9 @@
               <TextRun>
                 <Value>=Sum(Fields!paid_amount.Value)</Value>
                 <Style>
+                  <FontWeight>Bold</FontWeight>
                   <Format>'₱'#,0.00;('₱'#,0.00)</Format>
+                  <Color>Red</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -891,7 +893,9 @@
               <TextRun>
                 <Value>=Sum(Fields!discount_amount.Value)</Value>
                 <Style>
+                  <FontWeight>Bold</FontWeight>
                   <Format>'₱'#,0.00;('₱'#,0.00)</Format>
+                  <Color>Red</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -928,19 +932,6 @@
       <Height>1.20833in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
-      <ReportItems>
-        <Rectangle Name="Rectangle1">
-          <KeepTogether>true</KeepTogether>
-          <Height>1.20833in</Height>
-          <Width>8.21495in</Width>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <BackgroundColor>Lime</BackgroundColor>
-          </Style>
-        </Rectangle>
-      </ReportItems>
       <Style>
         <Border>
           <Style>None</Style>

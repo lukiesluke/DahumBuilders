@@ -176,10 +176,12 @@ Public Class FormPayment
                 DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
                 Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                     Case "Downpayment"
-                        DataGridView1.Rows(e.RowIndex).Cells(4).Value = (Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                         tcp = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value)
+                        downpamentAmount = (tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                         discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
-                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = (tcp * discount).ToString("N2")
+                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
+                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
+
                         DataGridView1.Columns(3).Visible = True 'cbb Downpayment
                         DataGridView1.Columns(4).Visible = True 'Downpayment Amount
                         DataGridView1.Columns(9).Visible = True 'Monthly
@@ -206,6 +208,9 @@ Public Class FormPayment
                 DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
                 downpamentAmount = Double.Parse(Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100)
                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = downpamentAmount.ToString("N2") 'Downpayment Amount
+                discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
+                DataGridView1.Rows(e.RowIndex).Cells(6).Value = (tcp * discount).ToString("N2") 'Discount Amount
+                DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
             Case 4 'Textbox downpayment Amount
                 downpamentAmount = Double.Parse(Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(1).Value) * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100)
                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = (downpamentAmount).ToString("N2") ''Downpayment Amount
