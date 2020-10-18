@@ -1325,7 +1325,7 @@
         <Top>0.84723in</Top>
         <Left>0.11937in</Left>
         <Height>0.5in</Height>
-        <Width>7.73702in</Width>
+        <Width>7.73701in</Width>
         <ZIndex>15</ZIndex>
         <Style>
           <Border>
@@ -1444,7 +1444,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
-          <Top>1.38416in</Top>
+          <Top>1.3425in</Top>
           <Left>5.13397in</Left>
           <Height>0.25in</Height>
           <Width>2.69464in</Width>
