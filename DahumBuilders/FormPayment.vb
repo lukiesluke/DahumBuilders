@@ -240,14 +240,14 @@ Public Class FormPayment
             If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
                 project._itemID = ListViewUserItem.SelectedItems.Item(0).Text
                 project._name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
-                project._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
-                project._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
-                project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
-                project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
-                project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
-                project._balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
-                project._description = project._name & " " & project._block & " " & project._lot & " " & project._sqm
-                addPurchaseItem(project)
+                Project._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+                Project._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+                Project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
+                Project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
+                Project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+                Project._balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
+                Project._description = Project._name & " " & Project._block & " " & Project._lot & " " & Project._sqm
+                addPurchaseItem(Project)
             End If
         End If
     End Sub
@@ -511,6 +511,37 @@ Public Class FormPayment
             mFormRptTransaction = New FormRptTransaction
             mFormRptTransaction.mUser = mUser
             mFormRptTransaction.Show()
+        End If
+    End Sub
+
+    Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
+        Dim projItemId As Int64 = ListViewUserItem.SelectedItems.Item(0).Text
+        Dim rowsAffected As Integer = 0
+        sql = "UPDATE `db_project_item` SET `assigned_userid`=0 WHERE `item_id`=@ItemId"
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@ItemId", MySqlDbType.Int32).Value = projItemId
+            rowsAffected = sqlCommand.ExecuteNonQuery()
+        Catch ex As Exception
+            MessageBox.Show("Assigning" & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        If rowsAffected > 0 Then
+            load_userId_info_data_reader()
+        End If
+    End Sub
+
+    Private Sub ListViewUserItem_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUserItem.MouseClick
+        If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
+            Dim totalPaid As Double = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
+            If totalPaid > 0 Then
+                ContextMenuProjectList.Items(0).Enabled = False
+            Else
+                ContextMenuProjectList.Items(0).Enabled = True
+            End If
         End If
     End Sub
 End Class

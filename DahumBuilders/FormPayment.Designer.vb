@@ -22,6 +22,7 @@ Partial Class FormPayment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.PanelTotal = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -57,6 +58,8 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -65,6 +68,7 @@ Partial Class FormPayment
         Me.PanelInformation.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        Me.ContextMenuProjectList.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -226,6 +230,7 @@ Partial Class FormPayment
         'ListViewUserItem
         '
         Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderTotalPaid})
+        Me.ListViewUserItem.ContextMenuStrip = Me.ContextMenuProjectList
         Me.ListViewUserItem.FullRowSelect = True
         Me.ListViewUserItem.GridLines = True
         Me.ListViewUserItem.Location = New System.Drawing.Point(16, 146)
@@ -423,6 +428,19 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
+        'ContextMenuProjectList
+        '
+        Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem})
+        Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
+        Me.ContextMenuProjectList.Size = New System.Drawing.Size(199, 67)
+        '
+        'RemoveToolStripMenuItem
+        '
+        Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(198, 30)
+        Me.RemoveToolStripMenuItem.Text = "Remove"
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -448,6 +466,7 @@ Partial Class FormPayment
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.ContextMenuProjectList.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -487,4 +506,6 @@ Partial Class FormPayment
     Friend WithEvents TransactionHistoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderBalance As ColumnHeader
     Friend WithEvents ColumnHeaderTotalPaid As ColumnHeader
+    Friend WithEvents ContextMenuProjectList As ContextMenuStrip
+    Friend WithEvents RemoveToolStripMenuItem As ToolStripMenuItem
 End Class
