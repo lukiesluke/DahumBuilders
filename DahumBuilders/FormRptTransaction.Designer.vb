@@ -24,22 +24,12 @@ Partial Class FormRptTransaction
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim ReportDataSource1 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
+        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.CustomerBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Customer = New DahumBuilders.Customer()
-        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
         CType(Me.CustomerBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Customer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'CustomerBindingSource
-        '
-        Me.CustomerBindingSource.DataSource = Me.Customer
-        Me.CustomerBindingSource.Position = 0
-        '
-        'Customer
-        '
-        Me.Customer.DataSetName = "Customer"
-        Me.Customer.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'ReportViewer1
         '
@@ -52,6 +42,16 @@ Partial Class FormRptTransaction
         Me.ReportViewer1.Name = "ReportViewer1"
         Me.ReportViewer1.Size = New System.Drawing.Size(1137, 593)
         Me.ReportViewer1.TabIndex = 0
+        '
+        'CustomerBindingSource
+        '
+        Me.CustomerBindingSource.DataSource = Me.Customer
+        Me.CustomerBindingSource.Position = 0
+        '
+        'Customer
+        '
+        Me.Customer.DataSetName = "Customer"
+        Me.Customer.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'FormRptTransaction
         '

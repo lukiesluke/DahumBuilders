@@ -297,6 +297,14 @@ Partial Public Class Customer
         
         Private columndiscount_amount As Global.System.Data.DataColumn
         
+        Private columnproj_name As Global.System.Data.DataColumn
+        
+        Private columnblock As Global.System.Data.DataColumn
+        
+        Private columnlot As Global.System.Data.DataColumn
+        
+        Private columnsqm As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -389,6 +397,38 @@ Partial Public Class Customer
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property proj_nameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnproj_name
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property blockColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnblock
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property lotColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnlot
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property sqmColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsqm
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -425,9 +465,9 @@ Partial Public Class Customer
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddCustomerRow(ByVal official_receipt_no As String, ByVal paid_amount As String, ByVal payment_type As String, ByVal particular As String, ByVal date_paid As String, ByVal part_no As String, ByVal discount_amount As String) As CustomerRow
+        Public Overloads Function AddCustomerRow(ByVal official_receipt_no As String, ByVal paid_amount As String, ByVal payment_type As String, ByVal particular As String, ByVal date_paid As String, ByVal part_no As String, ByVal discount_amount As String, ByVal proj_name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String) As CustomerRow
             Dim rowCustomerRow As CustomerRow = CType(Me.NewRow,CustomerRow)
-            Dim columnValuesArray() As Object = New Object() {official_receipt_no, paid_amount, payment_type, particular, date_paid, part_no, discount_amount}
+            Dim columnValuesArray() As Object = New Object() {official_receipt_no, paid_amount, payment_type, particular, date_paid, part_no, discount_amount, proj_name, block, lot, sqm}
             rowCustomerRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCustomerRow)
             Return rowCustomerRow
@@ -457,6 +497,10 @@ Partial Public Class Customer
             Me.columndate_paid = MyBase.Columns("date_paid")
             Me.columnpart_no = MyBase.Columns("part_no")
             Me.columndiscount_amount = MyBase.Columns("discount_amount")
+            Me.columnproj_name = MyBase.Columns("proj_name")
+            Me.columnblock = MyBase.Columns("block")
+            Me.columnlot = MyBase.Columns("lot")
+            Me.columnsqm = MyBase.Columns("sqm")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -476,6 +520,14 @@ Partial Public Class Customer
             MyBase.Columns.Add(Me.columnpart_no)
             Me.columndiscount_amount = New Global.System.Data.DataColumn("discount_amount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columndiscount_amount)
+            Me.columnproj_name = New Global.System.Data.DataColumn("proj_name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnproj_name)
+            Me.columnblock = New Global.System.Data.DataColumn("block", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnblock)
+            Me.columnlot = New Global.System.Data.DataColumn("lot", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnlot)
+            Me.columnsqm = New Global.System.Data.DataColumn("sqm", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsqm)
             Me.ExtendedProperties.Add("Generator_TablePropName", "_Customer")
             Me.ExtendedProperties.Add("Generator_UserTableName", "Customer")
         End Sub
@@ -729,6 +781,66 @@ Partial Public Class Customer
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property proj_name() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomer.proj_nameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'proj_name' in table 'Customer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomer.proj_nameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property block() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomer.blockColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'block' in table 'Customer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomer.blockColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property lot() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomer.lotColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'lot' in table 'Customer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomer.lotColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property sqm() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomer.sqmColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'sqm' in table 'Customer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomer.sqmColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Isofficial_receipt_noNull() As Boolean
             Return Me.IsNull(Me.tableCustomer.official_receipt_noColumn)
         End Function
@@ -809,6 +921,54 @@ Partial Public Class Customer
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Setdiscount_amountNull()
             Me(Me.tableCustomer.discount_amountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Isproj_nameNull() As Boolean
+            Return Me.IsNull(Me.tableCustomer.proj_nameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setproj_nameNull()
+            Me(Me.tableCustomer.proj_nameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsblockNull() As Boolean
+            Return Me.IsNull(Me.tableCustomer.blockColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetblockNull()
+            Me(Me.tableCustomer.blockColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IslotNull() As Boolean
+            Return Me.IsNull(Me.tableCustomer.lotColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetlotNull()
+            Me(Me.tableCustomer.lotColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IssqmNull() As Boolean
+            Return Me.IsNull(Me.tableCustomer.sqmColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetsqmNull()
+            Me(Me.tableCustomer.sqmColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

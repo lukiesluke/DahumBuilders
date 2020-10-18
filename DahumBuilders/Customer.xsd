@@ -22,6 +22,10 @@
               <xs:element name="date_paid" msprop:Generator_ColumnVarNameInTable="columndate_paid" msprop:Generator_ColumnPropNameInRow="date_paid" msprop:Generator_ColumnPropNameInTable="date_paidColumn" msprop:Generator_UserColumnName="date_paid" type="xs:string" minOccurs="0" />
               <xs:element name="part_no" msprop:Generator_ColumnVarNameInTable="columnpart_no" msprop:Generator_ColumnPropNameInRow="part_no" msprop:Generator_ColumnPropNameInTable="part_noColumn" msprop:Generator_UserColumnName="part_no" type="xs:string" minOccurs="0" />
               <xs:element name="discount_amount" msprop:Generator_ColumnVarNameInTable="columndiscount_amount" msprop:Generator_ColumnPropNameInRow="discount_amount" msprop:Generator_ColumnPropNameInTable="discount_amountColumn" msprop:Generator_UserColumnName="discount_amount" type="xs:string" minOccurs="0" />
+              <xs:element name="proj_name" msprop:Generator_ColumnVarNameInTable="columnproj_name" msprop:Generator_ColumnPropNameInRow="proj_name" msprop:Generator_ColumnPropNameInTable="proj_nameColumn" msprop:Generator_UserColumnName="proj_name" type="xs:string" minOccurs="0" />
+              <xs:element name="block" msprop:Generator_ColumnVarNameInTable="columnblock" msprop:Generator_ColumnPropNameInRow="block" msprop:Generator_ColumnPropNameInTable="blockColumn" msprop:Generator_UserColumnName="block" type="xs:string" minOccurs="0" />
+              <xs:element name="lot" msprop:Generator_ColumnVarNameInTable="columnlot" msprop:Generator_ColumnPropNameInRow="lot" msprop:Generator_ColumnPropNameInTable="lotColumn" msprop:Generator_UserColumnName="lot" type="xs:string" minOccurs="0" />
+              <xs:element name="sqm" msprop:Generator_ColumnVarNameInTable="columnsqm" msprop:Generator_ColumnPropNameInRow="sqm" msprop:Generator_ColumnPropNameInTable="sqmColumn" msprop:Generator_UserColumnName="sqm" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
