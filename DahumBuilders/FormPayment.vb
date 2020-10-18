@@ -8,8 +8,6 @@ Public Class FormPayment
     Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
 
     Private Sub FormPayment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2) - 80
-        'Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2) - 120
         Me.Size = New Size(1024, 670)
         lblName.Text = mUser._name & " " & mUser._middleName & " " & mUser._surname
         lblAddress.Text = mUser._address
@@ -22,7 +20,7 @@ Public Class FormPayment
         Me.Close()
     End Sub
 
-    Private Sub load_userId_info_data_reader()
+    Public Sub load_userId_info_data_reader()
 
         sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
         db_project_list.`id`=db_project_item.`proj_id` WHERE `db_project_item`.`assigned_userid` = @userId"
@@ -96,6 +94,7 @@ Public Class FormPayment
             End If
         Else
             mFormProjectList = New FormProjectList
+            mFormProjectList.mUser = mUser
             mFormProjectList.ShowDialog(Me)
         End If
     End Sub

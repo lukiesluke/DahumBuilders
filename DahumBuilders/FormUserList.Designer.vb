@@ -418,7 +418,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 160.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -440,7 +440,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(4, 3)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(125, 130)
+        Me.btnPayment.Size = New System.Drawing.Size(124, 130)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -451,10 +451,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(136, 3)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(135, 3)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(118, 130)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(117, 130)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -465,7 +465,7 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(261, 3)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(259, 3)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
         Me.btnUpdateRecord.Size = New System.Drawing.Size(150, 130)
@@ -479,10 +479,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(418, 3)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(416, 3)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(155, 130)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(157, 130)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter

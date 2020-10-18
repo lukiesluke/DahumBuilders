@@ -220,4 +220,7 @@ Public Class FormUserList
         End If
     End Sub
 
+    Private Sub ListViewUser_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewUser.SelectedIndexChanged
+
+    End Sub
 End Class

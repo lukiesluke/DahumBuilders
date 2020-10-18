@@ -207,7 +207,7 @@ Partial Class FormPayment
         Me.cbPaymentType.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPaymentType.FormattingEnabled = True
         Me.cbPaymentType.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
-        Me.cbPaymentType.Location = New System.Drawing.Point(210, 355)
+        Me.cbPaymentType.Location = New System.Drawing.Point(208, 400)
         Me.cbPaymentType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cbPaymentType.Name = "cbPaymentType"
         Me.cbPaymentType.Size = New System.Drawing.Size(241, 28)
@@ -231,7 +231,7 @@ Partial Class FormPayment
         Me.ListViewUserItem.Location = New System.Drawing.Point(16, 146)
         Me.ListViewUserItem.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUserItem.Name = "ListViewUserItem"
-        Me.ListViewUserItem.Size = New System.Drawing.Size(1019, 155)
+        Me.ListViewUserItem.Size = New System.Drawing.Size(1019, 198)
         Me.ListViewUserItem.TabIndex = 12
         Me.ListViewUserItem.UseCompatibleStateImageBehavior = False
         Me.ListViewUserItem.View = System.Windows.Forms.View.Details
@@ -249,7 +249,7 @@ Partial Class FormPayment
         'ColumnHeaderBlock
         '
         Me.ColumnHeaderBlock.Text = "Block"
-        Me.ColumnHeaderBlock.Width = 50
+        Me.ColumnHeaderBlock.Width = 70
         '
         'ColumnHeaderLot
         '
@@ -289,7 +289,7 @@ Partial Class FormPayment
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(127, 320)
+        Me.Label8.Location = New System.Drawing.Point(125, 365)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(77, 20)
         Me.Label8.TabIndex = 11
@@ -300,7 +300,7 @@ Partial Class FormPayment
         Me.dtpDatePaid.CustomFormat = "MMMM dd, yyyy"
         Me.dtpDatePaid.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDatePaid.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDatePaid.Location = New System.Drawing.Point(210, 314)
+        Me.dtpDatePaid.Location = New System.Drawing.Point(208, 359)
         Me.dtpDatePaid.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dtpDatePaid.Name = "dtpDatePaid"
         Me.dtpDatePaid.Size = New System.Drawing.Size(241, 29)
@@ -310,7 +310,7 @@ Partial Class FormPayment
         '
         Me.txtOfficialReceipt.BackColor = System.Drawing.Color.MistyRose
         Me.txtOfficialReceipt.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOfficialReceipt.Location = New System.Drawing.Point(646, 314)
+        Me.txtOfficialReceipt.Location = New System.Drawing.Point(644, 359)
         Me.txtOfficialReceipt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtOfficialReceipt.MaxLength = 12
         Me.txtOfficialReceipt.Name = "txtOfficialReceipt"
@@ -322,7 +322,7 @@ Partial Class FormPayment
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(490, 316)
+        Me.Label5.Location = New System.Drawing.Point(488, 361)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(150, 20)
         Me.Label5.TabIndex = 4
@@ -379,7 +379,7 @@ Partial Class FormPayment
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(80, 359)
+        Me.Label13.Location = New System.Drawing.Point(78, 404)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(126, 20)
         Me.Label13.TabIndex = 32
