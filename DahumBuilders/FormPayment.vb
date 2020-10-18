@@ -515,6 +515,10 @@ Public Class FormPayment
     End Sub
 
     Private Sub RemoveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RemoveToolStripMenuItem.Click
+        If ListViewUserItem.Items.Count < 1 Or ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
+            Exit Sub
+        End If
+
         Dim projItemId As Int64 = ListViewUserItem.SelectedItems.Item(0).Text
         Dim rowsAffected As Integer = 0
         sql = "UPDATE `db_project_item` SET `assigned_userid`=0 WHERE `item_id`=@ItemId"
@@ -542,6 +546,8 @@ Public Class FormPayment
             Else
                 ContextMenuProjectList.Items(0).Enabled = True
             End If
+        ElseIf ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
+            ContextMenuProjectList.Items(0).Enabled = False
         End If
     End Sub
 End Class
