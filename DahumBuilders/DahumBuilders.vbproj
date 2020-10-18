@@ -189,7 +189,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
-    <EmbeddedResource Include="Report2.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
@@ -245,6 +244,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\profiles-a-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dahum.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
