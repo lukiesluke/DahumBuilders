@@ -524,14 +524,23 @@ FinallyLine:
     End Sub
 
     Private Sub TransactionHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransactionHistoryToolStripMenuItem.Click
-        If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
-            If mFormUserProfile.WindowState = 1 Then
-                mFormUserProfile.WindowState = 0
+        'If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
+        '    If mFormUserProfile.WindowState = 1 Then
+        '        mFormUserProfile.WindowState = 0
+        '    End If
+        'Else
+        '    mFormRptTransaction = New FormRptTransaction
+        '    mFormRptTransaction.mUser = mUser
+        '    mFormRptTransaction.Show()
+        'End If
+        If Application.OpenForms().OfType(Of FormCRptTransaction).Any Then
+            If mFormCRptTransaction.WindowState = 1 Then
+                mFormCRptTransaction.WindowState = 0
             End If
         Else
-            mFormRptTransaction = New FormRptTransaction
-            mFormRptTransaction.mUser = mUser
-            mFormRptTransaction.Show()
+            mFormCRptTransaction = New FormCRptTransaction
+            mFormCRptTransaction.mUser = mUser
+            mFormCRptTransaction.Show()
         End If
     End Sub
 

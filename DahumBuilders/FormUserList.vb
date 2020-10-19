@@ -209,14 +209,23 @@ Public Class FormUserList
     End Sub
 
     Private Sub btnStatementAccount_Click(sender As Object, e As EventArgs) Handles btnStatementAccount.Click
-        If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
-            If mFormUserProfile.WindowState = 1 Then
-                mFormUserProfile.WindowState = 0
+        'If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
+        '    If mFormUserProfile.WindowState = 1 Then
+        '        mFormUserProfile.WindowState = 0
+        '    End If
+        'Else
+        '    mFormRptTransaction = New FormRptTransaction
+        '    mFormRptTransaction.mUser = mUser
+        '    mFormRptTransaction.ShowDialog()
+        'End If
+        If Application.OpenForms().OfType(Of FormCRptTransaction).Any Then
+            If mFormCRptTransaction.WindowState = 1 Then
+                mFormCRptTransaction.WindowState = 0
             End If
         Else
-            mFormRptTransaction = New FormRptTransaction
-            mFormRptTransaction.mUser = mUser
-            mFormRptTransaction.ShowDialog()
+            mFormCRptTransaction = New FormCRptTransaction
+            mFormCRptTransaction.mUser = mUser
+            mFormCRptTransaction.Show()
         End If
     End Sub
 

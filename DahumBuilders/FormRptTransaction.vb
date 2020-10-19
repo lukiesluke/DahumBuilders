@@ -39,15 +39,15 @@ Public Class FormRptTransaction
             rParam.Add(New ReportParameter("ReportParameterMobile", mUser._mobile))
             Me.ReportViewer1.LocalReport.SetParameters(rParam)
 
-            'creates a new page setting
-            Dim pageSettings As New Printing.PageSettings()
-            'create the new margin values (left,right,top,bottom)
-            Dim value As New Printing.Margins(10, 0, 0, 0)
-            'gives your new pagesetting a value
-            pageSettings.Margins = value
-            pageSettings.Landscape = False
-            pageSettings.PaperSize.RawKind = Printing.PaperKind.Letter
-            Me.ReportViewer1.SetPageSettings(pageSettings)
+            ''creates a new page setting
+            'Dim pageSettings As New Printing.PageSettings()
+            ''create the new margin values (left,right,top,bottom)
+            'Dim value As New Printing.Margins(10, 0, 0, 0)
+            ''gives your new pagesetting a value
+            'pageSettings.Margins = value
+            'pageSettings.Landscape = False
+            'pageSettings.PaperSize.RawKind = Printing.PaperKind.Letter
+            'Me.ReportViewer1.SetPageSettings(pageSettings)
             Me.ReportViewer1.SetDisplayMode(DisplayMode.PrintLayout)
 
             Me.ReportViewer1.ZoomMode = ZoomMode.Percent
