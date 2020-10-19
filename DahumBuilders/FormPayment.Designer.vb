@@ -45,6 +45,8 @@ Partial Class FormPayment
         Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTotalPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
         Me.txtOfficialReceipt = New System.Windows.Forms.TextBox()
@@ -58,17 +60,15 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.PanelInformation.SuspendLayout()
+        Me.ContextMenuProjectList.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
-        Me.ContextMenuProjectList.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -290,6 +290,19 @@ Partial Class FormPayment
         Me.ColumnHeaderTotalPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderTotalPaid.Width = 110
         '
+        'ContextMenuProjectList
+        '
+        Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem})
+        Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
+        Me.ContextMenuProjectList.Size = New System.Drawing.Size(149, 34)
+        '
+        'RemoveToolStripMenuItem
+        '
+        Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(148, 30)
+        Me.RemoveToolStripMenuItem.Text = "Remove"
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -428,19 +441,6 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
-        'ContextMenuProjectList
-        '
-        Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem})
-        Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
-        Me.ContextMenuProjectList.Size = New System.Drawing.Size(199, 67)
-        '
-        'RemoveToolStripMenuItem
-        '
-        Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
-        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(198, 30)
-        Me.RemoveToolStripMenuItem.Text = "Remove"
-        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -463,10 +463,10 @@ Partial Class FormPayment
         Me.Panel3.ResumeLayout(False)
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
+        Me.ContextMenuProjectList.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.ContextMenuProjectList.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

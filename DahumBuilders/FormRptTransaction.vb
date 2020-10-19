@@ -37,18 +37,22 @@ Public Class FormRptTransaction
             rParam.Add(New ReportParameter("ReportParameterClientName", mUser._name & " " & mUser._middleName & " " & mUser._surname))
             rParam.Add(New ReportParameter("ReportParameterAddress", mUser._address))
             rParam.Add(New ReportParameter("ReportParameterMobile", mUser._mobile))
-
             Me.ReportViewer1.LocalReport.SetParameters(rParam)
+
+            'creates a new page setting
+            Dim pageSettings As New Printing.PageSettings()
+            'create the new margin values (left,right,top,bottom)
+            Dim value As New Printing.Margins(10, 0, 0, 0)
+            'gives your new pagesetting a value
+            pageSettings.Margins = value
+            pageSettings.Landscape = False
+            pageSettings.PaperSize.RawKind = Printing.PaperKind.Letter
+            Me.ReportViewer1.SetPageSettings(pageSettings)
+            Me.ReportViewer1.SetDisplayMode(DisplayMode.PrintLayout)
+
+            Me.ReportViewer1.ZoomMode = ZoomMode.Percent
+            Me.ReportViewer1.ZoomPercent = 115
             Me.ReportViewer1.RefreshReport()
-            ''ReportViewer1.RefreshReport()
-            ''ReportViewer1.SetDisplayMode(DisplayMode.PrintLayout)
-            'Me.ReportViewer1.SetDisplayMode(DisplayMode.PrintLayout)
-            'Me.ReportViewer1.SetDisplayMode(DisplayMode.Normal)
-
-            Dim pageSettings As Printing.PageSettings = New Printing.PageSettings
-            Console.WriteLine(" Default height: " & pageSettings.PaperSize.Height)
-            Console.WriteLine(" Default width: " & pageSettings.PaperSize.Width)
-
         Catch ex As Exception
             sqlCommand.Dispose()
             sqlConnection.Close()

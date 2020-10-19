@@ -37,6 +37,9 @@ Public Class FormPayment
                 .SelectCommand = sqlCommand
                 .Fill(table)
             End With
+            If table.Rows.Count < 1 Then
+                GoTo FinallyLine
+            End If
 
             Dim item As ListViewItem
             For i As Integer = 0 To table.Rows.Count - 1
@@ -57,10 +60,8 @@ Public Class FormPayment
                 item.SubItems.Add(project._projID)
                 item.SubItems.Add(getClientBalance(mUser._id, project).ToString("N2"))
                 item.SubItems.Add(getClientTotalPaid(mUser._id, project).ToString("N2"))
-
                 ListViewUserItem.Items.Add(item)
             Next
-
             sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "id > 0"))
             For a As Integer = 1 To 1
                 item = New ListViewItem(String.Empty)
@@ -80,8 +81,9 @@ Public Class FormPayment
                 End If
                 ListViewUserItem.Items.Add(item)
             Next
+FinallyLine:
         Catch ex As Exception
-            MessageBox.Show("User Information: " & ex.Message)
+            MessageBox.Show("User Information load: " & ex.Message)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
@@ -409,7 +411,7 @@ Public Class FormPayment
                     If ListViewUserItem.Items.Count > 0 Then
                         ListViewUserItem.Focus()
                         ListViewUserItem.Items(0).Selected = True
-                        ListViewUserItem.Items(0).Focused = True
+                        'ListViewUserItem.Items(0).Focused = True
                     End If
                     Exit Sub
             End Select
@@ -423,6 +425,25 @@ Public Class FormPayment
                 row.DefaultCellStyle.BackColor = Color.White
             End If
         Next
+
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            Dim trans As Transaction = New Transaction()
+            Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(2, row.Index), DataGridViewComboBoxCell)
+            If c.Items.IndexOf(c.Value) = 1 Or c.Items.IndexOf(c.Value) = 2 Then
+                If row.Cells(10).Value Is Nothing Then
+                    MessageBox.Show(Me, "Please enter Part No. of Equity/Monthly Amortization.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Question)
+                    DataGridView1.Focus()
+                    row.Cells(10).Selected = True
+                    Exit Sub
+                ElseIf row.Cells(10).Value = 0 Then
+                    MessageBox.Show(Me, "Please enter Part No. of Equity/Monthly Amortization. Greater than Zero (0)", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Question)
+                    DataGridView1.Focus()
+                    row.Cells(10).Selected = True
+                    Exit Sub
+                End If
+            End If
+        Next
+
         For Each row As DataGridViewRow In DataGridView1.Rows
             If row.Cells(12).Value Is Nothing Then
                 Dim ret As DialogResult = MessageBox.Show(Me, "Please enter Tender Amount.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Question)

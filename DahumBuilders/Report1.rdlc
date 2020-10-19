@@ -145,7 +145,6 @@
                   <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <Format>'₱'#,0.00;('₱'#,0.00)</Format>
-                  <Color>Red</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -180,7 +179,6 @@
                   <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                   <Format>'₱'#,0.00;('₱'#,0.00)</Format>
-                  <Color>Red</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -214,7 +212,6 @@
                 <Style>
                   <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
-                  <Color>Red</Color>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1321,11 +1318,12 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>Customer</DataSetName>
         <Top>0.84723in</Top>
         <Left>0.11937in</Left>
         <Height>0.5in</Height>
-        <Width>7.73701in</Width>
+        <Width>7.73702in</Width>
         <ZIndex>15</ZIndex>
         <Style>
           <Border>
@@ -1341,7 +1339,7 @@
       </Border>
     </Style>
   </Body>
-  <Width>7.85639in</Width>
+  <Width>7.91195in</Width>
   <Page>
     <PageHeader>
       <Height>1.66194in</Height>
@@ -1401,7 +1399,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>3rd floor, T. De Castro Bld, Emilio Aguinaldo Hwy, Palico 1, Imus, 4103 Cavite</Value>
+                  <Value>3rd floor, T. De Castro Bldg, Emilio Aguinaldo Hwy, Palico 1, Imus, 4103 Cavite</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -1617,6 +1615,8 @@
     </PageFooter>
     <PageHeight>11.69in</PageHeight>
     <PageWidth>8.27in</PageWidth>
+    <InteractiveHeight>11.69in</InteractiveHeight>
+    <InteractiveWidth>9in</InteractiveWidth>
     <LeftMargin>0.5in</LeftMargin>
     <RightMargin>0.5in</RightMargin>
     <TopMargin>0.5in</TopMargin>
@@ -1756,6 +1756,7 @@ dOvMNS24izmSBIOzjV5JpVhVHcoAWV23ZVbkEPQ4rpU8zeuiRNzGXmeR9NTRRIpW+tZVlBIttYxqfjbp
 KKRfYUYMABgAMABgAMABgAMABgAMABgAMABgAMABgAMABgA5VFOjqUdVZTzVgCD7weeABWrPR1QsxeFZKZz9OmkaI/3R3fuxYqkueouREf8A2ZzSH+r5ozqPoVMSyfbIN/uwZ4PeJFmuYCbP4/aioZx+w0kbf5tsTak+qDxAc9zleeUxtb6tYgv7gVxGSn1/BN5dAHEGcnllCr+9Wx3+5cTlp9fwF30MtWZ8+yU1FD5ySvJ9mjAlT6sjxGPkLOJT+mzKOJeq08Aufc77jEZqa2QWl1OkXo5pWIaqkqKthv8Ap5mZb+SLYYnvZctCco0UGXQwrohiSNfBFCj7AMVNt7slKxKwEhgAMABgAMABgAMABgAMABgAMABgAMABgAMABgAMABgAMABgAMAGMABiIkGRiWSGIQAcBBjABnEkhgAMABgAMABgAMABgAMABgAMABgA/9k=</ImageData>
     </EmbeddedImage>
   </EmbeddedImages>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>616e573a-204a-471b-a6c8-a94a7cc03165</rd:ReportID>
 </Report>

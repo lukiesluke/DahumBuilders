@@ -4,7 +4,7 @@
     Public Property _tcp As String = ""
     Public Property _paidAmount As String = ""
     Public Property _DiscountAmount As String = ""
-    Public Property _particular As String = ""
+    Public Property _particular As Integer = 0
     Public Property _partNo As String = ""
     Public Property _paymentType As String = ""
     Public Property _clientId As String = ""

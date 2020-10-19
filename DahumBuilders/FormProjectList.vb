@@ -146,7 +146,7 @@ Public Class FormProjectList
         If rowsAffected < 1 Then
             MessageBox.Show("Assigning lot to " & mUser._name & " " & mUser._surname & " was unsuccessful")
         Else
-            MessageBox.Show("Assigning lot to " & mUser._name & " " & mUser._surname & " was Successfully updated")
+            MessageBox.Show(Me, "Assigning lot to " & mUser._name & " " & mUser._surname & " was Successfully updated", "Project List", MessageBoxButtons.OK, MessageBoxIcon.Information)
             mFormPayment.load_userId_info_data_reader()
             Me.Close()
         End If
