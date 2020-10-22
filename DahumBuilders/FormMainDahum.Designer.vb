@@ -28,11 +28,11 @@ Partial Class FormMainDahum
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CientListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClientRegistrationFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProjectSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ProjectControlSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AddProjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddProjectToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -40,7 +40,7 @@ Partial Class FormMainDahum
         'MenuStrip1
         '
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OpenToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OpenToolStripMenuItem, Me.ProjectSettingToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1265, 33)
@@ -62,7 +62,7 @@ Partial Class FormMainDahum
         '
         'OpenToolStripMenuItem
         '
-        Me.OpenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CientListToolStripMenuItem, Me.ClientRegistrationFormToolStripMenuItem, Me.ProjectControlSettingToolStripMenuItem})
+        Me.OpenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CientListToolStripMenuItem, Me.ClientRegistrationFormToolStripMenuItem})
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(68, 29)
         Me.OpenToolStripMenuItem.Text = "Open"
@@ -78,6 +78,13 @@ Partial Class FormMainDahum
         Me.ClientRegistrationFormToolStripMenuItem.Name = "ClientRegistrationFormToolStripMenuItem"
         Me.ClientRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(286, 30)
         Me.ClientRegistrationFormToolStripMenuItem.Text = "Client Registration Form"
+        '
+        'ProjectSettingToolStripMenuItem
+        '
+        Me.ProjectSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddProjectToolStripMenuItem1})
+        Me.ProjectSettingToolStripMenuItem.Name = "ProjectSettingToolStripMenuItem"
+        Me.ProjectSettingToolStripMenuItem.Size = New System.Drawing.Size(139, 29)
+        Me.ProjectSettingToolStripMenuItem.Text = "Project Setting"
         '
         'StatusStrip
         '
@@ -101,18 +108,11 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
         '
-        'ProjectControlSettingToolStripMenuItem
+        'AddProjectToolStripMenuItem1
         '
-        Me.ProjectControlSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddProjectToolStripMenuItem})
-        Me.ProjectControlSettingToolStripMenuItem.Name = "ProjectControlSettingToolStripMenuItem"
-        Me.ProjectControlSettingToolStripMenuItem.Size = New System.Drawing.Size(286, 30)
-        Me.ProjectControlSettingToolStripMenuItem.Text = "Project Control Setting"
-        '
-        'AddProjectToolStripMenuItem
-        '
-        Me.AddProjectToolStripMenuItem.Name = "AddProjectToolStripMenuItem"
-        Me.AddProjectToolStripMenuItem.Size = New System.Drawing.Size(210, 30)
-        Me.AddProjectToolStripMenuItem.Text = "Add Project"
+        Me.AddProjectToolStripMenuItem1.Name = "AddProjectToolStripMenuItem1"
+        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(210, 30)
+        Me.AddProjectToolStripMenuItem1.Text = "Add Project"
         '
         'FormMainDahum
         '
@@ -144,6 +144,6 @@ Partial Class FormMainDahum
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClientRegistrationFormToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CientListToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ProjectControlSettingToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AddProjectToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProjectSettingToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AddProjectToolStripMenuItem1 As ToolStripMenuItem
 End Class

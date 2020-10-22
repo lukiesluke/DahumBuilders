@@ -32,7 +32,7 @@ Public Class FormMainDahum
         End If
     End Sub
 
-    Private Sub AddProjectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddProjectToolStripMenuItem.Click
+    Private Sub AddProjectToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AddProjectToolStripMenuItem1.Click
         If Application.OpenForms().OfType(Of FormAddProjectSetting).Any Then
             mFormAddProjectSetting.Focus()
         Else
