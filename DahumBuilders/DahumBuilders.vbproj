@@ -106,6 +106,12 @@
     <Compile Include="FormCRptTransaction.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormProjectSetting.Designer.vb">
+      <DependentUpon>FormProjectSetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProjectSetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Project.vb" />
     <Compile Include="Customer.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -197,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProjectList.resx">
       <DependentUpon>FormProjectList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProjectSetting.resx">
+      <DependentUpon>FormProjectSetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRptTransaction.resx">
       <DependentUpon>FormRptTransaction.vb</DependentUpon>

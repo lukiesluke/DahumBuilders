@@ -17,6 +17,7 @@ Public Class FormUserProfile
         Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
         Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
         Me.Size = New Size(570, 570)
+        fileLocationImage = String.Empty
 
         With Me.ComboBoxGender.Items
             .Add("Male")
@@ -107,17 +108,18 @@ Public Class FormUserProfile
                 insertDataToChildAndBeneficiary(sqlCommand, sqlConnection, username)
                 MessageBox.Show("Successfully Saved")
                 clearAllTextBox()
+                sqlCommand.Dispose()
+                sqlConnection.Close()
+                Me.Close()
             Else
                 MessageBox.Show("Data NOT Inserted. Please try again.")
             End If
         Catch ex As Exception
-            MessageBox.Show("ERROR: " & ex.Message)
-
+            MessageBox.Show("Saving error: " & ex.Message)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
-
     End Sub
 
     Private Sub insertDataToChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, user As String)
@@ -311,6 +313,8 @@ Public Class FormUserProfile
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 MessageBox.Show("User Profile Successfully Updated")
                 clearAllTextBox()
+                sqlCommand.Dispose()
+                sqlConnection.Close()
                 Me.Close()
             Else
                 MessageBox.Show("Data was not updated. Please try again.")

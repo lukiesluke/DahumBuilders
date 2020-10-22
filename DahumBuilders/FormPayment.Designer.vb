@@ -334,7 +334,6 @@ Partial Class FormPayment
         Me.txtOfficialReceipt.Name = "txtOfficialReceipt"
         Me.txtOfficialReceipt.Size = New System.Drawing.Size(241, 29)
         Me.txtOfficialReceipt.TabIndex = 9
-        Me.txtOfficialReceipt.Text = "800788"
         '
         'Label5
         '

@@ -226,12 +226,13 @@ Partial Class FormUserProfile
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.CustomFormat = "MMMM dd, yyyy"
+        Me.DateTimePicker1.CustomFormat = "MM/dd/ yyyy"
+        Me.DateTimePicker1.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
         Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(522, 234)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(440, 231)
         Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(208, 26)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(197, 26)
         Me.DateTimePicker1.TabIndex = 8
         '
         'btnUpdate
@@ -294,9 +295,9 @@ Partial Class FormUserProfile
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.Image = Global.DahumBuilders.My.Resources.Resources.client_male
         Me.PictureBox1.InitialImage = Global.DahumBuilders.My.Resources.Resources.client_male
-        Me.PictureBox1.Location = New System.Drawing.Point(454, 18)
+        Me.PictureBox1.Location = New System.Drawing.Point(440, 18)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(276, 205)
+        Me.PictureBox1.Size = New System.Drawing.Size(290, 179)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 30
         Me.PictureBox1.TabStop = False
@@ -570,12 +571,12 @@ Partial Class FormUserProfile
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(417, 239)
+        Me.Label7.Location = New System.Drawing.Point(436, 203)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(97, 20)
+        Me.Label7.Size = New System.Drawing.Size(213, 20)
         Me.Label7.TabIndex = 16
-        Me.Label7.Text = "Date of birth"
+        Me.Label7.Text = "Date of birth (MM/DD/YYYY)"
         '
         'TabPage2
         '
