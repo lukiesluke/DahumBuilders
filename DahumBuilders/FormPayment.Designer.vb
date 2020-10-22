@@ -24,16 +24,28 @@ Partial Class FormPayment
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.PanelCheck = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblInformation = New System.Windows.Forms.Label()
+        Me.txtCheckTransferAmount = New System.Windows.Forms.TextBox()
+        Me.txtBankName = New System.Windows.Forms.TextBox()
+        Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
+        Me.lblDateOrTransfer = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblAmount = New System.Windows.Forms.Label()
         Me.PanelTotal = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.btnPayment = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cbPaymentType = New System.Windows.Forms.ComboBox()
+        Me.txtOfficialReceipt = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.PanelInformation = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.cbPaymentType = New System.Windows.Forms.ComboBox()
         Me.btnSearchProject = New System.Windows.Forms.Button()
         Me.ListViewUserItem = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -47,24 +59,24 @@ Partial Class FormPayment
         Me.ColumnHeaderTotalPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
-        Me.txtOfficialReceipt = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.lblAddress = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.txtCheckNo = New System.Windows.Forms.TextBox()
+        Me.lblCheckNo = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
+        Me.PanelCheck.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.PanelTotal.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.PanelInformation.SuspendLayout()
         Me.ContextMenuProjectList.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -79,107 +91,254 @@ Partial Class FormPayment
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.White
+        Me.SplitContainer1.Panel1.Controls.Add(Me.PanelCheck)
         Me.SplitContainer1.Panel1.Controls.Add(Me.PanelTotal)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.Panel3)
         Me.SplitContainer1.Panel1.Controls.Add(Me.Panel2)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.Panel1)
         '
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PanelInformation)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1465, 508)
-        Me.SplitContainer1.SplitterDistance = 407
+        Me.SplitContainer1.Size = New System.Drawing.Size(1500, 508)
+        Me.SplitContainer1.SplitterDistance = 416
         Me.SplitContainer1.TabIndex = 1
+        '
+        'PanelCheck
+        '
+        Me.PanelCheck.BackColor = System.Drawing.Color.White
+        Me.PanelCheck.Controls.Add(Me.lblCheckNo)
+        Me.PanelCheck.Controls.Add(Me.txtCheckNo)
+        Me.PanelCheck.Controls.Add(Me.Panel4)
+        Me.PanelCheck.Controls.Add(Me.txtCheckTransferAmount)
+        Me.PanelCheck.Controls.Add(Me.txtBankName)
+        Me.PanelCheck.Controls.Add(Me.dtpCheckDate)
+        Me.PanelCheck.Controls.Add(Me.lblDateOrTransfer)
+        Me.PanelCheck.Controls.Add(Me.Label3)
+        Me.PanelCheck.Controls.Add(Me.lblAmount)
+        Me.PanelCheck.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelCheck.Location = New System.Drawing.Point(0, 162)
+        Me.PanelCheck.Name = "PanelCheck"
+        Me.PanelCheck.Size = New System.Drawing.Size(416, 223)
+        Me.PanelCheck.TabIndex = 4
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.lblInformation)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel4.Location = New System.Drawing.Point(0, 0)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(416, 34)
+        Me.Panel4.TabIndex = 38
+        '
+        'lblInformation
+        '
+        Me.lblInformation.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInformation.Location = New System.Drawing.Point(14, 8)
+        Me.lblInformation.Name = "lblInformation"
+        Me.lblInformation.Size = New System.Drawing.Size(377, 20)
+        Me.lblInformation.TabIndex = 39
+        Me.lblInformation.Text = "Check Information"
+        Me.lblInformation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtCheckTransferAmount
+        '
+        Me.txtCheckTransferAmount.BackColor = System.Drawing.Color.White
+        Me.txtCheckTransferAmount.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCheckTransferAmount.Location = New System.Drawing.Point(166, 131)
+        Me.txtCheckTransferAmount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtCheckTransferAmount.MaxLength = 12
+        Me.txtCheckTransferAmount.Name = "txtCheckTransferAmount"
+        Me.txtCheckTransferAmount.Size = New System.Drawing.Size(225, 29)
+        Me.txtCheckTransferAmount.TabIndex = 37
+        '
+        'txtBankName
+        '
+        Me.txtBankName.BackColor = System.Drawing.Color.White
+        Me.txtBankName.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBankName.Location = New System.Drawing.Point(166, 92)
+        Me.txtBankName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtBankName.MaxLength = 12
+        Me.txtBankName.Name = "txtBankName"
+        Me.txtBankName.Size = New System.Drawing.Size(225, 29)
+        Me.txtBankName.TabIndex = 36
+        '
+        'dtpCheckDate
+        '
+        Me.dtpCheckDate.CustomFormat = "MMMM dd, yyyy"
+        Me.dtpCheckDate.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpCheckDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpCheckDate.Location = New System.Drawing.Point(166, 53)
+        Me.dtpCheckDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dtpCheckDate.Name = "dtpCheckDate"
+        Me.dtpCheckDate.Size = New System.Drawing.Size(225, 29)
+        Me.dtpCheckDate.TabIndex = 33
+        '
+        'lblDateOrTransfer
+        '
+        Me.lblDateOrTransfer.AutoSize = True
+        Me.lblDateOrTransfer.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblDateOrTransfer.Location = New System.Drawing.Point(10, 62)
+        Me.lblDateOrTransfer.Name = "lblDateOrTransfer"
+        Me.lblDateOrTransfer.Size = New System.Drawing.Size(105, 20)
+        Me.lblDateOrTransfer.TabIndex = 34
+        Me.lblDateOrTransfer.Text = "Check Date"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(10, 101)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(104, 20)
+        Me.Label3.TabIndex = 33
+        Me.Label3.Text = "Bank Name"
+        '
+        'lblAmount
+        '
+        Me.lblAmount.AutoSize = True
+        Me.lblAmount.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAmount.Location = New System.Drawing.Point(10, 140)
+        Me.lblAmount.Name = "lblAmount"
+        Me.lblAmount.Size = New System.Drawing.Size(131, 20)
+        Me.lblAmount.TabIndex = 35
+        Me.lblAmount.Text = "Check Amount"
         '
         'PanelTotal
         '
         Me.PanelTotal.BackColor = System.Drawing.Color.White
-        Me.PanelTotal.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelTotal.Location = New System.Drawing.Point(0, 431)
+        Me.PanelTotal.Controls.Add(Me.btnPayment)
+        Me.PanelTotal.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelTotal.Location = New System.Drawing.Point(0, 403)
         Me.PanelTotal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.Size = New System.Drawing.Size(407, 0)
+        Me.PanelTotal.Size = New System.Drawing.Size(416, 105)
         Me.PanelTotal.TabIndex = 3
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Panel3.Controls.Add(Me.btnPayment)
-        Me.Panel3.Controls.Add(Me.Button1)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 348)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(407, 160)
-        Me.Panel3.TabIndex = 2
         '
         'btnPayment
         '
         Me.btnPayment.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPayment.Location = New System.Drawing.Point(24, 78)
+        Me.btnPayment.Location = New System.Drawing.Point(14, 24)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(343, 55)
+        Me.btnPayment.Size = New System.Drawing.Size(377, 55)
         Me.btnPayment.TabIndex = 1
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.UseVisualStyleBackColor = True
         '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(24, 18)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(343, 55)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Payment Method"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.dtpDatePaid)
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Controls.Add(Me.cbPaymentType)
+        Me.Panel2.Controls.Add(Me.txtOfficialReceipt)
+        Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.Label13)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 100)
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(407, 331)
+        Me.Panel2.Size = New System.Drawing.Size(416, 162)
         Me.Panel2.TabIndex = 1
         '
-        'Panel1
+        'dtpDatePaid
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(407, 100)
-        Me.Panel1.TabIndex = 0
+        Me.dtpDatePaid.CustomFormat = "MMMM dd, yyyy"
+        Me.dtpDatePaid.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpDatePaid.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDatePaid.Location = New System.Drawing.Point(166, 23)
+        Me.dtpDatePaid.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.dtpDatePaid.Name = "dtpDatePaid"
+        Me.dtpDatePaid.Size = New System.Drawing.Size(225, 29)
+        Me.dtpDatePaid.TabIndex = 1
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(10, 32)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(77, 20)
+        Me.Label8.TabIndex = 11
+        Me.Label8.Text = "OR Date"
+        '
+        'cbPaymentType
+        '
+        Me.cbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPaymentType.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPaymentType.FormattingEnabled = True
+        Me.cbPaymentType.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
+        Me.cbPaymentType.Location = New System.Drawing.Point(166, 100)
+        Me.cbPaymentType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cbPaymentType.Name = "cbPaymentType"
+        Me.cbPaymentType.Size = New System.Drawing.Size(225, 28)
+        Me.cbPaymentType.TabIndex = 3
+        '
+        'txtOfficialReceipt
+        '
+        Me.txtOfficialReceipt.BackColor = System.Drawing.Color.MistyRose
+        Me.txtOfficialReceipt.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOfficialReceipt.Location = New System.Drawing.Point(166, 62)
+        Me.txtOfficialReceipt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtOfficialReceipt.MaxLength = 12
+        Me.txtOfficialReceipt.Name = "txtOfficialReceipt"
+        Me.txtOfficialReceipt.Size = New System.Drawing.Size(225, 29)
+        Me.txtOfficialReceipt.TabIndex = 2
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(10, 71)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(150, 20)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "Official Receipt #"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(10, 108)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(126, 20)
+        Me.Label13.TabIndex = 32
+        Me.Label13.Text = "Payment Type"
         '
         'PanelInformation
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelInformation.Controls.Add(Me.Button1)
         Me.PanelInformation.Controls.Add(Me.lblContact)
         Me.PanelInformation.Controls.Add(Me.Label2)
-        Me.PanelInformation.Controls.Add(Me.cbPaymentType)
         Me.PanelInformation.Controls.Add(Me.btnSearchProject)
         Me.PanelInformation.Controls.Add(Me.ListViewUserItem)
-        Me.PanelInformation.Controls.Add(Me.Label8)
-        Me.PanelInformation.Controls.Add(Me.dtpDatePaid)
-        Me.PanelInformation.Controls.Add(Me.txtOfficialReceipt)
-        Me.PanelInformation.Controls.Add(Me.Label5)
         Me.PanelInformation.Controls.Add(Me.lblAddress)
         Me.PanelInformation.Controls.Add(Me.lblName)
         Me.PanelInformation.Controls.Add(Me.Label7)
         Me.PanelInformation.Controls.Add(Me.Label6)
-        Me.PanelInformation.Controls.Add(Me.Label13)
         Me.PanelInformation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelInformation.Location = New System.Drawing.Point(0, 0)
         Me.PanelInformation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelInformation.Name = "PanelInformation"
-        Me.PanelInformation.Size = New System.Drawing.Size(1054, 508)
+        Me.PanelInformation.Size = New System.Drawing.Size(1080, 508)
         Me.PanelInformation.TabIndex = 2
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(830, 16)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(208, 55)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Payment Method"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
         '
         'lblContact
         '
@@ -205,25 +364,13 @@ Partial Class FormPayment
         Me.Label2.TabIndex = 48
         Me.Label2.Text = "Contact#"
         '
-        'cbPaymentType
-        '
-        Me.cbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPaymentType.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbPaymentType.FormattingEnabled = True
-        Me.cbPaymentType.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
-        Me.cbPaymentType.Location = New System.Drawing.Point(208, 400)
-        Me.cbPaymentType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.cbPaymentType.Name = "cbPaymentType"
-        Me.cbPaymentType.Size = New System.Drawing.Size(241, 28)
-        Me.cbPaymentType.TabIndex = 33
-        '
         'btnSearchProject
         '
         Me.btnSearchProject.Location = New System.Drawing.Point(727, 108)
         Me.btnSearchProject.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearchProject.Name = "btnSearchProject"
         Me.btnSearchProject.Size = New System.Drawing.Size(160, 32)
-        Me.btnSearchProject.TabIndex = 13
+        Me.btnSearchProject.TabIndex = 4
         Me.btnSearchProject.Text = "&Add Project"
         Me.btnSearchProject.UseVisualStyleBackColor = True
         '
@@ -236,8 +383,8 @@ Partial Class FormPayment
         Me.ListViewUserItem.Location = New System.Drawing.Point(16, 146)
         Me.ListViewUserItem.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUserItem.Name = "ListViewUserItem"
-        Me.ListViewUserItem.Size = New System.Drawing.Size(1019, 198)
-        Me.ListViewUserItem.TabIndex = 12
+        Me.ListViewUserItem.Size = New System.Drawing.Size(1045, 281)
+        Me.ListViewUserItem.TabIndex = 5
         Me.ListViewUserItem.UseCompatibleStateImageBehavior = False
         Me.ListViewUserItem.View = System.Windows.Forms.View.Details
         '
@@ -254,12 +401,14 @@ Partial Class FormPayment
         'ColumnHeaderBlock
         '
         Me.ColumnHeaderBlock.Text = "Block"
-        Me.ColumnHeaderBlock.Width = 70
+        Me.ColumnHeaderBlock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderBlock.Width = 40
         '
         'ColumnHeaderLot
         '
         Me.ColumnHeaderLot.Text = "Lot"
-        Me.ColumnHeaderLot.Width = 50
+        Me.ColumnHeaderLot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderLot.Width = 40
         '
         'ColumnHeaderSQM
         '
@@ -302,48 +451,6 @@ Partial Class FormPayment
         Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
         Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(148, 30)
         Me.RemoveToolStripMenuItem.Text = "Remove"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(125, 365)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(77, 20)
-        Me.Label8.TabIndex = 11
-        Me.Label8.Text = "OR Date"
-        '
-        'dtpDatePaid
-        '
-        Me.dtpDatePaid.CustomFormat = "MMMM dd, yyyy"
-        Me.dtpDatePaid.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDatePaid.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDatePaid.Location = New System.Drawing.Point(208, 359)
-        Me.dtpDatePaid.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.dtpDatePaid.Name = "dtpDatePaid"
-        Me.dtpDatePaid.Size = New System.Drawing.Size(241, 29)
-        Me.dtpDatePaid.TabIndex = 10
-        '
-        'txtOfficialReceipt
-        '
-        Me.txtOfficialReceipt.BackColor = System.Drawing.Color.MistyRose
-        Me.txtOfficialReceipt.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOfficialReceipt.Location = New System.Drawing.Point(644, 359)
-        Me.txtOfficialReceipt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtOfficialReceipt.MaxLength = 12
-        Me.txtOfficialReceipt.Name = "txtOfficialReceipt"
-        Me.txtOfficialReceipt.Size = New System.Drawing.Size(241, 29)
-        Me.txtOfficialReceipt.TabIndex = 9
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(488, 361)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(150, 20)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Official Receipt #"
         '
         'lblAddress
         '
@@ -392,16 +499,6 @@ Partial Class FormPayment
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Name"
         '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(78, 404)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(126, 20)
-        Me.Label13.TabIndex = 32
-        Me.Label13.Text = "Payment Type"
-        '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
@@ -413,8 +510,8 @@ Partial Class FormPayment
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(1465, 252)
-        Me.DataGridView1.TabIndex = 50
+        Me.DataGridView1.Size = New System.Drawing.Size(1500, 252)
+        Me.DataGridView1.TabIndex = 6
         '
         'MenuStrip1
         '
@@ -423,7 +520,7 @@ Partial Class FormPayment
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1493, 33)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1540, 33)
         Me.MenuStrip1.TabIndex = 51
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -440,11 +537,32 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
+        'txtCheckNo
+        '
+        Me.txtCheckNo.BackColor = System.Drawing.Color.White
+        Me.txtCheckNo.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCheckNo.Location = New System.Drawing.Point(166, 170)
+        Me.txtCheckNo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.txtCheckNo.MaxLength = 12
+        Me.txtCheckNo.Name = "txtCheckNo"
+        Me.txtCheckNo.Size = New System.Drawing.Size(225, 29)
+        Me.txtCheckNo.TabIndex = 39
+        '
+        'lblCheckNo
+        '
+        Me.lblCheckNo.AutoSize = True
+        Me.lblCheckNo.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCheckNo.Location = New System.Drawing.Point(10, 179)
+        Me.lblCheckNo.Name = "lblCheckNo"
+        Me.lblCheckNo.Size = New System.Drawing.Size(136, 20)
+        Me.lblCheckNo.TabIndex = 40
+        Me.lblCheckNo.Text = "Check Number"
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1493, 944)
+        Me.ClientSize = New System.Drawing.Size(1540, 944)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MenuStrip1)
@@ -459,7 +577,12 @@ Partial Class FormPayment
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
+        Me.PanelCheck.ResumeLayout(False)
+        Me.PanelCheck.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.PanelTotal.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
         Me.ContextMenuProjectList.ResumeLayout(False)
@@ -472,8 +595,6 @@ Partial Class FormPayment
     End Sub
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Panel3 As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents btnPayment As Button
     Friend WithEvents PanelInformation As Panel
@@ -493,7 +614,6 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderProjectName As ColumnHeader
     Friend WithEvents btnSearchProject As Button
     Friend WithEvents ColumnHeaderSQM As ColumnHeader
-    Friend WithEvents PanelTotal As Panel
     Friend WithEvents cbPaymentType As ComboBox
     Friend WithEvents Label13 As Label
     Friend WithEvents ColumnHeaderProjID As ColumnHeader
@@ -507,4 +627,16 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderTotalPaid As ColumnHeader
     Friend WithEvents ContextMenuProjectList As ContextMenuStrip
     Friend WithEvents RemoveToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PanelTotal As Panel
+    Friend WithEvents PanelCheck As Panel
+    Friend WithEvents lblDateOrTransfer As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents lblAmount As Label
+    Friend WithEvents dtpCheckDate As DateTimePicker
+    Friend WithEvents txtCheckTransferAmount As TextBox
+    Friend WithEvents txtBankName As TextBox
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents lblInformation As Label
+    Friend WithEvents lblCheckNo As Label
+    Friend WithEvents txtCheckNo As TextBox
 End Class

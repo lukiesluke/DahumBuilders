@@ -12,6 +12,8 @@ Public Class FormPayment
         lblName.Text = mUser._name & " " & mUser._middleName & " " & mUser._surname
         lblAddress.Text = mUser._address
         lblContact.Text = mUser._mobile
+        PanelCheck.Visible = False
+
         load_userId_info_data_reader()
         setDataGridView()
     End Sub
@@ -248,7 +250,7 @@ FinallyLine:
                 Project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
                 Project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
                 Project._balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
-                Project._description = Project._name & " " & Project._block & " " & Project._lot & " " & Project._sqm
+                project._description = project._name & " B" & project._block & " L" & project._lot & " - " & project._sqm & " sqm"
                 addPurchaseItem(Project)
             End If
         End If
@@ -579,5 +581,31 @@ FinallyLine:
         ElseIf ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
             ContextMenuProjectList.Items(0).Enabled = False
         End If
+    End Sub
+
+    Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
+        lblCheckNo.Visible = False
+        txtCheckNo.Visible = False
+        lblInformation.Text = String.Empty
+        lblDateOrTransfer.Text = String.Empty
+        txtCheckTransferAmount.Text = String.Empty
+        txtCheckNo.Text = String.Empty
+        txtBankName.Text = String.Empty
+        Select Case cbPaymentType.SelectedIndex
+            Case 1
+                PanelCheck.Visible = True
+                lblInformation.Text = "Check Information"
+                lblDateOrTransfer.Text = "Date Check"
+                lblAmount.Text = "Check Amount"
+                lblCheckNo.Visible = True
+                txtCheckNo.Visible = True
+            Case 2
+                PanelCheck.Visible = True
+                lblInformation.Text = "Bank Transfer Information"
+                lblDateOrTransfer.Text = "Date Transfer"
+                lblAmount.Text = "Transfer Amount"
+            Case Else
+                PanelCheck.Visible = False
+        End Select
     End Sub
 End Class

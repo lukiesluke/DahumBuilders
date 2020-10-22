@@ -280,13 +280,13 @@
     <None Include="Resources\profiles-a-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\dahum.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\iconfinder_search.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dahum.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

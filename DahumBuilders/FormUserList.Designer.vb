@@ -88,7 +88,7 @@ Partial Class FormUserList
         Me.ListViewUser.Location = New System.Drawing.Point(0, 84)
         Me.ListViewUser.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUser.Name = "ListViewUser"
-        Me.ListViewUser.Size = New System.Drawing.Size(763, 538)
+        Me.ListViewUser.Size = New System.Drawing.Size(861, 538)
         Me.ListViewUser.TabIndex = 4
         Me.ListViewUser.UseCompatibleStateImageBehavior = False
         Me.ListViewUser.View = System.Windows.Forms.View.Details
@@ -184,12 +184,12 @@ Partial Class FormUserList
         '
         'labelRows
         '
-        Me.labelRows.AutoSize = True
-        Me.labelRows.Location = New System.Drawing.Point(1268, 641)
+        Me.labelRows.Location = New System.Drawing.Point(1301, 640)
         Me.labelRows.Name = "labelRows"
-        Me.labelRows.Size = New System.Drawing.Size(53, 20)
+        Me.labelRows.Size = New System.Drawing.Size(173, 20)
         Me.labelRows.TabIndex = 5
         Me.labelRows.Text = "Rows:"
+        Me.labelRows.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TableLayoutPanel1
         '
@@ -208,7 +208,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.86747!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.13253!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 139.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(585, 622)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(592, 622)
         Me.TableLayoutPanel1.TabIndex = 6
         '
         'Panel1
@@ -235,7 +235,7 @@ Partial Class FormUserList
         Me.Panel1.Location = New System.Drawing.Point(4, 84)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(577, 394)
+        Me.Panel1.Size = New System.Drawing.Size(584, 394)
         Me.Panel1.TabIndex = 7
         '
         'txtMobileContact
@@ -394,7 +394,7 @@ Partial Class FormUserList
         Me.Panel2.Location = New System.Drawing.Point(4, 3)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(577, 76)
+        Me.Panel2.Size = New System.Drawing.Size(584, 76)
         Me.Panel2.TabIndex = 8
         '
         'Label9
@@ -406,7 +406,7 @@ Partial Class FormUserList
         Me.Label9.ForeColor = System.Drawing.Color.DarkGreen
         Me.Label9.Location = New System.Drawing.Point(0, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(577, 76)
+        Me.Label9.Size = New System.Drawing.Size(584, 76)
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -418,7 +418,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 162.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 166.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -429,7 +429,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(577, 136)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(584, 136)
         Me.TableLayoutPanel2.TabIndex = 9
         '
         'btnPayment
@@ -440,7 +440,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(4, 3)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(124, 130)
+        Me.btnPayment.Size = New System.Drawing.Size(125, 130)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -451,10 +451,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(135, 3)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(136, 3)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(117, 130)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(119, 130)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -465,7 +465,7 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(259, 3)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(262, 3)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
         Me.btnUpdateRecord.Size = New System.Drawing.Size(150, 130)
@@ -479,10 +479,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(416, 3)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(419, 3)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(157, 130)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(161, 130)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -491,8 +491,8 @@ Partial Class FormUserList
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 2
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.52941!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.47059!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.88737!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 59.11263!))
         Me.TableLayoutPanel3.Controls.Add(Me.Panel3, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel1, 0, 0)
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(12, 12)
@@ -500,7 +500,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1360, 626)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1465, 626)
         Me.TableLayoutPanel3.TabIndex = 7
         '
         'Panel3
@@ -508,10 +508,10 @@ Partial Class FormUserList
         Me.Panel3.Controls.Add(Me.Panel4)
         Me.Panel3.Controls.Add(Me.ListViewUser)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(594, 2)
+        Me.Panel3.Location = New System.Drawing.Point(601, 2)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(763, 622)
+        Me.Panel3.Size = New System.Drawing.Size(861, 622)
         Me.Panel3.TabIndex = 9
         '
         'Panel4
@@ -525,7 +525,7 @@ Partial Class FormUserList
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(763, 79)
+        Me.Panel4.Size = New System.Drawing.Size(861, 79)
         Me.Panel4.TabIndex = 0
         '
         'FormUserList
@@ -533,7 +533,7 @@ Partial Class FormUserList
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1396, 859)
+        Me.ClientSize = New System.Drawing.Size(1489, 859)
         Me.Controls.Add(Me.TableLayoutPanel3)
         Me.Controls.Add(Me.labelRows)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -553,7 +553,6 @@ Partial Class FormUserList
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 

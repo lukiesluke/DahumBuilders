@@ -84,6 +84,15 @@ Partial Class FormUserProfile
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.gbId = New System.Windows.Forms.GroupBox()
+        Me.txtIdNumber2 = New System.Windows.Forms.TextBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.txtIdType2 = New System.Windows.Forms.TextBox()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtIdNumber1 = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.txtIdType1 = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.btnClearListBeneficiary = New System.Windows.Forms.Button()
         Me.ListViewBeneficiary = New System.Windows.Forms.ListView()
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -91,15 +100,6 @@ Partial Class FormUserProfile
         Me.btnAddBeneficiary = New System.Windows.Forms.Button()
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
-        Me.gbId = New System.Windows.Forms.GroupBox()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.txtIdType1 = New System.Windows.Forms.TextBox()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.txtIdNumber1 = New System.Windows.Forms.TextBox()
-        Me.txtIdNumber2 = New System.Windows.Forms.TextBox()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.txtIdType2 = New System.Windows.Forms.TextBox()
-        Me.Label26 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -753,6 +753,87 @@ Partial Class FormUserProfile
         Me.TabPage3.Text = "Beneficiaries & ID's Information"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'gbId
+        '
+        Me.gbId.Controls.Add(Me.txtIdNumber2)
+        Me.gbId.Controls.Add(Me.Label25)
+        Me.gbId.Controls.Add(Me.txtIdType2)
+        Me.gbId.Controls.Add(Me.Label26)
+        Me.gbId.Controls.Add(Me.txtIdNumber1)
+        Me.gbId.Controls.Add(Me.Label23)
+        Me.gbId.Controls.Add(Me.txtIdType1)
+        Me.gbId.Controls.Add(Me.Label22)
+        Me.gbId.Location = New System.Drawing.Point(16, 305)
+        Me.gbId.Name = "gbId"
+        Me.gbId.Size = New System.Drawing.Size(714, 134)
+        Me.gbId.TabIndex = 14
+        Me.gbId.TabStop = False
+        Me.gbId.Text = "Valid ID's Presented"
+        '
+        'txtIdNumber2
+        '
+        Me.txtIdNumber2.Location = New System.Drawing.Point(395, 82)
+        Me.txtIdNumber2.Name = "txtIdNumber2"
+        Me.txtIdNumber2.Size = New System.Drawing.Size(294, 26)
+        Me.txtIdNumber2.TabIndex = 7
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(335, 88)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(54, 20)
+        Me.Label25.TabIndex = 6
+        Me.Label25.Text = "ID No."
+        '
+        'txtIdType2
+        '
+        Me.txtIdType2.Location = New System.Drawing.Point(103, 82)
+        Me.txtIdType2.Name = "txtIdType2"
+        Me.txtIdType2.Size = New System.Drawing.Size(226, 26)
+        Me.txtIdType2.TabIndex = 5
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(33, 85)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(64, 20)
+        Me.Label26.TabIndex = 4
+        Me.Label26.Text = "ID Type"
+        '
+        'txtIdNumber1
+        '
+        Me.txtIdNumber1.Location = New System.Drawing.Point(395, 46)
+        Me.txtIdNumber1.Name = "txtIdNumber1"
+        Me.txtIdNumber1.Size = New System.Drawing.Size(294, 26)
+        Me.txtIdNumber1.TabIndex = 3
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(335, 52)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(54, 20)
+        Me.Label23.TabIndex = 2
+        Me.Label23.Text = "ID No."
+        '
+        'txtIdType1
+        '
+        Me.txtIdType1.Location = New System.Drawing.Point(103, 46)
+        Me.txtIdType1.Name = "txtIdType1"
+        Me.txtIdType1.Size = New System.Drawing.Size(226, 26)
+        Me.txtIdType1.TabIndex = 1
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(33, 49)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(64, 20)
+        Me.Label22.TabIndex = 0
+        Me.Label22.Text = "ID Type"
+        '
         'btnClearListBeneficiary
         '
         Me.btnClearListBeneficiary.Location = New System.Drawing.Point(599, 25)
@@ -813,87 +894,6 @@ Partial Class FormUserProfile
         Me.Label29.Size = New System.Drawing.Size(51, 20)
         Me.Label29.TabIndex = 6
         Me.Label29.Text = "Name"
-        '
-        'gbId
-        '
-        Me.gbId.Controls.Add(Me.txtIdNumber2)
-        Me.gbId.Controls.Add(Me.Label25)
-        Me.gbId.Controls.Add(Me.txtIdType2)
-        Me.gbId.Controls.Add(Me.Label26)
-        Me.gbId.Controls.Add(Me.txtIdNumber1)
-        Me.gbId.Controls.Add(Me.Label23)
-        Me.gbId.Controls.Add(Me.txtIdType1)
-        Me.gbId.Controls.Add(Me.Label22)
-        Me.gbId.Location = New System.Drawing.Point(16, 305)
-        Me.gbId.Name = "gbId"
-        Me.gbId.Size = New System.Drawing.Size(714, 134)
-        Me.gbId.TabIndex = 14
-        Me.gbId.TabStop = False
-        Me.gbId.Text = "Valid ID's Presented"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(33, 49)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(64, 20)
-        Me.Label22.TabIndex = 0
-        Me.Label22.Text = "ID Type"
-        '
-        'txtIdType1
-        '
-        Me.txtIdType1.Location = New System.Drawing.Point(103, 46)
-        Me.txtIdType1.Name = "txtIdType1"
-        Me.txtIdType1.Size = New System.Drawing.Size(226, 26)
-        Me.txtIdType1.TabIndex = 1
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(335, 52)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(54, 20)
-        Me.Label23.TabIndex = 2
-        Me.Label23.Text = "ID No."
-        '
-        'txtIdNumber1
-        '
-        Me.txtIdNumber1.Location = New System.Drawing.Point(395, 46)
-        Me.txtIdNumber1.Name = "txtIdNumber1"
-        Me.txtIdNumber1.Size = New System.Drawing.Size(294, 26)
-        Me.txtIdNumber1.TabIndex = 3
-        '
-        'txtIdNumber2
-        '
-        Me.txtIdNumber2.Location = New System.Drawing.Point(395, 80)
-        Me.txtIdNumber2.Name = "txtIdNumber2"
-        Me.txtIdNumber2.Size = New System.Drawing.Size(294, 26)
-        Me.txtIdNumber2.TabIndex = 7
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(335, 86)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(54, 20)
-        Me.Label25.TabIndex = 6
-        Me.Label25.Text = "ID No."
-        '
-        'txtIdType2
-        '
-        Me.txtIdType2.Location = New System.Drawing.Point(103, 80)
-        Me.txtIdType2.Name = "txtIdType2"
-        Me.txtIdType2.Size = New System.Drawing.Size(226, 26)
-        Me.txtIdType2.TabIndex = 5
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(33, 83)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(64, 20)
-        Me.Label26.TabIndex = 4
-        Me.Label26.Text = "ID Type"
         '
         'FormUserProfile
         '
