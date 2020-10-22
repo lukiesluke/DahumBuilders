@@ -106,10 +106,10 @@
     <Compile Include="FormCRptTransaction.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProjectSetting.Designer.vb">
-      <DependentUpon>FormProjectSetting.vb</DependentUpon>
+    <Compile Include="FormAddProjectSetting.Designer.vb">
+      <DependentUpon>FormAddProjectSetting.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormProjectSetting.vb">
+    <Compile Include="FormAddProjectSetting.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Project.vb" />
@@ -204,8 +204,8 @@
     <EmbeddedResource Include="FormProjectList.resx">
       <DependentUpon>FormProjectList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProjectSetting.resx">
-      <DependentUpon>FormProjectSetting.vb</DependentUpon>
+    <EmbeddedResource Include="FormAddProjectSetting.resx">
+      <DependentUpon>FormAddProjectSetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRptTransaction.resx">
       <DependentUpon>FormRptTransaction.vb</DependentUpon>

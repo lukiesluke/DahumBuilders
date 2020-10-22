@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FormProjectSetting
+Partial Class FormAddProjectSetting
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -59,7 +59,7 @@ Partial Class FormProjectSetting
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(142, 181)
+        Me.btnSave.Location = New System.Drawing.Point(142, 184)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(146, 39)
         Me.btnSave.TabIndex = 6
@@ -111,18 +111,18 @@ Partial Class FormProjectSetting
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(294, 181)
+        Me.btnCancel.Location = New System.Drawing.Point(294, 184)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(146, 39)
         Me.btnCancel.TabIndex = 12
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'FormProjectSetting
+        'FormAddProjectSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(505, 238)
+        Me.ClientSize = New System.Drawing.Size(505, 249)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.txtSqm)
         Me.Controls.Add(Me.Label4)
@@ -136,8 +136,9 @@ Partial Class FormProjectSetting
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "FormProjectSetting"
-        Me.Text = "Project Control Setting"
+        Me.Name = "FormAddProjectSetting"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Add Project Setting"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

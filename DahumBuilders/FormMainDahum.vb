@@ -31,4 +31,13 @@ Public Class FormMainDahum
             mFormUserList.Show()
         End If
     End Sub
+
+    Private Sub AddProjectToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddProjectToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormAddProjectSetting).Any Then
+            mFormAddProjectSetting.Focus()
+        Else
+            mFormAddProjectSetting = New FormAddProjectSetting
+            mFormAddProjectSetting.ShowDialog(Me)
+        End If
+    End Sub
 End Class

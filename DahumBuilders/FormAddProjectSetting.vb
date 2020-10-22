@@ -1,6 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Public Class FormProjectSetting
+Public Class FormAddProjectSetting
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_ProjectName_combobox()
         cbbProjectName.SelectedIndex = 0
