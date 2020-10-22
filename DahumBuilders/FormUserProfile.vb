@@ -67,10 +67,10 @@ Public Class FormUserProfile
         `place_birth`, `citizenship`, `telephone_number`, `mobile_number`, `email_address`, 
         `occupation`, `company_name`, `spouse_name`, `spouse_occupation`, `spouse_contact`, 
         `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`,
-        `file_location_image`, `username`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
+        `file_location_image`, `id_type1`, `id_number1`, `id_type2`, `id_number2`, `username`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
         @civilStatus, @dateBirth, @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, 
         @companyName, @spouseName, @spouseOccupation, @spouseContact, @fatherName, @fatherAddress, @MotherName, 
-        @MotherAddress, @fileLocationImage, @username)"
+        @MotherAddress, @fileLocationImage, @IdType1, @IdNumber1, @IdType2, @IdNumber2, @username)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -99,9 +99,12 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@fatherAddress", MySqlDbType.VarChar).Value = txtFatherAddress.Text.Trim
         sqlCommand.Parameters.Add("@MotherName", MySqlDbType.VarChar).Value = txtMotherName.Text.Trim
         sqlCommand.Parameters.Add("@MotherAddress", MySqlDbType.VarChar).Value = txtMotherAddress.Text.Trim
-        sqlCommand.Parameters.Add("@@fileLocationImage", MySqlDbType.VarChar).Value = fileLocationImage
+        sqlCommand.Parameters.Add("@fileLocationImage", MySqlDbType.VarChar).Value = fileLocationImage
+        sqlCommand.Parameters.Add("@IdType1", MySqlDbType.VarChar).Value = txtIdType1.Text.Trim
+        sqlCommand.Parameters.Add("@IdType2", MySqlDbType.VarChar).Value = txtIdType2.Text.Trim
+        sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
+        sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
         sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
-
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
@@ -238,6 +241,11 @@ Public Class FormUserProfile
                 txtMotherName.Text = table.Rows(0)("mother_name")
                 txtMotherAddress.Text = table.Rows(0)("mother_provincial_address")
 
+                txtIdType1.Text = table.Rows(0)("id_type1")
+                txtIdType2.Text = table.Rows(0)("id_type2")
+                txtIdNumber1.Text = table.Rows(0)("id_number1")
+                txtIdNumber2.Text = table.Rows(0)("id_number2")
+
                 If userGender = "Male" Then
                     PictureBox1.Image = My.Resources.client_male
                 Else
@@ -276,7 +284,7 @@ Public Class FormUserProfile
         `email_address`=@email, `occupation`=@occupation, `company_name`=@companyName, `spouse_name`=@spouseName,
         `spouse_occupation`=@spouseOccupation, `spouse_contact`=@spouseContact, `father_name`=@fatherName,
         `father_provincial_address`=@fatherAddress, `mother_name`=@MotherName, `mother_provincial_address`=@MotherAddress,
-        `file_location_image`=@fileLocationImage, `username`=@username WHERE p.`id`=@currentUserId"
+        `file_location_image`=@fileLocationImage, `id_type1`=@IdType1, `id_number1`=@IdNumber1, `id_type2`=@IdType2, `id_number2`=@IdNumber2, `username`=@username WHERE p.`id`=@currentUserId"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -306,6 +314,10 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@MotherName", MySqlDbType.VarChar).Value = txtMotherName.Text.Trim
         sqlCommand.Parameters.Add("@MotherAddress", MySqlDbType.VarChar).Value = txtMotherAddress.Text.Trim
         sqlCommand.Parameters.Add("@@fileLocationImage", MySqlDbType.VarChar).Value = fileLocationImage
+        sqlCommand.Parameters.Add("@IdType1", MySqlDbType.VarChar).Value = txtIdType1.Text.Trim
+        sqlCommand.Parameters.Add("@IdType2", MySqlDbType.VarChar).Value = txtIdType2.Text.Trim
+        sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
+        sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
         sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
         sqlCommand.Parameters.Add("@currentUserId", MySqlDbType.Int32).Value = currentUserId
 
@@ -475,5 +487,9 @@ Public Class FormUserProfile
                                                           b.ReadOnly = value
                                                           Return True
                                                       End Function)
+        gbId.Controls.OfType(Of TextBox).All(Function(b)
+                                                 b.ReadOnly = value
+                                                 Return True
+                                             End Function)
     End Sub
 End Class
