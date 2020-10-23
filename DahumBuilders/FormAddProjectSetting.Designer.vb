@@ -35,6 +35,7 @@ Partial Class FormAddProjectSetting
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblProjID = New System.Windows.Forms.Label()
         Me.ListViewProjectLot = New System.Windows.Forms.ListView()
         Me.ColumnID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -43,6 +44,7 @@ Partial Class FormAddProjectSetting
         Me.ColumnSQM = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderAutoID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnAddProject = New System.Windows.Forms.Button()
         Me.txtProjectName = New System.Windows.Forms.TextBox()
@@ -53,8 +55,6 @@ Partial Class FormAddProjectSetting
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.lblProjID = New System.Windows.Forms.Label()
-        Me.ColumnHeaderAutoID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -67,28 +67,28 @@ Partial Class FormAddProjectSetting
         Me.cbbProjectName.Location = New System.Drawing.Point(138, 20)
         Me.cbbProjectName.Name = "cbbProjectName"
         Me.cbbProjectName.Size = New System.Drawing.Size(266, 28)
-        Me.cbbProjectName.TabIndex = 3
+        Me.cbbProjectName.TabIndex = 4
         '
         'txtBlock
         '
         Me.txtBlock.Location = New System.Drawing.Point(138, 57)
         Me.txtBlock.Name = "txtBlock"
         Me.txtBlock.Size = New System.Drawing.Size(54, 26)
-        Me.txtBlock.TabIndex = 4
+        Me.txtBlock.TabIndex = 5
         '
         'txtLot
         '
         Me.txtLot.Location = New System.Drawing.Point(236, 59)
         Me.txtLot.Name = "txtLot"
         Me.txtLot.Size = New System.Drawing.Size(54, 26)
-        Me.txtLot.TabIndex = 5
+        Me.txtLot.TabIndex = 6
         '
         'btnAddLot
         '
         Me.btnAddLot.Location = New System.Drawing.Point(422, 88)
         Me.btnAddLot.Name = "btnAddLot"
         Me.btnAddLot.Size = New System.Drawing.Size(109, 39)
-        Me.btnAddLot.TabIndex = 6
+        Me.btnAddLot.TabIndex = 9
         Me.btnAddLot.Text = "Add &Lot"
         Me.btnAddLot.UseVisualStyleBackColor = True
         '
@@ -133,14 +133,14 @@ Partial Class FormAddProjectSetting
         Me.txtSqm.Location = New System.Drawing.Point(350, 59)
         Me.txtSqm.Name = "txtSqm"
         Me.txtSqm.Size = New System.Drawing.Size(54, 26)
-        Me.txtSqm.TabIndex = 11
+        Me.txtSqm.TabIndex = 7
         '
         'txtTCP
         '
         Me.txtTCP.Location = New System.Drawing.Point(138, 94)
         Me.txtTCP.Name = "txtTCP"
         Me.txtTCP.Size = New System.Drawing.Size(266, 26)
-        Me.txtTCP.TabIndex = 13
+        Me.txtTCP.TabIndex = 8
         Me.txtTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label5
@@ -189,6 +189,16 @@ Partial Class FormAddProjectSetting
         Me.Panel1.Size = New System.Drawing.Size(816, 594)
         Me.Panel1.TabIndex = 0
         '
+        'lblProjID
+        '
+        Me.lblProjID.AutoSize = True
+        Me.lblProjID.Location = New System.Drawing.Point(411, 27)
+        Me.lblProjID.Name = "lblProjID"
+        Me.lblProjID.Size = New System.Drawing.Size(68, 20)
+        Me.lblProjID.TabIndex = 16
+        Me.lblProjID.Text = "lblProjID"
+        Me.lblProjID.Visible = False
+        '
         'ListViewProjectLot
         '
         Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID})
@@ -197,7 +207,7 @@ Partial Class FormAddProjectSetting
         Me.ListViewProjectLot.Location = New System.Drawing.Point(22, 137)
         Me.ListViewProjectLot.Name = "ListViewProjectLot"
         Me.ListViewProjectLot.Size = New System.Drawing.Size(773, 433)
-        Me.ListViewProjectLot.TabIndex = 15
+        Me.ListViewProjectLot.TabIndex = 10
         Me.ListViewProjectLot.UseCompatibleStateImageBehavior = False
         Me.ListViewProjectLot.View = System.Windows.Forms.View.Details
         '
@@ -237,6 +247,11 @@ Partial Class FormAddProjectSetting
         Me.ColumnStatus.Text = "Status"
         Me.ColumnStatus.Width = 80
         '
+        'ColumnHeaderAutoID
+        '
+        Me.ColumnHeaderAutoID.Text = "AutoID"
+        Me.ColumnHeaderAutoID.Width = 0
+        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
@@ -257,7 +272,7 @@ Partial Class FormAddProjectSetting
         Me.btnAddProject.Location = New System.Drawing.Point(434, 137)
         Me.btnAddProject.Name = "btnAddProject"
         Me.btnAddProject.Size = New System.Drawing.Size(128, 39)
-        Me.btnAddProject.TabIndex = 13
+        Me.btnAddProject.TabIndex = 2
         Me.btnAddProject.Text = "&Add Project"
         Me.btnAddProject.UseVisualStyleBackColor = True
         '
@@ -266,7 +281,7 @@ Partial Class FormAddProjectSetting
         Me.txtProjectName.Location = New System.Drawing.Point(143, 17)
         Me.txtProjectName.Name = "txtProjectName"
         Me.txtProjectName.Size = New System.Drawing.Size(419, 26)
-        Me.txtProjectName.TabIndex = 9
+        Me.txtProjectName.TabIndex = 0
         '
         'txtProjectAddress
         '
@@ -274,7 +289,7 @@ Partial Class FormAddProjectSetting
         Me.txtProjectAddress.Multiline = True
         Me.txtProjectAddress.Name = "txtProjectAddress"
         Me.txtProjectAddress.Size = New System.Drawing.Size(419, 76)
-        Me.txtProjectAddress.TabIndex = 10
+        Me.txtProjectAddress.TabIndex = 1
         '
         'Label6
         '
@@ -302,7 +317,7 @@ Partial Class FormAddProjectSetting
         Me.ListViewProject.Location = New System.Drawing.Point(26, 182)
         Me.ListViewProject.Name = "ListViewProject"
         Me.ListViewProject.Size = New System.Drawing.Size(536, 388)
-        Me.ListViewProject.TabIndex = 0
+        Me.ListViewProject.TabIndex = 3
         Me.ListViewProject.UseCompatibleStateImageBehavior = False
         Me.ListViewProject.View = System.Windows.Forms.View.Details
         '
@@ -320,20 +335,6 @@ Partial Class FormAddProjectSetting
         '
         Me.ColumnHeaderAddress.Text = "Address"
         Me.ColumnHeaderAddress.Width = 170
-        '
-        'lblProjID
-        '
-        Me.lblProjID.AutoSize = True
-        Me.lblProjID.Location = New System.Drawing.Point(411, 27)
-        Me.lblProjID.Name = "lblProjID"
-        Me.lblProjID.Size = New System.Drawing.Size(68, 20)
-        Me.lblProjID.TabIndex = 16
-        Me.lblProjID.Text = "lblProjID"
-        '
-        'ColumnHeaderAutoID
-        '
-        Me.ColumnHeaderAutoID.Text = "AutoID"
-        Me.ColumnHeaderAutoID.Width = 0
         '
         'FormAddProjectSetting
         '

@@ -61,7 +61,12 @@ Public Class FormAddProjectSetting
                 MessageBox.Show("Data NOT Inserted. Please try again.")
             End If
         Catch ex As Exception
-            MessageBox.Show("Project Add Lot: " & ex.Message)
+            If ex.Message.Contains("Duplicate") Then
+                Dim msg As String = "Block (" & txtBlock.Text.Trim & ") and lot (" & txtLot.Text.Trim & ") alreaady exist in " & cbbProjectName.Text.Trim
+                MessageBox.Show(Me, msg, "Project Setting", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Else
+                MessageBox.Show("Project Add Lot: " & ex.Message)
+            End If
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
