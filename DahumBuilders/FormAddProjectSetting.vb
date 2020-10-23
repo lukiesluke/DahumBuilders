@@ -54,7 +54,6 @@ Public Class FormAddProjectSetting
             sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = txtSqm.Text.Trim
             sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = Double.Parse(txtTCP.Text.Trim)
             sqlCommand.Parameters.Add("@ProjectName", MySqlDbType.VarChar).Value = cbbProjectName.Text.Trim
-
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 cbbProjectName_SelectedIndexChanged(Me, e)
                 MessageBox.Show("Successfully added new lot.")
@@ -68,6 +67,15 @@ Public Class FormAddProjectSetting
             sqlConnection.Close()
         End Try
 
+        Dim selectitemIndex As Integer = 7
+        Dim itmX As ListViewItem = ListViewProjectLot.FindItemWithText(lblProjID.Text & "." & txtBlock.Text.Trim & "." & txtLot.Text.Trim, True, selectitemIndex)
+        If Not itmX Is Nothing Then
+            ListViewProjectLot.Focus()
+            itmX.Selected = True
+            ListViewProjectLot.Items(itmX.Index).Selected = True
+            selectitemIndex = itmX.Index + 1
+            itmX.EnsureVisible()
+        End If
     End Sub
 
     Private Sub btnAddProject_Click(sender As Object, e As EventArgs) Handles btnAddProject.Click
@@ -108,8 +116,8 @@ Public Class FormAddProjectSetting
     Private Sub cbbProjectName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbProjectName.SelectedIndexChanged
         Dim item As ListViewItem
 
-        sql = "SELECT i.`item_id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available',
-            (SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`)) AS 'status'
+        sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available',
+            (SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`)) AS 'status', i.`autoID`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`proj_name` LIKE @ProjName ORDER BY i.`block` ASC, i.`lot` ASC"
         Connection()
         Try
@@ -132,6 +140,8 @@ Public Class FormAddProjectSetting
                         .ForeColor = Color.Green
                     End If
                 End With
+                lblProjID.Text = sqlDataReader("id")
+                item.SubItems.Add(sqlDataReader("autoID"))
                 ListViewProjectLot.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
