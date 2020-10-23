@@ -31,11 +31,17 @@ Partial Class FormAddProjectSetting
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtSqm = New System.Windows.Forms.TextBox()
-        Me.btnCancel = New System.Windows.Forms.Button()
         Me.txtTCP = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ListViewProjectLot = New System.Windows.Forms.ListView()
+        Me.ColumnID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnBlock = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnLot = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnSQM = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnAddProject = New System.Windows.Forms.Button()
         Me.txtProjectName = New System.Windows.Forms.TextBox()
@@ -46,6 +52,7 @@ Partial Class FormAddProjectSetting
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -55,30 +62,30 @@ Partial Class FormAddProjectSetting
         '
         Me.cbbProjectName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbProjectName.FormattingEnabled = True
-        Me.cbbProjectName.Location = New System.Drawing.Point(145, 20)
+        Me.cbbProjectName.Location = New System.Drawing.Point(138, 20)
         Me.cbbProjectName.Name = "cbbProjectName"
         Me.cbbProjectName.Size = New System.Drawing.Size(266, 28)
         Me.cbbProjectName.TabIndex = 3
         '
         'txtBlock
         '
-        Me.txtBlock.Location = New System.Drawing.Point(145, 57)
+        Me.txtBlock.Location = New System.Drawing.Point(138, 57)
         Me.txtBlock.Name = "txtBlock"
-        Me.txtBlock.Size = New System.Drawing.Size(100, 26)
+        Me.txtBlock.Size = New System.Drawing.Size(54, 26)
         Me.txtBlock.TabIndex = 4
         '
         'txtLot
         '
-        Me.txtLot.Location = New System.Drawing.Point(145, 91)
+        Me.txtLot.Location = New System.Drawing.Point(236, 59)
         Me.txtLot.Name = "txtLot"
-        Me.txtLot.Size = New System.Drawing.Size(100, 26)
+        Me.txtLot.Size = New System.Drawing.Size(54, 26)
         Me.txtLot.TabIndex = 5
         '
         'btnAddLot
         '
-        Me.btnAddLot.Location = New System.Drawing.Point(283, 194)
+        Me.btnAddLot.Location = New System.Drawing.Point(422, 88)
         Me.btnAddLot.Name = "btnAddLot"
-        Me.btnAddLot.Size = New System.Drawing.Size(128, 39)
+        Me.btnAddLot.Size = New System.Drawing.Size(109, 39)
         Me.btnAddLot.TabIndex = 6
         Me.btnAddLot.Text = "Add &Lot"
         Me.btnAddLot.UseVisualStyleBackColor = True
@@ -86,7 +93,7 @@ Partial Class FormAddProjectSetting
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(28, 23)
+        Me.Label1.Location = New System.Drawing.Point(28, 28)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 20)
         Me.Label1.TabIndex = 7
@@ -95,7 +102,7 @@ Partial Class FormAddProjectSetting
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(28, 63)
+        Me.Label2.Location = New System.Drawing.Point(84, 65)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(48, 20)
         Me.Label2.TabIndex = 8
@@ -104,7 +111,7 @@ Partial Class FormAddProjectSetting
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(28, 97)
+        Me.Label3.Location = New System.Drawing.Point(198, 65)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 20)
         Me.Label3.TabIndex = 9
@@ -113,31 +120,22 @@ Partial Class FormAddProjectSetting
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(28, 132)
+        Me.Label4.Location = New System.Drawing.Point(296, 65)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(106, 20)
+        Me.Label4.Size = New System.Drawing.Size(45, 20)
         Me.Label4.TabIndex = 10
-        Me.Label4.Text = "Square Meter"
+        Me.Label4.Text = "SQM"
         '
         'txtSqm
         '
-        Me.txtSqm.Location = New System.Drawing.Point(145, 126)
+        Me.txtSqm.Location = New System.Drawing.Point(350, 59)
         Me.txtSqm.Name = "txtSqm"
-        Me.txtSqm.Size = New System.Drawing.Size(100, 26)
+        Me.txtSqm.Size = New System.Drawing.Size(54, 26)
         Me.txtSqm.TabIndex = 11
-        '
-        'btnCancel
-        '
-        Me.btnCancel.Location = New System.Drawing.Point(408, 531)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(128, 39)
-        Me.btnCancel.TabIndex = 12
-        Me.btnCancel.Text = "&Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'txtTCP
         '
-        Me.txtTCP.Location = New System.Drawing.Point(145, 162)
+        Me.txtTCP.Location = New System.Drawing.Point(138, 94)
         Me.txtTCP.Name = "txtTCP"
         Me.txtTCP.Size = New System.Drawing.Size(266, 26)
         Me.txtTCP.TabIndex = 13
@@ -146,7 +144,7 @@ Partial Class FormAddProjectSetting
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(28, 168)
+        Me.Label5.Location = New System.Drawing.Point(84, 100)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(39, 20)
         Me.Label5.TabIndex = 14
@@ -155,8 +153,8 @@ Partial Class FormAddProjectSetting
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.60451!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.39549!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.69034!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.30966!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
@@ -164,14 +162,14 @@ Partial Class FormAddProjectSetting
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 600.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1153, 657)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1408, 657)
         Me.TableLayoutPanel1.TabIndex = 15
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
+        Me.Panel1.Controls.Add(Me.ListViewProjectLot)
         Me.Panel1.Controls.Add(Me.cbbProjectName)
-        Me.Panel1.Controls.Add(Me.btnCancel)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.txtBlock)
         Me.Panel1.Controls.Add(Me.txtTCP)
@@ -183,10 +181,53 @@ Partial Class FormAddProjectSetting
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(598, 60)
+        Me.Panel1.Location = New System.Drawing.Point(590, 60)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(552, 594)
+        Me.Panel1.Size = New System.Drawing.Size(815, 594)
         Me.Panel1.TabIndex = 0
+        '
+        'ListViewProjectLot
+        '
+        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus})
+        Me.ListViewProjectLot.FullRowSelect = True
+        Me.ListViewProjectLot.GridLines = True
+        Me.ListViewProjectLot.Location = New System.Drawing.Point(22, 137)
+        Me.ListViewProjectLot.Name = "ListViewProjectLot"
+        Me.ListViewProjectLot.Size = New System.Drawing.Size(773, 433)
+        Me.ListViewProjectLot.TabIndex = 15
+        Me.ListViewProjectLot.UseCompatibleStateImageBehavior = False
+        Me.ListViewProjectLot.View = System.Windows.Forms.View.Details
+        '
+        'ColumnID
+        '
+        Me.ColumnID.Text = "ID"
+        Me.ColumnID.Width = 0
+        '
+        'ColumnName
+        '
+        Me.ColumnName.Text = "Project Name"
+        Me.ColumnName.Width = 120
+        '
+        'ColumnBlock
+        '
+        Me.ColumnBlock.Text = "Block"
+        Me.ColumnBlock.Width = 40
+        '
+        'ColumnLot
+        '
+        Me.ColumnLot.Text = "Lot"
+        Me.ColumnLot.Width = 40
+        '
+        'ColumnSQM
+        '
+        Me.ColumnSQM.Text = "SQM"
+        Me.ColumnSQM.Width = 40
+        '
+        'ColumnTCP
+        '
+        Me.ColumnTCP.Text = "TCP"
+        Me.ColumnTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnTCP.Width = 100
         '
         'Panel2
         '
@@ -200,7 +241,7 @@ Partial Class FormAddProjectSetting
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 60)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(589, 594)
+        Me.Panel2.Size = New System.Drawing.Size(581, 594)
         Me.Panel2.TabIndex = 1
         '
         'btnAddProject
@@ -272,11 +313,16 @@ Partial Class FormAddProjectSetting
         Me.ColumnHeaderAddress.Text = "Address"
         Me.ColumnHeaderAddress.Width = 170
         '
+        'ColumnStatus
+        '
+        Me.ColumnStatus.Text = "Status"
+        Me.ColumnStatus.Width = 80
+        '
         'FormAddProjectSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1184, 690)
+        Me.ClientSize = New System.Drawing.Size(1447, 690)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -302,7 +348,6 @@ Partial Class FormAddProjectSetting
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents txtSqm As TextBox
-    Friend WithEvents btnCancel As Button
     Friend WithEvents txtTCP As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
@@ -317,4 +362,12 @@ Partial Class FormAddProjectSetting
     Friend WithEvents ColumnHeaderName As ColumnHeader
     Friend WithEvents ColumnHeaderAddress As ColumnHeader
     Friend WithEvents ColumnHeaderID As ColumnHeader
+    Friend WithEvents ListViewProjectLot As ListView
+    Friend WithEvents ColumnID As ColumnHeader
+    Friend WithEvents ColumnName As ColumnHeader
+    Friend WithEvents ColumnBlock As ColumnHeader
+    Friend WithEvents ColumnLot As ColumnHeader
+    Friend WithEvents ColumnSQM As ColumnHeader
+    Friend WithEvents ColumnTCP As ColumnHeader
+    Friend WithEvents ColumnStatus As ColumnHeader
 End Class

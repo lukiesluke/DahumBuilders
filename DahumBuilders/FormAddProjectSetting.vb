@@ -36,10 +36,6 @@ Public Class FormAddProjectSetting
         End Try
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Close()
-    End Sub
-
     Private Sub btnAddLot_Click(sender As Object, e As EventArgs) Handles btnAddLot.Click
         If cbbProjectName.SelectedIndex = -1 Then
             MessageBox.Show("Please select Project name to add lot")
@@ -60,6 +56,7 @@ Public Class FormAddProjectSetting
             sqlCommand.Parameters.Add("@ProjectName", MySqlDbType.VarChar).Value = cbbProjectName.Text.Trim
 
             If sqlCommand.ExecuteNonQuery() = 1 Then
+                cbbProjectName_SelectedIndexChanged(Me, e)
                 MessageBox.Show("Successfully added new lot.")
             Else
                 MessageBox.Show("Data NOT Inserted. Please try again.")
@@ -107,4 +104,43 @@ Public Class FormAddProjectSetting
             sqlConnection.Close()
         End Try
     End Sub
+
+    Private Sub cbbProjectName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbProjectName.SelectedIndexChanged
+        Dim item As ListViewItem
+
+        sql = "SELECT i.`item_id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available',
+            (SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`)) AS 'status'
+            FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`proj_name` LIKE @ProjName ORDER BY i.`block` ASC, i.`lot` ASC"
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@ProjName", MySqlDbType.VarChar).Value = cbbProjectName.Text
+            sqlDataReader = sqlCommand.ExecuteReader()
+            ListViewProjectLot.Items.Clear()
+            Do While sqlDataReader.Read = True
+                'Add to list view
+                item = New ListViewItem(sqlDataReader("item_id").ToString)
+                item.UseItemStyleForSubItems = False
+                item.SubItems.Add(sqlDataReader("proj_name"))
+                item.SubItems.Add(sqlDataReader("block"))
+                item.SubItems.Add(sqlDataReader("lot"))
+                item.SubItems.Add(sqlDataReader("sqm"))
+                item.SubItems.Add(Double.Parse(sqlDataReader("price")).ToString("N2"))
+                With item.SubItems.Add(sqlDataReader("status"))
+                    If sqlDataReader("status").Equals("Available") Then
+                        .Font = New Font(ListViewProjectLot.Font, FontStyle.Bold)
+                        .ForeColor = Color.Green
+                    End If
+                End With
+                ListViewProjectLot.Items.Add(item)
+            Loop
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
+
 End Class
