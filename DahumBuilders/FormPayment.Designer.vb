@@ -107,7 +107,7 @@ Partial Class FormPayment
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PanelInformation)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1500, 508)
+        Me.SplitContainer1.Size = New System.Drawing.Size(1500, 481)
         Me.SplitContainer1.SplitterDistance = 416
         Me.SplitContainer1.TabIndex = 1
         '
@@ -242,14 +242,14 @@ Partial Class FormPayment
         Me.PanelTotal.Location = New System.Drawing.Point(0, 403)
         Me.PanelTotal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.Size = New System.Drawing.Size(416, 105)
+        Me.PanelTotal.Size = New System.Drawing.Size(416, 78)
         Me.PanelTotal.TabIndex = 3
         '
         'btnPayment
         '
         Me.btnPayment.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPayment.Location = New System.Drawing.Point(14, 24)
+        Me.btnPayment.Location = New System.Drawing.Point(17, 13)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
         Me.btnPayment.Size = New System.Drawing.Size(377, 55)
@@ -377,16 +377,16 @@ Partial Class FormPayment
         Me.PanelInformation.Location = New System.Drawing.Point(0, 0)
         Me.PanelInformation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelInformation.Name = "PanelInformation"
-        Me.PanelInformation.Size = New System.Drawing.Size(1080, 508)
+        Me.PanelInformation.Size = New System.Drawing.Size(1080, 481)
         Me.PanelInformation.TabIndex = 2
         '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.ListViewUserItem)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(0, 181)
+        Me.Panel5.Location = New System.Drawing.Point(0, 179)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(1078, 325)
+        Me.Panel5.Size = New System.Drawing.Size(1078, 300)
         Me.Panel5.TabIndex = 51
         '
         'ListViewUserItem
@@ -399,7 +399,7 @@ Partial Class FormPayment
         Me.ListViewUserItem.Location = New System.Drawing.Point(0, 0)
         Me.ListViewUserItem.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUserItem.Name = "ListViewUserItem"
-        Me.ListViewUserItem.Size = New System.Drawing.Size(1078, 325)
+        Me.ListViewUserItem.Size = New System.Drawing.Size(1078, 300)
         Me.ListViewUserItem.TabIndex = 5
         Me.ListViewUserItem.UseCompatibleStateImageBehavior = False
         Me.ListViewUserItem.View = System.Windows.Forms.View.Details
@@ -587,7 +587,7 @@ Partial Class FormPayment
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ScrollBar
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 568)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 540)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
