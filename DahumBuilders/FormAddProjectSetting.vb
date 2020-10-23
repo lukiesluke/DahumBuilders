@@ -2,6 +2,7 @@
 
 Public Class FormAddProjectSetting
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Size = New Size(980, 500)
         load_ProjectName_combobox()
         cbbProjectName.SelectedIndex = 0
     End Sub

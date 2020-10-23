@@ -10,5 +10,11 @@
     Public Property _clientId As String = ""
     Public Property _projectId As String = ""
     Public Property _projectItemId As String = ""
+    Public Property _check_bank_name As String = ""
+    Public Property _check_amount As Double
+    Public Property _check_number As String = ""
+    Public Property _check_date As Date = Nothing
+
+
 
 End Class

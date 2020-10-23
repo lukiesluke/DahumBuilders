@@ -19,7 +19,7 @@ Public Class FormCRptTransaction
         INNER JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         INNER JOIN `db_particular_type` pa ON t.`particular` = pa.`id` INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
-        WHERE t.`userid`=@userId ORDER BY date_paid, t.`particular`, t.`part_no`, t.`official_receipt_no` ASC"
+        WHERE t.`userid`=@userId ORDER BY date_paid DESC, proj_name ASC, lot ASC"
         Connection()
         Try
 
@@ -43,6 +43,7 @@ Public Class FormCRptTransaction
 
             CrystalReportViewer1.ReportSource = report
             CrystalReportViewer1.Refresh()
+            CrystalReportViewer1.Zoom(90)
         Catch ex As Exception
             MessageBox.Show("Generate Report: " & ex.Message)
         End Try

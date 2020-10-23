@@ -471,6 +471,13 @@ FinallyLine:
             trans._clientId = mUser._id
             trans._projectItemId = row.Cells(7).Value
             trans._projectId = row.Cells(8).Value
+            trans._check_bank_name = txtBankName.Text.Trim
+            If cbPaymentType.SelectedIndex > 0 Then
+                trans._check_bank_name = txtBankName.Text.Trim
+                trans._check_amount = txtCheckTransferAmount.Text.Trim
+                trans._check_number = txtCheckNo.Text.Trim
+                trans._check_date = dtpCheckDate.Value
+            End If
             insertPurchase(trans)
         Next
 
@@ -491,8 +498,8 @@ FinallyLine:
 
     Private Sub insertPurchase(ByVal trans As Transaction)
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @DiscountAmount, @TCP, 
-        @Particular, @PartNo, @PaymentType, @userid, @ProjId, @ProjItemId)"
+        `part_no`, `payment_type`, `check_bank_name`, `check_amount`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @DiscountAmount, @TCP, 
+        @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckAmount, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId)"
 
         If trans._particular.Equals("0") Or trans._particular.Equals("3") Or trans._particular.Equals("4") Then
             trans._partNo = "0"
@@ -511,6 +518,11 @@ FinallyLine:
         sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = trans._clientId 'userId
         sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int24).Value = trans._projectId
         sqlCommand.Parameters.Add("@ProjItemId", MySqlDbType.Int24).Value = trans._projectItemId
+
+        sqlCommand.Parameters.Add("@CheckBankName", MySqlDbType.VarChar).Value = trans._check_bank_name
+        sqlCommand.Parameters.Add("@CheckAmount", MySqlDbType.Double).Value = trans._check_amount
+        sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = trans._check_number
+        sqlCommand.Parameters.Add("@CheckDate", MySqlDbType.Date).Value = trans._check_date
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
