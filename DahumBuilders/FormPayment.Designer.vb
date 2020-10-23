@@ -249,10 +249,10 @@ Partial Class FormPayment
         '
         Me.btnPayment.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPayment.Location = New System.Drawing.Point(17, 13)
+        Me.btnPayment.Location = New System.Drawing.Point(1, 13)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(377, 55)
+        Me.btnPayment.Size = New System.Drawing.Size(415, 55)
         Me.btnPayment.TabIndex = 1
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.UseVisualStyleBackColor = True

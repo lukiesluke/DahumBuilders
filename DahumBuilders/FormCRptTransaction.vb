@@ -36,7 +36,7 @@ Public Class FormCRptTransaction
             Dim name As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtName")
             Dim mobile As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtMobile")
             Dim address As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtAddress")
-            name.Text = mUser._name
+            name.Text = mUser._name & " " & mUser._middleName & " " & mUser._surname
             mobile.Text = mUser._mobile
             address.Text = mUser._address
             report.SetDataSource(table)

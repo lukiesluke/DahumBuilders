@@ -484,7 +484,6 @@ FinallyLine:
         cbPaymentType.SelectedIndex = -1
         txtOfficialReceipt.Text = String.Empty
         DataGridView1.Rows.Clear()
-        load_userId_info_data_reader()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -526,6 +525,11 @@ FinallyLine:
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
+                sqlCommand.Dispose()
+                sqlConnection.Close()
+                load_userId_info_data_reader()
+                MessageBox.Show(Me, "OR transaction successfully saved.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.Close()
             Else
                 MessageBox.Show(Me, "Data NOT Inserted. Please try again.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If
