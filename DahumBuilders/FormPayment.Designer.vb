@@ -74,6 +74,7 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -391,7 +392,7 @@ Partial Class FormPayment
         '
         'ListViewUserItem
         '
-        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderTotalPaid})
+        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderTotalPaid})
         Me.ListViewUserItem.ContextMenuStrip = Me.ContextMenuProjectList
         Me.ListViewUserItem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewUserItem.FullRowSelect = True
@@ -453,7 +454,7 @@ Partial Class FormPayment
         '
         Me.ColumnHeaderTotalPaid.Text = "Paid Amount"
         Me.ColumnHeaderTotalPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderTotalPaid.Width = 110
+        Me.ColumnHeaderTotalPaid.Width = 100
         '
         'ContextMenuProjectList
         '
@@ -619,6 +620,12 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
+        'ColumnHeaderDiscount
+        '
+        Me.ColumnHeaderDiscount.Text = "Discount"
+        Me.ColumnHeaderDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderDiscount.Width = 100
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -708,4 +715,5 @@ Partial Class FormPayment
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel5 As Panel
+    Friend WithEvents ColumnHeaderDiscount As ColumnHeader
 End Class
