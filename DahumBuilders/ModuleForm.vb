@@ -104,7 +104,6 @@ Module ModuleForm
             Dim sqlReader As MySqlDataReader = sqlCommand.ExecuteReader()
             While sqlReader.Read()
                 If Not IsDBNull(sqlReader("TotalPaid")) Then
-                    sumTansaction._tcp = sqlReader("tcp")
                     sumTansaction._balance = sqlReader("Balance")
                     sumTansaction._Discount = sqlReader("Discount")
                     sumTansaction._TotalPaid = sqlReader("TotalPaid")

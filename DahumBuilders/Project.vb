@@ -7,8 +7,7 @@
     Public Property _tcp As Double = 0
     Public Property _projID As String = ""
     Public Property _description As String = ""
-    Public Property _balance As Double = 0
-    Public Property _totalAmountPaid As Double = 0
+    Public Property _sumTran As SummaryTransaction = New SummaryTransaction
     Public Property _assignedToUserName As String = ""
 
 End Class
