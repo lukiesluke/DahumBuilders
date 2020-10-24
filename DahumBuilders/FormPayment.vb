@@ -419,7 +419,7 @@ FinallyLine:
 
         DataGridView1.Columns(7).Visible = False
         DataGridView1.Columns(8).Visible = False
-        DataGridView1.Columns(13).Visible = True 'Project class obkect
+        DataGridView1.Columns(13).Visible = False 'Project class obkect
 
         CType(DataGridView1.Columns(10), DataGridViewTextBoxColumn).MaxInputLength = 3
         CType(DataGridView1.Columns(12), DataGridViewTextBoxColumn).MaxInputLength = 20
@@ -537,6 +537,9 @@ FinallyLine:
         cbPaymentType.SelectedIndex = -1
         txtOfficialReceipt.Text = String.Empty
         DataGridView1.Rows.Clear()
+        load_userId_info_data_reader()
+        MessageBox.Show(Me, "OR transaction successfully saved.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Me.Close()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -553,8 +556,8 @@ FinallyLine:
         `part_no`, `payment_type`, `check_bank_name`, `check_amount`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @DiscountAmount, @TCP, 
         @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckAmount, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId)"
 
-        If trans._particular.Equals("0") Or trans._particular.Equals("3") Or trans._particular.Equals("4") Then
-            trans._partNo = "0"
+        If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
+            trans._partNo = 0
         End If
 
         Connection()
@@ -580,9 +583,6 @@ FinallyLine:
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 sqlCommand.Dispose()
                 sqlConnection.Close()
-                load_userId_info_data_reader()
-                MessageBox.Show(Me, "OR transaction successfully saved.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Close()
             Else
                 MessageBox.Show(Me, "Data NOT Inserted. Please try again.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If
