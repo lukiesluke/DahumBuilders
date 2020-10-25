@@ -10,7 +10,8 @@ Public Class FormAddProjectSetting
     Private Sub load_ProjectName_combobox()
         Dim item As ListViewItem
 
-        sql = "SELECT * FROM `db_project_list`"
+        sql = "SELECT `id`, `proj_name`, `proj_address`, (SELECT COUNT(proj_id)  FROM `db_project_item` 
+        WHERE `db_project_list`.`id`= `db_project_item`.`proj_id`) AS 'lot' FROM `db_project_list`"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -25,6 +26,7 @@ Public Class FormAddProjectSetting
                 item = New ListViewItem(sqlDataReader("id").ToString)
                 item.SubItems.Add(sqlDataReader("proj_name"))
                 item.SubItems.Add(sqlDataReader("proj_address"))
+                item.SubItems.Add(sqlDataReader("lot"))
                 ListViewProject.Items.Add(item)
             Loop
 
@@ -159,4 +161,15 @@ Public Class FormAddProjectSetting
         End Try
     End Sub
 
+    Private Sub ListViewProject_Click(sender As Object, e As EventArgs) Handles ListViewProject.Click
+        If ListViewProject.Items.Count > 0 Then
+            cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
+        End If
+    End Sub
+
+    Private Sub ListViewProject_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewProject.KeyUp
+        If ListViewProject.Items.Count > 0 Then
+            ListViewProject_Click(sender, e)
+        End If
+    End Sub
 End Class

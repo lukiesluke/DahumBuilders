@@ -45,6 +45,7 @@ Partial Class FormPayment
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.PanelInformation = New System.Windows.Forms.Panel()
+        Me.btnShowHistoryTransaction = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.ListViewUserItem = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -61,7 +62,6 @@ Partial Class FormPayment
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnSearchProject = New System.Windows.Forms.Button()
@@ -69,6 +69,7 @@ Partial Class FormPayment
         Me.lblName = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -339,9 +340,9 @@ Partial Class FormPayment
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelInformation.Controls.Add(Me.btnShowHistoryTransaction)
         Me.PanelInformation.Controls.Add(Me.Panel5)
         Me.PanelInformation.Controls.Add(Me.Panel3)
-        Me.PanelInformation.Controls.Add(Me.Button1)
         Me.PanelInformation.Controls.Add(Me.lblContact)
         Me.PanelInformation.Controls.Add(Me.Label2)
         Me.PanelInformation.Controls.Add(Me.btnSearchProject)
@@ -355,6 +356,16 @@ Partial Class FormPayment
         Me.PanelInformation.Name = "PanelInformation"
         Me.PanelInformation.Size = New System.Drawing.Size(1080, 481)
         Me.PanelInformation.TabIndex = 2
+        '
+        'btnShowHistoryTransaction
+        '
+        Me.btnShowHistoryTransaction.Location = New System.Drawing.Point(905, 78)
+        Me.btnShowHistoryTransaction.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnShowHistoryTransaction.Name = "btnShowHistoryTransaction"
+        Me.btnShowHistoryTransaction.Size = New System.Drawing.Size(160, 43)
+        Me.btnShowHistoryTransaction.TabIndex = 52
+        Me.btnShowHistoryTransaction.Text = "Transaction History"
+        Me.btnShowHistoryTransaction.UseVisualStyleBackColor = True
         '
         'Panel5
         '
@@ -470,18 +481,6 @@ Partial Class FormPayment
         Me.Label4.Text = "Customer Transaction Information"
         Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(830, 50)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(208, 55)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Payment Method"
-        Me.Button1.UseVisualStyleBackColor = True
-        Me.Button1.Visible = False
-        '
         'lblContact
         '
         Me.lblContact.BackColor = System.Drawing.Color.White
@@ -508,10 +507,10 @@ Partial Class FormPayment
         '
         'btnSearchProject
         '
-        Me.btnSearchProject.Location = New System.Drawing.Point(727, 142)
+        Me.btnSearchProject.Location = New System.Drawing.Point(905, 127)
         Me.btnSearchProject.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearchProject.Name = "btnSearchProject"
-        Me.btnSearchProject.Size = New System.Drawing.Size(160, 32)
+        Me.btnSearchProject.Size = New System.Drawing.Size(160, 43)
         Me.btnSearchProject.TabIndex = 4
         Me.btnSearchProject.Text = "&Add Project"
         Me.btnSearchProject.UseVisualStyleBackColor = True
@@ -563,6 +562,18 @@ Partial Class FormPayment
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Name"
         '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(1248, 7)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(192, 44)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "Payment Method"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
+        '
         'DataGridView1
         '
         Me.DataGridView1.AllowUserToAddRows = False
@@ -574,7 +585,7 @@ Partial Class FormPayment
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(1500, 337)
+        Me.DataGridView1.Size = New System.Drawing.Size(1610, 337)
         Me.DataGridView1.TabIndex = 6
         '
         'MenuStrip1
@@ -584,7 +595,7 @@ Partial Class FormPayment
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1540, 33)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1622, 33)
         Me.MenuStrip1.TabIndex = 51
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -605,9 +616,10 @@ Partial Class FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1540, 944)
+        Me.ClientSize = New System.Drawing.Size(1622, 944)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.SplitContainer1)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MainMenuStrip = Me.MenuStrip1
@@ -689,4 +701,5 @@ Partial Class FormPayment
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel5 As Panel
     Friend WithEvents ColumnHeaderDiscount As ColumnHeader
+    Friend WithEvents btnShowHistoryTransaction As Button
 End Class

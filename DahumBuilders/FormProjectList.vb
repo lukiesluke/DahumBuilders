@@ -102,7 +102,9 @@ Public Class FormProjectList
     End Sub
 
     Private Sub ListViewProject_Click(sender As Object, e As EventArgs) Handles ListViewProject.Click
-
+        If ListViewProject.Items.Count < 1 Then
+            Exit Sub
+        End If
         proj._itemID = ListViewProject.SelectedItems(0).Text
         proj._name = ListViewProject.SelectedItems(0).SubItems(1).Text
         proj._block = ListViewProject.SelectedItems(0).SubItems(2).Text
@@ -126,7 +128,9 @@ Public Class FormProjectList
             lblProjectAssignedToUser.Text = "Assigned to: " & proj._assignedToUserName
         End If
     End Sub
-
+    Private Sub ListViewProject_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewProject.KeyUp
+        ListViewProject_Click(sender, e)
+    End Sub
     Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
         Dim rowsAffected As Integer = 0
         sql = "UPDATE `db_project_item` SET `assigned_userid`=@UserID WHERE `item_id`=@ItemId AND `assigned_userid`<1"

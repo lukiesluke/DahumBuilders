@@ -41,19 +41,19 @@ Partial Class FormProjectList
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnAssign = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblProjectItemID = New System.Windows.Forms.Label()
+        Me.lblProjectSQM = New System.Windows.Forms.Label()
         Me.lblProjectName = New System.Windows.Forms.Label()
         Me.lblProjectTCP = New System.Windows.Forms.Label()
         Me.lblProjectBlock = New System.Windows.Forms.Label()
         Me.lblProjectLot = New System.Windows.Forms.Label()
-        Me.lblName = New System.Windows.Forms.Label()
-        Me.lblProjectAssignedToUser = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.lblProjectSQM = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblProjectAssignedToUser = New System.Windows.Forms.Label()
+        Me.lblProjectItemID = New System.Windows.Forms.Label()
+        Me.lblName = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -128,6 +128,7 @@ Partial Class FormProjectList
         '
         'Panel1
         '
+        Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.chkAvailable)
         Me.Panel1.Controls.Add(Me.txtBlock)
@@ -238,14 +239,14 @@ Partial Class FormProjectList
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Lot Information"
         '
-        'lblProjectItemID
+        'lblProjectSQM
         '
-        Me.lblProjectItemID.Location = New System.Drawing.Point(263, 25)
-        Me.lblProjectItemID.Name = "lblProjectItemID"
-        Me.lblProjectItemID.Size = New System.Drawing.Size(122, 20)
-        Me.lblProjectItemID.TabIndex = 5
-        Me.lblProjectItemID.Text = "000000"
-        Me.lblProjectItemID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblProjectSQM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblProjectSQM.Location = New System.Drawing.Point(70, 144)
+        Me.lblProjectSQM.Name = "lblProjectSQM"
+        Me.lblProjectSQM.Size = New System.Drawing.Size(315, 29)
+        Me.lblProjectSQM.TabIndex = 12
+        Me.lblProjectSQM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblProjectName
         '
@@ -283,56 +284,15 @@ Partial Class FormProjectList
         Me.lblProjectLot.TabIndex = 3
         Me.lblProjectLot.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'lblName
+        'Label7
         '
-        Me.lblName.BackColor = System.Drawing.Color.White
-        Me.lblName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblName.Location = New System.Drawing.Point(21, 324)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(402, 31)
-        Me.lblName.TabIndex = 0
-        Me.lblName.Text = "Name"
-        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'lblProjectAssignedToUser
-        '
-        Me.lblProjectAssignedToUser.ForeColor = System.Drawing.Color.Maroon
-        Me.lblProjectAssignedToUser.Location = New System.Drawing.Point(30, 219)
-        Me.lblProjectAssignedToUser.Name = "lblProjectAssignedToUser"
-        Me.lblProjectAssignedToUser.Size = New System.Drawing.Size(355, 20)
-        Me.lblProjectAssignedToUser.TabIndex = 6
-        Me.lblProjectAssignedToUser.Text = "lblProjectAssignedToUser"
-        Me.lblProjectAssignedToUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(13, 57)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(51, 20)
-        Me.Label3.TabIndex = 7
-        Me.Label3.Text = "Name"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(16, 89)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(48, 20)
-        Me.Label4.TabIndex = 8
-        Me.Label4.Text = "Block"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(32, 121)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(32, 20)
-        Me.Label5.TabIndex = 9
-        Me.Label5.Text = "Lot"
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(19, 153)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(45, 20)
+        Me.Label7.TabIndex = 11
+        Me.Label7.Text = "SQM"
         '
         'Label6
         '
@@ -344,24 +304,65 @@ Partial Class FormProjectList
         Me.Label6.TabIndex = 10
         Me.Label6.Text = "TCP"
         '
-        'Label7
+        'Label5
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(19, 153)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(45, 20)
-        Me.Label7.TabIndex = 11
-        Me.Label7.Text = "SQM"
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(32, 121)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(32, 20)
+        Me.Label5.TabIndex = 9
+        Me.Label5.Text = "Lot"
         '
-        'lblProjectSQM
+        'Label4
         '
-        Me.lblProjectSQM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblProjectSQM.Location = New System.Drawing.Point(70, 144)
-        Me.lblProjectSQM.Name = "lblProjectSQM"
-        Me.lblProjectSQM.Size = New System.Drawing.Size(315, 29)
-        Me.lblProjectSQM.TabIndex = 12
-        Me.lblProjectSQM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(16, 89)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(48, 20)
+        Me.Label4.TabIndex = 8
+        Me.Label4.Text = "Block"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(13, 57)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(51, 20)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "Name"
+        '
+        'lblProjectAssignedToUser
+        '
+        Me.lblProjectAssignedToUser.ForeColor = System.Drawing.Color.Maroon
+        Me.lblProjectAssignedToUser.Location = New System.Drawing.Point(30, 219)
+        Me.lblProjectAssignedToUser.Name = "lblProjectAssignedToUser"
+        Me.lblProjectAssignedToUser.Size = New System.Drawing.Size(355, 20)
+        Me.lblProjectAssignedToUser.TabIndex = 6
+        Me.lblProjectAssignedToUser.Text = "lblProjectAssignedToUser"
+        Me.lblProjectAssignedToUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblProjectItemID
+        '
+        Me.lblProjectItemID.Location = New System.Drawing.Point(263, 25)
+        Me.lblProjectItemID.Name = "lblProjectItemID"
+        Me.lblProjectItemID.Size = New System.Drawing.Size(122, 20)
+        Me.lblProjectItemID.TabIndex = 5
+        Me.lblProjectItemID.Text = "000000"
+        Me.lblProjectItemID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblName
+        '
+        Me.lblName.BackColor = System.Drawing.Color.White
+        Me.lblName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblName.Location = New System.Drawing.Point(21, 324)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(402, 31)
+        Me.lblName.TabIndex = 0
+        Me.lblName.Text = "Name"
+        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FormProjectList
         '

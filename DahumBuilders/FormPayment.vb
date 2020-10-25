@@ -9,7 +9,7 @@ Public Class FormPayment
     Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
 
     Private Sub FormPayment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(1024, 670)
+        Me.Size = New Size(1114, 670)
         lblName.Text = mUser._name & " " & mUser._middleName & " " & mUser._surname
         lblAddress.Text = mUser._address
         lblContact.Text = mUser._mobile
@@ -160,17 +160,25 @@ FinallyLine:
             Dim p As Project = DirectCast(DataGridView1.Rows(e.RowIndex).Cells(13).Value, Project) 'Project class obkect
             Select Case e.ColumnIndex
                 Case 2 'ComoboBox Particular
-                    Dim cell As DataGridViewComboBoxCell = DataGridView1.Rows(e.RowIndex).Cells(3)
-                    cell.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
-                    cell.Style.BackColor = Color.LightGray
-                    cell.ReadOnly = True
+                    Dim cellDP As DataGridViewComboBoxCell = DataGridView1.Rows(e.RowIndex).Cells(3)
+                    Dim cellDiscount As DataGridViewComboBoxCell = DataGridView1.Rows(e.RowIndex).Cells(5)
+                    cellDP.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+                    cellDP.Style.BackColor = Color.LightGray
+                    cellDP.ReadOnly = True
+
+                    cellDiscount.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+                    cellDiscount.Style.BackColor = Color.LightGray
+                    cellDiscount.ReadOnly = True
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
                         Case "Downpayment"
-                            cell.Style.BackColor = Color.White
-                            cell.ReadOnly = False
+                            cellDP.Style.BackColor = Color.White
+                            cellDP.ReadOnly = False
+                            cellDiscount.Style.BackColor = Color.White
+                            cellDiscount.ReadOnly = False
+
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
                             If p._sumTran._balance < 1 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
@@ -198,12 +206,17 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                         Case "Reservation"
+                            'cellDiscount.Style.BackColor = Color.White
+                            'cellDiscount.ReadOnly = False
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                         Case "Cash"
                             Dim ttSum As Double = p._sumTran._discount + p._sumTran._totalPaid
+                            cellDiscount.Style.BackColor = Color.White
+                            cellDiscount.ReadOnly = False
+
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
 
@@ -276,7 +289,6 @@ FinallyLine:
         End If
         If DataGridView1.CurrentCell.ColumnIndex = 12 Then 'Tender
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtAmountPaid_KeyPress
-
         End If
     End Sub
 
@@ -390,7 +402,7 @@ FinallyLine:
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
             .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -674,4 +686,7 @@ FinallyLine:
         'mProject = DirectCast(DataGridView1.Rows(e.RowIndex).Cells(14).Value, Project)
     End Sub
 
+    Private Sub btnShowHistoryTransaction_Click(sender As Object, e As EventArgs) Handles btnShowHistoryTransaction.Click
+        TransactionHistoryToolStripMenuItem.PerformClick()
+    End Sub
 End Class
