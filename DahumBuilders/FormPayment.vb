@@ -162,12 +162,14 @@ FinallyLine:
                 Case 2 'ComoboBox Particular
                     Dim cell As DataGridViewComboBoxCell = DataGridView1.Rows(e.RowIndex).Cells(3)
                     cell.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+                    cell.Style.BackColor = Color.LightGray
                     cell.ReadOnly = True
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
                         Case "Downpayment"
+                            cell.Style.BackColor = Color.White
                             cell.ReadOnly = False
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
                             If p._sumTran._balance < 1 Then
@@ -334,8 +336,8 @@ FinallyLine:
         row.Cells(6).Value = (Double.Parse(row.Cells(4).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
         row.Cells(7).Value = project._itemID
         row.Cells(8).Value = project._projID
-        row.Cells(9).Value = 0.ToString("N2")
-        row.Cells(13).Value = project 'Total Amount Paid
+        row.Cells(9).Value = 0.ToString("N2") 'Monthly Amortization
+        row.Cells(13).Value = project 'project class
     End Sub
     Private Sub setDataGridView()
 
@@ -400,14 +402,14 @@ FinallyLine:
         With DataGridView1
             .Columns(0).Width = 150
             .Columns(1).Width = 90 'TCP
-            .Columns(2).Width = 100
-            .Columns(3).Width = 100
+            .Columns(2).Width = 100 'cbb particular
+            .Columns(3).Width = 100 'cbb Downpayment
             .Columns(4).Width = 90 'Downpayment Amount
-            .Columns(5).Width = 70
+            .Columns(5).Width = 70 'cbb discount
             .Columns(6).Width = 90 'Discount Amount
             .Columns(7).Width = 50 'ItemID
             .Columns(8).Width = 50 'ProjectID
-            .Columns(9).Width = 80 'Monthly
+            .Columns(9).Width = 75 'Monthly
             .Columns(10).Width = 50 'Part
             .Columns(11).Width = 100 'Amount to Pay
             .Columns(12).Width = 110 'Tender Amount
@@ -533,7 +535,6 @@ FinallyLine:
             trans._check_bank_name = txtBankName.Text.Trim
             If cbPaymentType.SelectedIndex > 0 Then
                 trans._check_bank_name = txtBankName.Text.Trim
-                trans._check_amount = txtCheckTransferAmount.Text.Trim
                 trans._check_number = txtCheckNo.Text.Trim
                 trans._check_date = dtpCheckDate.Value
             End If
@@ -559,8 +560,8 @@ FinallyLine:
 
     Private Sub insertPurchase(ByVal trans As Transaction)
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `check_bank_name`, `check_amount`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @DiscountAmount, @TCP, 
-        @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckAmount, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId)"
+        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @DiscountAmount, @TCP, 
+        @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId)"
 
         If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
             trans._partNo = 0
@@ -581,7 +582,6 @@ FinallyLine:
         sqlCommand.Parameters.Add("@ProjItemId", MySqlDbType.Int24).Value = trans._projectItemId
 
         sqlCommand.Parameters.Add("@CheckBankName", MySqlDbType.VarChar).Value = trans._check_bank_name
-        sqlCommand.Parameters.Add("@CheckAmount", MySqlDbType.Double).Value = trans._check_amount
         sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = trans._check_number
         sqlCommand.Parameters.Add("@CheckDate", MySqlDbType.Date).Value = trans._check_date
 
@@ -652,7 +652,6 @@ FinallyLine:
         txtCheckNo.Visible = False
         lblInformation.Text = String.Empty
         lblDateOrTransfer.Text = String.Empty
-        txtCheckTransferAmount.Text = String.Empty
         txtCheckNo.Text = String.Empty
         txtBankName.Text = String.Empty
         Select Case cbPaymentType.SelectedIndex
@@ -660,14 +659,12 @@ FinallyLine:
                 PanelCheck.Visible = True
                 lblInformation.Text = "Check Information"
                 lblDateOrTransfer.Text = "Date Check"
-                lblAmount.Text = "Check Amount"
                 lblCheckNo.Visible = True
                 txtCheckNo.Visible = True
             Case 2
                 PanelCheck.Visible = True
                 lblInformation.Text = "Bank Transfer Information"
                 lblDateOrTransfer.Text = "Date Transfer"
-                lblAmount.Text = "Transfer Amount"
             Case Else
                 PanelCheck.Visible = False
         End Select

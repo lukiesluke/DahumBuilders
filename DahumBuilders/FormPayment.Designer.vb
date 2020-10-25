@@ -29,12 +29,10 @@ Partial Class FormPayment
         Me.txtCheckNo = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblInformation = New System.Windows.Forms.Label()
-        Me.txtCheckTransferAmount = New System.Windows.Forms.TextBox()
         Me.txtBankName = New System.Windows.Forms.TextBox()
         Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
         Me.lblDateOrTransfer = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.lblAmount = New System.Windows.Forms.Label()
         Me.PanelTotal = New System.Windows.Forms.Panel()
         Me.btnPayment = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -57,6 +55,7 @@ Partial Class FormPayment
         Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTotalPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -74,7 +73,6 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -119,23 +117,21 @@ Partial Class FormPayment
         Me.PanelCheck.Controls.Add(Me.lblCheckNo)
         Me.PanelCheck.Controls.Add(Me.txtCheckNo)
         Me.PanelCheck.Controls.Add(Me.Panel4)
-        Me.PanelCheck.Controls.Add(Me.txtCheckTransferAmount)
         Me.PanelCheck.Controls.Add(Me.txtBankName)
         Me.PanelCheck.Controls.Add(Me.dtpCheckDate)
         Me.PanelCheck.Controls.Add(Me.lblDateOrTransfer)
         Me.PanelCheck.Controls.Add(Me.Label3)
-        Me.PanelCheck.Controls.Add(Me.lblAmount)
         Me.PanelCheck.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelCheck.Location = New System.Drawing.Point(0, 181)
+        Me.PanelCheck.Location = New System.Drawing.Point(0, 186)
         Me.PanelCheck.Name = "PanelCheck"
-        Me.PanelCheck.Size = New System.Drawing.Size(416, 222)
+        Me.PanelCheck.Size = New System.Drawing.Size(416, 186)
         Me.PanelCheck.TabIndex = 4
         '
         'lblCheckNo
         '
         Me.lblCheckNo.AutoSize = True
         Me.lblCheckNo.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCheckNo.Location = New System.Drawing.Point(10, 179)
+        Me.lblCheckNo.Location = New System.Drawing.Point(10, 141)
         Me.lblCheckNo.Name = "lblCheckNo"
         Me.lblCheckNo.Size = New System.Drawing.Size(136, 20)
         Me.lblCheckNo.TabIndex = 40
@@ -145,7 +141,7 @@ Partial Class FormPayment
         '
         Me.txtCheckNo.BackColor = System.Drawing.Color.White
         Me.txtCheckNo.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCheckNo.Location = New System.Drawing.Point(166, 170)
+        Me.txtCheckNo.Location = New System.Drawing.Point(166, 132)
         Me.txtCheckNo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtCheckNo.MaxLength = 12
         Me.txtCheckNo.Name = "txtCheckNo"
@@ -171,17 +167,6 @@ Partial Class FormPayment
         Me.lblInformation.TabIndex = 39
         Me.lblInformation.Text = "Check Information"
         Me.lblInformation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'txtCheckTransferAmount
-        '
-        Me.txtCheckTransferAmount.BackColor = System.Drawing.Color.White
-        Me.txtCheckTransferAmount.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCheckTransferAmount.Location = New System.Drawing.Point(166, 131)
-        Me.txtCheckTransferAmount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtCheckTransferAmount.MaxLength = 12
-        Me.txtCheckTransferAmount.Name = "txtCheckTransferAmount"
-        Me.txtCheckTransferAmount.Size = New System.Drawing.Size(225, 29)
-        Me.txtCheckTransferAmount.TabIndex = 37
         '
         'txtBankName
         '
@@ -225,25 +210,15 @@ Partial Class FormPayment
         Me.Label3.TabIndex = 33
         Me.Label3.Text = "Bank Name"
         '
-        'lblAmount
-        '
-        Me.lblAmount.AutoSize = True
-        Me.lblAmount.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAmount.Location = New System.Drawing.Point(10, 140)
-        Me.lblAmount.Name = "lblAmount"
-        Me.lblAmount.Size = New System.Drawing.Size(131, 20)
-        Me.lblAmount.TabIndex = 35
-        Me.lblAmount.Text = "Check Amount"
-        '
         'PanelTotal
         '
         Me.PanelTotal.BackColor = System.Drawing.Color.White
         Me.PanelTotal.Controls.Add(Me.btnPayment)
         Me.PanelTotal.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelTotal.Location = New System.Drawing.Point(0, 403)
+        Me.PanelTotal.Location = New System.Drawing.Point(0, 372)
         Me.PanelTotal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.Size = New System.Drawing.Size(416, 78)
+        Me.PanelTotal.Size = New System.Drawing.Size(416, 109)
         Me.PanelTotal.TabIndex = 3
         '
         'btnPayment
@@ -450,6 +425,12 @@ Partial Class FormPayment
         Me.ColumnHeaderBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderBalance.Width = 100
         '
+        'ColumnHeaderDiscount
+        '
+        Me.ColumnHeaderDiscount.Text = "Discount"
+        Me.ColumnHeaderDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderDiscount.Width = 100
+        '
         'ColumnHeaderTotalPaid
         '
         Me.ColumnHeaderTotalPaid.Text = "Paid Amount"
@@ -620,12 +601,6 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
-        'ColumnHeaderDiscount
-        '
-        Me.ColumnHeaderDiscount.Text = "Discount"
-        Me.ColumnHeaderDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderDiscount.Width = 100
-        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -702,9 +677,7 @@ Partial Class FormPayment
     Friend WithEvents PanelCheck As Panel
     Friend WithEvents lblDateOrTransfer As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents lblAmount As Label
     Friend WithEvents dtpCheckDate As DateTimePicker
-    Friend WithEvents txtCheckTransferAmount As TextBox
     Friend WithEvents txtBankName As TextBox
     Friend WithEvents Panel4 As Panel
     Friend WithEvents lblInformation As Label
