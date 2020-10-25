@@ -160,11 +160,15 @@ FinallyLine:
             Dim p As Project = DirectCast(DataGridView1.Rows(e.RowIndex).Cells(13).Value, Project) 'Project class obkect
             Select Case e.ColumnIndex
                 Case 2 'ComoboBox Particular
+                    Dim cell As DataGridViewComboBoxCell = DataGridView1.Rows(e.RowIndex).Cells(3)
+                    cell.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+                    cell.ReadOnly = True
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
                         Case "Downpayment"
+                            cell.ReadOnly = False
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
                             If p._sumTran._balance < 1 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
@@ -240,7 +244,7 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                         Case "Cash"
-                                If p._sumTran._balance < 1 Then
+                            If p._sumTran._balance < 1 Then
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
                                 DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._tcp * discount).ToString("N2") 'Discount Amount
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._tcp - (p._tcp * discount)).ToString("N2") 'Amount to pay
@@ -401,7 +405,7 @@ FinallyLine:
             .Columns(6).Width = 90 'Discount Amount
             .Columns(7).Width = 50 'ItemID
             .Columns(8).Width = 50 'ProjectID
-            .Columns(9).Width = 90 'Monthly
+            .Columns(9).Width = 80 'Monthly
             .Columns(10).Width = 50 'Part
             .Columns(11).Width = 100 'Amount to Pay
             .Columns(12).Width = 110 'Tender Amount
@@ -581,8 +585,6 @@ FinallyLine:
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
-                sqlCommand.Dispose()
-                sqlConnection.Close()
             Else
                 MessageBox.Show(Me, "Data NOT Inserted. Please try again.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If
@@ -595,15 +597,6 @@ FinallyLine:
     End Sub
 
     Private Sub TransactionHistoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TransactionHistoryToolStripMenuItem.Click
-        'If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
-        '    If mFormUserProfile.WindowState = 1 Then
-        '        mFormUserProfile.WindowState = 0
-        '    End If
-        'Else
-        '    mFormRptTransaction = New FormRptTransaction
-        '    mFormRptTransaction.mUser = mUser
-        '    mFormRptTransaction.Show()
-        'End If
         If Application.OpenForms().OfType(Of FormCRptTransaction).Any Then
             If mFormCRptTransaction.WindowState = 1 Then
                 mFormCRptTransaction.WindowState = 0
