@@ -244,10 +244,12 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                         Case "Cash"
-                            If p._sumTran._balance < 1 Then
+                            If p._sumTran._balance < 1 And p._sumTran._totalPaid < 1 Then
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
                                 DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._tcp * discount).ToString("N2") 'Discount Amount
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._tcp - (p._tcp * discount)).ToString("N2") 'Amount to pay
+                            ElseIf p._sumTran._balance < 1 And p._sumTran._totalPaid >= p._tcp Then
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2")
                             Else
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
                                 DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._sumTran._balance * discount).ToString("N2") 'Discount Amount
