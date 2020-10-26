@@ -3,7 +3,6 @@
 Public Class FormPayment
     Public Property mUser As User = New User()
     Dim mProject As Project = New Project()
-    Dim sumOfTotalContractPrice As Double = 0
     Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
@@ -71,19 +70,19 @@ Public Class FormPayment
                 item.SubItems.Add(project._total_paidAmount.ToString("N2"))
                 ListViewUserItem.Items.Add(item)
             Next
-            sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "item_id > 0"))
-            For a As Integer = 1 To 1
-                item = New ListViewItem(String.Empty)
-                item.UseItemStyleForSubItems = False
-                item.SubItems.Add(String.Empty)
-                item.SubItems.Add(String.Empty)
-                item.SubItems.Add(String.Empty)
-                If a > 0 Then
+
+            If ListViewUserItem.Items.Count > 1 Then
+                For a As Integer = 1 To 1
+                    item = New ListViewItem(String.Empty)
+                    item.UseItemStyleForSubItems = False
+                    item.SubItems.Add(String.Empty)
+                    item.SubItems.Add(String.Empty)
+                    item.SubItems.Add(String.Empty)
                     With item.SubItems.Add("Total")
                         .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
                         .ForeColor = Color.Red
                     End With
-                    With item.SubItems.Add(String.Format("{0:n}", sumOfTotalContractPrice))
+                    With item.SubItems.Add(Convert.ToDouble(table.Compute("SUM(price)", "item_id > 0")).ToString("N2"))
                         .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
                         .ForeColor = Color.Red
                     End With
@@ -100,10 +99,9 @@ Public Class FormPayment
                         .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
                         .ForeColor = Color.Red
                     End With
-                End If
-
-                ListViewUserItem.Items.Add(item)
-            Next
+                    ListViewUserItem.Items.Add(item)
+                Next
+            End If
 FinallyLine:
         Catch ex As Exception
             MessageBox.Show("User Information load: " & ex.Message)
