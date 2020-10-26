@@ -87,15 +87,16 @@ Module ModuleForm
         End Try
         Return totalBalance
     End Function
-    Public Function getPaymentMethod(ByVal itemId As String) As Dictionary(Of String, PaymentMethod)
+    Public Function getPaymentMethod(ByVal itemId As String, ByVal userid As String) As Dictionary(Of String, PaymentMethod)
         Dim values As Dictionary(Of String, PaymentMethod) = New Dictionary(Of String, PaymentMethod)
         Connection()
         Try
-            sql = "SELECT m.`type`, m.`monthly` FROM `db_payment_method` m WHERE m.`item_id`=@ItemId"
+            sql = "SELECT m.`type`, m.`monthly` FROM `db_payment_method` m WHERE m.`item_id`=@ItemId AND m.`userid`=@Userid"
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             With sqlCommand
                 .CommandText = sql
                 .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = itemId
+                .Parameters.Add("@Userid", MySqlDbType.Int64).Value = userid
             End With
             Dim sqlReader As MySqlDataReader = sqlCommand.ExecuteReader()
             While sqlReader.Read()

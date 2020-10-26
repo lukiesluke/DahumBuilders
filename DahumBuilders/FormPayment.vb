@@ -26,7 +26,9 @@ Public Class FormPayment
         sql = "SELECT i.`item_id`, i.`proj_id`, l.`proj_name`, l.`proj_address`, i.`block`, i.`lot`, i.`sqm`, i.`price`,
         IFNULL((SELECT (`tcp`-SUM(`paid_amount`))-SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price`) AS 'totalBalance',
         IFNULL((SELECT SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalDiscount',
-        IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount'
+        IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount',
+        IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='EQ' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'EQ',
+        IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='MA' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'MA'
         FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
         ListViewUserItem.Items.Clear()
         Connection()
@@ -57,8 +59,11 @@ Public Class FormPayment
                 project._total_balance = table.Rows(i)("totalBalance")
                 project._total_discount = table.Rows(i)("totalDiscount")
                 project._total_paidAmount = table.Rows(i)("totalPaidAmount")
+                project._equity = table.Rows(i)("EQ")
+                project._amortization = table.Rows(i)("MA")
 
                 item = New ListViewItem(project._itemID)
+                item.UseItemStyleForSubItems = False
                 item.SubItems.Add(project._name)
                 item.SubItems.Add(project._block)
                 item.SubItems.Add(project._lot)
@@ -68,6 +73,12 @@ Public Class FormPayment
                 item.SubItems.Add(project._total_balance.ToString("N2"))
                 item.SubItems.Add(project._total_discount.ToString("N2"))
                 item.SubItems.Add(project._total_paidAmount.ToString("N2"))
+                With item.SubItems.Add(project._equity.ToString("N2"))
+                    .BackColor = Color.OldLace
+                End With
+                With item.SubItems.Add(project._amortization.ToString("N2"))
+                    .BackColor = Color.LightSkyBlue
+                End With
                 ListViewUserItem.Items.Add(item)
             Next
 
@@ -345,7 +356,7 @@ FinallyLine:
                 project._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
                 project._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
                 project._description = project._name & " B" & project._block & " L" & project._lot & " - " & project._sqm & " sqm"
-                project._payment_method = getPaymentMethod(project._itemID)
+                project._payment_method = getPaymentMethod(project._itemID, mUser._id)
                 addPurchaseItem(project)
             End If
         End If

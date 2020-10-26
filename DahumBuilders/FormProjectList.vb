@@ -43,7 +43,7 @@ Public Class FormProjectList
             WHERE block LIKE @Block " & checkAvailable
 
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@Block", MySqlDbType.VarChar).Value = "%" & txtBlock.Text.Trim & "%"
+            sqlCommand.Parameters.Add("@Block", MySqlDbType.VarChar).Value = txtBlock.Text.Trim
             sqlDataReader = sqlCommand.ExecuteReader()
         Else
             sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price, 

@@ -74,6 +74,8 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderMA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -107,8 +109,8 @@ Partial Class FormPayment
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PanelInformation)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1500, 481)
-        Me.SplitContainer1.SplitterDistance = 416
+        Me.SplitContainer1.Size = New System.Drawing.Size(1610, 481)
+        Me.SplitContainer1.SplitterDistance = 417
         Me.SplitContainer1.TabIndex = 1
         '
         'PanelCheck
@@ -125,7 +127,7 @@ Partial Class FormPayment
         Me.PanelCheck.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelCheck.Location = New System.Drawing.Point(0, 186)
         Me.PanelCheck.Name = "PanelCheck"
-        Me.PanelCheck.Size = New System.Drawing.Size(416, 186)
+        Me.PanelCheck.Size = New System.Drawing.Size(417, 186)
         Me.PanelCheck.TabIndex = 4
         '
         'lblCheckNo
@@ -156,7 +158,7 @@ Partial Class FormPayment
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(414, 34)
+        Me.Panel4.Size = New System.Drawing.Size(415, 34)
         Me.Panel4.TabIndex = 38
         '
         'lblInformation
@@ -219,7 +221,7 @@ Partial Class FormPayment
         Me.PanelTotal.Location = New System.Drawing.Point(0, 372)
         Me.PanelTotal.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelTotal.Name = "PanelTotal"
-        Me.PanelTotal.Size = New System.Drawing.Size(416, 109)
+        Me.PanelTotal.Size = New System.Drawing.Size(417, 109)
         Me.PanelTotal.TabIndex = 3
         '
         'btnPayment
@@ -249,7 +251,7 @@ Partial Class FormPayment
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(416, 175)
+        Me.Panel2.Size = New System.Drawing.Size(417, 175)
         Me.Panel2.TabIndex = 1
         '
         'Panel1
@@ -259,7 +261,7 @@ Partial Class FormPayment
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(414, 34)
+        Me.Panel1.Size = New System.Drawing.Size(415, 34)
         Me.Panel1.TabIndex = 39
         '
         'Label1
@@ -354,12 +356,12 @@ Partial Class FormPayment
         Me.PanelInformation.Location = New System.Drawing.Point(0, 0)
         Me.PanelInformation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelInformation.Name = "PanelInformation"
-        Me.PanelInformation.Size = New System.Drawing.Size(1080, 481)
+        Me.PanelInformation.Size = New System.Drawing.Size(1189, 481)
         Me.PanelInformation.TabIndex = 2
         '
         'btnShowHistoryTransaction
         '
-        Me.btnShowHistoryTransaction.Location = New System.Drawing.Point(905, 78)
+        Me.btnShowHistoryTransaction.Location = New System.Drawing.Point(1017, 78)
         Me.btnShowHistoryTransaction.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnShowHistoryTransaction.Name = "btnShowHistoryTransaction"
         Me.btnShowHistoryTransaction.Size = New System.Drawing.Size(160, 43)
@@ -373,12 +375,12 @@ Partial Class FormPayment
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel5.Location = New System.Drawing.Point(0, 179)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(1078, 300)
+        Me.Panel5.Size = New System.Drawing.Size(1187, 300)
         Me.Panel5.TabIndex = 51
         '
         'ListViewUserItem
         '
-        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderTotalPaid})
+        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderTotalPaid, Me.ColumnHeaderEQ, Me.ColumnHeaderMA})
         Me.ListViewUserItem.ContextMenuStrip = Me.ContextMenuProjectList
         Me.ListViewUserItem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewUserItem.FullRowSelect = True
@@ -387,7 +389,7 @@ Partial Class FormPayment
         Me.ListViewUserItem.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUserItem.MultiSelect = False
         Me.ListViewUserItem.Name = "ListViewUserItem"
-        Me.ListViewUserItem.Size = New System.Drawing.Size(1078, 300)
+        Me.ListViewUserItem.Size = New System.Drawing.Size(1187, 300)
         Me.ListViewUserItem.TabIndex = 5
         Me.ListViewUserItem.UseCompatibleStateImageBehavior = False
         Me.ListViewUserItem.View = System.Windows.Forms.View.Details
@@ -400,7 +402,7 @@ Partial Class FormPayment
         'ColumnHeaderProjectName
         '
         Me.ColumnHeaderProjectName.Text = "Project Name"
-        Me.ColumnHeaderProjectName.Width = 150
+        Me.ColumnHeaderProjectName.Width = 130
         '
         'ColumnHeaderBlock
         '
@@ -469,7 +471,7 @@ Partial Class FormPayment
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1078, 34)
+        Me.Panel3.Size = New System.Drawing.Size(1187, 34)
         Me.Panel3.TabIndex = 50
         '
         'Label4
@@ -508,7 +510,7 @@ Partial Class FormPayment
         '
         'btnSearchProject
         '
-        Me.btnSearchProject.Location = New System.Drawing.Point(905, 127)
+        Me.btnSearchProject.Location = New System.Drawing.Point(1017, 127)
         Me.btnSearchProject.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearchProject.Name = "btnSearchProject"
         Me.btnSearchProject.Size = New System.Drawing.Size(160, 43)
@@ -613,6 +615,16 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
+        'ColumnHeaderEQ
+        '
+        Me.ColumnHeaderEQ.Text = "EQ"
+        Me.ColumnHeaderEQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'ColumnHeaderMA
+        '
+        Me.ColumnHeaderMA.Text = "MA"
+        Me.ColumnHeaderMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -703,4 +715,6 @@ Partial Class FormPayment
     Friend WithEvents Panel5 As Panel
     Friend WithEvents ColumnHeaderDiscount As ColumnHeader
     Friend WithEvents btnShowHistoryTransaction As Button
+    Friend WithEvents ColumnHeaderEQ As ColumnHeader
+    Friend WithEvents ColumnHeaderMA As ColumnHeader
 End Class
