@@ -58,6 +58,8 @@ Partial Class FormPayment
         Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTotalPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderMA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -74,8 +76,7 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColumnHeaderEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderMA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.PaymentMethodToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -451,17 +452,27 @@ Partial Class FormPayment
         Me.ColumnHeaderTotalPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderTotalPaid.Width = 100
         '
+        'ColumnHeaderEQ
+        '
+        Me.ColumnHeaderEQ.Text = "EQ"
+        Me.ColumnHeaderEQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'ColumnHeaderMA
+        '
+        Me.ColumnHeaderMA.Text = "MA"
+        Me.ColumnHeaderMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
         'ContextMenuProjectList
         '
         Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem})
+        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.PaymentMethodToolStripMenuItem})
         Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
-        Me.ContextMenuProjectList.Size = New System.Drawing.Size(149, 34)
+        Me.ContextMenuProjectList.Size = New System.Drawing.Size(221, 97)
         '
         'RemoveToolStripMenuItem
         '
         Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
-        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(148, 30)
+        Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
         Me.RemoveToolStripMenuItem.Text = "Remove"
         '
         'Panel3
@@ -615,15 +626,11 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
-        'ColumnHeaderEQ
+        'PaymentMethodToolStripMenuItem
         '
-        Me.ColumnHeaderEQ.Text = "EQ"
-        Me.ColumnHeaderEQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'ColumnHeaderMA
-        '
-        Me.ColumnHeaderMA.Text = "MA"
-        Me.ColumnHeaderMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.PaymentMethodToolStripMenuItem.Name = "PaymentMethodToolStripMenuItem"
+        Me.PaymentMethodToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
+        Me.PaymentMethodToolStripMenuItem.Text = "Payment Method"
         '
         'FormPayment
         '
@@ -717,4 +724,5 @@ Partial Class FormPayment
     Friend WithEvents btnShowHistoryTransaction As Button
     Friend WithEvents ColumnHeaderEQ As ColumnHeader
     Friend WithEvents ColumnHeaderMA As ColumnHeader
+    Friend WithEvents PaymentMethodToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -1,4 +1,5 @@
 ﻿Public Class Project
+    Public Property _userID As String = ""
     Public Property _itemID As String = ""
     Public Property _name As String = ""
     Public Property _block As String = ""

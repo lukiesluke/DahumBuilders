@@ -249,8 +249,6 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                         Case "Reservation"
-                            'cellDiscount.Style.BackColor = Color.White
-                            'cellDiscount.ReadOnly = False
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
@@ -357,6 +355,8 @@ FinallyLine:
                 project._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
                 project._description = project._name & " B" & project._block & " L" & project._lot & " - " & project._sqm & " sqm"
                 project._payment_method = getPaymentMethod(project._itemID, mUser._id)
+                project._userID = mUser._id
+                mProject = project
                 addPurchaseItem(project)
             End If
         End If
@@ -574,7 +574,6 @@ FinallyLine:
                     If ListViewUserItem.Items.Count > 0 Then
                         ListViewUserItem.Focus()
                         ListViewUserItem.Items(0).Selected = True
-                        'ListViewUserItem.Items(0).Focused = True
                     End If
                     Exit Sub
             End Select
@@ -754,8 +753,10 @@ FinallyLine:
             Else
                 ContextMenuProjectList.Items(0).Enabled = True
             End If
+            ContextMenuProjectList.Items(1).Enabled = True
         ElseIf ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
             ContextMenuProjectList.Items(0).Enabled = False
+            ContextMenuProjectList.Items(1).Enabled = False
         End If
     End Sub
 
@@ -788,5 +789,16 @@ FinallyLine:
 
     Private Sub btnShowHistoryTransaction_Click(sender As Object, e As EventArgs) Handles btnShowHistoryTransaction.Click
         TransactionHistoryToolStripMenuItem.PerformClick()
+    End Sub
+
+    Private Sub PaymentMethodToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PaymentMethodToolStripMenuItem.Click
+        Dim frmPaymentMethod As New FormPaymentMethod
+        If Application.OpenForms().OfType(Of FormPaymentMethod).Any Then
+            frmPaymentMethod.Focus()
+        Else
+            frmPaymentMethod = New FormPaymentMethod
+            frmPaymentMethod.mProject = mProject
+            frmPaymentMethod.ShowDialog(Me)
+        End If
     End Sub
 End Class

@@ -112,6 +112,12 @@
     <Compile Include="FormAddProjectSetting.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormPaymentMethod.Designer.vb">
+      <DependentUpon>FormPaymentMethod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPaymentMethod.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PaymentMethod.vb" />
     <Compile Include="Project.vb" />
     <Compile Include="Customer.Designer.vb">
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPayment.resx">
       <DependentUpon>FormPayment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPaymentMethod.resx">
+      <DependentUpon>FormPaymentMethod.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormProjectList.resx">
       <DependentUpon>FormProjectList.vb</DependentUpon>
