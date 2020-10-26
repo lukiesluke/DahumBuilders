@@ -385,6 +385,7 @@ Partial Class FormPayment
         Me.ListViewUserItem.GridLines = True
         Me.ListViewUserItem.Location = New System.Drawing.Point(0, 0)
         Me.ListViewUserItem.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.ListViewUserItem.MultiSelect = False
         Me.ListViewUserItem.Name = "ListViewUserItem"
         Me.ListViewUserItem.Size = New System.Drawing.Size(1078, 300)
         Me.ListViewUserItem.TabIndex = 5
@@ -578,7 +579,7 @@ Partial Class FormPayment
         '
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ScrollBar
+        Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(12, 540)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -595,7 +596,7 @@ Partial Class FormPayment
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1622, 33)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1631, 33)
         Me.MenuStrip1.TabIndex = 51
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -616,7 +617,7 @@ Partial Class FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1622, 944)
+        Me.ClientSize = New System.Drawing.Size(1631, 944)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Button1)

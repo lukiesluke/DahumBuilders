@@ -192,13 +192,17 @@ FinallyLine:
                             cellDiscount.ReadOnly = False
 
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
-                            If p._total_balance < 1 Then
+                            If p._total_balance = 0 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
 
                                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = downpamentAmount.ToString("N2") 'Downpayment Amount
                                 DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
+                            ElseIf p._total_balance < 0 Then
+                                DataGridView1.Rows(e.RowIndex).Cells(4).Value = 0.ToString("N2") 'Downpayment Amount
+                                DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                             Else
                                 downpamentAmount = (p._total_balance * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
@@ -247,13 +251,14 @@ FinallyLine:
                 Case 3 'ComoboBox Downpayment
                     DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
                     If p IsNot Nothing Then
-                        If p._total_balance < 1 Then
+                        If p._total_balance = 0 Then
                             downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                             discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
 
                             DataGridView1.Rows(e.RowIndex).Cells(4).Value = downpamentAmount.ToString("N2") 'Downpayment Amount
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._tcp * discount).ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
+                        ElseIf p._total_balance < 0 Then
                         Else
                             downpamentAmount = (p._total_balance * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                             discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
@@ -311,21 +316,74 @@ FinallyLine:
 
     Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
         Dim project As Project = New Project()
-        If e.KeyCode = Keys.KeyCode.Enter Then
+        If e.KeyCode = Keys.Enter Then
             If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
                 project._itemID = ListViewUserItem.SelectedItems.Item(0).Text
                 project._name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
-                Project._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
-                Project._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
-                Project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
-                Project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
-                Project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+                project._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+                project._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+                project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
+                project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
+                project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
                 project._total_balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
                 project._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
                 project._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
                 project._description = project._name & " B" & project._block & " L" & project._lot & " - " & project._sqm & " sqm"
-                addPurchaseItem(Project)
+                addPurchaseItem(project)
             End If
+        End If
+        If e.KeyCode = Keys.F1 Then
+            For Each i As ListViewItem In Me.ListViewUserItem.Items
+                If ListViewUserItem.FocusedItem.Index <> i.Index Then
+                    With i
+                        .UseItemStyleForSubItems = False
+                        .BackColor = Color.Beige
+                        .SubItems(1).BackColor = Color.White
+                        .SubItems(2).BackColor = Color.White
+                        .SubItems(3).BackColor = Color.White
+                        .SubItems(4).BackColor = Color.White
+                        .SubItems(5).BackColor = Color.White
+                        .SubItems(6).BackColor = Color.White
+                        .SubItems(7).BackColor = Color.White
+                        .SubItems(8).BackColor = Color.White
+                        .SubItems(9).BackColor = Color.White
+                    End With
+                End If
+            Next
+
+            Dim item As ListViewItem = New ListViewItem(String.Empty)
+            item = ListViewUserItem.SelectedItems.Item(0)
+            If item.SubItems(1).BackColor = Color.Beige Then
+                With item
+                    .UseItemStyleForSubItems = False
+                    .BackColor = Color.Beige
+                    .SubItems(1).BackColor = Color.White
+                    .SubItems(2).BackColor = Color.White
+                    .SubItems(3).BackColor = Color.White
+                    .SubItems(4).BackColor = Color.White
+                    .SubItems(5).BackColor = Color.White
+                    .SubItems(6).BackColor = Color.White
+                    .SubItems(7).BackColor = Color.White
+                    .SubItems(8).BackColor = Color.White
+                    .SubItems(9).BackColor = Color.White
+                End With
+            Else
+                With item
+                    .UseItemStyleForSubItems = False
+                    .BackColor = Color.Beige
+                    .SubItems(1).BackColor = Color.Beige
+                    .SubItems(2).BackColor = Color.Beige
+                    .SubItems(3).BackColor = Color.Beige
+                    .SubItems(4).BackColor = Color.Beige
+                    .SubItems(5).BackColor = Color.Beige
+                    .SubItems(6).BackColor = Color.Beige
+                    .SubItems(7).BackColor = Color.Beige
+                    .SubItems(8).BackColor = Color.Beige
+                    .SubItems(9).BackColor = Color.Beige
+                End With
+            End If
+
+
         End If
     End Sub
 
