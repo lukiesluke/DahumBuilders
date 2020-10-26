@@ -181,6 +181,8 @@ FinallyLine:
                     cellDiscount.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
                     cellDiscount.Style.BackColor = Color.LightGray
                     cellDiscount.ReadOnly = True
+                    DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2") ' Monthly
+
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
@@ -212,11 +214,25 @@ FinallyLine:
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                             End If
                         Case "Equity"
+                            Dim pm As New PaymentMethod
+                            If p._payment_method.TryGetValue("EQ", pm) Then
+                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = pm._monthly.ToString("N2")
+                            Else
+                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2")
+                            End If
+
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                         Case "Monthly"
+                            Dim pm As New PaymentMethod
+                            If p._payment_method.TryGetValue("MA", pm) Then
+                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = pm._monthly.ToString("N2")
+                            Else
+                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2")
+                            End If
+
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
@@ -329,31 +345,34 @@ FinallyLine:
                 project._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
                 project._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
                 project._description = project._name & " B" & project._block & " L" & project._lot & " - " & project._sqm & " sqm"
+                project._payment_method = getPaymentMethod(project._itemID)
                 addPurchaseItem(project)
             End If
         End If
         If e.KeyCode = Keys.F1 Then
             For Each i As ListViewItem In Me.ListViewUserItem.Items
                 If ListViewUserItem.FocusedItem.Index <> i.Index Then
-                    With i
-                        .UseItemStyleForSubItems = False
-                        .BackColor = Color.Beige
-                        .SubItems(1).BackColor = Color.White
-                        .SubItems(2).BackColor = Color.White
-                        .SubItems(3).BackColor = Color.White
-                        .SubItems(4).BackColor = Color.White
-                        .SubItems(5).BackColor = Color.White
-                        .SubItems(6).BackColor = Color.White
-                        .SubItems(7).BackColor = Color.White
-                        .SubItems(8).BackColor = Color.White
-                        .SubItems(9).BackColor = Color.White
-                    End With
+                    If i.SubItems(1).BackColor = Color.MistyRose Then
+                        With i
+                            .UseItemStyleForSubItems = False
+                            .BackColor = Color.Beige
+                            .SubItems(1).BackColor = Color.White
+                            .SubItems(2).BackColor = Color.White
+                            .SubItems(3).BackColor = Color.White
+                            .SubItems(4).BackColor = Color.White
+                            .SubItems(5).BackColor = Color.White
+                            .SubItems(6).BackColor = Color.White
+                            .SubItems(7).BackColor = Color.White
+                            .SubItems(8).BackColor = Color.White
+                            .SubItems(9).BackColor = Color.White
+                        End With
+                    End If
                 End If
             Next
 
             Dim item As ListViewItem = New ListViewItem(String.Empty)
             item = ListViewUserItem.SelectedItems.Item(0)
-            If item.SubItems(1).BackColor = Color.Beige Then
+            If item.SubItems(1).BackColor = Color.MistyRose Then
                 With item
                     .UseItemStyleForSubItems = False
                     .BackColor = Color.Beige
@@ -371,15 +390,15 @@ FinallyLine:
                 With item
                     .UseItemStyleForSubItems = False
                     .BackColor = Color.Beige
-                    .SubItems(1).BackColor = Color.Beige
-                    .SubItems(2).BackColor = Color.Beige
-                    .SubItems(3).BackColor = Color.Beige
-                    .SubItems(4).BackColor = Color.Beige
-                    .SubItems(5).BackColor = Color.Beige
-                    .SubItems(6).BackColor = Color.Beige
-                    .SubItems(7).BackColor = Color.Beige
-                    .SubItems(8).BackColor = Color.Beige
-                    .SubItems(9).BackColor = Color.Beige
+                    .SubItems(1).BackColor = Color.MistyRose
+                    .SubItems(2).BackColor = Color.MistyRose
+                    .SubItems(3).BackColor = Color.MistyRose
+                    .SubItems(4).BackColor = Color.MistyRose
+                    .SubItems(5).BackColor = Color.MistyRose
+                    .SubItems(6).BackColor = Color.MistyRose
+                    .SubItems(7).BackColor = Color.MistyRose
+                    .SubItems(8).BackColor = Color.MistyRose
+                    .SubItems(9).BackColor = Color.MistyRose
                 End With
             End If
 
@@ -419,7 +438,7 @@ FinallyLine:
         row.Cells(7).Value = project._itemID
         row.Cells(8).Value = project._projID
         row.Cells(9).Value = 0.ToString("N2") 'Monthly Amortization
-        row.Cells(13).Value = project 'project class
+        row.Cells(13).Value = project 'ProjectClass
     End Sub
     Private Sub setDataGridView()
 
@@ -467,7 +486,7 @@ FinallyLine:
         DataGridView1.Columns.Add("", "Part")
         DataGridView1.Columns.Add("", "Amount to Pay")
         DataGridView1.Columns.Add("", "Tender Amount")
-        DataGridView1.Columns.Add("", "Total Paid")
+        DataGridView1.Columns.Add("", "ProjectClass")
 
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -505,11 +524,11 @@ FinallyLine:
         DataGridView1.Columns(8).ReadOnly = True
         DataGridView1.Columns(9).ReadOnly = True
         DataGridView1.Columns(11).ReadOnly = True
-        DataGridView1.Columns(13).ReadOnly = True 'Project class obkect
+        DataGridView1.Columns(13).ReadOnly = True 'ProjectClass object
 
         DataGridView1.Columns(7).Visible = False
         DataGridView1.Columns(8).Visible = False
-        DataGridView1.Columns(13).Visible = False 'Project class obkect
+        DataGridView1.Columns(13).Visible = False 'ProjectClass object
 
         CType(DataGridView1.Columns(10), DataGridViewTextBoxColumn).MaxInputLength = 3
         CType(DataGridView1.Columns(12), DataGridViewTextBoxColumn).MaxInputLength = 20

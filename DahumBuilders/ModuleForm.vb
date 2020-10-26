@@ -87,4 +87,29 @@ Module ModuleForm
         End Try
         Return totalBalance
     End Function
+    Public Function getPaymentMethod(ByVal itemId As String) As Dictionary(Of String, PaymentMethod)
+        Dim values As Dictionary(Of String, PaymentMethod) = New Dictionary(Of String, PaymentMethod)
+        Connection()
+        Try
+            sql = "SELECT m.`type`, m.`monthly` FROM `db_payment_method` m WHERE m.`item_id`=@ItemId"
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            With sqlCommand
+                .CommandText = sql
+                .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = itemId
+            End With
+            Dim sqlReader As MySqlDataReader = sqlCommand.ExecuteReader()
+            While sqlReader.Read()
+                Dim pm As PaymentMethod = New PaymentMethod
+                pm._type = sqlReader("type")
+                pm._monthly = sqlReader("monthly")
+                values.Add(pm._type, pm)
+            End While
+        Catch ex As Exception
+            MessageBox.Show("Client Balance: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        Return values
+    End Function
 End Module
