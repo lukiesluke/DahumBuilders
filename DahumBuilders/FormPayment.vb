@@ -339,84 +339,6 @@ FinallyLine:
         DataGridView1.CommitEdit(DataGridViewDataErrorContexts.Commit)
     End Sub
 
-    Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
-        Dim project As Project = New Project()
-        If e.KeyCode = Keys.Enter Then
-            If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
-                project._itemID = ListViewUserItem.SelectedItems.Item(0).Text
-                project._name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
-                project._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
-                project._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
-                project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
-                project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
-                project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
-                project._total_balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
-                project._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
-                project._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
-                project._description = project._name & " B" & project._block & " L" & project._lot & " - " & project._sqm & " sqm"
-                project._payment_method = getPaymentMethod(project._itemID, mUser._id)
-                project._userID = mUser._id
-                mProject = project
-                addPurchaseItem(project)
-            End If
-        End If
-        If e.KeyCode = Keys.F1 Then
-            For Each i As ListViewItem In Me.ListViewUserItem.Items
-                If ListViewUserItem.FocusedItem.Index <> i.Index Then
-                    If i.SubItems(1).BackColor = Color.MistyRose Then
-                        With i
-                            .UseItemStyleForSubItems = False
-                            .BackColor = Color.Beige
-                            .SubItems(1).BackColor = Color.White
-                            .SubItems(2).BackColor = Color.White
-                            .SubItems(3).BackColor = Color.White
-                            .SubItems(4).BackColor = Color.White
-                            .SubItems(5).BackColor = Color.White
-                            .SubItems(6).BackColor = Color.White
-                            .SubItems(7).BackColor = Color.White
-                            .SubItems(8).BackColor = Color.White
-                            .SubItems(9).BackColor = Color.White
-                        End With
-                    End If
-                End If
-            Next
-
-            Dim item As ListViewItem = New ListViewItem(String.Empty)
-            item = ListViewUserItem.SelectedItems.Item(0)
-            If item.SubItems(1).BackColor = Color.MistyRose Then
-                With item
-                    .UseItemStyleForSubItems = False
-                    .BackColor = Color.Beige
-                    .SubItems(1).BackColor = Color.White
-                    .SubItems(2).BackColor = Color.White
-                    .SubItems(3).BackColor = Color.White
-                    .SubItems(4).BackColor = Color.White
-                    .SubItems(5).BackColor = Color.White
-                    .SubItems(6).BackColor = Color.White
-                    .SubItems(7).BackColor = Color.White
-                    .SubItems(8).BackColor = Color.White
-                    .SubItems(9).BackColor = Color.White
-                End With
-            Else
-                With item
-                    .UseItemStyleForSubItems = False
-                    .BackColor = Color.Beige
-                    .SubItems(1).BackColor = Color.MistyRose
-                    .SubItems(2).BackColor = Color.MistyRose
-                    .SubItems(3).BackColor = Color.MistyRose
-                    .SubItems(4).BackColor = Color.MistyRose
-                    .SubItems(5).BackColor = Color.MistyRose
-                    .SubItems(6).BackColor = Color.MistyRose
-                    .SubItems(7).BackColor = Color.MistyRose
-                    .SubItems(8).BackColor = Color.MistyRose
-                    .SubItems(9).BackColor = Color.MistyRose
-                End With
-            End If
-
-
-        End If
-    End Sub
-
     Private Sub addPurchaseItem(ByVal project As Project)
 
         If DataGridView1.Rows.Count > 0 Then
@@ -799,6 +721,87 @@ FinallyLine:
             frmPaymentMethod = New FormPaymentMethod
             frmPaymentMethod.mProject = mProject
             frmPaymentMethod.ShowDialog(Me)
+        End If
+    End Sub
+
+    Private Sub ListViewUserItem_Click(sender As Object, e As EventArgs) Handles ListViewUserItem.Click
+        If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
+            mProject._itemID = ListViewUserItem.SelectedItems.Item(0).Text
+            mProject._name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
+            mProject._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+            mProject._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+            mProject._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
+            mProject._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
+            mProject._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+            mProject._total_balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
+            mProject._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
+            mProject._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
+            mProject._description = mProject._name & " B" & mProject._block & " L" & mProject._lot & " - " & mProject._sqm & " sqm"
+            mProject._payment_method = getPaymentMethod(mProject._itemID, mUser._id)
+            mProject._userID = mUser._id
+        End If
+    End Sub
+    Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
+        If e.KeyCode = Keys.Enter Then
+            If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
+                ListViewUserItem_Click(sender, e)
+                addPurchaseItem(mProject)
+            End If
+        End If
+        If e.KeyCode = Keys.F1 Then
+            For Each i As ListViewItem In Me.ListViewUserItem.Items
+                If ListViewUserItem.FocusedItem.Index <> i.Index Then
+                    If i.SubItems(1).BackColor = Color.MistyRose Then
+                        With i
+                            .UseItemStyleForSubItems = False
+                            .BackColor = Color.Beige
+                            .SubItems(1).BackColor = Color.White
+                            .SubItems(2).BackColor = Color.White
+                            .SubItems(3).BackColor = Color.White
+                            .SubItems(4).BackColor = Color.White
+                            .SubItems(5).BackColor = Color.White
+                            .SubItems(6).BackColor = Color.White
+                            .SubItems(7).BackColor = Color.White
+                            .SubItems(8).BackColor = Color.White
+                            .SubItems(9).BackColor = Color.White
+                        End With
+                    End If
+                End If
+            Next
+
+            Dim item As ListViewItem = New ListViewItem(String.Empty)
+            item = ListViewUserItem.SelectedItems.Item(0)
+            If item.SubItems(1).BackColor = Color.MistyRose Then
+                With item
+                    .UseItemStyleForSubItems = False
+                    .BackColor = Color.Beige
+                    .SubItems(1).BackColor = Color.White
+                    .SubItems(2).BackColor = Color.White
+                    .SubItems(3).BackColor = Color.White
+                    .SubItems(4).BackColor = Color.White
+                    .SubItems(5).BackColor = Color.White
+                    .SubItems(6).BackColor = Color.White
+                    .SubItems(7).BackColor = Color.White
+                    .SubItems(8).BackColor = Color.White
+                    .SubItems(9).BackColor = Color.White
+                End With
+            Else
+                With item
+                    .UseItemStyleForSubItems = False
+                    .BackColor = Color.Beige
+                    .SubItems(1).BackColor = Color.MistyRose
+                    .SubItems(2).BackColor = Color.MistyRose
+                    .SubItems(3).BackColor = Color.MistyRose
+                    .SubItems(4).BackColor = Color.MistyRose
+                    .SubItems(5).BackColor = Color.MistyRose
+                    .SubItems(6).BackColor = Color.MistyRose
+                    .SubItems(7).BackColor = Color.MistyRose
+                    .SubItems(8).BackColor = Color.MistyRose
+                    .SubItems(9).BackColor = Color.MistyRose
+                End With
+            End If
+
+
         End If
     End Sub
 End Class

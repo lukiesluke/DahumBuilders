@@ -24,16 +24,20 @@ Partial Class FormPaymentMethod
     Private Sub InitializeComponent()
         Me.txtAmountEQ = New System.Windows.Forms.TextBox()
         Me.txtAmountMA = New System.Windows.Forms.TextBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.dtpEquityStart = New System.Windows.Forms.DateTimePicker()
+        Me.dtpMonthlyStart = New System.Windows.Forms.DateTimePicker()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
+        Me.txtEquityTerm = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.dtpEquityEnd = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.DateTimePicker4 = New System.Windows.Forms.DateTimePicker()
+        Me.txtMATerm = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.dtpMonthlyEnd = New System.Windows.Forms.DateTimePicker()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -43,10 +47,6 @@ Partial Class FormPaymentMethod
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -70,21 +70,21 @@ Partial Class FormPaymentMethod
         Me.txtAmountMA.TabIndex = 4
         Me.txtAmountMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'DateTimePicker1
+        'dtpEquityStart
         '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(120, 115)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 26)
-        Me.DateTimePicker1.TabIndex = 2
+        Me.dtpEquityStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpEquityStart.Location = New System.Drawing.Point(120, 115)
+        Me.dtpEquityStart.Name = "dtpEquityStart"
+        Me.dtpEquityStart.Size = New System.Drawing.Size(200, 26)
+        Me.dtpEquityStart.TabIndex = 2
         '
-        'DateTimePicker2
+        'dtpMonthlyStart
         '
-        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker2.Location = New System.Drawing.Point(121, 116)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(200, 26)
-        Me.DateTimePicker2.TabIndex = 6
+        Me.dtpMonthlyStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpMonthlyStart.Location = New System.Drawing.Point(121, 116)
+        Me.dtpMonthlyStart.Name = "dtpMonthlyStart"
+        Me.dtpMonthlyStart.Size = New System.Drawing.Size(200, 26)
+        Me.dtpMonthlyStart.TabIndex = 6
         '
         'TableLayoutPanel1
         '
@@ -107,27 +107,46 @@ Partial Class FormPaymentMethod
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
-        Me.Panel1.Controls.Add(Me.TextBox2)
+        Me.Panel1.Controls.Add(Me.txtEquityTerm)
         Me.Panel1.Controls.Add(Me.Label10)
-        Me.Panel1.Controls.Add(Me.DateTimePicker3)
+        Me.Panel1.Controls.Add(Me.dtpEquityEnd)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.txtAmountEQ)
-        Me.Panel1.Controls.Add(Me.DateTimePicker1)
+        Me.Panel1.Controls.Add(Me.dtpEquityStart)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 82)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(391, 229)
         Me.Panel1.TabIndex = 0
         '
-        'DateTimePicker3
+        'txtEquityTerm
         '
-        Me.DateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker3.Location = New System.Drawing.Point(120, 162)
-        Me.DateTimePicker3.Name = "DateTimePicker3"
-        Me.DateTimePicker3.Size = New System.Drawing.Size(200, 26)
-        Me.DateTimePicker3.TabIndex = 3
+        Me.txtEquityTerm.Location = New System.Drawing.Point(120, 72)
+        Me.txtEquityTerm.Name = "txtEquityTerm"
+        Me.txtEquityTerm.Size = New System.Drawing.Size(71, 26)
+        Me.txtEquityTerm.TabIndex = 1
+        Me.txtEquityTerm.Text = "0"
+        Me.txtEquityTerm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(25, 76)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(53, 20)
+        Me.Label10.TabIndex = 13
+        Me.Label10.Text = "Terms"
+        '
+        'dtpEquityEnd
+        '
+        Me.dtpEquityEnd.Enabled = False
+        Me.dtpEquityEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpEquityEnd.Location = New System.Drawing.Point(120, 162)
+        Me.dtpEquityEnd.Name = "dtpEquityEnd"
+        Me.dtpEquityEnd.Size = New System.Drawing.Size(200, 26)
+        Me.dtpEquityEnd.TabIndex = 3
         '
         'Label6
         '
@@ -159,13 +178,13 @@ Partial Class FormPaymentMethod
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.txtMATerm)
         Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.DateTimePicker4)
+        Me.Panel2.Controls.Add(Me.dtpMonthlyEnd)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.txtAmountMA)
         Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.DateTimePicker2)
+        Me.Panel2.Controls.Add(Me.dtpMonthlyStart)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(402, 82)
@@ -173,13 +192,32 @@ Partial Class FormPaymentMethod
         Me.Panel2.Size = New System.Drawing.Size(391, 229)
         Me.Panel2.TabIndex = 1
         '
-        'DateTimePicker4
+        'txtMATerm
         '
-        Me.DateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker4.Location = New System.Drawing.Point(121, 158)
-        Me.DateTimePicker4.Name = "DateTimePicker4"
-        Me.DateTimePicker4.Size = New System.Drawing.Size(200, 26)
-        Me.DateTimePicker4.TabIndex = 7
+        Me.txtMATerm.Location = New System.Drawing.Point(121, 74)
+        Me.txtMATerm.Name = "txtMATerm"
+        Me.txtMATerm.Size = New System.Drawing.Size(71, 26)
+        Me.txtMATerm.TabIndex = 5
+        Me.txtMATerm.Text = "0"
+        Me.txtMATerm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(26, 78)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(53, 20)
+        Me.Label9.TabIndex = 11
+        Me.Label9.Text = "Terms"
+        '
+        'dtpMonthlyEnd
+        '
+        Me.dtpMonthlyEnd.Enabled = False
+        Me.dtpMonthlyEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpMonthlyEnd.Location = New System.Drawing.Point(121, 158)
+        Me.dtpMonthlyEnd.Name = "dtpMonthlyEnd"
+        Me.dtpMonthlyEnd.Size = New System.Drawing.Size(200, 26)
+        Me.dtpMonthlyEnd.TabIndex = 7
         '
         'Label4
         '
@@ -264,40 +302,6 @@ Partial Class FormPaymentMethod
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(121, 74)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(71, 26)
-        Me.TextBox1.TabIndex = 5
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(26, 78)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(53, 20)
-        Me.Label9.TabIndex = 11
-        Me.Label9.Text = "Terms"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(120, 72)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(71, 26)
-        Me.TextBox2.TabIndex = 1
-        Me.TextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(25, 76)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(53, 20)
-        Me.Label10.TabIndex = 13
-        Me.Label10.Text = "Terms"
-        '
         'FormPaymentMethod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -326,8 +330,8 @@ Partial Class FormPaymentMethod
 
     Friend WithEvents txtAmountEQ As TextBox
     Friend WithEvents txtAmountMA As TextBox
-    Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents DateTimePicker2 As DateTimePicker
+    Friend WithEvents dtpEquityStart As DateTimePicker
+    Friend WithEvents dtpMonthlyStart As DateTimePicker
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
@@ -341,12 +345,12 @@ Partial Class FormPaymentMethod
     Friend WithEvents Label4 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents DateTimePicker3 As DateTimePicker
-    Friend WithEvents DateTimePicker4 As DateTimePicker
+    Friend WithEvents dtpEquityEnd As DateTimePicker
+    Friend WithEvents dtpMonthlyEnd As DateTimePicker
     Friend WithEvents Button1 As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtMATerm As TextBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtEquityTerm As TextBox
     Friend WithEvents Label10 As Label
 End Class
