@@ -53,7 +53,6 @@ Partial Class FormProjectList
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblProjectAssignedToUser = New System.Windows.Forms.Label()
         Me.lblProjectItemID = New System.Windows.Forms.Label()
-        Me.lblName = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -201,7 +200,6 @@ Partial Class FormProjectList
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.Controls.Add(Me.btnAssign)
         Me.Panel2.Controls.Add(Me.GroupBox1)
-        Me.Panel2.Controls.Add(Me.lblName)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(824, 100)
         Me.Panel2.Name = "Panel2"
@@ -214,7 +212,7 @@ Partial Class FormProjectList
         Me.btnAssign.Name = "btnAssign"
         Me.btnAssign.Size = New System.Drawing.Size(402, 43)
         Me.btnAssign.TabIndex = 6
-        Me.btnAssign.Text = "&Assign"
+        Me.btnAssign.Text = "&Assign to buyer"
         Me.btnAssign.UseVisualStyleBackColor = True
         '
         'GroupBox1
@@ -244,7 +242,7 @@ Partial Class FormProjectList
         Me.lblProjectSQM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblProjectSQM.Location = New System.Drawing.Point(70, 144)
         Me.lblProjectSQM.Name = "lblProjectSQM"
-        Me.lblProjectSQM.Size = New System.Drawing.Size(315, 29)
+        Me.lblProjectSQM.Size = New System.Drawing.Size(143, 29)
         Me.lblProjectSQM.TabIndex = 12
         Me.lblProjectSQM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -262,7 +260,7 @@ Partial Class FormProjectList
         Me.lblProjectTCP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblProjectTCP.Location = New System.Drawing.Point(70, 177)
         Me.lblProjectTCP.Name = "lblProjectTCP"
-        Me.lblProjectTCP.Size = New System.Drawing.Size(315, 29)
+        Me.lblProjectTCP.Size = New System.Drawing.Size(143, 29)
         Me.lblProjectTCP.TabIndex = 4
         Me.lblProjectTCP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -271,7 +269,7 @@ Partial Class FormProjectList
         Me.lblProjectBlock.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblProjectBlock.Location = New System.Drawing.Point(70, 80)
         Me.lblProjectBlock.Name = "lblProjectBlock"
-        Me.lblProjectBlock.Size = New System.Drawing.Size(315, 29)
+        Me.lblProjectBlock.Size = New System.Drawing.Size(143, 29)
         Me.lblProjectBlock.TabIndex = 2
         Me.lblProjectBlock.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -280,7 +278,7 @@ Partial Class FormProjectList
         Me.lblProjectLot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblProjectLot.Location = New System.Drawing.Point(70, 112)
         Me.lblProjectLot.Name = "lblProjectLot"
-        Me.lblProjectLot.Size = New System.Drawing.Size(315, 29)
+        Me.lblProjectLot.Size = New System.Drawing.Size(143, 29)
         Me.lblProjectLot.TabIndex = 3
         Me.lblProjectLot.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
@@ -353,17 +351,6 @@ Partial Class FormProjectList
         Me.lblProjectItemID.Text = "000000"
         Me.lblProjectItemID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'lblName
-        '
-        Me.lblName.BackColor = System.Drawing.Color.White
-        Me.lblName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblName.Location = New System.Drawing.Point(21, 324)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(402, 31)
-        Me.lblName.TabIndex = 0
-        Me.lblName.Text = "Name"
-        Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
         'FormProjectList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -403,7 +390,6 @@ Partial Class FormProjectList
     Friend WithEvents txtBlock As TextBox
     Friend WithEvents chkAvailable As CheckBox
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents lblName As Label
     Friend WithEvents lblProjectLot As Label
     Friend WithEvents lblProjectBlock As Label
     Friend WithEvents lblProjectName As Label

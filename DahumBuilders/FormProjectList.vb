@@ -9,7 +9,6 @@ Public Class FormProjectList
         lblProjectAssignedToUser.Text = String.Empty
         load_project_list(String.Empty)
         load_ProjectName_combobox()
-        lblName.Text = mUser._name & " " & mUser._surname
     End Sub
 
     Private Sub load_ProjectName_combobox()
