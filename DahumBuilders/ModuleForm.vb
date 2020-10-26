@@ -87,34 +87,4 @@ Module ModuleForm
         End Try
         Return totalBalance
     End Function
-    Public Function getSummaryTransaction(ByVal clientId As String, ByRef proj As Project) As SummaryTransaction
-        Connection()
-        Dim sumTansaction As SummaryTransaction = New SummaryTransaction
-        Try
-            sql = "SELECT `tcp`, (`tcp`-SUM(`paid_amount`))-SUM(`discount_amount`) AS 'Balance',
-                    SUM(`discount_amount`)  AS 'Discount', SUM(`paid_amount`) AS 'TotalPaid'  
-                    FROM `db_transaction` WHERE `userid`=@userId AND `proj_id`=@ProjId AND `proj_itemId`=@ProjItemId"
-            sqlCommand = New MySqlCommand(sql, sqlConnection)
-            With sqlCommand
-                .CommandText = sql
-                .Parameters.Add("@userId", MySqlDbType.Int64).Value = clientId
-                .Parameters.Add("@ProjId", MySqlDbType.VarChar).Value = proj._projID
-                .Parameters.Add("@ProjItemId", MySqlDbType.VarChar).Value = proj._itemID
-            End With
-            Dim sqlReader As MySqlDataReader = sqlCommand.ExecuteReader()
-            While sqlReader.Read()
-                If Not IsDBNull(sqlReader("TotalPaid")) Then
-                    sumTansaction._balance = sqlReader("Balance")
-                    sumTansaction._Discount = sqlReader("Discount")
-                    sumTansaction._TotalPaid = sqlReader("TotalPaid")
-                End If
-            End While
-        Catch ex As Exception
-            MessageBox.Show("Client Total Paid Amount: " & ex.Message)
-        Finally
-            sqlCommand.Dispose()
-            sqlConnection.Close()
-        End Try
-        Return sumTansaction
-    End Function
 End Module

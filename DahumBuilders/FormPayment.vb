@@ -24,9 +24,11 @@ Public Class FormPayment
     End Sub
 
     Public Sub load_userId_info_data_reader()
-
-        sql = "SELECT * FROM `db_project_list` INNER JOIN `db_project_item` ON 
-        db_project_list.`id`=db_project_item.`proj_id` WHERE `db_project_item`.`assigned_userid` = @userId"
+        sql = "SELECT i.`item_id`, i.`proj_id`, l.`proj_name`, l.`proj_address`, i.`block`, i.`lot`, i.`sqm`, i.`price`,
+        IFNULL((SELECT (`tcp`-SUM(`paid_amount`))-SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price`) AS 'totalBalance',
+        IFNULL((SELECT SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalDiscount',
+        IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount'
+        FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
         ListViewUserItem.Items.Clear()
         Connection()
         Try
@@ -45,7 +47,6 @@ Public Class FormPayment
             End If
 
             Dim item As ListViewItem
-            Dim sumTransaction As SummaryTransaction = New SummaryTransaction
             For i As Integer = 0 To table.Rows.Count - 1
                 project._itemID = table.Rows(i)("item_id")
                 project._projID = table.Rows(i)("proj_id")
@@ -54,10 +55,9 @@ Public Class FormPayment
                 project._lot = table.Rows(i)("lot")
                 project._sqm = table.Rows(i)("sqm")
                 project._tcp = table.Rows(i)("price")
-
-                sumTransaction = New SummaryTransaction
-                sumTransaction = getSummaryTransaction(mUser._id, project)
-                project._sumTran = sumTransaction
+                project._total_balance = table.Rows(i)("totalBalance")
+                project._total_discount = table.Rows(i)("totalDiscount")
+                project._total_paidAmount = table.Rows(i)("totalPaidAmount")
 
                 item = New ListViewItem(project._itemID)
                 item.SubItems.Add(project._name)
@@ -66,12 +66,12 @@ Public Class FormPayment
                 item.SubItems.Add(project._sqm)
                 item.SubItems.Add(project._tcp.ToString("N2"))
                 item.SubItems.Add(project._projID)
-                item.SubItems.Add(project._sumTran._balance.ToString("N2"))
-                item.SubItems.Add(project._sumTran._discount.ToString("N2"))
-                item.SubItems.Add(project._sumTran._totalPaid.ToString("N2"))
+                item.SubItems.Add(project._total_balance.ToString("N2"))
+                item.SubItems.Add(project._total_discount.ToString("N2"))
+                item.SubItems.Add(project._total_paidAmount.ToString("N2"))
                 ListViewUserItem.Items.Add(item)
             Next
-            sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "id > 0"))
+            sumOfTotalContractPrice = Convert.ToDouble(table.Compute("SUM(price)", "item_id > 0"))
             For a As Integer = 1 To 1
                 item = New ListViewItem(String.Empty)
                 item.UseItemStyleForSubItems = False
@@ -87,7 +87,21 @@ Public Class FormPayment
                         .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
                         .ForeColor = Color.Red
                     End With
+                    item.SubItems.Add((String.Empty))
+                    With item.SubItems.Add(Convert.ToDouble(table.Compute("SUM(totalBalance)", "item_id > 0")).ToString("N2"))
+                        .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
+                        .ForeColor = Color.Red
+                    End With
+                    With item.SubItems.Add(Convert.ToDouble(table.Compute("SUM(totalDiscount)", "item_id > 0")).ToString("N2"))
+                        .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
+                        .ForeColor = Color.Red
+                    End With
+                    With item.SubItems.Add(Convert.ToDouble(table.Compute("SUM(totalPaidAmount)", "item_id > 0")).ToString("N2"))
+                        .Font = New Font(ListViewUserItem.Font, FontStyle.Bold)
+                        .ForeColor = Color.Red
+                    End With
                 End If
+
                 ListViewUserItem.Items.Add(item)
             Next
 FinallyLine:
@@ -180,7 +194,7 @@ FinallyLine:
                             cellDiscount.ReadOnly = False
 
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
-                            If p._sumTran._balance < 1 Then
+                            If p._total_balance < 1 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
 
@@ -188,7 +202,7 @@ FinallyLine:
                                 DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                             Else
-                                downpamentAmount = (p._sumTran._balance * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
+                                downpamentAmount = (p._total_balance * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
 
                                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = downpamentAmount.ToString("N2") 'Downpayment Amount
@@ -213,29 +227,29 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                         Case "Cash"
-                            Dim ttSum As Double = p._sumTran._discount + p._sumTran._totalPaid
+                            Dim ttSum As Double = p._total_discount + p._total_paidAmount
                             cellDiscount.Style.BackColor = Color.White
                             cellDiscount.ReadOnly = False
 
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
 
-                            If p._sumTran._balance <= 0 And ttSum <= 0 Then
+                            If p._total_balance <= 0 And ttSum <= 0 Then
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._tcp.ToString("N2") 'Amount to pay
                             End If
 
-                            If p._sumTran._balance <= 0 And ttSum >= p._tcp Then
+                            If p._total_balance <= 0 And ttSum >= p._tcp Then
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2")  'Amount to pay
                             End If
 
-                            If p._sumTran._balance >= 1 And ttSum <= p._tcp Then
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._sumTran._balance.ToString("N2")
+                            If p._total_balance >= 1 And ttSum <= p._tcp Then
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._total_balance.ToString("N2")
                             End If
                     End Select
                 Case 3 'ComoboBox Downpayment
                     DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
                     If p IsNot Nothing Then
-                        If p._sumTran._balance < 1 Then
+                        If p._total_balance < 1 Then
                             downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                             discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
 
@@ -243,7 +257,7 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._tcp * discount).ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                         Else
-                            downpamentAmount = (p._sumTran._balance * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
+                            downpamentAmount = (p._total_balance * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                             discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
 
                             DataGridView1.Rows(e.RowIndex).Cells(4).Value = downpamentAmount.ToString("N2") 'Downpayment Amount
@@ -259,16 +273,16 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                         Case "Cash"
-                            If p._sumTran._balance < 1 And p._sumTran._totalPaid < 1 Then
+                            If p._total_balance < 1 And p._total_paidAmount < 1 Then
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
                                 DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._tcp * discount).ToString("N2") 'Discount Amount
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._tcp - (p._tcp * discount)).ToString("N2") 'Amount to pay
-                            ElseIf p._sumTran._balance < 1 And p._sumTran._totalPaid >= p._tcp Then
+                            ElseIf p._total_balance < 1 And p._total_paidAmount >= p._tcp Then
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2")
                             Else
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
-                                DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._sumTran._balance * discount).ToString("N2") 'Discount Amount
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._sumTran._balance - (p._sumTran._balance * discount)).ToString("N2") 'Amount to pay
+                                DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._total_balance * discount).ToString("N2") 'Discount Amount
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._total_balance - (p._total_balance * discount)).ToString("N2") 'Amount to pay
                             End If
                     End Select
             End Select
@@ -308,9 +322,9 @@ FinallyLine:
                 Project._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
                 Project._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
                 Project._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
-                project._sumTran._balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
-                project._sumTran._discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
-                project._sumTran._totalPaid = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
+                project._total_balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
+                project._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
+                project._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
                 project._description = project._name & " B" & project._block & " L" & project._lot & " - " & project._sqm & " sqm"
                 addPurchaseItem(Project)
             End If
@@ -648,7 +662,7 @@ FinallyLine:
 
     Private Sub ListViewUserItem_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUserItem.MouseClick
         If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
-            Dim totalPaid As Double = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
+            Dim totalPaid As Double = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
             If totalPaid > 0 Then
                 ContextMenuProjectList.Items(0).Enabled = False
             Else
