@@ -564,17 +564,18 @@ FinallyLine:
             End If
             Dim trans As Transaction = New Transaction()
             Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(2, row.Index), DataGridViewComboBoxCell)
+            trans._particular = c.Items.IndexOf(c.Value)
+            trans._paymentType = cbPaymentType.SelectedIndex
+            trans._clientId = mUser._id
             trans._or = txtOfficialReceipt.Text.Trim
             trans._datePaid = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
             trans._tcp = row.Cells(1).Value
-            trans._DiscountAmount = row.Cells(6).Value
-            trans._paidAmount = row.Cells(12).Value 'Tender Amount
-            trans._particular = c.Items.IndexOf(c.Value)
-            trans._partNo = row.Cells(10).Value
-            trans._paymentType = cbPaymentType.SelectedIndex
-            trans._clientId = mUser._id
+            trans._discountAmount = row.Cells(6).Value
             trans._projectItemId = row.Cells(7).Value
             trans._projectId = row.Cells(8).Value
+            trans._penalty = row.Cells(9).Value 'Penalty
+            trans._partNo = row.Cells(10).Value
+            trans._paidAmount = row.Cells(12).Value 'Tender Amount
             trans._check_bank_name = txtBankName.Text.Trim
             If cbPaymentType.SelectedIndex > 0 Then
                 trans._check_bank_name = txtBankName.Text.Trim
@@ -602,9 +603,9 @@ FinallyLine:
     End Sub
 
     Private Sub insertPurchase(ByVal trans As Transaction)
-        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, @DiscountAmount, @TCP, 
-        @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId)"
+        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `penalty`, `tcp`, `particular`, 
+        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, 
+        @DiscountAmount, @Penalty, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId)"
 
         If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
             trans._partNo = 0
@@ -615,7 +616,8 @@ FinallyLine:
         sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = trans._or 'txtOfficialReceipt.Text.Trim
         sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(trans._datePaid, "yyyy-MM-dd").ToString 'Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
         sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = trans._paidAmount 'txtPaidAmount.Text.Trim
-        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = trans._DiscountAmount 'txtPaidAmount.Text.Trim
+        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = trans._discountAmount 'txtPaidAmount.Text.Trim
+        sqlCommand.Parameters.Add("@Penalty", MySqlDbType.Double).Value = trans._penalty 'txtPaidAmount.Text.Trim
         sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = trans._tcp
         sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = trans._particular 'Integer.Parse(cbParticular.SelectedIndex)
         sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = trans._partNo 'Integer.Parse(txtPart.Text)
