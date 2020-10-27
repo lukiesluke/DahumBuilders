@@ -192,8 +192,8 @@ FinallyLine:
                     cellDiscount.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
                     cellDiscount.Style.BackColor = Color.LightGray
                     cellDiscount.ReadOnly = True
-                    DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2") ' Monthly
-
+                    DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2") 'Penalty Amount
+                    DisableDataGridViewCell(DataGridView1, e) 'Part
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
@@ -226,28 +226,26 @@ FinallyLine:
                             End If
                         Case "Equity"
                             Dim pm As New PaymentMethod
-                            If p._payment_method.TryGetValue("EQ", pm) Then
-                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = pm._monthly.ToString("N2")
-                            Else
-                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2")
-                            End If
-
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
-                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
+                            EnableDataGridViewCell(DataGridView1, e) 'Part
+                            If p._payment_method.TryGetValue("EQ", pm) Then
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = pm._monthly.ToString("N2") 'Amount to pay
+                            Else
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
+                            End If
                         Case "Monthly"
                             Dim pm As New PaymentMethod
-                            If p._payment_method.TryGetValue("MA", pm) Then
-                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = pm._monthly.ToString("N2")
-                            Else
-                                DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2")
-                            End If
-
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
-                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
+                            EnableDataGridViewCell(DataGridView1, e) 'Part
+                            If p._payment_method.TryGetValue("MA", pm) Then
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = pm._monthly.ToString("N2") 'Amount to pay
+                            Else
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
+                            End If
                         Case "Reservation"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
@@ -317,14 +315,25 @@ FinallyLine:
         End If
     End Sub
 
-    Private Sub DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellEndEdit
-        If e.ColumnIndex = 12 Then
+    Private Sub DataGridView1_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellLeave
+        If e.ColumnIndex = 9 Then 'Penalty Amount
+            If DataGridView1.Rows(e.RowIndex).Cells(9).Value IsNot Nothing Then
+                DataGridView1.Rows(e.RowIndex).Cells(9).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(9).Value).ToString("N2") 'Penalty Amount
+            Else
+                DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2") 'Penalty Amount
+            End If
+        End If
+        If e.ColumnIndex = 10 Then 'Part
+            If DataGridView1.Rows(e.RowIndex).Cells(10).Value Is Nothing Then
+                DataGridView1.Rows(e.RowIndex).Cells(10).Value = 0 'Part
+            End If
+        End If
+        If e.ColumnIndex = 12 Then 'Tender Amount
             If DataGridView1.Rows(e.RowIndex).Cells(12).Value IsNot Nothing Then
-                DataGridView1.Rows(e.RowIndex).Cells(12).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(12).Value).ToString("N2")
+                DataGridView1.Rows(e.RowIndex).Cells(12).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(12).Value).ToString("N2") 'Tender Amount
             End If
         End If
     End Sub
-
     Private Sub DataGridView1_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles DataGridView1.EditingControlShowing
         If DataGridView1.CurrentCell.ColumnIndex = 9 Or DataGridView1.CurrentCell.ColumnIndex = 10 Then 'Part
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtMonthOf_KeyPress
@@ -370,7 +379,8 @@ FinallyLine:
         row.Cells(6).Value = (Double.Parse(row.Cells(4).Value) * Double.Parse(cbcDiscount.Value) / 100).ToString("N2")
         row.Cells(7).Value = project._itemID
         row.Cells(8).Value = project._projID
-        row.Cells(9).Value = 0.ToString("N2") 'Monthly Amortization
+        row.Cells(9).Value = 0.ToString("N2") 'Penalty Amount
+        row.Cells(10).Value = 0 'Part
         row.Cells(13).Value = project 'ProjectClass
     End Sub
     Private Sub setDataGridView()
@@ -415,7 +425,7 @@ FinallyLine:
         DataGridView1.Columns.Add("", "Discount Amount")
         DataGridView1.Columns.Add("", "ItemID")
         DataGridView1.Columns.Add("", "ProjectID")
-        DataGridView1.Columns.Add("", "Monthly")
+        DataGridView1.Columns.Add("", "Penalty")
         DataGridView1.Columns.Add("", "Part")
         DataGridView1.Columns.Add("", "Amount to Pay")
         DataGridView1.Columns.Add("", "Tender Amount")
@@ -443,7 +453,7 @@ FinallyLine:
             .Columns(6).Width = 90 'Discount Amount
             .Columns(7).Width = 50 'ItemID
             .Columns(8).Width = 50 'ProjectID
-            .Columns(9).Width = 75 'Monthly
+            .Columns(9).Width = 75 'Penalty Amount
             .Columns(10).Width = 50 'Part
             .Columns(11).Width = 100 'Amount to Pay
             .Columns(12).Width = 110 'Tender Amount
@@ -455,7 +465,7 @@ FinallyLine:
         DataGridView1.Columns(6).ReadOnly = True
         DataGridView1.Columns(7).ReadOnly = True
         DataGridView1.Columns(8).ReadOnly = True
-        DataGridView1.Columns(9).ReadOnly = True
+        'DataGridView1.Columns(9).ReadOnly = True 'Penalty
         DataGridView1.Columns(11).ReadOnly = True
         DataGridView1.Columns(13).ReadOnly = True 'ProjectClass object
 
@@ -705,10 +715,6 @@ FinallyLine:
         End Select
     End Sub
 
-    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
-        'mProject = DirectCast(DataGridView1.Rows(e.RowIndex).Cells(14).Value, Project)
-    End Sub
-
     Private Sub btnShowHistoryTransaction_Click(sender As Object, e As EventArgs) Handles btnShowHistoryTransaction.Click
         TransactionHistoryToolStripMenuItem.PerformClick()
     End Sub
@@ -800,8 +806,8 @@ FinallyLine:
                     .SubItems(9).BackColor = Color.MistyRose
                 End With
             End If
-
-
         End If
     End Sub
+
+
 End Class

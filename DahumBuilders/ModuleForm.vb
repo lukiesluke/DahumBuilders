@@ -113,4 +113,17 @@ Module ModuleForm
         End Try
         Return values
     End Function
+    Public Sub EnableDataGridViewCell(ByVal dataGridView As DataGridView, e As DataGridViewCellEventArgs)
+        With dataGridView.Rows(e.RowIndex).Cells(10)
+            .ReadOnly = False 'Part
+            .Style.BackColor = Color.White
+        End With
+    End Sub
+    Public Sub DisableDataGridViewCell(ByVal dataGridView As DataGridView, e As DataGridViewCellEventArgs)
+        With dataGridView.Rows(e.RowIndex).Cells(10)
+            .ReadOnly = True
+            .Style.BackColor = Color.LightGray
+            .Value = 0
+        End With
+    End Sub
 End Module
