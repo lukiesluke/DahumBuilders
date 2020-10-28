@@ -199,8 +199,9 @@ FinallyLine:
                     cellDiscount.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
                     cellDiscount.Style.BackColor = Color.LightGray
                     cellDiscount.ReadOnly = True
-                    DataGridView1.Rows(e.RowIndex).Cells(9).Value = 0.ToString("N2") 'Penalty Amount
-                    DisableDataGridViewCell(DataGridView1, e) 'Part
+
+                    DisableDataGridViewCell(DataGridView1, e) 'Penalty and Part functionality
+
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
@@ -318,6 +319,27 @@ FinallyLine:
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._total_balance - (p._total_balance * discount)).ToString("N2") 'Amount to pay
                             End If
                     End Select
+                Case 9 ' Penalty
+                    If DataGridView1.Rows(e.RowIndex).Cells(9).Value IsNot Nothing Then
+                        Dim pm As New PaymentMethod
+                        Dim penalty As Double = DataGridView1.Rows(e.RowIndex).Cells(9).Value
+                        Dim amountToPay As Double = 0
+                        Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
+                            Case "Equity"
+                                If p._payment_method.TryGetValue("EQ", pm) Then
+                                    amountToPay = (penalty + pm._monthly)
+                                Else
+                                    amountToPay = penalty
+                                End If
+                            Case "Monthly"
+                                If p._payment_method.TryGetValue("MA", pm) Then
+                                    amountToPay = (penalty + pm._monthly)
+                                Else
+                                    amountToPay = penalty
+                                End If
+                        End Select
+                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = amountToPay.ToString("N2") 'Amount to pay
+                    End If
             End Select
         End If
     End Sub
@@ -688,7 +710,7 @@ FinallyLine:
 
     Private Sub ListViewUserItem_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUserItem.MouseClick
         If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
-            Dim totalPaid As Double = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
+            Dim totalPaid As Double = ListViewUserItem.SelectedItems.Item(0).SubItems(10).Text 'Paid Amount
             If totalPaid > 0 Then
                 ContextMenuProjectList.Items(0).Enabled = False
             Else
@@ -741,20 +763,23 @@ FinallyLine:
 
     Private Sub ListViewUserItem_Click(sender As Object, e As EventArgs) Handles ListViewUserItem.Click
         If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
-            mProject._itemID = ListViewUserItem.SelectedItems.Item(0).Text
-            mProject._name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
-            mProject._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
-            mProject._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
-            mProject._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
-            mProject._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
-            mProject._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
-            mProject._total_balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
-            mProject._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
-            mProject._total_penalty = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
-            mProject._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(10).Text
-            mProject._description = mProject._name & " B" & mProject._block & " L" & mProject._lot & " - " & mProject._sqm & " sqm"
-            mProject._payment_method = getPaymentMethod(mProject._itemID, mUser._id)
-            mProject._userID = mUser._id
+            mProject = New Project()
+            With mProject
+                ._itemID = ListViewUserItem.SelectedItems.Item(0).Text
+                ._name = ListViewUserItem.SelectedItems.Item(0).SubItems(1).Text
+                ._block = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+                ._lot = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+                ._sqm = ListViewUserItem.SelectedItems.Item(0).SubItems(4).Text
+                ._tcp = ListViewUserItem.SelectedItems.Item(0).SubItems(5).Text
+                ._projID = ListViewUserItem.SelectedItems.Item(0).SubItems(6).Text
+                ._total_balance = ListViewUserItem.SelectedItems.Item(0).SubItems(7).Text
+                ._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
+                ._total_penalty = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
+                ._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(10).Text
+                ._description = mProject._name & " B" & mProject._block & " L" & mProject._lot & " - " & mProject._sqm & " sqm"
+                ._payment_method = getPaymentMethod(mProject._itemID, mUser._id)
+                ._userID = mUser._id
+            End With
         End If
     End Sub
     Private Sub ListViewUserItem_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUserItem.KeyUp
