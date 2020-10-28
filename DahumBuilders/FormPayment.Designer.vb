@@ -62,6 +62,7 @@ Partial Class FormPayment
         Me.ColumnHeaderMA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PaymentMethodToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblContact = New System.Windows.Forms.Label()
@@ -76,7 +77,7 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PaymentMethodToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderPenalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -381,7 +382,7 @@ Partial Class FormPayment
         '
         'ListViewUserItem
         '
-        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderTotalPaid, Me.ColumnHeaderEQ, Me.ColumnHeaderMA})
+        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderPenalty, Me.ColumnHeaderTotalPaid, Me.ColumnHeaderEQ, Me.ColumnHeaderMA})
         Me.ListViewUserItem.ContextMenuStrip = Me.ContextMenuProjectList
         Me.ListViewUserItem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewUserItem.FullRowSelect = True
@@ -444,7 +445,7 @@ Partial Class FormPayment
         '
         Me.ColumnHeaderDiscount.Text = "Discount"
         Me.ColumnHeaderDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderDiscount.Width = 100
+        Me.ColumnHeaderDiscount.Width = 80
         '
         'ColumnHeaderTotalPaid
         '
@@ -467,13 +468,19 @@ Partial Class FormPayment
         Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.PaymentMethodToolStripMenuItem})
         Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
-        Me.ContextMenuProjectList.Size = New System.Drawing.Size(221, 97)
+        Me.ContextMenuProjectList.Size = New System.Drawing.Size(221, 64)
         '
         'RemoveToolStripMenuItem
         '
         Me.RemoveToolStripMenuItem.Name = "RemoveToolStripMenuItem"
         Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
         Me.RemoveToolStripMenuItem.Text = "Remove"
+        '
+        'PaymentMethodToolStripMenuItem
+        '
+        Me.PaymentMethodToolStripMenuItem.Name = "PaymentMethodToolStripMenuItem"
+        Me.PaymentMethodToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
+        Me.PaymentMethodToolStripMenuItem.Text = "Payment Method"
         '
         'Panel3
         '
@@ -626,11 +633,11 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
-        'PaymentMethodToolStripMenuItem
+        'ColumnHeaderPenalty
         '
-        Me.PaymentMethodToolStripMenuItem.Name = "PaymentMethodToolStripMenuItem"
-        Me.PaymentMethodToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
-        Me.PaymentMethodToolStripMenuItem.Text = "Payment Method"
+        Me.ColumnHeaderPenalty.Text = "Penalty"
+        Me.ColumnHeaderPenalty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderPenalty.Width = 70
         '
         'FormPayment
         '
@@ -725,4 +732,5 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderEQ As ColumnHeader
     Friend WithEvents ColumnHeaderMA As ColumnHeader
     Friend WithEvents PaymentMethodToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderPenalty As ColumnHeader
 End Class
