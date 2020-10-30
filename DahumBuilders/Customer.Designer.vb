@@ -475,7 +475,7 @@ Partial Public Class Customer
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddCustomerRow(ByVal official_receipt_no As String, ByVal paid_amount As Date, ByVal payment_type As String, ByVal particular As String, ByVal date_paid As String, ByVal part_no As String, ByVal discount_amount As Double, ByVal proj_name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal penalty As Double) As CustomerRow
+        Public Overloads Function AddCustomerRow(ByVal official_receipt_no As String, ByVal paid_amount As Double, ByVal payment_type As String, ByVal particular As String, ByVal date_paid As String, ByVal part_no As String, ByVal discount_amount As Double, ByVal proj_name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal penalty As Double) As CustomerRow
             Dim rowCustomerRow As CustomerRow = CType(Me.NewRow,CustomerRow)
             Dim columnValuesArray() As Object = New Object() {official_receipt_no, paid_amount, payment_type, particular, date_paid, part_no, discount_amount, proj_name, block, lot, sqm, penalty}
             rowCustomerRow.ItemArray = columnValuesArray
@@ -519,7 +519,7 @@ Partial Public Class Customer
         Private Sub InitClass()
             Me.columnofficial_receipt_no = New Global.System.Data.DataColumn("official_receipt_no", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnofficial_receipt_no)
-            Me.columnpaid_amount = New Global.System.Data.DataColumn("paid_amount", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            Me.columnpaid_amount = New Global.System.Data.DataColumn("paid_amount", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnpaid_amount)
             Me.columnpayment_type = New Global.System.Data.DataColumn("payment_type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnpayment_type)
@@ -704,10 +704,10 @@ Partial Public Class Customer
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property paid_amount() As Date
+        Public Property paid_amount() As Double
             Get
                 Try 
-                    Return CType(Me(Me.tableCustomer.paid_amountColumn),Date)
+                    Return CType(Me(Me.tableCustomer.paid_amountColumn),Double)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'paid_amount' in table 'Customer' is DBNull.", e)
                 End Try

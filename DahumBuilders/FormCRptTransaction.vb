@@ -22,7 +22,6 @@ Public Class FormCRptTransaction
         WHERE t.`userid`=@userId ORDER BY date_paid DESC, proj_name ASC, lot ASC"
         Connection()
         Try
-
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = mUser._id
             sqlAdapter = New MySqlDataAdapter
@@ -31,14 +30,32 @@ Public Class FormCRptTransaction
                 .Fill(table)
             End With
 
+            sql = "SELECT SUM(IFNULL((SELECT (`tcp`-SUM(`paid_amount`))-SUM(`discount_amount`) 
+            FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price` )) AS 'totalBalance'
+            FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
+
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = mUser._id
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            Dim totalTcp As Double = 0
+            Do While sqlDataReader.Read = True
+                If IsDBNull(sqlDataReader("totalBalance")) Then
+                Else
+                    totalTcp = sqlDataReader("totalBalance")
+                End If
+            Loop
+
             Dim report As New crptTransaction
             report.Load()
             Dim name As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtName")
             Dim mobile As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtMobile")
             Dim address As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtAddress")
+            Dim tcpTotal As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtTotalTCP")
             name.Text = mUser._name & " " & mUser._middleName & " " & mUser._surname
             mobile.Text = mUser._mobile
             address.Text = mUser._address
+            tcpTotal.Text = totalTcp.ToString("N2")
             report.SetDataSource(table)
 
             CrystalReportViewer1.ReportSource = report
