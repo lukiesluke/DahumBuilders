@@ -91,7 +91,7 @@ Module ModuleForm
         Dim values As Dictionary(Of String, PaymentMethod) = New Dictionary(Of String, PaymentMethod)
         Connection()
         Try
-            sql = "SELECT m.`type`, m.`monthly` FROM `db_payment_method` m WHERE m.`item_id`=@ItemId AND m.`userid`=@Userid"
+            sql = "SELECT m.`type`, m.`monthly`, m.`terms` FROM `db_payment_method` m WHERE m.`item_id`=@ItemId AND m.`userid`=@Userid"
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             With sqlCommand
                 .CommandText = sql
@@ -103,6 +103,7 @@ Module ModuleForm
                 Dim pm As PaymentMethod = New PaymentMethod
                 pm._type = sqlReader("type")
                 pm._monthly = sqlReader("monthly")
+                pm._term = sqlReader("terms")
                 values.Add(pm._type, pm)
             End While
         Catch ex As Exception
@@ -137,4 +138,30 @@ Module ModuleForm
             .Value = 0
         End With
     End Sub
+
+    Public Function UpdatePaymetMethod(ByVal proj As Project, type As String, monthly As Double, term As Integer) As Integer
+        Dim result As Integer = 0
+        Connection()
+        Try
+            sql = "UPDATE `db_payment_method` SET `monthly`=@monthly, `terms`=@term 
+            WHERE `item_id`=@ItemID AND `userid`=@UserID AND `type` LIKE @Type"
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            With sqlCommand
+                .CommandText = sql
+                .Parameters.Add("@ItemID", MySqlDbType.Int64).Value = proj._itemID
+                .Parameters.Add("@UserID", MySqlDbType.Int64).Value = proj._userID
+                .Parameters.Add("@Type", MySqlDbType.VarChar).Value = type
+                .Parameters.Add("@monthly", MySqlDbType.Double).Value = monthly
+                .Parameters.Add("@term", MySqlDbType.Int24).Value = term
+            End With
+            If sqlCommand.ExecuteNonQuery() > 0 Then
+                result = 1
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        Return result
+    End Function
 End Module

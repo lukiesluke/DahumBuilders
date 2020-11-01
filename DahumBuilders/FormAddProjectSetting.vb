@@ -74,16 +74,35 @@ Public Class FormAddProjectSetting
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+        Try
+            Dim FindMe As String = lblProjID.Text & "." & txtBlock.Text.Trim & "." & txtLot.Text.Trim
+            For i As Integer = 0 To ListViewProjectLot.Items.Count - 1
+                For n As Integer = 0 To 7
+                    If ListViewProjectLot.Items(i).SubItems(n).Text.Equals(FindMe) Then
+                        ListViewProjectLot.Items(i).Selected = True
+                        ListViewProjectLot.Items(i).EnsureVisible()
+                        Exit For
+                    End If
+                Next
+            Next
+        Catch ex As Exception
 
-        Dim selectitemIndex As Integer = 7
-        Dim itmX As ListViewItem = ListViewProjectLot.FindItemWithText(lblProjID.Text & "." & txtBlock.Text.Trim & "." & txtLot.Text.Trim, True, selectitemIndex)
-        If Not itmX Is Nothing Then
-            ListViewProjectLot.Focus()
-            itmX.Selected = True
-            ListViewProjectLot.Items(itmX.Index).Selected = True
-            selectitemIndex = itmX.Index + 1
-            itmX.EnsureVisible()
-        End If
+        End Try
+
+        'Try
+        '    Dim selectitemIndex As Integer = 7
+        '    Dim itmX As ListViewItem = ListViewProjectLot.FindItemWithText(FindMe, True, selectitemIndex)
+        '    If Not itmX Is Nothing Then
+        '        ListViewProjectLot.Focus()
+        '        itmX.Selected = True
+        '        ListViewProjectLot.Items(itmX.Index).Selected = True
+        '        selectitemIndex = itmX.Index + 1
+        '        itmX.EnsureVisible()
+        '    End If
+        'Catch ex As Exception
+
+        'End Try
+
     End Sub
 
     Private Sub btnAddProject_Click(sender As Object, e As EventArgs) Handles btnAddProject.Click

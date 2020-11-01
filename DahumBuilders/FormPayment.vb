@@ -757,6 +757,7 @@ FinallyLine:
         Else
             frmPaymentMethod = New FormPaymentMethod
             frmPaymentMethod.mProject = mProject
+            txtOfficialReceipt.Focus()
             frmPaymentMethod.ShowDialog(Me)
         End If
     End Sub

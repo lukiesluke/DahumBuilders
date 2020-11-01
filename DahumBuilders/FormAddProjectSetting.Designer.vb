@@ -397,9 +397,9 @@ Partial Class FormAddProjectSetting
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(22, 12)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(263, 25)
+        Me.Label8.Size = New System.Drawing.Size(195, 25)
         Me.Label8.TabIndex = 0
-        Me.Label8.Text = "Project Name Control Setting"
+        Me.Label8.Text = "Project Name Setting"
         '
         'Panel4
         '
@@ -418,9 +418,9 @@ Partial Class FormAddProjectSetting
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(27, 12)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(238, 25)
+        Me.Label9.Size = New System.Drawing.Size(170, 25)
         Me.Label9.TabIndex = 1
-        Me.Label9.Text = "Project Lot Control Setting"
+        Me.Label9.Text = "Project Lot Setting"
         '
         'FormAddProjectSetting
         '
