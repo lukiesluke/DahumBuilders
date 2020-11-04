@@ -238,22 +238,14 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             EnableDataGridViewCell(DataGridView1, e) 'Part
-                            If p._payment_method.TryGetValue("EQ", pm) Then
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = pm._monthly.ToString("N2") 'Amount to pay
-                            Else
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
-                            End If
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._equity.ToString("N2") 'Amount to pay
                         Case "Monthly"
                             Dim pm As New PaymentMethod
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             EnableDataGridViewCell(DataGridView1, e) 'Part
-                            If p._payment_method.TryGetValue("MA", pm) Then
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = pm._monthly.ToString("N2") 'Amount to pay
-                            Else
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
-                            End If
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._amortization.ToString("N2") 'Amount to pay
                         Case "Reservation"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
@@ -321,22 +313,13 @@ FinallyLine:
                     End Select
                 Case 9 ' Penalty
                     If DataGridView1.Rows(e.RowIndex).Cells(9).Value IsNot Nothing Then
-                        Dim pm As New PaymentMethod
                         Dim penalty As Double = DataGridView1.Rows(e.RowIndex).Cells(9).Value
                         Dim amountToPay As Double = 0
                         Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                             Case "Equity"
-                                If p._payment_method.TryGetValue("EQ", pm) Then
-                                    amountToPay = (penalty + pm._monthly)
-                                Else
-                                    amountToPay = penalty
-                                End If
+                                amountToPay = (penalty + p._equity)
                             Case "Monthly"
-                                If p._payment_method.TryGetValue("MA", pm) Then
-                                    amountToPay = (penalty + pm._monthly)
-                                Else
-                                    amountToPay = penalty
-                                End If
+                                amountToPay = (penalty + p._amortization)
                         End Select
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = amountToPay.ToString("N2") 'Amount to pay
                     End If
@@ -383,6 +366,7 @@ FinallyLine:
             For Each dRow As DataGridViewRow In DataGridView1.Rows
                 If dRow.Cells(7).Value.Equals(project._itemID) And dRow.Cells(8).Value.Equals(project._projID) Then
                     Console.WriteLine(String.Format("Already exist Project ID {0} and ItemID {1}", project._projID, project._itemID))
+                    Console.WriteLine(String.Format("EQ: {0} and Amortization: {1}", project._equity, project._amortization))
                     Exit Sub
                 End If
             Next
@@ -777,8 +761,9 @@ FinallyLine:
                 ._total_discount = ListViewUserItem.SelectedItems.Item(0).SubItems(8).Text
                 ._total_penalty = ListViewUserItem.SelectedItems.Item(0).SubItems(9).Text
                 ._total_paidAmount = ListViewUserItem.SelectedItems.Item(0).SubItems(10).Text
+                ._equity = ListViewUserItem.SelectedItems.Item(0).SubItems(11).Text
+                ._amortization = ListViewUserItem.SelectedItems.Item(0).SubItems(12).Text
                 ._description = mProject._name & " B" & mProject._block & " L" & mProject._lot & " - " & mProject._sqm & " sqm"
-                ._payment_method = getPaymentMethod(mProject._itemID, mUser._id)
                 ._userID = mUser._id
             End With
         End If

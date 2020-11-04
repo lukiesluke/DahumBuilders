@@ -10,7 +10,6 @@
     Public Property _total_discount As Double = 0
     Public Property _total_penalty As Double = 0
     Public Property _total_paidAmount As Double = 0
-    Public Property _payment_method As New Dictionary(Of String, PaymentMethod)
     Public Property _equity As Double = 0
     Public Property _amortization As Double = 0
     Public Property _projID As String = ""
