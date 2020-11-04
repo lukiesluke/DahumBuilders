@@ -47,6 +47,8 @@ Partial Class FormPaymentMethod
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.lblProjectDetails = New System.Windows.Forms.Label()
+        Me.lblTCP = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -74,7 +76,7 @@ Partial Class FormPaymentMethod
         '
         'dtpEquityStart
         '
-        Me.dtpEquityStart.CustomFormat = "dd/MM/yyyy"
+        Me.dtpEquityStart.CustomFormat = "MM/dd/yyyy"
         Me.dtpEquityStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEquityStart.Location = New System.Drawing.Point(120, 115)
         Me.dtpEquityStart.Name = "dtpEquityStart"
@@ -83,7 +85,7 @@ Partial Class FormPaymentMethod
         '
         'dtpMonthlyStart
         '
-        Me.dtpMonthlyStart.CustomFormat = "dd/MM/yyyy"
+        Me.dtpMonthlyStart.CustomFormat = "MM/dd/yyyy"
         Me.dtpMonthlyStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpMonthlyStart.Location = New System.Drawing.Point(121, 116)
         Me.dtpMonthlyStart.Name = "dtpMonthlyStart"
@@ -100,7 +102,7 @@ Partial Class FormPaymentMethod
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 1, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 58)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.06369!))
@@ -145,7 +147,7 @@ Partial Class FormPaymentMethod
         '
         'dtpEquityEnd
         '
-        Me.dtpEquityEnd.CustomFormat = "dd/MM/yyyy"
+        Me.dtpEquityEnd.CustomFormat = "MM/dd/yyyy"
         Me.dtpEquityEnd.Enabled = False
         Me.dtpEquityEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEquityEnd.Location = New System.Drawing.Point(120, 162)
@@ -217,7 +219,7 @@ Partial Class FormPaymentMethod
         '
         'dtpMonthlyEnd
         '
-        Me.dtpMonthlyEnd.CustomFormat = "dd/MM/yyyy"
+        Me.dtpMonthlyEnd.CustomFormat = "MM/dd/yyyy"
         Me.dtpMonthlyEnd.Enabled = False
         Me.dtpMonthlyEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpMonthlyEnd.Location = New System.Drawing.Point(121, 158)
@@ -265,9 +267,10 @@ Partial Class FormPaymentMethod
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(27, 19)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(112, 20)
+        Me.Label1.Size = New System.Drawing.Size(127, 22)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Monthly Equity"
         '
@@ -284,15 +287,16 @@ Partial Class FormPaymentMethod
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(26, 19)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(157, 20)
+        Me.Label2.Size = New System.Drawing.Size(175, 22)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Monthly Amortization"
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(561, 334)
+        Me.btnUpdate.Location = New System.Drawing.Point(561, 380)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(121, 46)
         Me.btnUpdate.TabIndex = 8
@@ -301,18 +305,40 @@ Partial Class FormPaymentMethod
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(688, 334)
+        Me.btnCancel.Location = New System.Drawing.Point(688, 380)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(121, 46)
         Me.btnCancel.TabIndex = 9
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'lblProjectDetails
+        '
+        Me.lblProjectDetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblProjectDetails.Location = New System.Drawing.Point(16, 15)
+        Me.lblProjectDetails.Name = "lblProjectDetails"
+        Me.lblProjectDetails.Size = New System.Drawing.Size(618, 40)
+        Me.lblProjectDetails.TabIndex = 10
+        Me.lblProjectDetails.Text = "lblProjectDetails"
+        Me.lblProjectDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblTCP
+        '
+        Me.lblTCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTCP.Location = New System.Drawing.Point(640, 15)
+        Me.lblTCP.Name = "lblTCP"
+        Me.lblTCP.Size = New System.Drawing.Size(169, 40)
+        Me.lblTCP.TabIndex = 11
+        Me.lblTCP.Text = "lblTCP"
+        Me.lblTCP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FormPaymentMethod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(831, 391)
+        Me.ClientSize = New System.Drawing.Size(831, 441)
+        Me.Controls.Add(Me.lblTCP)
+        Me.Controls.Add(Me.lblProjectDetails)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -359,4 +385,6 @@ Partial Class FormPaymentMethod
     Friend WithEvents Label9 As Label
     Friend WithEvents txtEquityTerm As TextBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents lblProjectDetails As Label
+    Friend WithEvents lblTCP As Label
 End Class

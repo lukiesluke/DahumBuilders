@@ -4,6 +4,8 @@ Public Class FormPaymentMethod
     Public Property mProject As Project = New Project()
     Private Sub FormPaymentMethod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         btnCancel.Select()
+        lblProjectDetails.Text = String.Format("{0} Block {1} Lot {2} ({3} sqm)", mProject._name, mProject._block, mProject._lot, mProject._sqm)
+        lblTCP.Text = mProject._tcp.ToString("N2")
         Dim count As Integer = 0
         Connection()
         Try
