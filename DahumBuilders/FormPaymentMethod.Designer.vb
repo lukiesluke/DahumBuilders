@@ -60,6 +60,7 @@ Partial Class FormPaymentMethod
         Me.txtAmountEQ.Name = "txtAmountEQ"
         Me.txtAmountEQ.Size = New System.Drawing.Size(143, 26)
         Me.txtAmountEQ.TabIndex = 0
+        Me.txtAmountEQ.Text = "0"
         Me.txtAmountEQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtAmountMA
@@ -68,10 +69,12 @@ Partial Class FormPaymentMethod
         Me.txtAmountMA.Name = "txtAmountMA"
         Me.txtAmountMA.Size = New System.Drawing.Size(143, 26)
         Me.txtAmountMA.TabIndex = 4
+        Me.txtAmountMA.Text = "0"
         Me.txtAmountMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'dtpEquityStart
         '
+        Me.dtpEquityStart.CustomFormat = "dd/MM/yyyy"
         Me.dtpEquityStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEquityStart.Location = New System.Drawing.Point(120, 115)
         Me.dtpEquityStart.Name = "dtpEquityStart"
@@ -80,6 +83,7 @@ Partial Class FormPaymentMethod
         '
         'dtpMonthlyStart
         '
+        Me.dtpMonthlyStart.CustomFormat = "dd/MM/yyyy"
         Me.dtpMonthlyStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpMonthlyStart.Location = New System.Drawing.Point(121, 116)
         Me.dtpMonthlyStart.Name = "dtpMonthlyStart"
@@ -141,6 +145,7 @@ Partial Class FormPaymentMethod
         '
         'dtpEquityEnd
         '
+        Me.dtpEquityEnd.CustomFormat = "dd/MM/yyyy"
         Me.dtpEquityEnd.Enabled = False
         Me.dtpEquityEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEquityEnd.Location = New System.Drawing.Point(120, 162)
@@ -212,6 +217,7 @@ Partial Class FormPaymentMethod
         '
         'dtpMonthlyEnd
         '
+        Me.dtpMonthlyEnd.CustomFormat = "dd/MM/yyyy"
         Me.dtpMonthlyEnd.Enabled = False
         Me.dtpMonthlyEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpMonthlyEnd.Location = New System.Drawing.Point(121, 158)

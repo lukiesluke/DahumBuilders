@@ -58,10 +58,13 @@ Public Class FormPaymentMethod
                 End If
             End If
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MessageBox.Show("On Load: " & ex.Message)
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+
+        txtAmountMA.Text = Double.Parse(txtAmountMA.Text).ToString("N2")
+        txtAmountEQ.Text = Double.Parse(txtAmountEQ.Text).ToString("N2")
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If UpdatePaymetMethod(mProject, "EQ", txtAmountEQ.Text, txtEquityTerm.Text, dtpEquityStart.Value, dtpEquityEnd.Value) = 1 Then
@@ -90,16 +93,6 @@ Public Class FormPaymentMethod
             dtpEquityEnd.Value = dtpEquityEnd.Value.AddMonths(txtEquityTerm.Text)
         End If
     End Sub
-    'Private Sub txtEquityTerm_TextChanged(sender As Object, e As EventArgs) Handles txtEquityTerm.TextChanged
-    '    If txtEquityTerm.Text.Trim IsNot String.Empty Then
-    '        txtEquityTerm_KeyUp(sender, e)
-    '    End If
-    'End Sub
-    'Private Sub txtMATerm_TextChanged(sender As Object, e As EventArgs) Handles txtMATerm.TextChanged
-    '    If txtMATerm.Text.Trim IsNot String.Empty Then
-    '        txtMATerm_KeyUp(sender, e)
-    '    End If
-    'End Sub
 
     Private Sub txtMATerm_KeyUp(sender As Object, e As KeyEventArgs) Handles txtMATerm.KeyUp
         If txtMATerm.Text.Trim IsNot String.Empty Then
@@ -129,5 +122,40 @@ Public Class FormPaymentMethod
                 e.Handled = True
             End If
         End If
+    End Sub
+
+    Private Sub txtAmountEQ_LostFocus(sender As Object, e As EventArgs) Handles txtAmountEQ.LostFocus
+        txtAmountEQ.Text = Double.Parse(txtAmountEQ.Text).ToString("N2")
+    End Sub
+
+    Private Sub txtAmountMA_LostFocus(sender As Object, e As EventArgs) Handles txtAmountMA.LostFocus
+        txtAmountMA.Text = Double.Parse(txtAmountMA.Text).ToString("N2")
+    End Sub
+
+    Private Sub txtAmountMA_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmountMA.KeyPress
+        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
+        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
+                         Asc(e.KeyChar) = 8 Or
+                         (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
+    End Sub
+
+    Private Sub txtAmountEQ_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmountEQ.KeyPress
+        txtAmountMA_KeyPress(sender, e)
+    End Sub
+
+    Private Sub txtAmountEQ_GotFocus(sender As Object, e As EventArgs) Handles txtAmountEQ.GotFocus
+        txtAmountEQ.SelectAll()
+    End Sub
+
+    Private Sub txtAmountMA_GotFocus(sender As Object, e As EventArgs) Handles txtAmountMA.GotFocus
+        txtAmountMA.SelectAll()
+    End Sub
+
+    Private Sub txtAmountMA_Click(sender As Object, e As EventArgs) Handles txtAmountMA.Click
+        txtAmountMA.SelectAll()
+    End Sub
+
+    Private Sub txtAmountEQ_Click(sender As Object, e As EventArgs) Handles txtAmountEQ.Click
+        txtAmountEQ.SelectAll()
     End Sub
 End Class
