@@ -47,10 +47,14 @@ Public Class FormPaymentMethod
                 If values.TryGetValue("EQ", pm) Then
                     txtAmountEQ.Text = pm._monthly
                     txtEquityTerm.Text = pm._term
+                    dtpEquityStart.Value = pm._startDate
+                    dtpEquityEnd.Value = pm._endDate
                 End If
                 If values.TryGetValue("MA", pm) Then
                     txtAmountMA.Text = pm._monthly
                     txtMATerm.Text = pm._term
+                    dtpMonthlyStart.Value = pm._startDate
+                    dtpMonthlyEnd.Value = pm._endDate
                 End If
             End If
         Catch ex As Exception
@@ -60,8 +64,8 @@ Public Class FormPaymentMethod
         End Try
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If UpdatePaymetMethod(mProject, "EQ", txtAmountEQ.Text, txtEquityTerm.Text) = 1 Then
-            If UpdatePaymetMethod(mProject, "MA", txtAmountMA.Text, txtMATerm.Text) = 1 Then
+        If UpdatePaymetMethod(mProject, "EQ", txtAmountEQ.Text, txtEquityTerm.Text, dtpEquityStart.Value, dtpEquityEnd.Value) = 1 Then
+            If UpdatePaymetMethod(mProject, "MA", txtAmountMA.Text, txtMATerm.Text, dtpMonthlyStart.Value, dtpMonthlyEnd.Value) = 1 Then
                 MessageBox.Show("Successfully Updated.")
                 mFormPayment.load_userId_info_data_reader()
                 Me.Close()

@@ -99,8 +99,8 @@ Partial Class FormPaymentMethod
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 12)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.71483!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.28517!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.06369!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.9363!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(797, 315)
         Me.TableLayoutPanel1.TabIndex = 4
         '
@@ -116,9 +116,9 @@ Partial Class FormPaymentMethod
         Me.Panel1.Controls.Add(Me.txtAmountEQ)
         Me.Panel1.Controls.Add(Me.dtpEquityStart)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(4, 82)
+        Me.Panel1.Location = New System.Drawing.Point(4, 67)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(391, 229)
+        Me.Panel1.Size = New System.Drawing.Size(391, 244)
         Me.Panel1.TabIndex = 0
         '
         'txtEquityTerm
@@ -187,9 +187,9 @@ Partial Class FormPaymentMethod
         Me.Panel2.Controls.Add(Me.dtpMonthlyStart)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(402, 82)
+        Me.Panel2.Location = New System.Drawing.Point(402, 67)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(391, 229)
+        Me.Panel2.Size = New System.Drawing.Size(391, 244)
         Me.Panel2.TabIndex = 1
         '
         'txtMATerm
@@ -253,7 +253,7 @@ Partial Class FormPaymentMethod
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(391, 71)
+        Me.Panel3.Size = New System.Drawing.Size(391, 56)
         Me.Panel3.TabIndex = 2
         '
         'Label1
@@ -272,7 +272,7 @@ Partial Class FormPaymentMethod
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(402, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(391, 71)
+        Me.Panel4.Size = New System.Drawing.Size(391, 56)
         Me.Panel4.TabIndex = 3
         '
         'Label2

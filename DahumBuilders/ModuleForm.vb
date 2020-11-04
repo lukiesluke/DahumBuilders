@@ -91,7 +91,7 @@ Module ModuleForm
         Dim values As Dictionary(Of String, PaymentMethod) = New Dictionary(Of String, PaymentMethod)
         Connection()
         Try
-            sql = "SELECT m.`type`, m.`monthly`, m.`terms` FROM `db_payment_method` m WHERE m.`item_id`=@ItemId AND m.`userid`=@Userid"
+            sql = "SELECT m.`type`, m.`monthly`, m.`terms`, m.`start_date`, m.`end_date` FROM `db_payment_method` m WHERE m.`item_id`=@ItemId AND m.`userid`=@Userid"
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             With sqlCommand
                 .CommandText = sql
@@ -104,6 +104,16 @@ Module ModuleForm
                 pm._type = sqlReader("type")
                 pm._monthly = sqlReader("monthly")
                 pm._term = sqlReader("terms")
+                If Not IsDBNull(sqlReader("start_date")) Then
+                    pm._startDate = sqlReader("start_date")
+                Else
+                    pm._term = 0
+                End If
+                If Not IsDBNull(sqlReader("end_date")) Then
+                    pm._endDate = sqlReader("end_date")
+                Else
+                    pm._term = 0
+                End If
                 values.Add(pm._type, pm)
             End While
         Catch ex As Exception
@@ -139,11 +149,11 @@ Module ModuleForm
         End With
     End Sub
 
-    Public Function UpdatePaymetMethod(ByVal proj As Project, type As String, monthly As Double, term As Integer) As Integer
+    Public Function UpdatePaymetMethod(ByVal proj As Project, type As String, monthly As Double, term As Integer, startDate As Date, endDate As Date) As Integer
         Dim result As Integer = 0
         Connection()
         Try
-            sql = "UPDATE `db_payment_method` SET `monthly`=@monthly, `terms`=@term 
+            sql = "UPDATE `db_payment_method` SET `monthly`=@monthly, `terms`=@term, `start_date`=@StartDate, `end_date`=@EndDate
             WHERE `item_id`=@ItemID AND `userid`=@UserID AND `type` LIKE @Type"
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             With sqlCommand
@@ -153,6 +163,8 @@ Module ModuleForm
                 .Parameters.Add("@Type", MySqlDbType.VarChar).Value = type
                 .Parameters.Add("@monthly", MySqlDbType.Double).Value = monthly
                 .Parameters.Add("@term", MySqlDbType.Int24).Value = term
+                .Parameters.Add("@StartDate", MySqlDbType.Date).Value = startDate
+                .Parameters.Add("@EndDate", MySqlDbType.Date).Value = endDate
             End With
             If sqlCommand.ExecuteNonQuery() > 0 Then
                 result = 1
