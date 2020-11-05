@@ -29,10 +29,13 @@ Partial Class FormMainDahum
         Me.CientListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClientRegistrationFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjectSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddProjectToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.AddProjectToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -40,7 +43,7 @@ Partial Class FormMainDahum
         'MenuStrip1
         '
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OpenToolStripMenuItem, Me.ProjectSettingToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OpenToolStripMenuItem, Me.ProjectSettingToolStripMenuItem, Me.ReportToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1265, 33)
@@ -86,6 +89,12 @@ Partial Class FormMainDahum
         Me.ProjectSettingToolStripMenuItem.Size = New System.Drawing.Size(139, 29)
         Me.ProjectSettingToolStripMenuItem.Text = "Project Setting"
         '
+        'AddProjectToolStripMenuItem1
+        '
+        Me.AddProjectToolStripMenuItem1.Name = "AddProjectToolStripMenuItem1"
+        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(189, 30)
+        Me.AddProjectToolStripMenuItem1.Text = "Add Project"
+        '
         'StatusStrip
         '
         Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -108,11 +117,24 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
         '
-        'AddProjectToolStripMenuItem1
+        'ReportToolStripMenuItem
         '
-        Me.AddProjectToolStripMenuItem1.Name = "AddProjectToolStripMenuItem1"
-        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(210, 30)
-        Me.AddProjectToolStripMenuItem1.Text = "Add Project"
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem})
+        Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
+        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(77, 29)
+        Me.ReportToolStripMenuItem.Text = "Report"
+        '
+        'SalesReportToolStripMenuItem
+        '
+        Me.SalesReportToolStripMenuItem.Name = "SalesReportToolStripMenuItem"
+        Me.SalesReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.SalesReportToolStripMenuItem.Text = "Sales Report"
+        '
+        'SummaryReportToolStripMenuItem
+        '
+        Me.SummaryReportToolStripMenuItem.Name = "SummaryReportToolStripMenuItem"
+        Me.SummaryReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.SummaryReportToolStripMenuItem.Text = "Summary Report"
         '
         'FormMainDahum
         '
@@ -146,4 +168,7 @@ Partial Class FormMainDahum
     Friend WithEvents CientListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ProjectSettingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AddProjectToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SalesReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SummaryReportToolStripMenuItem As ToolStripMenuItem
 End Class

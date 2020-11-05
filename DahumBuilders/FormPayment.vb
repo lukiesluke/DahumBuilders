@@ -35,7 +35,7 @@ Public Class FormPayment
         Connection()
         Try
             Dim table As New DataTable()
-            Dim project As Project = New Project()
+            Dim project As Project
 
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@userId", MySqlDbType.Int64).Value = mUser._id
@@ -50,19 +50,22 @@ Public Class FormPayment
 
             Dim item As ListViewItem
             For i As Integer = 0 To table.Rows.Count - 1
-                project._itemID = table.Rows(i)("item_id")
-                project._projID = table.Rows(i)("proj_id")
-                project._name = table.Rows(i)("proj_name")
-                project._block = table.Rows(i)("block")
-                project._lot = table.Rows(i)("lot")
-                project._sqm = table.Rows(i)("sqm")
-                project._tcp = table.Rows(i)("price")
-                project._total_balance = table.Rows(i)("totalBalance")
-                project._total_discount = table.Rows(i)("totalDiscount")
-                project._total_penalty = table.Rows(i)("totalPenalty")
-                project._total_paidAmount = table.Rows(i)("totalPaidAmount")
-                project._equity = table.Rows(i)("EQ")
-                project._amortization = table.Rows(i)("MA")
+                project = New Project()
+                With project
+                    ._itemID = table.Rows(i)("item_id")
+                    ._projID = table.Rows(i)("proj_id")
+                    ._name = table.Rows(i)("proj_name")
+                    ._block = table.Rows(i)("block")
+                    ._lot = table.Rows(i)("lot")
+                    ._sqm = table.Rows(i)("sqm")
+                    ._tcp = table.Rows(i)("price")
+                    ._total_balance = table.Rows(i)("totalBalance")
+                    ._total_discount = table.Rows(i)("totalDiscount")
+                    ._total_penalty = table.Rows(i)("totalPenalty")
+                    ._total_paidAmount = table.Rows(i)("totalPaidAmount")
+                    ._equity = table.Rows(i)("EQ")
+                    ._amortization = table.Rows(i)("MA")
+                End With
 
                 item = New ListViewItem(project._itemID)
                 item.UseItemStyleForSubItems = False

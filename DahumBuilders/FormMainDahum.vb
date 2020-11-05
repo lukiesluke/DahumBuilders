@@ -40,4 +40,13 @@ Public Class FormMainDahum
             mFormAddProjectSetting.ShowDialog(Me)
         End If
     End Sub
+
+    Private Sub SalesReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesReportToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormSalesReport).Any Then
+            mFormSalesReport.Focus()
+        Else
+            mFormSalesReport = New FormSalesReport
+            mFormSalesReport.ShowDialog(Me)
+        End If
+    End Sub
 End Class

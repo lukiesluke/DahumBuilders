@@ -57,6 +57,7 @@ Partial Class FormPayment
         Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPenalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTotalPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderMA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -77,7 +78,7 @@ Partial Class FormPayment
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColumnHeaderPenalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -230,7 +231,7 @@ Partial Class FormPayment
         '
         Me.btnPayment.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPayment.Location = New System.Drawing.Point(1, 13)
+        Me.btnPayment.Location = New System.Drawing.Point(0, 54)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
         Me.btnPayment.Size = New System.Drawing.Size(415, 55)
@@ -447,6 +448,12 @@ Partial Class FormPayment
         Me.ColumnHeaderDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderDiscount.Width = 80
         '
+        'ColumnHeaderPenalty
+        '
+        Me.ColumnHeaderPenalty.Text = "Penalty"
+        Me.ColumnHeaderPenalty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderPenalty.Width = 70
+        '
         'ColumnHeaderTotalPaid
         '
         Me.ColumnHeaderTotalPaid.Text = "Paid Amount"
@@ -601,7 +608,7 @@ Partial Class FormPayment
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 540)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 566)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
@@ -633,17 +640,23 @@ Partial Class FormPayment
         Me.TransactionHistoryToolStripMenuItem.Size = New System.Drawing.Size(246, 30)
         Me.TransactionHistoryToolStripMenuItem.Text = "Transaction History"
         '
-        'ColumnHeaderPenalty
+        'Label9
         '
-        Me.ColumnHeaderPenalty.Text = "Penalty"
-        Me.ColumnHeaderPenalty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderPenalty.Width = 70
+        Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label9.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(12, 538)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(1610, 26)
+        Me.Label9.TabIndex = 52
+        Me.Label9.Text = "Transaction Entry"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1631, 944)
+        Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Button1)
@@ -733,4 +746,5 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderMA As ColumnHeader
     Friend WithEvents PaymentMethodToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderPenalty As ColumnHeader
+    Friend WithEvents Label9 As Label
 End Class
