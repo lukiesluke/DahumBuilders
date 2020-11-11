@@ -42,10 +42,10 @@ Public Class FormMainDahum
     End Sub
 
     Private Sub SalesReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesReportToolStripMenuItem.Click
-        If Application.OpenForms().OfType(Of FormSalesReport).Any Then
+        If Application.OpenForms().OfType(Of FormCRptSalesReport).Any Then
             mFormSalesReport.Focus()
         Else
-            mFormSalesReport = New FormSalesReport
+            mFormSalesReport = New FormCRptSalesReport
             mFormSalesReport.ShowDialog(Me)
         End If
     End Sub
