@@ -297,9 +297,13 @@ Partial Public Class SalesReport
         
         Private columnparticular As Global.System.Data.DataColumn
         
-        Private columnpayment_type As Global.System.Data.DataColumn
+        Private columnshort_name As Global.System.Data.DataColumn
         
         Private columnpenalty As Global.System.Data.DataColumn
+        
+        Private columndiscount_amount As Global.System.Data.DataColumn
+        
+        Private columndate_paid As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -394,9 +398,9 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property payment_typeColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property short_nameColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnpayment_type
+                Return Me.columnshort_name
             End Get
         End Property
         
@@ -405,6 +409,22 @@ Partial Public Class SalesReport
         Public ReadOnly Property penaltyColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnpenalty
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property discount_amountColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndiscount_amount
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property date_paidColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columndate_paid
             End Get
         End Property
         
@@ -445,9 +465,9 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddSalesReportRow(ByVal official_receipt_no As String, ByVal name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal paid_amount As Double, ByVal particular As String, ByVal payment_type As String, ByVal penalty As Double) As SalesReportRow
+        Public Overloads Function AddSalesReportRow(ByVal official_receipt_no As String, ByVal name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal paid_amount As Double, ByVal particular As String, ByVal short_name As String, ByVal penalty As Double, ByVal discount_amount As String, ByVal date_paid As Date) As SalesReportRow
             Dim rowSalesReportRow As SalesReportRow = CType(Me.NewRow,SalesReportRow)
-            Dim columnValuesArray() As Object = New Object() {official_receipt_no, name, block, lot, sqm, paid_amount, particular, payment_type, penalty}
+            Dim columnValuesArray() As Object = New Object() {official_receipt_no, name, block, lot, sqm, paid_amount, particular, short_name, penalty, discount_amount, date_paid}
             rowSalesReportRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSalesReportRow)
             Return rowSalesReportRow
@@ -477,8 +497,10 @@ Partial Public Class SalesReport
             Me.columnsqm = MyBase.Columns("sqm")
             Me.columnpaid_amount = MyBase.Columns("paid_amount")
             Me.columnparticular = MyBase.Columns("particular")
-            Me.columnpayment_type = MyBase.Columns("payment_type")
+            Me.columnshort_name = MyBase.Columns("short_name")
             Me.columnpenalty = MyBase.Columns("penalty")
+            Me.columndiscount_amount = MyBase.Columns("discount_amount")
+            Me.columndate_paid = MyBase.Columns("date_paid")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -498,10 +520,14 @@ Partial Public Class SalesReport
             MyBase.Columns.Add(Me.columnpaid_amount)
             Me.columnparticular = New Global.System.Data.DataColumn("particular", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnparticular)
-            Me.columnpayment_type = New Global.System.Data.DataColumn("payment_type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnpayment_type)
+            Me.columnshort_name = New Global.System.Data.DataColumn("short_name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnshort_name)
             Me.columnpenalty = New Global.System.Data.DataColumn("penalty", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnpenalty)
+            Me.columndiscount_amount = New Global.System.Data.DataColumn("discount_amount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndiscount_amount)
+            Me.columndate_paid = New Global.System.Data.DataColumn("date_paid", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columndate_paid)
             Me.ExtendedProperties.Add("Generator_TablePropName", "_SalesReport")
             Me.ExtendedProperties.Add("Generator_UserTableName", "SalesReport")
         End Sub
@@ -755,16 +781,16 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property payment_type() As String
+        Public Property short_name() As String
             Get
                 Try 
-                    Return CType(Me(Me.tableSalesReport.payment_typeColumn),String)
+                    Return CType(Me(Me.tableSalesReport.short_nameColumn),String)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'payment_type' in table 'SalesReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'short_name' in table 'SalesReport' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableSalesReport.payment_typeColumn) = value
+                Me(Me.tableSalesReport.short_nameColumn) = value
             End Set
         End Property
         
@@ -780,6 +806,36 @@ Partial Public Class SalesReport
             End Get
             Set
                 Me(Me.tableSalesReport.penaltyColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property discount_amount() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSalesReport.discount_amountColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'discount_amount' in table 'SalesReport' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSalesReport.discount_amountColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property date_paid() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableSalesReport.date_paidColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'date_paid' in table 'SalesReport' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSalesReport.date_paidColumn) = value
             End Set
         End Property
         
@@ -869,14 +925,14 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function Ispayment_typeNull() As Boolean
-            Return Me.IsNull(Me.tableSalesReport.payment_typeColumn)
+        Public Function Isshort_nameNull() As Boolean
+            Return Me.IsNull(Me.tableSalesReport.short_nameColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub Setpayment_typeNull()
-            Me(Me.tableSalesReport.payment_typeColumn) = Global.System.Convert.DBNull
+        Public Sub Setshort_nameNull()
+            Me(Me.tableSalesReport.short_nameColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -889,6 +945,30 @@ Partial Public Class SalesReport
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetpenaltyNull()
             Me(Me.tableSalesReport.penaltyColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Isdiscount_amountNull() As Boolean
+            Return Me.IsNull(Me.tableSalesReport.discount_amountColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setdiscount_amountNull()
+            Me(Me.tableSalesReport.discount_amountColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Isdate_paidNull() As Boolean
+            Return Me.IsNull(Me.tableSalesReport.date_paidColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setdate_paidNull()
+            Me(Me.tableSalesReport.date_paidColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
