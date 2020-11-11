@@ -13,7 +13,8 @@ Public Class FormPayment
         lblAddress.Text = mUser._address
         lblContact.Text = mUser._mobile
         PanelCheck.Visible = False
-
+        SplitContainer1.IsSplitterFixed = True
+        SplitContainer1.SplitterDistance = 190
         load_userId_info_data_reader()
         setDataGridView()
     End Sub
@@ -204,7 +205,6 @@ FinallyLine:
                     cellDiscount.ReadOnly = True
 
                     DisableDataGridViewCell(DataGridView1, e) 'Penalty and Part functionality
-
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
@@ -214,7 +214,6 @@ FinallyLine:
                             cellDP.ReadOnly = False
                             cellDiscount.Style.BackColor = Color.White
                             cellDiscount.ReadOnly = False
-
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
                             If p._total_balance = 0 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
@@ -276,6 +275,15 @@ FinallyLine:
                     End Select
                 Case 3 'ComoboBox Downpayment
                     DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
+                    If DataGridView1.Rows(e.RowIndex).Cells(2).Value.Equals("Downpayment") And DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" Then
+                        With DataGridView1.Rows(e.RowIndex).Cells(4) 'Downpayment amount
+                            .ReadOnly = False
+                        End With
+                    Else
+                        With DataGridView1.Rows(e.RowIndex).Cells(4) 'Downpayment amount
+                            .ReadOnly = True
+                        End With
+                    End If
                     If p IsNot Nothing Then
                         If p._total_balance = 0 Then
                             downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
@@ -294,43 +302,60 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                         End If
                     End If
-                Case 5 'ComboBox Discount
+                Case 4 'Discount Amount
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Downpayment"
-                            downpamentAmount = DataGridView1.Rows(e.RowIndex).Cells(4).Value 'Downpayment Amount
-                            discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
-                            DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
-                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
-                        Case "Cash"
-                            If p._total_balance < 1 And p._total_paidAmount < 1 Then
-                                discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
-                                DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._tcp * discount).ToString("N2") 'Discount Amount
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._tcp - (p._tcp * discount)).ToString("N2") 'Amount to pay
-                            ElseIf p._total_balance < 1 And p._total_paidAmount >= p._tcp Then
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2")
-                            Else
-                                discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
-                                DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._total_balance * discount).ToString("N2") 'Discount Amount
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._total_balance - (p._total_balance * discount)).ToString("N2") 'Amount to pay
+                            If DataGridView1.Rows(e.RowIndex).Cells(4).Value IsNot Nothing Then
+                                downpamentAmount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value).ToString("N2")
+                                discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
+                                DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                             End If
                     End Select
-                Case 9 ' Penalty
-                    If DataGridView1.Rows(e.RowIndex).Cells(9).Value IsNot Nothing Then
-                        Dim penalty As Double = DataGridView1.Rows(e.RowIndex).Cells(9).Value
-                        Dim amountToPay As Double = 0
-                        Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
-                            Case "Equity"
-                                amountToPay = (penalty + p._equity)
-                            Case "Monthly"
-                                amountToPay = (penalty + p._amortization)
-                        End Select
-                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = amountToPay.ToString("N2") 'Amount to pay
-                    End If
-            End Select
+                Case 5 'ComboBox Discount
+                            Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
+                                Case "Downpayment"
+                                    downpamentAmount = DataGridView1.Rows(e.RowIndex).Cells(4).Value 'Downpayment Amount
+                                    discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
+                                    DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
+                                    DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
+                                Case "Cash"
+                                    If p._total_balance < 1 And p._total_paidAmount < 1 Then
+                                        discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
+                                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._tcp * discount).ToString("N2") 'Discount Amount
+                                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._tcp - (p._tcp * discount)).ToString("N2") 'Amount to pay
+                                    ElseIf p._total_balance < 1 And p._total_paidAmount >= p._tcp Then
+                                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2")
+                                    Else
+                                        discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100 'cbbDiscount
+                                        DataGridView1.Rows(e.RowIndex).Cells(6).Value = (p._total_balance * discount).ToString("N2") 'Discount Amount
+                                        DataGridView1.Rows(e.RowIndex).Cells(11).Value = (p._total_balance - (p._total_balance * discount)).ToString("N2") 'Amount to pay
+                                    End If
+                            End Select
+                        Case 9 ' Penalty
+                            If DataGridView1.Rows(e.RowIndex).Cells(9).Value IsNot Nothing Then
+                                Dim penalty As Double = DataGridView1.Rows(e.RowIndex).Cells(9).Value
+                                Dim amountToPay As Double = 0
+                                Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
+                                    Case "Equity"
+                                        amountToPay = (penalty + p._equity)
+                                    Case "Monthly"
+                                        amountToPay = (penalty + p._amortization)
+                                End Select
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = amountToPay.ToString("N2") 'Amount to pay
+                            End If
+                    End Select
         End If
     End Sub
 
     Private Sub DataGridView1_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellLeave
+        If e.ColumnIndex = 4 Then 'Downpayment Amount
+            If DataGridView1.Rows(e.RowIndex).Cells(4).Value IsNot Nothing Then
+                DataGridView1.Rows(e.RowIndex).Cells(4).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value).ToString("N2") 'Penalty Amount
+            Else
+                DataGridView1.Rows(e.RowIndex).Cells(4).Value = 0.ToString("N2") 'Penalty Amount
+            End If
+        End If
         If e.ColumnIndex = 9 Then 'Penalty Amount
             If DataGridView1.Rows(e.RowIndex).Cells(9).Value IsNot Nothing Then
                 DataGridView1.Rows(e.RowIndex).Cells(9).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(9).Value).ToString("N2") 'Penalty Amount
@@ -833,5 +858,8 @@ FinallyLine:
         End If
     End Sub
 
-
+    Private Sub btnClearEntry_Click(sender As Object, e As EventArgs) Handles btnClearEntry.Click
+        DataGridView1.Rows.Clear()
+        DataGridView1.Refresh()
+    End Sub
 End Class

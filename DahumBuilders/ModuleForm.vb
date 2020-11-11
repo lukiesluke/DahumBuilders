@@ -148,6 +148,9 @@ Module ModuleForm
             .Style.BackColor = Color.LightGray
             .Value = 0
         End With
+        With dataGridView.Rows(e.RowIndex).Cells(4) 'Downpayment amount
+            .ReadOnly = True
+        End With
     End Sub
 
     Public Function UpdatePaymetMethod(ByVal proj As Project, type As String, monthly As Double, term As Integer, startDate As Date, endDate As Date) As Integer
