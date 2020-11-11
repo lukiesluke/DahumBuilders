@@ -736,8 +736,6 @@ FinallyLine:
     End Sub
 
     Private Sub cbPaymentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbPaymentType.SelectedIndexChanged
-        lblCheckNo.Visible = False
-        txtCheckNo.Visible = False
         lblInformation.Text = String.Empty
         lblDateOrTransfer.Text = String.Empty
         txtCheckNo.Text = String.Empty
@@ -747,12 +745,12 @@ FinallyLine:
                 PanelCheck.Visible = True
                 lblInformation.Text = "Check Information"
                 lblDateOrTransfer.Text = "Date Check"
-                lblCheckNo.Visible = True
-                txtCheckNo.Visible = True
+                lblCheckNo.Text = "Check Number"
             Case 2
                 PanelCheck.Visible = True
                 lblInformation.Text = "Bank Transfer Information"
                 lblDateOrTransfer.Text = "Date Transfer"
+                lblCheckNo.Text = "Ref. Number"
             Case Else
                 PanelCheck.Visible = False
         End Select
