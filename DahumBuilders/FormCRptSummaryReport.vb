@@ -31,11 +31,36 @@ Public Class FormCRptSummaryReport
             Dim report As New crpSummaryReport
             report.Load()
             Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
+            Dim txtCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCash")
+            Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
+            Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
 
             If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
                 dateReport.Text = dtpFrom.Value.ToString(MMddyyyy)
             Else
                 dateReport.Text = dtpFrom.Value.ToString(MMddyyyy) & " - " & dtpTo.Value.ToString(MMddyyyy)
+            End If
+
+            If table.Rows.Count > 0 Then
+                If IsDBNull(table.Compute("SUM(cash)", "")) Then
+                    txtCash.Text = 0.ToString("N2")
+                Else
+                    txtCash.Text = Convert.ToDouble(table.Compute("SUM(cash)", "")).ToString("N2")
+                End If
+                If IsDBNull(table.Compute("SUM(check)", "")) Then
+                    txtCheck.Text = 0.ToString("N2")
+                Else
+                    txtCheck.Text = Convert.ToDouble(table.Compute("SUM(check)", "")).ToString("N2")
+                End If
+                If IsDBNull(table.Compute("SUM(bankTransfer)", "")) Then
+                    txtBankTransfer.Text = 0.ToString("N2")
+                Else
+                    txtBankTransfer.Text = Convert.ToDouble(table.Compute("SUM(bankTransfer)", "")).ToString("N2")
+                End If
+            Else
+                txtCash.Text = 0.ToString("N2")
+                txtCheck.Text = 0.ToString("N2")
+                txtBankTransfer.Text = 0.ToString("N2")
             End If
 
             report.SetDataSource(table)
