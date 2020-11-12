@@ -152,6 +152,11 @@ Module ModuleForm
             .ReadOnly = True
         End With
     End Sub
+    Public Sub SetDataGridViewCell(ByVal dataGridView As DataGridView, e As DataGridViewCellEventArgs, i As Integer, enble As Boolean)
+        With dataGridView.Rows(e.RowIndex).Cells(i) 'Downpayment amount
+            .ReadOnly = enble
+        End With
+    End Sub
 
     Public Function UpdatePaymetMethod(ByVal proj As Project, type As String, monthly As Double, term As Integer, startDate As Date, endDate As Date) As Integer
         Dim result As Integer = 0

@@ -41,6 +41,7 @@ Partial Class FormUserList
         Me.labelRows = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtMobileContact = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtAddress = New System.Windows.Forms.TextBox()
         Me.txtCivilStatus = New System.Windows.Forms.TextBox()
@@ -56,7 +57,6 @@ Partial Class FormUserList
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -146,7 +146,7 @@ Partial Class FormUserList
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(5, 34)
+        Me.Label1.Location = New System.Drawing.Point(5, 41)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(60, 20)
         Me.Label1.TabIndex = 1
@@ -154,7 +154,7 @@ Partial Class FormUserList
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(72, 28)
+        Me.txtSearch.Location = New System.Drawing.Point(72, 35)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(217, 26)
@@ -162,7 +162,7 @@ Partial Class FormUserList
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(486, 22)
+        Me.btnSearch.Location = New System.Drawing.Point(486, 29)
         Me.btnSearch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(119, 38)
@@ -174,7 +174,7 @@ Partial Class FormUserList
         '
         Me.ComboBoxSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxSearch.FormattingEnabled = True
-        Me.ComboBoxSearch.Location = New System.Drawing.Point(295, 25)
+        Me.ComboBoxSearch.Location = New System.Drawing.Point(295, 32)
         Me.ComboBoxSearch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ComboBoxSearch.Name = "ComboBoxSearch"
         Me.ComboBoxSearch.Size = New System.Drawing.Size(185, 28)
@@ -182,7 +182,7 @@ Partial Class FormUserList
         '
         'labelRows
         '
-        Me.labelRows.Location = New System.Drawing.Point(5, 70)
+        Me.labelRows.Location = New System.Drawing.Point(611, 38)
         Me.labelRows.Name = "labelRows"
         Me.labelRows.Size = New System.Drawing.Size(173, 20)
         Me.labelRows.TabIndex = 5
@@ -224,6 +224,15 @@ Partial Class FormUserList
         Me.txtMobileContact.Name = "txtMobileContact"
         Me.txtMobileContact.Size = New System.Drawing.Size(438, 26)
         Me.txtMobileContact.TabIndex = 22
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(16, 223)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(68, 20)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Address" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'Label10
         '
@@ -356,15 +365,6 @@ Partial Class FormUserList
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Name"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(16, 223)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(68, 20)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Address" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.ListViewUser)
@@ -409,7 +409,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 163.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 165.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -430,7 +430,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(4, 3)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(137, 133)
+        Me.btnPayment.Size = New System.Drawing.Size(136, 133)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -441,10 +441,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(148, 3)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(147, 3)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(131, 133)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(130, 133)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -455,7 +455,7 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(286, 3)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(284, 3)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
         Me.btnUpdateRecord.Size = New System.Drawing.Size(134, 133)
@@ -469,10 +469,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(427, 3)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(425, 3)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(158, 133)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(160, 133)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
