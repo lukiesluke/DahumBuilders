@@ -429,7 +429,7 @@ Partial Class FormPayment
         Me.btnPayment.BackColor = System.Drawing.Color.Lime
         Me.btnPayment.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPayment.Location = New System.Drawing.Point(909, 134)
+        Me.btnPayment.Location = New System.Drawing.Point(834, 132)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPayment.Name = "btnPayment"
         Me.btnPayment.Size = New System.Drawing.Size(160, 43)
@@ -439,7 +439,7 @@ Partial Class FormPayment
         '
         'btnClearEntry
         '
-        Me.btnClearEntry.Location = New System.Drawing.Point(743, 50)
+        Me.btnClearEntry.Location = New System.Drawing.Point(668, 48)
         Me.btnClearEntry.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnClearEntry.Name = "btnClearEntry"
         Me.btnClearEntry.Size = New System.Drawing.Size(160, 43)
@@ -449,7 +449,7 @@ Partial Class FormPayment
         '
         'btnShowHistoryTransaction
         '
-        Me.btnShowHistoryTransaction.Location = New System.Drawing.Point(743, 91)
+        Me.btnShowHistoryTransaction.Location = New System.Drawing.Point(668, 89)
         Me.btnShowHistoryTransaction.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnShowHistoryTransaction.Name = "btnShowHistoryTransaction"
         Me.btnShowHistoryTransaction.Size = New System.Drawing.Size(160, 43)
@@ -615,7 +615,7 @@ Partial Class FormPayment
         Me.lblContact.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.lblContact.Location = New System.Drawing.Point(104, 86)
         Me.lblContact.Name = "lblContact"
-        Me.lblContact.Size = New System.Drawing.Size(617, 31)
+        Me.lblContact.Size = New System.Drawing.Size(553, 31)
         Me.lblContact.TabIndex = 49
         Me.lblContact.Text = "09169151625"
         Me.lblContact.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -632,7 +632,7 @@ Partial Class FormPayment
         '
         'btnSearchProject
         '
-        Me.btnSearchProject.Location = New System.Drawing.Point(743, 132)
+        Me.btnSearchProject.Location = New System.Drawing.Point(668, 130)
         Me.btnSearchProject.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearchProject.Name = "btnSearchProject"
         Me.btnSearchProject.Size = New System.Drawing.Size(160, 43)
@@ -649,7 +649,7 @@ Partial Class FormPayment
         Me.lblAddress.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.lblAddress.Location = New System.Drawing.Point(104, 124)
         Me.lblAddress.Name = "lblAddress"
-        Me.lblAddress.Size = New System.Drawing.Size(617, 48)
+        Me.lblAddress.Size = New System.Drawing.Size(553, 48)
         Me.lblAddress.TabIndex = 3
         Me.lblAddress.Text = "Block 44 lot 26 Greengate Phase 1, Malagaang II-A, Imus City"
         '
@@ -662,7 +662,7 @@ Partial Class FormPayment
         Me.lblName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.lblName.Location = New System.Drawing.Point(104, 50)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(617, 31)
+        Me.lblName.Size = New System.Drawing.Size(553, 31)
         Me.lblName.TabIndex = 2
         Me.lblName.Text = "Luke Washington Ortiz"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft

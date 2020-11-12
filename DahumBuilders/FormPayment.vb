@@ -31,7 +31,7 @@ Public Class FormPayment
         IFNULL((SELECT (`tcp`-SUM(`paid_amount`))-SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price`) AS 'totalBalance',
         IFNULL((SELECT SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalDiscount',
         IFNULL((SELECT SUM(`penalty`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPenalty',
-        IFNULL((SELECT SUM(`paid_amount`)+SUM(`penalty`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount',
+        IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount',
         IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='EQ' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'EQ',
         IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='MA' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'MA'
         FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
@@ -862,7 +862,7 @@ FinallyLine:
     Private Sub enablePaymentBotton()
         If lblTotalAmount.Text.Length > 0 And txtTenderedAmount.Text.Length > 0 And txtTenderedAmount.Text <> "." Then
             lblChange.Text = (Convert.ToDouble(txtTenderedAmount.Text) - Convert.ToDouble(lblTotalAmount.Text)).ToString("N2")
-            If Convert.ToDouble(lblTotalAmount.Text) >= Convert.ToDouble(txtTenderedAmount.Text) And txtTenderedAmount.Text <> "0.00" Then
+            If Convert.ToDouble(txtTenderedAmount.Text) >= Convert.ToDouble(lblTotalAmount.Text) And txtTenderedAmount.Text <> "0.00" Then
                 btnPayment.Enabled = True
                 btnPayment.BackColor = Color.Lime
             Else
