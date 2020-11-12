@@ -49,4 +49,13 @@ Public Class FormMainDahum
             mFormSalesReport.ShowDialog(Me)
         End If
     End Sub
+
+    Private Sub SummaryReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryReportToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormCRptSummaryReport).Any Then
+            mFormCRptSummaryReport.Focus()
+        Else
+            mFormCRptSummaryReport = New FormCRptSummaryReport
+            mFormCRptSummaryReport.ShowDialog(Me)
+        End If
+    End Sub
 End Class

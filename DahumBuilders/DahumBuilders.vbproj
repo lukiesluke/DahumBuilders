@@ -100,6 +100,12 @@
       <DependentUpon>crpSalesReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="crpSummaryReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crpSummaryReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="crptTransaction.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -128,6 +134,12 @@
       <DependentUpon>FormCRptSalesReport.vb</DependentUpon>
     </Compile>
     <Compile Include="FormCRptSalesReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCRptSummaryReport.Designer.vb">
+      <DependentUpon>FormCRptSummaryReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCRptSummaryReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PaymentMethod.vb" />
@@ -209,6 +221,11 @@
     <Compile Include="SalesReport.vb">
       <DependentUpon>SalesReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="SummaryReport.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Transaction.vb" />
     <Compile Include="User.vb" />
   </ItemGroup>
@@ -217,9 +234,16 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crpSalesReport.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="crpSummaryReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpSummaryReport.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="crptTransaction.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crptTransaction.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCRptSummaryReport.resx">
+      <DependentUpon>FormCRptSummaryReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCRptTransaction.resx">
       <DependentUpon>FormCRptTransaction.vb</DependentUpon>
@@ -295,6 +319,17 @@
     </None>
     <None Include="SalesReport.xss">
       <DependentUpon>SalesReport.xsd</DependentUpon>
+    </None>
+    <None Include="SummaryReport.xsc">
+      <DependentUpon>SummaryReport.xsd</DependentUpon>
+    </None>
+    <None Include="SummaryReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SummaryReport.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="SummaryReport.xss">
+      <DependentUpon>SummaryReport.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

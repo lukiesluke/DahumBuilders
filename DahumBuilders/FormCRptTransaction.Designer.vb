@@ -44,7 +44,7 @@ Partial Class FormCRptTransaction
         Me.Controls.Add(Me.CrystalReportViewer1)
         Me.Name = "FormCRptTransaction"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FormCRptTransaction"
+        Me.Text = "Transaction History"
         Me.ResumeLayout(False)
 
     End Sub

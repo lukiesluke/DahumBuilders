@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="SummaryReport" targetNamespace="http://tempuri.org/SummaryReport.xsd" xmlns:mstns="http://tempuri.org/SummaryReport.xsd" xmlns="http://tempuri.org/SummaryReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="SummaryReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SummaryReport" msprop:Generator_UserDSName="SummaryReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SummaryReport" msprop:Generator_TableClassName="SummaryReportDataTable" msprop:Generator_TableVarName="tableSummaryReport" msprop:Generator_TablePropName="_SummaryReport" msprop:Generator_RowDeletingName="SummaryReportRowDeleting" msprop:Generator_RowChangingName="SummaryReportRowChanging" msprop:Generator_RowEvHandlerName="SummaryReportRowChangeEventHandler" msprop:Generator_RowDeletedName="SummaryReportRowDeleted" msprop:Generator_UserTableName="SummaryReport" msprop:Generator_RowChangedName="SummaryReportRowChanged" msprop:Generator_RowEvArgName="SummaryReportRowChangeEvent" msprop:Generator_RowClassName="SummaryReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:string" minOccurs="0" />
+              <xs:element name="proj_name" msprop:Generator_ColumnVarNameInTable="columnproj_name" msprop:Generator_ColumnPropNameInRow="proj_name" msprop:Generator_ColumnPropNameInTable="proj_nameColumn" msprop:Generator_UserColumnName="proj_name" type="xs:string" minOccurs="0" />
+              <xs:element name="cash" msprop:Generator_ColumnVarNameInTable="columncash" msprop:Generator_ColumnPropNameInRow="cash" msprop:Generator_ColumnPropNameInTable="cashColumn" msprop:Generator_UserColumnName="cash" type="xs:double" minOccurs="0" />
+              <xs:element name="check" msprop:Generator_ColumnVarNameInTable="columncheck" msprop:Generator_ColumnPropNameInRow="check" msprop:Generator_ColumnPropNameInTable="checkColumn" msprop:Generator_UserColumnName="check" type="xs:double" minOccurs="0" />
+              <xs:element name="bankTransfer" msprop:Generator_ColumnVarNameInTable="columnbankTransfer" msprop:Generator_ColumnPropNameInRow="bankTransfer" msprop:Generator_ColumnPropNameInTable="bankTransferColumn" msprop:Generator_UserColumnName="bankTransfer" type="xs:double" minOccurs="0" />
+              <xs:element name="discount" msprop:Generator_ColumnVarNameInTable="columndiscount" msprop:Generator_ColumnPropNameInRow="discount" msprop:Generator_ColumnPropNameInTable="discountColumn" msprop:Generator_UserColumnName="discount" type="xs:double" minOccurs="0" />
+              <xs:element name="total" msprop:Generator_ColumnVarNameInTable="columntotal" msprop:Generator_ColumnPropNameInRow="total" msprop:Generator_ColumnPropNameInTable="totalColumn" msprop:Generator_UserColumnName="total" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

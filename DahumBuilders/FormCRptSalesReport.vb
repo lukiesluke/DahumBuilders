@@ -6,7 +6,6 @@ Public Class FormCRptSalesReport
     Dim format As String = "yyyy-MM-dd"
     Dim MMddyyyy As String = "MMMM dd, yyyy"
 
-
     Private Sub FormSalesReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         load_combobox()
         cbbProjectName.SelectedIndex = 0

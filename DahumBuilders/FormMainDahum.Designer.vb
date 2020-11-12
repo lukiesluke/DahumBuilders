@@ -30,12 +30,12 @@ Partial Class FormMainDahum
         Me.ClientRegistrationFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjectSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddProjectToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -95,6 +95,25 @@ Partial Class FormMainDahum
         Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(189, 30)
         Me.AddProjectToolStripMenuItem1.Text = "Add Project"
         '
+        'ReportToolStripMenuItem
+        '
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem})
+        Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
+        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(77, 29)
+        Me.ReportToolStripMenuItem.Text = "Report"
+        '
+        'SalesReportToolStripMenuItem
+        '
+        Me.SalesReportToolStripMenuItem.Name = "SalesReportToolStripMenuItem"
+        Me.SalesReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.SalesReportToolStripMenuItem.Text = "Sales Report"
+        '
+        'SummaryReportToolStripMenuItem
+        '
+        Me.SummaryReportToolStripMenuItem.Name = "SummaryReportToolStripMenuItem"
+        Me.SummaryReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.SummaryReportToolStripMenuItem.Text = "Summary Report"
+        '
         'StatusStrip
         '
         Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
@@ -116,25 +135,6 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Name = "ToolStripStatusUsername"
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
-        '
-        'ReportToolStripMenuItem
-        '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem})
-        Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
-        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(77, 29)
-        Me.ReportToolStripMenuItem.Text = "Report"
-        '
-        'SalesReportToolStripMenuItem
-        '
-        Me.SalesReportToolStripMenuItem.Name = "SalesReportToolStripMenuItem"
-        Me.SalesReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
-        Me.SalesReportToolStripMenuItem.Text = "Sales Report"
-        '
-        'SummaryReportToolStripMenuItem
-        '
-        Me.SummaryReportToolStripMenuItem.Name = "SummaryReportToolStripMenuItem"
-        Me.SummaryReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
-        Me.SummaryReportToolStripMenuItem.Text = "Summary Report"
         '
         'FormMainDahum
         '
