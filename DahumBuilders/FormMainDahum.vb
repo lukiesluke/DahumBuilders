@@ -46,7 +46,7 @@ Public Class FormMainDahum
             mFormSalesReport.Focus()
         Else
             mFormSalesReport = New FormCRptSalesReport
-            mFormSalesReport.ShowDialog(Me)
+            mFormSalesReport.Show()
         End If
     End Sub
 
@@ -55,7 +55,7 @@ Public Class FormMainDahum
             mFormCRptSummaryReport.Focus()
         Else
             mFormCRptSummaryReport = New FormCRptSummaryReport
-            mFormCRptSummaryReport.ShowDialog(Me)
+            mFormCRptSummaryReport.Show()
         End If
     End Sub
 End Class

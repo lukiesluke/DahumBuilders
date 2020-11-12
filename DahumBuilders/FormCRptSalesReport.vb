@@ -58,17 +58,17 @@ Public Class FormCRptSalesReport
             Dim report As New crpSalesReport
             report.Load()
             Dim projName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtProjectName")
-            Dim salesReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
+            Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
             Dim txtCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCash")
             Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
             Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
             Dim txtDiscount As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtDiscount")
 
             projName.Text = "PROJECT NAME: " & projectName
-            If dtpFrom.Value = dtpTo.Value Then
-                salesReport.Text = dtpFrom.Value.ToString(MMddyyyy)
+            If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                dateReport.Text = dtpFrom.Value.ToString(MMddyyyy)
             Else
-                salesReport.Text = dtpFrom.Value.ToString(MMddyyyy) & " - " & dtpTo.Value.ToString(MMddyyyy)
+                dateReport.Text = dtpFrom.Value.ToString(MMddyyyy) & " - " & dtpTo.Value.ToString(MMddyyyy)
             End If
 
             If table.Rows.Count > 0 Then
