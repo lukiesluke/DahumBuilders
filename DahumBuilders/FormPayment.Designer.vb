@@ -79,6 +79,9 @@ Partial Class FormPayment
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TransactionHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnClearEntry = New System.Windows.Forms.Button()
+        Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
+        Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
+        Me.Label9 = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -94,6 +97,8 @@ Partial Class FormPayment
         Me.Panel3.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
+        Me.PanelBodyDataEntry.SuspendLayout()
+        Me.PanelHeaderDataEntry.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -612,12 +617,12 @@ Partial Class FormPayment
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Top
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 514)
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 42)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(3, 3, 3, 2)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(1631, 337)
+        Me.DataGridView1.Size = New System.Drawing.Size(1631, 394)
         Me.DataGridView1.TabIndex = 6
         '
         'MenuStrip1
@@ -654,12 +659,42 @@ Partial Class FormPayment
         Me.btnClearEntry.Text = "Clear OR Entry"
         Me.btnClearEntry.UseVisualStyleBackColor = True
         '
+        'PanelBodyDataEntry
+        '
+        Me.PanelBodyDataEntry.Controls.Add(Me.DataGridView1)
+        Me.PanelBodyDataEntry.Controls.Add(Me.PanelHeaderDataEntry)
+        Me.PanelBodyDataEntry.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelBodyDataEntry.Location = New System.Drawing.Point(0, 514)
+        Me.PanelBodyDataEntry.Name = "PanelBodyDataEntry"
+        Me.PanelBodyDataEntry.Size = New System.Drawing.Size(1631, 430)
+        Me.PanelBodyDataEntry.TabIndex = 52
+        '
+        'PanelHeaderDataEntry
+        '
+        Me.PanelHeaderDataEntry.Controls.Add(Me.Label9)
+        Me.PanelHeaderDataEntry.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PanelHeaderDataEntry.Location = New System.Drawing.Point(0, 0)
+        Me.PanelHeaderDataEntry.Name = "PanelHeaderDataEntry"
+        Me.PanelHeaderDataEntry.Size = New System.Drawing.Size(1631, 42)
+        Me.PanelHeaderDataEntry.TabIndex = 0
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label9.Location = New System.Drawing.Point(0, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(1631, 42)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "OR Data Entry"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1631, 944)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.PanelBodyDataEntry)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -688,6 +723,8 @@ Partial Class FormPayment
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.PanelBodyDataEntry.ResumeLayout(False)
+        Me.PanelHeaderDataEntry.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -748,4 +785,7 @@ Partial Class FormPayment
     Friend WithEvents PaymentMethodToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderPenalty As ColumnHeader
     Friend WithEvents btnClearEntry As Button
+    Friend WithEvents PanelBodyDataEntry As Panel
+    Friend WithEvents PanelHeaderDataEntry As Panel
+    Friend WithEvents Label9 As Label
 End Class
