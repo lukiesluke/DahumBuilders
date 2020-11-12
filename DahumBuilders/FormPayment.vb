@@ -16,6 +16,7 @@ Public Class FormPayment
         lblTotalAmount.Text = 0.ToString("N2")
         lblChange.Text = 0.ToString("N2")
         txtTenderedAmount.Text = 0.ToString("N2")
+        DataGridView1.DefaultCellStyle.Font = New Font("Consolas", 9)
         SplitContainer1.IsSplitterFixed = True
         SplitContainer1.SplitterDistance = 190
         load_userId_info_data_reader()
@@ -484,9 +485,9 @@ FinallyLine:
         End With
 
         With DataGridView1
-            .Columns(0).Width = 170
-            .Columns(1).Width = 90 'TCP
-            .Columns(2).Width = 100 'cbb particular
+            .Columns(0).Width = 200
+            .Columns(1).Width = 100 'TCP
+            .Columns(2).Width = 105 'cbb particular
             .Columns(3).Width = 100 'cbb Downpayment
             .Columns(4).Width = 140 'Downpayment Amount
             .Columns(5).Width = 70 'cbb discount

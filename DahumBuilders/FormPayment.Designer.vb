@@ -155,12 +155,12 @@ Partial Class FormPayment
         'txtCheckNo
         '
         Me.txtCheckNo.BackColor = System.Drawing.Color.White
-        Me.txtCheckNo.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCheckNo.Location = New System.Drawing.Point(166, 132)
+        Me.txtCheckNo.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCheckNo.Location = New System.Drawing.Point(173, 132)
         Me.txtCheckNo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtCheckNo.MaxLength = 12
         Me.txtCheckNo.Name = "txtCheckNo"
-        Me.txtCheckNo.Size = New System.Drawing.Size(225, 29)
+        Me.txtCheckNo.Size = New System.Drawing.Size(232, 29)
         Me.txtCheckNo.TabIndex = 39
         '
         'Panel4
@@ -186,12 +186,12 @@ Partial Class FormPayment
         'txtBankName
         '
         Me.txtBankName.BackColor = System.Drawing.Color.White
-        Me.txtBankName.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtBankName.Location = New System.Drawing.Point(166, 92)
+        Me.txtBankName.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtBankName.Location = New System.Drawing.Point(173, 92)
         Me.txtBankName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtBankName.MaxLength = 12
         Me.txtBankName.Name = "txtBankName"
-        Me.txtBankName.Size = New System.Drawing.Size(225, 29)
+        Me.txtBankName.Size = New System.Drawing.Size(232, 29)
         Me.txtBankName.TabIndex = 36
         '
         'dtpCheckDate
@@ -199,10 +199,10 @@ Partial Class FormPayment
         Me.dtpCheckDate.CustomFormat = "MMMM dd, yyyy"
         Me.dtpCheckDate.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpCheckDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpCheckDate.Location = New System.Drawing.Point(166, 53)
+        Me.dtpCheckDate.Location = New System.Drawing.Point(173, 53)
         Me.dtpCheckDate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dtpCheckDate.Name = "dtpCheckDate"
-        Me.dtpCheckDate.Size = New System.Drawing.Size(225, 29)
+        Me.dtpCheckDate.Size = New System.Drawing.Size(232, 29)
         Me.dtpCheckDate.TabIndex = 33
         '
         'lblDateOrTransfer
@@ -251,18 +251,19 @@ Partial Class FormPayment
         '
         'txtTenderedAmount
         '
+        Me.txtTenderedAmount.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTenderedAmount.Location = New System.Drawing.Point(173, 212)
         Me.txtTenderedAmount.MaxLength = 20
         Me.txtTenderedAmount.Name = "txtTenderedAmount"
-        Me.txtTenderedAmount.Size = New System.Drawing.Size(225, 26)
+        Me.txtTenderedAmount.Size = New System.Drawing.Size(232, 29)
         Me.txtTenderedAmount.TabIndex = 41
         Me.txtTenderedAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblChange
         '
         Me.lblChange.BackColor = System.Drawing.Color.White
-        Me.lblChange.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblChange.Location = New System.Drawing.Point(172, 241)
+        Me.lblChange.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblChange.Location = New System.Drawing.Point(181, 241)
         Me.lblChange.Name = "lblChange"
         Me.lblChange.Size = New System.Drawing.Size(229, 36)
         Me.lblChange.TabIndex = 43
@@ -273,10 +274,10 @@ Partial Class FormPayment
         '
         Me.Label11.AutoSize = True
         Me.Label11.BackColor = System.Drawing.Color.White
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(14, 248)
+        Me.Label11.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(10, 248)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(73, 22)
+        Me.Label11.Size = New System.Drawing.Size(74, 20)
         Me.Label11.TabIndex = 42
         Me.Label11.Text = "Change"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -285,10 +286,10 @@ Partial Class FormPayment
         '
         Me.Label10.AutoSize = True
         Me.Label10.BackColor = System.Drawing.Color.White
-        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(11, 215)
+        Me.Label10.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(10, 215)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(154, 22)
+        Me.Label10.Size = New System.Drawing.Size(158, 20)
         Me.Label10.TabIndex = 40
         Me.Label10.Text = "Tendered Amount"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -297,10 +298,10 @@ Partial Class FormPayment
         '
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.Color.White
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(9, 182)
+        Me.Label9.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(10, 182)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(61, 25)
+        Me.Label9.Size = New System.Drawing.Size(49, 20)
         Me.Label9.TabIndex = 0
         Me.Label9.Text = "Total"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -308,8 +309,8 @@ Partial Class FormPayment
         'lblTotalAmount
         '
         Me.lblTotalAmount.BackColor = System.Drawing.Color.White
-        Me.lblTotalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalAmount.Location = New System.Drawing.Point(172, 176)
+        Me.lblTotalAmount.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalAmount.Location = New System.Drawing.Point(181, 176)
         Me.lblTotalAmount.Name = "lblTotalAmount"
         Me.lblTotalAmount.Size = New System.Drawing.Size(230, 35)
         Me.lblTotalAmount.TabIndex = 1
@@ -344,7 +345,7 @@ Partial Class FormPayment
         Me.dtpDatePaid.Location = New System.Drawing.Point(173, 49)
         Me.dtpDatePaid.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dtpDatePaid.Name = "dtpDatePaid"
-        Me.dtpDatePaid.Size = New System.Drawing.Size(225, 29)
+        Me.dtpDatePaid.Size = New System.Drawing.Size(232, 29)
         Me.dtpDatePaid.TabIndex = 1
         '
         'Label8
@@ -360,24 +361,24 @@ Partial Class FormPayment
         'cbPaymentType
         '
         Me.cbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPaymentType.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbPaymentType.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbPaymentType.FormattingEnabled = True
         Me.cbPaymentType.Items.AddRange(New Object() {"CASH", "CHECK", "BANK TRANSFER"})
         Me.cbPaymentType.Location = New System.Drawing.Point(173, 126)
         Me.cbPaymentType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cbPaymentType.Name = "cbPaymentType"
-        Me.cbPaymentType.Size = New System.Drawing.Size(225, 28)
+        Me.cbPaymentType.Size = New System.Drawing.Size(232, 30)
         Me.cbPaymentType.TabIndex = 3
         '
         'txtOfficialReceipt
         '
         Me.txtOfficialReceipt.BackColor = System.Drawing.Color.MistyRose
-        Me.txtOfficialReceipt.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOfficialReceipt.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOfficialReceipt.Location = New System.Drawing.Point(173, 88)
         Me.txtOfficialReceipt.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtOfficialReceipt.MaxLength = 12
         Me.txtOfficialReceipt.Name = "txtOfficialReceipt"
-        Me.txtOfficialReceipt.Size = New System.Drawing.Size(225, 29)
+        Me.txtOfficialReceipt.Size = New System.Drawing.Size(232, 29)
         Me.txtOfficialReceipt.TabIndex = 2
         '
         'Label5
@@ -471,6 +472,7 @@ Partial Class FormPayment
         Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderPenalty, Me.ColumnHeaderTotalPaid, Me.ColumnHeaderEQ, Me.ColumnHeaderMA})
         Me.ListViewUserItem.ContextMenuStrip = Me.ContextMenuProjectList
         Me.ListViewUserItem.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListViewUserItem.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ListViewUserItem.FullRowSelect = True
         Me.ListViewUserItem.GridLines = True
         Me.ListViewUserItem.Location = New System.Drawing.Point(0, 0)
@@ -496,13 +498,13 @@ Partial Class FormPayment
         '
         Me.ColumnHeaderBlock.Text = "Block"
         Me.ColumnHeaderBlock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeaderBlock.Width = 40
+        Me.ColumnHeaderBlock.Width = 50
         '
         'ColumnHeaderLot
         '
         Me.ColumnHeaderLot.Text = "Lot"
         Me.ColumnHeaderLot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeaderLot.Width = 40
+        Me.ColumnHeaderLot.Width = 50
         '
         'ColumnHeaderSQM
         '
@@ -514,7 +516,7 @@ Partial Class FormPayment
         '
         Me.ColumnHeaderTCP.Text = "TCP"
         Me.ColumnHeaderTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderTCP.Width = 100
+        Me.ColumnHeaderTCP.Width = 110
         '
         'ColumnHeaderProjID
         '
@@ -549,11 +551,13 @@ Partial Class FormPayment
         '
         Me.ColumnHeaderEQ.Text = "EQ"
         Me.ColumnHeaderEQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderEQ.Width = 80
         '
         'ColumnHeaderMA
         '
         Me.ColumnHeaderMA.Text = "MA"
         Me.ColumnHeaderMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderMA.Width = 80
         '
         'ContextMenuProjectList
         '
@@ -750,6 +754,7 @@ Partial Class FormPayment
         '
         Me.Label12.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label12.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.Location = New System.Drawing.Point(0, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(1631, 28)
