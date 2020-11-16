@@ -127,8 +127,8 @@ Partial Class FormMainDahum
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(91, 25)
-        Me.ToolStripStatusLabel1.Text = "Username"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(95, 25)
+        Me.ToolStripStatusLabel1.Text = "Username:"
         '
         'ToolStripStatusUsername
         '

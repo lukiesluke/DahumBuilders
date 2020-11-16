@@ -67,10 +67,10 @@ Public Class FormUserProfile
         `place_birth`, `citizenship`, `telephone_number`, `mobile_number`, `email_address`, 
         `occupation`, `company_name`, `spouse_name`, `spouse_occupation`, `spouse_contact`, 
         `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`,
-        `file_location_image`, `id_type1`, `id_number1`, `id_type2`, `id_number2`, `username`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
+        `file_location_image`, `id_type1`, `id_number1`, `id_type2`, `id_number2`, `username`, `created_by`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
         @civilStatus, @dateBirth, @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, 
         @companyName, @spouseName, @spouseOccupation, @spouseContact, @fatherName, @fatherAddress, @MotherName, 
-        @MotherAddress, @fileLocationImage, @IdType1, @IdNumber1, @IdType2, @IdNumber2, @username)"
+        @MotherAddress, @fileLocationImage, @IdType1, @IdNumber1, @IdType2, @IdNumber2, @username, @CreatedBy)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -104,7 +104,8 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdType2", MySqlDbType.VarChar).Value = txtIdType2.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
-        sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
+        sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = ""
+        sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = username
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then

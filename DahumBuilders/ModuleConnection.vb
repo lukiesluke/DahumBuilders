@@ -6,7 +6,7 @@ Module ModuleConnection
     Public sqlCommand As MySqlCommand
     Public sqlDataReader As MySqlDataReader
     Public sqlAdapter As MySqlDataAdapter
-    Public username As String = "admin8080"
+    Public username As String = String.Empty
     Public fileLocationImage As String
 
     Public Sub Connection()

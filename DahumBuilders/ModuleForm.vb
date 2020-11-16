@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Module ModuleForm
+    Public mFormMainDahum As New FormMainDahum
     Public mFormUserProfile As New FormUserProfile
     Public mFormUserList As New FormUserList
     Public mFormImageCapture As FormImageCapture
@@ -11,6 +12,8 @@ Module ModuleForm
     Public mFormAddProjectSetting As FormAddProjectSetting
     Public mFormSalesReport As FormCRptSalesReport
     Public mFormCRptSummaryReport As FormCRptSummaryReport
+    Public mFormLogin As FormLogin
+
     Public Function computePercentage(totalPrice As Double, value As ComboBox) As Double
         Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100
         Return totalPrice * percentageDownpayment

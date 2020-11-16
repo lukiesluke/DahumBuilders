@@ -3,6 +3,10 @@
 Public Class FormMainDahum
 
     Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        showLoginForm()
+
+        ToolStripStatusUsername.Text = username
+
         If Application.OpenForms().OfType(Of FormUserList).Any Then
             mFormUserList.Focus()
         Else
@@ -56,6 +60,15 @@ Public Class FormMainDahum
         Else
             mFormCRptSummaryReport = New FormCRptSummaryReport
             mFormCRptSummaryReport.Show()
+        End If
+    End Sub
+
+    Private Sub showLoginForm()
+        If Application.OpenForms().OfType(Of FormLogin).Any Then
+            mFormLogin.Focus()
+        Else
+            mFormLogin = New FormLogin
+            mFormLogin.ShowDialog()
         End If
     End Sub
 End Class
