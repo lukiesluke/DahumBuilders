@@ -862,13 +862,14 @@ FinallyLine:
 
     Private Sub enablePaymentBotton()
         If lblTotalAmount.Text.Length > 0 And txtTenderedAmount.Text.Length > 0 And txtTenderedAmount.Text <> "." Then
-            lblChange.Text = (Convert.ToDouble(txtTenderedAmount.Text) - Convert.ToDouble(lblTotalAmount.Text)).ToString("N2")
             If Convert.ToDouble(txtTenderedAmount.Text) >= Convert.ToDouble(lblTotalAmount.Text) And txtTenderedAmount.Text <> "0.00" Then
                 btnPayment.Enabled = True
                 btnPayment.BackColor = Color.Lime
+                lblChange.Text = (Convert.ToDouble(txtTenderedAmount.Text) - Convert.ToDouble(lblTotalAmount.Text)).ToString("N2")
             Else
                 btnPayment.Enabled = False
                 btnPayment.BackColor = Color.LightGray
+                lblChange.Text = 0.ToString("N2")
             End If
         End If
     End Sub
