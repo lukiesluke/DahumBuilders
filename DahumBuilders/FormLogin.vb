@@ -4,7 +4,7 @@ Public Class FormLogin
     Private password As String = String.Empty
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        sql = "SELECT `username`, `password`,`user_type` FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
+        sql = "SELECT `id`,`username`, `password`,`user_type` FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         sqlCommand.Parameters.Add("@Username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim
@@ -12,6 +12,7 @@ Public Class FormLogin
         Try
             sqlDataReader = sqlCommand.ExecuteReader()
             Do While sqlDataReader.Read = True
+                userID = sqlDataReader("id")
                 username = sqlDataReader("username")
                 password = sqlDataReader("password")
                 Exit Do

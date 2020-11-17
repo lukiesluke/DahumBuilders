@@ -24,6 +24,13 @@ Partial Class FormEmployeeRegistration
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtPass2 = New System.Windows.Forms.TextBox()
+        Me.txtPass1 = New System.Windows.Forms.TextBox()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.gbContactInformation = New System.Windows.Forms.GroupBox()
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtMobile = New System.Windows.Forms.TextBox()
@@ -43,19 +50,16 @@ Partial Class FormEmployeeRegistration
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.txtPass2 = New System.Windows.Forms.TextBox()
-        Me.txtPass1 = New System.Windows.Forms.TextBox()
-        Me.txtUsername = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.gbContactInformation.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.gbContactInformation.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -69,6 +73,8 @@ Partial Class FormEmployeeRegistration
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Label13)
+        Me.TabPage1.Controls.Add(Me.DateTimePicker1)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
         Me.TabPage1.Controls.Add(Me.gbContactInformation)
         Me.TabPage1.Controls.Add(Me.Label6)
@@ -90,6 +96,79 @@ Partial Class FormEmployeeRegistration
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtPass2)
+        Me.GroupBox1.Controls.Add(Me.txtPass1)
+        Me.GroupBox1.Controls.Add(Me.txtUsername)
+        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.Label9)
+        Me.GroupBox1.Location = New System.Drawing.Point(449, 248)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GroupBox1.Size = New System.Drawing.Size(401, 163)
+        Me.GroupBox1.TabIndex = 31
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "User Account Setting"
+        '
+        'txtPass2
+        '
+        Me.txtPass2.Location = New System.Drawing.Point(106, 115)
+        Me.txtPass2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtPass2.Name = "txtPass2"
+        Me.txtPass2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPass2.Size = New System.Drawing.Size(267, 26)
+        Me.txtPass2.TabIndex = 13
+        '
+        'txtPass1
+        '
+        Me.txtPass1.Location = New System.Drawing.Point(106, 75)
+        Me.txtPass1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtPass1.Name = "txtPass1"
+        Me.txtPass1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPass1.Size = New System.Drawing.Size(267, 26)
+        Me.txtPass1.TabIndex = 12
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Location = New System.Drawing.Point(106, 35)
+        Me.txtUsername.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(267, 26)
+        Me.txtUsername.TabIndex = 11
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(12, 118)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(78, 20)
+        Me.Label7.TabIndex = 2
+        Me.Label7.Text = "Password"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(12, 78)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(78, 20)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Password"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(12, 38)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(83, 20)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "Username"
         '
         'gbContactInformation
         '
@@ -249,7 +328,7 @@ Partial Class FormEmployeeRegistration
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(26, 62)
+        Me.Label2.Location = New System.Drawing.Point(26, 63)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(101, 20)
         Me.Label2.TabIndex = 19
@@ -263,77 +342,6 @@ Partial Class FormEmployeeRegistration
         Me.Label1.Size = New System.Drawing.Size(51, 20)
         Me.Label1.TabIndex = 18
         Me.Label1.Text = "Name"
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.txtPass2)
-        Me.GroupBox1.Controls.Add(Me.txtPass1)
-        Me.GroupBox1.Controls.Add(Me.txtUsername)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.Label8)
-        Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Location = New System.Drawing.Point(466, 23)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GroupBox1.Size = New System.Drawing.Size(401, 163)
-        Me.GroupBox1.TabIndex = 31
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "User Account Setting"
-        '
-        'txtPass2
-        '
-        Me.txtPass2.Location = New System.Drawing.Point(106, 115)
-        Me.txtPass2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtPass2.Name = "txtPass2"
-        Me.txtPass2.Size = New System.Drawing.Size(267, 26)
-        Me.txtPass2.TabIndex = 13
-        '
-        'txtPass1
-        '
-        Me.txtPass1.Location = New System.Drawing.Point(106, 75)
-        Me.txtPass1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtPass1.Name = "txtPass1"
-        Me.txtPass1.Size = New System.Drawing.Size(267, 26)
-        Me.txtPass1.TabIndex = 12
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Location = New System.Drawing.Point(106, 35)
-        Me.txtUsername.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(267, 26)
-        Me.txtUsername.TabIndex = 11
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(12, 118)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(78, 20)
-        Me.Label7.TabIndex = 2
-        Me.Label7.Text = "Password"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(12, 78)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(78, 20)
-        Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Password"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(12, 38)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(83, 20)
-        Me.Label9.TabIndex = 0
-        Me.Label9.Text = "Username"
         '
         'btnCancel
         '
@@ -355,11 +363,54 @@ Partial Class FormEmployeeRegistration
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(461, 134)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(213, 20)
+        Me.Label13.TabIndex = 33
+        Me.Label13.Text = "Date of birth (MM/DD/YYYY)"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.CustomFormat = "MM/dd/ yyyy"
+        Me.DateTimePicker1.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DateTimePicker1.Location = New System.Drawing.Point(465, 162)
+        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(197, 26)
+        Me.DateTimePicker1.TabIndex = 32
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(687, 501)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
+        Me.btnUpdate.TabIndex = 26
+        Me.btnUpdate.Text = "&Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(983, 499)
+        Me.btnSearch.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(112, 35)
+        Me.btnSearch.TabIndex = 27
+        Me.btnSearch.Text = "&Search"
+        Me.btnSearch.UseVisualStyleBackColor = True
+        '
         'FormEmployeeRegistration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(942, 559)
+        Me.ClientSize = New System.Drawing.Size(942, 548)
+        Me.Controls.Add(Me.btnSearch)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.TabControl1)
@@ -372,10 +423,10 @@ Partial Class FormEmployeeRegistration
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
-        Me.gbContactInformation.ResumeLayout(False)
-        Me.gbContactInformation.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.gbContactInformation.ResumeLayout(False)
+        Me.gbContactInformation.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -410,4 +461,8 @@ Partial Class FormEmployeeRegistration
     Friend WithEvents Label9 As Label
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnSave As Button
+    Friend WithEvents Label13 As Label
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnSearch As Button
 End Class
