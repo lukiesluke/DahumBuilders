@@ -124,6 +124,12 @@
     <Compile Include="FormAddProjectSetting.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormEmployeeRegistration.Designer.vb">
+      <DependentUpon>FormEmployeeRegistration.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmployeeRegistration.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormLogin.Designer.vb">
       <DependentUpon>FormLogin.vb</DependentUpon>
     </Compile>
@@ -253,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCRptTransaction.resx">
       <DependentUpon>FormCRptTransaction.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmployeeRegistration.resx">
+      <DependentUpon>FormEmployeeRegistration.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormImageCapture.resx">
       <DependentUpon>FormImageCapture.vb</DependentUpon>

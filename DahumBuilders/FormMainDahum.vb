@@ -71,4 +71,14 @@ Public Class FormMainDahum
             mFormLogin.ShowDialog()
         End If
     End Sub
+
+    Private Sub EmployeeRegistrationFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EmployeeRegistrationFormToolStripMenuItem.Click
+
+        If Application.OpenForms().OfType(Of FormEmployeeRegistration).Any Then
+            mFormEmployeeRegistration.Focus()
+        Else
+            mFormEmployeeRegistration = New FormEmployeeRegistration
+            mFormEmployeeRegistration.ShowDialog()
+        End If
+    End Sub
 End Class

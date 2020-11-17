@@ -36,6 +36,7 @@ Partial Class FormMainDahum
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.EmployeeRegistrationFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -65,7 +66,7 @@ Partial Class FormMainDahum
         '
         'OpenToolStripMenuItem
         '
-        Me.OpenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CientListToolStripMenuItem, Me.ClientRegistrationFormToolStripMenuItem})
+        Me.OpenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CientListToolStripMenuItem, Me.ClientRegistrationFormToolStripMenuItem, Me.EmployeeRegistrationFormToolStripMenuItem})
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(68, 29)
         Me.OpenToolStripMenuItem.Text = "Open"
@@ -73,13 +74,13 @@ Partial Class FormMainDahum
         'CientListToolStripMenuItem
         '
         Me.CientListToolStripMenuItem.Name = "CientListToolStripMenuItem"
-        Me.CientListToolStripMenuItem.Size = New System.Drawing.Size(286, 30)
+        Me.CientListToolStripMenuItem.Size = New System.Drawing.Size(320, 30)
         Me.CientListToolStripMenuItem.Text = "Cient List"
         '
         'ClientRegistrationFormToolStripMenuItem
         '
         Me.ClientRegistrationFormToolStripMenuItem.Name = "ClientRegistrationFormToolStripMenuItem"
-        Me.ClientRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(286, 30)
+        Me.ClientRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(320, 30)
         Me.ClientRegistrationFormToolStripMenuItem.Text = "Client Registration Form"
         '
         'ProjectSettingToolStripMenuItem
@@ -136,6 +137,12 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
         '
+        'EmployeeRegistrationFormToolStripMenuItem
+        '
+        Me.EmployeeRegistrationFormToolStripMenuItem.Name = "EmployeeRegistrationFormToolStripMenuItem"
+        Me.EmployeeRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(320, 30)
+        Me.EmployeeRegistrationFormToolStripMenuItem.Text = "Employee Registration Form"
+        '
         'FormMainDahum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -171,4 +178,5 @@ Partial Class FormMainDahum
     Friend WithEvents ReportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SalesReportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SummaryReportToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents EmployeeRegistrationFormToolStripMenuItem As ToolStripMenuItem
 End Class

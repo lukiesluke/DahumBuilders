@@ -13,6 +13,7 @@ Module ModuleForm
     Public mFormSalesReport As FormCRptSalesReport
     Public mFormCRptSummaryReport As FormCRptSummaryReport
     Public mFormLogin As FormLogin
+    Public mFormEmployeeRegistration As FormEmployeeRegistration
 
     Public Function computePercentage(totalPrice As Double, value As ComboBox) As Double
         Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100
