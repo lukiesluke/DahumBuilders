@@ -299,6 +299,7 @@ Partial Class FormPayment
         Me.Label9.AutoSize = True
         Me.Label9.BackColor = System.Drawing.Color.White
         Me.Label9.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.Red
         Me.Label9.Location = New System.Drawing.Point(10, 182)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(49, 20)
@@ -310,6 +311,7 @@ Partial Class FormPayment
         '
         Me.lblTotalAmount.BackColor = System.Drawing.Color.White
         Me.lblTotalAmount.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotalAmount.ForeColor = System.Drawing.Color.Red
         Me.lblTotalAmount.Location = New System.Drawing.Point(181, 176)
         Me.lblTotalAmount.Name = "lblTotalAmount"
         Me.lblTotalAmount.Size = New System.Drawing.Size(230, 35)
