@@ -73,8 +73,8 @@ Public Class FormEmployeeRegistration
         If txtPass1.Text.Trim.Equals(txtPass2.Text.Trim) Then
             sql = "UPDATE `db_user_profile` SET `first_name`=@first_name, `middle_name`= @middle_name, `last_name`=@last_name,
             `address`=@address, `gender`=@gender, `civil_status`=@civilStatus, `date_birth`=@dateBirth, `telephone_number`= @telephone,
-            `mobile_number`=@mobile, `email_address`=@email, `username`=@username, `password`=@Password, `modified_by`=@ModifiedBy
-            WHERE `id`=@ID"
+            `mobile_number`=@mobile, `email_address`=@email, `username`=@username, `password`=@Password, `modified_by`=@ModifiedBy,
+            `modified_date`=@ModifiedDate WHERE `id`=@ID"
 
             Connection()
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -94,6 +94,7 @@ Public Class FormEmployeeRegistration
             sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPass1.Text.Trim
             sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = username
             sqlCommand.Parameters.Add("@ID", MySqlDbType.VarChar).Value = userID
+            sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
 
             Try
                 If sqlCommand.ExecuteNonQuery() = 1 Then

@@ -285,7 +285,8 @@ Public Class FormUserProfile
         `email_address`=@email, `occupation`=@occupation, `company_name`=@companyName, `spouse_name`=@spouseName,
         `spouse_occupation`=@spouseOccupation, `spouse_contact`=@spouseContact, `father_name`=@fatherName,
         `father_provincial_address`=@fatherAddress, `mother_name`=@MotherName, `mother_provincial_address`=@MotherAddress,
-        `file_location_image`=@fileLocationImage, `id_type1`=@IdType1, `id_number1`=@IdNumber1, `id_type2`=@IdType2, `id_number2`=@IdNumber2, `username`=@username WHERE p.`id`=@currentUserId"
+        `file_location_image`=@fileLocationImage, `id_type1`=@IdType1, `id_number1`=@IdNumber1, `id_type2`=@IdType2, `id_number2`=@IdNumber2,
+        `username`=@username,`modified_by`=@ModifiedBy, `modified_date`=@ModifiedDate WHERE p.`id`=@currentUserId"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -321,6 +322,8 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
         sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
         sqlCommand.Parameters.Add("@currentUserId", MySqlDbType.Int32).Value = currentUserId
+        sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = username
+        sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
