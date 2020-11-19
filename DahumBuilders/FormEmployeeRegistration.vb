@@ -120,13 +120,39 @@ Public Class FormEmployeeRegistration
 
         If txtPass1.Text.Trim.Equals(txtPass2.Text.Trim) Then
 
+            sql = "SELECT COUNT(`username`) 'count' FROM `db_user_profile` WHERE `username` LIKE @username"
+            Connection()
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim.ToLower
+
+            Try
+                Dim count As Integer = 0
+                sqlDataReader = sqlCommand.ExecuteReader()
+                Do While sqlDataReader.Read = True
+                    count = sqlDataReader("count")
+                    Exit Do
+                Loop
+                sqlDataReader.Dispose()
+                sqlCommand.Dispose()
+
+                If count > 1 Then
+                    MessageBox.Show("Username is already exist in the database.")
+                    txtUsername.Focus()
+                    txtUsername.SelectAll()
+
+                    sqlCommand.Dispose()
+                    sqlConnection.Close()
+                    Exit Sub
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
+
             sql = "INSERT INTO `db_user_profile` 
             (`first_name`, `middle_name`, `last_name`, `address`, `gender`, `civil_status`, `date_birth`, `telephone_number`,
             `mobile_number`, `email_address`, `username`, `password`, `created_by`, `user_type`) VALUES 
             (@first_name, @middle_name, @last_name, @address, @gender, @civilStatus, @dateBirth, @telephone, 
             @mobile, @email, @username, @Password, @CreatedBy, '1')"
-
-            Connection()
             sqlCommand = New MySqlCommand(sql, sqlConnection)
 
             sqlCommand.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = txtName.Text.Trim
@@ -160,7 +186,7 @@ Public Class FormEmployeeRegistration
                 sqlCommand.Dispose()
                 sqlConnection.Close()
             End Try
-        End If
+            End If
     End Sub
 
     Private Sub comboBoxSetting()
@@ -177,9 +203,11 @@ Public Class FormEmployeeRegistration
         End With
         ComboBoxGender.SelectedIndex = 0
         ComboBoxCivilStatus.SelectedIndex = 0
+        ComboBoxEmpType.SelectedIndex = 0
     End Sub
     Function validation() As Boolean
         Dim pass As Boolean = True
+
         If txtName.Text.Trim.Length < 1 Then
             ShowMessageBox(txtName, "Please Enter Employee Name", MessageBoxIcon.Question)
             pass = False
@@ -188,16 +216,22 @@ Public Class FormEmployeeRegistration
             ShowMessageBox(txtSurname, "Please Enter Employee Surname", MessageBoxIcon.Question)
             pass = False
             Exit Function
-        ElseIf txtUsername.Text.Trim.Length < 1 Then
-            ShowMessageBox(txtUsername, "Please Enter Employee username", MessageBoxIcon.Question)
+        ElseIf ComboBoxEmpType.SelectedIndex = 0 Then
+            pass = False
+            ShowMessageBox(Nothing, "Please Select Employee type", MessageBoxIcon.Question)
+            ComboBoxEmpType.DroppedDown = True
+            ComboBoxEmpType.Focus()
+            Exit Function
+        ElseIf txtUsername.Text.Trim.Length < 5 Then
+            ShowMessageBox(txtUsername, "Please Enter Employee username of minimum of 5 characters.", MessageBoxIcon.Question)
             pass = False
             Exit Function
-        ElseIf txtPass1.Text.Trim.Length < 1 Then
-            ShowMessageBox(txtPass1, "Please enter Password.", MessageBoxIcon.Question)
+        ElseIf txtPass1.Text.Trim.Length < 5 Then
+            ShowMessageBox(txtPass1, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
             pass = False
             Exit Function
-        ElseIf txtPass2.Text.Trim.Length < 1 Then
-            ShowMessageBox(txtPass2, "Please enter Password.", MessageBoxIcon.Question)
+        ElseIf txtPass2.Text.Trim.Length < 5 Then
+            ShowMessageBox(txtPass2, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
             pass = False
             Exit Function
         ElseIf txtPass1.Text.Trim <> txtPass2.Text.Trim Then

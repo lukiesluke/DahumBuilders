@@ -24,6 +24,8 @@ Partial Class FormEmployeeRegistration
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtPass2 = New System.Windows.Forms.TextBox()
         Me.txtPass1 = New System.Windows.Forms.TextBox()
@@ -52,10 +54,10 @@ Partial Class FormEmployeeRegistration
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.ComboBoxEmpType = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -68,11 +70,13 @@ Partial Class FormEmployeeRegistration
         Me.TabControl1.Location = New System.Drawing.Point(18, 14)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(905, 483)
+        Me.TabControl1.Size = New System.Drawing.Size(901, 516)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Label14)
+        Me.TabPage1.Controls.Add(Me.ComboBoxEmpType)
         Me.TabPage1.Controls.Add(Me.Label13)
         Me.TabPage1.Controls.Add(Me.DateTimePicker1)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
@@ -92,10 +96,31 @@ Partial Class FormEmployeeRegistration
         Me.TabPage1.Location = New System.Drawing.Point(4, 29)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(897, 450)
+        Me.TabPage1.Size = New System.Drawing.Size(893, 483)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(461, 134)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(213, 20)
+        Me.Label13.TabIndex = 33
+        Me.Label13.Text = "Date of birth (MM/DD/YYYY)"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.CustomFormat = "MM/dd/ yyyy"
+        Me.DateTimePicker1.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.DateTimePicker1.Location = New System.Drawing.Point(465, 162)
+        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(197, 26)
+        Me.DateTimePicker1.TabIndex = 32
         '
         'GroupBox1
         '
@@ -105,7 +130,7 @@ Partial Class FormEmployeeRegistration
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Location = New System.Drawing.Point(449, 248)
+        Me.GroupBox1.Location = New System.Drawing.Point(449, 294)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -178,7 +203,7 @@ Partial Class FormEmployeeRegistration
         Me.gbContactInformation.Controls.Add(Me.Label12)
         Me.gbContactInformation.Controls.Add(Me.Label11)
         Me.gbContactInformation.Controls.Add(Me.Label10)
-        Me.gbContactInformation.Location = New System.Drawing.Point(30, 246)
+        Me.gbContactInformation.Location = New System.Drawing.Point(30, 292)
         Me.gbContactInformation.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.gbContactInformation.Name = "gbContactInformation"
         Me.gbContactInformation.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
@@ -265,7 +290,7 @@ Partial Class FormEmployeeRegistration
         '
         Me.ComboBoxCivilStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxCivilStatus.FormattingEnabled = True
-        Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(133, 164)
+        Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(152, 164)
         Me.ComboBoxCivilStatus.Name = "ComboBoxCivilStatus"
         Me.ComboBoxCivilStatus.Size = New System.Drawing.Size(297, 28)
         Me.ComboBoxCivilStatus.TabIndex = 27
@@ -274,35 +299,35 @@ Partial Class FormEmployeeRegistration
         '
         Me.ComboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxGender.FormattingEnabled = True
-        Me.ComboBoxGender.Location = New System.Drawing.Point(133, 128)
+        Me.ComboBoxGender.Location = New System.Drawing.Point(152, 128)
         Me.ComboBoxGender.Name = "ComboBoxGender"
         Me.ComboBoxGender.Size = New System.Drawing.Size(298, 28)
         Me.ComboBoxGender.TabIndex = 26
         '
         'txtAddress
         '
-        Me.txtAddress.Location = New System.Drawing.Point(133, 200)
+        Me.txtAddress.Location = New System.Drawing.Point(152, 200)
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(734, 26)
+        Me.txtAddress.Size = New System.Drawing.Size(698, 26)
         Me.txtAddress.TabIndex = 25
         '
         'txtSurname
         '
-        Me.txtSurname.Location = New System.Drawing.Point(133, 94)
+        Me.txtSurname.Location = New System.Drawing.Point(152, 94)
         Me.txtSurname.Name = "txtSurname"
         Me.txtSurname.Size = New System.Drawing.Size(298, 26)
         Me.txtSurname.TabIndex = 24
         '
         'txtMiddleName
         '
-        Me.txtMiddleName.Location = New System.Drawing.Point(133, 60)
+        Me.txtMiddleName.Location = New System.Drawing.Point(152, 60)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(298, 26)
         Me.txtMiddleName.TabIndex = 23
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(133, 26)
+        Me.txtName.Location = New System.Drawing.Point(152, 26)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(298, 26)
         Me.txtName.TabIndex = 22
@@ -345,7 +370,7 @@ Partial Class FormEmployeeRegistration
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(807, 501)
+        Me.btnCancel.Location = New System.Drawing.Point(803, 538)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(112, 35)
@@ -355,7 +380,7 @@ Partial Class FormEmployeeRegistration
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(687, 501)
+        Me.btnSave.Location = New System.Drawing.Point(683, 538)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(112, 35)
@@ -363,30 +388,9 @@ Partial Class FormEmployeeRegistration
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(461, 134)
-        Me.Label13.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(213, 20)
-        Me.Label13.TabIndex = 33
-        Me.Label13.Text = "Date of birth (MM/DD/YYYY)"
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.CustomFormat = "MM/dd/ yyyy"
-        Me.DateTimePicker1.DropDownAlign = System.Windows.Forms.LeftRightAlignment.Right
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.DateTimePicker1.Location = New System.Drawing.Point(465, 162)
-        Me.DateTimePicker1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(197, 26)
-        Me.DateTimePicker1.TabIndex = 32
-        '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(687, 501)
+        Me.btnUpdate.Location = New System.Drawing.Point(683, 538)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
@@ -404,11 +408,31 @@ Partial Class FormEmployeeRegistration
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(26, 242)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(117, 20)
+        Me.Label14.TabIndex = 35
+        Me.Label14.Text = "Employee Type"
+        '
+        'ComboBoxEmpType
+        '
+        Me.ComboBoxEmpType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxEmpType.FormattingEnabled = True
+        Me.ComboBoxEmpType.Items.AddRange(New Object() {"[Select]", "Admin", "Agent"})
+        Me.ComboBoxEmpType.Location = New System.Drawing.Point(152, 239)
+        Me.ComboBoxEmpType.Name = "ComboBoxEmpType"
+        Me.ComboBoxEmpType.Size = New System.Drawing.Size(298, 28)
+        Me.ComboBoxEmpType.TabIndex = 34
+        '
         'FormEmployeeRegistration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(942, 548)
+        Me.ClientSize = New System.Drawing.Size(942, 592)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnCancel)
@@ -465,4 +489,6 @@ Partial Class FormEmployeeRegistration
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnSearch As Button
+    Friend WithEvents Label14 As Label
+    Friend WithEvents ComboBoxEmpType As ComboBox
 End Class
