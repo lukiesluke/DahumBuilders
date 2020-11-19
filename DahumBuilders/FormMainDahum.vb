@@ -4,8 +4,9 @@ Public Class FormMainDahum
 
     Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         showLoginForm()
-
-        ToolStripStatusUsername.Text = username
+        If userLogon IsNot Nothing Then
+            ToolStripStatusUsername.Text = userLogon._username
+        End If
 
         If Application.OpenForms().OfType(Of FormUserList).Any Then
             mFormUserList.Focus()

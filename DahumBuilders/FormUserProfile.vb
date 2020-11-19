@@ -53,6 +53,10 @@ Public Class FormUserProfile
                     btnSave.Visible = False
                     btnUpdate.Visible = False
                     btnSearch.PerformClick()
+                    btnAddChild.Enabled = False
+                    btnClearListChild.Enabled = False
+                    btnAddBeneficiary.Enabled = False
+                    btnClearListBeneficiary.Enabled = False
                 End If
             Case Else
                 MessageBox.Show("Error: " & currentUserId, "Information")
@@ -67,10 +71,10 @@ Public Class FormUserProfile
         `place_birth`, `citizenship`, `telephone_number`, `mobile_number`, `email_address`, 
         `occupation`, `company_name`, `spouse_name`, `spouse_occupation`, `spouse_contact`, 
         `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`,
-        `file_location_image`, `id_type1`, `id_number1`, `id_type2`, `id_number2`, `username`, `created_by`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
+        `file_location_image`, `id_type1`, `id_number1`, `id_type2`, `id_number2`, `created_by`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
         @civilStatus, @dateBirth, @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, 
         @companyName, @spouseName, @spouseOccupation, @spouseContact, @fatherName, @fatherAddress, @MotherName, 
-        @MotherAddress, @fileLocationImage, @IdType1, @IdNumber1, @IdType2, @IdNumber2, @username, @CreatedBy)"
+        @MotherAddress, @fileLocationImage, @IdType1, @IdNumber1, @IdType2, @IdNumber2, @CreatedBy)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -104,12 +108,11 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdType2", MySqlDbType.VarChar).Value = txtIdType2.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
-        sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = ""
-        sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = username
+        sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = userLogon._username
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
-                insertDataToChildAndBeneficiary(sqlCommand, sqlConnection, username)
+                insertDataToChildAndBeneficiary(sqlCommand, sqlConnection, userLogon._username)
                 MessageBox.Show("Successfully Saved")
                 clearAllTextBox()
                 sqlCommand.Dispose()
@@ -124,6 +127,37 @@ Public Class FormUserProfile
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+    End Sub
+    Private Sub updateDataToChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, clientID As String)
+        If ListViewChild.Items.Count > 0 Then
+            sql = "INSERT INTO `db_user_child` 
+            (`first_name`, `userid`) VALUES (@firstName, @userid)"
+
+            For Each item As ListViewItem In Me.ListViewChild.Items
+                If item.Text.Equals("*") Then
+                    cmd = New MySqlCommand(sql, conn)
+                    sqlAdapter = New MySqlDataAdapter(cmd)
+                    cmd.Parameters.Add("@firstName", MySqlDbType.VarChar).Value = item.SubItems.Item(1).Text.Trim
+                    cmd.Parameters.Add("@userid", MySqlDbType.VarChar).Value = clientID
+                    cmd.ExecuteNonQuery()
+                End If
+            Next
+        End If
+
+        If ListViewBeneficiary.Items.Count > 0 Then
+            sql = "INSERT INTO `db_user_beneficiary` 
+            (`first_name`, `userid`) VALUES (@firstName, @userid)"
+
+            For Each item As ListViewItem In Me.ListViewBeneficiary.Items
+                If item.Text.Equals("*") Then
+                    cmd = New MySqlCommand(sql, conn)
+                    sqlAdapter = New MySqlDataAdapter(cmd)
+                    cmd.Parameters.Add("@firstName", MySqlDbType.VarChar).Value = item.SubItems.Item(1).Text.Trim
+                    cmd.Parameters.Add("@userid", MySqlDbType.VarChar).Value = clientID
+                    cmd.ExecuteNonQuery()
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub insertDataToChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, user As String)
@@ -216,6 +250,7 @@ Public Class FormUserProfile
             sqlAdapter.Fill(table)
 
             If table.Rows.Count > 0 Then
+                lblClientID.Text = table.Rows(0)("id")
                 userGender = table.Rows(0)("gender")
                 txtFirstName.Text = table.Rows(0)("first_name")
                 txtMiddleName.Text = table.Rows(0)("middle_name")
@@ -286,7 +321,7 @@ Public Class FormUserProfile
         `spouse_occupation`=@spouseOccupation, `spouse_contact`=@spouseContact, `father_name`=@fatherName,
         `father_provincial_address`=@fatherAddress, `mother_name`=@MotherName, `mother_provincial_address`=@MotherAddress,
         `file_location_image`=@fileLocationImage, `id_type1`=@IdType1, `id_number1`=@IdNumber1, `id_type2`=@IdType2, `id_number2`=@IdNumber2,
-        `username`=@username,`modified_by`=@ModifiedBy, `modified_date`=@ModifiedDate WHERE p.`id`=@currentUserId"
+        `modified_by`=@ModifiedBy, `modified_date`=@ModifiedDate WHERE p.`id`=@currentUserId"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -320,13 +355,13 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdType2", MySqlDbType.VarChar).Value = txtIdType2.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
-        sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = username
         sqlCommand.Parameters.Add("@currentUserId", MySqlDbType.Int32).Value = currentUserId
-        sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = username
+        sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = userLogon._username
         sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
+                updateDataToChildAndBeneficiary(sqlCommand, sqlConnection, lblClientID.Text)
                 MessageBox.Show("User Profile Successfully Updated")
                 clearAllTextBox()
                 sqlCommand.Dispose()
@@ -346,13 +381,19 @@ Public Class FormUserProfile
     Private Sub btnAddChild_Click(sender As Object, e As EventArgs) Handles btnAddChild.Click
 
         If txtChildName.Text.Trim().Length > 0 Then
-            Dim item As New ListViewItem(ListViewChild.Items.Count + 1)
-            item.SubItems.Add(txtChildName.Text.Trim)
-            ListViewChild.Items.Add(item)
-
+            If formViewType.Equals("UPDATE") Then
+                Dim item As New ListViewItem("*")
+                item.SubItems.Add(txtChildName.Text.Trim)
+                ListViewChild.Items.Add(item)
+            Else
+                Dim item As New ListViewItem(ListViewChild.Items.Count + 1)
+                item.SubItems.Add(txtChildName.Text.Trim)
+                ListViewChild.Items.Add(item)
+            End If
             txtChildName.Text = ""
-        Else
+            Else
             If txtChildName.Text.Trim().Length < 1 Then
+                txtChildName.Focus()
                 MsgBox("Please Enter Child Name.", MsgBoxStyle.Information, "Child Information")
             End If
         End If
@@ -361,14 +402,19 @@ Public Class FormUserProfile
 
     Private Sub btnAddBeneficiary_Click(sender As Object, e As EventArgs) Handles btnAddBeneficiary.Click
         If txtBeneficiaryName.Text.Trim.Length > 0 Then
-
-            Dim item As New ListViewItem(ListViewBeneficiary.Items.Count + 1)
-            item.SubItems.Add(txtBeneficiaryName.Text.Trim)
-            ListViewBeneficiary.Items.Add(item)
+            If formViewType.Equals("UPDATE") Then
+                Dim item As New ListViewItem("*")
+                item.SubItems.Add(txtBeneficiaryName.Text.Trim)
+                ListViewBeneficiary.Items.Add(item)
+            Else
+                Dim item As New ListViewItem(ListViewBeneficiary.Items.Count + 1)
+                item.SubItems.Add(txtBeneficiaryName.Text.Trim)
+                ListViewBeneficiary.Items.Add(item)
+            End If
             txtBeneficiaryName.Text = ""
         Else
-
             If txtBeneficiaryName.Text.Trim.Length < 1 Then
+                txtBeneficiaryName.Focus()
                 MsgBox("Please Enter Beneficiary Name.", MsgBoxStyle.Information, "Beneficiary Information")
             End If
         End If

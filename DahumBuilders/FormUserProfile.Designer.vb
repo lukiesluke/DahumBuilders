@@ -100,6 +100,7 @@ Partial Class FormUserProfile
         Me.btnAddBeneficiary = New System.Windows.Forms.Button()
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
+        Me.lblClientID = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -895,11 +896,22 @@ Partial Class FormUserProfile
         Me.Label29.TabIndex = 6
         Me.Label29.Text = "Name"
         '
+        'lblClientID
+        '
+        Me.lblClientID.AutoSize = True
+        Me.lblClientID.Location = New System.Drawing.Point(18, 770)
+        Me.lblClientID.Name = "lblClientID"
+        Me.lblClientID.Size = New System.Drawing.Size(81, 20)
+        Me.lblClientID.TabIndex = 25
+        Me.lblClientID.Text = "lblClientID"
+        Me.lblClientID.Visible = False
+        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(801, 817)
+        Me.Controls.Add(Me.lblClientID)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnSearch)
@@ -933,6 +945,7 @@ Partial Class FormUserProfile
         Me.gbId.ResumeLayout(False)
         Me.gbId.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -1014,4 +1027,5 @@ Partial Class FormUserProfile
     Friend WithEvents Label25 As Label
     Friend WithEvents txtIdType2 As TextBox
     Friend WithEvents Label26 As Label
+    Friend WithEvents lblClientID As Label
 End Class

@@ -1,8 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormLogin
-    Private password As String = String.Empty
-
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         sql = "SELECT `id`,`username`, `password`,`user_type` FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
         Connection()
@@ -11,13 +9,16 @@ Public Class FormLogin
         sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPassword.Text.Trim
         Try
             sqlDataReader = sqlCommand.ExecuteReader()
+            userLogon = New User
             Do While sqlDataReader.Read = True
-                userID = sqlDataReader("id")
-                username = sqlDataReader("username")
-                password = sqlDataReader("password")
+                With userLogon
+                    ._id = sqlDataReader("id")
+                    ._username = sqlDataReader("username")
+                    ._password = sqlDataReader("password")
+                End With
                 Exit Do
             Loop
-            If username.Equals(txtUsername.Text.Trim.ToLower) And password.Equals(txtPassword.Text.Trim) Then
+            If userLogon._username.Equals(txtUsername.Text.Trim.ToLower) And userLogon._password.Equals(txtPassword.Text.Trim) Then
                 showMainForm()
                 Me.Close()
             Else

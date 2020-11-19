@@ -22,7 +22,7 @@ Public Class FormEmployeeRegistration
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@ID", MySqlDbType.Int64).Value = userID
+            sqlCommand.Parameters.Add("@ID", MySqlDbType.Int64).Value = userLogon._id
             sqlDataReader = sqlCommand.ExecuteReader()
             Do While sqlDataReader.Read = True
                 mUser = New User
@@ -95,8 +95,8 @@ Public Class FormEmployeeRegistration
             sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim.ToLower
             sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPass1.Text.Trim
             sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = ComboBoxEmpType.SelectedIndex
-            sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = username
-            sqlCommand.Parameters.Add("@ID", MySqlDbType.VarChar).Value = userID
+            sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = userLogon._username
+            sqlCommand.Parameters.Add("@ID", MySqlDbType.VarChar).Value = userLogon._id
             sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
 
             Try
@@ -173,7 +173,7 @@ Public Class FormEmployeeRegistration
             sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim.ToLower
             sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPass1.Text.Trim
             sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = ComboBoxEmpType.SelectedIndex
-            sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = username
+            sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = userLogon._username
 
             Try
                 If sqlCommand.ExecuteNonQuery() = 1 Then
