@@ -322,6 +322,16 @@ Public Class FormUserProfile
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        If txtFirstName.Text.Trim.Length < 1 Then
+            txtFirstName.Focus()
+            MessageBox.Show("Please Enter Client Name", "User Profile")
+            Exit Sub
+        ElseIf txtLastName.Text.Trim.Length < 1 Then
+            txtLastName.Focus()
+            MessageBox.Show("Please Enter Client Surname", "User Profile")
+            Exit Sub
+        End If
+
         sql = "UPDATE `db_user_profile` p SET `first_name`=@first_name, `middle_name`=@middle_name, 
         `last_name`=@last_name, `address`=@address, `gender`=@gender,
         `civil_status`=@civilStatus, `date_birth`=@dateBirth, `place_birth`=@placeBirth, 
