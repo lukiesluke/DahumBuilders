@@ -16,7 +16,7 @@ Public Class FormUserProfile
         'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
         Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
         Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
-        Me.Size = New Size(570, 570)
+        Me.Size = New Size(550, 570)
         fileLocationImage = String.Empty
 
         With Me.ComboBoxGender.Items

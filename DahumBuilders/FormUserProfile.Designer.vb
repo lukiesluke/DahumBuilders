@@ -248,7 +248,7 @@ Partial Class FormUserProfile
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(427, 763)
+        Me.btnUpdate.Location = New System.Drawing.Point(547, 763)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
@@ -664,7 +664,7 @@ Partial Class FormUserProfile
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Name"
-        Me.ColumnHeader1.Width = 126
+        Me.ColumnHeader1.Width = 320
         '
         'txtChildName
         '
@@ -866,7 +866,7 @@ Partial Class FormUserProfile
         'ColumnHeader6
         '
         Me.ColumnHeader6.Text = "Name"
-        Me.ColumnHeader6.Width = 296
+        Me.ColumnHeader6.Width = 320
         '
         'btnAddBeneficiary
         '
