@@ -34,7 +34,7 @@ Public Class FormCRptSalesReport
 
         Dim table As New DataTable()
         sql = "SELECT `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
-        `paid_amount`, t.`discount_amount`, t.`penalty`, pt.`short_name`, pt.`id` AS `payment_type`, 
+        `paid_amount`, t.`commission`, `paid_amount`-t.`commission` AS 'totalCash', t.`discount_amount`, t.`penalty`, pt.`short_name`, pt.`id` AS `payment_type`, 
         IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, pa.`name` AS `particular`, `date_paid`, 
         pl.`proj_name` , it.`block` , it.`lot` , it.`sqm`, t.`date_paid` FROM `db_transaction` t 
         INNER JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
