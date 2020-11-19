@@ -17,7 +17,7 @@ Public Class FormEmployeeRegistration
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         sql = "SELECT `first_name`, `middle_name`, `last_name`,
         `address`, `gender`, `civil_status`, `date_birth`, `telephone_number`, `mobile_number`,
-        `email_address`, `username`, `password` FROM `db_user_profile` WHERE `id`=@ID"
+        `email_address`, `username`, `password`, `user_type` FROM `db_user_profile` WHERE `id`=@ID"
 
         Connection()
         Try
@@ -39,6 +39,7 @@ Public Class FormEmployeeRegistration
                     ._email = sqlDataReader("email_address")
                     ._username = sqlDataReader("username")
                     ._password = sqlDataReader("password")
+                    ._userType = sqlDataReader("user_type")
                 End With
             Loop
 
@@ -55,6 +56,7 @@ Public Class FormEmployeeRegistration
             txtUsername.Text = mUser._username
             txtPass1.Text = mUser._password
             txtPass2.Text = mUser._password
+            ComboBoxEmpType.SelectedIndex = mUser._userType
             sqlDataReader.Dispose()
 
         Catch ex As Exception
@@ -73,8 +75,8 @@ Public Class FormEmployeeRegistration
         If txtPass1.Text.Trim.Equals(txtPass2.Text.Trim) Then
             sql = "UPDATE `db_user_profile` SET `first_name`=@first_name, `middle_name`= @middle_name, `last_name`=@last_name,
             `address`=@address, `gender`=@gender, `civil_status`=@civilStatus, `date_birth`=@dateBirth, `telephone_number`= @telephone,
-            `mobile_number`=@mobile, `email_address`=@email, `username`=@username, `password`=@Password, `modified_by`=@ModifiedBy,
-            `modified_date`=@ModifiedDate WHERE `id`=@ID"
+            `mobile_number`=@mobile, `email_address`=@email, `username`=@username, `password`=@Password, `user_type`=@userType, 
+            `modified_by`=@ModifiedBy, `modified_date`=@ModifiedDate WHERE `id`=@ID"
 
             Connection()
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -92,6 +94,7 @@ Public Class FormEmployeeRegistration
 
             sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim.ToLower
             sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPass1.Text.Trim
+            sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = ComboBoxEmpType.SelectedIndex
             sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = username
             sqlCommand.Parameters.Add("@ID", MySqlDbType.VarChar).Value = userID
             sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
@@ -152,7 +155,7 @@ Public Class FormEmployeeRegistration
             (`first_name`, `middle_name`, `last_name`, `address`, `gender`, `civil_status`, `date_birth`, `telephone_number`,
             `mobile_number`, `email_address`, `username`, `password`, `created_by`, `user_type`) VALUES 
             (@first_name, @middle_name, @last_name, @address, @gender, @civilStatus, @dateBirth, @telephone, 
-            @mobile, @email, @username, @Password, @CreatedBy, '1')"
+            @mobile, @email, @username, @Password, @CreatedBy, @userType)"
             sqlCommand = New MySqlCommand(sql, sqlConnection)
 
             sqlCommand.Parameters.Add("@first_name", MySqlDbType.VarChar).Value = txtName.Text.Trim
@@ -169,6 +172,7 @@ Public Class FormEmployeeRegistration
 
             sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim.ToLower
             sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPass1.Text.Trim
+            sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = ComboBoxEmpType.SelectedIndex
             sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = username
 
             Try

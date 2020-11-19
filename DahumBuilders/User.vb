@@ -13,5 +13,5 @@
     Public Property _image_location As String = ""
     Public Property _username As String = ""
     Public Property _password As String = ""
-
+    Public Property _userType As Integer = 0
 End Class
