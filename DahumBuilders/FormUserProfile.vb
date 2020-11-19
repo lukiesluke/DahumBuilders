@@ -65,6 +65,15 @@ Public Class FormUserProfile
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If txtFirstName.Text.Trim.Length < 1 Then
+            txtFirstName.Focus()
+            MessageBox.Show("Please Enter Client Name", "User Profile")
+            Exit Sub
+        ElseIf txtLastName.Text.Trim.Length < 1 Then
+            txtLastName.Focus()
+            MessageBox.Show("Please Enter Client Surname", "User Profile")
+            Exit Sub
+        End If
 
         sql = "INSERT INTO `db_user_profile` 
         (`first_name`, `middle_name`, `last_name`, `address`, `gender`, `civil_status`, `date_birth`, 
