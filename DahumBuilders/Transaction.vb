@@ -15,7 +15,5 @@
     Public Property _check_amount As Double
     Public Property _check_number As String = ""
     Public Property _check_date As Date = Nothing
-
-
-
+    Public Property _commission As Double
 End Class
