@@ -7,7 +7,6 @@ Module ModuleForm
     Public mFormImageCapture As FormImageCapture
     Public mFormPayment As FormPayment
     Public mFormProjectList As FormProjectList
-    Public mFormRptTransaction As FormRptTransaction
     Public mFormCRptTransaction As FormCRptTransaction
     Public mFormAddProjectSetting As FormAddProjectSetting
     Public mFormSalesReport As FormCRptSalesReport

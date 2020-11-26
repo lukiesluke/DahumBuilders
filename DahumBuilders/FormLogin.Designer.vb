@@ -29,6 +29,7 @@ Partial Class FormLogin
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtUsername
@@ -98,12 +99,23 @@ Partial Class FormLogin
         Me.Label3.TabIndex = 6
         Me.Label3.Text = "Dahum Builders and Development Corporation"
         '
+        'lblMessage
+        '
+        Me.lblMessage.ForeColor = System.Drawing.Color.Crimson
+        Me.lblMessage.Location = New System.Drawing.Point(55, 224)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(558, 23)
+        Me.lblMessage.TabIndex = 7
+        Me.lblMessage.Text = "lblMessage"
+        Me.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FormLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(625, 245)
+        Me.ClientSize = New System.Drawing.Size(625, 296)
+        Me.Controls.Add(Me.lblMessage)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLogin)
@@ -129,4 +141,5 @@ Partial Class FormLogin
     Friend WithEvents btnLogin As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents Label3 As Label
+    Friend WithEvents lblMessage As Label
 End Class

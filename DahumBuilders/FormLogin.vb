@@ -1,7 +1,19 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormLogin
+    Private tries As Integer = 0
+    Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        tries = 0
+        lblMessage.Visible = False
+    End Sub
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+
+        If validateLogin() = False Then
+            lblMessage.Text = "Please enter username/password."
+            lblMessage.Visible = True
+            Exit Sub
+        End If
+
         sql = "SELECT `id`,`username`, `password`,`user_type` FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -22,10 +34,14 @@ Public Class FormLogin
                 showMainForm()
                 Me.Close()
             Else
-                MessageBox.Show("Invaild username or password please try again.")
+                Dim result As String = String.Empty
+                result = String.Format("Invaild username or password please try again. Attemp ({0})", tries + 1)
+                tries += 1
+                lblMessage.Text = result
+                lblMessage.Visible = True
             End If
         Catch ex As Exception
-            MessageBox.Show("Saving error: " & ex.Message)
+            MessageBox.Show("Login Error: " & ex.Message)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
@@ -39,14 +55,23 @@ Public Class FormLogin
             mFormMainDahum.Show()
         End If
     End Sub
-
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         End
     End Sub
-
     Private Sub txtPassword_KeyUp(sender As Object, e As KeyEventArgs) Handles txtPassword.KeyUp
         If e.KeyCode = Keys.Enter Then
             btnLogin.PerformClick()
+            Me.Focus()
         End If
     End Sub
+
+    Private Function validateLogin() As Boolean
+        Dim pass As Boolean = True
+        If txtUsername.Text.Trim.Length < 5 Then
+            pass = False
+        ElseIf txtPassword.Text.Trim.Length < 5 Then
+            pass = False
+        End If
+        Return pass
+    End Function
 End Class
