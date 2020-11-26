@@ -24,6 +24,8 @@ Partial Class FormEmployeeRegistration
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.ComboBoxEmpType = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -56,8 +58,6 @@ Partial Class FormEmployeeRegistration
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.ComboBoxEmpType = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -100,6 +100,26 @@ Partial Class FormEmployeeRegistration
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(26, 242)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(117, 20)
+        Me.Label14.TabIndex = 35
+        Me.Label14.Text = "Employee Type"
+        '
+        'ComboBoxEmpType
+        '
+        Me.ComboBoxEmpType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBoxEmpType.FormattingEnabled = True
+        Me.ComboBoxEmpType.Items.AddRange(New Object() {"[Select]", "Admin", "Agent"})
+        Me.ComboBoxEmpType.Location = New System.Drawing.Point(152, 239)
+        Me.ComboBoxEmpType.Name = "ComboBoxEmpType"
+        Me.ComboBoxEmpType.Size = New System.Drawing.Size(298, 28)
+        Me.ComboBoxEmpType.TabIndex = 34
         '
         'Label13
         '
@@ -408,26 +428,6 @@ Partial Class FormEmployeeRegistration
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(26, 242)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(117, 20)
-        Me.Label14.TabIndex = 35
-        Me.Label14.Text = "Employee Type"
-        '
-        'ComboBoxEmpType
-        '
-        Me.ComboBoxEmpType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBoxEmpType.FormattingEnabled = True
-        Me.ComboBoxEmpType.Items.AddRange(New Object() {"[Select]", "Admin", "Agent"})
-        Me.ComboBoxEmpType.Location = New System.Drawing.Point(152, 239)
-        Me.ComboBoxEmpType.Name = "ComboBoxEmpType"
-        Me.ComboBoxEmpType.Size = New System.Drawing.Size(298, 28)
-        Me.ComboBoxEmpType.TabIndex = 34
-        '
         'FormEmployeeRegistration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -442,6 +442,7 @@ Partial Class FormEmployeeRegistration
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormEmployeeRegistration"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Employee Registration"
         Me.TabControl1.ResumeLayout(False)

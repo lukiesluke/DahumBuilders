@@ -107,6 +107,7 @@ Partial Class FormImageCapture
         Me.Controls.Add(Me.bntCamera)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "FormImageCapture"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Image Capture"
         Me.TableLayoutPanel1.ResumeLayout(False)

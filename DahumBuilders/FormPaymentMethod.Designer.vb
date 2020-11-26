@@ -22,6 +22,7 @@ Partial Class FormPaymentMethod
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPaymentMethod))
         Me.txtAmountEQ = New System.Windows.Forms.TextBox()
         Me.txtAmountMA = New System.Windows.Forms.TextBox()
         Me.dtpEquityStart = New System.Windows.Forms.DateTimePicker()
@@ -343,6 +344,7 @@ Partial Class FormPaymentMethod
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormPaymentMethod"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

@@ -23,6 +23,7 @@ Partial Class FormPayment
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPayment))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.PanelCheck = New System.Windows.Forms.Panel()
         Me.lblCheckNo = New System.Windows.Forms.Label()
@@ -773,6 +774,7 @@ Partial Class FormPayment
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "FormPayment"
