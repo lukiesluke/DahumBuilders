@@ -93,6 +93,8 @@ Public Class FormPaymentMethod
         If txtEquityTerm.Text.Trim IsNot String.Empty Then
             dtpEquityEnd.Value = dtpEquityStart.Value
             dtpEquityEnd.Value = dtpEquityEnd.Value.AddMonths(txtEquityTerm.Text)
+
+            dtpMonthlyStart.Value = dtpEquityEnd.Value.AddMonths(1)
         End If
     End Sub
 
@@ -109,7 +111,9 @@ Public Class FormPaymentMethod
             dtpMonthlyEnd.Value = dtpMonthlyEnd.Value.AddMonths(txtMATerm.Text)
         End If
     End Sub
-
+    Private Sub dtpEquityEnd_ValueChanged(sender As Object, e As EventArgs) Handles dtpEquityEnd.ValueChanged
+        dtpMonthlyStart.Value = dtpEquityEnd.Value.AddMonths(1)
+    End Sub
     Private Sub txtEquityTerm_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEquityTerm.KeyPress
         If Asc(e.KeyChar) <> 8 Then
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
@@ -160,4 +164,5 @@ Public Class FormPaymentMethod
     Private Sub txtAmountEQ_Click(sender As Object, e As EventArgs) Handles txtAmountEQ.Click
         txtAmountEQ.SelectAll()
     End Sub
+
 End Class

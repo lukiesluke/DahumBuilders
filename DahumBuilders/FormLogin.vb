@@ -58,6 +58,9 @@ Public Class FormLogin
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         End
     End Sub
+    Private Sub txtUsername_KeyUp(sender As Object, e As KeyEventArgs) Handles txtUsername.KeyUp
+        txtPassword_KeyUp(sender, e)
+    End Sub
     Private Sub txtPassword_KeyUp(sender As Object, e As KeyEventArgs) Handles txtPassword.KeyUp
         If e.KeyCode = Keys.Enter Then
             btnLogin.PerformClick()
