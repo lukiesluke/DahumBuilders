@@ -185,7 +185,10 @@ Public Class FormAddProjectSetting
 
     Private Sub ListViewProject_Click(sender As Object, e As EventArgs) Handles ListViewProject.Click
         If ListViewProject.Items.Count > 0 Then
-            cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
+            Dim projectName As String = cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
+            If projectName.Length > 0 Then
+                cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
+            End If
         End If
     End Sub
 
@@ -215,13 +218,14 @@ Public Class FormAddProjectSetting
     End Sub
 
     Private Sub ListViewProjectLot_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewProjectLot.KeyUp
-        If ListViewProjectLot.Items.Count > 0 And ListViewProjectLot.SelectedItems.Item(0).Text IsNot String.Empty Then
+        If ListViewProjectLot.Items.Count > 0 Then
             ListViewProjectLot_Click(sender, e)
-        End If
-        If e.KeyCode = Keys.Enter Then
-            PanelLotUpdate.Visible = True
-        ElseIf e.KeyCode = Keys.Escape Then
-            PanelLotUpdate.Visible = False
+
+            If e.KeyCode = Keys.Enter Then
+                PanelLotUpdate.Visible = True
+            ElseIf e.KeyCode = Keys.Escape Then
+                PanelLotUpdate.Visible = False
+            End If
         End If
     End Sub
 
