@@ -3893,7 +3893,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Dahum Builders Corps"
         "ProductCode" = "8:{46A4CE61-C661-4C65-94DC-06C8D737F53F}"
-        "PackageCode" = "8:{19AF40C5-4B72-4BBD-9990-B905B90030BB}"
+        "PackageCode" = "8:{FFB7F116-601A-49C2-B299-BBCD357332AF}"
         "UpgradeCode" = "8:{FCF71A66-7517-4091-B677-FFEFE5CD8939}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

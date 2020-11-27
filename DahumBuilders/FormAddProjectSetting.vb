@@ -1,10 +1,12 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormAddProjectSetting
+    Private lot As New LotClass()
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Size(980, 500)
         load_ProjectName_combobox()
         cbbProjectName.SelectedIndex = 0
+        PanelLotUpdate.Visible = False
     End Sub
 
     Private Sub load_ProjectName_combobox()
@@ -144,7 +146,7 @@ Public Class FormAddProjectSetting
         Dim item As ListViewItem
 
         sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available',
-            (SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`)) AS 'status', i.`autoID`
+            (SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`)) AS 'status', i.`autoID`, i.`proj_id`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`proj_name` LIKE @ProjName ORDER BY i.`block` ASC, i.`lot` ASC"
         Connection()
         Try
@@ -169,6 +171,7 @@ Public Class FormAddProjectSetting
                 End With
                 lblProjID.Text = sqlDataReader("id")
                 item.SubItems.Add(sqlDataReader("autoID"))
+                item.SubItems.Add(sqlDataReader("proj_id"))
                 ListViewProjectLot.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -190,5 +193,72 @@ Public Class FormAddProjectSetting
         If ListViewProject.Items.Count > 0 Then
             ListViewProject_Click(sender, e)
         End If
+    End Sub
+
+    Private Sub ListViewProjectLot_Click(sender As Object, e As EventArgs) Handles ListViewProjectLot.Click
+        If ListViewProjectLot.Items.Count > 0 And ListViewProjectLot.SelectedItems.Item(0).Text IsNot String.Empty Then
+            lot = New LotClass()
+            With lot
+                ._id = ListViewProjectLot.SelectedItems.Item(0).Text
+                ._block = ListViewProjectLot.SelectedItems.Item(0).SubItems(2).Text
+                ._lot = ListViewProjectLot.SelectedItems.Item(0).SubItems(3).Text
+                ._sqm = ListViewProjectLot.SelectedItems.Item(0).SubItems(4).Text
+                ._tcp = ListViewProjectLot.SelectedItems.Item(0).SubItems(5).Text
+                ._projID = ListViewProjectLot.SelectedItems.Item(0).SubItems(8).Text
+            End With
+
+            txtBlockUp.Text = lot._block
+            txtLotUp.Text = lot._lot
+            txtSqmUp.Text = lot._sqm
+            txtTcpUp.Text = lot._tcp.ToString("N2")
+        End If
+    End Sub
+
+    Private Sub ListViewProjectLot_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewProjectLot.KeyUp
+        If ListViewProjectLot.Items.Count > 0 And ListViewProjectLot.SelectedItems.Item(0).Text IsNot String.Empty Then
+            ListViewProjectLot_Click(sender, e)
+        End If
+        If e.KeyCode = Keys.Enter Then
+            PanelLotUpdate.Visible = True
+        ElseIf e.KeyCode = Keys.Escape Then
+            PanelLotUpdate.Visible = False
+        End If
+    End Sub
+
+    Private Sub lblClose_Click(sender As Object, e As EventArgs) Handles lblClose.Click
+        PanelLotUpdate.Visible = False
+    End Sub
+
+    Private Sub btnUpdateLot_Click(sender As Object, e As EventArgs) Handles btnUpdateLot.Click
+        sql = "UPDATE `db_project_item` SET `block`=@block, `lot`=@lot,`sqm`=@Sqm,
+        `price`=@price, `autoID`=@autoID WHERE `item_id`=@ItemID"
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        Try
+            sqlCommand.Parameters.Add("@block", MySqlDbType.Int24).Value = txtBlockUp.Text.Trim
+            sqlCommand.Parameters.Add("@lot", MySqlDbType.Int24).Value = txtLotUp.Text.Trim
+            sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = txtSqmUp.Text.Trim
+            sqlCommand.Parameters.Add("@price", MySqlDbType.Double).Value = txtTcpUp.Text.Trim
+            sqlCommand.Parameters.Add("@autoID", MySqlDbType.VarChar).Value = lot._projID & "." & txtBlockUp.Text.Trim & "." & txtLotUp.Text.Trim
+            sqlCommand.Parameters.Add("@ItemID", MySqlDbType.Int64).Value = lot._id
+
+            If sqlCommand.ExecuteNonQuery() = 1 Then
+                txtProjectName.Text = String.Empty
+                txtProjectAddress.Text = String.Empty
+                PanelLotUpdate.Visible = False
+                cbbProjectName_SelectedIndexChanged(Me, Nothing)
+                MessageBox.Show("Successfully lot updated.")
+            End If
+        Catch ex As Exception
+            If ex.Message.Contains("Duplicate") Then
+                Dim msg As String = "Block (" & txtBlockUp.Text.Trim & ") and lot (" & txtLotUp.Text.Trim & ") alreaady exist in " & cbbProjectName.Text.Trim
+                MessageBox.Show(Me, msg, "Project Setting", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Else
+                MessageBox.Show("Project Add Lot: " & ex.Message)
+            End If
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
     End Sub
 End Class

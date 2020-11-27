@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormAddProjectSetting
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FormAddProjectSetting
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.cbbProjectName = New System.Windows.Forms.ComboBox()
         Me.txtBlock = New System.Windows.Forms.TextBox()
@@ -36,6 +36,16 @@ Partial Class FormAddProjectSetting
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.PanelLotUpdate = New System.Windows.Forms.Panel()
+        Me.btnUpdateLot = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtBlockUp = New System.Windows.Forms.TextBox()
+        Me.txtTcpUp = New System.Windows.Forms.TextBox()
+        Me.txtLotUp = New System.Windows.Forms.TextBox()
+        Me.txtSqmUp = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.ListViewProjectLot = New System.Windows.Forms.ListView()
         Me.ColumnID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -62,9 +72,12 @@ Partial Class FormAddProjectSetting
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblClose = New System.Windows.Forms.Label()
+        Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel6.SuspendLayout()
+        Me.PanelLotUpdate.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -177,6 +190,7 @@ Partial Class FormAddProjectSetting
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 600.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1408, 657)
         Me.TableLayoutPanel1.TabIndex = 15
         '
@@ -206,6 +220,7 @@ Partial Class FormAddProjectSetting
         'Panel6
         '
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel6.Controls.Add(Me.PanelLotUpdate)
         Me.Panel6.Controls.Add(Me.ListViewProjectLot)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel6.Location = New System.Drawing.Point(0, 136)
@@ -213,10 +228,103 @@ Partial Class FormAddProjectSetting
         Me.Panel6.Size = New System.Drawing.Size(808, 456)
         Me.Panel6.TabIndex = 17
         '
+        'PanelLotUpdate
+        '
+        Me.PanelLotUpdate.BackColor = System.Drawing.Color.LightGray
+        Me.PanelLotUpdate.Controls.Add(Me.lblClose)
+        Me.PanelLotUpdate.Controls.Add(Me.btnUpdateLot)
+        Me.PanelLotUpdate.Controls.Add(Me.Label13)
+        Me.PanelLotUpdate.Controls.Add(Me.Label10)
+        Me.PanelLotUpdate.Controls.Add(Me.txtBlockUp)
+        Me.PanelLotUpdate.Controls.Add(Me.txtTcpUp)
+        Me.PanelLotUpdate.Controls.Add(Me.txtLotUp)
+        Me.PanelLotUpdate.Controls.Add(Me.txtSqmUp)
+        Me.PanelLotUpdate.Controls.Add(Me.Label11)
+        Me.PanelLotUpdate.Controls.Add(Me.Label12)
+        Me.PanelLotUpdate.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelLotUpdate.Location = New System.Drawing.Point(0, 273)
+        Me.PanelLotUpdate.Name = "PanelLotUpdate"
+        Me.PanelLotUpdate.Size = New System.Drawing.Size(804, 179)
+        Me.PanelLotUpdate.TabIndex = 11
+        '
+        'btnUpdateLot
+        '
+        Me.btnUpdateLot.Location = New System.Drawing.Point(282, 116)
+        Me.btnUpdateLot.Name = "btnUpdateLot"
+        Me.btnUpdateLot.Size = New System.Drawing.Size(120, 42)
+        Me.btnUpdateLot.TabIndex = 22
+        Me.btnUpdateLot.Text = "Update"
+        Me.btnUpdateLot.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(26, 89)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(45, 20)
+        Me.Label13.TabIndex = 18
+        Me.Label13.Text = "SQM"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(26, 127)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(39, 20)
+        Me.Label10.TabIndex = 21
+        Me.Label10.Text = "TCP"
+        '
+        'txtBlockUp
+        '
+        Me.txtBlockUp.Location = New System.Drawing.Point(86, 22)
+        Me.txtBlockUp.Name = "txtBlockUp"
+        Me.txtBlockUp.Size = New System.Drawing.Size(54, 26)
+        Me.txtBlockUp.TabIndex = 15
+        '
+        'txtTcpUp
+        '
+        Me.txtTcpUp.Location = New System.Drawing.Point(86, 121)
+        Me.txtTcpUp.Name = "txtTcpUp"
+        Me.txtTcpUp.Size = New System.Drawing.Size(182, 26)
+        Me.txtTcpUp.TabIndex = 18
+        Me.txtTcpUp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'txtLotUp
+        '
+        Me.txtLotUp.Location = New System.Drawing.Point(86, 55)
+        Me.txtLotUp.Name = "txtLotUp"
+        Me.txtLotUp.Size = New System.Drawing.Size(54, 26)
+        Me.txtLotUp.TabIndex = 16
+        '
+        'txtSqmUp
+        '
+        Me.txtSqmUp.Location = New System.Drawing.Point(86, 88)
+        Me.txtSqmUp.Name = "txtSqmUp"
+        Me.txtSqmUp.Size = New System.Drawing.Size(54, 26)
+        Me.txtSqmUp.TabIndex = 17
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(26, 25)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(48, 20)
+        Me.Label11.TabIndex = 19
+        Me.Label11.Text = "Block"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(26, 58)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(32, 20)
+        Me.Label12.TabIndex = 20
+        Me.Label12.Text = "Lot"
+        '
         'ListViewProjectLot
         '
         Me.ListViewProjectLot.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID})
+        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID})
         Me.ListViewProjectLot.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewProjectLot.FullRowSelect = True
         Me.ListViewProjectLot.GridLines = True
@@ -422,6 +530,21 @@ Partial Class FormAddProjectSetting
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "Project Lot Setting"
         '
+        'lblClose
+        '
+        Me.lblClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblClose.Location = New System.Drawing.Point(729, 4)
+        Me.lblClose.Name = "lblClose"
+        Me.lblClose.Size = New System.Drawing.Size(71, 30)
+        Me.lblClose.TabIndex = 23
+        Me.lblClose.Text = "X"
+        Me.lblClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ColumnHeaderProjID
+        '
+        Me.ColumnHeaderProjID.Text = "ProjectID"
+        Me.ColumnHeaderProjID.Width = 0
+        '
         'FormAddProjectSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -438,6 +561,8 @@ Partial Class FormAddProjectSetting
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel6.ResumeLayout(False)
+        Me.PanelLotUpdate.ResumeLayout(False)
+        Me.PanelLotUpdate.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel5.ResumeLayout(False)
@@ -489,4 +614,16 @@ Partial Class FormAddProjectSetting
     Friend WithEvents ColumnHeader1 As ColumnHeader
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel6 As Panel
+    Friend WithEvents PanelLotUpdate As Panel
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtBlockUp As TextBox
+    Friend WithEvents txtTcpUp As TextBox
+    Friend WithEvents txtLotUp As TextBox
+    Friend WithEvents txtSqmUp As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents btnUpdateLot As Button
+    Friend WithEvents lblClose As Label
+    Friend WithEvents ColumnHeaderProjID As ColumnHeader
 End Class
