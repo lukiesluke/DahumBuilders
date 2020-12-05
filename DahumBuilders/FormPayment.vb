@@ -545,6 +545,38 @@ FinallyLine:
                     cbPaymentType.Focus()
                     Exit Sub
             End Select
+        ElseIf cbPaymentType.SelectedIndex = 1 Then
+            If txtBankName.Text.Trim.Length < 1 Then
+                Dim ret As DialogResult = MessageBox.Show(Me, "Please Enter Bank Name.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Select Case ret
+                    Case DialogResult.OK
+                End Select
+                txtBankName.Focus()
+                Exit Sub
+            ElseIf txtCheckNo.Text.Trim.Length < 1 Then
+                Dim ret As DialogResult = MessageBox.Show(Me, "Please Ente check number.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Select Case ret
+                    Case DialogResult.OK
+                End Select
+                txtCheckNo.Focus()
+                Exit Sub
+            End If
+        ElseIf cbPaymentType.SelectedIndex = 2 Then
+            If txtBankName.Text.Trim.Length < 1 Then
+                Dim ret As DialogResult = MessageBox.Show(Me, "Please Enter Bank Name.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Select Case ret
+                    Case DialogResult.OK
+                End Select
+                txtBankName.Focus()
+                Exit Sub
+            ElseIf txtCheckNo.Text.Trim.Length < 1 Then
+                Dim ret As DialogResult = MessageBox.Show(Me, "Please Enter reference number.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Select Case ret
+                    Case DialogResult.OK
+                End Select
+                txtCheckNo.Focus()
+                Exit Sub
+            End If
         End If
 
         If DataGridView1.Rows.Count() < 1 Then

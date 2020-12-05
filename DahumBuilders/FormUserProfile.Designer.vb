@@ -249,7 +249,7 @@ Partial Class FormUserProfile
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(547, 763)
+        Me.btnUpdate.Location = New System.Drawing.Point(427, 763)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(112, 35)

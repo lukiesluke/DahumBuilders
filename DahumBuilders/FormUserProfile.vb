@@ -117,7 +117,7 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdType2", MySqlDbType.VarChar).Value = txtIdType2.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
-        sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = userLogon._username
+        sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.Int64).Value = userLogon._id
 
         Try
             If sqlCommand.ExecuteNonQuery() = 1 Then
@@ -375,7 +375,7 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
         sqlCommand.Parameters.Add("@currentUserId", MySqlDbType.Int32).Value = currentUserId
-        sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = userLogon._username
+        sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.Int64).Value = userLogon._id
         sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
 
         Try
