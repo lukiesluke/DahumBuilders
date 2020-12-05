@@ -117,6 +117,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsIni.vb" />
+    <Compile Include="configurationSetting.vb" />
     <Compile Include="crpSalesReport.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -341,6 +343,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Resources\dahum.ini" />
     <None Include="SalesReport.xsc">
       <DependentUpon>SalesReport.xsd</DependentUpon>
     </None>

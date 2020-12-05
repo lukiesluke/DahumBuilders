@@ -3,7 +3,10 @@
 Public Class FormMainDahum
 
     Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        DahumConfiguration()
         showLoginForm()
+
         If userLogon IsNot Nothing Then
             ToolStripStatusUsername.Text = userLogon._username
         End If

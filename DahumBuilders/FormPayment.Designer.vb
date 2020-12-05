@@ -159,7 +159,7 @@ Partial Class FormPayment
         Me.txtCheckNo.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCheckNo.Location = New System.Drawing.Point(173, 132)
         Me.txtCheckNo.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.txtCheckNo.MaxLength = 12
+        Me.txtCheckNo.MaxLength = 30
         Me.txtCheckNo.Name = "txtCheckNo"
         Me.txtCheckNo.Size = New System.Drawing.Size(232, 29)
         Me.txtCheckNo.TabIndex = 39

@@ -8,14 +8,23 @@ Module ModuleConnection
     Public sqlAdapter As MySqlDataAdapter
     Public fileLocationImage As String
     Public userLogon As User
+    Public serverSetting As configurationSetting
+    Public ini As New clsIni
+
     Public Sub Connection()
         Try
-            Dim connStr As String = "Server=192.168.1.9; Uid=admin; Pwd=@dmin@2020; Port=3306; Database=dahum_builders;"
-            'sqlConnection = New MySqlConnection("datasource=localhost;port=3306;username=admin;password=@dmin@2020;database=dahum_builders")
+            Dim connStr As String = String.Format("Server={0}; Uid={1}; Pwd=@dmin@2020; Port=3306; Database=dahum_builders;", serverSetting._ip, serverSetting._username)
             sqlConnection = New MySqlConnection(connStr)
             sqlConnection.Open()
         Catch ex As Exception
             MsgBox("Please configure Database: " & ex.Message, MsgBoxStyle.Information, "Database")
         End Try
+    End Sub
+
+    Public Sub DahumConfiguration()
+        ini = New clsIni
+        serverSetting = New configurationSetting
+        serverSetting._ip = ini.GetString("server_setting", "ip-address", "")
+        serverSetting._username = ini.GetString("server_setting", "username", "")
     End Sub
 End Module

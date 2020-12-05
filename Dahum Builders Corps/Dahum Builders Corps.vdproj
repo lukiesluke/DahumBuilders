@@ -591,6 +591,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DBF6061DD5F94AE0954F7DD9BBED3D47"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_DCD37A6B4C3E28FFCED9912D79E6CD92"
         "OwnerKey" = "8:_AFD066EFF02A4B12B43BA805E1804130"
         "MsmSig" = "8:_UNDEFINED"
@@ -622,13 +628,13 @@
         "Entry"
         {
         "MsmKey" = "8:_E8F52AC7101ED443C4FD1364C8C3BBD0"
-        "OwnerKey" = "8:_7E3D5CB18B77865FC4B74F743EBBD938"
+        "OwnerKey" = "8:_AFD066EFF02A4B12B43BA805E1804130"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_E8F52AC7101ED443C4FD1364C8C3BBD0"
-        "OwnerKey" = "8:_AFD066EFF02A4B12B43BA805E1804130"
+        "OwnerKey" = "8:_7E3D5CB18B77865FC4B74F743EBBD938"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -689,6 +695,24 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0BC49258F8063AFBE18299DE3E7DC73C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F5D888636843AF5A49DF5986F44E9C40"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E8F52AC7101ED443C4FD1364C8C3BBD0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2E70BF53CCFF8E2D36E5937FA4AFF270"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1135,24 +1159,6 @@
         "OwnerKey" = "8:_7E3D5CB18B77865FC4B74F743EBBD938"
         "MsmSig" = "8:_UNDEFINED"
         }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E8F52AC7101ED443C4FD1364C8C3BBD0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F5D888636843AF5A49DF5986F44E9C40"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_2E70BF53CCFF8E2D36E5937FA4AFF270"
-        "MsmSig" = "8:_UNDEFINED"
-        }
     }
     "Configurations"
     {
@@ -1171,6 +1177,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -1187,6 +1201,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -3439,6 +3461,26 @@
             {
             "SourcePath" = "8:..\\DahumBuilders\\crptTransaction.vb"
             "TargetName" = "8:crptTransaction.vb"
+            "Tag" = "8:"
+            "Folder" = "8:_5045AD63FA4141F6860FF5364552EB82"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DBF6061DD5F94AE0954F7DD9BBED3D47"
+            {
+            "SourcePath" = "8:..\\DahumBuilders\\bin\\Debug\\dahum.ini"
+            "TargetName" = "8:dahum.ini"
             "Tag" = "8:"
             "Folder" = "8:_5045AD63FA4141F6860FF5364552EB82"
             "Condition" = "8:"

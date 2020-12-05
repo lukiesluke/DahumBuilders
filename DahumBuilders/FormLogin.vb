@@ -7,7 +7,7 @@ Public Class FormLogin
         lblMessage.Visible = False
     End Sub
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-
+        DahumConfiguration()
         If validateLogin() = False Then
             lblMessage.Text = "Please enter username/password."
             lblMessage.Visible = True
