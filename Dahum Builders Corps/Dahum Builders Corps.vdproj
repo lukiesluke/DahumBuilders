@@ -1184,6 +1184,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -1208,6 +1216,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
     }
@@ -3934,15 +3950,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Dahum Builders Corps"
-        "ProductCode" = "8:{46A4CE61-C661-4C65-94DC-06C8D737F53F}"
-        "PackageCode" = "8:{FFB7F116-601A-49C2-B299-BBCD357332AF}"
+        "ProductCode" = "8:{81E9E605-2AB8-48FC-91F8-3A90BC69D192}"
+        "PackageCode" = "8:{996A5B16-03A6-4A9C-9F9A-F57A602D3C54}"
         "UpgradeCode" = "8:{FCF71A66-7517-4091-B677-FFEFE5CD8939}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Builders"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -3952,7 +3968,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Dahum Builders and Development Corparation"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_10088726B4EB4909B08FFCAE883E6D0C"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
