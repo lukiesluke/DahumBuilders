@@ -37,6 +37,7 @@ Partial Class FormAddProjectSetting
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PanelLotUpdate = New System.Windows.Forms.Panel()
+        Me.lblClose = New System.Windows.Forms.Label()
         Me.btnUpdateLot = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -55,6 +56,8 @@ Partial Class FormAddProjectSetting
         Me.ColumnTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAutoID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderClient = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblProjID = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -72,8 +75,6 @@ Partial Class FormAddProjectSetting
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.lblClose = New System.Windows.Forms.Label()
-        Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -179,8 +180,8 @@ Partial Class FormAddProjectSetting
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.04546!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.95454!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.20112!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.79888!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 0)
@@ -191,7 +192,7 @@ Partial Class FormAddProjectSetting
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 600.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1408, 657)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1432, 657)
         Me.TableLayoutPanel1.TabIndex = 15
         '
         'Panel1
@@ -212,9 +213,9 @@ Partial Class FormAddProjectSetting
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(595, 60)
+        Me.Panel1.Location = New System.Drawing.Point(593, 60)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(810, 594)
+        Me.Panel1.Size = New System.Drawing.Size(836, 594)
         Me.Panel1.TabIndex = 0
         '
         'Panel6
@@ -225,7 +226,7 @@ Partial Class FormAddProjectSetting
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel6.Location = New System.Drawing.Point(0, 136)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(808, 456)
+        Me.Panel6.Size = New System.Drawing.Size(834, 456)
         Me.Panel6.TabIndex = 17
         '
         'PanelLotUpdate
@@ -244,8 +245,18 @@ Partial Class FormAddProjectSetting
         Me.PanelLotUpdate.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelLotUpdate.Location = New System.Drawing.Point(0, 273)
         Me.PanelLotUpdate.Name = "PanelLotUpdate"
-        Me.PanelLotUpdate.Size = New System.Drawing.Size(804, 179)
+        Me.PanelLotUpdate.Size = New System.Drawing.Size(830, 179)
         Me.PanelLotUpdate.TabIndex = 11
+        '
+        'lblClose
+        '
+        Me.lblClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblClose.Location = New System.Drawing.Point(729, 4)
+        Me.lblClose.Name = "lblClose"
+        Me.lblClose.Size = New System.Drawing.Size(71, 30)
+        Me.lblClose.TabIndex = 23
+        Me.lblClose.Text = "X"
+        Me.lblClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnUpdateLot
         '
@@ -324,13 +335,13 @@ Partial Class FormAddProjectSetting
         'ListViewProjectLot
         '
         Me.ListViewProjectLot.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID})
+        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID, Me.ColumnHeaderClient})
         Me.ListViewProjectLot.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewProjectLot.FullRowSelect = True
         Me.ListViewProjectLot.GridLines = True
         Me.ListViewProjectLot.Location = New System.Drawing.Point(0, 0)
         Me.ListViewProjectLot.Name = "ListViewProjectLot"
-        Me.ListViewProjectLot.Size = New System.Drawing.Size(804, 452)
+        Me.ListViewProjectLot.Size = New System.Drawing.Size(830, 452)
         Me.ListViewProjectLot.TabIndex = 10
         Me.ListViewProjectLot.UseCompatibleStateImageBehavior = False
         Me.ListViewProjectLot.View = System.Windows.Forms.View.Details
@@ -348,16 +359,19 @@ Partial Class FormAddProjectSetting
         'ColumnBlock
         '
         Me.ColumnBlock.Text = "Block"
+        Me.ColumnBlock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnBlock.Width = 40
         '
         'ColumnLot
         '
         Me.ColumnLot.Text = "Lot"
+        Me.ColumnLot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnLot.Width = 40
         '
         'ColumnSQM
         '
         Me.ColumnSQM.Text = "SQM"
+        Me.ColumnSQM.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnSQM.Width = 40
         '
         'ColumnTCP
@@ -375,6 +389,16 @@ Partial Class FormAddProjectSetting
         '
         Me.ColumnHeaderAutoID.Text = "AutoID"
         Me.ColumnHeaderAutoID.Width = 0
+        '
+        'ColumnHeaderProjID
+        '
+        Me.ColumnHeaderProjID.Text = "ProjectID"
+        Me.ColumnHeaderProjID.Width = 0
+        '
+        'ColumnHeaderClient
+        '
+        Me.ColumnHeaderClient.Text = "Client Name"
+        Me.ColumnHeaderClient.Width = 100
         '
         'lblProjID
         '
@@ -399,7 +423,7 @@ Partial Class FormAddProjectSetting
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 60)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(586, 594)
+        Me.Panel2.Size = New System.Drawing.Size(584, 594)
         Me.Panel2.TabIndex = 1
         '
         'Panel5
@@ -409,7 +433,7 @@ Partial Class FormAddProjectSetting
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel5.Location = New System.Drawing.Point(0, 183)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(584, 409)
+        Me.Panel5.Size = New System.Drawing.Size(582, 409)
         Me.Panel5.TabIndex = 13
         '
         'ListViewProject
@@ -421,7 +445,7 @@ Partial Class FormAddProjectSetting
         Me.ListViewProject.GridLines = True
         Me.ListViewProject.Location = New System.Drawing.Point(0, 0)
         Me.ListViewProject.Name = "ListViewProject"
-        Me.ListViewProject.Size = New System.Drawing.Size(580, 405)
+        Me.ListViewProject.Size = New System.Drawing.Size(578, 405)
         Me.ListViewProject.TabIndex = 3
         Me.ListViewProject.UseCompatibleStateImageBehavior = False
         Me.ListViewProject.View = System.Windows.Forms.View.Details
@@ -444,6 +468,7 @@ Partial Class FormAddProjectSetting
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "Lot"
+        Me.ColumnHeader1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnHeader1.Width = 40
         '
         'btnAddProject
@@ -496,7 +521,7 @@ Partial Class FormAddProjectSetting
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(586, 51)
+        Me.Panel3.Size = New System.Drawing.Size(584, 51)
         Me.Panel3.TabIndex = 2
         '
         'Label8
@@ -515,9 +540,9 @@ Partial Class FormAddProjectSetting
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel4.Controls.Add(Me.Label9)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(595, 3)
+        Me.Panel4.Location = New System.Drawing.Point(593, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(810, 51)
+        Me.Panel4.Size = New System.Drawing.Size(836, 51)
         Me.Panel4.TabIndex = 3
         '
         'Label9
@@ -530,26 +555,11 @@ Partial Class FormAddProjectSetting
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "Project Lot Setting"
         '
-        'lblClose
-        '
-        Me.lblClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblClose.Location = New System.Drawing.Point(729, 4)
-        Me.lblClose.Name = "lblClose"
-        Me.lblClose.Size = New System.Drawing.Size(71, 30)
-        Me.lblClose.TabIndex = 23
-        Me.lblClose.Text = "X"
-        Me.lblClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ColumnHeaderProjID
-        '
-        Me.ColumnHeaderProjID.Text = "ProjectID"
-        Me.ColumnHeaderProjID.Width = 0
-        '
         'FormAddProjectSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1447, 690)
+        Me.ClientSize = New System.Drawing.Size(1456, 690)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
@@ -626,4 +636,5 @@ Partial Class FormAddProjectSetting
     Friend WithEvents btnUpdateLot As Button
     Friend WithEvents lblClose As Label
     Friend WithEvents ColumnHeaderProjID As ColumnHeader
+    Friend WithEvents ColumnHeaderClient As ColumnHeader
 End Class

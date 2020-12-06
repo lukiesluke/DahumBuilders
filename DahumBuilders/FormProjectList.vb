@@ -5,6 +5,7 @@ Public Class FormProjectList
     Dim proj As Project = New Project()
 
     Private Sub FormProjectList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Size = New Size(950, 500)
         btnAssign.Enabled = False
         lblProjectAssignedToUser.Text = String.Empty
         load_project_list(String.Empty)
@@ -62,13 +63,25 @@ Public Class FormProjectList
             ListViewProject.Items.Clear()
             Do While sqlDataReader.Read = True
                 item = New ListViewItem(sqlDataReader("item_id").ToString)
-                Dim price As Double = sqlDataReader("price")
+                item.UseItemStyleForSubItems = False
 
+                Dim price As Double = sqlDataReader("price")
                 item.SubItems.Add(sqlDataReader("proj_name"))
                 item.SubItems.Add(sqlDataReader("block"))
                 item.SubItems.Add(sqlDataReader("lot"))
                 item.SubItems.Add(sqlDataReader("sqm"))
                 item.SubItems.Add(price.ToString("N2"))
+                If sqlDataReader("assigned_name").ToString.Length < 1 Then
+                    With item.SubItems.Add("Available")
+                        .Font = New Font(ListViewProject.Font, FontStyle.Bold)
+                        .ForeColor = Color.Green
+                    End With
+                Else
+                    With item.SubItems.Add("Occupied")
+                        .Font = New Font(ListViewProject.Font, FontStyle.Bold)
+                        .ForeColor = Color.Orange
+                    End With
+                End If
                 item.SubItems.Add(sqlDataReader("assigned_name"))
                 ListViewProject.Items.Add(item)
             Loop
@@ -110,7 +123,7 @@ Public Class FormProjectList
         proj._lot = ListViewProject.SelectedItems(0).SubItems(3).Text
         proj._sqm = ListViewProject.SelectedItems(0).SubItems(4).Text
         proj._tcp = ListViewProject.SelectedItems(0).SubItems(5).Text
-        proj._assignedToUserName = ListViewProject.SelectedItems(0).SubItems(6).Text
+        proj._assignedToUserName = ListViewProject.SelectedItems(0).SubItems(7).Text
 
         lblProjectName.Text = proj._name
         lblProjectItemID.Text = String.Format("{0:000000}", Integer.Parse(proj._itemID)) 'proj._itemID.ToString("0000")

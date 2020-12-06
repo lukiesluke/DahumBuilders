@@ -145,9 +145,9 @@ Public Class FormAddProjectSetting
     Private Sub cbbProjectName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbProjectName.SelectedIndexChanged
         Dim item As ListViewItem
 
-        sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available',
-            (SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`)) AS 'status', i.`autoID`, i.`proj_id`
-            FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`proj_name` LIKE @ProjName ORDER BY i.`block` ASC, i.`lot` ASC"
+        sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available', 'Occupied') AS 'status',
+IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`, i.`proj_id`
+FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`proj_name` LIKE @ProjName ORDER BY i.`block` ASC, i.`lot` ASC"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -164,14 +164,17 @@ Public Class FormAddProjectSetting
                 item.SubItems.Add(sqlDataReader("sqm"))
                 item.SubItems.Add(Double.Parse(sqlDataReader("price")).ToString("N2"))
                 With item.SubItems.Add(sqlDataReader("status"))
+                    .Font = New Font(ListViewProjectLot.Font, FontStyle.Bold)
                     If sqlDataReader("status").Equals("Available") Then
-                        .Font = New Font(ListViewProjectLot.Font, FontStyle.Bold)
                         .ForeColor = Color.Green
+                    Else
+                        .ForeColor = Color.Orange
                     End If
                 End With
                 lblProjID.Text = sqlDataReader("id")
                 item.SubItems.Add(sqlDataReader("autoID"))
                 item.SubItems.Add(sqlDataReader("proj_id"))
+                item.SubItems.Add(sqlDataReader("clientName"))
                 ListViewProjectLot.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -264,5 +267,9 @@ Public Class FormAddProjectSetting
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+    End Sub
+
+    Private Sub ListViewProject_GotFocus(sender As Object, e As EventArgs) Handles ListViewProject.GotFocus
+        PanelLotUpdate.Visible = False
     End Sub
 End Class
