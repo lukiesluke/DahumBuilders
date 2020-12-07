@@ -639,7 +639,7 @@ Partial Class FormPayment
         '
         'btnSearchProject
         '
-        Me.btnSearchProject.Location = New System.Drawing.Point(668, 130)
+        Me.btnSearchProject.Location = New System.Drawing.Point(668, 131)
         Me.btnSearchProject.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSearchProject.Name = "btnSearchProject"
         Me.btnSearchProject.Size = New System.Drawing.Size(160, 43)
