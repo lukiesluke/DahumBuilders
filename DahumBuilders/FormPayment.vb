@@ -424,7 +424,7 @@ FinallyLine:
         If DataGridView1.CurrentCell.ColumnIndex = 9 Or DataGridView1.CurrentCell.ColumnIndex = 10 Or DataGridView1.CurrentCell.ColumnIndex = 13 Then 'Part
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtMonthOf_KeyPress
         End If
-        If DataGridView1.CurrentCell.ColumnIndex = 14 Then 'Commission
+        If DataGridView1.CurrentCell.ColumnIndex = 11 Or DataGridView1.CurrentCell.ColumnIndex = 14 Then 'Commission
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtAmountPaid_KeyPress
         End If
     End Sub
