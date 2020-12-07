@@ -139,6 +139,19 @@ Module ModuleForm
             .Style.BackColor = Color.White
         End With
     End Sub
+    Public Sub EnableDataGridViewCell(ByVal dataGridView As DataGridView, e As DataGridViewCellEventArgs, ByVal rowIndex As Integer, ByVal enable As Boolean)
+        With dataGridView.Rows(e.RowIndex).Cells(rowIndex)
+            If enable = True Then
+                .ReadOnly = True
+                .Style.BackColor = Color.LightGray
+            Else
+                .ReadOnly = False
+                .Style.BackColor = Color.White
+            End If
+
+        End With
+    End Sub
+
     Public Sub DisableDataGridViewCell(ByVal dataGridView As DataGridView, e As DataGridViewCellEventArgs)
         With dataGridView.Rows(e.RowIndex).Cells(9) 'Penalty
             .ReadOnly = False

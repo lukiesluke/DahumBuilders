@@ -204,10 +204,15 @@ FinallyLine:
                     cellDP.Style.BackColor = Color.LightGray
                     cellDP.ReadOnly = True
 
+                    With DataGridView1.Rows(e.RowIndex).Cells(11)
+                        .ReadOnly = True
+                    End With
+
                     cellDiscount.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
                     cellDiscount.Style.BackColor = Color.LightGray
                     cellDiscount.ReadOnly = True
-
+                    DataGridView1.Rows(e.RowIndex).Cells(13).Value = 0
+                    EnableDataGridViewCell(DataGridView1, e, 13, True)
                     DisableDataGridViewCell(DataGridView1, e) 'Penalty and Part functionality
                     Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
                         Case "Select"
@@ -239,24 +244,31 @@ FinallyLine:
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                             End If
                         Case "Equity"
+                            EnableDataGridViewCell(DataGridView1, e, 13, False)
                             Dim pm As New PaymentMethod
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
+                            DataGridView1.Rows(e.RowIndex).Cells(13).Value = 1 'Advance Payment
                             EnableDataGridViewCell(DataGridView1, e) 'Part
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._equity.ToString("N2") 'Amount to pay
                         Case "Monthly"
+                            EnableDataGridViewCell(DataGridView1, e, 13, False)
                             Dim pm As New PaymentMethod
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
+                            DataGridView1.Rows(e.RowIndex).Cells(13).Value = 1 'Advance Payment
                             EnableDataGridViewCell(DataGridView1, e) 'Part
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._amortization.ToString("N2") 'Amount to pay
                         Case "Reservation"
+                            With DataGridView1.Rows(e.RowIndex).Cells(11)
+                                .ReadOnly = False
+                                .Value = 0
+                            End With
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
-                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Amount to pay
                         Case "Cash"
                             Dim ttSum As Double = p._total_discount + p._total_paidAmount
                             cellDiscount.Style.BackColor = Color.White
@@ -344,6 +356,18 @@ FinallyLine:
                         End Select
                         DataGridView1.Rows(e.RowIndex).Cells(11).Value = amountToPay.ToString("N2") 'Amount to pay
                     End If
+                Case 13 'Advance payment
+                    Dim amountToPay As Double = 0
+                    Dim advance As Integer = DataGridView1.Rows(e.RowIndex).Cells(13).Value
+
+                    Select Case DataGridView1.Rows(e.RowIndex).Cells(2).Value 'ComoboBox Particular
+                        Case "Equity"
+                            amountToPay = (advance * p._equity)
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = amountToPay.ToString("N2") 'Amount to pay
+                        Case "Monthly"
+                            amountToPay = (advance * p._amortization)
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = amountToPay.ToString("N2") 'Amount to pay
+                    End Select
             End Select
             Dim totalAmountToPay As Double = 0
             For index As Integer = 0 To DataGridView1.RowCount - 1
@@ -370,14 +394,26 @@ FinallyLine:
         End If
         If e.ColumnIndex = 10 Then 'Part
             If DataGridView1.Rows(e.RowIndex).Cells(10).Value Is Nothing Then
-                DataGridView1.Rows(e.RowIndex).Cells(10).Value = 0 'Part
+                DataGridView1.Rows(e.RowIndex).Cells(10).Value = 1 'Part
             End If
         End If
-        If e.ColumnIndex = 13 Then 'Part
-            If DataGridView1.Rows(e.RowIndex).Cells(13).Value IsNot Nothing Then
-                DataGridView1.Rows(e.RowIndex).Cells(13).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(13).Value).ToString("N2") 'Commission
+        If e.ColumnIndex = 11 Then 'Payment
+            If DataGridView1.Rows(e.RowIndex).Cells(11).Value IsNot Nothing Then
+                DataGridView1.Rows(e.RowIndex).Cells(11).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(11).Value).ToString("N2")
             Else
-                DataGridView1.Rows(e.RowIndex).Cells(13).Value = 0.ToString("N2") 'Commission
+                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Commission
+            End If
+        End If
+        If e.ColumnIndex = 13 Then 'Advance Payment
+            If DataGridView1.Rows(e.RowIndex).Cells(13).Value Is Nothing Then
+                DataGridView1.Rows(e.RowIndex).Cells(13).Value = 1 'Advance Payment
+            End If
+        End If
+        If e.ColumnIndex = 14 Then 'Commission
+            If DataGridView1.Rows(e.RowIndex).Cells(14).Value IsNot Nothing Then
+                DataGridView1.Rows(e.RowIndex).Cells(14).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(14).Value).ToString("N2")
+            Else
+                DataGridView1.Rows(e.RowIndex).Cells(14).Value = 0.ToString("N2") 'Commission
             End If
         End If
     End Sub
@@ -385,10 +421,10 @@ FinallyLine:
         If DataGridView1.CurrentCell.ColumnIndex = 4 Then 'Downpaymnet Amount
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtAmountPaid_KeyPress
         End If
-        If DataGridView1.CurrentCell.ColumnIndex = 9 Or DataGridView1.CurrentCell.ColumnIndex = 10 Then 'Part
+        If DataGridView1.CurrentCell.ColumnIndex = 9 Or DataGridView1.CurrentCell.ColumnIndex = 10 Or DataGridView1.CurrentCell.ColumnIndex = 13 Then 'Part
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtMonthOf_KeyPress
         End If
-        If DataGridView1.CurrentCell.ColumnIndex = 13 Then 'Commission
+        If DataGridView1.CurrentCell.ColumnIndex = 14 Then 'Commission
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtAmountPaid_KeyPress
         End If
     End Sub
@@ -433,7 +469,8 @@ FinallyLine:
         row.Cells(9).Value = 0.ToString("N2") 'Penalty Amount
         row.Cells(10).Value = 0 'Part
         row.Cells(12).Value = project 'ProjectClass
-        row.Cells(13).Value = 0.ToString("N2") 'Commission
+        row.Cells(13).Value = 0 'Advance Payment
+        row.Cells(14).Value = 0.ToString("N2") 'Commission
     End Sub
     Private Sub setDataGridView()
 
@@ -481,6 +518,7 @@ FinallyLine:
         DataGridView1.Columns.Add("", "Part")
         DataGridView1.Columns.Add("", "Amount to Pay")
         DataGridView1.Columns.Add("", "ProjectClass")
+        DataGridView1.Columns.Add("", "Advance")
         DataGridView1.Columns.Add("", "Commission")
 
         With DataGridView1
@@ -491,7 +529,7 @@ FinallyLine:
             .Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         End With
 
         With DataGridView1
@@ -507,7 +545,8 @@ FinallyLine:
             .Columns(9).Width = 75 'Penalty Amount
             .Columns(10).Width = 50 'Part
             .Columns(11).Width = 105 'Amount to Pay
-            .Columns(13).Width = 105 'Commission
+            .Columns(13).Width = 60 'Advance Payment
+            .Columns(14).Width = 105 'Commission
         End With
 
         DataGridView1.Columns(0).ReadOnly = True
@@ -524,6 +563,8 @@ FinallyLine:
         DataGridView1.Columns(12).Visible = False 'ProjectClass object
 
         CType(DataGridView1.Columns(10), DataGridViewTextBoxColumn).MaxInputLength = 3
+        CType(DataGridView1.Columns(13), DataGridViewTextBoxColumn).MaxInputLength = 3
+
     End Sub
 
     Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
@@ -643,7 +684,7 @@ FinallyLine:
                 trans._check_number = txtCheckNo.Text.Trim
                 trans._check_date = dtpCheckDate.Value
             End If
-            trans._commission = row.Cells(13).Value
+            trans._commission = row.Cells(14).Value 'Commission
             insertPurchase(trans)
         Next
 
