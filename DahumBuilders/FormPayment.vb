@@ -530,6 +530,7 @@ FinallyLine:
             .Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         End With
 
         With DataGridView1
@@ -964,4 +965,16 @@ FinallyLine:
         txtTenderedAmount.SelectAll()
     End Sub
 
+    Private Sub btnOREntries_Click(sender As Object, e As EventArgs) Handles btnOREntries.Click
+        If Application.OpenForms().OfType(Of FormOREntries).Any Then
+            mFormOREntries.Focus()
+        Else
+            Dim u As New User()
+            u._id = mProject._userID
+            mFormOREntries = New FormOREntries
+            mFormOREntries.Focus()
+            mFormOREntries.mUser = u
+            mFormOREntries.ShowDialog(Me)
+        End If
+    End Sub
 End Class

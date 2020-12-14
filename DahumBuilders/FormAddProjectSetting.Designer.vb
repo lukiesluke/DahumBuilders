@@ -30,13 +30,18 @@ Partial Class FormAddProjectSetting
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtSqm = New System.Windows.Forms.TextBox()
         Me.txtTCP = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnFilter = New System.Windows.Forms.Button()
+        Me.txtBlockFilter = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cbSQM = New System.Windows.Forms.ComboBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PanelLotUpdate = New System.Windows.Forms.Panel()
+        Me.cbSQMUpdate = New System.Windows.Forms.ComboBox()
         Me.lblClose = New System.Windows.Forms.Label()
         Me.btnUpdateLot = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -44,7 +49,6 @@ Partial Class FormAddProjectSetting
         Me.txtBlockUp = New System.Windows.Forms.TextBox()
         Me.txtTcpUp = New System.Windows.Forms.TextBox()
         Me.txtLotUp = New System.Windows.Forms.TextBox()
-        Me.txtSqmUp = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.ListViewProjectLot = New System.Windows.Forms.ListView()
@@ -77,6 +81,7 @@ Partial Class FormAddProjectSetting
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.PanelLotUpdate.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -91,7 +96,7 @@ Partial Class FormAddProjectSetting
         Me.cbbProjectName.FormattingEnabled = True
         Me.cbbProjectName.Location = New System.Drawing.Point(138, 20)
         Me.cbbProjectName.Name = "cbbProjectName"
-        Me.cbbProjectName.Size = New System.Drawing.Size(266, 28)
+        Me.cbbProjectName.Size = New System.Drawing.Size(270, 28)
         Me.cbbProjectName.TabIndex = 4
         '
         'txtBlock
@@ -103,14 +108,14 @@ Partial Class FormAddProjectSetting
         '
         'txtLot
         '
-        Me.txtLot.Location = New System.Drawing.Point(236, 59)
+        Me.txtLot.Location = New System.Drawing.Point(235, 57)
         Me.txtLot.Name = "txtLot"
         Me.txtLot.Size = New System.Drawing.Size(54, 26)
         Me.txtLot.TabIndex = 6
         '
         'btnAddLot
         '
-        Me.btnAddLot.Location = New System.Drawing.Point(422, 88)
+        Me.btnAddLot.Location = New System.Drawing.Point(300, 91)
         Me.btnAddLot.Name = "btnAddLot"
         Me.btnAddLot.Size = New System.Drawing.Size(109, 39)
         Me.btnAddLot.TabIndex = 9
@@ -129,7 +134,7 @@ Partial Class FormAddProjectSetting
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(84, 65)
+        Me.Label2.Location = New System.Drawing.Point(83, 60)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(48, 20)
         Me.Label2.TabIndex = 8
@@ -138,7 +143,7 @@ Partial Class FormAddProjectSetting
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(198, 65)
+        Me.Label3.Location = New System.Drawing.Point(198, 60)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(32, 20)
         Me.Label3.TabIndex = 9
@@ -147,31 +152,24 @@ Partial Class FormAddProjectSetting
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(296, 65)
+        Me.Label4.Location = New System.Drawing.Point(296, 60)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(45, 20)
         Me.Label4.TabIndex = 10
         Me.Label4.Text = "SQM"
         '
-        'txtSqm
-        '
-        Me.txtSqm.Location = New System.Drawing.Point(350, 59)
-        Me.txtSqm.Name = "txtSqm"
-        Me.txtSqm.Size = New System.Drawing.Size(54, 26)
-        Me.txtSqm.TabIndex = 7
-        '
         'txtTCP
         '
-        Me.txtTCP.Location = New System.Drawing.Point(138, 94)
+        Me.txtTCP.Location = New System.Drawing.Point(138, 98)
         Me.txtTCP.Name = "txtTCP"
-        Me.txtTCP.Size = New System.Drawing.Size(266, 26)
+        Me.txtTCP.Size = New System.Drawing.Size(152, 26)
         Me.txtTCP.TabIndex = 8
         Me.txtTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(84, 100)
+        Me.Label5.Location = New System.Drawing.Point(84, 104)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(39, 20)
         Me.Label5.TabIndex = 14
@@ -199,6 +197,8 @@ Partial Class FormAddProjectSetting
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.GroupBox1)
+        Me.Panel1.Controls.Add(Me.cbSQM)
         Me.Panel1.Controls.Add(Me.Panel6)
         Me.Panel1.Controls.Add(Me.lblProjID)
         Me.Panel1.Controls.Add(Me.cbbProjectName)
@@ -207,7 +207,6 @@ Partial Class FormAddProjectSetting
         Me.Panel1.Controls.Add(Me.txtTCP)
         Me.Panel1.Controls.Add(Me.txtLot)
         Me.Panel1.Controls.Add(Me.btnAddLot)
-        Me.Panel1.Controls.Add(Me.txtSqm)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label2)
@@ -217,6 +216,52 @@ Partial Class FormAddProjectSetting
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(836, 594)
         Me.Panel1.TabIndex = 0
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnFilter)
+        Me.GroupBox1.Controls.Add(Me.txtBlockFilter)
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Location = New System.Drawing.Point(429, 17)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(287, 113)
+        Me.GroupBox1.TabIndex = 19
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Filter Block"
+        '
+        'btnFilter
+        '
+        Me.btnFilter.Location = New System.Drawing.Point(148, 38)
+        Me.btnFilter.Name = "btnFilter"
+        Me.btnFilter.Size = New System.Drawing.Size(109, 39)
+        Me.btnFilter.TabIndex = 11
+        Me.btnFilter.Text = "&Filter"
+        Me.btnFilter.UseVisualStyleBackColor = True
+        '
+        'txtBlockFilter
+        '
+        Me.txtBlockFilter.Location = New System.Drawing.Point(88, 44)
+        Me.txtBlockFilter.Name = "txtBlockFilter"
+        Me.txtBlockFilter.Size = New System.Drawing.Size(54, 26)
+        Me.txtBlockFilter.TabIndex = 9
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(33, 47)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(48, 20)
+        Me.Label14.TabIndex = 10
+        Me.Label14.Text = "Block"
+        '
+        'cbSQM
+        '
+        Me.cbSQM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSQM.FormattingEnabled = True
+        Me.cbSQM.Location = New System.Drawing.Point(342, 56)
+        Me.cbSQM.Name = "cbSQM"
+        Me.cbSQM.Size = New System.Drawing.Size(66, 28)
+        Me.cbSQM.TabIndex = 18
         '
         'Panel6
         '
@@ -232,6 +277,7 @@ Partial Class FormAddProjectSetting
         'PanelLotUpdate
         '
         Me.PanelLotUpdate.BackColor = System.Drawing.Color.LightGray
+        Me.PanelLotUpdate.Controls.Add(Me.cbSQMUpdate)
         Me.PanelLotUpdate.Controls.Add(Me.lblClose)
         Me.PanelLotUpdate.Controls.Add(Me.btnUpdateLot)
         Me.PanelLotUpdate.Controls.Add(Me.Label13)
@@ -239,7 +285,6 @@ Partial Class FormAddProjectSetting
         Me.PanelLotUpdate.Controls.Add(Me.txtBlockUp)
         Me.PanelLotUpdate.Controls.Add(Me.txtTcpUp)
         Me.PanelLotUpdate.Controls.Add(Me.txtLotUp)
-        Me.PanelLotUpdate.Controls.Add(Me.txtSqmUp)
         Me.PanelLotUpdate.Controls.Add(Me.Label11)
         Me.PanelLotUpdate.Controls.Add(Me.Label12)
         Me.PanelLotUpdate.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -247,6 +292,15 @@ Partial Class FormAddProjectSetting
         Me.PanelLotUpdate.Name = "PanelLotUpdate"
         Me.PanelLotUpdate.Size = New System.Drawing.Size(830, 179)
         Me.PanelLotUpdate.TabIndex = 11
+        '
+        'cbSQMUpdate
+        '
+        Me.cbSQMUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbSQMUpdate.FormattingEnabled = True
+        Me.cbSQMUpdate.Location = New System.Drawing.Point(85, 87)
+        Me.cbSQMUpdate.Name = "cbSQMUpdate"
+        Me.cbSQMUpdate.Size = New System.Drawing.Size(66, 28)
+        Me.cbSQMUpdate.TabIndex = 24
         '
         'lblClose
         '
@@ -306,13 +360,6 @@ Partial Class FormAddProjectSetting
         Me.txtLotUp.Name = "txtLotUp"
         Me.txtLotUp.Size = New System.Drawing.Size(54, 26)
         Me.txtLotUp.TabIndex = 16
-        '
-        'txtSqmUp
-        '
-        Me.txtSqmUp.Location = New System.Drawing.Point(86, 88)
-        Me.txtSqmUp.Name = "txtSqmUp"
-        Me.txtSqmUp.Size = New System.Drawing.Size(54, 26)
-        Me.txtSqmUp.TabIndex = 17
         '
         'Label11
         '
@@ -403,7 +450,7 @@ Partial Class FormAddProjectSetting
         'lblProjID
         '
         Me.lblProjID.AutoSize = True
-        Me.lblProjID.Location = New System.Drawing.Point(411, 27)
+        Me.lblProjID.Location = New System.Drawing.Point(8, 84)
         Me.lblProjID.Name = "lblProjID"
         Me.lblProjID.Size = New System.Drawing.Size(68, 20)
         Me.lblProjID.TabIndex = 16
@@ -570,6 +617,8 @@ Partial Class FormAddProjectSetting
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.PanelLotUpdate.ResumeLayout(False)
         Me.PanelLotUpdate.PerformLayout()
@@ -592,7 +641,6 @@ Partial Class FormAddProjectSetting
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents txtSqm As TextBox
     Friend WithEvents txtTCP As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
@@ -630,11 +678,16 @@ Partial Class FormAddProjectSetting
     Friend WithEvents txtBlockUp As TextBox
     Friend WithEvents txtTcpUp As TextBox
     Friend WithEvents txtLotUp As TextBox
-    Friend WithEvents txtSqmUp As TextBox
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents btnUpdateLot As Button
     Friend WithEvents lblClose As Label
     Friend WithEvents ColumnHeaderProjID As ColumnHeader
     Friend WithEvents ColumnHeaderClient As ColumnHeader
+    Friend WithEvents cbSQM As ComboBox
+    Friend WithEvents cbSQMUpdate As ComboBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents btnFilter As Button
+    Friend WithEvents txtBlockFilter As TextBox
+    Friend WithEvents Label14 As Label
 End Class

@@ -88,6 +88,7 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.btnOREntries = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -408,6 +409,7 @@ Partial Class FormPayment
         '
         Me.PanelInformation.BackColor = System.Drawing.Color.White
         Me.PanelInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelInformation.Controls.Add(Me.btnOREntries)
         Me.PanelInformation.Controls.Add(Me.btnPayment)
         Me.PanelInformation.Controls.Add(Me.btnClearEntry)
         Me.PanelInformation.Controls.Add(Me.btnShowHistoryTransaction)
@@ -604,7 +606,7 @@ Partial Class FormPayment
         'Button1
         '
         Me.Button1.Font = New System.Drawing.Font("Rockwell", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(990, 49)
+        Me.Button1.Location = New System.Drawing.Point(1004, 49)
         Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(192, 44)
@@ -765,6 +767,15 @@ Partial Class FormPayment
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'btnOREntries
+        '
+        Me.btnOREntries.Location = New System.Drawing.Point(834, 89)
+        Me.btnOREntries.Name = "btnOREntries"
+        Me.btnOREntries.Size = New System.Drawing.Size(160, 43)
+        Me.btnOREntries.TabIndex = 54
+        Me.btnOREntries.Text = "OR Entries"
+        Me.btnOREntries.UseVisualStyleBackColor = True
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -869,4 +880,5 @@ Partial Class FormPayment
     Friend WithEvents txtTenderedAmount As TextBox
     Friend WithEvents lblChange As Label
     Friend WithEvents Label12 As Label
+    Friend WithEvents btnOREntries As Button
 End Class

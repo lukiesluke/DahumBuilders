@@ -115,8 +115,8 @@ Partial Class FormMainDahum
         'AddProjectToolStripMenuItem1
         '
         Me.AddProjectToolStripMenuItem1.Name = "AddProjectToolStripMenuItem1"
-        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(189, 30)
-        Me.AddProjectToolStripMenuItem1.Text = "Add Project"
+        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(254, 30)
+        Me.AddProjectToolStripMenuItem1.Text = "Add/Update Project"
         '
         'ReportToolStripMenuItem
         '
