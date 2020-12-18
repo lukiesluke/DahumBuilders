@@ -36,7 +36,7 @@ Partial Class FormLogin
         'txtUsername
         '
         Me.txtUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtUsername.Location = New System.Drawing.Point(227, 82)
+        Me.txtUsername.Location = New System.Drawing.Point(223, 99)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(238, 30)
         Me.txtUsername.TabIndex = 0
@@ -44,7 +44,7 @@ Partial Class FormLogin
         'txtPassword
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPassword.Location = New System.Drawing.Point(227, 123)
+        Me.txtPassword.Location = New System.Drawing.Point(223, 140)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(238, 30)
@@ -54,7 +54,7 @@ Partial Class FormLogin
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(105, 85)
+        Me.Label1.Location = New System.Drawing.Point(101, 102)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(102, 25)
         Me.Label1.TabIndex = 2
@@ -64,7 +64,7 @@ Partial Class FormLogin
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(105, 126)
+        Me.Label2.Location = New System.Drawing.Point(101, 143)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(98, 25)
         Me.Label2.TabIndex = 3
@@ -73,7 +73,7 @@ Partial Class FormLogin
         'btnLogin
         '
         Me.btnLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLogin.Location = New System.Drawing.Point(227, 171)
+        Me.btnLogin.Location = New System.Drawing.Point(223, 188)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(113, 41)
         Me.btnLogin.TabIndex = 4
@@ -83,7 +83,7 @@ Partial Class FormLogin
         'btnCancel
         '
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Location = New System.Drawing.Point(352, 171)
+        Me.btnCancel.Location = New System.Drawing.Point(348, 188)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(113, 41)
         Me.btnCancel.TabIndex = 5
@@ -94,7 +94,7 @@ Partial Class FormLogin
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(50, 18)
+        Me.Label3.Location = New System.Drawing.Point(46, 35)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(512, 29)
         Me.Label3.TabIndex = 6
@@ -103,7 +103,7 @@ Partial Class FormLogin
         'lblMessage
         '
         Me.lblMessage.ForeColor = System.Drawing.Color.Crimson
-        Me.lblMessage.Location = New System.Drawing.Point(55, 224)
+        Me.lblMessage.Location = New System.Drawing.Point(51, 241)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(558, 23)
         Me.lblMessage.TabIndex = 7
@@ -124,7 +124,7 @@ Partial Class FormLogin
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUsername)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False

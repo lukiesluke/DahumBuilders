@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.ComponentModel
+Imports MySql.Data.MySqlClient
 
 Public Class FormLogin
     Private tries As Integer = 0
@@ -77,4 +78,5 @@ Public Class FormLogin
         End If
         Return pass
     End Function
+
 End Class
