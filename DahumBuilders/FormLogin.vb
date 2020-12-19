@@ -80,13 +80,4 @@ Public Class FormLogin
         End If
         Return pass
     End Function
-
-    Private Sub FormLogin_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-
-        If onCancelClick = True Then
-            End
-        End If
-        e.Cancel = True
-
-    End Sub
 End Class

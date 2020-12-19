@@ -95,4 +95,13 @@ Public Class FormMainDahum
             mFormEmployeeRegistration.ShowDialog()
         End If
     End Sub
+
+    Private Sub ExpensesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExpensesToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormExpenses).Any Then
+            mFormExpenses.Focus()
+        Else
+            mFormExpenses = New FormExpenses
+            mFormExpenses.Show()
+        End If
+    End Sub
 End Class

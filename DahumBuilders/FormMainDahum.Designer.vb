@@ -40,6 +40,7 @@ Partial Class FormMainDahum
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ExpensesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -120,7 +121,7 @@ Partial Class FormMainDahum
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem, Me.ExpensesToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(77, 29)
         Me.ReportToolStripMenuItem.Text = "Report"
@@ -158,6 +159,12 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Name = "ToolStripStatusUsername"
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
+        '
+        'ExpensesToolStripMenuItem
+        '
+        Me.ExpensesToolStripMenuItem.Name = "ExpensesToolStripMenuItem"
+        Me.ExpensesToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.ExpensesToolStripMenuItem.Text = "Expenses"
         '
         'FormMainDahum
         '
@@ -199,4 +206,5 @@ Partial Class FormMainDahum
     Friend WithEvents EmployeeRegistrationFormToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents MyProfileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExpensesToolStripMenuItem As ToolStripMenuItem
 End Class
