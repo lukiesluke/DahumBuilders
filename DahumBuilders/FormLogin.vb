@@ -2,6 +2,7 @@
 Imports MySql.Data.MySqlClient
 
 Public Class FormLogin
+    Private onCancelClick As Boolean = False
     Private tries As Integer = 0
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tries = 0
@@ -57,6 +58,7 @@ Public Class FormLogin
         End If
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        onCancelClick = True
         End
     End Sub
     Private Sub txtUsername_KeyUp(sender As Object, e As KeyEventArgs) Handles txtUsername.KeyUp
@@ -79,4 +81,12 @@ Public Class FormLogin
         Return pass
     End Function
 
+    Private Sub FormLogin_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+        If onCancelClick = True Then
+            End
+        End If
+        e.Cancel = True
+
+    End Sub
 End Class
