@@ -24,6 +24,7 @@ Partial Class FormCRptSalesReport
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.CrystalReportViewerSales = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.PanelHeader = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -32,7 +33,6 @@ Partial Class FormCRptSalesReport
         Me.dtpFrom = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbbProjectName = New System.Windows.Forms.ComboBox()
-        Me.CrystalReportViewerSales = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.PanelHeader.SuspendLayout()
@@ -56,6 +56,17 @@ Partial Class FormCRptSalesReport
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1457, 651)
         Me.Panel2.TabIndex = 3
+        '
+        'CrystalReportViewerSales
+        '
+        Me.CrystalReportViewerSales.ActiveViewIndex = -1
+        Me.CrystalReportViewerSales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.CrystalReportViewerSales.Cursor = System.Windows.Forms.Cursors.Default
+        Me.CrystalReportViewerSales.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CrystalReportViewerSales.Location = New System.Drawing.Point(0, 0)
+        Me.CrystalReportViewerSales.Name = "CrystalReportViewerSales"
+        Me.CrystalReportViewerSales.Size = New System.Drawing.Size(1457, 651)
+        Me.CrystalReportViewerSales.TabIndex = 0
         '
         'PanelHeader
         '
@@ -134,17 +145,6 @@ Partial Class FormCRptSalesReport
         Me.cbbProjectName.Name = "cbbProjectName"
         Me.cbbProjectName.Size = New System.Drawing.Size(291, 28)
         Me.cbbProjectName.TabIndex = 0
-        '
-        'CrystalReportViewerSales
-        '
-        Me.CrystalReportViewerSales.ActiveViewIndex = -1
-        Me.CrystalReportViewerSales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CrystalReportViewerSales.Cursor = System.Windows.Forms.Cursors.Default
-        Me.CrystalReportViewerSales.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CrystalReportViewerSales.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalReportViewerSales.Name = "CrystalReportViewerSales"
-        Me.CrystalReportViewerSales.Size = New System.Drawing.Size(1457, 651)
-        Me.CrystalReportViewerSales.TabIndex = 0
         '
         'FormCRptSalesReport
         '

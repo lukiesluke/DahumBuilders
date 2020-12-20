@@ -307,8 +307,6 @@ Partial Public Class SalesReport
         
         Private columncommission As Global.System.Data.DataColumn
         
-        Private columntotalCash As Global.System.Data.DataColumn
-        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -441,14 +439,6 @@ Partial Public Class SalesReport
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property totalCashColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columntotalCash
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -485,9 +475,9 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddSalesReportRow(ByVal official_receipt_no As String, ByVal name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal paid_amount As Double, ByVal particular As String, ByVal short_name As String, ByVal penalty As Double, ByVal discount_amount As String, ByVal date_paid As Date, ByVal commission As Double, ByVal totalCash As Double) As SalesReportRow
+        Public Overloads Function AddSalesReportRow(ByVal official_receipt_no As String, ByVal name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal paid_amount As Double, ByVal particular As String, ByVal short_name As String, ByVal penalty As Double, ByVal discount_amount As String, ByVal date_paid As Date, ByVal commission As Double) As SalesReportRow
             Dim rowSalesReportRow As SalesReportRow = CType(Me.NewRow,SalesReportRow)
-            Dim columnValuesArray() As Object = New Object() {official_receipt_no, name, block, lot, sqm, paid_amount, particular, short_name, penalty, discount_amount, date_paid, commission, totalCash}
+            Dim columnValuesArray() As Object = New Object() {official_receipt_no, name, block, lot, sqm, paid_amount, particular, short_name, penalty, discount_amount, date_paid, commission}
             rowSalesReportRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSalesReportRow)
             Return rowSalesReportRow
@@ -522,7 +512,6 @@ Partial Public Class SalesReport
             Me.columndiscount_amount = MyBase.Columns("discount_amount")
             Me.columndate_paid = MyBase.Columns("date_paid")
             Me.columncommission = MyBase.Columns("commission")
-            Me.columntotalCash = MyBase.Columns("totalCash")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -552,8 +541,6 @@ Partial Public Class SalesReport
             MyBase.Columns.Add(Me.columndate_paid)
             Me.columncommission = New Global.System.Data.DataColumn("commission", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columncommission)
-            Me.columntotalCash = New Global.System.Data.DataColumn("totalCash", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columntotalCash)
             Me.ExtendedProperties.Add("Generator_TablePropName", "_SalesReport")
             Me.ExtendedProperties.Add("Generator_UserTableName", "SalesReport")
         End Sub
@@ -882,21 +869,6 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property totalCash() As Double
-            Get
-                Try 
-                    Return CType(Me(Me.tableSalesReport.totalCashColumn),Double)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'totalCash' in table 'SalesReport' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableSalesReport.totalCashColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Isofficial_receipt_noNull() As Boolean
             Return Me.IsNull(Me.tableSalesReport.official_receipt_noColumn)
         End Function
@@ -1037,18 +1009,6 @@ Partial Public Class SalesReport
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetcommissionNull()
             Me(Me.tableSalesReport.commissionColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IstotalCashNull() As Boolean
-            Return Me.IsNull(Me.tableSalesReport.totalCashColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SettotalCashNull()
-            Me(Me.tableSalesReport.totalCashColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
