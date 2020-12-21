@@ -22,6 +22,7 @@ Partial Class FormCRptSummaryReport
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCRptSummaryReport))
         Me.PanelMain = New System.Windows.Forms.Panel()
         Me.PanelBody = New System.Windows.Forms.Panel()
         Me.CrystalReportViewerSummary = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
@@ -130,6 +131,7 @@ Partial Class FormCRptSummaryReport
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1321, 643)
         Me.Controls.Add(Me.PanelMain)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FormCRptSummaryReport"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Summary Report"

@@ -22,11 +22,13 @@ Partial Class FormExpenses
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormExpenses))
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProjectName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTotalCash = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTotalDeduction = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.dt = New System.Windows.Forms.DateTimePicker()
         Me.cbbType = New System.Windows.Forms.ComboBox()
@@ -40,7 +42,6 @@ Partial Class FormExpenses
         Me.Label4 = New System.Windows.Forms.Label()
         Me.lblTotalCashin = New System.Windows.Forms.Label()
         Me.lblProjectID = New System.Windows.Forms.Label()
-        Me.ColumnHeaderTotalDeduction = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ListViewExpenses = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -81,6 +82,12 @@ Partial Class FormExpenses
         Me.ColumnHeaderTotalCash.Text = "Total Cash"
         Me.ColumnHeaderTotalCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderTotalCash.Width = 100
+        '
+        'ColumnHeaderTotalDeduction
+        '
+        Me.ColumnHeaderTotalDeduction.Text = "Total Deduction"
+        Me.ColumnHeaderTotalDeduction.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTotalDeduction.Width = 100
         '
         'btnSearch
         '
@@ -197,12 +204,7 @@ Partial Class FormExpenses
         Me.lblProjectID.Size = New System.Drawing.Size(90, 20)
         Me.lblProjectID.TabIndex = 18
         Me.lblProjectID.Text = "lblProjectID"
-        '
-        'ColumnHeaderTotalDeduction
-        '
-        Me.ColumnHeaderTotalDeduction.Text = "Total Deduction"
-        Me.ColumnHeaderTotalDeduction.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderTotalDeduction.Width = 100
+        Me.lblProjectID.Visible = False
         '
         'ListViewExpenses
         '
@@ -261,10 +263,11 @@ Partial Class FormExpenses
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.dt)
         Me.Controls.Add(Me.ListView1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormExpenses"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FormExpenses"
+        Me.Text = "Commission / Expenses"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
