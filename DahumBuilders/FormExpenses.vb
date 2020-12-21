@@ -141,8 +141,8 @@ Public Class FormExpenses
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim particularID As String = DirectCast(cbbType.SelectedItem, KeyValuePair(Of String, String)).Key
 
-        sql = "INSERT INTO `db_transaction` (`date_paid`,`commission`,`particular`, `description`, `proj_id`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID)"
+        sql = "INSERT INTO `db_transaction` (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `penalty`, `discount_amount`) VALUES
+        (@DatePaid, @Commission, @Particular, @Description, @ProjID, NULL, NULL)"
 
         Connection()
         Try

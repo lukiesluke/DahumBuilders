@@ -38,6 +38,7 @@ Public Class FormCRptSalesReport
     End Sub
     Private Sub generate_report()
         Dim projectID As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
+        Dim zero As String = 0.ToString("N2")
 
         Dim table As New DataTable()
         sql = "SELECT IFNULL(`official_receipt_no`, 'x') AS official_receipt_no, IFNULL((SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`),t.`description`) AS 'name', 
@@ -66,10 +67,12 @@ Public Class FormCRptSalesReport
             report.Load()
             Dim projName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtProjectName")
             Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
-            Dim txtCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCash")
+            Dim txtTotalCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCash")
             Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
             Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
             Dim txtDiscount As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtDiscount")
+            Dim txtTotalCommission As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCommission")
+            Dim txtTotalCashOnHand As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCashOnHand")
 
             projName.Text = "PROJECT NAME: " & cbbProjectName.Text
             If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
@@ -80,9 +83,9 @@ Public Class FormCRptSalesReport
 
             If table.Rows.Count > 0 Then
                 If IsDBNull(table.Compute("SUM(paid_amount)", "payment_type = 0")) Then
-                    txtCash.Text = 0.ToString("N2")
+                    txtTotalCash.Text = 0.ToString("N2")
                 Else
-                    txtCash.Text = Convert.ToDouble(table.Compute("SUM(paid_amount)", "payment_type = 0")).ToString("N2")
+                    txtTotalCash.Text = Convert.ToDouble(table.Compute("SUM(paid_amount)", "payment_type = 0")).ToString("N2")
                 End If
                 If IsDBNull(table.Compute("SUM(paid_amount)", "payment_type = 1")) Then
                     txtCheck.Text = 0.ToString("N2")
@@ -94,12 +97,20 @@ Public Class FormCRptSalesReport
                 Else
                     txtBankTransfer.Text = Convert.ToDouble(table.Compute("SUM(paid_amount)", "payment_type = 2")).ToString("N2")
                 End If
+                If IsDBNull(table.Compute("SUM(commission)", "")) Then
+                    txtTotalCommission.Text = 0.ToString("N2")
+                Else
+                    txtTotalCommission.Text = Convert.ToDouble(table.Compute("SUM(commission)", "")).ToString("N2")
+                End If
+                txtTotalCashOnHand.Text = (Convert.ToDouble(txtTotalCash.Text) - Convert.ToDouble(txtTotalCommission.Text)).ToString("N2")
                 txtDiscount.Text = Convert.ToDouble(table.Compute("SUM(discount_amount)", "")).ToString("N2")
             Else
-                txtCash.Text = 0.ToString("N2")
-                txtCheck.Text = 0.ToString("N2")
-                txtBankTransfer.Text = 0.ToString("N2")
-                txtDiscount.Text = 0.ToString("N2")
+                txtTotalCash.Text = zero
+                txtCheck.Text = zero
+                txtBankTransfer.Text = zero
+                txtDiscount.Text = zero
+                txtTotalCommission.Text = zero
+                txtTotalCashOnHand.Text = zero
             End If
             report.SetDataSource(table)
             CrystalReportViewerSales.ReportSource = report
@@ -112,5 +123,9 @@ Public Class FormCRptSalesReport
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         generate_report()
+    End Sub
+
+    Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged
+        dtpTo.Value = dtpFrom.Value
     End Sub
 End Class
