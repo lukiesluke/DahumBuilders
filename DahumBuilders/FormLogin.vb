@@ -7,6 +7,7 @@ Public Class FormLogin
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tries = 0
         lblMessage.Visible = False
+        lblIP.Text = String.Format("server: {0}", serverSetting._ip)
     End Sub
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         DahumConfiguration()

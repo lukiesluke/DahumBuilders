@@ -37,10 +37,11 @@ Partial Class FormMainDahum
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExpensesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ExpensesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripStatusIP = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -138,10 +139,16 @@ Partial Class FormMainDahum
         Me.SummaryReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
         Me.SummaryReportToolStripMenuItem.Text = "Summary Report"
         '
+        'ExpensesToolStripMenuItem
+        '
+        Me.ExpensesToolStripMenuItem.Name = "ExpensesToolStripMenuItem"
+        Me.ExpensesToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.ExpensesToolStripMenuItem.Text = "Expenses"
+        '
         'StatusStrip
         '
         Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusUsername})
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusUsername, Me.ToolStripStatusIP})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 459)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Size = New System.Drawing.Size(1265, 30)
@@ -160,11 +167,11 @@ Partial Class FormMainDahum
         Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
         '
-        'ExpensesToolStripMenuItem
+        'ToolStripStatusIP
         '
-        Me.ExpensesToolStripMenuItem.Name = "ExpensesToolStripMenuItem"
-        Me.ExpensesToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
-        Me.ExpensesToolStripMenuItem.Text = "Expenses"
+        Me.ToolStripStatusIP.Name = "ToolStripStatusIP"
+        Me.ToolStripStatusIP.Size = New System.Drawing.Size(27, 25)
+        Me.ToolStripStatusIP.Text = "IP"
         '
         'FormMainDahum
         '
@@ -207,4 +214,5 @@ Partial Class FormMainDahum
     Friend WithEvents MyProfileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExpensesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripStatusIP As ToolStripStatusLabel
 End Class

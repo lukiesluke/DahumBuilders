@@ -31,6 +31,7 @@ Partial Class FormLogin
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblMessage = New System.Windows.Forms.Label()
+        Me.lblIP = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtUsername
@@ -110,12 +111,22 @@ Partial Class FormLogin
         Me.lblMessage.Text = "lblMessage"
         Me.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lblIP
+        '
+        Me.lblIP.Location = New System.Drawing.Point(416, 285)
+        Me.lblIP.Name = "lblIP"
+        Me.lblIP.Size = New System.Drawing.Size(197, 23)
+        Me.lblIP.TabIndex = 8
+        Me.lblIP.Text = "IP"
+        Me.lblIP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FormLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(625, 296)
+        Me.ClientSize = New System.Drawing.Size(625, 317)
+        Me.Controls.Add(Me.lblIP)
         Me.Controls.Add(Me.lblMessage)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnCancel)
@@ -144,4 +155,5 @@ Partial Class FormLogin
     Friend WithEvents btnCancel As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents lblMessage As Label
+    Friend WithEvents lblIP As Label
 End Class

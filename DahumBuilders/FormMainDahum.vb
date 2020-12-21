@@ -11,6 +11,8 @@ Public Class FormMainDahum
             ToolStripStatusUsername.Text = userLogon._username
         End If
 
+        ToolStripStatusIP.Text = String.Format("IP: {0}", serverSetting._ip)
+
         If Application.OpenForms().OfType(Of FormUserList).Any Then
             mFormUserList.Focus()
         Else
