@@ -293,7 +293,7 @@ Partial Public Class SummaryReport
         
         Private columnbankTransfer As Global.System.Data.DataColumn
         
-        Private columndiscount As Global.System.Data.DataColumn
+        Private columncommission As Global.System.Data.DataColumn
         
         Private columntotal As Global.System.Data.DataColumn
         
@@ -374,9 +374,9 @@ Partial Public Class SummaryReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property discountColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property commissionColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columndiscount
+                Return Me.columncommission
             End Get
         End Property
         
@@ -425,9 +425,9 @@ Partial Public Class SummaryReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddSummaryReportRow(ByVal id As String, ByVal proj_name As String, ByVal cash As Double, ByVal check As Double, ByVal bankTransfer As Double, ByVal discount As Double, ByVal total As Double) As SummaryReportRow
+        Public Overloads Function AddSummaryReportRow(ByVal id As String, ByVal proj_name As String, ByVal cash As Double, ByVal check As Double, ByVal bankTransfer As Double, ByVal commission As Double, ByVal total As Double) As SummaryReportRow
             Dim rowSummaryReportRow As SummaryReportRow = CType(Me.NewRow,SummaryReportRow)
-            Dim columnValuesArray() As Object = New Object() {id, proj_name, cash, check, bankTransfer, discount, total}
+            Dim columnValuesArray() As Object = New Object() {id, proj_name, cash, check, bankTransfer, commission, total}
             rowSummaryReportRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSummaryReportRow)
             Return rowSummaryReportRow
@@ -455,7 +455,7 @@ Partial Public Class SummaryReport
             Me.columncash = MyBase.Columns("cash")
             Me.columncheck = MyBase.Columns("check")
             Me.columnbankTransfer = MyBase.Columns("bankTransfer")
-            Me.columndiscount = MyBase.Columns("discount")
+            Me.columncommission = MyBase.Columns("commission")
             Me.columntotal = MyBase.Columns("total")
         End Sub
         
@@ -472,8 +472,8 @@ Partial Public Class SummaryReport
             MyBase.Columns.Add(Me.columncheck)
             Me.columnbankTransfer = New Global.System.Data.DataColumn("bankTransfer", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnbankTransfer)
-            Me.columndiscount = New Global.System.Data.DataColumn("discount", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columndiscount)
+            Me.columncommission = New Global.System.Data.DataColumn("commission", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columncommission)
             Me.columntotal = New Global.System.Data.DataColumn("total", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columntotal)
             Me.ExtendedProperties.Add("Generator_TablePropName", "_SummaryReport")
@@ -699,16 +699,16 @@ Partial Public Class SummaryReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property discount() As Double
+        Public Property commission() As Double
             Get
                 Try 
-                    Return CType(Me(Me.tableSummaryReport.discountColumn),Double)
+                    Return CType(Me(Me.tableSummaryReport.commissionColumn),Double)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'discount' in table 'SummaryReport' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'commission' in table 'SummaryReport' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableSummaryReport.discountColumn) = value
+                Me(Me.tableSummaryReport.commissionColumn) = value
             End Set
         End Property
         
@@ -789,14 +789,14 @@ Partial Public Class SummaryReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsdiscountNull() As Boolean
-            Return Me.IsNull(Me.tableSummaryReport.discountColumn)
+        Public Function IscommissionNull() As Boolean
+            Return Me.IsNull(Me.tableSummaryReport.commissionColumn)
         End Function
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetdiscountNull()
-            Me(Me.tableSummaryReport.discountColumn) = Global.System.Convert.DBNull
+        Public Sub SetcommissionNull()
+            Me(Me.tableSummaryReport.commissionColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

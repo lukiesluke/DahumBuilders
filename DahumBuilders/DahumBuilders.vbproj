@@ -270,6 +270,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryReport.xsd</DependentUpon>
     </Compile>
+    <Compile Include="SummaryReport.vb">
+      <DependentUpon>SummaryReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Transaction.vb" />
     <Compile Include="User.vb" />
   </ItemGroup>

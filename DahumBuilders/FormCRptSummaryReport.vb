@@ -13,8 +13,8 @@ Public Class FormCRptSummaryReport
         (SELECT IFNULL(SUM(it.`paid_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND  it.`payment_type`=0 AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS cash,
         (SELECT IFNULL(SUM(it.`paid_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND  it.`payment_type`=1 AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'check',
         (SELECT IFNULL(SUM(it.`paid_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND  it.`payment_type`=2 AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'bankTransfer',
-        (SELECT IFNULL(SUM(it.`discount_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'discount',
-        (SELECT IFNULL(SUM(it.`paid_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'total'
+        (SELECT IFNULL(SUM(it.`commission`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'commission',
+        (SELECT IFNULL(SUM(it.`paid_amount`)-SUM(it.`commission`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'total'
         FROM `db_project_list` l LEFT JOIN `db_transaction` t ON l.id = t.`proj_id` GROUP BY l.`id` ORDER BY l.`proj_name` ASC"
         Connection()
         Try
@@ -31,9 +31,10 @@ Public Class FormCRptSummaryReport
             Dim report As New crpSummaryReport
             report.Load()
             Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
-            Dim txtCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCash")
+            Dim txtTotalCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCash")
             Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
             Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
+            Dim totalExpenses As Double
 
             If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
                 dateReport.Text = dtpFrom.Value.ToString(MMddyyyy)
@@ -43,9 +44,9 @@ Public Class FormCRptSummaryReport
 
             If table.Rows.Count > 0 Then
                 If IsDBNull(table.Compute("SUM(cash)", "")) Then
-                    txtCash.Text = 0.ToString("N2")
+                    txtTotalCash.Text = 0.ToString("N2")
                 Else
-                    txtCash.Text = Convert.ToDouble(table.Compute("SUM(cash)", "")).ToString("N2")
+                    txtTotalCash.Text = Convert.ToDouble(table.Compute("SUM(cash)", "")).ToString("N2")
                 End If
                 If IsDBNull(table.Compute("SUM(check)", "")) Then
                     txtCheck.Text = 0.ToString("N2")
@@ -57,8 +58,16 @@ Public Class FormCRptSummaryReport
                 Else
                     txtBankTransfer.Text = Convert.ToDouble(table.Compute("SUM(bankTransfer)", "")).ToString("N2")
                 End If
+
+                If IsDBNull(table.Compute("SUM(commission)", "")) Then
+                    totalExpenses = 0
+                Else
+                    totalExpenses = table.Compute("SUM(commission)", "")
+                End If
+
+                txtTotalCash.Text = (Convert.ToDouble(txtTotalCash.Text) - totalExpenses).ToString("N2")
             Else
-                txtCash.Text = 0.ToString("N2")
+                txtTotalCash.Text = 0.ToString("N2")
                 txtCheck.Text = 0.ToString("N2")
                 txtBankTransfer.Text = 0.ToString("N2")
             End If
@@ -77,5 +86,9 @@ Public Class FormCRptSummaryReport
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         generate_report()
+    End Sub
+
+    Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged
+        dtpTo.Value = dtpFrom.Value
     End Sub
 End Class
