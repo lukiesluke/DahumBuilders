@@ -50,6 +50,7 @@ Partial Class FormPayment
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.PanelInformation = New System.Windows.Forms.Panel()
+        Me.btnOREntries = New System.Windows.Forms.Button()
         Me.btnPayment = New System.Windows.Forms.Button()
         Me.btnClearEntry = New System.Windows.Forms.Button()
         Me.btnShowHistoryTransaction = New System.Windows.Forms.Button()
@@ -88,7 +89,6 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.btnOREntries = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -430,6 +430,15 @@ Partial Class FormPayment
         Me.PanelInformation.Size = New System.Drawing.Size(1206, 472)
         Me.PanelInformation.TabIndex = 2
         '
+        'btnOREntries
+        '
+        Me.btnOREntries.Location = New System.Drawing.Point(834, 89)
+        Me.btnOREntries.Name = "btnOREntries"
+        Me.btnOREntries.Size = New System.Drawing.Size(160, 43)
+        Me.btnOREntries.TabIndex = 54
+        Me.btnOREntries.Text = "OR Entries"
+        Me.btnOREntries.UseVisualStyleBackColor = True
+        '
         'btnPayment
         '
         Me.btnPayment.BackColor = System.Drawing.Color.Lime
@@ -497,7 +506,7 @@ Partial Class FormPayment
         'ColumnHeaderProjectName
         '
         Me.ColumnHeaderProjectName.Text = "Project Name"
-        Me.ColumnHeaderProjectName.Width = 130
+        Me.ColumnHeaderProjectName.Width = 180
         '
         'ColumnHeaderBlock
         '
@@ -766,15 +775,6 @@ Partial Class FormPayment
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'btnOREntries
-        '
-        Me.btnOREntries.Location = New System.Drawing.Point(834, 89)
-        Me.btnOREntries.Name = "btnOREntries"
-        Me.btnOREntries.Size = New System.Drawing.Size(160, 43)
-        Me.btnOREntries.TabIndex = 54
-        Me.btnOREntries.Text = "OR Entries"
-        Me.btnOREntries.UseVisualStyleBackColor = True
         '
         'FormPayment
         '
