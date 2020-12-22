@@ -686,6 +686,7 @@ FinallyLine:
                 trans._check_date = dtpCheckDate.Value
             End If
             trans._commission = row.Cells(14).Value 'Commission
+            trans._created_by = userLogon._id
             insertPurchase(trans)
         Next
 
@@ -708,40 +709,41 @@ FinallyLine:
 
     Private Sub insertPurchase(ByVal trans As Transaction)
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `penalty`, `commission`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`) VALUES (@OR, @DatePaid, @PaidAmount, 
-        @DiscountAmount, @Penalty, @Commission, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId)"
+        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`, `created_by`) VALUES (@OR, @DatePaid, @PaidAmount, 
+        @DiscountAmount, @Penalty, @Commission, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId, @CreatedBy)"
 
         If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
             trans._partNo = 0
         End If
 
         Connection()
-        sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = trans._or
-        sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(trans._datePaid, "yyyy-MM-dd").ToString
-        sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = trans._paidAmount
-        sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = trans._discountAmount
-        sqlCommand.Parameters.Add("@Penalty", MySqlDbType.Double).Value = trans._penalty
-        sqlCommand.Parameters.Add("@Commission", MySqlDbType.Double).Value = trans._commission
-        sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = trans._tcp
-        sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = trans._particular
-        sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = trans._partNo
-        sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = trans._paymentType
-        sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = trans._clientId 'userId
-        sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int24).Value = trans._projectId
-        sqlCommand.Parameters.Add("@ProjItemId", MySqlDbType.Int24).Value = trans._projectItemId
-
-        sqlCommand.Parameters.Add("@CheckBankName", MySqlDbType.VarChar).Value = trans._check_bank_name
-        sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = trans._check_number
-        sqlCommand.Parameters.Add("@CheckDate", MySqlDbType.Date).Value = trans._check_date
-
         Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = trans._or
+            sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(trans._datePaid, "yyyy-MM-dd").ToString
+            sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = trans._paidAmount
+            sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = trans._discountAmount
+            sqlCommand.Parameters.Add("@Penalty", MySqlDbType.Double).Value = trans._penalty
+            sqlCommand.Parameters.Add("@Commission", MySqlDbType.Double).Value = trans._commission
+            sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = trans._tcp
+            sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = trans._particular
+            sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = trans._partNo
+            sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = trans._paymentType
+            sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = trans._clientId 'userId
+            sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int24).Value = trans._projectId
+            sqlCommand.Parameters.Add("@ProjItemId", MySqlDbType.Int24).Value = trans._projectItemId
+
+            sqlCommand.Parameters.Add("@CheckBankName", MySqlDbType.VarChar).Value = trans._check_bank_name
+            sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = trans._check_number
+            sqlCommand.Parameters.Add("@CheckDate", MySqlDbType.Date).Value = trans._check_date
+            sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.Int64).Value = trans._created_by
+
             If sqlCommand.ExecuteNonQuery() = 1 Then
             Else
                 MessageBox.Show(Me, "Data NOT Inserted. Please try again.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If
         Catch ex As Exception
-            MessageBox.Show(Me, "ERROR: ", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(Me, "ERROR: " & ex.Message, "Payment", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
