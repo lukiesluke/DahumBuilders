@@ -401,19 +401,12 @@ FinallyLine:
             If DataGridView1.Rows(e.RowIndex).Cells(11).Value IsNot Nothing Then
                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(11).Value).ToString("N2")
             Else
-                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2") 'Commission
+                DataGridView1.Rows(e.RowIndex).Cells(11).Value = 0.ToString("N2")
             End If
         End If
         If e.ColumnIndex = 13 Then 'Advance Payment
             If DataGridView1.Rows(e.RowIndex).Cells(13).Value Is Nothing Then
                 DataGridView1.Rows(e.RowIndex).Cells(13).Value = 1 'Advance Payment
-            End If
-        End If
-        If e.ColumnIndex = 14 Then 'Commission
-            If DataGridView1.Rows(e.RowIndex).Cells(14).Value IsNot Nothing Then
-                DataGridView1.Rows(e.RowIndex).Cells(14).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(14).Value).ToString("N2")
-            Else
-                DataGridView1.Rows(e.RowIndex).Cells(14).Value = 0.ToString("N2") 'Commission
             End If
         End If
     End Sub
@@ -424,7 +417,7 @@ FinallyLine:
         If DataGridView1.CurrentCell.ColumnIndex = 9 Or DataGridView1.CurrentCell.ColumnIndex = 10 Or DataGridView1.CurrentCell.ColumnIndex = 13 Then 'Part
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtMonthOf_KeyPress
         End If
-        If DataGridView1.CurrentCell.ColumnIndex = 11 Or DataGridView1.CurrentCell.ColumnIndex = 14 Then 'Commission
+        If DataGridView1.CurrentCell.ColumnIndex = 11 Then
             AddHandler CType(e.Control, TextBox).KeyPress, AddressOf txtAmountPaid_KeyPress
         End If
     End Sub
@@ -470,7 +463,6 @@ FinallyLine:
         row.Cells(10).Value = 0 'Part
         row.Cells(12).Value = project 'ProjectClass
         row.Cells(13).Value = 0 'Advance Payment
-        row.Cells(14).Value = 0.ToString("N2") 'Commission
     End Sub
     Private Sub setDataGridView()
 
@@ -519,7 +511,6 @@ FinallyLine:
         DataGridView1.Columns.Add("", "Amount to Pay")
         DataGridView1.Columns.Add("", "ProjectClass")
         DataGridView1.Columns.Add("", "Advance")
-        DataGridView1.Columns.Add("", "Commission")
 
         With DataGridView1
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
@@ -530,7 +521,6 @@ FinallyLine:
             .Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(11).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
         End With
 
         With DataGridView1
@@ -547,7 +537,6 @@ FinallyLine:
             .Columns(10).Width = 50 'Part
             .Columns(11).Width = 105 'Amount to Pay
             .Columns(13).Width = 60 'Advance Payment
-            .Columns(14).Width = 105 'Commission
         End With
 
         DataGridView1.Columns(0).ReadOnly = True
@@ -685,7 +674,6 @@ FinallyLine:
                 trans._check_number = txtCheckNo.Text.Trim
                 trans._check_date = dtpCheckDate.Value
             End If
-            trans._commission = row.Cells(14).Value 'Commission
             trans._created_by = userLogon._id
             insertPurchase(trans)
         Next
@@ -708,9 +696,9 @@ FinallyLine:
     End Sub
 
     Private Sub insertPurchase(ByVal trans As Transaction)
-        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `penalty`, `commission`, `tcp`, `particular`, 
+        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `penalty`, `tcp`, `particular`, 
         `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`, `created_by`) VALUES (@OR, @DatePaid, @PaidAmount, 
-        @DiscountAmount, @Penalty, @Commission, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId, @CreatedBy)"
+        @DiscountAmount, @Penalty, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId, @CreatedBy)"
 
         If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
             trans._partNo = 0
@@ -724,7 +712,6 @@ FinallyLine:
             sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = trans._paidAmount
             sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = trans._discountAmount
             sqlCommand.Parameters.Add("@Penalty", MySqlDbType.Double).Value = trans._penalty
-            sqlCommand.Parameters.Add("@Commission", MySqlDbType.Double).Value = trans._commission
             sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = trans._tcp
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = trans._particular
             sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = trans._partNo
