@@ -141,8 +141,8 @@ Public Class FormExpenses
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim particularID As String = DirectCast(cbbType.SelectedItem, KeyValuePair(Of String, String)).Key
 
-        sql = "INSERT INTO `db_transaction` (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `penalty`, `discount_amount`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID, NULL, NULL)"
+        sql = "INSERT INTO `db_transaction` (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `penalty`, `discount_amount`, `created_by`) VALUES
+        (@DatePaid, @Commission, @Particular, @Description, @ProjID, NULL, NULL, @CreatedBy)"
 
         Connection()
         Try
@@ -152,6 +152,7 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularID
             sqlCommand.Parameters.Add("@Description", MySqlDbType.VarChar).Value = txtDescription.Text.Trim
             sqlCommand.Parameters.Add("@ProjID", MySqlDbType.Int64).Value = lblProjectID.Text.Trim
+            sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.Int64).Value = userLogon._id
 
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 sqlCommand.Dispose()
