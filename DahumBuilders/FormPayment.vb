@@ -524,7 +524,7 @@ FinallyLine:
         End With
 
         With DataGridView1
-            .Columns(0).Width = 250
+            .Columns(0).Width = 280
             .Columns(1).Width = 100 'TCP
             .Columns(2).Width = 105 'cbb particular
             .Columns(3).Width = 100 'cbb Downpayment
