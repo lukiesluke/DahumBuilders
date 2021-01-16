@@ -218,7 +218,11 @@ FinallyLine:
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
+                            DataGridView1.Rows(e.RowIndex).Cells(11).Value = "0" 'Amount to pay
                         Case "Downpayment"
+
+                            DataGridView1.Rows(e.RowIndex).Cells(11).ReadOnly = False
+
                             cellDP.Style.BackColor = Color.White
                             cellDP.ReadOnly = False
                             cellDiscount.Style.BackColor = Color.White
@@ -244,6 +248,8 @@ FinallyLine:
                                 DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
                             End If
                         Case "Equity"
+                            DataGridView1.Rows(e.RowIndex).Cells(11).ReadOnly = False
+
                             EnableDataGridViewCell(DataGridView1, e, 13, False)
                             Dim pm As New PaymentMethod
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
@@ -253,6 +259,8 @@ FinallyLine:
                             EnableDataGridViewCell(DataGridView1, e) 'Part
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._equity.ToString("N2") 'Amount to pay
                         Case "Monthly"
+                            DataGridView1.Rows(e.RowIndex).Cells(11).ReadOnly = False
+
                             EnableDataGridViewCell(DataGridView1, e, 13, False)
                             Dim pm As New PaymentMethod
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
@@ -270,6 +278,8 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0"
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                         Case "Cash"
+                            DataGridView1.Rows(e.RowIndex).Cells(11).ReadOnly = False
+
                             Dim ttSum As Double = p._total_discount + p._total_paidAmount
                             cellDiscount.Style.BackColor = Color.White
                             cellDiscount.ReadOnly = False
