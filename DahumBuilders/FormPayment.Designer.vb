@@ -343,7 +343,7 @@ Partial Class FormPayment
         '
         'dtpDatePaid
         '
-        Me.dtpDatePaid.CustomFormat = "MMMM dd, yyyy"
+        Me.dtpDatePaid.CustomFormat = "MM/dd/ yyyy"
         Me.dtpDatePaid.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDatePaid.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpDatePaid.Location = New System.Drawing.Point(173, 49)
