@@ -15,6 +15,7 @@ Module ModuleForm
     Public mFormEmployeeRegistration As FormEmployeeRegistration
     Public mFormOREntries As FormOREntries
     Public mFormExpenses As FormExpenses
+    Public mFormMyOREntries As FormMyOREntries
 
     Public Function computePercentage(totalPrice As Double, value As ComboBox) As Double
         Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100

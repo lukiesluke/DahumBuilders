@@ -27,6 +27,9 @@ Partial Class FormMainDahum
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UserSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MyProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OfficialRecieptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExpensesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.UpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CientListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -71,15 +74,34 @@ Partial Class FormMainDahum
         '
         'MyProfileToolStripMenuItem
         '
-        Me.MyProfileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UpdateToolStripMenuItem})
+        Me.MyProfileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EntriesToolStripMenuItem, Me.UpdateToolStripMenuItem})
         Me.MyProfileToolStripMenuItem.Name = "MyProfileToolStripMenuItem"
         Me.MyProfileToolStripMenuItem.Size = New System.Drawing.Size(104, 29)
         Me.MyProfileToolStripMenuItem.Text = "My Profile"
         '
+        'EntriesToolStripMenuItem
+        '
+        Me.EntriesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OfficialRecieptToolStripMenuItem, Me.ExpensesToolStripMenuItem1})
+        Me.EntriesToolStripMenuItem.Name = "EntriesToolStripMenuItem"
+        Me.EntriesToolStripMenuItem.Size = New System.Drawing.Size(210, 30)
+        Me.EntriesToolStripMenuItem.Text = "Entries"
+        '
+        'OfficialRecieptToolStripMenuItem
+        '
+        Me.OfficialRecieptToolStripMenuItem.Name = "OfficialRecieptToolStripMenuItem"
+        Me.OfficialRecieptToolStripMenuItem.Size = New System.Drawing.Size(213, 30)
+        Me.OfficialRecieptToolStripMenuItem.Text = "Official Reciept"
+        '
+        'ExpensesToolStripMenuItem1
+        '
+        Me.ExpensesToolStripMenuItem1.Name = "ExpensesToolStripMenuItem1"
+        Me.ExpensesToolStripMenuItem1.Size = New System.Drawing.Size(213, 30)
+        Me.ExpensesToolStripMenuItem1.Text = "Expenses"
+        '
         'UpdateToolStripMenuItem
         '
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
-        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(154, 30)
+        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(210, 30)
         Me.UpdateToolStripMenuItem.Text = "Update"
         '
         'OpenToolStripMenuItem
@@ -215,4 +237,7 @@ Partial Class FormMainDahum
     Friend WithEvents UpdateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExpensesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripStatusIP As ToolStripStatusLabel
+    Friend WithEvents EntriesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OfficialRecieptToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExpensesToolStripMenuItem1 As ToolStripMenuItem
 End Class

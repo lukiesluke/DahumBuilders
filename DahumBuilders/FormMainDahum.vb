@@ -106,4 +106,13 @@ Public Class FormMainDahum
             mFormExpenses.Show()
         End If
     End Sub
+
+    Private Sub OfficialRecieptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OfficialRecieptToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormMyOREntries).Any Then
+            mFormMyOREntries.Focus()
+        Else
+            mFormMyOREntries = New FormMyOREntries
+            mFormMyOREntries.ShowDialog()
+        End If
+    End Sub
 End Class
