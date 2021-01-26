@@ -115,4 +115,9 @@ Public Class FormMainDahum
             mFormMyOREntries.ShowDialog()
         End If
     End Sub
+
+    Private Sub SendLiveReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SendLiveReportToolStripMenuItem.Click
+        Dim form As New FormSendReportFirebase
+        form.ShowDialog()
+    End Sub
 End Class

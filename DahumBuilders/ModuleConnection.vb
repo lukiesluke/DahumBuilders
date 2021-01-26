@@ -1,4 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
+Imports FireSharp.Config
 
 Module ModuleConnection
     Public sqlConnection As New MySqlConnection
@@ -10,6 +11,10 @@ Module ModuleConnection
     Public userLogon As User
     Public serverSetting As configurationSetting
     Public ini As New clsIni
+    Public fireCon As New FirebaseConfig() With {
+        .AuthSecret = "g8tKN67dcGPFLnYw7bLXIivT3j3cd7SEpYbBoOFZ",
+        .BasePath = "https://dahum-builders-corporation-default-rtdb.firebaseio.com/"
+        }
 
     Public Sub Connection()
         Try
