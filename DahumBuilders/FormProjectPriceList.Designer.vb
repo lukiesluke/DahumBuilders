@@ -33,6 +33,8 @@ Partial Class FormProjectPriceList
         Me.txtTcp = New System.Windows.Forms.TextBox()
         Me.txtSQM = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.lblProjectName = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ListView1
@@ -84,7 +86,7 @@ Partial Class FormProjectPriceList
         '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(674, 147)
+        Me.btnAdd.Location = New System.Drawing.Point(668, 215)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(182, 33)
         Me.btnAdd.TabIndex = 27
@@ -94,7 +96,7 @@ Partial Class FormProjectPriceList
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(614, 118)
+        Me.Label10.Location = New System.Drawing.Point(608, 186)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(39, 20)
         Me.Label10.TabIndex = 26
@@ -102,7 +104,7 @@ Partial Class FormProjectPriceList
         '
         'txtTcp
         '
-        Me.txtTcp.Location = New System.Drawing.Point(674, 115)
+        Me.txtTcp.Location = New System.Drawing.Point(668, 183)
         Me.txtTcp.Name = "txtTcp"
         Me.txtTcp.Size = New System.Drawing.Size(182, 26)
         Me.txtTcp.TabIndex = 24
@@ -110,7 +112,7 @@ Partial Class FormProjectPriceList
         '
         'txtSQM
         '
-        Me.txtSQM.Location = New System.Drawing.Point(674, 83)
+        Me.txtSQM.Location = New System.Drawing.Point(668, 149)
         Me.txtSQM.Name = "txtSQM"
         Me.txtSQM.Size = New System.Drawing.Size(85, 26)
         Me.txtSQM.TabIndex = 23
@@ -118,17 +120,37 @@ Partial Class FormProjectPriceList
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(614, 86)
+        Me.Label12.Location = New System.Drawing.Point(608, 152)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(45, 20)
         Me.Label12.TabIndex = 25
         Me.Label12.Text = "SQM"
         '
+        'lblProjectName
+        '
+        Me.lblProjectName.AutoSize = True
+        Me.lblProjectName.Location = New System.Drawing.Point(665, 122)
+        Me.lblProjectName.Name = "lblProjectName"
+        Me.lblProjectName.Size = New System.Drawing.Size(115, 20)
+        Me.lblProjectName.TabIndex = 28
+        Me.lblProjectName.Text = "lblProjectName"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(608, 122)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(55, 20)
+        Me.Label2.TabIndex = 29
+        Me.Label2.Text = "Name:"
+        '
         'FormProjectPriceList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(894, 551)
+        Me.ClientSize = New System.Drawing.Size(1043, 551)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblProjectName)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.txtTcp)
@@ -159,4 +181,6 @@ Partial Class FormProjectPriceList
     Friend WithEvents txtTcp As TextBox
     Friend WithEvents txtSQM As TextBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents lblProjectName As Label
+    Friend WithEvents Label2 As Label
 End Class

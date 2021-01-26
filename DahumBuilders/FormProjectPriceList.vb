@@ -8,6 +8,7 @@ Public Class FormProjectPriceList
 
         Dim key As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim value As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Value
+        lblProjectName.Text = value
         load_price_list(key)
     End Sub
 
@@ -81,5 +82,34 @@ Public Class FormProjectPriceList
         e.Handled = Not (Char.IsDigit(e.KeyChar) Or
                          Asc(e.KeyChar) = 8 Or
                          (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        Dim key As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
+        Dim value As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Value
+
+        sql = "INSERT INTO `db_project_list_price` (`sqm`, `tcp`,`lid`) VALUES (@SQM, @TCP,@LID)"
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@SQM", MySqlDbType.Int32).Value = txtSQM.Text.Trim
+            sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = txtTcp.Text.Trim
+            sqlCommand.Parameters.Add("@LID", MySqlDbType.Int32).Value = key
+
+            If sqlCommand.ExecuteNonQuery() = 1 Then
+                txtSQM.Text = String.Empty
+                txtTcp.Text = String.Empty
+                MessageBox.Show("Successfully added new project name.")
+            Else
+                MessageBox.Show("Data NOT Inserted. Please try again.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Project Add: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+
+        load_price_list(key)
     End Sub
 End Class
