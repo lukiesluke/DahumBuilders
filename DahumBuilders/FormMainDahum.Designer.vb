@@ -37,16 +37,19 @@ Partial Class FormMainDahum
         Me.EmployeeRegistrationFormToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjectSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddProjectToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SynceProjectToLiveDatabaseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExpensesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.SendLiveReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusIP = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ProjectPriceListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -133,7 +136,7 @@ Partial Class FormMainDahum
         '
         'ProjectSettingToolStripMenuItem
         '
-        Me.ProjectSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddProjectToolStripMenuItem1})
+        Me.ProjectSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddProjectToolStripMenuItem1, Me.ProjectPriceListToolStripMenuItem, Me.ToolStripMenuItem2, Me.SynceProjectToLiveDatabaseToolStripMenuItem})
         Me.ProjectSettingToolStripMenuItem.Name = "ProjectSettingToolStripMenuItem"
         Me.ProjectSettingToolStripMenuItem.Size = New System.Drawing.Size(139, 29)
         Me.ProjectSettingToolStripMenuItem.Text = "Project Setting"
@@ -141,8 +144,19 @@ Partial Class FormMainDahum
         'AddProjectToolStripMenuItem1
         '
         Me.AddProjectToolStripMenuItem1.Name = "AddProjectToolStripMenuItem1"
-        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(254, 30)
+        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(336, 30)
         Me.AddProjectToolStripMenuItem1.Text = "Add/Update Project"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(333, 6)
+        '
+        'SynceProjectToLiveDatabaseToolStripMenuItem
+        '
+        Me.SynceProjectToLiveDatabaseToolStripMenuItem.Name = "SynceProjectToLiveDatabaseToolStripMenuItem"
+        Me.SynceProjectToLiveDatabaseToolStripMenuItem.Size = New System.Drawing.Size(336, 30)
+        Me.SynceProjectToLiveDatabaseToolStripMenuItem.Text = "Synce Project to Live Database"
         '
         'ReportToolStripMenuItem
         '
@@ -168,6 +182,11 @@ Partial Class FormMainDahum
         Me.ExpensesToolStripMenuItem.Name = "ExpensesToolStripMenuItem"
         Me.ExpensesToolStripMenuItem.Size = New System.Drawing.Size(330, 30)
         Me.ExpensesToolStripMenuItem.Text = "Expenses"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(327, 6)
         '
         'SendLiveReportToolStripMenuItem
         '
@@ -203,10 +222,11 @@ Partial Class FormMainDahum
         Me.ToolStripStatusIP.Size = New System.Drawing.Size(27, 25)
         Me.ToolStripStatusIP.Text = "IP"
         '
-        'ToolStripMenuItem1
+        'ProjectPriceListToolStripMenuItem
         '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(327, 6)
+        Me.ProjectPriceListToolStripMenuItem.Name = "ProjectPriceListToolStripMenuItem"
+        Me.ProjectPriceListToolStripMenuItem.Size = New System.Drawing.Size(336, 30)
+        Me.ProjectPriceListToolStripMenuItem.Text = "Project Price List"
         '
         'FormMainDahum
         '
@@ -255,4 +275,7 @@ Partial Class FormMainDahum
     Friend WithEvents ExpensesToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents SendLiveReportToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
+    Friend WithEvents SynceProjectToLiveDatabaseToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProjectPriceListToolStripMenuItem As ToolStripMenuItem
 End Class

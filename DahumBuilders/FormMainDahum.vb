@@ -1,6 +1,13 @@
-﻿Imports System.Linq
+﻿Imports MySql.Data.MySqlClient
+Imports FireSharp.Interfaces
+Imports FireSharp.Config
+Imports FireSharp.Response
+
+Imports System.Linq
 
 Public Class FormMainDahum
+
+    Private client As IFirebaseClient
 
     Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -119,5 +126,42 @@ Public Class FormMainDahum
     Private Sub SendLiveReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SendLiveReportToolStripMenuItem.Click
         Dim form As New FormSendReportFirebase
         form.ShowDialog()
+    End Sub
+
+    Private Sub SynceProjectToLiveDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SynceProjectToLiveDatabaseToolStripMenuItem.Click
+
+        Try
+            client = New FireSharp.FirebaseClient(fireCon)
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            Exit Sub
+        End Try
+
+        Dim projectList As New List(Of FirebaseProject)()
+        sql = "SELECT `proj_name`,`proj_address` FROM `db_project_list` ORDER BY `proj_name` ASC"
+
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            Do While sqlDataReader.Read = True
+                Dim project = New FirebaseProject() With {
+                        .projName = sqlDataReader("proj_name"),
+                        .address = sqlDataReader("proj_address")
+                    }
+                projectList.Add(project)
+            Loop
+
+            client.Set("project/", projectList)
+            MessageBox.Show("Successfully synce to live database.")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub ProjectPriceListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProjectPriceListToolStripMenuItem.Click
+        Dim m = New FormProjectPriceList
+        m.ShowDialog()
     End Sub
 End Class

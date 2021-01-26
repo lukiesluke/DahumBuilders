@@ -157,24 +157,29 @@ Public Class FormAddProjectSetting
             sqlCommand.Parameters.Add("@listID", MySqlDbType.Int32).Value = listID
             sqlDataReader = sqlCommand.ExecuteReader()
 
-            cbSQM.DataSource = Nothing
-            cbSQM.Items.Clear()
+            If sqlDataReader.HasRows Then
 
-            cbSQMUpdate.DataSource = Nothing
-            cbSQMUpdate.Items.Clear()
 
-            Dim comboSource As New Dictionary(Of String, String)()
-            Do While sqlDataReader.Read = True
-                comboSource.Add(sqlDataReader("tcp"), sqlDataReader("sqm"))
-            Loop
-            cbSQM.DataSource = New BindingSource(comboSource, Nothing)
-            cbSQM.DisplayMember = "Value"
-            cbSQM.ValueMember = "Key"
+                cbSQM.DataSource = Nothing
+                cbSQM.Items.Clear()
 
-            cbSQMUpdate.DataSource = New BindingSource(comboSource, Nothing)
-            cbSQMUpdate.DisplayMember = "Value"
-            cbSQMUpdate.ValueMember = "Key"
+                cbSQMUpdate.DataSource = Nothing
+                cbSQMUpdate.Items.Clear()
 
+                Dim comboSource As New Dictionary(Of String, String)()
+                Do While sqlDataReader.Read = True
+                    comboSource.Add(sqlDataReader("tcp"), sqlDataReader("sqm"))
+                Loop
+                cbSQM.DataSource = New BindingSource(comboSource, Nothing)
+                cbSQM.DisplayMember = "Value"
+                cbSQM.ValueMember = "Key"
+
+                cbSQMUpdate.DataSource = New BindingSource(comboSource, Nothing)
+                cbSQMUpdate.DisplayMember = "Value"
+                cbSQMUpdate.ValueMember = "Key"
+            Else
+                MessageBox.Show("Please set Price list for this Project Name")
+            End If
             sqlDataReader.Dispose()
         Catch ex As Exception
             MessageBox.Show("Project Add: " & ex.Message)
@@ -375,5 +380,9 @@ Public Class FormAddProjectSetting
 
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
         loadProjectLots(txtBlockFilter.Text.Trim)
+    End Sub
+
+    Private Sub ListViewProject_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewProject.SelectedIndexChanged
+
     End Sub
 End Class

@@ -168,6 +168,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FirebaseDetail.vb" />
+    <Compile Include="FirebaseProject.vb" />
     <Compile Include="FirebaseSummaryReport.vb" />
     <Compile Include="FormCRptTransaction.Designer.vb">
       <DependentUpon>FormCRptTransaction.vb</DependentUpon>
@@ -227,6 +228,12 @@
       <DependentUpon>FormCRptSummaryReport.vb</DependentUpon>
     </Compile>
     <Compile Include="FormCRptSummaryReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProjectPriceList.Designer.vb">
+      <DependentUpon>FormProjectPriceList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormProjectPriceList.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormSendReportFirebase.Designer.vb">
@@ -374,6 +381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCRptSalesReport.resx">
       <DependentUpon>FormCRptSalesReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProjectPriceList.resx">
+      <DependentUpon>FormProjectPriceList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSendReportFirebase.resx">
       <DependentUpon>FormSendReportFirebase.vb</DependentUpon>
