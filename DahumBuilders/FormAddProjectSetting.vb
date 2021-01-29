@@ -274,6 +274,10 @@ Public Class FormAddProjectSetting
             If projectName.Length > 0 Then
                 cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
                 loadComboPriceList(ListViewProject.SelectedItems(0).Text)
+
+                lblID.Text = ListViewProject.SelectedItems(0).Text
+                txtProjectNameUpdate.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
+                txtAddressUpdate.Text = ListViewProject.SelectedItems(0).SubItems(2).Text
             End If
         End If
     End Sub
@@ -281,6 +285,10 @@ Public Class FormAddProjectSetting
     Private Sub ListViewProject_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewProject.KeyUp
         If ListViewProject.Items.Count > 0 Then
             ListViewProject_Click(sender, e)
+            If e.KeyCode = Keys.Enter Then
+                PanelProjectNameUpdate.Visible = True
+                txtProjectNameUpdate.Focus()
+            End If
         End If
     End Sub
 
@@ -384,5 +392,32 @@ Public Class FormAddProjectSetting
 
     Private Sub ListViewProject_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewProject.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub btnUpdateProjectName_Click(sender As Object, e As EventArgs) Handles btnUpdateProjectName.Click
+
+        sql = "UPDATE `db_project_list` SET `proj_name`=@ProjName,  `proj_address`=@ProjAddress  WHERE `id`=@ID"
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        Try
+            sqlCommand.Parameters.Add("@ProjName", MySqlDbType.VarChar).Value = txtProjectNameUpdate.Text.Trim
+            sqlCommand.Parameters.Add("@ProjAddress", MySqlDbType.VarChar).Value = txtAddressUpdate.Text.Trim
+            sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = lblID.Text.Trim
+
+            If sqlCommand.ExecuteNonQuery() = 1 Then
+                txtProjectName.Text = String.Empty
+                txtProjectAddress.Text = String.Empty
+                PanelLotUpdate.Visible = False
+                PanelProjectNameUpdate.Visible = False
+                MessageBox.Show("Successfully Project updated.")
+                mFormMainDahum.SynceProjectToLiveDatabaseToolStripMenuItem.PerformClick()
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Project Add Lot: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        load_ProjectName_combobox()
     End Sub
 End Class

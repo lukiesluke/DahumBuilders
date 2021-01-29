@@ -138,7 +138,7 @@ Public Class FormMainDahum
         End Try
 
         Dim projectList As New List(Of FirebaseProject)()
-        sql = "SELECT `proj_name`,`proj_address` FROM `db_project_list` ORDER BY `proj_name` ASC"
+        sql = "SELECT `id`,`proj_name`,`proj_address` FROM `db_project_list` ORDER BY `proj_name` ASC"
 
         Connection()
         Try
@@ -147,21 +147,54 @@ Public Class FormMainDahum
 
             Do While sqlDataReader.Read = True
                 Dim project = New FirebaseProject() With {
+                        .id = sqlDataReader("id"),
                         .projName = sqlDataReader("proj_name"),
                         .address = sqlDataReader("proj_address")
                     }
                 projectList.Add(project)
             Loop
 
-            client.Set("project/", projectList)
+            For Each project In projectList
+                project.projectList = generateProjectList(project.id)
+            Next
+
+            client.Set(pathProjectTest, projectList)
+
             MessageBox.Show("Successfully synce to live database.")
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
     End Sub
 
+    Function generateProjectList(id As Integer) As List(Of FirebaseProjectList)
+        sql = "SELECT `block`,`lot`,`sqm`,`price`,`assigned_userid` FROM `db_project_item` WHERE `proj_id`=@ID"
+        Dim projectList As New List(Of FirebaseProjectList)()
+
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@ID", MySqlDbType.VarChar).Value = id
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            Do While sqlDataReader.Read = True
+                Dim project = New FirebaseProjectList() With {
+                        .block = sqlDataReader("block"),
+                        .lot = sqlDataReader("lot"),
+                        .sqm = sqlDataReader("sqm"),
+                        .tcp = sqlDataReader("price"),
+                        .assignStat = sqlDataReader("assigned_userid")
+                    }
+                projectList.Add(project)
+            Loop
+            Return projectList
+        Catch ex As Exception
+            Return New List(Of FirebaseProjectList)()
+        End Try
+    End Function
+
     Private Sub ProjectPriceListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProjectPriceListToolStripMenuItem.Click
         Dim m = New FormProjectPriceList
         m.ShowDialog()
     End Sub
+
 End Class

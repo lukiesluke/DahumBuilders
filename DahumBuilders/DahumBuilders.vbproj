@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="FirebaseDetail.vb" />
     <Compile Include="FirebaseProject.vb" />
+    <Compile Include="FirebaseProjectList.vb" />
     <Compile Include="FirebaseSummaryReport.vb" />
     <Compile Include="FormCRptTransaction.Designer.vb">
       <DependentUpon>FormCRptTransaction.vb</DependentUpon>

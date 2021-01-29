@@ -62,7 +62,7 @@ Public Class FormSendReportFirebase
                 summary.details = generateDetailReport(summary.datePaid)
             Next
 
-            client.Set("summary/", summaryList)
+            client.Set(pathSummaryTest, summaryList)
 
             sqlDataReader.Dispose()
             lblStatus.Text = "Report Successfully submitted."
