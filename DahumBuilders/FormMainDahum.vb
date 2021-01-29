@@ -167,7 +167,7 @@ Public Class FormMainDahum
     End Sub
 
     Function generateProjectList(id As Integer) As List(Of FirebaseProjectList)
-        sql = "SELECT `block`,`lot`,`sqm`,`price`,`assigned_userid` FROM `db_project_item` WHERE `proj_id`=@ID"
+        sql = "SELECT `block`,`lot`,`sqm`,`price`,`assigned_userid` FROM `db_project_item` WHERE `proj_id`=@ID ORDER BY `block`, `lot` ASC"
         Dim projectList As New List(Of FirebaseProjectList)()
 
         Connection()
