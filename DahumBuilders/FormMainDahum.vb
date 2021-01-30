@@ -123,49 +123,6 @@ Public Class FormMainDahum
         End If
     End Sub
 
-    Private Sub SendLiveReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SendLiveReportToolStripMenuItem.Click
-        Dim form As New FormSendReportFirebase
-        form.ShowDialog()
-    End Sub
-
-    Private Sub SynceProjectToLiveDatabaseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SynceProjectToLiveDatabaseToolStripMenuItem.Click
-
-        Try
-            client = New FireSharp.FirebaseClient(fireCon)
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-            Exit Sub
-        End Try
-
-        Dim projectList As New List(Of FirebaseProject)()
-        sql = "SELECT `id`,`proj_name`,`proj_address` FROM `db_project_list` ORDER BY `proj_name` ASC"
-
-        Connection()
-        Try
-            sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlDataReader = sqlCommand.ExecuteReader()
-
-            Do While sqlDataReader.Read = True
-                Dim project = New FirebaseProject() With {
-                        .id = sqlDataReader("id"),
-                        .projName = sqlDataReader("proj_name"),
-                        .address = sqlDataReader("proj_address")
-                    }
-                projectList.Add(project)
-            Loop
-
-            For Each project In projectList
-                project.projectList = generateProjectList(project.id)
-            Next
-
-            client.Set(pathProjectTest, projectList)
-
-            MessageBox.Show("Successfully synce to live database.")
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
     Function generateProjectList(id As Integer) As List(Of FirebaseProjectList)
         sql = "SELECT `block`,`lot`,`sqm`,`price`,`assigned_userid` FROM `db_project_item` WHERE `proj_id`=@ID ORDER BY `block`, `lot` ASC"
         Dim projectList As New List(Of FirebaseProjectList)()
@@ -197,4 +154,49 @@ Public Class FormMainDahum
         m.ShowDialog()
     End Sub
 
+    Private Sub SummaryReportToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SummaryReportToolStripMenuItem1.Click
+        Dim form As New FormSendReportFirebase
+        form.ShowDialog()
+    End Sub
+
+    Private Sub ProjectListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProjectListToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        Try
+            client = New FireSharp.FirebaseClient(fireCon)
+        Catch ex As Exception
+            Cursor = Cursors.Default
+            MessageBox.Show(ex.Message)
+            Exit Sub
+        End Try
+
+        Dim projectList As New List(Of FirebaseProject)()
+        sql = "SELECT `id`,`proj_name`,`proj_address` FROM `db_project_list` ORDER BY `proj_name` ASC"
+
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            Do While sqlDataReader.Read = True
+                Dim project = New FirebaseProject() With {
+                        .id = sqlDataReader("id"),
+                        .projName = sqlDataReader("proj_name"),
+                        .address = sqlDataReader("proj_address")
+                    }
+                projectList.Add(project)
+            Loop
+
+            For Each project In projectList
+                project.projectList = generateProjectList(project.id)
+            Next
+
+            client.Set(pathProjectTest, projectList)
+
+            Cursor = Cursors.Default
+            MessageBox.Show("Successfully synce to live database.")
+        Catch ex As Exception
+            Cursor = Cursors.Default
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
 End Class
