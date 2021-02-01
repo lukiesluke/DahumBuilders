@@ -66,6 +66,14 @@ Partial Class FormAddProjectSetting
         Me.lblProjID = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.PanelProjectNameUpdate = New System.Windows.Forms.Panel()
+        Me.lblProjectName = New System.Windows.Forms.Label()
+        Me.lblID = New System.Windows.Forms.Label()
+        Me.txtAddressUpdate = New System.Windows.Forms.TextBox()
+        Me.txtProjectNameUpdate = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.btnUpdateProjectName = New System.Windows.Forms.Button()
         Me.ListViewProject = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -80,13 +88,6 @@ Partial Class FormAddProjectSetting
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.PanelProjectNameUpdate = New System.Windows.Forms.Panel()
-        Me.btnUpdateProjectName = New System.Windows.Forms.Button()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtProjectNameUpdate = New System.Windows.Forms.TextBox()
-        Me.txtAddressUpdate = New System.Windows.Forms.TextBox()
-        Me.lblID = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -94,9 +95,9 @@ Partial Class FormAddProjectSetting
         Me.PanelLotUpdate.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        Me.PanelProjectNameUpdate.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.PanelProjectNameUpdate.SuspendLayout()
         Me.SuspendLayout()
         '
         'cbbProjectName
@@ -314,7 +315,7 @@ Partial Class FormAddProjectSetting
         'lblClose
         '
         Me.lblClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblClose.Location = New System.Drawing.Point(729, 4)
+        Me.lblClose.Location = New System.Drawing.Point(748, 8)
         Me.lblClose.Name = "lblClose"
         Me.lblClose.Size = New System.Drawing.Size(71, 30)
         Me.lblClose.TabIndex = 23
@@ -493,6 +494,84 @@ Partial Class FormAddProjectSetting
         Me.Panel5.Size = New System.Drawing.Size(582, 409)
         Me.Panel5.TabIndex = 13
         '
+        'PanelProjectNameUpdate
+        '
+        Me.PanelProjectNameUpdate.BackColor = System.Drawing.Color.Gainsboro
+        Me.PanelProjectNameUpdate.Controls.Add(Me.lblProjectName)
+        Me.PanelProjectNameUpdate.Controls.Add(Me.lblID)
+        Me.PanelProjectNameUpdate.Controls.Add(Me.txtAddressUpdate)
+        Me.PanelProjectNameUpdate.Controls.Add(Me.txtProjectNameUpdate)
+        Me.PanelProjectNameUpdate.Controls.Add(Me.Label15)
+        Me.PanelProjectNameUpdate.Controls.Add(Me.Label16)
+        Me.PanelProjectNameUpdate.Controls.Add(Me.btnUpdateProjectName)
+        Me.PanelProjectNameUpdate.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PanelProjectNameUpdate.Location = New System.Drawing.Point(0, 203)
+        Me.PanelProjectNameUpdate.Name = "PanelProjectNameUpdate"
+        Me.PanelProjectNameUpdate.Size = New System.Drawing.Size(578, 202)
+        Me.PanelProjectNameUpdate.TabIndex = 4
+        '
+        'lblProjectName
+        '
+        Me.lblProjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblProjectName.Location = New System.Drawing.Point(494, 8)
+        Me.lblProjectName.Name = "lblProjectName"
+        Me.lblProjectName.Size = New System.Drawing.Size(71, 30)
+        Me.lblProjectName.TabIndex = 30
+        Me.lblProjectName.Text = "X"
+        Me.lblProjectName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblID
+        '
+        Me.lblID.AutoSize = True
+        Me.lblID.Location = New System.Drawing.Point(22, 117)
+        Me.lblID.Name = "lblID"
+        Me.lblID.Size = New System.Drawing.Size(41, 20)
+        Me.lblID.TabIndex = 29
+        Me.lblID.Text = "lblID"
+        Me.lblID.Visible = False
+        '
+        'txtAddressUpdate
+        '
+        Me.txtAddressUpdate.Location = New System.Drawing.Point(128, 78)
+        Me.txtAddressUpdate.Multiline = True
+        Me.txtAddressUpdate.Name = "txtAddressUpdate"
+        Me.txtAddressUpdate.Size = New System.Drawing.Size(437, 60)
+        Me.txtAddressUpdate.TabIndex = 28
+        '
+        'txtProjectNameUpdate
+        '
+        Me.txtProjectNameUpdate.Location = New System.Drawing.Point(128, 44)
+        Me.txtProjectNameUpdate.Name = "txtProjectNameUpdate"
+        Me.txtProjectNameUpdate.Size = New System.Drawing.Size(437, 26)
+        Me.txtProjectNameUpdate.TabIndex = 27
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(18, 47)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(104, 20)
+        Me.Label15.TabIndex = 25
+        Me.Label15.Text = "Project Name"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(18, 81)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(68, 20)
+        Me.Label16.TabIndex = 26
+        Me.Label16.Text = "Address"
+        '
+        'btnUpdateProjectName
+        '
+        Me.btnUpdateProjectName.Location = New System.Drawing.Point(442, 150)
+        Me.btnUpdateProjectName.Name = "btnUpdateProjectName"
+        Me.btnUpdateProjectName.Size = New System.Drawing.Size(123, 41)
+        Me.btnUpdateProjectName.TabIndex = 0
+        Me.btnUpdateProjectName.Text = "Update"
+        Me.btnUpdateProjectName.UseVisualStyleBackColor = True
+        '
         'ListViewProject
         '
         Me.ListViewProject.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -612,71 +691,6 @@ Partial Class FormAddProjectSetting
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "Project Lot Setting"
         '
-        'PanelProjectNameUpdate
-        '
-        Me.PanelProjectNameUpdate.BackColor = System.Drawing.Color.Gainsboro
-        Me.PanelProjectNameUpdate.Controls.Add(Me.lblID)
-        Me.PanelProjectNameUpdate.Controls.Add(Me.txtAddressUpdate)
-        Me.PanelProjectNameUpdate.Controls.Add(Me.txtProjectNameUpdate)
-        Me.PanelProjectNameUpdate.Controls.Add(Me.Label15)
-        Me.PanelProjectNameUpdate.Controls.Add(Me.Label16)
-        Me.PanelProjectNameUpdate.Controls.Add(Me.btnUpdateProjectName)
-        Me.PanelProjectNameUpdate.Location = New System.Drawing.Point(3, 226)
-        Me.PanelProjectNameUpdate.Name = "PanelProjectNameUpdate"
-        Me.PanelProjectNameUpdate.Size = New System.Drawing.Size(577, 178)
-        Me.PanelProjectNameUpdate.TabIndex = 4
-        '
-        'btnUpdateProjectName
-        '
-        Me.btnUpdateProjectName.Location = New System.Drawing.Point(442, 127)
-        Me.btnUpdateProjectName.Name = "btnUpdateProjectName"
-        Me.btnUpdateProjectName.Size = New System.Drawing.Size(123, 41)
-        Me.btnUpdateProjectName.TabIndex = 0
-        Me.btnUpdateProjectName.Text = "Update"
-        Me.btnUpdateProjectName.UseVisualStyleBackColor = True
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(18, 24)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(104, 20)
-        Me.Label15.TabIndex = 25
-        Me.Label15.Text = "Project Name"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(18, 58)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(68, 20)
-        Me.Label16.TabIndex = 26
-        Me.Label16.Text = "Address"
-        '
-        'txtProjectNameUpdate
-        '
-        Me.txtProjectNameUpdate.Location = New System.Drawing.Point(128, 21)
-        Me.txtProjectNameUpdate.Name = "txtProjectNameUpdate"
-        Me.txtProjectNameUpdate.Size = New System.Drawing.Size(437, 26)
-        Me.txtProjectNameUpdate.TabIndex = 27
-        '
-        'txtAddressUpdate
-        '
-        Me.txtAddressUpdate.Location = New System.Drawing.Point(128, 55)
-        Me.txtAddressUpdate.Multiline = True
-        Me.txtAddressUpdate.Name = "txtAddressUpdate"
-        Me.txtAddressUpdate.Size = New System.Drawing.Size(437, 60)
-        Me.txtAddressUpdate.TabIndex = 28
-        '
-        'lblID
-        '
-        Me.lblID.AutoSize = True
-        Me.lblID.Location = New System.Drawing.Point(22, 94)
-        Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(41, 20)
-        Me.lblID.TabIndex = 29
-        Me.lblID.Text = "lblID"
-        '
         'FormAddProjectSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -701,12 +715,12 @@ Partial Class FormAddProjectSetting
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel5.ResumeLayout(False)
+        Me.PanelProjectNameUpdate.ResumeLayout(False)
+        Me.PanelProjectNameUpdate.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        Me.PanelProjectNameUpdate.ResumeLayout(False)
-        Me.PanelProjectNameUpdate.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -775,4 +789,5 @@ Partial Class FormAddProjectSetting
     Friend WithEvents txtAddressUpdate As TextBox
     Friend WithEvents txtProjectNameUpdate As TextBox
     Friend WithEvents lblID As Label
+    Friend WithEvents lblProjectName As Label
 End Class

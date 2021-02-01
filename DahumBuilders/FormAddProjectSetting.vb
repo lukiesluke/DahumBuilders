@@ -7,6 +7,7 @@ Public Class FormAddProjectSetting
         load_ProjectName_combobox()
         'cbbProjectName.SelectedIndex = 0
         PanelLotUpdate.Visible = False
+        PanelProjectNameUpdate.Visible = False
     End Sub
 
     Private Sub load_ProjectName_combobox()
@@ -288,6 +289,9 @@ Public Class FormAddProjectSetting
             If e.KeyCode = Keys.Enter Then
                 PanelProjectNameUpdate.Visible = True
                 txtProjectNameUpdate.Focus()
+            ElseIf e.KeyCode = Keys.Escape Then
+                PanelProjectNameUpdate.Visible = False
+                PanelLotUpdate.Visible = False
             End If
         End If
     End Sub
@@ -309,6 +313,7 @@ Public Class FormAddProjectSetting
             cbSQMUpdate.Text = lot._sqm
             txtTcpUp.Text = lot._tcp.ToString("N2")
         End If
+        PanelProjectNameUpdate.Visible = False
     End Sub
 
     Private Sub ListViewProjectLot_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewProjectLot.KeyUp
@@ -319,6 +324,7 @@ Public Class FormAddProjectSetting
                 PanelLotUpdate.Visible = True
             ElseIf e.KeyCode = Keys.Escape Then
                 PanelLotUpdate.Visible = False
+                PanelProjectNameUpdate.Visible = False
             End If
         End If
     End Sub
@@ -410,7 +416,7 @@ Public Class FormAddProjectSetting
                 PanelLotUpdate.Visible = False
                 PanelProjectNameUpdate.Visible = False
                 MessageBox.Show("Successfully Project updated.")
-                mFormMainDahum.SyncToolStripMenuItem.PerformClick()
+                mFormMainDahum.ProjectListToolStripMenuItem.PerformClick()
             End If
         Catch ex As Exception
             MessageBox.Show("Project Add Lot: " & ex.Message)
@@ -419,5 +425,13 @@ Public Class FormAddProjectSetting
             sqlConnection.Close()
         End Try
         load_ProjectName_combobox()
+    End Sub
+
+    Private Sub lblProjectName_Click(sender As Object, e As EventArgs) Handles lblProjectName.Click
+        PanelProjectNameUpdate.Visible = False
+    End Sub
+
+    Private Sub ListViewProjectLot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewProjectLot.SelectedIndexChanged
+
     End Sub
 End Class
