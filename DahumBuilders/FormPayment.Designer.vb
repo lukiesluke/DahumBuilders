@@ -89,6 +89,7 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.AssumeLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -438,6 +439,7 @@ Partial Class FormPayment
         Me.btnOREntries.TabIndex = 54
         Me.btnOREntries.Text = "OR Entries"
         Me.btnOREntries.UseVisualStyleBackColor = True
+        Me.btnOREntries.Visible = False
         '
         'btnPayment
         '
@@ -576,9 +578,9 @@ Partial Class FormPayment
         'ContextMenuProjectList
         '
         Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.PaymentMethodToolStripMenuItem})
+        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.AssumeLotToolStripMenuItem, Me.PaymentMethodToolStripMenuItem})
         Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
-        Me.ContextMenuProjectList.Size = New System.Drawing.Size(221, 64)
+        Me.ContextMenuProjectList.Size = New System.Drawing.Size(221, 94)
         '
         'RemoveToolStripMenuItem
         '
@@ -776,6 +778,12 @@ Partial Class FormPayment
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'AssumeLotToolStripMenuItem
+        '
+        Me.AssumeLotToolStripMenuItem.Name = "AssumeLotToolStripMenuItem"
+        Me.AssumeLotToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
+        Me.AssumeLotToolStripMenuItem.Text = "Assume Lot"
+        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -881,4 +889,5 @@ Partial Class FormPayment
     Friend WithEvents lblChange As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents btnOREntries As Button
+    Friend WithEvents AssumeLotToolStripMenuItem As ToolStripMenuItem
 End Class
