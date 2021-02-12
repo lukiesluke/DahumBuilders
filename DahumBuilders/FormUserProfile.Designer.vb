@@ -101,7 +101,25 @@ Partial Class FormUserProfile
         Me.btnAddBeneficiary = New System.Windows.Forms.Button()
         Me.txtBeneficiaryName = New System.Windows.Forms.TextBox()
         Me.Label29 = New System.Windows.Forms.Label()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.lblAgentID = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtSearchAgent = New System.Windows.Forms.TextBox()
+        Me.btnSearchAgent = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ListViewAgent = New System.Windows.Forms.ListView()
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader7 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader8 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader9 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.txtAgentContact = New System.Windows.Forms.TextBox()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.txtAgentName = New System.Windows.Forms.TextBox()
+        Me.Label27 = New System.Windows.Forms.Label()
         Me.lblClientID = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,6 +130,10 @@ Partial Class FormUserProfile
         Me.gbChilderName.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.gbId.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtFirstName
@@ -148,7 +170,7 @@ Partial Class FormUserProfile
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(547, 763)
+        Me.btnSave.Location = New System.Drawing.Point(547, 784)
         Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(112, 35)
@@ -158,7 +180,7 @@ Partial Class FormUserProfile
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(667, 763)
+        Me.btnCancel.Location = New System.Drawing.Point(667, 784)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(112, 35)
@@ -249,7 +271,7 @@ Partial Class FormUserProfile
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(427, 763)
+        Me.btnUpdate.Location = New System.Drawing.Point(547, 784)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(112, 35)
@@ -262,7 +284,8 @@ Partial Class FormUserProfile
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Location = New System.Drawing.Point(18, 18)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Location = New System.Drawing.Point(18, 38)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -897,29 +920,182 @@ Partial Class FormUserProfile
         Me.Label29.TabIndex = 6
         Me.Label29.Text = "Name"
         '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.lblAgentID)
+        Me.TabPage4.Controls.Add(Me.Panel2)
+        Me.TabPage4.Controls.Add(Me.Panel1)
+        Me.TabPage4.Controls.Add(Me.txtAgentContact)
+        Me.TabPage4.Controls.Add(Me.Label28)
+        Me.TabPage4.Controls.Add(Me.txtAgentName)
+        Me.TabPage4.Controls.Add(Me.Label27)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(757, 707)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Agent Info"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'lblAgentID
+        '
+        Me.lblAgentID.AutoSize = True
+        Me.lblAgentID.Location = New System.Drawing.Point(81, 97)
+        Me.lblAgentID.Name = "lblAgentID"
+        Me.lblAgentID.Size = New System.Drawing.Size(84, 20)
+        Me.lblAgentID.TabIndex = 9
+        Me.lblAgentID.Text = "lblAgentID"
+        Me.lblAgentID.Visible = False
+        '
+        'Panel2
+        '
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtSearchAgent)
+        Me.Panel2.Controls.Add(Me.btnSearchAgent)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Location = New System.Drawing.Point(3, 123)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(751, 60)
+        Me.Panel2.TabIndex = 8
+        '
+        'txtSearchAgent
+        '
+        Me.txtSearchAgent.Location = New System.Drawing.Point(305, 18)
+        Me.txtSearchAgent.Name = "txtSearchAgent"
+        Me.txtSearchAgent.Size = New System.Drawing.Size(304, 26)
+        Me.txtSearchAgent.TabIndex = 3
+        '
+        'btnSearchAgent
+        '
+        Me.btnSearchAgent.Location = New System.Drawing.Point(615, 12)
+        Me.btnSearchAgent.Name = "btnSearchAgent"
+        Me.btnSearchAgent.Size = New System.Drawing.Size(121, 38)
+        Me.btnSearchAgent.TabIndex = 2
+        Me.btnSearchAgent.Text = "&Search"
+        Me.btnSearchAgent.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.ListViewAgent)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(3, 183)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(751, 521)
+        Me.Panel1.TabIndex = 7
+        '
+        'ListViewAgent
+        '
+        Me.ListViewAgent.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader7, Me.ColumnHeader8, Me.ColumnHeader9})
+        Me.ListViewAgent.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListViewAgent.FullRowSelect = True
+        Me.ListViewAgent.GridLines = True
+        Me.ListViewAgent.Location = New System.Drawing.Point(0, 0)
+        Me.ListViewAgent.Name = "ListViewAgent"
+        Me.ListViewAgent.Size = New System.Drawing.Size(751, 521)
+        Me.ListViewAgent.TabIndex = 0
+        Me.ListViewAgent.UseCompatibleStateImageBehavior = False
+        Me.ListViewAgent.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "ID"
+        Me.ColumnHeader2.Width = 0
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Name"
+        Me.ColumnHeader3.Width = 100
+        '
+        'ColumnHeader7
+        '
+        Me.ColumnHeader7.Text = "Last Name"
+        Me.ColumnHeader7.Width = 100
+        '
+        'ColumnHeader8
+        '
+        Me.ColumnHeader8.Text = "Contact"
+        Me.ColumnHeader8.Width = 100
+        '
+        'ColumnHeader9
+        '
+        Me.ColumnHeader9.Text = "Type"
+        '
+        'txtAgentContact
+        '
+        Me.txtAgentContact.Location = New System.Drawing.Point(85, 63)
+        Me.txtAgentContact.Name = "txtAgentContact"
+        Me.txtAgentContact.ReadOnly = True
+        Me.txtAgentContact.Size = New System.Drawing.Size(285, 26)
+        Me.txtAgentContact.TabIndex = 6
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(14, 66)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(65, 20)
+        Me.Label28.TabIndex = 5
+        Me.Label28.Text = "Contact"
+        '
+        'txtAgentName
+        '
+        Me.txtAgentName.Location = New System.Drawing.Point(85, 31)
+        Me.txtAgentName.Name = "txtAgentName"
+        Me.txtAgentName.ReadOnly = True
+        Me.txtAgentName.Size = New System.Drawing.Size(285, 26)
+        Me.txtAgentName.TabIndex = 4
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(14, 34)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(51, 20)
+        Me.Label27.TabIndex = 1
+        Me.Label27.Text = "Name"
+        '
         'lblClientID
         '
         Me.lblClientID.AutoSize = True
-        Me.lblClientID.Location = New System.Drawing.Point(18, 770)
+        Me.lblClientID.Location = New System.Drawing.Point(18, 791)
         Me.lblClientID.Name = "lblClientID"
         Me.lblClientID.Size = New System.Drawing.Size(81, 20)
         Me.lblClientID.TabIndex = 25
         Me.lblClientID.Text = "lblClientID"
         Me.lblClientID.Visible = False
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RefreshToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1005, 33)
+        Me.MenuStrip1.TabIndex = 26
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'RefreshToolStripMenuItem
+        '
+        Me.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem"
+        Me.RefreshToolStripMenuItem.ShowShortcutKeys = False
+        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(82, 29)
+        Me.RefreshToolStripMenuItem.Text = "Refresh"
+        '
         'FormUserProfile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(801, 817)
+        Me.ClientSize = New System.Drawing.Size(1005, 831)
         Me.Controls.Add(Me.lblClientID)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -946,6 +1122,13 @@ Partial Class FormUserProfile
         Me.TabPage3.PerformLayout()
         Me.gbId.ResumeLayout(False)
         Me.gbId.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1030,4 +1213,22 @@ Partial Class FormUserProfile
     Friend WithEvents txtIdType2 As TextBox
     Friend WithEvents Label26 As Label
     Friend WithEvents lblClientID As Label
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents ListViewAgent As ListView
+    Friend WithEvents ColumnHeader2 As ColumnHeader
+    Friend WithEvents ColumnHeader3 As ColumnHeader
+    Friend WithEvents ColumnHeader7 As ColumnHeader
+    Friend WithEvents txtSearchAgent As TextBox
+    Friend WithEvents btnSearchAgent As Button
+    Friend WithEvents Label27 As Label
+    Friend WithEvents txtAgentName As TextBox
+    Friend WithEvents txtAgentContact As TextBox
+    Friend WithEvents Label28 As Label
+    Friend WithEvents ColumnHeader8 As ColumnHeader
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents ColumnHeader9 As ColumnHeader
+    Friend WithEvents lblAgentID As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents RefreshToolStripMenuItem As ToolStripMenuItem
 End Class

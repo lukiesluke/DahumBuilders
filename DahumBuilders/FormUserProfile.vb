@@ -16,8 +16,9 @@ Public Class FormUserProfile
         'Me.Location = New Point(My.Computer.Screen.Bounds.Top)
         Me.Top = (My.Computer.Screen.WorkingArea.Height \ 2) - (Me.Height \ 2)
         Me.Left = (My.Computer.Screen.WorkingArea.Width \ 2) - (Me.Width \ 2)
-        Me.Size = New Size(550, 570)
+        Me.Size = New Size(550, 580)
         fileLocationImage = String.Empty
+        lblAgentID.Text = 0
 
         With Me.ComboBoxGender.Items
             .Add("Male")
@@ -80,10 +81,10 @@ Public Class FormUserProfile
         `place_birth`, `citizenship`, `telephone_number`, `mobile_number`, `email_address`, 
         `occupation`, `company_name`, `spouse_name`, `spouse_occupation`, `spouse_contact`, 
         `father_name`, `father_provincial_address`, `mother_name`, `mother_provincial_address`,
-        `file_location_image`, `id_type1`, `id_number1`, `id_type2`, `id_number2`, `created_by`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
+        `file_location_image`, `id_type1`, `id_number1`, `id_type2`, `id_number2`,`agent_id`, `created_by`)  VALUES (@first_name, @middle_name, @last_name, @address, @gender,
         @civilStatus, @dateBirth, @placeBirth, @citizenship, @telephone, @mobile, @email, @occupation, 
         @companyName, @spouseName, @spouseOccupation, @spouseContact, @fatherName, @fatherAddress, @MotherName, 
-        @MotherAddress, @fileLocationImage, @IdType1, @IdNumber1, @IdType2, @IdNumber2, @CreatedBy)"
+        @MotherAddress, @fileLocationImage, @IdType1, @IdNumber1, @IdType2, @IdNumber2, @AgentId, @CreatedBy)"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -117,6 +118,7 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdType2", MySqlDbType.VarChar).Value = txtIdType2.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
+        sqlCommand.Parameters.Add("@AgentId", MySqlDbType.VarChar).Value = lblAgentID.Text.Trim
         sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.Int64).Value = userLogon._id
 
         Try
@@ -207,6 +209,39 @@ Public Class FormUserProfile
             Next
         End If
     End Sub
+    Private Sub getAgentList(cmd As MySqlCommand, conn As MySqlConnection, search As String, agentID As String)
+        Dim item As ListViewItem
+        cmd.Dispose()
+
+        If search IsNot Nothing Then
+            sql = "SELECT `id`, `first_name`,`last_name`, `mobile_number`, `user_type` FROM `db_user_profile` WHERE `user_type`>0 AND (`first_name` LIKE @search OR `last_name` LIKE @search)"
+        Else
+            sql = "SELECT `id`, `first_name`,`last_name`, `mobile_number`, `user_type` FROM `db_user_profile` WHERE `user_type`>0"
+        End If
+
+        cmd = New MySqlCommand(sql, conn)
+        If search IsNot Nothing Then
+            cmd.Parameters.Add("@search", MySqlDbType.VarChar).Value = search + "%"
+        End If
+        sqlDataReader = cmd.ExecuteReader()
+
+        ListViewAgent.Items.Clear()
+        Do While sqlDataReader.Read = True
+            item = New ListViewItem(sqlDataReader("id").ToString)
+            item.SubItems.Add(sqlDataReader("first_name"))
+            item.SubItems.Add(sqlDataReader("last_name"))
+            item.SubItems.Add(sqlDataReader("mobile_number"))
+            item.SubItems.Add(sqlDataReader("user_type"))
+
+            If lblAgentID.Text.Equals(sqlDataReader("id").ToString) Then
+                txtAgentName.Text = sqlDataReader("last_name") + ", " + sqlDataReader("first_name")
+                txtAgentContact.Text = sqlDataReader("mobile_number")
+            End If
+
+            ListViewAgent.Items.Add(item)
+        Loop
+        sqlDataReader.Dispose()
+    End Sub
 
     Private Sub getUserChildAndBeneficiary(cmd As MySqlCommand, conn As MySqlConnection, userId As String)
         Dim item As ListViewItem
@@ -291,6 +326,8 @@ Public Class FormUserProfile
                 txtIdNumber1.Text = table.Rows(0)("id_number1")
                 txtIdNumber2.Text = table.Rows(0)("id_number2")
 
+                lblAgentID.Text = table.Rows(0)("agent_id")
+
                 If userGender = "Male" Then
                     PictureBox1.Image = My.Resources.client_male
                 Else
@@ -309,6 +346,8 @@ Public Class FormUserProfile
                 End If
 
                 getUserChildAndBeneficiary(sqlCommand, sqlConnection, currentUserId)
+                getAgentList(sqlCommand, sqlConnection, Nothing, lblAgentID.Text.Trim)
+
             Else
                 MessageBox.Show("No Data Found")
             End If
@@ -340,7 +379,7 @@ Public Class FormUserProfile
         `spouse_occupation`=@spouseOccupation, `spouse_contact`=@spouseContact, `father_name`=@fatherName,
         `father_provincial_address`=@fatherAddress, `mother_name`=@MotherName, `mother_provincial_address`=@MotherAddress,
         `file_location_image`=@fileLocationImage, `id_type1`=@IdType1, `id_number1`=@IdNumber1, `id_type2`=@IdType2, `id_number2`=@IdNumber2,
-        `modified_by`=@ModifiedBy, `modified_date`=@ModifiedDate WHERE p.`id`=@currentUserId"
+        `agent_id`=@AgentId, `modified_by`=@ModifiedBy, `modified_date`=@ModifiedDate WHERE p.`id`=@currentUserId"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -375,6 +414,7 @@ Public Class FormUserProfile
         sqlCommand.Parameters.Add("@IdNumber1", MySqlDbType.VarChar).Value = txtIdNumber1.Text.Trim
         sqlCommand.Parameters.Add("@IdNumber2", MySqlDbType.VarChar).Value = txtIdNumber2.Text.Trim
         sqlCommand.Parameters.Add("@currentUserId", MySqlDbType.Int32).Value = currentUserId
+        sqlCommand.Parameters.Add("@AgentId", MySqlDbType.VarChar).Value = lblAgentID.Text.Trim
         sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.Int64).Value = userLogon._id
         sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
 
@@ -560,5 +600,25 @@ Public Class FormUserProfile
                                                  b.ReadOnly = value
                                                  Return True
                                              End Function)
+    End Sub
+
+    Private Sub btnSearchAgent_Click(sender As Object, e As EventArgs) Handles btnSearchAgent.Click
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        getAgentList(sqlCommand, sqlConnection, txtSearchAgent.Text.Trim, lblAgentID.Text.Trim)
+        sqlCommand.Dispose()
+        sqlConnection.Close()
+    End Sub
+
+    Private Sub ListViewAgent_Click(sender As Object, e As EventArgs) Handles ListViewAgent.Click, ListViewAgent.KeyUp
+        If ListViewAgent.Items.Count > 0 Then
+            lblAgentID.Text = ListViewAgent.SelectedItems.Item(0).Text
+            txtAgentName.Text = ListViewAgent.SelectedItems.Item(0).SubItems(2).Text + ", " + ListViewAgent.SelectedItems.Item(0).SubItems(1).Text
+            txtAgentContact.Text = ListViewAgent.SelectedItems.Item(0).SubItems(3).Text
+        End If
+    End Sub
+
+    Private Sub RefreshToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RefreshToolStripMenuItem.Click
+        btnSearch.PerformClick()
     End Sub
 End Class
