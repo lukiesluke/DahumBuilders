@@ -17,7 +17,7 @@ Public Class FormLogin
             Exit Sub
         End If
 
-        sql = "SELECT `id`,`username`, `password`,`user_type` FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
+        sql = "SELECT `id`, CONCAT(`first_name`, ' ', `middle_name`, ' ', `last_name`) AS 'name', `username`, `password`,`user_type` FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         sqlCommand.Parameters.Add("@Username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim
@@ -28,6 +28,7 @@ Public Class FormLogin
             Do While sqlDataReader.Read = True
                 With userLogon
                     ._id = sqlDataReader("id")
+                    ._name = sqlDataReader("name")
                     ._username = sqlDataReader("username")
                     ._password = sqlDataReader("password")
                 End With

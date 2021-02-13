@@ -34,6 +34,8 @@ Public Class FormCRptSummaryReport
             Dim txtTotalCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCash")
             Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
             Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
+            Dim txtLoginName As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtLoginName")
+
             Dim totalExpenses As Double
 
             If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
@@ -71,6 +73,8 @@ Public Class FormCRptSummaryReport
                 txtCheck.Text = 0.ToString("N2")
                 txtBankTransfer.Text = 0.ToString("N2")
             End If
+
+            txtLoginName.Text = userLogon._name
 
             report.SetDataSource(table)
             CrystalReportViewerSummary.ReportSource = report

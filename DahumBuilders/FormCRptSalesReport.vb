@@ -79,6 +79,7 @@ Public Class FormCRptSalesReport
             Dim txtDiscount As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtDiscount")
             'Dim txtTotalCommission As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCommission")
             'Dim txtTotalCashOnHand As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCashOnHand")
+            Dim txtLoginName As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtLoginName")
 
             projName.Text = "PROJECT NAME: " & cbbProjectName.Text
             If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
@@ -137,6 +138,8 @@ Public Class FormCRptSalesReport
                 .Fill(dataSet, "SalesReportExpenses")
             End With
             report.Refresh()
+
+            txtLoginName.Text = userLogon._name
 
             report.SetDataSource(dataSet)
             CrystalReportViewerSales.ReportSource = report
