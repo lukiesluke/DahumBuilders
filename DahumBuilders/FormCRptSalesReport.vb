@@ -41,14 +41,16 @@ Public Class FormCRptSalesReport
         Dim zero As String = 0.ToString("N2")
 
         Dim table As New DataTable()
-        sql = "SELECT IFNULL(`official_receipt_no`, 'x') AS official_receipt_no, IFNULL((SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`),t.`description`) AS 'name', 
-        `paid_amount`, t.`commission`, `paid_amount`-t.`commission` AS 'totalCash', t.`discount_amount`, t.`penalty`, pt.`short_name`, pt.`id` AS `payment_type`, 
-        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, pa.`name` AS `particular`, `date_paid`, 
-        t.`id` , it.`block` , it.`lot` , it.`sqm`, t.`date_paid` FROM `db_transaction` t 
+        Dim dataSet As New DataSet()
+        dataSet.Clear()
+
+        sql = "SELECT `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
+        t.`penalty`,  t.`discount_amount`, `paid_amount`,  pt.`short_name`, pa.`name` AS `particular`, pt.`id` AS `payment_type`, 
+        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, t.`id` , t.`proj_id`, it.`block` , it.`lot` , it.`sqm`, t.`date_paid` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
-        WHERE t.`proj_id`=@projectID AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
+        WHERE t.`proj_id`=@projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
         ORDER BY date_paid DESC, lot ASC, official_receipt_no ASC"
         Connection()
         Try
@@ -60,19 +62,23 @@ Public Class FormCRptSalesReport
             sqlAdapter = New MySqlDataAdapter
             With sqlAdapter
                 .SelectCommand = sqlCommand
-                .Fill(table)
+                .Fill(dataSet, "SalesReport")
             End With
+
+            table = dataSet.Tables(0)
+
 
             Dim report As New crpSalesReport
             report.Load()
+
             Dim projName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtProjectName")
             Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
             Dim txtTotalCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCash")
             Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
             Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
             Dim txtDiscount As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtDiscount")
-            Dim txtTotalCommission As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCommission")
-            Dim txtTotalCashOnHand As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCashOnHand")
+            'Dim txtTotalCommission As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCommission")
+            'Dim txtTotalCashOnHand As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCashOnHand")
 
             projName.Text = "PROJECT NAME: " & cbbProjectName.Text
             If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
@@ -87,32 +93,52 @@ Public Class FormCRptSalesReport
                 Else
                     txtTotalCash.Text = Convert.ToDouble(table.Compute("SUM(paid_amount)", "payment_type = 0")).ToString("N2")
                 End If
+
                 If IsDBNull(table.Compute("SUM(paid_amount)", "payment_type = 1")) Then
                     txtCheck.Text = 0.ToString("N2")
                 Else
                     txtCheck.Text = Convert.ToDouble(table.Compute("SUM(paid_amount)", "payment_type = 1")).ToString("N2")
                 End If
+
                 If IsDBNull(table.Compute("SUM(paid_amount)", "payment_type = 2")) Then
                     txtBankTransfer.Text = 0.ToString("N2")
                 Else
                     txtBankTransfer.Text = Convert.ToDouble(table.Compute("SUM(paid_amount)", "payment_type = 2")).ToString("N2")
                 End If
-                If IsDBNull(table.Compute("SUM(commission)", "")) Then
-                    txtTotalCommission.Text = 0.ToString("N2")
-                Else
-                    txtTotalCommission.Text = Convert.ToDouble(table.Compute("SUM(commission)", "")).ToString("N2")
-                End If
-                txtTotalCashOnHand.Text = (Convert.ToDouble(txtTotalCash.Text) - Convert.ToDouble(txtTotalCommission.Text)).ToString("N2")
+
+                '    txtTotalCashOnHand.Text = (Convert.ToDouble(txtTotalCash.Text) - Convert.ToDouble(txtTotalCommission.Text)).ToString("N2")
                 txtDiscount.Text = Convert.ToDouble(table.Compute("SUM(discount_amount)", "")).ToString("N2")
             Else
                 txtTotalCash.Text = zero
                 txtCheck.Text = zero
                 txtBankTransfer.Text = zero
                 txtDiscount.Text = zero
-                txtTotalCommission.Text = zero
-                txtTotalCashOnHand.Text = zero
+
+                '    txtTotalCommission.Text = zero
+                '    txtTotalCashOnHand.Text = zero
             End If
-            report.SetDataSource(table)
+
+            sql = "SELECT t.`description`, t.`commission`, pt.`short_name`, pa.`name` AS `particular`, pt.`id` AS `payment_type`, 
+            t.`id` , t.`proj_id`, it.`block` , it.`lot` , it.`sqm`, t.`date_paid` FROM `db_transaction` t 
+            LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
+            LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
+            LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
+            WHERE t.`proj_id`=@projectID AND t.`particular`>=6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
+            ORDER BY date_paid DESC"
+
+            Dim cmd As New MySqlCommand(sql, sqlConnection)
+            cmd.Parameters.Add("@projectID", MySqlDbType.VarChar).Value = projectID
+            cmd.Parameters.Add("@DateFrom", MySqlDbType.VarChar).Value = dtpFrom.Value.ToString(format)
+            cmd.Parameters.Add("@DateTo", MySqlDbType.VarChar).Value = dtpTo.Value.ToString(format)
+
+            Dim adapter As New MySqlDataAdapter()
+            With adapter
+                .SelectCommand = cmd
+                .Fill(dataSet, "SalesReportExpenses")
+            End With
+            report.Refresh()
+
+            report.SetDataSource(dataSet)
             CrystalReportViewerSales.ReportSource = report
             CrystalReportViewerSales.Refresh()
             CrystalReportViewerSales.Zoom(90)
