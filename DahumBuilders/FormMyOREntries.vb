@@ -3,15 +3,19 @@ Public Class FormMyOREntries
     Private transaction As Transaction = New Transaction()
 
     Private Sub FormMyOREntries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblProjectName.Text = ""
+        lblClientName.Text = ""
+
         load_my_entries()
     End Sub
 
     Private Sub load_my_entries()
 
-        sql = "SELECT `id`,`date_paid`,`official_receipt_no`,`paid_amount`, 
+        sql = "SELECT `id`,`date_paid`,`official_receipt_no`,`paid_amount`,
+        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes
-        FROM `db_transaction` t WHERE t.`official_receipt_no` IS NOT NULL ORDER BY t.`date_paid` DESC"
+        FROM `db_transaction` t WHERE t.`official_receipt_no` IS NOT NULL AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -28,6 +32,7 @@ Public Class FormMyOREntries
                 transaction._id = sqlDataReader("id")
                 transaction._datePaid = sqlDataReader("date_paid")
                 transaction._or = sqlDataReader("official_receipt_no")
+                transaction._clientName = sqlDataReader("clientName")
                 transaction._paidAmount = sqlDataReader("paid_amount")
                 transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
 
@@ -35,6 +40,7 @@ Public Class FormMyOREntries
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(transaction._datePaid)
                 item.SubItems.Add(transaction._or)
+                item.SubItems.Add(transaction._clientName)
                 item.SubItems.Add(transaction._paidAmount.ToString("N2"))
                 item.SubItems.Add(transaction._description)
                 ListView1.Items.Add(item)
@@ -87,12 +93,16 @@ Public Class FormMyOREntries
         transaction._id = ListView1.SelectedItems.Item(0).Text
         transaction._datePaid = ListView1.SelectedItems.Item(0).SubItems(1).Text
         transaction._or = ListView1.SelectedItems.Item(0).SubItems(2).Text
-        transaction._paidAmount = ListView1.SelectedItems.Item(0).SubItems(3).Text
-        transaction._description = ListView1.SelectedItems.Item(0).SubItems(4).Text
+        transaction._clientName = ListView1.SelectedItems.Item(0).SubItems(3).Text
+        transaction._paidAmount = ListView1.SelectedItems.Item(0).SubItems(4).Text
+        transaction._description = ListView1.SelectedItems.Item(0).SubItems(5).Text
 
         dtpDatePaid.Value = transaction._datePaid
         txtORNumber.Text = transaction._or
         txtAmount.Text = transaction._paidAmount.ToString("N2")
+        lblClientName.Text = transaction._clientName
+        lblProjectName.Text = transaction._description
+
     End Sub
 
     Private Sub ListView1_KeyUp(sender As Object, e As KeyEventArgs) Handles ListView1.KeyUp

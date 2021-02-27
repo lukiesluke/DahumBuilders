@@ -36,16 +36,21 @@ Partial Class FormMyOREntries
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btCancel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lblClientName = New System.Windows.Forms.Label()
+        Me.lblProjectName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAmount, Me.ColumnHeaderDescription})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderDescription})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(16, 143)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(873, 396)
+        Me.ListView1.Size = New System.Drawing.Size(1263, 396)
         Me.ListView1.TabIndex = 3
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -78,7 +83,7 @@ Partial Class FormMyOREntries
         '
         'txtORNumber
         '
-        Me.txtORNumber.Location = New System.Drawing.Point(118, 58)
+        Me.txtORNumber.Location = New System.Drawing.Point(118, 57)
         Me.txtORNumber.Name = "txtORNumber"
         Me.txtORNumber.Size = New System.Drawing.Size(142, 26)
         Me.txtORNumber.TabIndex = 1
@@ -96,7 +101,7 @@ Partial Class FormMyOREntries
         Me.dtpDatePaid.CustomFormat = "dd/MM/ yyyy"
         Me.dtpDatePaid.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDatePaid.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDatePaid.Location = New System.Drawing.Point(118, 24)
+        Me.dtpDatePaid.Location = New System.Drawing.Point(118, 21)
         Me.dtpDatePaid.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.dtpDatePaid.Name = "dtpDatePaid"
         Me.dtpDatePaid.Size = New System.Drawing.Size(142, 29)
@@ -105,7 +110,7 @@ Partial Class FormMyOREntries
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 30)
+        Me.Label1.Location = New System.Drawing.Point(12, 21)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(72, 20)
         Me.Label1.TabIndex = 4
@@ -123,7 +128,7 @@ Partial Class FormMyOREntries
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 93)
+        Me.Label3.Location = New System.Drawing.Point(12, 90)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(100, 20)
         Me.Label3.TabIndex = 6
@@ -147,11 +152,60 @@ Partial Class FormMyOREntries
         Me.btnUpdate.Text = "&Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
+        'ColumnHeaderName
+        '
+        Me.ColumnHeaderName.Text = "Name"
+        Me.ColumnHeaderName.Width = 200
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(278, 18)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(72, 35)
+        Me.Label4.TabIndex = 9
+        Me.Label4.Text = "Name"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(278, 61)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(72, 35)
+        Me.Label5.TabIndex = 10
+        Me.Label5.Text = "Project"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblClientName
+        '
+        Me.lblClientName.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblClientName.Location = New System.Drawing.Point(353, 18)
+        Me.lblClientName.Name = "lblClientName"
+        Me.lblClientName.Size = New System.Drawing.Size(678, 35)
+        Me.lblClientName.TabIndex = 11
+        Me.lblClientName.Text = "ClientName"
+        Me.lblClientName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'lblProjectName
+        '
+        Me.lblProjectName.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblProjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblProjectName.Location = New System.Drawing.Point(353, 61)
+        Me.lblProjectName.Name = "lblProjectName"
+        Me.lblProjectName.Size = New System.Drawing.Size(678, 35)
+        Me.lblProjectName.TabIndex = 12
+        Me.lblProjectName.Text = "ProjectName"
+        Me.lblProjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(905, 596)
+        Me.ClientSize = New System.Drawing.Size(1291, 596)
+        Me.Controls.Add(Me.lblProjectName)
+        Me.Controls.Add(Me.lblClientName)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btCancel)
         Me.Controls.Add(Me.Label3)
@@ -186,4 +240,9 @@ Partial Class FormMyOREntries
     Friend WithEvents btCancel As Button
     Friend WithEvents ColumnHeaderDescription As ColumnHeader
     Friend WithEvents btnUpdate As Button
+    Friend WithEvents ColumnHeaderName As ColumnHeader
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lblClientName As Label
+    Friend WithEvents lblProjectName As Label
 End Class
