@@ -4,10 +4,11 @@ Public Class FormExpenses
     Dim format As String = "yyyy-MM-dd"
     Private Sub FormExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblTotalCashin.Text = 0.ToString("N2")
-        txtCashoutAmount.Enabled = False
         lblProjectID.Text = 0
+        lblIssueTo.Text = ""
+        txtCashoutAmount.Enabled = False
         btnSave.Enabled = False
-
+        loadPaymentType()
         loadCombo()
     End Sub
 
@@ -65,6 +66,19 @@ Public Class FormExpenses
         txtCashoutAmount.Enabled = False
         lblProjectID.Text = 0
         loadSales(dt)
+    End Sub
+
+    Private Sub loadPaymentType()
+        Dim comboSourcePaymentType As New Dictionary(Of String, String)()
+        comboSourcePaymentType.Add("0", "Check")
+        comboSourcePaymentType.Add("1", "Cash")
+
+        cbbPaymentType.DataSource = Nothing
+        cbbPaymentType.Items.Clear()
+
+        cbbPaymentType.DataSource = New BindingSource(comboSourcePaymentType, Nothing)
+        cbbPaymentType.DisplayMember = "Value"
+        cbbPaymentType.ValueMember = "Key"
     End Sub
 
     Private Sub loadCombo()
@@ -175,15 +189,66 @@ Public Class FormExpenses
     End Sub
 
     Private Sub txtCashoutAmount_KeyUp(sender As Object, e As KeyEventArgs) Handles txtCashoutAmount.KeyUp
+        Dim type As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
+
         If txtCashoutAmount.Text.Length > 0 And txtCashoutAmount.Text <> "." Then
             Dim cashin As Double = Double.Parse(lblTotalCashin.Text)
             Dim cashout As Double = Double.Parse(txtCashoutAmount.Text)
-            If cashout > 0 And cashout <= cashin Then
-                btnSave.Enabled = True
+
+            If "0".Equals(Type) Then
+                If cashout > 0 Then
+                    btnSave.Enabled = True
+                Else
+                    btnSave.Enabled = False
+                End If
             Else
+                If cashout > 0 And cashout <= cashin Then
+                    btnSave.Enabled = True
+                Else
+                    btnSave.Enabled = False
+                End If
+            End If
+        End If
+
+        If "0".Equals("") Or "0".Equals(" ") Then
+            If txtCashoutAmount.Text.Length < 1 Then
                 btnSave.Enabled = False
             End If
         End If
+
     End Sub
 
+    Private Sub cbbPaymentType_TextChanged(sender As Object, e As EventArgs) Handles cbbPaymentType.TextChanged
+        txtCashoutAmount.Text = "0"
+        btnSave.Enabled = False
+
+        Try
+            Dim type As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
+
+            If "0".Equals(type) Then
+                lblTotalCashin.Visible = False
+                lblCashIn.Visible = False
+                If txtCashoutAmount.Text.Length > 0 And txtCashoutAmount.Text <> "." Then
+                    Dim cashout As Double = Double.Parse(txtCashoutAmount.Text)
+                    If cashout >= 0 Then
+                        txtCashoutAmount.Enabled = True
+                    End If
+                Else
+                    txtCashoutAmount.Enabled = False
+                End If
+            Else
+                lblTotalCashin.Visible = True
+                lblCashIn.Visible = True
+                Dim cashin As Double = Double.Parse(lblTotalCashin.Text)
+
+                If cashin > 0 Then
+                    txtCashoutAmount.Enabled = True
+                Else
+                    txtCashoutAmount.Enabled = False
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
