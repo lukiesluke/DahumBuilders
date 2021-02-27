@@ -52,6 +52,7 @@ Partial Class FormExpenses
         Me.lblIssueTo = New System.Windows.Forms.Label()
         Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'ListView1
@@ -216,7 +217,7 @@ Partial Class FormExpenses
         '
         'ListViewExpenses
         '
-        Me.ListViewExpenses.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDescription, Me.ColumnHeaderAmount, Me.ColumnHeaderType, Me.ColumnHeaderExpDate})
+        Me.ListViewExpenses.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDescription, Me.ColumnHeaderAmount, Me.ColumnHeaderType, Me.ColumnHeaderExpDate, Me.ColumnHeaderPaymentType})
         Me.ListViewExpenses.FullRowSelect = True
         Me.ListViewExpenses.GridLines = True
         Me.ListViewExpenses.Location = New System.Drawing.Point(21, 461)
@@ -290,6 +291,11 @@ Partial Class FormExpenses
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Expenses Type"
         '
+        'ColumnHeaderPaymentType
+        '
+        Me.ColumnHeaderPaymentType.Text = "Payment"
+        Me.ColumnHeaderPaymentType.Width = 100
+        '
         'FormExpenses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -353,4 +359,5 @@ Partial Class FormExpenses
     Friend WithEvents lblIssueTo As Label
     Friend WithEvents cbbPaymentType As ComboBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents ColumnHeaderPaymentType As ColumnHeader
 End Class

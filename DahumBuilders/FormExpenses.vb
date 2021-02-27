@@ -70,8 +70,8 @@ Public Class FormExpenses
 
     Private Sub loadPaymentType()
         Dim comboSourcePaymentType As New Dictionary(Of String, String)()
-        comboSourcePaymentType.Add("0", "Check")
-        comboSourcePaymentType.Add("1", "Cash")
+        comboSourcePaymentType.Add("0", "Cash")
+        comboSourcePaymentType.Add("1", "Check")
 
         cbbPaymentType.DataSource = Nothing
         cbbPaymentType.Items.Clear()
@@ -111,7 +111,8 @@ Public Class FormExpenses
         End Try
     End Sub
     Private Sub loadDeduction(dt As DateTimePicker)
-        sql = "SELECT `id`, `date_paid`, `commission`, `description`, 
+        sql = "SELECT `id`, `date_paid`, `commission`, `description`,
+        (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular
         FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"
 
@@ -131,6 +132,7 @@ Public Class FormExpenses
                 item.SubItems.Add(sqlDataReader("commission"))
                 item.SubItems.Add(sqlDataReader("particular"))
                 item.SubItems.Add(sqlDataReader("date_paid"))
+                item.SubItems.Add(sqlDataReader("paymentType"))
                 ListViewExpenses.Items.Add(item)
             Loop
 
@@ -155,9 +157,10 @@ Public Class FormExpenses
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim particularID As String = DirectCast(cbbType.SelectedItem, KeyValuePair(Of String, String)).Key
+        Dim typeIssue As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
 
-        sql = "INSERT INTO `db_transaction` (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `penalty`, `discount_amount`, `created_by`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID, NULL, NULL, @CreatedBy)"
+        sql = "INSERT INTO `db_transaction` (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `penalty`, `discount_amount`, `payment_type`, `created_by`) VALUES
+        (@DatePaid, @Commission, @Particular, @Description, @ProjID, NULL, NULL, @PaymentType, @CreatedBy)"
 
         Connection()
         Try
@@ -167,6 +170,7 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularID
             sqlCommand.Parameters.Add("@Description", MySqlDbType.VarChar).Value = txtDescription.Text.Trim
             sqlCommand.Parameters.Add("@ProjID", MySqlDbType.Int64).Value = lblProjectID.Text.Trim
+            sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = typeIssue
             sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.Int64).Value = userLogon._id
 
             If sqlCommand.ExecuteNonQuery() = 1 Then
@@ -195,7 +199,7 @@ Public Class FormExpenses
             Dim cashin As Double = Double.Parse(lblTotalCashin.Text)
             Dim cashout As Double = Double.Parse(txtCashoutAmount.Text)
 
-            If "0".Equals(Type) Then
+            If "1".Equals(type) Then
                 If cashout > 0 Then
                     btnSave.Enabled = True
                 Else
@@ -210,7 +214,7 @@ Public Class FormExpenses
             End If
         End If
 
-        If "0".Equals("") Or "0".Equals(" ") Then
+        If "1".Equals("") Or "0".Equals(" ") Then
             If txtCashoutAmount.Text.Length < 1 Then
                 btnSave.Enabled = False
             End If
@@ -225,7 +229,7 @@ Public Class FormExpenses
         Try
             Dim type As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
 
-            If "0".Equals(type) Then
+            If "1".Equals(type) Then
                 lblTotalCashin.Visible = False
                 lblCashIn.Visible = False
                 If txtCashoutAmount.Text.Length > 0 And txtCashoutAmount.Text <> "." Then
