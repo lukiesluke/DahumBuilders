@@ -28,17 +28,7 @@
               <xs:element name="date_paid" msprop:Generator_ColumnVarNameInTable="columndate_paid" msprop:Generator_ColumnPropNameInRow="date_paid" msprop:Generator_ColumnPropNameInTable="date_paidColumn" msprop:Generator_UserColumnName="date_paid" type="xs:dateTime" minOccurs="0" />
               <xs:element name="commission" msprop:Generator_ColumnVarNameInTable="columncommission" msprop:Generator_ColumnPropNameInRow="commission" msprop:Generator_ColumnPropNameInTable="commissionColumn" msprop:Generator_UserColumnName="commission" type="xs:double" minOccurs="0" />
               <xs:element name="payment_type" msprop:Generator_ColumnVarNameInTable="columnpayment_type" msprop:Generator_ColumnPropNameInRow="payment_type" msprop:Generator_ColumnPropNameInTable="payment_typeColumn" msprop:Generator_UserColumnName="payment_type" type="xs:string" minOccurs="0" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="SalesReportExpenses" msprop:Generator_TableClassName="SalesReportExpensesDataTable" msprop:Generator_TableVarName="tableSalesReportExpenses" msprop:Generator_RowChangedName="SalesReportExpensesRowChanged" msprop:Generator_TablePropName="SalesReportExpenses" msprop:Generator_RowDeletingName="SalesReportExpensesRowDeleting" msprop:Generator_RowChangingName="SalesReportExpensesRowChanging" msprop:Generator_RowEvHandlerName="SalesReportExpensesRowChangeEventHandler" msprop:Generator_RowDeletedName="SalesReportExpensesRowDeleted" msprop:Generator_RowClassName="SalesReportExpensesRow" msprop:Generator_UserTableName="SalesReportExpenses" msprop:Generator_RowEvArgName="SalesReportExpensesRowChangeEvent">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="description" msprop:Generator_ColumnVarNameInTable="columndescription" msprop:Generator_ColumnPropNameInRow="description" msprop:Generator_ColumnPropNameInTable="descriptionColumn" msprop:Generator_UserColumnName="description" type="xs:string" minOccurs="0" />
-              <xs:element name="date_paid" msprop:Generator_ColumnVarNameInTable="columndate_paid" msprop:Generator_ColumnPropNameInRow="date_paid" msprop:Generator_ColumnPropNameInTable="date_paidColumn" msprop:Generator_UserColumnName="date_paid" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="particular" msprop:Generator_ColumnVarNameInTable="columnparticular" msprop:Generator_ColumnPropNameInRow="particular" msprop:Generator_ColumnPropNameInTable="particularColumn" msprop:Generator_UserColumnName="particular" type="xs:string" minOccurs="0" />
-              <xs:element name="short_name" msprop:Generator_ColumnVarNameInTable="columnshort_name" msprop:Generator_ColumnPropNameInRow="short_name" msprop:Generator_ColumnPropNameInTable="short_nameColumn" msprop:Generator_UserColumnName="short_name" type="xs:string" minOccurs="0" />
-              <xs:element name="commission" msprop:Generator_ColumnVarNameInTable="columncommission" msprop:Generator_ColumnPropNameInRow="commission" msprop:Generator_ColumnPropNameInTable="commissionColumn" msprop:Generator_UserColumnName="commission" type="xs:double" minOccurs="0" />
+              <xs:element name="proj_name" msprop:Generator_ColumnVarNameInTable="columnproj_name" msprop:Generator_ColumnPropNameInRow="proj_name" msprop:Generator_ColumnPropNameInTable="proj_nameColumn" msprop:Generator_UserColumnName="proj_name" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

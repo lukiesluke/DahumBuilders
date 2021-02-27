@@ -14,13 +14,16 @@ Public Class FormExpenses
     Private Sub loadSales(dt As DateTimePicker)
         Connection()
         sql = "SELECT `proj_id`, (SELECT `proj_name` FROM `db_project_list` WHERE `id`= t.`proj_id`) proj_name,
-              `date_paid`, SUM(`paid_amount`)-SUM(`commission`) AS totalCash, SUM(`commission`) AS totalDeduction FROM `db_transaction` t WHERE `payment_type`=0 AND `date_paid`=@dt GROUP BY `proj_id`"
+        `date_paid`, SUM(`paid_amount`)-SUM(`commission`) AS totalCash, SUM(`commission`) AS totalDeduction 
+        FROM `db_transaction` t WHERE `payment_type`=0 AND `date_paid`=@dt AND `proj_id`>0 GROUP BY `proj_id`"
 
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         sqlCommand.Parameters.Add("@dt", MySqlDbType.VarChar).Value = dt.Value.ToString(format)
         sqlDataReader = sqlCommand.ExecuteReader()
         Try
             Dim item As ListViewItem
+            Dim totalPaid As Double = 0
+
             ListView1.Items.Clear()
             Do While sqlDataReader.Read = True
                 item = New ListViewItem(sqlDataReader("proj_id").ToString)
@@ -28,6 +31,7 @@ Public Class FormExpenses
                 item.SubItems.Add(sqlDataReader("proj_name"))
                 item.SubItems.Add(sqlDataReader("date_paid"))
                 Dim totalCash As Double = sqlDataReader("totalCash")
+                totalPaid += totalCash
                 Dim totalDeduction As Double = sqlDataReader("totalDeduction")
                 With item.SubItems.Add(totalCash.ToString("N2"))
                     .Font = New Font(ListView1.Font, FontStyle.Regular)
@@ -39,9 +43,21 @@ Public Class FormExpenses
                 End With
                 ListView1.Items.Add(item)
             Loop
+
+            lblTotalCashin.Text = totalPaid.ToString("N2")
+
+            If totalPaid > 0 Then
+                txtCashoutAmount.Enabled = True
+            Else
+                txtCashoutAmount.Enabled = False
+            End If
+
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+
+        loadDeduction(dt)
+
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -83,12 +99,11 @@ Public Class FormExpenses
     Private Sub loadDeduction(dt As DateTimePicker)
         sql = "SELECT `id`, `date_paid`, `commission`, `description`, 
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular
-        FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt AND `proj_id`=@ProjID"
+        FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         sqlCommand.Parameters.Add("@dt", MySqlDbType.VarChar).Value = dt.Value.ToString(format)
-        sqlCommand.Parameters.Add("@ProjID", MySqlDbType.VarChar).Value = lblProjectID.Text.Trim
         sqlDataReader = sqlCommand.ExecuteReader()
 
         Try
@@ -117,20 +132,6 @@ Public Class FormExpenses
     Private Sub txtCashoutAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCashoutAmount.KeyPress
         If (Not e.KeyChar = ChrW(Keys.Back) And ("0123456789.").IndexOf(e.KeyChar) = -1) Or (e.KeyChar = "." And txtCashoutAmount.Text.ToCharArray().Count(Function(c) c = ".") > 0) Then
             e.Handled = True
-        End If
-    End Sub
-
-    Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click, ListView1.KeyUp
-        If ListView1.Items.Count > 0 Then
-            btnSave.Enabled = False
-            lblTotalCashin.Text = ListView1.SelectedItems(0).SubItems(3).Text
-            lblProjectID.Text = ListView1.SelectedItems(0).Text
-            loadDeduction(dt)
-            If Double.Parse(lblTotalCashin.Text) > 0 Then
-                txtCashoutAmount.Enabled = True
-            Else
-                txtCashoutAmount.Enabled = False
-            End If
         End If
     End Sub
 
@@ -184,4 +185,5 @@ Public Class FormExpenses
             End If
         End If
     End Sub
+
 End Class
