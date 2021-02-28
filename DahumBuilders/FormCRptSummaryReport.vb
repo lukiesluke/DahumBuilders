@@ -30,14 +30,17 @@ Public Class FormCRptSummaryReport
 
             Dim report As New crpSummaryReport
             report.Load()
+            Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtHeaderCompanyName")
+
             Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
             Dim txtTotalCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCash")
             Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
             Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
             Dim txtLoginName As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtLoginName")
 
-            Dim totalExpenses As Double
+            txtHeaderCompanyName.Text = ModuleConnection.CompanyName
 
+            Dim totalExpenses As Double
             If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
                 dateReport.Text = dtpFrom.Value.ToString(MMddyyyy)
             Else

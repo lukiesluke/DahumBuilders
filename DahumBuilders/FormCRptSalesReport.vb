@@ -149,4 +149,5 @@ Public Class FormCRptSalesReport
     Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged
         dtpTo.Value = dtpFrom.Value
     End Sub
+
 End Class
