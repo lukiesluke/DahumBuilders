@@ -12,6 +12,9 @@ Module ModuleConnection
     Public serverSetting As configurationSetting
     Public ini As New clsIni
 
+    'Public CompanyName As String = "Dahum Builders and Development Corporation"
+    Public CompanyName As String = "TP Realty And Development Corporation"
+
     'Firebase variable
     Public pathSummary As String = "summary/"
     Public pathSummaryTest As String = "summaryTest/"

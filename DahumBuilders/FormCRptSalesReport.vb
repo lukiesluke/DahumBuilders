@@ -77,6 +77,8 @@ Public Class FormCRptSalesReport
 
             Dim report As New crpSalesReport
             report.Load()
+            Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtHeaderCompanyName")
+
             Dim projName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtProjectName")
             Dim txtHeaderSaleReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("HeaderSaleReport")
             Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
@@ -88,6 +90,7 @@ Public Class FormCRptSalesReport
             'Dim txtTotalCashOnHand As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCashOnHand")
             Dim txtLoginName As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtLoginName")
 
+            txtHeaderCompanyName.Text = ModuleConnection.CompanyName
             projName.Text = "PROJECT NAME: " & cbbProjectName.Text
             txtHeaderSaleReport.Text = HeaderSaleReport
 

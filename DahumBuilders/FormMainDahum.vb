@@ -10,7 +10,7 @@ Public Class FormMainDahum
     Private client As IFirebaseClient
 
     Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Me.Text = ModuleConnection.CompanyName
         DahumConfiguration()
         showLoginForm()
 

@@ -29,7 +29,7 @@ Partial Class FormLogin
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblCompanyName = New System.Windows.Forms.Label()
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.lblIP = New System.Windows.Forms.Label()
         Me.SuspendLayout()
@@ -91,15 +91,15 @@ Partial Class FormLogin
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Label3
+        'lblCompanyName
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(46, 35)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(512, 29)
-        Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Dahum Builders and Development Corporation"
+        Me.lblCompanyName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCompanyName.Location = New System.Drawing.Point(12, 35)
+        Me.lblCompanyName.Name = "lblCompanyName"
+        Me.lblCompanyName.Size = New System.Drawing.Size(601, 29)
+        Me.lblCompanyName.TabIndex = 6
+        Me.lblCompanyName.Text = "Dahum Builders and Development Corporation"
+        Me.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblMessage
         '
@@ -128,7 +128,7 @@ Partial Class FormLogin
         Me.ClientSize = New System.Drawing.Size(625, 317)
         Me.Controls.Add(Me.lblIP)
         Me.Controls.Add(Me.lblMessage)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lblCompanyName)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.Label2)
@@ -153,7 +153,7 @@ Partial Class FormLogin
     Friend WithEvents Label2 As Label
     Friend WithEvents btnLogin As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblCompanyName As Label
     Friend WithEvents lblMessage As Label
     Friend WithEvents lblIP As Label
 End Class
