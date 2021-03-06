@@ -18,7 +18,7 @@ Public Class FormPayment
         txtTenderedAmount.Text = 0.ToString("N2")
         DataGridView1.DefaultCellStyle.Font = New Font("Consolas", 9)
         SplitContainer1.IsSplitterFixed = True
-        SplitContainer1.SplitterDistance = 190
+        SplitContainer1.SplitterDistance = 250
         load_userId_info_data_reader()
         setDataGridView()
     End Sub

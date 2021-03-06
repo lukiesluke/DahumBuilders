@@ -34,7 +34,7 @@ Partial Class FormPayment
         Me.dtpCheckDate = New System.Windows.Forms.DateTimePicker()
         Me.lblDateOrTransfer = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ORInformation = New System.Windows.Forms.Panel()
         Me.txtTenderedAmount = New System.Windows.Forms.TextBox()
         Me.lblChange = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -71,6 +71,7 @@ Partial Class FormPayment
         Me.ColumnHeaderMA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AssumeLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PaymentMethodToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -89,14 +90,13 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.AssumeLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.PanelCheck.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.Panel2.SuspendLayout()
+        Me.ORInformation.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.PanelInformation.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -118,14 +118,14 @@ Partial Class FormPayment
         'SplitContainer1.Panel1
         '
         Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.White
+        Me.SplitContainer1.Panel1.Controls.Add(Me.ORInformation)
         Me.SplitContainer1.Panel1.Controls.Add(Me.PanelCheck)
-        Me.SplitContainer1.Panel1.Controls.Add(Me.Panel2)
         '
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.PanelInformation)
         Me.SplitContainer1.Size = New System.Drawing.Size(1631, 472)
-        Me.SplitContainer1.SplitterDistance = 421
+        Me.SplitContainer1.SplitterDistance = 500
         Me.SplitContainer1.TabIndex = 1
         '
         'PanelCheck
@@ -142,7 +142,7 @@ Partial Class FormPayment
         Me.PanelCheck.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelCheck.Location = New System.Drawing.Point(0, 293)
         Me.PanelCheck.Name = "PanelCheck"
-        Me.PanelCheck.Size = New System.Drawing.Size(421, 179)
+        Me.PanelCheck.Size = New System.Drawing.Size(500, 179)
         Me.PanelCheck.TabIndex = 4
         '
         'lblCheckNo
@@ -173,7 +173,7 @@ Partial Class FormPayment
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(419, 34)
+        Me.Panel4.Size = New System.Drawing.Size(498, 34)
         Me.Panel4.TabIndex = 38
         '
         'lblInformation
@@ -228,29 +228,29 @@ Partial Class FormPayment
         Me.Label3.TabIndex = 33
         Me.Label3.Text = "Bank Name"
         '
-        'Panel2
+        'ORInformation
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.txtTenderedAmount)
-        Me.Panel2.Controls.Add(Me.lblChange)
-        Me.Panel2.Controls.Add(Me.Label11)
-        Me.Panel2.Controls.Add(Me.Label10)
-        Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.lblTotalAmount)
-        Me.Panel2.Controls.Add(Me.Panel1)
-        Me.Panel2.Controls.Add(Me.dtpDatePaid)
-        Me.Panel2.Controls.Add(Me.Label8)
-        Me.Panel2.Controls.Add(Me.cbPaymentType)
-        Me.Panel2.Controls.Add(Me.txtOfficialReceipt)
-        Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.Label13)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(421, 285)
-        Me.Panel2.TabIndex = 1
+        Me.ORInformation.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.ORInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ORInformation.Controls.Add(Me.txtTenderedAmount)
+        Me.ORInformation.Controls.Add(Me.lblChange)
+        Me.ORInformation.Controls.Add(Me.Label11)
+        Me.ORInformation.Controls.Add(Me.Label10)
+        Me.ORInformation.Controls.Add(Me.Label9)
+        Me.ORInformation.Controls.Add(Me.lblTotalAmount)
+        Me.ORInformation.Controls.Add(Me.Panel1)
+        Me.ORInformation.Controls.Add(Me.dtpDatePaid)
+        Me.ORInformation.Controls.Add(Me.Label8)
+        Me.ORInformation.Controls.Add(Me.cbPaymentType)
+        Me.ORInformation.Controls.Add(Me.txtOfficialReceipt)
+        Me.ORInformation.Controls.Add(Me.Label5)
+        Me.ORInformation.Controls.Add(Me.Label13)
+        Me.ORInformation.Dock = System.Windows.Forms.DockStyle.Top
+        Me.ORInformation.Location = New System.Drawing.Point(0, 0)
+        Me.ORInformation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.ORInformation.Name = "ORInformation"
+        Me.ORInformation.Size = New System.Drawing.Size(500, 285)
+        Me.ORInformation.TabIndex = 1
         '
         'txtTenderedAmount
         '
@@ -329,7 +329,7 @@ Partial Class FormPayment
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(419, 34)
+        Me.Panel1.Size = New System.Drawing.Size(498, 34)
         Me.Panel1.TabIndex = 39
         '
         'Label1
@@ -428,7 +428,7 @@ Partial Class FormPayment
         Me.PanelInformation.Location = New System.Drawing.Point(0, 0)
         Me.PanelInformation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.PanelInformation.Name = "PanelInformation"
-        Me.PanelInformation.Size = New System.Drawing.Size(1206, 472)
+        Me.PanelInformation.Size = New System.Drawing.Size(1127, 472)
         Me.PanelInformation.TabIndex = 2
         '
         'btnOREntries
@@ -480,7 +480,7 @@ Partial Class FormPayment
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel5.Location = New System.Drawing.Point(0, 183)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(1204, 287)
+        Me.Panel5.Size = New System.Drawing.Size(1125, 287)
         Me.Panel5.TabIndex = 51
         '
         'ListViewUserItem
@@ -495,7 +495,7 @@ Partial Class FormPayment
         Me.ListViewUserItem.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.ListViewUserItem.MultiSelect = False
         Me.ListViewUserItem.Name = "ListViewUserItem"
-        Me.ListViewUserItem.Size = New System.Drawing.Size(1204, 287)
+        Me.ListViewUserItem.Size = New System.Drawing.Size(1125, 287)
         Me.ListViewUserItem.TabIndex = 5
         Me.ListViewUserItem.UseCompatibleStateImageBehavior = False
         Me.ListViewUserItem.View = System.Windows.Forms.View.Details
@@ -588,6 +588,12 @@ Partial Class FormPayment
         Me.RemoveToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
         Me.RemoveToolStripMenuItem.Text = "Remove"
         '
+        'AssumeLotToolStripMenuItem
+        '
+        Me.AssumeLotToolStripMenuItem.Name = "AssumeLotToolStripMenuItem"
+        Me.AssumeLotToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
+        Me.AssumeLotToolStripMenuItem.Text = "Assume Lot"
+        '
         'PaymentMethodToolStripMenuItem
         '
         Me.PaymentMethodToolStripMenuItem.Name = "PaymentMethodToolStripMenuItem"
@@ -601,7 +607,7 @@ Partial Class FormPayment
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1204, 34)
+        Me.Panel3.Size = New System.Drawing.Size(1125, 34)
         Me.Panel3.TabIndex = 50
         '
         'Label4
@@ -778,12 +784,6 @@ Partial Class FormPayment
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'AssumeLotToolStripMenuItem
-        '
-        Me.AssumeLotToolStripMenuItem.Name = "AssumeLotToolStripMenuItem"
-        Me.AssumeLotToolStripMenuItem.Size = New System.Drawing.Size(220, 30)
-        Me.AssumeLotToolStripMenuItem.Text = "Assume Lot"
-        '
         'FormPayment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -807,8 +807,8 @@ Partial Class FormPayment
         Me.PanelCheck.ResumeLayout(False)
         Me.PanelCheck.PerformLayout()
         Me.Panel4.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
+        Me.ORInformation.ResumeLayout(False)
+        Me.ORInformation.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.PanelInformation.ResumeLayout(False)
         Me.PanelInformation.PerformLayout()
@@ -825,7 +825,7 @@ Partial Class FormPayment
 
     End Sub
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents ORInformation As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents btnPayment As Button
     Friend WithEvents PanelInformation As Panel

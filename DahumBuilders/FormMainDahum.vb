@@ -105,15 +105,6 @@ Public Class FormMainDahum
         End If
     End Sub
 
-    Private Sub ExpensesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExpensesToolStripMenuItem.Click
-        If Application.OpenForms().OfType(Of FormExpenses).Any Then
-            mFormExpenses.Focus()
-        Else
-            mFormExpenses = New FormExpenses
-            mFormExpenses.Show()
-        End If
-    End Sub
-
     Private Sub OfficialRecieptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OfficialRecieptToolStripMenuItem.Click
         If Application.OpenForms().OfType(Of FormMyOREntries).Any Then
             mFormMyOREntries.Focus()
@@ -198,5 +189,14 @@ Public Class FormMainDahum
             Cursor = Cursors.Default
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    Private Sub EntriesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EntriesToolStripMenuItem1.Click
+        If Application.OpenForms().OfType(Of FormExpenses).Any Then
+            mFormExpenses.Focus()
+        Else
+            mFormExpenses = New FormExpenses
+            mFormExpenses.Show()
+        End If
     End Sub
 End Class
