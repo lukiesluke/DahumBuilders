@@ -30,8 +30,14 @@ Public Class FormCRptExpenses
             Dim report As New crpExpensesReport
             report.Load()
             Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtHeaderCompanyName")
+            Dim txtDateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtDateReport")
 
             txtHeaderCompanyName.Text = ModuleConnection.CompanyName
+            If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                txtDateReport.Text = dtpFrom.Value.ToString(MMddyyyy)
+            Else
+                txtDateReport.Text = dtpFrom.Value.ToString(MMddyyyy) & " - " & dtpTo.Value.ToString(MMddyyyy)
+            End If
 
             report.SetDataSource(table)
             CrystalReportViewerExpenses.ReportSource = report
