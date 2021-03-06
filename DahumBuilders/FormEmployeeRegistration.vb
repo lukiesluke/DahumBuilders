@@ -181,7 +181,13 @@ Public Class FormEmployeeRegistration
 
             Try
                 If sqlCommand.ExecuteNonQuery() = 1 Then
-                    ShowMessageBox(Nothing, "Employee Profile Successfully Saved.", MessageBoxIcon.Information)
+
+                    If ComboBoxEmpType.SelectedIndex = 4 Then
+                        ShowMessageBox(Nothing, "Vendor Name Successfully Saved.", MessageBoxIcon.Information)
+                    Else
+                        ShowMessageBox(Nothing, "Employee Profile Successfully Saved.", MessageBoxIcon.Information)
+                    End If
+
                     sqlCommand.Dispose()
                     sqlConnection.Close()
                     Me.Close()
