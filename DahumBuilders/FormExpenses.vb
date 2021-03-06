@@ -140,7 +140,7 @@ Public Class FormExpenses
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
+        Dim bankName As String = ""
         Dim particularIdValue As String = DirectCast(cbbExpensesType.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim PaymentType As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
 
@@ -163,12 +163,16 @@ Public Class FormExpenses
         End If
 
         sql = "INSERT INTO `db_transaction` 
-        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_date`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @DateCheck, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
+        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
 
         Dim dateCheck As Date = Nothing
         If "commission".Equals(cbbExpensesType.Text.Trim.ToLower) Then
             dateCheck = dt.Value
+        End If
+
+        If cbbBankName.SelectedIndex > 0 Then
+            bankName = cbbBankName.Text.Trim
         End If
 
         Connection()
@@ -179,6 +183,7 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularIdValue
             sqlCommand.Parameters.Add("@Description", MySqlDbType.VarChar).Value = txtDescription.Text.Trim
             sqlCommand.Parameters.Add("@ProjID", MySqlDbType.Int64).Value = lblProjectID.Text.Trim
+            sqlCommand.Parameters.Add("@BankName", MySqlDbType.VarChar).Value = bankName
             sqlCommand.Parameters.Add("@DateCheck", MySqlDbType.VarChar).Value = dateCheck.ToString(format)
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = lblClientID.Text.Trim
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentType
@@ -192,7 +197,7 @@ Public Class FormExpenses
                 txtDescription.Text = ""
                 btnSave.Enabled = False
                 txtCheckNo.Text = ""
-
+                cbbBankName.SelectedIndex = 0
                 MessageBox.Show("Expenses successfully save.")
                 lblIssueTo.Text = messageInfo
             End If
@@ -231,13 +236,16 @@ Public Class FormExpenses
         txtCashoutAmount.Text = 0.ToString("N2")
         txtCheckNo.Text = ""
         btnSave.Enabled = False
-
         Try
             Dim type As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
             If "1".Equals(type) Then
                 txtCheckNo.Enabled = True
+                cbbBankName.Enabled = True
+                cbbBankName.DroppedDown = True
             Else
                 txtCheckNo.Enabled = False
+                cbbBankName.Enabled = False
+                cbbBankName.SelectedIndex = 0
             End If
         Catch ex As Exception
 
@@ -254,4 +262,5 @@ Public Class FormExpenses
     Private Sub ListView1_KeyUp(sender As Object, e As KeyEventArgs) Handles ListView1.KeyUp
         ListView1_Click(sender, e)
     End Sub
+
 End Class
