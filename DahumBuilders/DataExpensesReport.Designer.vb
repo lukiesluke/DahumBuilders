@@ -299,6 +299,8 @@ Partial Public Class DataExpensesReport
         
         Private columnparticular As Global.System.Data.DataColumn
         
+        Private columncheck_bank_name As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -399,6 +401,14 @@ Partial Public Class DataExpensesReport
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property check_bank_nameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columncheck_bank_name
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -435,9 +445,9 @@ Partial Public Class DataExpensesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddExpensesReportRow(ByVal id As String, ByVal commission As Double, ByVal description As String, ByVal payeeName As String, ByVal paymentType As String, ByVal check_number As String, ByVal date_paid As Date, ByVal particular As String) As ExpensesReportRow
+        Public Overloads Function AddExpensesReportRow(ByVal id As String, ByVal commission As Double, ByVal description As String, ByVal payeeName As String, ByVal paymentType As String, ByVal check_number As String, ByVal date_paid As Date, ByVal particular As String, ByVal check_bank_name As String) As ExpensesReportRow
             Dim rowExpensesReportRow As ExpensesReportRow = CType(Me.NewRow,ExpensesReportRow)
-            Dim columnValuesArray() As Object = New Object() {id, commission, description, payeeName, paymentType, check_number, date_paid, particular}
+            Dim columnValuesArray() As Object = New Object() {id, commission, description, payeeName, paymentType, check_number, date_paid, particular, check_bank_name}
             rowExpensesReportRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowExpensesReportRow)
             Return rowExpensesReportRow
@@ -468,6 +478,7 @@ Partial Public Class DataExpensesReport
             Me.columncheck_number = MyBase.Columns("check_number")
             Me.columndate_paid = MyBase.Columns("date_paid")
             Me.columnparticular = MyBase.Columns("particular")
+            Me.columncheck_bank_name = MyBase.Columns("check_bank_name")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -489,6 +500,8 @@ Partial Public Class DataExpensesReport
             MyBase.Columns.Add(Me.columndate_paid)
             Me.columnparticular = New Global.System.Data.DataColumn("particular", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnparticular)
+            Me.columncheck_bank_name = New Global.System.Data.DataColumn("check_bank_name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columncheck_bank_name)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -755,6 +768,21 @@ Partial Public Class DataExpensesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property check_bank_name() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableExpensesReport.check_bank_nameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'check_bank_name' in table 'ExpensesReport' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableExpensesReport.check_bank_nameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsidNull() As Boolean
             Return Me.IsNull(Me.tableExpensesReport.idColumn)
         End Function
@@ -847,6 +875,18 @@ Partial Public Class DataExpensesReport
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetparticularNull()
             Me(Me.tableExpensesReport.particularColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Ischeck_bank_nameNull() As Boolean
+            Return Me.IsNull(Me.tableExpensesReport.check_bank_nameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setcheck_bank_nameNull()
+            Me(Me.tableExpensesReport.check_bank_nameColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

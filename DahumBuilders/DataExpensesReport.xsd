@@ -12,7 +12,7 @@
   <xs:element name="DataExpensesReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataExpensesReport" msprop:Generator_UserDSName="DataExpensesReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ExpensesReport" msprop:Generator_TableClassName="ExpensesReportDataTable" msprop:Generator_TableVarName="tableExpensesReport" msprop:Generator_TablePropName="ExpensesReport" msprop:Generator_RowDeletingName="ExpensesReportRowDeleting" msprop:Generator_RowChangingName="ExpensesReportRowChanging" msprop:Generator_RowEvHandlerName="ExpensesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ExpensesReportRowDeleted" msprop:Generator_UserTableName="ExpensesReport" msprop:Generator_RowChangedName="ExpensesReportRowChanged" msprop:Generator_RowEvArgName="ExpensesReportRowChangeEvent" msprop:Generator_RowClassName="ExpensesReportRow">
+        <xs:element name="ExpensesReport" msprop:Generator_TableClassName="ExpensesReportDataTable" msprop:Generator_TableVarName="tableExpensesReport" msprop:Generator_RowChangedName="ExpensesReportRowChanged" msprop:Generator_TablePropName="ExpensesReport" msprop:Generator_RowDeletingName="ExpensesReportRowDeleting" msprop:Generator_RowChangingName="ExpensesReportRowChanging" msprop:Generator_RowEvHandlerName="ExpensesReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ExpensesReportRowDeleted" msprop:Generator_RowClassName="ExpensesReportRow" msprop:Generator_UserTableName="ExpensesReport" msprop:Generator_RowEvArgName="ExpensesReportRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:string" minOccurs="0" />
@@ -23,6 +23,7 @@
               <xs:element name="check_number" msprop:Generator_ColumnVarNameInTable="columncheck_number" msprop:Generator_ColumnPropNameInRow="check_number" msprop:Generator_ColumnPropNameInTable="check_numberColumn" msprop:Generator_UserColumnName="check_number" type="xs:string" minOccurs="0" />
               <xs:element name="date_paid" msprop:Generator_ColumnVarNameInTable="columndate_paid" msprop:Generator_ColumnPropNameInRow="date_paid" msprop:Generator_ColumnPropNameInTable="date_paidColumn" msprop:Generator_UserColumnName="date_paid" type="xs:dateTime" minOccurs="0" />
               <xs:element name="particular" msprop:Generator_ColumnVarNameInTable="columnparticular" msprop:Generator_ColumnPropNameInRow="particular" msprop:Generator_ColumnPropNameInTable="particularColumn" msprop:Generator_UserColumnName="particular" type="xs:string" minOccurs="0" />
+              <xs:element name="check_bank_name" msprop:Generator_ColumnVarNameInTable="columncheck_bank_name" msprop:Generator_ColumnPropNameInRow="check_bank_name" msprop:Generator_ColumnPropNameInTable="check_bank_nameColumn" msprop:Generator_UserColumnName="check_bank_name" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
