@@ -7,6 +7,11 @@ Public Class FormCRptExpenses
     Private Sub FormCRptExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        generate_report()
+    End Sub
+
     Private Sub generate_report()
 
         Dim table As New DataTable()
@@ -47,9 +52,7 @@ Public Class FormCRptExpenses
 
         End Try
     End Sub
-    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        generate_report()
-    End Sub
+
     Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged
         dtpTo.Value = dtpFrom.Value
     End Sub

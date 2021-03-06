@@ -31,7 +31,7 @@ Partial Class FormExpenses
         Me.ColumnHeaderTotalDeduction = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.dt = New System.Windows.Forms.DateTimePicker()
-        Me.cbbType = New System.Windows.Forms.ComboBox()
+        Me.cbbExpensesType = New System.Windows.Forms.ComboBox()
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,11 +41,13 @@ Partial Class FormExpenses
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ListViewExpenses = New System.Windows.Forms.ListView()
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderExpDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderEmpName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderExpDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCheckNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblIssueTo = New System.Windows.Forms.Label()
         Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
@@ -57,8 +59,6 @@ Partial Class FormExpenses
         Me.Label8 = New System.Windows.Forms.Label()
         Me.lblClientID = New System.Windows.Forms.Label()
         Me.lblProjectID = New System.Windows.Forms.Label()
-        Me.ColumnHeaderCheckNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderEmpName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'ListView1
@@ -117,14 +117,14 @@ Partial Class FormExpenses
         Me.dt.Size = New System.Drawing.Size(139, 26)
         Me.dt.TabIndex = 0
         '
-        'cbbType
+        'cbbExpensesType
         '
-        Me.cbbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbbType.FormattingEnabled = True
-        Me.cbbType.Location = New System.Drawing.Point(160, 54)
-        Me.cbbType.Name = "cbbType"
-        Me.cbbType.Size = New System.Drawing.Size(335, 28)
-        Me.cbbType.TabIndex = 3
+        Me.cbbExpensesType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbExpensesType.FormattingEnabled = True
+        Me.cbbExpensesType.Location = New System.Drawing.Point(160, 54)
+        Me.cbbExpensesType.Name = "cbbExpensesType"
+        Me.cbbExpensesType.Size = New System.Drawing.Size(335, 28)
+        Me.cbbExpensesType.TabIndex = 3
         '
         'txtDescription
         '
@@ -206,6 +206,11 @@ Partial Class FormExpenses
         Me.ColumnHeader1.Text = "ID"
         Me.ColumnHeader1.Width = 0
         '
+        'ColumnHeaderExpDate
+        '
+        Me.ColumnHeaderExpDate.Text = "Date"
+        Me.ColumnHeaderExpDate.Width = 80
+        '
         'ColumnHeaderDescription
         '
         Me.ColumnHeaderDescription.Text = "Description"
@@ -217,20 +222,25 @@ Partial Class FormExpenses
         Me.ColumnHeaderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderAmount.Width = 80
         '
+        'ColumnHeaderEmpName
+        '
+        Me.ColumnHeaderEmpName.Text = "Name"
+        Me.ColumnHeaderEmpName.Width = 130
+        '
         'ColumnHeaderType
         '
         Me.ColumnHeaderType.Text = "Type"
         Me.ColumnHeaderType.Width = 100
         '
-        'ColumnHeaderExpDate
-        '
-        Me.ColumnHeaderExpDate.Text = "Date"
-        Me.ColumnHeaderExpDate.Width = 80
-        '
         'ColumnHeaderPaymentType
         '
         Me.ColumnHeaderPaymentType.Text = "Payment"
         Me.ColumnHeaderPaymentType.Width = 80
+        '
+        'ColumnHeaderCheckNo
+        '
+        Me.ColumnHeaderCheckNo.Text = "Check No"
+        Me.ColumnHeaderCheckNo.Width = 80
         '
         'Label6
         '
@@ -332,16 +342,6 @@ Partial Class FormExpenses
         Me.lblProjectID.Text = "lblProjectID"
         Me.lblProjectID.Visible = False
         '
-        'ColumnHeaderCheckNo
-        '
-        Me.ColumnHeaderCheckNo.Text = "Check No"
-        Me.ColumnHeaderCheckNo.Width = 80
-        '
-        'ColumnHeaderEmpName
-        '
-        Me.ColumnHeaderEmpName.Text = "Name"
-        Me.ColumnHeaderEmpName.Width = 130
-        '
         'FormExpenses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -366,7 +366,7 @@ Partial Class FormExpenses
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtDescription)
-        Me.Controls.Add(Me.cbbType)
+        Me.Controls.Add(Me.cbbExpensesType)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.dt)
         Me.Controls.Add(Me.ListView1)
@@ -388,7 +388,7 @@ Partial Class FormExpenses
     Friend WithEvents ColumnHeaderAddress As ColumnHeader
     Friend WithEvents btnSearch As Button
     Friend WithEvents dt As DateTimePicker
-    Friend WithEvents cbbType As ComboBox
+    Friend WithEvents cbbExpensesType As ComboBox
     Friend WithEvents txtDescription As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
