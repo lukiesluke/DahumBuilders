@@ -115,7 +115,7 @@ Partial Class FormEmployeeRegistration
         '
         Me.ComboBoxEmpType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxEmpType.FormattingEnabled = True
-        Me.ComboBoxEmpType.Items.AddRange(New Object() {"[Select]", "Admin", "Agent"})
+        Me.ComboBoxEmpType.Items.AddRange(New Object() {"[Select]", "Admin", "Staff", "Agent", "Vendor"})
         Me.ComboBoxEmpType.Location = New System.Drawing.Point(152, 239)
         Me.ComboBoxEmpType.Name = "ComboBoxEmpType"
         Me.ComboBoxEmpType.Size = New System.Drawing.Size(298, 28)
