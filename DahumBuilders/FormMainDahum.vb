@@ -60,10 +60,10 @@ Public Class FormMainDahum
 
     Private Sub SalesReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesReportToolStripMenuItem.Click
         If Application.OpenForms().OfType(Of FormCRptSalesReport).Any Then
-            mFormSalesReport.Focus()
+            mFormCRptSalesReport.Focus()
         Else
-            mFormSalesReport = New FormCRptSalesReport
-            mFormSalesReport.Show()
+            mFormCRptSalesReport = New FormCRptSalesReport
+            mFormCRptSalesReport.Show()
         End If
     End Sub
 
@@ -197,6 +197,15 @@ Public Class FormMainDahum
         Else
             mFormExpenses = New FormExpenses
             mFormExpenses.Show()
+        End If
+    End Sub
+
+    Private Sub ReportToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ReportToolStripMenuItemExpensesReport.Click
+        If Application.OpenForms().OfType(Of FormCRptExpenses).Any Then
+            mFormCRptExpenses.Focus()
+        Else
+            mFormCRptExpenses = New FormCRptExpenses
+            mFormCRptExpenses.Show()
         End If
     End Sub
 End Class

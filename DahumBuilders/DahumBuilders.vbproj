@@ -149,6 +149,12 @@
   <ItemGroup>
     <Compile Include="clsIni.vb" />
     <Compile Include="configurationSetting.vb" />
+    <Compile Include="crpExpensesReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crpExpensesReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="crpSalesReport.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,10 +173,24 @@
       <DependentUpon>crptTransaction.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DataExpensesReport.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataExpensesReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataExpensesReport.vb">
+      <DependentUpon>DataExpensesReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FirebaseDetail.vb" />
     <Compile Include="FirebaseProject.vb" />
     <Compile Include="FirebaseProjectList.vb" />
     <Compile Include="FirebaseSummaryReport.vb" />
+    <Compile Include="FormCRptExpenses.Designer.vb">
+      <DependentUpon>FormCRptExpenses.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCRptExpenses.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormCRptTransaction.Designer.vb">
       <DependentUpon>FormCRptTransaction.vb</DependentUpon>
     </Compile>
@@ -246,13 +266,13 @@
     <Compile Include="LotClass.vb" />
     <Compile Include="PaymentMethod.vb" />
     <Compile Include="Project.vb" />
-    <Compile Include="Customer.Designer.vb">
+    <Compile Include="DataCustomer.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Customer.xsd</DependentUpon>
+      <DependentUpon>DataCustomer.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Customer.vb">
-      <DependentUpon>Customer.xsd</DependentUpon>
+    <Compile Include="DataCustomer.vb">
+      <DependentUpon>DataCustomer.xsd</DependentUpon>
     </Compile>
     <Compile Include="FormImageCapture.Designer.vb">
       <DependentUpon>FormImageCapture.vb</DependentUpon>
@@ -309,26 +329,30 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Sales.vb" />
-    <Compile Include="SalesReport.Designer.vb">
+    <Compile Include="DataSalesReport.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SalesReport.xsd</DependentUpon>
+      <DependentUpon>DataSalesReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SalesReport.vb">
-      <DependentUpon>SalesReport.xsd</DependentUpon>
+    <Compile Include="DataSalesReport.vb">
+      <DependentUpon>DataSalesReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SummaryReport.Designer.vb">
+    <Compile Include="DataSummaryReport.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SummaryReport.xsd</DependentUpon>
+      <DependentUpon>DataSummaryReport.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SummaryReport.vb">
-      <DependentUpon>SummaryReport.xsd</DependentUpon>
+    <Compile Include="DataSummaryReport.vb">
+      <DependentUpon>DataSummaryReport.xsd</DependentUpon>
     </Compile>
     <Compile Include="Transaction.vb" />
     <Compile Include="User.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="crpExpensesReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpExpensesReport.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="crpSalesReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crpSalesReport.vb</LastGenOutput>
@@ -340,6 +364,9 @@
     <EmbeddedResource Include="crptTransaction.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crptTransaction.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCRptExpenses.resx">
+      <DependentUpon>FormCRptExpenses.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCRptSummaryReport.resx">
       <DependentUpon>FormCRptSummaryReport.vb</DependentUpon>
@@ -404,16 +431,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
-    <None Include="Customer.xsc">
-      <DependentUpon>Customer.xsd</DependentUpon>
+    <None Include="DataCustomer.xsc">
+      <DependentUpon>DataCustomer.xsd</DependentUpon>
     </None>
-    <None Include="Customer.xsd">
+    <None Include="DataCustomer.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Customer.Designer.vb</LastGenOutput>
+      <LastGenOutput>DataCustomer.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Customer.xss">
-      <DependentUpon>Customer.xsd</DependentUpon>
+    <None Include="DataCustomer.xss">
+      <DependentUpon>DataCustomer.xsd</DependentUpon>
+    </None>
+    <None Include="DataExpensesReport.xsc">
+      <DependentUpon>DataExpensesReport.xsd</DependentUpon>
+    </None>
+    <None Include="DataExpensesReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataExpensesReport.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="DataExpensesReport.xss">
+      <DependentUpon>DataExpensesReport.xsd</DependentUpon>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -426,27 +464,27 @@
     </None>
     <None Include="App.config" />
     <None Include="Resources\dahum.ini" />
-    <None Include="SalesReport.xsc">
-      <DependentUpon>SalesReport.xsd</DependentUpon>
+    <None Include="DataSalesReport.xsc">
+      <DependentUpon>DataSalesReport.xsd</DependentUpon>
     </None>
-    <None Include="SalesReport.xsd">
+    <None Include="DataSalesReport.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SalesReport.Designer.vb</LastGenOutput>
+      <LastGenOutput>DataSalesReport.Designer.vb</LastGenOutput>
     </None>
-    <None Include="SalesReport.xss">
-      <DependentUpon>SalesReport.xsd</DependentUpon>
+    <None Include="DataSalesReport.xss">
+      <DependentUpon>DataSalesReport.xsd</DependentUpon>
     </None>
-    <None Include="SummaryReport.xsc">
-      <DependentUpon>SummaryReport.xsd</DependentUpon>
+    <None Include="DataSummaryReport.xsc">
+      <DependentUpon>DataSummaryReport.xsd</DependentUpon>
     </None>
-    <None Include="SummaryReport.xsd">
+    <None Include="DataSummaryReport.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SummaryReport.Designer.vb</LastGenOutput>
+      <LastGenOutput>DataSummaryReport.Designer.vb</LastGenOutput>
     </None>
-    <None Include="SummaryReport.xss">
-      <DependentUpon>SummaryReport.xsd</DependentUpon>
+    <None Include="DataSummaryReport.xss">
+      <DependentUpon>DataSummaryReport.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

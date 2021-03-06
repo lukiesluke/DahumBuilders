@@ -93,7 +93,7 @@ Public Class FormExpenses
     End Sub
     Private Sub loadDeduction(dt As DateTimePicker)
         sql = "SELECT `id`, `date_paid`, `commission`, `description`,
-        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`) AS NAME,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), 'UNSIGNED') AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`
         FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"

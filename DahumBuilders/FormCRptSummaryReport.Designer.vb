@@ -66,6 +66,7 @@ Partial Class FormCRptSummaryReport
         Me.CrystalReportViewerSummary.Name = "CrystalReportViewerSummary"
         Me.CrystalReportViewerSummary.Size = New System.Drawing.Size(1321, 575)
         Me.CrystalReportViewerSummary.TabIndex = 0
+        Me.CrystalReportViewerSummary.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
         '
         'PanelHeader
         '

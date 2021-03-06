@@ -42,6 +42,8 @@ Partial Class FormMainDahum
         Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExpensesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportToolStripMenuItemExpensesReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EntriesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SyncToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryReportToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjectListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -49,8 +51,6 @@ Partial Class FormMainDahum
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusIP = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ReportToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EntriesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -175,10 +175,22 @@ Partial Class FormMainDahum
         '
         'ExpensesToolStripMenuItem
         '
-        Me.ExpensesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportToolStripMenuItem1, Me.EntriesToolStripMenuItem1})
+        Me.ExpensesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportToolStripMenuItemExpensesReport, Me.EntriesToolStripMenuItem1})
         Me.ExpensesToolStripMenuItem.Name = "ExpensesToolStripMenuItem"
         Me.ExpensesToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
         Me.ExpensesToolStripMenuItem.Text = "Expenses"
+        '
+        'ReportToolStripMenuItemExpensesReport
+        '
+        Me.ReportToolStripMenuItemExpensesReport.Name = "ReportToolStripMenuItemExpensesReport"
+        Me.ReportToolStripMenuItemExpensesReport.Size = New System.Drawing.Size(210, 30)
+        Me.ReportToolStripMenuItemExpensesReport.Text = "Report"
+        '
+        'EntriesToolStripMenuItem1
+        '
+        Me.EntriesToolStripMenuItem1.Name = "EntriesToolStripMenuItem1"
+        Me.EntriesToolStripMenuItem1.Size = New System.Drawing.Size(210, 30)
+        Me.EntriesToolStripMenuItem1.Text = "Entries"
         '
         'SyncToolStripMenuItem
         '
@@ -229,18 +241,6 @@ Partial Class FormMainDahum
         Me.ToolStripStatusIP.Size = New System.Drawing.Size(27, 25)
         Me.ToolStripStatusIP.Text = "IP"
         '
-        'ReportToolStripMenuItem1
-        '
-        Me.ReportToolStripMenuItem1.Name = "ReportToolStripMenuItem1"
-        Me.ReportToolStripMenuItem1.Size = New System.Drawing.Size(210, 30)
-        Me.ReportToolStripMenuItem1.Text = "Report"
-        '
-        'EntriesToolStripMenuItem1
-        '
-        Me.EntriesToolStripMenuItem1.Name = "EntriesToolStripMenuItem1"
-        Me.EntriesToolStripMenuItem1.Size = New System.Drawing.Size(210, 30)
-        Me.EntriesToolStripMenuItem1.Text = "Entries"
-        '
         'FormMainDahum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -289,6 +289,6 @@ Partial Class FormMainDahum
     Friend WithEvents SyncToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SummaryReportToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ProjectListToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReportToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ReportToolStripMenuItemExpensesReport As ToolStripMenuItem
     Friend WithEvents EntriesToolStripMenuItem1 As ToolStripMenuItem
 End Class
