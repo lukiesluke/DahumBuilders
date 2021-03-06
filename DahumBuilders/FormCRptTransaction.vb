@@ -51,12 +51,16 @@ Public Class FormCRptTransaction
 
             Dim report As New crptTransaction
             report.Load()
+
+            Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtHeaderCompanyName")
+
             Dim name As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtName")
             Dim mobile As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtMobile")
             Dim address As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtAddress")
             Dim txtTotalTCP As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtTotalTCP")
             Dim txtTotalBalance As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtTotalBalance")
 
+            txtHeaderCompanyName.Text = ModuleConnection.CompanyName
             name.Text = mUser._name & " " & mUser._middleName & " " & mUser._surname
             mobile.Text = mUser._mobile
             address.Text = mUser._address

@@ -186,12 +186,14 @@ Partial Class FormMainDahum
         '
         'SummaryReportToolStripMenuItem1
         '
+        Me.SummaryReportToolStripMenuItem1.Enabled = False
         Me.SummaryReportToolStripMenuItem1.Name = "SummaryReportToolStripMenuItem1"
         Me.SummaryReportToolStripMenuItem1.Size = New System.Drawing.Size(230, 30)
         Me.SummaryReportToolStripMenuItem1.Text = "Summary Report"
         '
         'ProjectListToolStripMenuItem
         '
+        Me.ProjectListToolStripMenuItem.Enabled = False
         Me.ProjectListToolStripMenuItem.Name = "ProjectListToolStripMenuItem"
         Me.ProjectListToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
         Me.ProjectListToolStripMenuItem.Text = "Project List"
