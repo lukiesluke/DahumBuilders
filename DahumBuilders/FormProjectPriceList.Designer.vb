@@ -81,7 +81,6 @@ Partial Class FormProjectPriceList
         'cbbProjectName
         '
         Me.cbbProjectName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbbProjectName.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbbProjectName.FormattingEnabled = True
         Me.cbbProjectName.Location = New System.Drawing.Point(110, 48)
         Me.cbbProjectName.Name = "cbbProjectName"
