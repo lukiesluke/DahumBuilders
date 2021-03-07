@@ -153,7 +153,7 @@ Public Class FormAddProjectSetting
     End Sub
     Private Sub loadComboPriceList(listID As Integer)
 
-        sql = "SELECT `id`, `sqm`, `tcp` FROM `db_project_list_price` WHERE `lid`=@listID"
+        sql = "SELECT `id`, `sqm`, `tcp` FROM `db_project_list_price` WHERE `lid`=@listID ORDER BY sqm"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
