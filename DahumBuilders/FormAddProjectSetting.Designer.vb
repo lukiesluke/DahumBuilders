@@ -466,6 +466,7 @@ Partial Class FormAddProjectSetting
         Me.lblProjID.Size = New System.Drawing.Size(68, 20)
         Me.lblProjID.TabIndex = 16
         Me.lblProjID.Text = "lblProjID"
+        Me.lblProjID.Visible = False
         '
         'Panel2
         '

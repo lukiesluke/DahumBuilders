@@ -168,18 +168,23 @@ Public Class FormAddProjectSetting
             dataPriceList.Clear()
 
             Dim comboSource As New Dictionary(Of String, String)()
-            Do While sqlDataReader.Read = True
-                comboSource.Add(sqlDataReader("id"), sqlDataReader("sqm"))
-                dataPriceList.Add(sqlDataReader("id"), sqlDataReader("tcp"))
-            Loop
+            If sqlDataReader.HasRows Then
+                Do While sqlDataReader.Read = True
+                    comboSource.Add(sqlDataReader("id"), sqlDataReader("sqm"))
+                    dataPriceList.Add(sqlDataReader("id"), sqlDataReader("tcp"))
+                Loop
+            Else
+                comboSource.Add("1", "0")
+                dataPriceList.Add("1", "0")
+            End If
 
             cbSQM.DataSource = New BindingSource(comboSource, Nothing)
             cbSQM.DisplayMember = "Value"
             cbSQM.ValueMember = "Key"
 
-            'cbSQMUpdate.DataSource = New BindingSource(comboSource, Nothing)
-            'cbSQMUpdate.DisplayMember = "Value"
-            'cbSQMUpdate.ValueMember = "Key"
+            cbSQMUpdate.DataSource = New BindingSource(comboSource, Nothing)
+            cbSQMUpdate.DisplayMember = "Value"
+            cbSQMUpdate.ValueMember = "Key"
 
         Catch ex As Exception
             MessageBox.Show("Load Combo PriceList: " & ex.Message)
@@ -209,7 +214,12 @@ Public Class FormAddProjectSetting
         If cbSQMUpdate.SelectedIndex > -1 Then
             Dim key As String = DirectCast(cbSQMUpdate.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbSQMUpdate.SelectedItem, KeyValuePair(Of String, String)).Value
-            txtTcpUp.Text = CDbl(key).ToString("N2")
+            'txtTcpUp.Text = CDbl(key).ToString("N2")
+
+            If dataPriceList.ContainsKey(key) Then
+                Dim price As Double = dataPriceList.Item(key)
+                txtTcpUp.Text = price.ToString("N2")
+            End If
         End If
     End Sub
     Private Sub cbbProjectName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbProjectName.SelectedIndexChanged
