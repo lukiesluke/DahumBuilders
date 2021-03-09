@@ -130,23 +130,27 @@ Public Class FormEmployeeRegistration
 
             Try
                 Dim count As Integer = 0
-                sqlDataReader = sqlCommand.ExecuteReader()
-                Do While sqlDataReader.Read = True
-                    count = sqlDataReader("count")
-                    Exit Do
-                Loop
-                sqlDataReader.Dispose()
-                sqlCommand.Dispose()
-
-                If count > 1 Then
-                    MessageBox.Show("Username is already exist in the database.")
-                    txtUsername.Focus()
-                    txtUsername.SelectAll()
-
+                '4 Vendor type no user name and pass needed
+                If ComboBoxEmpType.SelectedIndex < 4 Then
+                    sqlDataReader = sqlCommand.ExecuteReader()
+                    Do While sqlDataReader.Read = True
+                        count = sqlDataReader("count")
+                        Exit Do
+                    Loop
+                    sqlDataReader.Dispose()
                     sqlCommand.Dispose()
-                    sqlConnection.Close()
-                    Exit Sub
+
+                    If count > 1 Then
+                        MessageBox.Show("Username is already exist in the database.")
+                        txtUsername.Focus()
+                        txtUsername.SelectAll()
+
+                        sqlCommand.Dispose()
+                        sqlConnection.Close()
+                        Exit Sub
+                    End If
                 End If
+
             Catch ex As Exception
                 MessageBox.Show("Error: " & ex.Message)
             End Try
@@ -177,7 +181,13 @@ Public Class FormEmployeeRegistration
 
             Try
                 If sqlCommand.ExecuteNonQuery() = 1 Then
-                    ShowMessageBox(Nothing, "Employee Profile Successfully Saved.", MessageBoxIcon.Information)
+
+                    If ComboBoxEmpType.SelectedIndex = 4 Then
+                        ShowMessageBox(Nothing, "Vendor Name Successfully Saved.", MessageBoxIcon.Information)
+                    Else
+                        ShowMessageBox(Nothing, "Employee Profile Successfully Saved.", MessageBoxIcon.Information)
+                    End If
+
                     sqlCommand.Dispose()
                     sqlConnection.Close()
                     Me.Close()
@@ -216,7 +226,7 @@ Public Class FormEmployeeRegistration
             ShowMessageBox(txtName, "Please Enter Employee Name", MessageBoxIcon.Question)
             pass = False
             Exit Function
-        ElseIf txtSurname.Text.Trim.Length < 1 Then
+        ElseIf txtSurname.Text.Trim.Length < 1 And ComboBoxEmpType.SelectedIndex < 4 Then
             ShowMessageBox(txtSurname, "Please Enter Employee Surname", MessageBoxIcon.Question)
             pass = False
             Exit Function
@@ -226,23 +236,28 @@ Public Class FormEmployeeRegistration
             ComboBoxEmpType.DroppedDown = True
             ComboBoxEmpType.Focus()
             Exit Function
-        ElseIf txtUsername.Text.Trim.Length < 5 Then
-            ShowMessageBox(txtUsername, "Please Enter Employee username of minimum of 5 characters.", MessageBoxIcon.Question)
-            pass = False
-            Exit Function
-        ElseIf txtPass1.Text.Trim.Length < 5 Then
-            ShowMessageBox(txtPass1, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
-            pass = False
-            Exit Function
-        ElseIf txtPass2.Text.Trim.Length < 5 Then
-            ShowMessageBox(txtPass2, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
-            pass = False
-            Exit Function
-        ElseIf txtPass1.Text.Trim <> txtPass2.Text.Trim Then
-            ShowMessageBox(txtName, "Password does not match. Please enter again.", MessageBoxIcon.Question)
-            pass = False
-            Exit Function
         End If
+
+        If ComboBoxEmpType.SelectedIndex < 4 Then
+            If txtUsername.Text.Trim.Length < 4 Then
+                ShowMessageBox(txtUsername, "Please Enter Employee username of minimum of 5 characters.", MessageBoxIcon.Question)
+                pass = False
+                Exit Function
+            ElseIf txtPass1.Text.Trim.Length < 5 Then
+                ShowMessageBox(txtPass1, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
+                pass = False
+                Exit Function
+            ElseIf txtPass2.Text.Trim.Length < 5 Then
+                ShowMessageBox(txtPass2, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
+                pass = False
+                Exit Function
+            ElseIf txtPass1.Text.Trim <> txtPass2.Text.Trim Then
+                ShowMessageBox(txtName, "Password does not match. Please enter again.", MessageBoxIcon.Question)
+                pass = False
+                Exit Function
+            End If
+        End If
+
         Return pass
     End Function
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -259,4 +274,15 @@ Public Class FormEmployeeRegistration
         End Select
     End Sub
 
+    Private Sub ComboBoxEmpType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxEmpType.SelectedIndexChanged
+        If ComboBoxEmpType.SelectedIndex = 4 Then
+            txtUsername.Enabled = False
+            txtPass1.Enabled = False
+            txtPass2.Enabled = False
+        Else
+            txtUsername.Enabled = True
+            txtPass1.Enabled = True
+            txtPass2.Enabled = True
+        End If
+    End Sub
 End Class

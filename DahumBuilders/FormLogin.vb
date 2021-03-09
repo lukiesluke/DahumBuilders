@@ -5,6 +5,8 @@ Public Class FormLogin
     Private onCancelClick As Boolean = False
     Private tries As Integer = 0
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblCompanyName.Text = ModuleConnection.CompanyName
+        mFormMainDahum.Text = ModuleConnection.CompanyName
         tries = 0
         lblMessage.Visible = False
         lblIP.Text = String.Format("server: {0}", serverSetting._ip)

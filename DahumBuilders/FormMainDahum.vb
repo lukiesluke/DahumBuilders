@@ -10,7 +10,7 @@ Public Class FormMainDahum
     Private client As IFirebaseClient
 
     Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        Me.Text = ModuleConnection.CompanyName
         DahumConfiguration()
         showLoginForm()
 
@@ -60,10 +60,10 @@ Public Class FormMainDahum
 
     Private Sub SalesReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalesReportToolStripMenuItem.Click
         If Application.OpenForms().OfType(Of FormCRptSalesReport).Any Then
-            mFormSalesReport.Focus()
+            mFormCRptSalesReport.Focus()
         Else
-            mFormSalesReport = New FormCRptSalesReport
-            mFormSalesReport.Show()
+            mFormCRptSalesReport = New FormCRptSalesReport
+            mFormCRptSalesReport.Show()
         End If
     End Sub
 
@@ -102,15 +102,6 @@ Public Class FormMainDahum
             mFormEmployeeRegistration = New FormEmployeeRegistration
             mFormEmployeeRegistration.mUpdate = True
             mFormEmployeeRegistration.ShowDialog()
-        End If
-    End Sub
-
-    Private Sub ExpensesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExpensesToolStripMenuItem.Click
-        If Application.OpenForms().OfType(Of FormExpenses).Any Then
-            mFormExpenses.Focus()
-        Else
-            mFormExpenses = New FormExpenses
-            mFormExpenses.Show()
         End If
     End Sub
 
@@ -198,5 +189,23 @@ Public Class FormMainDahum
             Cursor = Cursors.Default
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    Private Sub EntriesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles EntriesToolStripMenuItem1.Click
+        If Application.OpenForms().OfType(Of FormExpenses).Any Then
+            mFormExpenses.Focus()
+        Else
+            mFormExpenses = New FormExpenses
+            mFormExpenses.Show()
+        End If
+    End Sub
+
+    Private Sub ReportToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ReportToolStripMenuItemExpensesReport.Click
+        If Application.OpenForms().OfType(Of FormCRptExpenses).Any Then
+            mFormCRptExpenses.Focus()
+        Else
+            mFormCRptExpenses = New FormCRptExpenses
+            mFormCRptExpenses.Show()
+        End If
     End Sub
 End Class

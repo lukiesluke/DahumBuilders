@@ -77,17 +77,17 @@ Public Class FormCRptSalesReport
 
             Dim report As New crpSalesReport
             report.Load()
+            Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtHeaderCompanyName")
+
             Dim projName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtProjectName")
             Dim txtHeaderSaleReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("HeaderSaleReport")
             Dim dateReport As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtSalesReport")
             Dim txtTotalCash As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCash")
             Dim txtCheck As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCheck")
             Dim txtBankTransfer As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtBankTransfer")
-            Dim txtDiscount As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtDiscount")
-            'Dim txtTotalCommission As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCommission")
-            'Dim txtTotalCashOnHand As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalCashOnHand")
             Dim txtLoginName As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtLoginName")
 
+            txtHeaderCompanyName.Text = ModuleConnection.CompanyName
             projName.Text = "PROJECT NAME: " & cbbProjectName.Text
             txtHeaderSaleReport.Text = HeaderSaleReport
 
@@ -116,16 +116,10 @@ Public Class FormCRptSalesReport
                     txtBankTransfer.Text = Convert.ToDouble(table.Compute("SUM(paid_amount)", "payment_type = 2")).ToString("N2")
                 End If
 
-                '    txtTotalCashOnHand.Text = (Convert.ToDouble(txtTotalCash.Text) - Convert.ToDouble(txtTotalCommission.Text)).ToString("N2")
-                txtDiscount.Text = Convert.ToDouble(table.Compute("SUM(discount_amount)", "")).ToString("N2")
             Else
                 txtTotalCash.Text = zero
                 txtCheck.Text = zero
                 txtBankTransfer.Text = zero
-                txtDiscount.Text = zero
-
-                '    txtTotalCommission.Text = zero
-                '    txtTotalCashOnHand.Text = zero
             End If
 
             txtLoginName.Text = userLogon._name
@@ -146,4 +140,5 @@ Public Class FormCRptSalesReport
     Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged
         dtpTo.Value = dtpFrom.Value
     End Sub
+
 End Class

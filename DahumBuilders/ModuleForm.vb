@@ -7,15 +7,17 @@ Module ModuleForm
     Public mFormImageCapture As FormImageCapture
     Public mFormPayment As FormPayment
     Public mFormProjectList As FormProjectList
-    Public mFormCRptTransaction As FormCRptTransaction
     Public mFormAddProjectSetting As FormAddProjectSetting
-    Public mFormSalesReport As FormCRptSalesReport
-    Public mFormCRptSummaryReport As FormCRptSummaryReport
     Public mFormLogin As FormLogin
     Public mFormEmployeeRegistration As FormEmployeeRegistration
     Public mFormOREntries As FormOREntries
     Public mFormExpenses As FormExpenses
     Public mFormMyOREntries As FormMyOREntries
+
+    Public mFormCRptTransaction As FormCRptTransaction
+    Public mFormCRptSalesReport As FormCRptSalesReport
+    Public mFormCRptSummaryReport As FormCRptSummaryReport
+    Public mFormCRptExpenses As FormCRptExpenses
 
     Public Function computePercentage(totalPrice As Double, value As ComboBox) As Double
         Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100

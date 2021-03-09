@@ -17,22 +17,40 @@ Public Class FormUserList
                                                    Return True
                                                End Function)
         enableDisableClientButton(False)
+        loadProjectListCombobox()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
-        ListViewUser.Items.Clear()
+        cbbProjectList.SelectedIndex = 0
+        searchUser("")
+    End Sub
 
+    Private Sub searchUser(value As String)
+        ListViewUser.Items.Clear()
         Dim item As ListViewItem
-        If ComboBoxSearch.SelectedIndex = 0 Then
-            sql = "SELECT * FROM `db_user_profile` WHERE last_name LIKE @valueSearch"
-        ElseIf ComboBoxSearch.SelectedIndex = 1 Then
-            sql = "SELECT * FROM `db_user_profile` WHERE first_name LIKE @valueSearch"
+        If value.Equals("All") Or value.Length < 1 Then
+            If ComboBoxSearch.SelectedIndex = 0 Then
+                sql = "SELECT * FROM `db_user_profile` WHERE last_name LIKE @valueSearch ORDER BY `user_type` ASC, `last_name`"
+            ElseIf ComboBoxSearch.SelectedIndex = 1 Then
+                sql = "SELECT * FROM `db_user_profile` WHERE first_name LIKE @valueSearch ORDER BY `user_type` ASC, `last_name`"
+            End If
+        Else
+            txtSearch.Text = ""
+            sql = "SELECT * FROM `db_user_profile` p
+            INNER JOIN `db_project_item` i ON i.`assigned_userid`=p.`id` AND i.`proj_id`=@ProjID GROUP BY p.`id` ORDER BY p.`last_name`"
         End If
 
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@valueSearch", MySqlDbType.VarChar).Value = "%" & txtSearch.Text.Trim & "%"
+            If value.Equals("All") Or value.Length < 1 Then
+                sqlCommand.Parameters.Add("@valueSearch", MySqlDbType.VarChar).Value = "%" & txtSearch.Text.Trim & "%"
+            Else
+                Dim key As String = DirectCast(cbbProjectList.SelectedItem, KeyValuePair(Of String, String)).Key
+                sqlCommand.Parameters.Add("@ProjID", MySqlDbType.Int32).Value = key
+                txtSearch.Text = ""
+            End If
+
             sqlDataReader = sqlCommand.ExecuteReader()
             Do While sqlDataReader.Read = True
                 Dim user As User = New User()
@@ -75,16 +93,6 @@ Public Class FormUserList
 
     Private Sub ListViewUser_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewUser.KeyUp
         ListViewUser_Click(sender, e)
-        'If e.KeyCode = Keys.F1 Then
-        '    If Application.OpenForms().OfType(Of FormUserProfile).Any Then
-        '        If mFormUserProfile.WindowState = 1 Then
-        '            mFormUserProfile.WindowState = 0
-        '        End If
-        '    Else
-        '        mFormUserProfile = New FormUserProfile()
-        '        mFormUserProfile.ShowForm("VIEW", ListViewUser.SelectedItems(0).Text)
-        '    End If
-        'End If
     End Sub
 
     Private Sub ListViewUser_Click(sender As Object, e As EventArgs) Handles ListViewUser.Click
@@ -173,15 +181,6 @@ Public Class FormUserList
     End Sub
 
     Private Sub btnStatementAccount_Click(sender As Object, e As EventArgs) Handles btnStatementAccount.Click
-        'If Application.OpenForms().OfType(Of FormRptTransaction).Any Then
-        '    If mFormUserProfile.WindowState = 1 Then
-        '        mFormUserProfile.WindowState = 0
-        '    End If
-        'Else
-        '    mFormRptTransaction = New FormRptTransaction
-        '    mFormRptTransaction.mUser = mUser
-        '    mFormRptTransaction.ShowDialog()
-        'End If
         If Application.OpenForms().OfType(Of FormCRptTransaction).Any Then
             If mFormCRptTransaction.WindowState = 1 Then
                 mFormCRptTransaction.WindowState = 0
@@ -193,7 +192,44 @@ Public Class FormUserList
         End If
     End Sub
 
-    Private Sub ListViewUser_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewUser.SelectedIndexChanged
+    Private Sub loadProjectListCombobox()
+        sql = "SELECT id, `proj_name` FROM `db_project_list`"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            cbbProjectList.DataSource = Nothing
+            cbbProjectList.Items.Clear()
+
+            Dim comboSourceProject As New Dictionary(Of String, String)()
+            comboSourceProject.Add("0", "All")
+            Do While sqlDataReader.Read = True
+                comboSourceProject.Add(sqlDataReader("id"), sqlDataReader("proj_name"))
+            Loop
+
+            cbbProjectList.DataSource = New BindingSource(comboSourceProject, Nothing)
+            cbbProjectList.DisplayMember = "Value"
+            cbbProjectList.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub cbbProjectList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbProjectList.SelectedIndexChanged
+        Try
+            Dim value As String = DirectCast(cbbProjectList.SelectedItem, KeyValuePair(Of String, String)).Value
+            searchUser(value)
+        Catch ex As Exception
+
+        End Try
 
     End Sub
 End Class

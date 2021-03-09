@@ -286,7 +286,8 @@ Partial Class FormAddProjectSetting
         '
         'PanelLotUpdate
         '
-        Me.PanelLotUpdate.BackColor = System.Drawing.Color.Gainsboro
+        Me.PanelLotUpdate.BackColor = System.Drawing.Color.White
+        Me.PanelLotUpdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PanelLotUpdate.Controls.Add(Me.cbSQMUpdate)
         Me.PanelLotUpdate.Controls.Add(Me.lblClose)
         Me.PanelLotUpdate.Controls.Add(Me.btnUpdateLot)
@@ -496,7 +497,8 @@ Partial Class FormAddProjectSetting
         '
         'PanelProjectNameUpdate
         '
-        Me.PanelProjectNameUpdate.BackColor = System.Drawing.Color.Gainsboro
+        Me.PanelProjectNameUpdate.BackColor = System.Drawing.Color.White
+        Me.PanelProjectNameUpdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PanelProjectNameUpdate.Controls.Add(Me.lblProjectName)
         Me.PanelProjectNameUpdate.Controls.Add(Me.lblID)
         Me.PanelProjectNameUpdate.Controls.Add(Me.txtAddressUpdate)

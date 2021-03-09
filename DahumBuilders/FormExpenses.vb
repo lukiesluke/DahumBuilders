@@ -70,17 +70,17 @@ Public Class FormExpenses
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlDataReader = sqlCommand.ExecuteReader()
 
-            cbbType.DataSource = Nothing
-            cbbType.Items.Clear()
+            cbbExpensesType.DataSource = Nothing
+            cbbExpensesType.Items.Clear()
 
-            Dim comboSourceProjectName As New Dictionary(Of String, String)()
+            Dim comboSourceExpeneseType As New Dictionary(Of String, String)()
             Do While sqlDataReader.Read = True
-                comboSourceProjectName.Add(sqlDataReader("id"), sqlDataReader("name"))
+                comboSourceExpeneseType.Add(sqlDataReader("id"), sqlDataReader("name"))
             Loop
 
-            cbbType.DataSource = New BindingSource(comboSourceProjectName, Nothing)
-            cbbType.DisplayMember = "Value"
-            cbbType.ValueMember = "Key"
+            cbbExpensesType.DataSource = New BindingSource(comboSourceExpeneseType, Nothing)
+            cbbExpensesType.DisplayMember = "Value"
+            cbbExpensesType.ValueMember = "Key"
 
             sqlDataReader.Dispose()
         Catch ex As Exception
@@ -93,7 +93,7 @@ Public Class FormExpenses
     End Sub
     Private Sub loadDeduction(dt As DateTimePicker)
         sql = "SELECT `id`, `date_paid`, `commission`, `description`,
-        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`) AS NAME,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), 'UNSIGNED') AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`
         FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"
@@ -140,9 +140,11 @@ Public Class FormExpenses
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Dim bankName As String = ""
+        Dim particularIdValue As String = DirectCast(cbbExpensesType.SelectedItem, KeyValuePair(Of String, String)).Key
+        Dim PaymentType As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
 
-        Dim type As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
-        If "1".Equals(type) And txtCheckNo.Text.Equals("") Then
+        If "1".Equals(PaymentType) And txtCheckNo.Text.Equals("") Then
             MessageBox.Show("Please enter check number.")
             txtCheckNo.Focus()
             Exit Sub
@@ -154,21 +156,35 @@ Public Class FormExpenses
             Exit Sub
         End If
 
-        Dim particularID As String = DirectCast(cbbType.SelectedItem, KeyValuePair(Of String, String)).Key
-        Dim paymentType As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
+        If txtDescription.Text.Trim.Length < 1 Then
+            MessageBox.Show("Please a short description.")
+            txtDescription.Focus()
+            Exit Sub
+        End If
 
         sql = "INSERT INTO `db_transaction` 
-        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `penalty`, `discount_amount`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID, NULL, NULL, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
+        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+
+        Dim dateCheck As Date = Nothing
+        If "commission".Equals(cbbExpensesType.Text.Trim.ToLower) Then
+            dateCheck = dt.Value
+        End If
+
+        If cbbBankName.SelectedIndex > 0 Then
+            bankName = cbbBankName.Text.Trim
+        End If
 
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.VarChar).Value = dt.Value.ToString(format)
             sqlCommand.Parameters.Add("@Commission", MySqlDbType.Double).Value = Double.Parse(txtCashoutAmount.Text.Trim)
-            sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularID
+            sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularIdValue
             sqlCommand.Parameters.Add("@Description", MySqlDbType.VarChar).Value = txtDescription.Text.Trim
             sqlCommand.Parameters.Add("@ProjID", MySqlDbType.Int64).Value = lblProjectID.Text.Trim
+            sqlCommand.Parameters.Add("@BankName", MySqlDbType.VarChar).Value = bankName
+            sqlCommand.Parameters.Add("@DateCheck", MySqlDbType.VarChar).Value = dateCheck.ToString(format)
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = lblClientID.Text.Trim
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentType
             sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = txtCheckNo.Text.Trim.ToUpper
@@ -181,7 +197,7 @@ Public Class FormExpenses
                 txtDescription.Text = ""
                 btnSave.Enabled = False
                 txtCheckNo.Text = ""
-
+                cbbBankName.SelectedIndex = 0
                 MessageBox.Show("Expenses successfully save.")
                 lblIssueTo.Text = messageInfo
             End If
@@ -220,13 +236,16 @@ Public Class FormExpenses
         txtCashoutAmount.Text = 0.ToString("N2")
         txtCheckNo.Text = ""
         btnSave.Enabled = False
-
         Try
             Dim type As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
             If "1".Equals(type) Then
                 txtCheckNo.Enabled = True
+                cbbBankName.Enabled = True
+                cbbBankName.DroppedDown = True
             Else
                 txtCheckNo.Enabled = False
+                cbbBankName.Enabled = False
+                cbbBankName.SelectedIndex = 0
             End If
         Catch ex As Exception
 
@@ -243,4 +262,5 @@ Public Class FormExpenses
     Private Sub ListView1_KeyUp(sender As Object, e As KeyEventArgs) Handles ListView1.KeyUp
         ListView1_Click(sender, e)
     End Sub
+
 End Class

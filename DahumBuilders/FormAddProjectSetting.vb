@@ -2,6 +2,8 @@
 
 Public Class FormAddProjectSetting
     Private lot As New LotClass()
+    Dim dataPriceList As New Dictionary(Of String, Double)()
+
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Size(980, 500)
         load_ProjectName_combobox()
@@ -151,39 +153,41 @@ Public Class FormAddProjectSetting
     End Sub
     Private Sub loadComboPriceList(listID As Integer)
 
-        sql = "SELECT `sqm`,`tcp` FROM `db_project_list_price` WHERE `lid`=@listID"
+        sql = "SELECT `id`, `sqm`, `tcp` FROM `db_project_list_price` WHERE `lid`=@listID ORDER BY sqm"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@listID", MySqlDbType.Int32).Value = listID
             sqlDataReader = sqlCommand.ExecuteReader()
 
+            cbSQM.DataSource = Nothing
+            cbSQMUpdate.DataSource = Nothing
+
+            cbSQM.Items.Clear()
+            cbSQMUpdate.Items.Clear()
+            dataPriceList.Clear()
+
+            Dim comboSource As New Dictionary(Of String, String)()
             If sqlDataReader.HasRows Then
-
-
-                cbSQM.DataSource = Nothing
-                cbSQM.Items.Clear()
-
-                cbSQMUpdate.DataSource = Nothing
-                cbSQMUpdate.Items.Clear()
-
-                Dim comboSource As New Dictionary(Of String, String)()
                 Do While sqlDataReader.Read = True
-                    comboSource.Add(sqlDataReader("tcp"), sqlDataReader("sqm"))
+                    comboSource.Add(sqlDataReader("id"), sqlDataReader("sqm"))
+                    dataPriceList.Add(sqlDataReader("id"), sqlDataReader("tcp"))
                 Loop
-                cbSQM.DataSource = New BindingSource(comboSource, Nothing)
-                cbSQM.DisplayMember = "Value"
-                cbSQM.ValueMember = "Key"
-
-                cbSQMUpdate.DataSource = New BindingSource(comboSource, Nothing)
-                cbSQMUpdate.DisplayMember = "Value"
-                cbSQMUpdate.ValueMember = "Key"
             Else
-                MessageBox.Show("Please set Price list for this Project Name")
+                comboSource.Add("1", "0")
+                dataPriceList.Add("1", "0")
             End If
-            sqlDataReader.Dispose()
+
+            cbSQM.DataSource = New BindingSource(comboSource, Nothing)
+            cbSQM.DisplayMember = "Value"
+            cbSQM.ValueMember = "Key"
+
+            cbSQMUpdate.DataSource = New BindingSource(comboSource, Nothing)
+            cbSQMUpdate.DisplayMember = "Value"
+            cbSQMUpdate.ValueMember = "Key"
+
         Catch ex As Exception
-            MessageBox.Show("Project Add: " & ex.Message)
+            MessageBox.Show("Load Combo PriceList: " & ex.Message)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
@@ -192,9 +196,17 @@ Public Class FormAddProjectSetting
 
     Private Sub cbSQM_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbSQM.SelectedIndexChanged
         If cbSQM.SelectedIndex > -1 Then
-            Dim key As String = DirectCast(cbSQM.SelectedItem, KeyValuePair(Of String, String)).Key
-            Dim value As String = DirectCast(cbSQM.SelectedItem, KeyValuePair(Of String, String)).Value
-            txtTCP.Text = CDbl(key).ToString("N2")
+            Try
+                Dim key As String = DirectCast(cbSQM.SelectedItem, KeyValuePair(Of String, String)).Key
+                Dim value As String = DirectCast(cbSQM.SelectedItem, KeyValuePair(Of String, String)).Value
+                'txtTCP.Text = CDbl(key).ToString("N2")
+
+                If dataPriceList.ContainsKey(key) Then
+                    Dim price As Double = dataPriceList.Item(key)
+                    txtTCP.Text = price.ToString("N2")
+                End If
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 
@@ -202,13 +214,19 @@ Public Class FormAddProjectSetting
         If cbSQMUpdate.SelectedIndex > -1 Then
             Dim key As String = DirectCast(cbSQMUpdate.SelectedItem, KeyValuePair(Of String, String)).Key
             Dim value As String = DirectCast(cbSQMUpdate.SelectedItem, KeyValuePair(Of String, String)).Value
-            txtTcpUp.Text = CDbl(key).ToString("N2")
+            'txtTcpUp.Text = CDbl(key).ToString("N2")
+
+            If dataPriceList.ContainsKey(key) Then
+                Dim price As Double = dataPriceList.Item(key)
+                txtTcpUp.Text = price.ToString("N2")
+            End If
         End If
     End Sub
     Private Sub cbbProjectName_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbProjectName.SelectedIndexChanged
-        If cbbProjectName.SelectedIndex > -1 Then
+        If cbbProjectName.SelectedIndex >= 0 And cbbProjectName.Text.Length > 3 Then
             loadProjectLots("")
             txtBlockFilter.Text = ""
+
             Dim key As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
             lblProjID.Text = key
             loadComboPriceList(key)
@@ -271,10 +289,13 @@ Public Class FormAddProjectSetting
 
     Private Sub ListViewProject_Click(sender As Object, e As EventArgs) Handles ListViewProject.Click
         If ListViewProject.Items.Count > 0 Then
-            Dim projectName As String = cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
+            Dim projectName As String = ListViewProject.SelectedItems(0).SubItems(1).Text
+            cbbProjectName.Text = projectName
+
             If projectName.Length > 0 Then
-                cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
-                loadComboPriceList(ListViewProject.SelectedItems(0).Text)
+                'cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
+                'MessageBox.Show("ListViewProject.SelectedItems(0): " & ListViewProject.SelectedItems(0).Text)
+                'loadComboPriceList(ListViewProject.SelectedItems(0).Text)
 
                 lblID.Text = ListViewProject.SelectedItems(0).Text
                 txtProjectNameUpdate.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
@@ -396,9 +417,6 @@ Public Class FormAddProjectSetting
         loadProjectLots(txtBlockFilter.Text.Trim)
     End Sub
 
-    Private Sub ListViewProject_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewProject.SelectedIndexChanged
-
-    End Sub
 
     Private Sub btnUpdateProjectName_Click(sender As Object, e As EventArgs) Handles btnUpdateProjectName.Click
 
@@ -431,7 +449,24 @@ Public Class FormAddProjectSetting
         PanelProjectNameUpdate.Visible = False
     End Sub
 
-    Private Sub ListViewProjectLot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListViewProjectLot.SelectedIndexChanged
-
+    Private Sub ListViewProjectLot_MouseUp(sender As Object, e As MouseEventArgs) Handles ListViewProjectLot.MouseUp
+        If ListViewProjectLot.Items.Count > 0 Then
+            If e.Button = MouseButtons.Right Then
+                PanelLotUpdate.Visible = True
+            End If
+        Else
+            PanelLotUpdate.Visible = False
+        End If
     End Sub
+
+    Private Sub ListViewProject_MouseUp(sender As Object, e As MouseEventArgs) Handles ListViewProject.MouseUp
+        If ListViewProject.Items.Count > 0 Then
+            If e.Button = MouseButtons.Right Then
+                PanelProjectNameUpdate.Visible = True
+            End If
+        Else
+            PanelProjectNameUpdate.Visible = False
+        End If
+    End Sub
+
 End Class

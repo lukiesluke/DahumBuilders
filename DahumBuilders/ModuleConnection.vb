@@ -12,6 +12,12 @@ Module ModuleConnection
     Public serverSetting As configurationSetting
     Public ini As New clsIni
 
+    'Public CompanyName As String = "Dahum Builders and Development Corporation"
+    'Public CompanyAddress As String = "3rd floor, T. De Castro Bldg, Emilio Aguinaldo Hwy, Palico 1, Imus, 4103 Cavite"
+
+    Public CompanyName As String = "TP Realty And Development Corporation"
+    Public CompanyAddress As String = "General Trias Cavite Cas Dela Torre Village"
+
     'Firebase variable
     Public pathSummary As String = "summary/"
     Public pathSummaryTest As String = "summaryTest/"
