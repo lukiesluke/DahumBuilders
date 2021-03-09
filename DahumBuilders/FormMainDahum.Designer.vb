@@ -61,7 +61,8 @@ Partial Class FormMainDahum
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.MyProfileToolStripMenuItem, Me.OpenToolStripMenuItem, Me.ProjectSettingToolStripMenuItem, Me.ReportToolStripMenuItem, Me.SyncToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1265, 33)
+        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
+        Me.MenuStrip1.Size = New System.Drawing.Size(843, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -69,189 +70,189 @@ Partial Class FormMainDahum
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserSettingToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(50, 29)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 22)
         Me.FileToolStripMenuItem.Text = "File"
         '
         'UserSettingToolStripMenuItem
         '
         Me.UserSettingToolStripMenuItem.Name = "UserSettingToolStripMenuItem"
-        Me.UserSettingToolStripMenuItem.Size = New System.Drawing.Size(192, 30)
+        Me.UserSettingToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.UserSettingToolStripMenuItem.Text = "User Setting"
         '
         'MyProfileToolStripMenuItem
         '
         Me.MyProfileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EntriesToolStripMenuItem, Me.UpdateToolStripMenuItem})
         Me.MyProfileToolStripMenuItem.Name = "MyProfileToolStripMenuItem"
-        Me.MyProfileToolStripMenuItem.Size = New System.Drawing.Size(104, 29)
+        Me.MyProfileToolStripMenuItem.Size = New System.Drawing.Size(73, 22)
         Me.MyProfileToolStripMenuItem.Text = "My Profile"
         '
         'EntriesToolStripMenuItem
         '
         Me.EntriesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OfficialRecieptToolStripMenuItem, Me.ExpensesToolStripMenuItem1})
         Me.EntriesToolStripMenuItem.Name = "EntriesToolStripMenuItem"
-        Me.EntriesToolStripMenuItem.Size = New System.Drawing.Size(154, 30)
+        Me.EntriesToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
         Me.EntriesToolStripMenuItem.Text = "Entries"
         '
         'OfficialRecieptToolStripMenuItem
         '
         Me.OfficialRecieptToolStripMenuItem.Name = "OfficialRecieptToolStripMenuItem"
-        Me.OfficialRecieptToolStripMenuItem.Size = New System.Drawing.Size(213, 30)
+        Me.OfficialRecieptToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.OfficialRecieptToolStripMenuItem.Text = "Official Reciept"
         '
         'ExpensesToolStripMenuItem1
         '
         Me.ExpensesToolStripMenuItem1.Name = "ExpensesToolStripMenuItem1"
-        Me.ExpensesToolStripMenuItem1.Size = New System.Drawing.Size(213, 30)
+        Me.ExpensesToolStripMenuItem1.Size = New System.Drawing.Size(154, 22)
         Me.ExpensesToolStripMenuItem1.Text = "Expenses"
         '
         'UpdateToolStripMenuItem
         '
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
-        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(154, 30)
+        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
         Me.UpdateToolStripMenuItem.Text = "Update"
         '
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CientListToolStripMenuItem, Me.ClientRegistrationFormToolStripMenuItem, Me.EmployeeRegistrationFormToolStripMenuItem})
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(120, 29)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(82, 22)
         Me.OpenToolStripMenuItem.Text = "User Setting"
         '
         'CientListToolStripMenuItem
         '
         Me.CientListToolStripMenuItem.Name = "CientListToolStripMenuItem"
-        Me.CientListToolStripMenuItem.Size = New System.Drawing.Size(320, 30)
+        Me.CientListToolStripMenuItem.Size = New System.Drawing.Size(223, 22)
         Me.CientListToolStripMenuItem.Text = "Cient List"
         '
         'ClientRegistrationFormToolStripMenuItem
         '
         Me.ClientRegistrationFormToolStripMenuItem.Name = "ClientRegistrationFormToolStripMenuItem"
-        Me.ClientRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(320, 30)
+        Me.ClientRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(223, 22)
         Me.ClientRegistrationFormToolStripMenuItem.Text = "Client Registration Form"
         '
         'EmployeeRegistrationFormToolStripMenuItem
         '
         Me.EmployeeRegistrationFormToolStripMenuItem.Name = "EmployeeRegistrationFormToolStripMenuItem"
-        Me.EmployeeRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(320, 30)
+        Me.EmployeeRegistrationFormToolStripMenuItem.Size = New System.Drawing.Size(223, 22)
         Me.EmployeeRegistrationFormToolStripMenuItem.Text = "Employee Registration Form"
         '
         'ProjectSettingToolStripMenuItem
         '
         Me.ProjectSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddProjectToolStripMenuItem1, Me.ProjectPriceListToolStripMenuItem})
         Me.ProjectSettingToolStripMenuItem.Name = "ProjectSettingToolStripMenuItem"
-        Me.ProjectSettingToolStripMenuItem.Size = New System.Drawing.Size(139, 29)
+        Me.ProjectSettingToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
         Me.ProjectSettingToolStripMenuItem.Text = "Project Setting"
         '
         'AddProjectToolStripMenuItem1
         '
         Me.AddProjectToolStripMenuItem1.Name = "AddProjectToolStripMenuItem1"
-        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(254, 30)
+        Me.AddProjectToolStripMenuItem1.Size = New System.Drawing.Size(179, 22)
         Me.AddProjectToolStripMenuItem1.Text = "Add/Update Project"
         '
         'ProjectPriceListToolStripMenuItem
         '
         Me.ProjectPriceListToolStripMenuItem.Name = "ProjectPriceListToolStripMenuItem"
-        Me.ProjectPriceListToolStripMenuItem.Size = New System.Drawing.Size(254, 30)
+        Me.ProjectPriceListToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.ProjectPriceListToolStripMenuItem.Text = "Project Price List"
         '
         'ReportToolStripMenuItem
         '
         Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem, Me.ExpensesToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
-        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(77, 29)
+        Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 22)
         Me.ReportToolStripMenuItem.Text = "Report"
         '
         'SalesReportToolStripMenuItem
         '
         Me.SalesReportToolStripMenuItem.Name = "SalesReportToolStripMenuItem"
-        Me.SalesReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.SalesReportToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.SalesReportToolStripMenuItem.Text = "Sales Report"
         '
         'SummaryReportToolStripMenuItem
         '
         Me.SummaryReportToolStripMenuItem.Name = "SummaryReportToolStripMenuItem"
-        Me.SummaryReportToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.SummaryReportToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.SummaryReportToolStripMenuItem.Text = "Summary Report"
         '
         'ExpensesToolStripMenuItem
         '
         Me.ExpensesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReportToolStripMenuItemExpensesReport, Me.EntriesToolStripMenuItem1})
         Me.ExpensesToolStripMenuItem.Name = "ExpensesToolStripMenuItem"
-        Me.ExpensesToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.ExpensesToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.ExpensesToolStripMenuItem.Text = "Expenses"
         '
         'ReportToolStripMenuItemExpensesReport
         '
         Me.ReportToolStripMenuItemExpensesReport.Name = "ReportToolStripMenuItemExpensesReport"
-        Me.ReportToolStripMenuItemExpensesReport.Size = New System.Drawing.Size(210, 30)
+        Me.ReportToolStripMenuItemExpensesReport.Size = New System.Drawing.Size(109, 22)
         Me.ReportToolStripMenuItemExpensesReport.Text = "Report"
         '
         'EntriesToolStripMenuItem1
         '
         Me.EntriesToolStripMenuItem1.Name = "EntriesToolStripMenuItem1"
-        Me.EntriesToolStripMenuItem1.Size = New System.Drawing.Size(210, 30)
+        Me.EntriesToolStripMenuItem1.Size = New System.Drawing.Size(109, 22)
         Me.EntriesToolStripMenuItem1.Text = "Entries"
         '
         'SyncToolStripMenuItem
         '
         Me.SyncToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SummaryReportToolStripMenuItem1, Me.ProjectListToolStripMenuItem})
         Me.SyncToolStripMenuItem.Name = "SyncToolStripMenuItem"
-        Me.SyncToolStripMenuItem.Size = New System.Drawing.Size(139, 29)
+        Me.SyncToolStripMenuItem.Size = New System.Drawing.Size(95, 22)
         Me.SyncToolStripMenuItem.Text = "Sync Database"
         '
         'SummaryReportToolStripMenuItem1
         '
-        Me.SummaryReportToolStripMenuItem1.Enabled = False
         Me.SummaryReportToolStripMenuItem1.Name = "SummaryReportToolStripMenuItem1"
-        Me.SummaryReportToolStripMenuItem1.Size = New System.Drawing.Size(230, 30)
+        Me.SummaryReportToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
         Me.SummaryReportToolStripMenuItem1.Text = "Summary Report"
         '
         'ProjectListToolStripMenuItem
         '
-        Me.ProjectListToolStripMenuItem.Enabled = False
         Me.ProjectListToolStripMenuItem.Name = "ProjectListToolStripMenuItem"
-        Me.ProjectListToolStripMenuItem.Size = New System.Drawing.Size(230, 30)
+        Me.ProjectListToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
         Me.ProjectListToolStripMenuItem.Text = "Project List"
         '
         'StatusStrip
         '
         Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusUsername, Me.ToolStripStatusIP})
-        Me.StatusStrip.Location = New System.Drawing.Point(0, 459)
+        Me.StatusStrip.Location = New System.Drawing.Point(0, 296)
         Me.StatusStrip.Name = "StatusStrip"
-        Me.StatusStrip.Size = New System.Drawing.Size(1265, 30)
+        Me.StatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 9, 0)
+        Me.StatusStrip.Size = New System.Drawing.Size(843, 22)
         Me.StatusStrip.TabIndex = 3
         Me.StatusStrip.Text = "StatusStrip1"
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(95, 25)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(63, 17)
         Me.ToolStripStatusLabel1.Text = "Username:"
         '
         'ToolStripStatusUsername
         '
         Me.ToolStripStatusUsername.Name = "ToolStripStatusUsername"
-        Me.ToolStripStatusUsername.Size = New System.Drawing.Size(101, 25)
+        Me.ToolStripStatusUsername.Size = New System.Drawing.Size(64, 17)
         Me.ToolStripStatusUsername.Text = "ADMIN888"
         '
         'ToolStripStatusIP
         '
         Me.ToolStripStatusIP.Name = "ToolStripStatusIP"
-        Me.ToolStripStatusIP.Size = New System.Drawing.Size(27, 25)
+        Me.ToolStripStatusIP.Size = New System.Drawing.Size(17, 17)
         Me.ToolStripStatusIP.Text = "IP"
         '
         'FormMainDahum
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.ClientSize = New System.Drawing.Size(1265, 489)
+        Me.ClientSize = New System.Drawing.Size(843, 318)
         Me.Controls.Add(Me.StatusStrip)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "FormMainDahum"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)
