@@ -247,11 +247,11 @@ Partial Class FormExpenses
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(83, 226)
+        Me.Label6.Location = New System.Drawing.Point(42, 226)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(58, 20)
+        Me.Label6.Size = New System.Drawing.Size(99, 20)
         Me.Label6.TabIndex = 21
-        Me.Label6.Text = "Paid to"
+        Me.Label6.Text = "Payee Name"
         '
         'lblIssueTo
         '
@@ -332,7 +332,6 @@ Partial Class FormExpenses
         Me.lblClientID.Size = New System.Drawing.Size(81, 20)
         Me.lblClientID.TabIndex = 28
         Me.lblClientID.Text = "lblClientID"
-        Me.lblClientID.Visible = False
         '
         'lblProjectID
         '

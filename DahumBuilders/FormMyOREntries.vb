@@ -14,7 +14,9 @@ Public Class FormMyOREntries
         sql = "SELECT `id`,`date_paid`,`official_receipt_no`,`paid_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
-        (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes
+        (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
+        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type
         FROM `db_transaction` t WHERE t.`official_receipt_no` IS NOT NULL AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
@@ -35,6 +37,8 @@ Public Class FormMyOREntries
                 transaction._clientName = sqlDataReader("clientName")
                 transaction._paidAmount = sqlDataReader("paid_amount")
                 transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
+                transaction._particular_str = sqlDataReader("particular")
+                transaction._paymentType = sqlDataReader("payment_type")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -42,6 +46,8 @@ Public Class FormMyOREntries
                 item.SubItems.Add(transaction._or)
                 item.SubItems.Add(transaction._clientName)
                 item.SubItems.Add(transaction._paidAmount.ToString("N2"))
+                item.SubItems.Add(transaction._paymentType)
+                item.SubItems.Add(transaction._particular_str)
                 item.SubItems.Add(transaction._description)
                 ListView1.Items.Add(item)
             Loop
@@ -95,7 +101,7 @@ Public Class FormMyOREntries
         transaction._or = ListView1.SelectedItems.Item(0).SubItems(2).Text
         transaction._clientName = ListView1.SelectedItems.Item(0).SubItems(3).Text
         transaction._paidAmount = ListView1.SelectedItems.Item(0).SubItems(4).Text
-        transaction._description = ListView1.SelectedItems.Item(0).SubItems(5).Text
+        transaction._description = ListView1.SelectedItems.Item(0).SubItems(7).Text
 
         dtpDatePaid.Value = transaction._datePaid
         txtORNumber.Text = transaction._or

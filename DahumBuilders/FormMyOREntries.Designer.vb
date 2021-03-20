@@ -26,8 +26,9 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderOR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.txtORNumber = New System.Windows.Forms.TextBox()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
@@ -36,16 +37,17 @@ Partial Class FormMyOREntries
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btCancel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblClientName = New System.Windows.Forms.Label()
         Me.lblProjectName = New System.Windows.Forms.Label()
+        Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderDescription})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(16, 143)
@@ -63,23 +65,28 @@ Partial Class FormMyOREntries
         'ColumnHeaderDate
         '
         Me.ColumnHeaderDate.Text = "Date"
-        Me.ColumnHeaderDate.Width = 100
+        Me.ColumnHeaderDate.Width = 80
         '
         'ColumnHeaderOR
         '
         Me.ColumnHeaderOR.Text = "OR Number"
-        Me.ColumnHeaderOR.Width = 100
+        Me.ColumnHeaderOR.Width = 80
+        '
+        'ColumnHeaderName
+        '
+        Me.ColumnHeaderName.Text = "Name"
+        Me.ColumnHeaderName.Width = 200
         '
         'ColumnHeaderAmount
         '
         Me.ColumnHeaderAmount.Text = "Amount"
         Me.ColumnHeaderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderAmount.Width = 100
+        Me.ColumnHeaderAmount.Width = 80
         '
-        'ColumnHeaderDescription
+        'ColumnHeaderProject
         '
-        Me.ColumnHeaderDescription.Text = "Description"
-        Me.ColumnHeaderDescription.Width = 250
+        Me.ColumnHeaderProject.Text = "Project"
+        Me.ColumnHeaderProject.Width = 240
         '
         'txtORNumber
         '
@@ -98,7 +105,7 @@ Partial Class FormMyOREntries
         '
         'dtpDatePaid
         '
-        Me.dtpDatePaid.CustomFormat = "dd/MM/ yyyy"
+        Me.dtpDatePaid.CustomFormat = "MM/dd/ yyyy"
         Me.dtpDatePaid.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDatePaid.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpDatePaid.Location = New System.Drawing.Point(118, 21)
@@ -110,7 +117,7 @@ Partial Class FormMyOREntries
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 21)
+        Me.Label1.Location = New System.Drawing.Point(33, 27)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(72, 20)
         Me.Label1.TabIndex = 4
@@ -119,7 +126,7 @@ Partial Class FormMyOREntries
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 61)
+        Me.Label2.Location = New System.Drawing.Point(12, 60)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(93, 20)
         Me.Label2.TabIndex = 5
@@ -128,7 +135,7 @@ Partial Class FormMyOREntries
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 90)
+        Me.Label3.Location = New System.Drawing.Point(5, 93)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(100, 20)
         Me.Label3.TabIndex = 6
@@ -151,11 +158,6 @@ Partial Class FormMyOREntries
         Me.btnUpdate.TabIndex = 7
         Me.btnUpdate.Text = "&Update"
         Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'ColumnHeaderName
-        '
-        Me.ColumnHeaderName.Text = "Name"
-        Me.ColumnHeaderName.Width = 200
         '
         'Label4
         '
@@ -181,7 +183,7 @@ Partial Class FormMyOREntries
         Me.lblClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblClientName.Location = New System.Drawing.Point(353, 18)
         Me.lblClientName.Name = "lblClientName"
-        Me.lblClientName.Size = New System.Drawing.Size(678, 35)
+        Me.lblClientName.Size = New System.Drawing.Size(598, 35)
         Me.lblClientName.TabIndex = 11
         Me.lblClientName.Text = "ClientName"
         Me.lblClientName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -192,10 +194,22 @@ Partial Class FormMyOREntries
         Me.lblProjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblProjectName.Location = New System.Drawing.Point(353, 61)
         Me.lblProjectName.Name = "lblProjectName"
-        Me.lblProjectName.Size = New System.Drawing.Size(678, 35)
+        Me.lblProjectName.Size = New System.Drawing.Size(598, 35)
         Me.lblProjectName.TabIndex = 12
         Me.lblProjectName.Text = "ProjectName"
         Me.lblProjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'ColumnHeaderPaymentType
+        '
+        Me.ColumnHeaderPaymentType.Text = "Payment"
+        Me.ColumnHeaderPaymentType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderPaymentType.Width = 70
+        '
+        'ColumnHeaderParticular
+        '
+        Me.ColumnHeaderParticular.Text = "Particular"
+        Me.ColumnHeaderParticular.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderParticular.Width = 70
         '
         'FormMyOREntries
         '
@@ -238,11 +252,13 @@ Partial Class FormMyOREntries
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents btCancel As Button
-    Friend WithEvents ColumnHeaderDescription As ColumnHeader
+    Friend WithEvents ColumnHeaderProject As ColumnHeader
     Friend WithEvents btnUpdate As Button
     Friend WithEvents ColumnHeaderName As ColumnHeader
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents lblClientName As Label
     Friend WithEvents lblProjectName As Label
+    Friend WithEvents ColumnHeaderParticular As ColumnHeader
+    Friend WithEvents ColumnHeaderPaymentType As ColumnHeader
 End Class

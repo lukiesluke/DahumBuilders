@@ -263,4 +263,7 @@ Public Class FormExpenses
         ListView1_Click(sender, e)
     End Sub
 
+    Private Sub lblIssueTo_Click(sender As Object, e As EventArgs) Handles lblIssueTo.Click
+
+    End Sub
 End Class
