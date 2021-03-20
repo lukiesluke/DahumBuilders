@@ -28,6 +28,8 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderOR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.txtORNumber = New System.Windows.Forms.TextBox()
         Me.txtAmount = New System.Windows.Forms.TextBox()
@@ -41,8 +43,10 @@ Partial Class FormMyOREntries
         Me.Label5 = New System.Windows.Forms.Label()
         Me.lblClientName = New System.Windows.Forms.Label()
         Me.lblProjectName = New System.Windows.Forms.Label()
-        Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cbbPayment = New System.Windows.Forms.ComboBox()
+        Me.cbbParticular = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ListView1
@@ -82,6 +86,18 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderAmount.Text = "Amount"
         Me.ColumnHeaderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderAmount.Width = 80
+        '
+        'ColumnHeaderPaymentType
+        '
+        Me.ColumnHeaderPaymentType.Text = "Payment"
+        Me.ColumnHeaderPaymentType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderPaymentType.Width = 70
+        '
+        'ColumnHeaderParticular
+        '
+        Me.ColumnHeaderParticular.Text = "Particular"
+        Me.ColumnHeaderParticular.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderParticular.Width = 70
         '
         'ColumnHeaderProject
         '
@@ -161,27 +177,27 @@ Partial Class FormMyOREntries
         '
         'Label4
         '
-        Me.Label4.Location = New System.Drawing.Point(278, 18)
+        Me.Label4.Location = New System.Drawing.Point(284, 18)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(72, 35)
         Me.Label4.TabIndex = 9
         Me.Label4.Text = "Name"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label5
         '
-        Me.Label5.Location = New System.Drawing.Point(278, 61)
+        Me.Label5.Location = New System.Drawing.Point(284, 61)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(72, 35)
         Me.Label5.TabIndex = 10
         Me.Label5.Text = "Project"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblClientName
         '
         Me.lblClientName.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.lblClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblClientName.Location = New System.Drawing.Point(353, 18)
+        Me.lblClientName.Location = New System.Drawing.Point(365, 18)
         Me.lblClientName.Name = "lblClientName"
         Me.lblClientName.Size = New System.Drawing.Size(598, 35)
         Me.lblClientName.TabIndex = 11
@@ -192,30 +208,60 @@ Partial Class FormMyOREntries
         '
         Me.lblProjectName.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.lblProjectName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblProjectName.Location = New System.Drawing.Point(353, 61)
+        Me.lblProjectName.Location = New System.Drawing.Point(365, 61)
         Me.lblProjectName.Name = "lblProjectName"
         Me.lblProjectName.Size = New System.Drawing.Size(598, 35)
         Me.lblProjectName.TabIndex = 12
         Me.lblProjectName.Text = "ProjectName"
         Me.lblProjectName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'ColumnHeaderPaymentType
+        'cbbPayment
         '
-        Me.ColumnHeaderPaymentType.Text = "Payment"
-        Me.ColumnHeaderPaymentType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeaderPaymentType.Width = 70
+        Me.cbbPayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbPayment.FormattingEnabled = True
+        Me.cbbPayment.Location = New System.Drawing.Point(365, 104)
+        Me.cbbPayment.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cbbPayment.Name = "cbbPayment"
+        Me.cbbPayment.Size = New System.Drawing.Size(232, 28)
+        Me.cbbPayment.TabIndex = 13
         '
-        'ColumnHeaderParticular
+        'cbbParticular
         '
-        Me.ColumnHeaderParticular.Text = "Particular"
-        Me.ColumnHeaderParticular.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.ColumnHeaderParticular.Width = 70
+        Me.cbbParticular.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbParticular.FormattingEnabled = True
+        Me.cbbParticular.Location = New System.Drawing.Point(731, 104)
+        Me.cbbParticular.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.cbbParticular.Name = "cbbParticular"
+        Me.cbbParticular.Size = New System.Drawing.Size(232, 28)
+        Me.cbbParticular.TabIndex = 14
+        '
+        'Label6
+        '
+        Me.Label6.Location = New System.Drawing.Point(284, 102)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(72, 35)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Payment"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label7
+        '
+        Me.Label7.Location = New System.Drawing.Point(641, 102)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(84, 35)
+        Me.Label7.TabIndex = 16
+        Me.Label7.Text = "Particular"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1291, 596)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.cbbParticular)
+        Me.Controls.Add(Me.cbbPayment)
         Me.Controls.Add(Me.lblProjectName)
         Me.Controls.Add(Me.lblClientName)
         Me.Controls.Add(Me.Label5)
@@ -261,4 +307,8 @@ Partial Class FormMyOREntries
     Friend WithEvents lblProjectName As Label
     Friend WithEvents ColumnHeaderParticular As ColumnHeader
     Friend WithEvents ColumnHeaderPaymentType As ColumnHeader
+    Friend WithEvents cbbPayment As ComboBox
+    Friend WithEvents cbbParticular As ComboBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
 End Class
