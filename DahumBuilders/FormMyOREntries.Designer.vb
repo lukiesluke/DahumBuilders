@@ -50,6 +50,7 @@ Partial Class FormMyOREntries
         Me.txtORFilter = New System.Windows.Forms.TextBox()
         Me.chbORFilter = New System.Windows.Forms.CheckBox()
         Me.btDeleteOR = New System.Windows.Forms.Button()
+        Me.btnVoidOR = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ListView1
@@ -162,7 +163,7 @@ Partial Class FormMyOREntries
         '
         'btCancel
         '
-        Me.btCancel.Location = New System.Drawing.Point(768, 545)
+        Me.btCancel.Location = New System.Drawing.Point(789, 553)
         Me.btCancel.Name = "btCancel"
         Me.btCancel.Size = New System.Drawing.Size(161, 38)
         Me.btCancel.TabIndex = 8
@@ -171,7 +172,7 @@ Partial Class FormMyOREntries
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(601, 545)
+        Me.btnUpdate.Location = New System.Drawing.Point(622, 553)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(161, 38)
         Me.btnUpdate.TabIndex = 7
@@ -276,18 +277,28 @@ Partial Class FormMyOREntries
         'btDeleteOR
         '
         Me.btDeleteOR.Enabled = False
-        Me.btDeleteOR.Location = New System.Drawing.Point(434, 545)
+        Me.btDeleteOR.Location = New System.Drawing.Point(421, 553)
         Me.btDeleteOR.Name = "btDeleteOR"
         Me.btDeleteOR.Size = New System.Drawing.Size(161, 38)
         Me.btDeleteOR.TabIndex = 19
-        Me.btDeleteOR.Text = "&Delete"
+        Me.btDeleteOR.Text = "&Delete OR"
         Me.btDeleteOR.UseVisualStyleBackColor = True
+        '
+        'btnVoidOR
+        '
+        Me.btnVoidOR.Location = New System.Drawing.Point(254, 553)
+        Me.btnVoidOR.Name = "btnVoidOR"
+        Me.btnVoidOR.Size = New System.Drawing.Size(161, 38)
+        Me.btnVoidOR.TabIndex = 20
+        Me.btnVoidOR.Text = "&Void OR"
+        Me.btnVoidOR.UseVisualStyleBackColor = True
         '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1291, 596)
+        Me.ClientSize = New System.Drawing.Size(1291, 606)
+        Me.Controls.Add(Me.btnVoidOR)
         Me.Controls.Add(Me.btDeleteOR)
         Me.Controls.Add(Me.chbORFilter)
         Me.Controls.Add(Me.txtORFilter)
@@ -347,4 +358,5 @@ Partial Class FormMyOREntries
     Friend WithEvents txtORFilter As TextBox
     Friend WithEvents chbORFilter As CheckBox
     Friend WithEvents btDeleteOR As Button
+    Friend WithEvents btnVoidOR As Button
 End Class

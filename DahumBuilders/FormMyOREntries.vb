@@ -15,7 +15,7 @@ Public Class FormMyOREntries
         transaction = New Transaction()
         transaction._id = 0
 
-        buttonDelete()
+        buttonVoidDelete()
         sql = "SELECT `id`,`date_paid`,`official_receipt_no`,`paid_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
@@ -118,7 +118,7 @@ Public Class FormMyOREntries
             cbbParticular.Text = transaction._particular_str
         End If
 
-        buttonDelete()
+        buttonVoidDelete()
     End Sub
 
     Private Sub ListView1_KeyUp(sender As Object, e As KeyEventArgs) Handles ListView1.KeyUp
@@ -206,7 +206,7 @@ Public Class FormMyOREntries
 
     Private Sub chbORFilter_CheckedChanged(sender As Object, e As EventArgs) Handles chbORFilter.CheckedChanged
         clearFields()
-        buttonDelete()
+        buttonVoidDelete()
         If chbORFilter.Checked = False Then
             load_my_entries()
             Exit Sub
@@ -267,11 +267,13 @@ Public Class FormMyOREntries
         End Try
     End Sub
 
-    Private Sub buttonDelete()
+    Private Sub buttonVoidDelete()
         If ListView1.Items.Count > 0 And transaction._id > 0 Then
             btDeleteOR.Enabled = True
+            btnVoidOR.Enabled = True
         Else
             btDeleteOR.Enabled = False
+            btnVoidOR.Enabled = False
         End If
     End Sub
 
@@ -285,4 +287,36 @@ Public Class FormMyOREntries
         cbbParticular.SelectedIndex = 0
         transaction._id = 0
     End Sub
+
+    Private Sub btDeleteOR_Click(sender As Object, e As EventArgs) Handles btDeleteOR.Click
+        Dim message As String = "Are you sure you want to delete this OR?" & vbNewLine & vbNewLine & "OR number: " & transaction._or & vbNewLine & "OR Name: " & transaction._clientName
+        Dim result As DialogResult = MessageBox.Show(Me, message, "Delete Official Reciept", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Yes Then
+            deleteORMethod()
+        End If
+    End Sub
+
+    Private Sub deleteORMethod()
+
+        Connection()
+        sql = "DELETE FROM `db_transaction` WHERE `id`=@ID"
+
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = transaction._id
+
+            If sqlCommand.ExecuteNonQuery() = 1 Then
+                MessageBox.Show("Official Reciept Entry Successfully deleted")
+                load_my_entries()
+            Else
+                MessageBox.Show("Official Reciept was not deleted. Please try again.")
+            End If
+        Catch ex As Exception
+            MessageBox.Show("DELETE Official Reciept ERROR: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
+
 End Class
