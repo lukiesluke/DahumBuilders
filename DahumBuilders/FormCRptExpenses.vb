@@ -16,7 +16,7 @@ Public Class FormCRptExpenses
 
         Dim table As New DataTable()
         sql = "SELECT `id`, `date_paid`, `commission`, `description`,
-        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), 'UNSIGNED') AS payeeName,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS payeeName,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_bank_name`, `check_number`
         FROM `db_transaction` WHERE `particular`>5 AND `date_paid` BETWEEN @DateFrom AND @DateTo"
