@@ -1,10 +1,12 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class FormMyOREntries
     Private transaction As Transaction = New Transaction()
+    Dim tries As Integer = 0
 
     Private Sub FormMyOREntries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblProjectName.Text = ""
         lblClientName.Text = ""
+        PanelPassword.Visible = False
 
         load_my_entries()
         loadParticularCombobox()
@@ -292,7 +294,10 @@ Public Class FormMyOREntries
         Dim message As String = "Are you sure you want to delete this OR?" & vbNewLine & vbNewLine & "OR number: " & transaction._or & vbNewLine & "OR Name: " & transaction._clientName
         Dim result As DialogResult = MessageBox.Show(Me, message, "Delete Official Reciept", MessageBoxButtons.YesNoCancel)
         If result = DialogResult.Yes Then
-            deleteORMethod()
+            'deleteORMethod()
+            PanelPassword.Visible = True
+            tries = 0
+            passwordVerification()
         End If
     End Sub
 
@@ -305,18 +310,47 @@ Public Class FormMyOREntries
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = transaction._id
 
-            If sqlCommand.ExecuteNonQuery() = 1 Then
+            If sqlCommand.ExecuteNonQuery() > 0 Then
+                txtPassword.Text = ""
+                PanelPassword.Visible = False
                 MessageBox.Show("Official Reciept Entry Successfully deleted")
                 load_my_entries()
-            Else
-                MessageBox.Show("Official Reciept was not deleted. Please try again.")
             End If
         Catch ex As Exception
             MessageBox.Show("DELETE Official Reciept ERROR: " & ex.Message)
+            PanelPassword.Visible = True
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+    End Sub
+    Private Sub btnOkayPassword_Click(sender As Object, e As EventArgs) Handles btnOkayPassword.Click
+        passwordVerification()
+    End Sub
+
+    Private Sub passwordVerification()
+        lblMessage.Visible = False
+        Try
+            If userLogon._password.Equals(txtPassword.Text.Trim) Then
+                deleteORMethod()
+            Else
+                lblMessage.Visible = True
+                If txtPassword.Text.Trim.Length < 1 Then
+                    lblMessage.Text = "Please enter password."
+                Else
+                    Dim result As String = String.Empty
+                    result = String.Format("Invaild password please try again. Attemp ({0})", tries + 1)
+                    tries += 1
+                    lblMessage.Text = result
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Login Error: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btPassCancel_Click(sender As Object, e As EventArgs) Handles btPassCancel.Click
+        PanelPassword.Visible = False
     End Sub
 
 End Class

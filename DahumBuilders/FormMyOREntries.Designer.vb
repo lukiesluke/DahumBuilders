@@ -51,6 +51,13 @@ Partial Class FormMyOREntries
         Me.chbORFilter = New System.Windows.Forms.CheckBox()
         Me.btDeleteOR = New System.Windows.Forms.Button()
         Me.btnVoidOR = New System.Windows.Forms.Button()
+        Me.PanelPassword = New System.Windows.Forms.Panel()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.btPassCancel = New System.Windows.Forms.Button()
+        Me.btnOkayPassword = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
@@ -293,11 +300,70 @@ Partial Class FormMyOREntries
         Me.btnVoidOR.Text = "&Void OR"
         Me.btnVoidOR.UseVisualStyleBackColor = True
         '
+        'PanelPassword
+        '
+        Me.PanelPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelPassword.Controls.Add(Me.lblMessage)
+        Me.PanelPassword.Controls.Add(Me.btPassCancel)
+        Me.PanelPassword.Controls.Add(Me.btnOkayPassword)
+        Me.PanelPassword.Controls.Add(Me.Label8)
+        Me.PanelPassword.Controls.Add(Me.txtPassword)
+        Me.PanelPassword.Location = New System.Drawing.Point(254, 496)
+        Me.PanelPassword.Name = "PanelPassword"
+        Me.PanelPassword.Size = New System.Drawing.Size(696, 98)
+        Me.PanelPassword.TabIndex = 21
+        '
+        'lblMessage
+        '
+        Me.lblMessage.ForeColor = System.Drawing.Color.Maroon
+        Me.lblMessage.Location = New System.Drawing.Point(7, 68)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(677, 20)
+        Me.lblMessage.TabIndex = 4
+        Me.lblMessage.Text = "lblMessage"
+        Me.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'btPassCancel
+        '
+        Me.btPassCancel.Location = New System.Drawing.Point(501, 18)
+        Me.btPassCancel.Name = "btPassCancel"
+        Me.btPassCancel.Size = New System.Drawing.Size(161, 38)
+        Me.btPassCancel.TabIndex = 3
+        Me.btPassCancel.Text = "Cancel"
+        Me.btPassCancel.UseVisualStyleBackColor = True
+        '
+        'btnOkayPassword
+        '
+        Me.btnOkayPassword.Location = New System.Drawing.Point(334, 18)
+        Me.btnOkayPassword.Name = "btnOkayPassword"
+        Me.btnOkayPassword.Size = New System.Drawing.Size(161, 38)
+        Me.btnOkayPassword.TabIndex = 2
+        Me.btnOkayPassword.Text = "Okay"
+        Me.btnOkayPassword.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(58, 27)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(78, 20)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Password"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Location = New System.Drawing.Point(142, 24)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txtPassword.Size = New System.Drawing.Size(171, 26)
+        Me.txtPassword.TabIndex = 0
+        '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1291, 606)
+        Me.Controls.Add(Me.PanelPassword)
         Me.Controls.Add(Me.btnVoidOR)
         Me.Controls.Add(Me.btDeleteOR)
         Me.Controls.Add(Me.chbORFilter)
@@ -325,6 +391,8 @@ Partial Class FormMyOREntries
         Me.Name = "FormMyOREntries"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "OR Entries"
+        Me.PanelPassword.ResumeLayout(False)
+        Me.PanelPassword.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -359,4 +427,10 @@ Partial Class FormMyOREntries
     Friend WithEvents chbORFilter As CheckBox
     Friend WithEvents btDeleteOR As Button
     Friend WithEvents btnVoidOR As Button
+    Friend WithEvents PanelPassword As Panel
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents btPassCancel As Button
+    Friend WithEvents btnOkayPassword As Button
+    Friend WithEvents lblMessage As Label
 End Class
