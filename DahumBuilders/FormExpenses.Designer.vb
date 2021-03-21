@@ -61,6 +61,14 @@ Partial Class FormExpenses
         Me.lblProjectID = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cbbBankName = New System.Windows.Forms.ComboBox()
+        Me.PanelPayeeName = New System.Windows.Forms.Panel()
+        Me.btnSetPayeeName = New System.Windows.Forms.Button()
+        Me.btnPayeeCancel = New System.Windows.Forms.Button()
+        Me.txtPayeeName = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.PanelPayeeName.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
@@ -68,9 +76,9 @@ Partial Class FormExpenses
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderName, Me.ColumnHeaderMobile, Me.ColumnHeaderAddress, Me.ColumnHeaderTotalDeduction})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(513, 54)
+        Me.ListView1.Location = New System.Drawing.Point(9, 63)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(740, 434)
+        Me.ListView1.Size = New System.Drawing.Size(731, 383)
         Me.ListView1.TabIndex = 14
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -103,7 +111,7 @@ Partial Class FormExpenses
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(1163, 15)
+        Me.btnSearch.Location = New System.Drawing.Point(348, 25)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(90, 32)
         Me.btnSearch.TabIndex = 13
@@ -310,7 +318,7 @@ Partial Class FormExpenses
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(881, 15)
+        Me.txtSearch.Location = New System.Drawing.Point(66, 28)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(276, 26)
         Me.txtSearch.TabIndex = 12
@@ -318,7 +326,7 @@ Partial Class FormExpenses
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(824, 15)
+        Me.Label8.Location = New System.Drawing.Point(9, 31)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(51, 20)
         Me.Label8.TabIndex = 27
@@ -326,12 +334,13 @@ Partial Class FormExpenses
         '
         'lblClientID
         '
-        Me.lblClientID.AutoSize = True
-        Me.lblClientID.Location = New System.Drawing.Point(721, 15)
+        Me.lblClientID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblClientID.Location = New System.Drawing.Point(647, 28)
         Me.lblClientID.Name = "lblClientID"
-        Me.lblClientID.Size = New System.Drawing.Size(81, 20)
+        Me.lblClientID.Size = New System.Drawing.Size(93, 26)
         Me.lblClientID.TabIndex = 28
         Me.lblClientID.Text = "lblClientID"
+        Me.lblClientID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblProjectID
         '
@@ -362,16 +371,75 @@ Partial Class FormExpenses
         Me.cbbBankName.Size = New System.Drawing.Size(335, 28)
         Me.cbbBankName.TabIndex = 5
         '
+        'PanelPayeeName
+        '
+        Me.PanelPayeeName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelPayeeName.Controls.Add(Me.btnSetPayeeName)
+        Me.PanelPayeeName.Controls.Add(Me.btnPayeeCancel)
+        Me.PanelPayeeName.Controls.Add(Me.txtPayeeName)
+        Me.PanelPayeeName.Controls.Add(Me.Label10)
+        Me.PanelPayeeName.Location = New System.Drawing.Point(501, 168)
+        Me.PanelPayeeName.Name = "PanelPayeeName"
+        Me.PanelPayeeName.Size = New System.Drawing.Size(503, 121)
+        Me.PanelPayeeName.TabIndex = 31
+        Me.PanelPayeeName.Visible = False
+        '
+        'btnSetPayeeName
+        '
+        Me.btnSetPayeeName.Location = New System.Drawing.Point(154, 63)
+        Me.btnSetPayeeName.Name = "btnSetPayeeName"
+        Me.btnSetPayeeName.Size = New System.Drawing.Size(161, 41)
+        Me.btnSetPayeeName.TabIndex = 32
+        Me.btnSetPayeeName.Text = "Set Payee Name"
+        Me.btnSetPayeeName.UseVisualStyleBackColor = True
+        '
+        'btnPayeeCancel
+        '
+        Me.btnPayeeCancel.Location = New System.Drawing.Point(321, 63)
+        Me.btnPayeeCancel.Name = "btnPayeeCancel"
+        Me.btnPayeeCancel.Size = New System.Drawing.Size(161, 41)
+        Me.btnPayeeCancel.TabIndex = 33
+        Me.btnPayeeCancel.Text = "&Cancel"
+        Me.btnPayeeCancel.UseVisualStyleBackColor = True
+        '
+        'txtPayeeName
+        '
+        Me.txtPayeeName.Location = New System.Drawing.Point(128, 19)
+        Me.txtPayeeName.Name = "txtPayeeName"
+        Me.txtPayeeName.Size = New System.Drawing.Size(354, 26)
+        Me.txtPayeeName.TabIndex = 32
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(13, 22)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(99, 20)
+        Me.Label10.TabIndex = 22
+        Me.Label10.Text = "Payee Name"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnSearch)
+        Me.GroupBox1.Controls.Add(Me.txtSearch)
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.lblClientID)
+        Me.GroupBox1.Controls.Add(Me.ListView1)
+        Me.GroupBox1.Location = New System.Drawing.Point(510, 15)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(749, 469)
+        Me.GroupBox1.TabIndex = 32
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Employee list"
+        '
         'FormExpenses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1271, 772)
+        Me.Controls.Add(Me.PanelPayeeName)
         Me.Controls.Add(Me.cbbBankName)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.lblClientID)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.txtSearch)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtCheckNo)
@@ -389,15 +457,18 @@ Partial Class FormExpenses
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtDescription)
         Me.Controls.Add(Me.cbbExpensesType)
-        Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.dt)
-        Me.Controls.Add(Me.ListView1)
+        Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.Name = "FormExpenses"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Commission / Expenses"
+        Me.PanelPayeeName.ResumeLayout(False)
+        Me.PanelPayeeName.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -441,4 +512,10 @@ Partial Class FormExpenses
     Friend WithEvents ColumnHeaderEmpName As ColumnHeader
     Friend WithEvents Label9 As Label
     Friend WithEvents cbbBankName As ComboBox
+    Friend WithEvents PanelPayeeName As Panel
+    Friend WithEvents btnSetPayeeName As Button
+    Friend WithEvents btnPayeeCancel As Button
+    Friend WithEvents txtPayeeName As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents GroupBox1 As GroupBox
 End Class

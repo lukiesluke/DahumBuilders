@@ -93,7 +93,7 @@ Public Class FormExpenses
     End Sub
     Private Sub loadDeduction(dt As DateTimePicker)
         sql = "SELECT `id`, `date_paid`, `commission`, `description`,
-        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), 'UNSIGNED') AS NAME,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`
         FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"
@@ -141,6 +141,7 @@ Public Class FormExpenses
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Dim bankName As String = ""
+        Dim payeeName As String = ""
         Dim particularIdValue As String = DirectCast(cbbExpensesType.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim PaymentType As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
 
@@ -163,8 +164,8 @@ Public Class FormExpenses
         End If
 
         sql = "INSERT INTO `db_transaction` 
-        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
+        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
 
         Dim dateCheck As Date = Nothing
         If "commission".Equals(cbbExpensesType.Text.Trim.ToLower) Then
@@ -173,6 +174,10 @@ Public Class FormExpenses
 
         If cbbBankName.SelectedIndex > 0 Then
             bankName = cbbBankName.Text.Trim
+        End If
+
+        If lblIssueTo.Text.Equals("0") Then
+            payeeName = lblIssueTo.Text.Trim
         End If
 
         Connection()
@@ -185,6 +190,7 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@ProjID", MySqlDbType.Int64).Value = lblProjectID.Text.Trim
             sqlCommand.Parameters.Add("@BankName", MySqlDbType.VarChar).Value = bankName
             sqlCommand.Parameters.Add("@DateCheck", MySqlDbType.VarChar).Value = dateCheck.ToString(format)
+            sqlCommand.Parameters.Add("@PayeeName", MySqlDbType.VarChar).Value = payeeName
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = lblClientID.Text.Trim
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentType
             sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = txtCheckNo.Text.Trim.ToUpper
@@ -264,6 +270,30 @@ Public Class FormExpenses
     End Sub
 
     Private Sub lblIssueTo_Click(sender As Object, e As EventArgs) Handles lblIssueTo.Click
+        If cbbExpensesType.Text.Contains("Commission") Then
+            MessageBox.Show("Please select Payee name from Employee list.")
+            txtSearch.Focus()
+        Else
+            PanelPayeeName.Visible = True
+        End If
+    End Sub
 
+    Private Sub btnPayeeCancel_Click(sender As Object, e As EventArgs) Handles btnPayeeCancel.Click
+        PanelPayeeName.Visible = False
+    End Sub
+
+    Private Sub btnSetPayeeName_Click(sender As Object, e As EventArgs) Handles btnSetPayeeName.Click
+        txtPayeeName.Text = txtPayeeName.Text.Trim()
+
+        If txtPayeeName.Text.Length < 1 Then
+            MessageBox.Show("Please enter Payee Name.")
+            txtPayeeName.Focus()
+            Exit Sub
+        End If
+
+        lblIssueTo.Text = txtPayeeName.Text.Trim
+        lblClientID.Text = "0"
+        PanelPayeeName.Visible = False
+        txtPayeeName.Text = ""
     End Sub
 End Class
