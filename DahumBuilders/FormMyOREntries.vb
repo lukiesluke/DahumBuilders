@@ -12,7 +12,10 @@ Public Class FormMyOREntries
     End Sub
 
     Private Sub load_my_entries()
+        transaction = New Transaction()
+        transaction._id = 0
 
+        buttonDelete()
         sql = "SELECT `id`,`date_paid`,`official_receipt_no`,`paid_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
@@ -23,16 +26,12 @@ Public Class FormMyOREntries
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
-        'sqlCommand.Parameters.Add("@dt", MySqlDbType.VarChar).Value = dt.Value.ToString(Format)
-        'sqlCommand.Parameters.Add("@ProjID", MySqlDbType.VarChar).Value = lblProjectID.Text.Trim
         sqlDataReader = sqlCommand.ExecuteReader()
-
         Try
             Cursor = Cursors.WaitCursor
             Dim item As ListViewItem
             ListView1.Items.Clear()
             Do While sqlDataReader.Read = True
-                transaction = New Transaction()
                 transaction._id = sqlDataReader("id")
                 transaction._datePaid = sqlDataReader("date_paid")
                 transaction._or = sqlDataReader("official_receipt_no")
@@ -53,7 +52,6 @@ Public Class FormMyOREntries
                 item.SubItems.Add(transaction._description)
                 ListView1.Items.Add(item)
             Loop
-
             sqlDataReader.Dispose()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -66,15 +64,19 @@ Public Class FormMyOREntries
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Connection()
+        Dim paymentKey As String = DirectCast(cbbPayment.SelectedItem, KeyValuePair(Of String, String)).Key
+        Dim particularKey As String = DirectCast(cbbParticular.SelectedItem, KeyValuePair(Of String, String)).Key
 
         sql = "UPDATE `db_transaction` t SET t.`date_paid`=@DatePaid, t.`official_receipt_no`=@ORNumber,
-        t.`paid_amount`=@PaidAmount, t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
+        t.`paid_amount`=@PaidAmount, `particular`=@Particular, `payment_type`=@PaymentType,  t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
             sqlCommand.Parameters.Add("@ORNumber", MySqlDbType.Double).Value = txtORNumber.Text.Trim
             sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = txtAmount.Text.Trim
+            sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularKey
+            sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentKey
             sqlCommand.Parameters.Add("@UpdatedBy", MySqlDbType.Int64).Value = userLogon._id
             sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = transaction._id
 
@@ -95,26 +97,28 @@ Public Class FormMyOREntries
     End Sub
 
     Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click
-        'ListView1.SelectedItems.Item(0).Text
-        'dtpDatePaid.Value = ListView1.SelectedItems.Item(0).SubItems(1).Text
-        transaction = New Transaction()
-        transaction._id = ListView1.SelectedItems.Item(0).Text
-        transaction._datePaid = ListView1.SelectedItems.Item(0).SubItems(1).Text
-        transaction._or = ListView1.SelectedItems.Item(0).SubItems(2).Text
-        transaction._clientName = ListView1.SelectedItems.Item(0).SubItems(3).Text
-        transaction._paidAmount = ListView1.SelectedItems.Item(0).SubItems(4).Text
-        transaction._paymentType = ListView1.SelectedItems.Item(0).SubItems(5).Text
-        transaction._particular_str = ListView1.SelectedItems.Item(0).SubItems(6).Text
-        transaction._description = ListView1.SelectedItems.Item(0).SubItems(7).Text
 
-        dtpDatePaid.Value = transaction._datePaid
-        txtORNumber.Text = transaction._or
-        txtAmount.Text = transaction._paidAmount.ToString("N2")
-        lblClientName.Text = transaction._clientName
-        lblProjectName.Text = transaction._description
-        cbbPayment.Text = transaction._paymentType
-        cbbParticular.Text = transaction._particular_str
+        If ListView1.Items.Count > 0 Then
+            transaction = New Transaction()
+            transaction._id = ListView1.SelectedItems.Item(0).Text
+            transaction._datePaid = ListView1.SelectedItems.Item(0).SubItems(1).Text
+            transaction._or = ListView1.SelectedItems.Item(0).SubItems(2).Text
+            transaction._clientName = ListView1.SelectedItems.Item(0).SubItems(3).Text
+            transaction._paidAmount = ListView1.SelectedItems.Item(0).SubItems(4).Text
+            transaction._paymentType = ListView1.SelectedItems.Item(0).SubItems(5).Text
+            transaction._particular_str = ListView1.SelectedItems.Item(0).SubItems(6).Text
+            transaction._description = ListView1.SelectedItems.Item(0).SubItems(7).Text
 
+            dtpDatePaid.Value = transaction._datePaid
+            txtORNumber.Text = transaction._or
+            txtAmount.Text = transaction._paidAmount.ToString("N2")
+            lblClientName.Text = transaction._clientName
+            lblProjectName.Text = transaction._description
+            cbbPayment.Text = transaction._paymentType
+            cbbParticular.Text = transaction._particular_str
+        End If
+
+        buttonDelete()
     End Sub
 
     Private Sub ListView1_KeyUp(sender As Object, e As KeyEventArgs) Handles ListView1.KeyUp
@@ -194,5 +198,91 @@ Public Class FormMyOREntries
             sqlConnection.Close()
             Cursor = Cursors.Default
         End Try
+    End Sub
+
+    Private Sub cbbPayment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbPayment.SelectedIndexChanged
+        Dim paymentKey As String = DirectCast(cbbPayment.SelectedItem, KeyValuePair(Of String, String)).Key
+    End Sub
+
+    Private Sub chbORFilter_CheckedChanged(sender As Object, e As EventArgs) Handles chbORFilter.CheckedChanged
+        clearFields()
+        buttonDelete()
+        If chbORFilter.Checked = False Then
+            load_my_entries()
+            Exit Sub
+        End If
+
+        If txtORFilter.Text.Trim.Length < 1 Then
+            load_my_entries()
+            Exit Sub
+        End If
+
+        sql = "SELECT `id`,`date_paid`,`official_receipt_no`,`paid_amount`,
+        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
+        (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
+        (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
+        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type
+        FROM `db_transaction` t WHERE t.`official_receipt_no` LIKE @OREntry"
+
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        sqlCommand.Parameters.Add("@OREntry", MySqlDbType.VarChar).Value = "%" & txtORFilter.Text.Trim & "%"
+        sqlDataReader = sqlCommand.ExecuteReader()
+
+        Try
+            Cursor = Cursors.WaitCursor
+            Dim item As ListViewItem
+            ListView1.Items.Clear()
+            Do While sqlDataReader.Read = True
+                transaction = New Transaction()
+                transaction._id = sqlDataReader("id")
+                transaction._datePaid = sqlDataReader("date_paid")
+                transaction._or = sqlDataReader("official_receipt_no")
+                transaction._clientName = sqlDataReader("clientName")
+                transaction._paidAmount = sqlDataReader("paid_amount")
+                transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
+                transaction._particular_str = sqlDataReader("particular")
+                transaction._paymentType = sqlDataReader("payment_type")
+
+                item = New ListViewItem(transaction._id)
+                item.UseItemStyleForSubItems = False
+                item.SubItems.Add(transaction._datePaid)
+                item.SubItems.Add(transaction._or)
+                item.SubItems.Add(transaction._clientName)
+                item.SubItems.Add(transaction._paidAmount.ToString("N2"))
+                item.SubItems.Add(transaction._paymentType)
+                item.SubItems.Add(transaction._particular_str)
+                item.SubItems.Add(transaction._description)
+                ListView1.Items.Add(item)
+            Loop
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub buttonDelete()
+        If ListView1.Items.Count > 0 And transaction._id > 0 Then
+            btDeleteOR.Enabled = True
+        Else
+            btDeleteOR.Enabled = False
+        End If
+    End Sub
+
+    Private Sub clearFields()
+        dtpDatePaid.Value = Date.Now
+        txtORNumber.Text = ""
+        txtAmount.Text = ""
+        lblClientName.Text = ""
+        lblProjectName.Text = ""
+        cbbPayment.SelectedIndex = 0
+        cbbParticular.SelectedIndex = 0
+        transaction._id = 0
     End Sub
 End Class

@@ -47,6 +47,9 @@ Partial Class FormMyOREntries
         Me.cbbParticular = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtORFilter = New System.Windows.Forms.TextBox()
+        Me.chbORFilter = New System.Windows.Forms.CheckBox()
+        Me.btDeleteOR = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ListView1
@@ -159,7 +162,7 @@ Partial Class FormMyOREntries
         '
         'btCancel
         '
-        Me.btCancel.Location = New System.Drawing.Point(729, 545)
+        Me.btCancel.Location = New System.Drawing.Point(768, 545)
         Me.btCancel.Name = "btCancel"
         Me.btCancel.Size = New System.Drawing.Size(161, 38)
         Me.btCancel.TabIndex = 8
@@ -168,7 +171,7 @@ Partial Class FormMyOREntries
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(562, 546)
+        Me.btnUpdate.Location = New System.Drawing.Point(601, 545)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(161, 38)
         Me.btnUpdate.TabIndex = 7
@@ -253,11 +256,41 @@ Partial Class FormMyOREntries
         Me.Label7.Text = "Particular"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'txtORFilter
+        '
+        Me.txtORFilter.Location = New System.Drawing.Point(1022, 21)
+        Me.txtORFilter.Name = "txtORFilter"
+        Me.txtORFilter.Size = New System.Drawing.Size(129, 26)
+        Me.txtORFilter.TabIndex = 17
+        '
+        'chbORFilter
+        '
+        Me.chbORFilter.AutoSize = True
+        Me.chbORFilter.Location = New System.Drawing.Point(1163, 23)
+        Me.chbORFilter.Name = "chbORFilter"
+        Me.chbORFilter.Size = New System.Drawing.Size(98, 24)
+        Me.chbORFilter.TabIndex = 18
+        Me.chbORFilter.Text = "Filter OR"
+        Me.chbORFilter.UseVisualStyleBackColor = True
+        '
+        'btDeleteOR
+        '
+        Me.btDeleteOR.Enabled = False
+        Me.btDeleteOR.Location = New System.Drawing.Point(434, 545)
+        Me.btDeleteOR.Name = "btDeleteOR"
+        Me.btDeleteOR.Size = New System.Drawing.Size(161, 38)
+        Me.btDeleteOR.TabIndex = 19
+        Me.btDeleteOR.Text = "&Delete"
+        Me.btDeleteOR.UseVisualStyleBackColor = True
+        '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1291, 596)
+        Me.Controls.Add(Me.btDeleteOR)
+        Me.Controls.Add(Me.chbORFilter)
+        Me.Controls.Add(Me.txtORFilter)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.cbbParticular)
@@ -311,4 +344,7 @@ Partial Class FormMyOREntries
     Friend WithEvents cbbParticular As ComboBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
+    Friend WithEvents txtORFilter As TextBox
+    Friend WithEvents chbORFilter As CheckBox
+    Friend WithEvents btDeleteOR As Button
 End Class
