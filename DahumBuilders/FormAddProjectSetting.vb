@@ -102,20 +102,6 @@ Public Class FormAddProjectSetting
 
         End Try
 
-        'Try
-        '    Dim selectitemIndex As Integer = 7
-        '    Dim itmX As ListViewItem = ListViewProjectLot.FindItemWithText(FindMe, True, selectitemIndex)
-        '    If Not itmX Is Nothing Then
-        '        ListViewProjectLot.Focus()
-        '        itmX.Selected = True
-        '        ListViewProjectLot.Items(itmX.Index).Selected = True
-        '        selectitemIndex = itmX.Index + 1
-        '        itmX.EnsureVisible()
-        '    End If
-        'Catch ex As Exception
-
-        'End Try
-
     End Sub
 
     Private Sub btnAddProject_Click(sender As Object, e As EventArgs) Handles btnAddProject.Click
@@ -234,21 +220,23 @@ Public Class FormAddProjectSetting
     End Sub
 
     Private Sub loadProjectLots(blockNumber As String)
+        Dim projectID As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
+
         Dim item As ListViewItem
         If blockNumber.Length > 0 Then
-            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available', 'Occupied') AS 'status',
+            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`, i.`proj_id`
-            FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`proj_name` LIKE @ProjName {0} ORDER BY i.`block` ASC, i.`lot` ASC"
+            FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID {0} ORDER BY i.`block` ASC, i.`lot` ASC"
             sql = String.Format(sql, " AND i.`block` LIKE '" + blockNumber + "'")
         Else
-            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`=0,'Available', 'Occupied') AS 'status',
+            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`, i.`proj_id`
-            FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`proj_name` LIKE @ProjName ORDER BY i.`block` ASC, i.`lot` ASC"
+            FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID ORDER BY i.`block` ASC, i.`lot` ASC"
         End If
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@ProjName", MySqlDbType.VarChar).Value = cbbProjectName.Text
+            sqlCommand.Parameters.Add("@ProjID", MySqlDbType.VarChar).Value = projectID
             If blockNumber.Length > 0 Then
                 sqlCommand.Parameters.Add("@Block", MySqlDbType.VarChar).Value = blockNumber
             End If
@@ -276,6 +264,7 @@ Public Class FormAddProjectSetting
                 item.SubItems.Add(sqlDataReader("autoID"))
                 item.SubItems.Add(sqlDataReader("proj_id"))
                 item.SubItems.Add(sqlDataReader("clientName"))
+                item.SubItems.Add(sqlDataReader("remark"))
                 ListViewProjectLot.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -293,9 +282,6 @@ Public Class FormAddProjectSetting
             cbbProjectName.Text = projectName
 
             If projectName.Length > 0 Then
-                'cbbProjectName.Text = ListViewProject.SelectedItems(0).SubItems(1).Text
-                'MessageBox.Show("ListViewProject.SelectedItems(0): " & ListViewProject.SelectedItems(0).Text)
-                'loadComboPriceList(ListViewProject.SelectedItems(0).Text)
 
                 lblID.Text = ListViewProject.SelectedItems(0).Text
                 txtProjectNameUpdate.Text = ListViewProject.SelectedItems(0).SubItems(1).Text

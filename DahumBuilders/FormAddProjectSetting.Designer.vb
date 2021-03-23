@@ -63,6 +63,7 @@ Partial Class FormAddProjectSetting
         Me.ColumnHeaderAutoID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProjID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderClient = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderRemark = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.lblProjID = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
@@ -393,7 +394,7 @@ Partial Class FormAddProjectSetting
         'ListViewProjectLot
         '
         Me.ListViewProjectLot.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID, Me.ColumnHeaderClient})
+        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID, Me.ColumnHeaderClient, Me.ColumnHeaderRemark})
         Me.ListViewProjectLot.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewProjectLot.FullRowSelect = True
         Me.ListViewProjectLot.GridLines = True
@@ -436,7 +437,7 @@ Partial Class FormAddProjectSetting
         '
         Me.ColumnTCP.Text = "TCP"
         Me.ColumnTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnTCP.Width = 100
+        Me.ColumnTCP.Width = 80
         '
         'ColumnStatus
         '
@@ -457,6 +458,11 @@ Partial Class FormAddProjectSetting
         '
         Me.ColumnHeaderClient.Text = "Client Name"
         Me.ColumnHeaderClient.Width = 100
+        '
+        'ColumnHeaderRemark
+        '
+        Me.ColumnHeaderRemark.Text = "Remark"
+        Me.ColumnHeaderRemark.Width = 200
         '
         'lblProjID
         '
@@ -792,4 +798,5 @@ Partial Class FormAddProjectSetting
     Friend WithEvents txtProjectNameUpdate As TextBox
     Friend WithEvents lblID As Label
     Friend WithEvents lblProjectName As Label
+    Friend WithEvents ColumnHeaderRemark As ColumnHeader
 End Class

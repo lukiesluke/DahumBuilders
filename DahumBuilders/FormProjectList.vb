@@ -145,7 +145,7 @@ Public Class FormProjectList
     End Sub
     Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
         Dim rowsAffected As Integer = 0
-        sql = "UPDATE `db_project_item` SET `assigned_userid`=@UserID WHERE `item_id`=@ItemId AND `assigned_userid`<1"
+        sql = "UPDATE `db_project_item` SET `assigned_userid`=@UserID, `remark`='' WHERE `item_id`=@ItemId AND `assigned_userid`<1"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)

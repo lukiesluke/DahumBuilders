@@ -8,6 +8,7 @@
     Public Property _penalty As Double = 0
     Public Property _discountAmount As Double = 0
     Public Property _particular As Integer = 0
+    Public Property _particular_str As String = ""
     Public Property _partNo As String = ""
     Public Property _paymentType As String = ""
     Public Property _description As String = ""

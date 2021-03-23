@@ -787,9 +787,13 @@ FinallyLine:
         If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
             Dim totalPaid As Double = ListViewUserItem.SelectedItems.Item(0).SubItems(10).Text 'Paid Amount
             If totalPaid > 0 Then
-                ContextMenuProjectList.Items(0).Enabled = False
+                ContextMenuProjectList.Items(0).Enabled = False 'Removed
+                ContextMenuProjectList.Items(2).Enabled = True 'Cancelled
+
             Else
-                ContextMenuProjectList.Items(0).Enabled = True
+                ContextMenuProjectList.Items(0).Enabled = True 'Removed
+                ContextMenuProjectList.Items(2).Enabled = False 'Cancelled
+
             End If
             ContextMenuProjectList.Items(1).Enabled = True
         ElseIf ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
@@ -974,6 +978,37 @@ FinallyLine:
             mFormOREntries.Focus()
             mFormOREntries.mUser = u
             mFormOREntries.ShowDialog(Me)
+        End If
+    End Sub
+
+    Private Sub CancelLotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancelLotToolStripMenuItem.Click
+        If ListViewUserItem.Items.Count < 1 Or ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
+            Exit Sub
+        End If
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to cancel this lot", "Cancel Lot", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Yes Then
+            CancelLotMethod()
+        End If
+    End Sub
+
+    Private Sub CancelLotMethod()
+
+        Dim projItemId As Int64 = ListViewUserItem.SelectedItems.Item(0).Text
+        Dim rowsAffected As Integer = 0
+        sql = "UPDATE `db_project_item` SET `assigned_userid`=-1, `remark`='Cancelled by: " & lblName.Text & "' WHERE `item_id`=@ItemId"
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@ItemId", MySqlDbType.Int32).Value = projItemId
+            rowsAffected = sqlCommand.ExecuteNonQuery()
+        Catch ex As Exception
+            MessageBox.Show("Cancelled error: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        If rowsAffected > 0 Then
+            load_userId_info_data_reader()
         End If
     End Sub
 End Class
