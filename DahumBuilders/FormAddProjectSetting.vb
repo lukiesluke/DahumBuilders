@@ -5,9 +5,10 @@ Public Class FormAddProjectSetting
     Dim dataPriceList As New Dictionary(Of String, Double)()
 
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(980, 500)
+        Me.Size = New Size(1150, 500)
         load_ProjectName_combobox()
-        'cbbProjectName.SelectedIndex = 0
+        load_Project_tot_type_combobox()
+
         PanelLotUpdate.Visible = False
         PanelProjectNameUpdate.Visible = False
     End Sub
@@ -59,8 +60,8 @@ Public Class FormAddProjectSetting
             Exit Sub
         End If
 
-        sql = "INSERT INTO `db_project_item` ( `block`, `lot`,`sqm`, `price`, `proj_id`,`autoID`) VALUES 
-        (@Block, @Lot, @Sqm, @TCP, (SELECT `id` FROM `db_project_list` WHERE `proj_name` LIKE @ProjectName),
+        sql = "INSERT INTO `db_project_item` ( `block`, `lot`,`sqm`, `lot_type`, `price`, `proj_id`,`autoID`) VALUES 
+        (@Block, @Lot, @Sqm, @LotType, @TCP, (SELECT `id` FROM `db_project_list` WHERE `proj_name` LIKE @ProjectName),
         CONCAT(`proj_id`,'.',`block`,'.',`lot`))"
         Connection()
         Try
@@ -68,6 +69,7 @@ Public Class FormAddProjectSetting
             sqlCommand.Parameters.Add("@Block", MySqlDbType.Int24).Value = Double.Parse(txtBlock.Text.Trim)
             sqlCommand.Parameters.Add("@Lot", MySqlDbType.Int24).Value = Double.Parse(txtLot.Text.Trim)
             sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = cbSQM.Text
+            sqlCommand.Parameters.Add("@LotType", MySqlDbType.VarChar).Value = cbbLotType.Text.Trim
             sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = Double.Parse(txtTCP.Text.Trim)
             sqlCommand.Parameters.Add("@ProjectName", MySqlDbType.VarChar).Value = cbbProjectName.Text.Trim
             If sqlCommand.ExecuteNonQuery() = 1 Then
@@ -224,12 +226,12 @@ Public Class FormAddProjectSetting
 
         Dim item As ListViewItem
         If blockNumber.Length > 0 Then
-            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
+            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`, i.`proj_id`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID {0} ORDER BY i.`block` ASC, i.`lot` ASC"
             sql = String.Format(sql, " AND i.`block` LIKE '" + blockNumber + "'")
         Else
-            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
+            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`, i.`proj_id`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID ORDER BY i.`block` ASC, i.`lot` ASC"
         End If
@@ -250,6 +252,7 @@ Public Class FormAddProjectSetting
                 item.SubItems.Add(sqlDataReader("block"))
                 item.SubItems.Add(sqlDataReader("lot"))
                 item.SubItems.Add(sqlDataReader("sqm"))
+                item.SubItems.Add(sqlDataReader("lot_type"))
                 item.SubItems.Add(Double.Parse(sqlDataReader("price")).ToString("N2"))
 
                 With item.SubItems.Add(sqlDataReader("status"))
@@ -311,8 +314,9 @@ Public Class FormAddProjectSetting
                 ._block = ListViewProjectLot.SelectedItems.Item(0).SubItems(2).Text
                 ._lot = ListViewProjectLot.SelectedItems.Item(0).SubItems(3).Text
                 ._sqm = ListViewProjectLot.SelectedItems.Item(0).SubItems(4).Text
-                ._tcp = ListViewProjectLot.SelectedItems.Item(0).SubItems(5).Text
-                ._projID = ListViewProjectLot.SelectedItems.Item(0).SubItems(8).Text
+                ._lotType = ListViewProjectLot.SelectedItems.Item(0).SubItems(5).Text
+                ._tcp = ListViewProjectLot.SelectedItems.Item(0).SubItems(6).Text
+                ._projID = ListViewProjectLot.SelectedItems.Item(0).SubItems(9).Text
             End With
 
             txtBlockUp.Text = lot._block
@@ -341,7 +345,7 @@ Public Class FormAddProjectSetting
     End Sub
 
     Private Sub btnUpdateLot_Click(sender As Object, e As EventArgs) Handles btnUpdateLot.Click
-        sql = "UPDATE `db_project_item` SET `block`=@block, `lot`=@lot,`sqm`=@Sqm,
+        sql = "UPDATE `db_project_item` SET `block`=@block, `lot`=@lot,`sqm`=@Sqm, `lot_type`=@lotType,
         `price`=@price, `autoID`=@autoID WHERE `item_id`=@ItemID"
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -349,6 +353,7 @@ Public Class FormAddProjectSetting
             sqlCommand.Parameters.Add("@block", MySqlDbType.Int24).Value = txtBlockUp.Text.Trim
             sqlCommand.Parameters.Add("@lot", MySqlDbType.Int24).Value = txtLotUp.Text.Trim
             sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = cbSQMUpdate.Text
+            sqlCommand.Parameters.Add("@lotType", MySqlDbType.VarChar).Value = cbbLotTypeUpdate.Text
             sqlCommand.Parameters.Add("@price", MySqlDbType.Double).Value = txtTcpUp.Text.Trim
             sqlCommand.Parameters.Add("@autoID", MySqlDbType.VarChar).Value = lot._projID & "." & txtBlockUp.Text.Trim & "." & txtLotUp.Text.Trim
             sqlCommand.Parameters.Add("@ItemID", MySqlDbType.Int64).Value = lot._id
@@ -454,5 +459,44 @@ Public Class FormAddProjectSetting
             PanelProjectNameUpdate.Visible = False
         End If
     End Sub
+    Private Sub load_Project_tot_type_combobox()
+        sql = "SELECT * FROM `db_project_lot_type` ORDER BY lottype"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
 
+            cbbLotType.DataSource = Nothing
+            cbbLotType.Items.Clear()
+
+            cbbLotTypeUpdate.DataSource = Nothing
+            cbbLotTypeUpdate.Items.Clear()
+
+            Dim comboSourceProjectLotType As New Dictionary(Of String, String)()
+            If sqlDataReader.HasRows Then
+                Do While sqlDataReader.Read = True
+                    comboSourceProjectLotType.Add(sqlDataReader("id"), sqlDataReader("lotType"))
+                Loop
+            Else
+                comboSourceProjectLotType.Add("0", "Empty")
+            End If
+
+            cbbLotType.DataSource = New BindingSource(comboSourceProjectLotType, Nothing)
+            cbbLotType.DisplayMember = "Value"
+            cbbLotType.ValueMember = "Key"
+
+            cbbLotTypeUpdate.DataSource = New BindingSource(comboSourceProjectLotType, Nothing)
+            cbbLotTypeUpdate.DisplayMember = "Value"
+            cbbLotTypeUpdate.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
 End Class
