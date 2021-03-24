@@ -3,11 +3,13 @@
 Public Class FormAddProjectSetting
     Private lot As New LotClass()
     Dim dataPriceList As New Dictionary(Of String, Double)()
+    Dim dataPriceListLotType As New Dictionary(Of String, String)()
+
 
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Size(1150, 500)
+        load_Project_lot_type_combobox()
         load_ProjectName_combobox()
-        load_Project_tot_type_combobox()
 
         PanelLotUpdate.Visible = False
         PanelProjectNameUpdate.Visible = False
@@ -141,7 +143,7 @@ Public Class FormAddProjectSetting
     End Sub
     Private Sub loadComboPriceList(listID As Integer)
 
-        sql = "SELECT `id`, `sqm`, `tcp` FROM `db_project_list_price` WHERE `lid`=@listID ORDER BY sqm"
+        sql = "SELECT `id`, `sqm`, `tcp`, `lot_type` FROM `db_project_list_price` WHERE `lid`=@listID ORDER BY sqm"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -154,16 +156,19 @@ Public Class FormAddProjectSetting
             cbSQM.Items.Clear()
             cbSQMUpdate.Items.Clear()
             dataPriceList.Clear()
+            dataPriceListLotType.Clear()
 
             Dim comboSource As New Dictionary(Of String, String)()
             If sqlDataReader.HasRows Then
                 Do While sqlDataReader.Read = True
                     comboSource.Add(sqlDataReader("id"), sqlDataReader("sqm"))
                     dataPriceList.Add(sqlDataReader("id"), sqlDataReader("tcp"))
+                    dataPriceListLotType.Add(sqlDataReader("id"), sqlDataReader("lot_type"))
                 Loop
             Else
                 comboSource.Add("1", "0")
                 dataPriceList.Add("1", "0")
+                dataPriceListLotType.Add("1", "INNER")
             End If
 
             cbSQM.DataSource = New BindingSource(comboSource, Nothing)
@@ -192,6 +197,7 @@ Public Class FormAddProjectSetting
                 If dataPriceList.ContainsKey(key) Then
                     Dim price As Double = dataPriceList.Item(key)
                     txtTCP.Text = price.ToString("N2")
+                    cbbLotType.Text = dataPriceListLotType.Item(key)
                 End If
             Catch ex As Exception
             End Try
@@ -207,6 +213,7 @@ Public Class FormAddProjectSetting
             If dataPriceList.ContainsKey(key) Then
                 Dim price As Double = dataPriceList.Item(key)
                 txtTcpUp.Text = price.ToString("N2")
+                cbbLotTypeUpdate.Text = dataPriceListLotType.Item(key)
             End If
         End If
     End Sub
@@ -323,6 +330,7 @@ Public Class FormAddProjectSetting
             txtLotUp.Text = lot._lot
             cbSQMUpdate.Text = lot._sqm
             txtTcpUp.Text = lot._tcp.ToString("N2")
+            cbbLotTypeUpdate.Text = lot._lotType
         End If
         PanelProjectNameUpdate.Visible = False
     End Sub
@@ -459,7 +467,7 @@ Public Class FormAddProjectSetting
             PanelProjectNameUpdate.Visible = False
         End If
     End Sub
-    Private Sub load_Project_tot_type_combobox()
+    Private Sub load_Project_lot_type_combobox()
         sql = "SELECT * FROM `db_project_lot_type` ORDER BY lottype"
         Connection()
         Try
@@ -475,6 +483,7 @@ Public Class FormAddProjectSetting
 
             Dim comboSourceProjectLotType As New Dictionary(Of String, String)()
             If sqlDataReader.HasRows Then
+                comboSourceProjectLotType.Add("0", "")
                 Do While sqlDataReader.Read = True
                     comboSourceProjectLotType.Add(sqlDataReader("id"), sqlDataReader("lotType"))
                 Loop

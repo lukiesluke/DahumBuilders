@@ -9,6 +9,8 @@
     Public Property _address As String = ""
     Public Property _mobile As String = ""
     Public Property _email As String = ""
+    Public Property _sss As String = ""
+    Public Property _tin As String = ""
     Public Property _telephone As String = ""
     Public Property _image_location As String = ""
     Public Property _username As String = ""
