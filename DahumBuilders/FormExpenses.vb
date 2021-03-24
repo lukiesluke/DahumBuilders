@@ -92,7 +92,7 @@ Public Class FormExpenses
         End Try
     End Sub
     Private Sub loadDeduction(dt As DateTimePicker)
-        sql = "SELECT `id`, `date_paid`, `commission`, `description`,
+        sql = "SELECT `id`, `date_paid`, `commission`, `voucher_no`, `description`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`
@@ -111,6 +111,7 @@ Public Class FormExpenses
                 item = New ListViewItem(sqlDataReader("id").ToString)
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(sqlDataReader("date_paid"))
+                item.SubItems.Add(sqlDataReader("voucher_no"))
                 item.SubItems.Add(sqlDataReader("description"))
                 item.SubItems.Add(Double.Parse(sqlDataReader("commission")).ToString("N2"))
                 item.SubItems.Add(sqlDataReader("NAME"))
@@ -164,8 +165,8 @@ Public Class FormExpenses
         End If
 
         sql = "INSERT INTO `db_transaction` 
-        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
+        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
 
         Dim dateCheck As Date = Nothing
         If "commission".Equals(cbbExpensesType.Text.Trim.ToLower) Then
@@ -176,7 +177,7 @@ Public Class FormExpenses
             bankName = cbbBankName.Text.Trim
         End If
 
-        If lblIssueTo.Text.Equals("0") Then
+        If lblClientID.Text.Equals("0") Then
             payeeName = lblIssueTo.Text.Trim
         End If
 
@@ -190,6 +191,7 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@ProjID", MySqlDbType.Int64).Value = lblProjectID.Text.Trim
             sqlCommand.Parameters.Add("@BankName", MySqlDbType.VarChar).Value = bankName
             sqlCommand.Parameters.Add("@DateCheck", MySqlDbType.VarChar).Value = dateCheck.ToString(format)
+            sqlCommand.Parameters.Add("@VoucherNo", MySqlDbType.VarChar).Value = txtVoucherNo.Text.Trim
             sqlCommand.Parameters.Add("@PayeeName", MySqlDbType.VarChar).Value = payeeName
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = lblClientID.Text.Trim
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentType
