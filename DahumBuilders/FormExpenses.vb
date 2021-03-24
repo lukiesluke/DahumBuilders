@@ -17,7 +17,7 @@ Public Class FormExpenses
     Private Sub loadEmployeeList()
         Connection()
         sql = "SELECT `id`, CONCAT(`first_name`, ' ', `middle_name`,' ', `last_name`) NAME, 
-        `mobile_number`, TRIM(`address`) AS address FROM `db_user_profile` 
+        `mobile_number`, TRIM(`address`) AS address, `tin` FROM `db_user_profile` 
         WHERE `user_type`>0 AND (`first_name` LIKE @Name OR `last_name` LIKE @Name)"
 
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -32,6 +32,7 @@ Public Class FormExpenses
                 item.SubItems.Add(sqlDataReader("NAME"))
                 item.SubItems.Add(sqlDataReader("mobile_number"))
                 item.SubItems.Add(sqlDataReader("address"))
+                item.SubItems.Add(sqlDataReader("tin"))
                 ListView1.Items.Add(item)
             Loop
         Catch ex As Exception

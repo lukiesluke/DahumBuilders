@@ -16,4 +16,6 @@
     Public Property _username As String = ""
     Public Property _password As String = ""
     Public Property _userType As Integer = 0
+    Public Property _userTypeStr As String = ""
+
 End Class

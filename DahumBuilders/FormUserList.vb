@@ -30,13 +30,19 @@ Public Class FormUserList
         Dim item As ListViewItem
         If value.Equals("All") Or value.Length < 1 Then
             If ComboBoxSearch.SelectedIndex = 0 Then
-                sql = "SELECT * FROM `db_user_profile` WHERE last_name LIKE @valueSearch ORDER BY `user_type` ASC, `last_name`"
+                sql = "SELECT `id`,`last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,`date_birth`,`mobile_number`,
+                (SELECT `type` FROM `db_user_type` WHERE `id`=u.`user_type`) user_type, `file_location_image`
+                FROM `db_user_profile` u WHERE u.`last_name` LIKE @valueSearch ORDER BY u.`user_type`, u.`last_name`"
             ElseIf ComboBoxSearch.SelectedIndex = 1 Then
-                sql = "SELECT * FROM `db_user_profile` WHERE first_name LIKE @valueSearch ORDER BY `user_type` ASC, `last_name`"
+                sql = "SELECT `id`,`last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,`date_birth`,`mobile_number`,
+                (SELECT `type` FROM `db_user_type` WHERE `id`=u.`user_type`) user_type, `file_location_image`
+                FROM `db_user_profile` u WHERE u.`first_name` LIKE @valueSearch ORDER BY u.`user_type`, u.`last_name`"
             End If
         Else
             txtSearch.Text = ""
-            sql = "SELECT * FROM `db_user_profile` p
+            sql = "SELECT `id`, `last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,
+            `date_birth`,`mobile_number`,`file_location_image`, (SELECT `type` FROM `db_user_type` WHERE `id`=p.`user_type`) user_type 
+            FROM `db_user_profile` p
             INNER JOIN `db_project_item` i ON i.`assigned_userid`=p.`id` AND i.`proj_id`=@ProjID GROUP BY p.`id` ORDER BY p.`last_name`"
         End If
 
@@ -64,6 +70,7 @@ Public Class FormUserList
                 user._address = sqlDataReader("address")
                 user._mobile = sqlDataReader("mobile_number")
                 user._image_location = IIf(IsDBNull(sqlDataReader("file_location_image")), "", sqlDataReader("file_location_image"))
+                user._userTypeStr = sqlDataReader("user_type")
 
                 item = New ListViewItem(user._id)
                 item.SubItems.Add(user._surname)
@@ -79,6 +86,8 @@ Public Class FormUserList
                     item.SubItems.Add(user._image_location)
                 End If
                 item.SubItems.Add(user._mobile)
+                item.SubItems.Add(user._userTypeStr)
+
                 ListViewUser.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
