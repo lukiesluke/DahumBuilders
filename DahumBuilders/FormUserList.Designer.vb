@@ -34,6 +34,7 @@ Partial Class FormUserList
         Me.ColumnHeaderAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderImageLocation = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderMobile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderUserType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -69,7 +70,8 @@ Partial Class FormUserList
         Me.btnProfileInfo = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderUserType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cbbUserType = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -145,6 +147,10 @@ Partial Class FormUserList
         '
         Me.ColumnHeaderMobile.Text = "Mobile"
         Me.ColumnHeaderMobile.Width = 80
+        '
+        'ColumnHeaderUserType
+        '
+        Me.ColumnHeaderUserType.Text = "Type"
         '
         'Label1
         '
@@ -386,7 +392,7 @@ Partial Class FormUserList
         Me.Panel5.Controls.Add(Me.Panel6)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(13, 13, 13, 13)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(13)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(1080, 487)
         Me.Panel5.TabIndex = 8
@@ -394,6 +400,8 @@ Partial Class FormUserList
         'Panel8
         '
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel8.Controls.Add(Me.Label12)
+        Me.Panel8.Controls.Add(Me.cbbUserType)
         Me.Panel8.Controls.Add(Me.Label11)
         Me.Panel8.Controls.Add(Me.cbbProjectList)
         Me.Panel8.Controls.Add(Me.ComboBoxSearch)
@@ -403,7 +411,7 @@ Partial Class FormUserList
         Me.Panel8.Controls.Add(Me.txtSearch)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel8.Location = New System.Drawing.Point(399, 0)
-        Me.Panel8.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(681, 64)
         Me.Panel8.TabIndex = 9
@@ -411,7 +419,7 @@ Partial Class FormUserList
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(21, 36)
+        Me.Label11.Location = New System.Drawing.Point(21, 38)
         Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(40, 13)
@@ -423,7 +431,7 @@ Partial Class FormUserList
         '
         Me.cbbProjectList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbProjectList.FormattingEnabled = True
-        Me.cbbProjectList.Location = New System.Drawing.Point(66, 34)
+        Me.cbbProjectList.Location = New System.Drawing.Point(66, 36)
         Me.cbbProjectList.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.cbbProjectList.Name = "cbbProjectList"
         Me.cbbProjectList.Size = New System.Drawing.Size(156, 21)
@@ -436,7 +444,7 @@ Partial Class FormUserList
         Me.Panel6.Controls.Add(Me.Panel7)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(399, 487)
         Me.Panel6.TabIndex = 8
@@ -448,7 +456,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 119.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -469,7 +477,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(3, 2)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(87, 86)
+        Me.btnPayment.Size = New System.Drawing.Size(86, 86)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -480,10 +488,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(95, 2)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(94, 2)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(82, 86)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(81, 86)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -494,7 +502,7 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(182, 2)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(180, 2)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
         Me.btnUpdateRecord.Size = New System.Drawing.Size(89, 86)
@@ -508,10 +516,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(276, 2)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(274, 2)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(114, 86)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(116, 86)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -524,7 +532,7 @@ Partial Class FormUserList
         Me.Panel7.Controls.Add(Me.Label9)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel7.Location = New System.Drawing.Point(0, 0)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(399, 64)
         Me.Panel7.TabIndex = 8
@@ -544,9 +552,26 @@ Partial Class FormUserList
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'ColumnHeaderUserType
+        'Label12
         '
-        Me.ColumnHeaderUserType.Text = "Type"
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(229, 38)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(56, 13)
+        Me.Label12.TabIndex = 9
+        Me.Label12.Text = "User Type"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cbbUserType
+        '
+        Me.cbbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbUserType.FormattingEnabled = True
+        Me.cbbUserType.Location = New System.Drawing.Point(289, 36)
+        Me.cbbUserType.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
+        Me.cbbUserType.Name = "cbbUserType"
+        Me.cbbUserType.Size = New System.Drawing.Size(142, 21)
+        Me.cbbUserType.TabIndex = 8
         '
         'FormUserList
         '
@@ -623,4 +648,6 @@ Partial Class FormUserList
     Friend WithEvents cbbProjectList As ComboBox
     Friend WithEvents Label11 As Label
     Friend WithEvents ColumnHeaderUserType As ColumnHeader
+    Friend WithEvents Label12 As Label
+    Friend WithEvents cbbUserType As ComboBox
 End Class

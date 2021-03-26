@@ -30,6 +30,11 @@ Module ModuleConnection
         .BasePath = "https://tprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com/"
         }
 
+    'Public fireCon As New FirebaseConfig() With {
+    '    .AuthSecret = "g8tKN67dcGPFLnYw7bLXIivT3j3cd7SEpYbBoOFZ",
+    '    .BasePath = "https://daC:\Users\Admin\Source\Repos\lukiesluke\DahumBuilders\DahumBuilders\ModuleConnection.vbhum-builders-corporation-default-rtdb.firebaseio.com/"
+    '    }
+
     Public Sub Connection()
         Try
             Dim connStr As String = String.Format("Server={0}; Uid={1}; Pwd=; Port=3306; Database=dahum_builders;", serverSetting._ip, serverSetting._username)

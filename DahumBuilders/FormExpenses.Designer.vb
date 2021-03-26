@@ -28,6 +28,7 @@ Partial Class FormExpenses
         Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderMobile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTIN = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.dt = New System.Windows.Forms.DateTimePicker()
         Me.cbbExpensesType = New System.Windows.Forms.ComboBox()
@@ -67,22 +68,24 @@ Partial Class FormExpenses
         Me.txtPayeeName = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cbbUserType = New System.Windows.Forms.ComboBox()
         Me.txtVoucherNo = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderTIN = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderUserType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelPayeeName.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderName, Me.ColumnHeaderMobile, Me.ColumnHeaderAddress, Me.ColumnHeaderTIN})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderName, Me.ColumnHeaderMobile, Me.ColumnHeaderAddress, Me.ColumnHeaderTIN, Me.ColumnHeaderUserType})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(6, 41)
         Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(489, 250)
+        Me.ListView1.Size = New System.Drawing.Size(622, 250)
         Me.ListView1.TabIndex = 14
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -106,6 +109,10 @@ Partial Class FormExpenses
         '
         Me.ColumnHeaderAddress.Text = "Address"
         Me.ColumnHeaderAddress.Width = 200
+        '
+        'ColumnHeaderTIN
+        '
+        Me.ColumnHeaderTIN.Text = "TIN"
         '
         'btnSearch
         '
@@ -215,7 +222,7 @@ Partial Class FormExpenses
         Me.ListViewExpenses.Location = New System.Drawing.Point(8, 323)
         Me.ListViewExpenses.Margin = New System.Windows.Forms.Padding(2)
         Me.ListViewExpenses.Name = "ListViewExpenses"
-        Me.ListViewExpenses.Size = New System.Drawing.Size(829, 153)
+        Me.ListViewExpenses.Size = New System.Drawing.Size(964, 153)
         Me.ListViewExpenses.TabIndex = 15
         Me.ListViewExpenses.UseCompatibleStateImageBehavior = False
         Me.ListViewExpenses.View = System.Windows.Forms.View.Details
@@ -359,7 +366,7 @@ Partial Class FormExpenses
         '
         Me.lblClientID.BackColor = System.Drawing.Color.White
         Me.lblClientID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblClientID.Location = New System.Drawing.Point(431, 18)
+        Me.lblClientID.Location = New System.Drawing.Point(565, 18)
         Me.lblClientID.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblClientID.Name = "lblClientID"
         Me.lblClientID.Size = New System.Drawing.Size(63, 18)
@@ -453,6 +460,8 @@ Partial Class FormExpenses
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.cbbUserType)
         Me.GroupBox1.Controls.Add(Me.btnSearch)
         Me.GroupBox1.Controls.Add(Me.txtSearch)
         Me.GroupBox1.Controls.Add(Me.Label8)
@@ -462,10 +471,31 @@ Partial Class FormExpenses
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(499, 305)
+        Me.GroupBox1.Size = New System.Drawing.Size(632, 305)
         Me.GroupBox1.TabIndex = 32
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Employee list"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(342, 20)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(56, 13)
+        Me.Label12.TabIndex = 30
+        Me.Label12.Text = "User Type"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cbbUserType
+        '
+        Me.cbbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbUserType.FormattingEnabled = True
+        Me.cbbUserType.Location = New System.Drawing.Point(402, 15)
+        Me.cbbUserType.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
+        Me.cbbUserType.Name = "cbbUserType"
+        Me.cbbUserType.Size = New System.Drawing.Size(115, 21)
+        Me.cbbUserType.TabIndex = 29
         '
         'txtVoucherNo
         '
@@ -484,15 +514,16 @@ Partial Class FormExpenses
         Me.Label11.TabIndex = 34
         Me.Label11.Text = "No.:"
         '
-        'ColumnHeaderTIN
+        'ColumnHeaderUserType
         '
-        Me.ColumnHeaderTIN.Text = "TIN"
+        Me.ColumnHeaderUserType.Text = "Type"
+        Me.ColumnHeaderUserType.Width = 75
         '
         'FormExpenses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(847, 487)
+        Me.ClientSize = New System.Drawing.Size(983, 487)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtVoucherNo)
         Me.Controls.Add(Me.PanelPayeeName)
@@ -580,4 +611,7 @@ Partial Class FormExpenses
     Friend WithEvents Label11 As Label
     Friend WithEvents ColumnHeaderVoucherNo As ColumnHeader
     Friend WithEvents ColumnHeaderTIN As ColumnHeader
+    Friend WithEvents Label12 As Label
+    Friend WithEvents cbbUserType As ComboBox
+    Friend WithEvents ColumnHeaderUserType As ColumnHeader
 End Class

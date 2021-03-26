@@ -2,6 +2,8 @@
 
 Public Class FormUserList
     Dim mUser As User
+    Dim mDisableLoadUserType As Boolean = False
+    Dim mDisableLoadProject As Boolean = False
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Location = New Point(My.Computer.Screen.Bounds.Top)
@@ -18,11 +20,18 @@ Public Class FormUserList
                                                End Function)
         enableDisableClientButton(False)
         loadProjectListCombobox()
+        loadComboBoxUserType()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        mDisableLoadUserType = True
+        mDisableLoadProject = True
+
+        cbbUserType.SelectedIndex = 0
         cbbProjectList.SelectedIndex = 0
         searchUser("")
+        mDisableLoadUserType = False
+        mDisableLoadProject = False
     End Sub
 
     Private Sub searchUser(value As String)
@@ -233,12 +242,125 @@ Public Class FormUserList
     End Sub
 
     Private Sub cbbProjectList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbProjectList.SelectedIndexChanged
+        If mDisableLoadProject = True Then
+            Exit Sub
+        End If
+
+        mDisableLoadUserType = True
         Try
+            cbbUserType.SelectedIndex = 0
             Dim value As String = DirectCast(cbbProjectList.SelectedItem, KeyValuePair(Of String, String)).Value
             searchUser(value)
         Catch ex As Exception
 
         End Try
-
+        mDisableLoadUserType = False
     End Sub
+
+    Private Sub loadComboBoxUserType()
+        sql = "SELECT `id`, `type` FROM `db_user_type`"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            cbbUserType.DataSource = Nothing
+            cbbUserType.Items.Clear()
+
+            Dim comboSourceUserType As New Dictionary(Of Integer, String)()
+            comboSourceUserType.Add(-1, "All")
+            Do While sqlDataReader.Read = True
+                comboSourceUserType.Add(sqlDataReader("id"), sqlDataReader("type"))
+            Loop
+
+            cbbUserType.DataSource = New BindingSource(comboSourceUserType, Nothing)
+            cbbUserType.DisplayMember = "Value"
+            cbbUserType.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub cbbUserType_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbbUserType.SelectedValueChanged
+        If mDisableLoadUserType = True Then
+            Exit Sub
+        End If
+
+        Dim key As Integer = DirectCast(cbbUserType.SelectedItem, KeyValuePair(Of Integer, String)).Key
+        If -1 = key Then
+            selectPerUserType(key)
+        Else
+            selectPerUserType(key)
+        End If
+    End Sub
+
+    Private Sub selectPerUserType(key As String)
+        Dim item As ListViewItem
+        ListViewUser.Items.Clear()
+        Connection()
+        Try
+
+            sql = "SELECT `id`,`last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,`date_birth`,`mobile_number`,
+                (SELECT `type` FROM `db_user_type` WHERE `id`=u.`user_type`) user_type, `file_location_image`
+                FROM `db_user_profile` u {0} ORDER BY u.`user_type`, u.`last_name`"
+
+            If -1 = key Then
+                sql = String.Format(sql, "")
+                sqlCommand = New MySqlCommand(sql, sqlConnection)
+            Else
+                sql = String.Format(sql, "WHERE `user_type`=@UserType")
+                sqlCommand = New MySqlCommand(sql, sqlConnection)
+                sqlCommand.Parameters.Add("@UserType", MySqlDbType.Int32).Value = key
+            End If
+
+            sqlDataReader = sqlCommand.ExecuteReader()
+            Do While sqlDataReader.Read = True
+                Dim user As User = New User()
+                user._id = sqlDataReader("id")
+                user._surname = sqlDataReader("last_name")
+                user._middleName = sqlDataReader("middle_name")
+                user._name = sqlDataReader("first_name")
+                user._gender = sqlDataReader("gender")
+                user._civilStatus = sqlDataReader("civil_status")
+                user._dateOfBirth = sqlDataReader("date_birth")
+                user._address = sqlDataReader("address")
+                user._mobile = sqlDataReader("mobile_number")
+                user._image_location = IIf(IsDBNull(sqlDataReader("file_location_image")), "", sqlDataReader("file_location_image"))
+                user._userTypeStr = sqlDataReader("user_type")
+
+                item = New ListViewItem(user._id)
+                item.SubItems.Add(user._surname)
+                item.SubItems.Add(user._name)
+                item.SubItems.Add(user._middleName)
+                item.SubItems.Add(user._gender)
+                item.SubItems.Add(user._civilStatus)
+                item.SubItems.Add(user._dateOfBirth.ToString("MMM dd, yyyy"))
+                item.SubItems.Add(user._address)
+                If IsDBNull(user._image_location) Or user._image_location.Length.Equals(String.Empty) Then
+                    item.SubItems.Add("")
+                Else
+                    item.SubItems.Add(user._image_location)
+                End If
+                item.SubItems.Add(user._mobile)
+                item.SubItems.Add(user._userTypeStr)
+
+                ListViewUser.Items.Add(item)
+            Loop
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        labelRows.Text = "Row's: " & ListViewUser.Items.Count
+    End Sub
+
 End Class

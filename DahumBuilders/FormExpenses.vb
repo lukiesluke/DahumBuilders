@@ -3,8 +3,9 @@
 Public Class FormExpenses
     Dim format As String = "yyyy-MM-dd"
     Dim messageInfo As String = "Please select name..."
+    Dim mDisableLoadUserType As Boolean = False
     Private Sub FormExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(870, 530)
+        Me.Size = New Size(1020, 530)
         lblProjectID.Text = 0
         lblClientID.Text = 0
         lblIssueTo.Text = messageInfo
@@ -12,16 +13,33 @@ Public Class FormExpenses
         txtCheckNo.Text = ""
         loadPaymentType()
         loadCombo()
+        loadComboBoxUserType()
     End Sub
 
-    Private Sub loadEmployeeList()
+    Private Sub loadEmployeeList(type As String)
         Connection()
-        sql = "SELECT `id`, CONCAT(`first_name`, ' ', `middle_name`,' ', `last_name`) NAME, 
-        `mobile_number`, TRIM(`address`) AS address, `tin` FROM `db_user_profile` 
-        WHERE `user_type`>0 AND (`first_name` LIKE @Name OR `last_name` LIKE @Name)"
+        If "search".Equals(type) Then
+            sql = "SELECT `id`, CONCAT(`first_name`, ' ', `middle_name`,' ', `last_name`) NAME, 
+            `mobile_number`, TRIM(`address`) AS address, `tin`, (SELECT `type` FROM `db_user_type` WHERE `id`=`user_type`) `user_type`
+            FROM `db_user_profile` WHERE `user_type`>0 AND (`first_name` LIKE @Name OR `last_name` LIKE @Name) ORDER BY user_type, NAME"
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = txtSearch.Text.Trim + "%"
+        Else
+            Dim key As Integer = DirectCast(cbbUserType.SelectedItem, KeyValuePair(Of Integer, String)).Key
+            sql = "SELECT `id`, CONCAT(`first_name`, ' ', `middle_name`,' ', `last_name`) NAME, 
+            `mobile_number`, TRIM(`address`) AS address, `tin`, (SELECT `type` FROM `db_user_type` WHERE `id`=`user_type`) `user_type` FROM `db_user_profile` 
+            WHERE {0} ORDER BY user_type, NAME"
 
-        sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = txtSearch.Text.Trim + "%"
+            If 0 = key Then
+                sql = String.Format(sql, "`user_type`>@UserType")
+            Else
+                sql = String.Format(sql, "`user_type`=@UserType")
+            End If
+
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@UserType", MySqlDbType.Int32).Value = key
+        End If
+
         sqlDataReader = sqlCommand.ExecuteReader()
         Try
             Dim item As ListViewItem
@@ -33,6 +51,7 @@ Public Class FormExpenses
                 item.SubItems.Add(sqlDataReader("mobile_number"))
                 item.SubItems.Add(sqlDataReader("address"))
                 item.SubItems.Add(sqlDataReader("tin"))
+                item.SubItems.Add(sqlDataReader("user_type"))
                 ListView1.Items.Add(item)
             Loop
         Catch ex As Exception
@@ -47,7 +66,10 @@ Public Class FormExpenses
         lblProjectID.Text = 0
         lblClientID.Text = 0
         lblIssueTo.Text = messageInfo
-        loadEmployeeList()
+        cbbUserType.SelectedIndex = 0
+        mDisableLoadUserType = True
+        loadEmployeeList("search")
+        mDisableLoadUserType = False
     End Sub
 
     Private Sub loadPaymentType()
@@ -298,5 +320,44 @@ Public Class FormExpenses
         lblClientID.Text = "0"
         PanelPayeeName.Visible = False
         txtPayeeName.Text = ""
+    End Sub
+
+    Private Sub loadComboBoxUserType()
+        sql = "SELECT `id`, `type` FROM `db_user_type` WHERE `id` > 0"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            cbbUserType.DataSource = Nothing
+            cbbUserType.Items.Clear()
+
+            Dim comboSourceUserType As New Dictionary(Of Integer, String)()
+            comboSourceUserType.Add(0, "All")
+            Do While sqlDataReader.Read = True
+                comboSourceUserType.Add(sqlDataReader("id"), sqlDataReader("type"))
+            Loop
+
+            cbbUserType.DataSource = New BindingSource(comboSourceUserType, Nothing)
+            cbbUserType.DisplayMember = "Value"
+            cbbUserType.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
+
+    Private Sub cbbUserType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbUserType.SelectedIndexChanged
+        If mDisableLoadUserType = True Then
+            Exit Sub
+        End If
+
+        loadEmployeeList("userType")
     End Sub
 End Class
