@@ -214,7 +214,14 @@ Public Class FormCRptSalesReport
                     shWorkSheet.Cells(i + 3, j + 1) = ds.Tables(0).Rows(i).Item(j)
                 Next
             Next
+
             shWorkSheet.Columns(1).HorizontalAlignment = Excel.Constants.xlLeft
+            shWorkSheet.Columns(6).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(7).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(9).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(10).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(11).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(12).HorizontalAlignment = Excel.Constants.xlCenter
 
             shWorkSheet.Range("A1:P1").EntireColumn.AutoFit()
             objExcel.Visible = True
