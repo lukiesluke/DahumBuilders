@@ -192,8 +192,8 @@ Public Class FormCRptSalesReport
 
             chartRange = shWorkSheet.Range("A1", "M1")
             chartRange.Merge()
+            chartRange.HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Cells(1, 1) = HeaderSaleReport
-            shWorkSheet.Columns.HorizontalAlignment = Excel.Constants.xlCenter
 
             shWorkSheet.Cells(2, 1) = "OR"
             shWorkSheet.Cells(2, 2) = "Name"
@@ -214,6 +214,7 @@ Public Class FormCRptSalesReport
                     shWorkSheet.Cells(i + 3, j + 1) = ds.Tables(0).Rows(i).Item(j)
                 Next
             Next
+            shWorkSheet.Columns(1).HorizontalAlignment = Excel.Constants.xlLeft
 
             shWorkSheet.Range("A1:P1").EntireColumn.AutoFit()
             objExcel.Visible = True
