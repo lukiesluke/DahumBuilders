@@ -1,4 +1,7 @@
-﻿Imports MySql.Data.MySqlClient
+﻿
+Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Excel
+Imports MySql.Data.MySqlClient
 
 Public Class FormExpenses
     Dim format As String = "yyyy-MM-dd"
@@ -14,6 +17,7 @@ Public Class FormExpenses
         loadPaymentType()
         loadCombo()
         loadComboBoxUserType()
+        enableExportToExcel()
     End Sub
 
     Private Sub loadEmployeeList(type As String)
@@ -118,18 +122,22 @@ Public Class FormExpenses
         sql = "SELECT `id`, `date_paid`, `commission`, `voucher_no`, `description`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
-        (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`
+        (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`,
+        IFNULL((SELECT `tin` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') tin
         FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"
 
         Connection()
-        sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlCommand.Parameters.Add("@dt", MySqlDbType.VarChar).Value = dt.Value.ToString(format)
-        sqlDataReader = sqlCommand.ExecuteReader()
+
 
         Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@dt", MySqlDbType.VarChar).Value = dt.Value.ToString(format)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
             Cursor = Cursors.WaitCursor
             Dim item As ListViewItem
             ListViewExpenses.Items.Clear()
+
             Do While sqlDataReader.Read = True
                 item = New ListViewItem(sqlDataReader("id").ToString)
                 item.UseItemStyleForSubItems = False
@@ -141,6 +149,7 @@ Public Class FormExpenses
                 item.SubItems.Add(sqlDataReader("particular"))
                 item.SubItems.Add(sqlDataReader("paymentType"))
                 item.SubItems.Add(sqlDataReader("check_number"))
+                item.SubItems.Add(sqlDataReader("tin"))
                 ListViewExpenses.Items.Add(item)
             Loop
 
@@ -152,6 +161,8 @@ Public Class FormExpenses
             sqlConnection.Close()
             Cursor = Cursors.Default
         End Try
+
+        enableExportToExcel()
     End Sub
     Private Sub txtCashoutAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCashoutAmount.KeyPress
         If (Not e.KeyChar = ChrW(Keys.Back) And ("0123456789.").IndexOf(e.KeyChar) = -1) Or (e.KeyChar = "." And txtCashoutAmount.Text.ToCharArray().Count(Function(c) c = ".") > 0) Then
@@ -217,7 +228,7 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@VoucherNo", MySqlDbType.VarChar).Value = txtVoucherNo.Text.Trim
             sqlCommand.Parameters.Add("@PayeeName", MySqlDbType.VarChar).Value = payeeName
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = lblClientID.Text.Trim
-            sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentType
+            sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = PaymentType
             sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = txtCheckNo.Text.Trim.ToUpper
             sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.Int64).Value = userLogon._id
 
@@ -359,5 +370,42 @@ Public Class FormExpenses
         End If
 
         loadEmployeeList("userType")
+    End Sub
+
+    Private Sub ExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExcelToolStripMenuItem.Click
+        Cursor = Cursors.WaitCursor
+        Try
+            Dim objExcel As New Excel.Application
+            Dim bkWorkBook As Workbook
+            Dim shWorkSheet As Worksheet
+            Dim i As Integer
+            Dim j As Integer
+
+            objExcel = New Excel.Application
+            bkWorkBook = objExcel.Workbooks.Add
+            shWorkSheet = CType(bkWorkBook.ActiveSheet, Worksheet)
+            For i = 0 To Me.ListViewExpenses.Columns.Count - 1
+                shWorkSheet.Cells(1, i + 1) = Me.ListViewExpenses.Columns(i).Text
+            Next
+            For i = 0 To Me.ListViewExpenses.Items.Count - 1
+                For j = 0 To Me.ListViewExpenses.Items(i).SubItems.Count - 1
+                    shWorkSheet.Cells(i + 2, j + 1) = Me.ListViewExpenses.Items(i).SubItems(j).Text
+                Next
+            Next
+
+            shWorkSheet.Range("A1:L1").EntireColumn.AutoFit()
+            objExcel.Visible = True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub enableExportToExcel()
+        If ListViewExpenses.Items.Count > 0 Then
+            ExcelToolStripMenuItem.Enabled = True
+        Else
+            ExcelToolStripMenuItem.Enabled = False
+        End If
     End Sub
 End Class

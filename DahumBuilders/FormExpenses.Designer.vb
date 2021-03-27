@@ -29,6 +29,7 @@ Partial Class FormExpenses
         Me.ColumnHeaderMobile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAddress = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTIN = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderUserType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.dt = New System.Windows.Forms.DateTimePicker()
         Me.cbbExpensesType = New System.Windows.Forms.ComboBox()
@@ -72,9 +73,12 @@ Partial Class FormExpenses
         Me.cbbUserType = New System.Windows.Forms.ComboBox()
         Me.txtVoucherNo = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderUserType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderTINex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelPayeeName.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
@@ -82,10 +86,9 @@ Partial Class FormExpenses
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderName, Me.ColumnHeaderMobile, Me.ColumnHeaderAddress, Me.ColumnHeaderTIN, Me.ColumnHeaderUserType})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(6, 41)
-        Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
+        Me.ListView1.Location = New System.Drawing.Point(9, 63)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(622, 250)
+        Me.ListView1.Size = New System.Drawing.Size(931, 382)
         Me.ListView1.TabIndex = 14
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -114,12 +117,16 @@ Partial Class FormExpenses
         '
         Me.ColumnHeaderTIN.Text = "TIN"
         '
+        'ColumnHeaderUserType
+        '
+        Me.ColumnHeaderUserType.Text = "Type"
+        Me.ColumnHeaderUserType.Width = 75
+        '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(232, 16)
-        Me.btnSearch.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSearch.Location = New System.Drawing.Point(348, 25)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(60, 21)
+        Me.btnSearch.Size = New System.Drawing.Size(90, 32)
         Me.btnSearch.TabIndex = 13
         Me.btnSearch.Text = "S&earch"
         Me.btnSearch.UseVisualStyleBackColor = True
@@ -128,68 +135,61 @@ Partial Class FormExpenses
         '
         Me.dt.CustomFormat = "MM/dd/yyyy"
         Me.dt.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dt.Location = New System.Drawing.Point(107, 10)
-        Me.dt.Margin = New System.Windows.Forms.Padding(2)
+        Me.dt.Location = New System.Drawing.Point(160, 36)
         Me.dt.Name = "dt"
-        Me.dt.Size = New System.Drawing.Size(81, 20)
+        Me.dt.Size = New System.Drawing.Size(120, 26)
         Me.dt.TabIndex = 0
         '
         'cbbExpensesType
         '
         Me.cbbExpensesType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbExpensesType.FormattingEnabled = True
-        Me.cbbExpensesType.Location = New System.Drawing.Point(107, 35)
-        Me.cbbExpensesType.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbExpensesType.Location = New System.Drawing.Point(160, 75)
         Me.cbbExpensesType.Name = "cbbExpensesType"
-        Me.cbbExpensesType.Size = New System.Drawing.Size(225, 21)
+        Me.cbbExpensesType.Size = New System.Drawing.Size(336, 28)
         Me.cbbExpensesType.TabIndex = 3
         '
         'txtDescription
         '
         Me.txtDescription.BackColor = System.Drawing.Color.White
-        Me.txtDescription.Location = New System.Drawing.Point(107, 195)
-        Me.txtDescription.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtDescription.Location = New System.Drawing.Point(160, 321)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(225, 90)
+        Me.txtDescription.Size = New System.Drawing.Size(336, 136)
         Me.txtDescription.TabIndex = 9
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(43, 37)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Location = New System.Drawing.Point(64, 78)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(53, 13)
+        Me.Label1.Size = New System.Drawing.Size(79, 20)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "Expenses"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(36, 197)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label2.Location = New System.Drawing.Point(54, 324)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(60, 13)
+        Me.Label2.Size = New System.Drawing.Size(89, 20)
         Me.Label2.TabIndex = 11
         Me.Label2.Text = "Description"
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(107, 288)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSave.Location = New System.Drawing.Point(160, 464)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(107, 27)
+        Me.btnSave.Size = New System.Drawing.Size(160, 42)
         Me.btnSave.TabIndex = 10
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(223, 288)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnCancel.Location = New System.Drawing.Point(334, 464)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(107, 27)
+        Me.btnCancel.Size = New System.Drawing.Size(160, 42)
         Me.btnCancel.TabIndex = 11
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -197,32 +197,29 @@ Partial Class FormExpenses
         'txtCashoutAmount
         '
         Me.txtCashoutAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.txtCashoutAmount.Location = New System.Drawing.Point(107, 171)
-        Me.txtCashoutAmount.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtCashoutAmount.Location = New System.Drawing.Point(160, 284)
         Me.txtCashoutAmount.Name = "txtCashoutAmount"
-        Me.txtCashoutAmount.Size = New System.Drawing.Size(225, 20)
+        Me.txtCashoutAmount.Size = New System.Drawing.Size(336, 26)
         Me.txtCashoutAmount.TabIndex = 8
         Me.txtCashoutAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(11, 173)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Location = New System.Drawing.Point(16, 287)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(85, 13)
+        Me.Label3.Size = New System.Drawing.Size(129, 20)
         Me.Label3.TabIndex = 15
         Me.Label3.Text = "Cashout Amount"
         '
         'ListViewExpenses
         '
-        Me.ListViewExpenses.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderExpDate, Me.ColumnHeaderVoucherNo, Me.ColumnHeaderDescription, Me.ColumnHeaderAmount, Me.ColumnHeaderEmpName, Me.ColumnHeaderType, Me.ColumnHeaderPaymentType, Me.ColumnHeaderCheckNo})
+        Me.ListViewExpenses.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderExpDate, Me.ColumnHeaderVoucherNo, Me.ColumnHeaderDescription, Me.ColumnHeaderAmount, Me.ColumnHeaderEmpName, Me.ColumnHeaderType, Me.ColumnHeaderPaymentType, Me.ColumnHeaderCheckNo, Me.ColumnHeaderTINex})
         Me.ListViewExpenses.FullRowSelect = True
         Me.ListViewExpenses.GridLines = True
-        Me.ListViewExpenses.Location = New System.Drawing.Point(8, 323)
-        Me.ListViewExpenses.Margin = New System.Windows.Forms.Padding(2)
+        Me.ListViewExpenses.Location = New System.Drawing.Point(12, 518)
         Me.ListViewExpenses.Name = "ListViewExpenses"
-        Me.ListViewExpenses.Size = New System.Drawing.Size(964, 153)
+        Me.ListViewExpenses.Size = New System.Drawing.Size(1444, 233)
         Me.ListViewExpenses.TabIndex = 15
         Me.ListViewExpenses.UseCompatibleStateImageBehavior = False
         Me.ListViewExpenses.View = System.Windows.Forms.View.Details
@@ -276,10 +273,9 @@ Partial Class FormExpenses
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(28, 147)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Location = New System.Drawing.Point(42, 247)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(68, 13)
+        Me.Label6.Size = New System.Drawing.Size(99, 20)
         Me.Label6.TabIndex = 21
         Me.Label6.Text = "Payee Name"
         '
@@ -288,10 +284,9 @@ Partial Class FormExpenses
         Me.lblIssueTo.BackColor = System.Drawing.Color.White
         Me.lblIssueTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblIssueTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblIssueTo.Location = New System.Drawing.Point(107, 142)
-        Me.lblIssueTo.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblIssueTo.Location = New System.Drawing.Point(160, 239)
         Me.lblIssueTo.Name = "lblIssueTo"
-        Me.lblIssueTo.Size = New System.Drawing.Size(225, 22)
+        Me.lblIssueTo.Size = New System.Drawing.Size(336, 33)
         Me.lblIssueTo.TabIndex = 7
         Me.lblIssueTo.Text = "Please select name..."
         Me.lblIssueTo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -300,65 +295,58 @@ Partial Class FormExpenses
         '
         Me.cbbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbPaymentType.FormattingEnabled = True
-        Me.cbbPaymentType.Location = New System.Drawing.Point(107, 60)
-        Me.cbbPaymentType.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbPaymentType.Location = New System.Drawing.Point(160, 113)
         Me.cbbPaymentType.Name = "cbbPaymentType"
-        Me.cbbPaymentType.Size = New System.Drawing.Size(225, 21)
+        Me.cbbPaymentType.Size = New System.Drawing.Size(336, 28)
         Me.cbbPaymentType.TabIndex = 4
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(25, 62)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label5.Location = New System.Drawing.Point(38, 116)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(71, 13)
+        Me.Label5.Size = New System.Drawing.Size(105, 20)
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Payment type"
         '
         'txtCheckNo
         '
-        Me.txtCheckNo.Location = New System.Drawing.Point(107, 116)
-        Me.txtCheckNo.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtCheckNo.Location = New System.Drawing.Point(160, 199)
         Me.txtCheckNo.Name = "txtCheckNo"
-        Me.txtCheckNo.Size = New System.Drawing.Size(225, 20)
+        Me.txtCheckNo.Size = New System.Drawing.Size(336, 26)
         Me.txtCheckNo.TabIndex = 6
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(38, 118)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Location = New System.Drawing.Point(57, 203)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(58, 13)
+        Me.Label4.Size = New System.Drawing.Size(82, 20)
         Me.Label4.TabIndex = 17
         Me.Label4.Text = "Check No."
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(66, 14)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label7.Location = New System.Drawing.Point(99, 43)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(30, 13)
+        Me.Label7.Size = New System.Drawing.Size(44, 20)
         Me.Label7.TabIndex = 25
         Me.Label7.Text = "Date"
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(44, 18)
-        Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtSearch.Location = New System.Drawing.Point(66, 28)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(185, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(276, 26)
         Me.txtSearch.TabIndex = 12
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 20)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label8.Location = New System.Drawing.Point(9, 31)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(35, 13)
+        Me.Label8.Size = New System.Drawing.Size(51, 20)
         Me.Label8.TabIndex = 27
         Me.Label8.Text = "Name"
         '
@@ -366,10 +354,9 @@ Partial Class FormExpenses
         '
         Me.lblClientID.BackColor = System.Drawing.Color.White
         Me.lblClientID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblClientID.Location = New System.Drawing.Point(565, 18)
-        Me.lblClientID.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblClientID.Location = New System.Drawing.Point(848, 28)
         Me.lblClientID.Name = "lblClientID"
-        Me.lblClientID.Size = New System.Drawing.Size(63, 18)
+        Me.lblClientID.Size = New System.Drawing.Size(94, 27)
         Me.lblClientID.TabIndex = 28
         Me.lblClientID.Text = "lblClientID"
         Me.lblClientID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -377,10 +364,9 @@ Partial Class FormExpenses
         'lblProjectID
         '
         Me.lblProjectID.AutoSize = True
-        Me.lblProjectID.Location = New System.Drawing.Point(35, 224)
-        Me.lblProjectID.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblProjectID.Location = New System.Drawing.Point(52, 366)
         Me.lblProjectID.Name = "lblProjectID"
-        Me.lblProjectID.Size = New System.Drawing.Size(61, 13)
+        Me.lblProjectID.Size = New System.Drawing.Size(90, 20)
         Me.lblProjectID.TabIndex = 18
         Me.lblProjectID.Text = "lblProjectID"
         Me.lblProjectID.Visible = False
@@ -388,10 +374,9 @@ Partial Class FormExpenses
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(33, 92)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label9.Location = New System.Drawing.Point(50, 163)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(63, 13)
+        Me.Label9.Size = New System.Drawing.Size(92, 20)
         Me.Label9.TabIndex = 30
         Me.Label9.Text = "Bank Name"
         '
@@ -400,10 +385,9 @@ Partial Class FormExpenses
         Me.cbbBankName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbBankName.FormattingEnabled = True
         Me.cbbBankName.Items.AddRange(New Object() {"Select Bank Name", "RCBC", "PSBank", "BPI", "BDO", "MetroBank", "Security Bank", "Unionbank", "ChinaBank", "Citibank"})
-        Me.cbbBankName.Location = New System.Drawing.Point(107, 90)
-        Me.cbbBankName.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbBankName.Location = New System.Drawing.Point(160, 159)
         Me.cbbBankName.Name = "cbbBankName"
-        Me.cbbBankName.Size = New System.Drawing.Size(225, 21)
+        Me.cbbBankName.Size = New System.Drawing.Size(336, 28)
         Me.cbbBankName.TabIndex = 5
         '
         'PanelPayeeName
@@ -413,48 +397,43 @@ Partial Class FormExpenses
         Me.PanelPayeeName.Controls.Add(Me.btnPayeeCancel)
         Me.PanelPayeeName.Controls.Add(Me.txtPayeeName)
         Me.PanelPayeeName.Controls.Add(Me.Label10)
-        Me.PanelPayeeName.Location = New System.Drawing.Point(334, 109)
-        Me.PanelPayeeName.Margin = New System.Windows.Forms.Padding(2)
+        Me.PanelPayeeName.Location = New System.Drawing.Point(501, 189)
         Me.PanelPayeeName.Name = "PanelPayeeName"
-        Me.PanelPayeeName.Size = New System.Drawing.Size(336, 79)
+        Me.PanelPayeeName.Size = New System.Drawing.Size(503, 120)
         Me.PanelPayeeName.TabIndex = 31
         Me.PanelPayeeName.Visible = False
         '
         'btnSetPayeeName
         '
-        Me.btnSetPayeeName.Location = New System.Drawing.Point(103, 41)
-        Me.btnSetPayeeName.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSetPayeeName.Location = New System.Drawing.Point(154, 63)
         Me.btnSetPayeeName.Name = "btnSetPayeeName"
-        Me.btnSetPayeeName.Size = New System.Drawing.Size(107, 27)
+        Me.btnSetPayeeName.Size = New System.Drawing.Size(160, 42)
         Me.btnSetPayeeName.TabIndex = 32
         Me.btnSetPayeeName.Text = "Set Payee Name"
         Me.btnSetPayeeName.UseVisualStyleBackColor = True
         '
         'btnPayeeCancel
         '
-        Me.btnPayeeCancel.Location = New System.Drawing.Point(214, 41)
-        Me.btnPayeeCancel.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnPayeeCancel.Location = New System.Drawing.Point(321, 63)
         Me.btnPayeeCancel.Name = "btnPayeeCancel"
-        Me.btnPayeeCancel.Size = New System.Drawing.Size(107, 27)
+        Me.btnPayeeCancel.Size = New System.Drawing.Size(160, 42)
         Me.btnPayeeCancel.TabIndex = 33
         Me.btnPayeeCancel.Text = "&Cancel"
         Me.btnPayeeCancel.UseVisualStyleBackColor = True
         '
         'txtPayeeName
         '
-        Me.txtPayeeName.Location = New System.Drawing.Point(85, 12)
-        Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPayeeName.Location = New System.Drawing.Point(128, 18)
         Me.txtPayeeName.Name = "txtPayeeName"
-        Me.txtPayeeName.Size = New System.Drawing.Size(237, 20)
+        Me.txtPayeeName.Size = New System.Drawing.Size(354, 26)
         Me.txtPayeeName.TabIndex = 32
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(9, 14)
-        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label10.Location = New System.Drawing.Point(14, 22)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(68, 13)
+        Me.Label10.Size = New System.Drawing.Size(99, 20)
         Me.Label10.TabIndex = 22
         Me.Label10.Text = "Payee Name"
         '
@@ -467,11 +446,9 @@ Partial Class FormExpenses
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.lblClientID)
         Me.GroupBox1.Controls.Add(Me.ListView1)
-        Me.GroupBox1.Location = New System.Drawing.Point(340, 10)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Location = New System.Drawing.Point(510, 36)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(632, 305)
+        Me.GroupBox1.Size = New System.Drawing.Size(948, 469)
         Me.GroupBox1.TabIndex = 32
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Employee list"
@@ -479,10 +456,9 @@ Partial Class FormExpenses
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(342, 20)
-        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label12.Location = New System.Drawing.Point(513, 31)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(56, 13)
+        Me.Label12.Size = New System.Drawing.Size(81, 20)
         Me.Label12.TabIndex = 30
         Me.Label12.Text = "User Type"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -491,39 +467,55 @@ Partial Class FormExpenses
         '
         Me.cbbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbUserType.FormattingEnabled = True
-        Me.cbbUserType.Location = New System.Drawing.Point(402, 15)
-        Me.cbbUserType.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
+        Me.cbbUserType.Location = New System.Drawing.Point(603, 23)
+        Me.cbbUserType.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cbbUserType.Name = "cbbUserType"
-        Me.cbbUserType.Size = New System.Drawing.Size(115, 21)
+        Me.cbbUserType.Size = New System.Drawing.Size(170, 28)
         Me.cbbUserType.TabIndex = 29
         '
         'txtVoucherNo
         '
-        Me.txtVoucherNo.Location = New System.Drawing.Point(246, 11)
+        Me.txtVoucherNo.Location = New System.Drawing.Point(369, 38)
+        Me.txtVoucherNo.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txtVoucherNo.Name = "txtVoucherNo"
-        Me.txtVoucherNo.Size = New System.Drawing.Size(86, 20)
+        Me.txtVoucherNo.Size = New System.Drawing.Size(127, 26)
         Me.txtVoucherNo.TabIndex = 33
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(211, 14)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Location = New System.Drawing.Point(316, 43)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(27, 13)
+        Me.Label11.Size = New System.Drawing.Size(37, 20)
         Me.Label11.TabIndex = 34
         Me.Label11.Text = "No.:"
         '
-        'ColumnHeaderUserType
+        'MenuStrip1
         '
-        Me.ColumnHeaderUserType.Text = "Type"
-        Me.ColumnHeaderUserType.Width = 75
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExcelToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1474, 33)
+        Me.MenuStrip1.TabIndex = 35
+        Me.MenuStrip1.Text = "MenuStripMain"
+        '
+        'ExcelToolStripMenuItem
+        '
+        Me.ExcelToolStripMenuItem.Name = "ExcelToolStripMenuItem"
+        Me.ExcelToolStripMenuItem.Size = New System.Drawing.Size(62, 29)
+        Me.ExcelToolStripMenuItem.Text = "Excel"
+        '
+        'ColumnHeaderTINex
+        '
+        Me.ColumnHeaderTINex.Text = "TIN"
+        Me.ColumnHeaderTINex.Width = 80
         '
         'FormExpenses
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(983, 487)
+        Me.ClientSize = New System.Drawing.Size(1474, 763)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtVoucherNo)
         Me.Controls.Add(Me.PanelPayeeName)
@@ -548,9 +540,10 @@ Partial Class FormExpenses
         Me.Controls.Add(Me.cbbExpensesType)
         Me.Controls.Add(Me.dt)
         Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "FormExpenses"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -559,6 +552,8 @@ Partial Class FormExpenses
         Me.PanelPayeeName.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -614,4 +609,7 @@ Partial Class FormExpenses
     Friend WithEvents Label12 As Label
     Friend WithEvents cbbUserType As ComboBox
     Friend WithEvents ColumnHeaderUserType As ColumnHeader
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents ExcelToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderTINex As ColumnHeader
 End Class
