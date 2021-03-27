@@ -1,5 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports CrystalDecisions.CrystalReports.Engine
+Imports Microsoft.Office.Interop
 
 Public Class FormCRptSalesReport
     Public Property mUser As User = New User()
@@ -141,4 +142,83 @@ Public Class FormCRptSalesReport
         dtpTo.Value = dtpFrom.Value
     End Sub
 
+    Private Sub ExportToExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToExcelToolStripMenuItem.Click
+        Dim projectID As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
+        Dim HeaderSaleReport As String = "Daily Sales Report"
+
+        sql = "SELECT `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
+        t.`penalty`,  t.`discount_amount`, `paid_amount`,  pt.`short_name`, pa.`short_name` AS `particular`, l.`proj_name`, 
+        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, it.`block`, it.`lot`, it.`sqm`, t.`date_paid` FROM `db_transaction` t 
+        LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
+        LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
+        LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
+        LEFT JOIN `db_project_list` l ON l.`id` = t.`proj_id`
+        WHERE t.`proj_id`{0} @projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
+        ORDER BY date_paid DESC, lot ASC, official_receipt_no ASC"
+
+
+        If projectID.Equals("0") Then
+            sql = String.Format(sql, ">=")
+            HeaderSaleReport = "Sales Report"
+        Else
+            sql = String.Format(sql, "=")
+            HeaderSaleReport = "Daily Sales Report"
+        End If
+
+        Connection()
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@projectID", MySqlDbType.VarChar).Value = projectID
+            sqlCommand.Parameters.Add("@DateFrom", MySqlDbType.VarChar).Value = dtpFrom.Value.ToString(format)
+            sqlCommand.Parameters.Add("@DateTo", MySqlDbType.VarChar).Value = dtpTo.Value.ToString(format)
+
+            sqlAdapter = New MySqlDataAdapter
+            Dim ds As New DataSet
+
+            With sqlAdapter
+                .SelectCommand = sqlCommand
+                .Fill(ds)
+            End With
+
+            Dim objExcel As Excel.Application
+            Dim xlWorkBook As Excel.Workbook
+            Dim shWorkSheet As Excel.Worksheet
+            Dim misValue As Object = System.Reflection.Missing.Value
+            Dim chartRange As Excel.Range
+
+            objExcel = New Excel.Application
+            xlWorkBook = objExcel.Workbooks.Add(misValue)
+            shWorkSheet = xlWorkBook.Sheets("sheet1")
+
+            chartRange = shWorkSheet.Range("A1", "M1")
+            chartRange.Merge()
+            shWorkSheet.Cells(1, 1) = HeaderSaleReport
+            shWorkSheet.Columns.HorizontalAlignment = Excel.Constants.xlCenter
+
+            shWorkSheet.Cells(2, 1) = "OR"
+            shWorkSheet.Cells(2, 2) = "Name"
+            shWorkSheet.Cells(2, 3) = "Penalty"
+            shWorkSheet.Cells(2, 4) = "Discount Amount"
+            shWorkSheet.Cells(2, 5) = "Paid Amount"
+            shWorkSheet.Cells(2, 6) = "Payment Type"
+            shWorkSheet.Cells(2, 7) = "Particular"
+            shWorkSheet.Cells(2, 8) = "Project Name"
+            shWorkSheet.Cells(2, 9) = "Part No"
+            shWorkSheet.Cells(2, 10) = "BLOCK"
+            shWorkSheet.Cells(2, 11) = "LOT"
+            shWorkSheet.Cells(2, 12) = "SQM"
+            shWorkSheet.Cells(2, 13) = "Date Paid"
+
+            For i = 0 To ds.Tables(0).Rows.Count - 1
+                For j = 0 To ds.Tables(0).Columns.Count - 1
+                    shWorkSheet.Cells(i + 3, j + 1) = ds.Tables(0).Rows(i).Item(j)
+                Next
+            Next
+
+            shWorkSheet.Range("A1:P1").EntireColumn.AutoFit()
+            objExcel.Visible = True
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
 End Class

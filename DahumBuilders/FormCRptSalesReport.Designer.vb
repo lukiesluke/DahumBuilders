@@ -34,9 +34,12 @@ Partial Class FormCRptSalesReport
         Me.dtpFrom = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cbbProjectName = New System.Windows.Forms.ComboBox()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ExportToExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.PanelHeader.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -79,6 +82,7 @@ Partial Class FormCRptSalesReport
         Me.PanelHeader.Controls.Add(Me.dtpFrom)
         Me.PanelHeader.Controls.Add(Me.Label1)
         Me.PanelHeader.Controls.Add(Me.cbbProjectName)
+        Me.PanelHeader.Controls.Add(Me.MenuStrip1)
         Me.PanelHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelHeader.Location = New System.Drawing.Point(0, 0)
         Me.PanelHeader.Name = "PanelHeader"
@@ -88,7 +92,7 @@ Partial Class FormCRptSalesReport
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(476, 27)
+        Me.Label3.Location = New System.Drawing.Point(476, 37)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(46, 20)
         Me.Label3.TabIndex = 6
@@ -96,9 +100,9 @@ Partial Class FormCRptSalesReport
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(851, 21)
+        Me.btnSearch.Location = New System.Drawing.Point(851, 31)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(90, 47)
+        Me.btnSearch.Size = New System.Drawing.Size(90, 33)
         Me.btnSearch.TabIndex = 5
         Me.btnSearch.Text = "S&earch"
         Me.btnSearch.UseVisualStyleBackColor = True
@@ -106,7 +110,7 @@ Partial Class FormCRptSalesReport
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(673, 29)
+        Me.Label2.Location = New System.Drawing.Point(673, 39)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(27, 20)
         Me.Label2.TabIndex = 4
@@ -116,7 +120,7 @@ Partial Class FormCRptSalesReport
         '
         Me.dtpTo.CustomFormat = "MM/dd/yyyy"
         Me.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpTo.Location = New System.Drawing.Point(706, 24)
+        Me.dtpTo.Location = New System.Drawing.Point(706, 34)
         Me.dtpTo.Name = "dtpTo"
         Me.dtpTo.Size = New System.Drawing.Size(139, 26)
         Me.dtpTo.TabIndex = 3
@@ -125,7 +129,7 @@ Partial Class FormCRptSalesReport
         '
         Me.dtpFrom.CustomFormat = "MM/dd/yyyy"
         Me.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFrom.Location = New System.Drawing.Point(528, 24)
+        Me.dtpFrom.Location = New System.Drawing.Point(528, 34)
         Me.dtpFrom.Name = "dtpFrom"
         Me.dtpFrom.Size = New System.Drawing.Size(139, 26)
         Me.dtpFrom.TabIndex = 2
@@ -133,7 +137,7 @@ Partial Class FormCRptSalesReport
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(43, 29)
+        Me.Label1.Location = New System.Drawing.Point(43, 39)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(104, 20)
         Me.Label1.TabIndex = 1
@@ -143,10 +147,26 @@ Partial Class FormCRptSalesReport
         '
         Me.cbbProjectName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbProjectName.FormattingEnabled = True
-        Me.cbbProjectName.Location = New System.Drawing.Point(153, 26)
+        Me.cbbProjectName.Location = New System.Drawing.Point(153, 36)
         Me.cbbProjectName.Name = "cbbProjectName"
         Me.cbbProjectName.Size = New System.Drawing.Size(291, 28)
         Me.cbbProjectName.TabIndex = 0
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportToExcelToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1457, 33)
+        Me.MenuStrip1.TabIndex = 7
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'ExportToExcelToolStripMenuItem
+        '
+        Me.ExportToExcelToolStripMenuItem.Name = "ExportToExcelToolStripMenuItem"
+        Me.ExportToExcelToolStripMenuItem.Size = New System.Drawing.Size(140, 29)
+        Me.ExportToExcelToolStripMenuItem.Text = "Export to Excel"
         '
         'FormCRptSalesReport
         '
@@ -155,6 +175,7 @@ Partial Class FormCRptSalesReport
         Me.ClientSize = New System.Drawing.Size(1457, 727)
         Me.Controls.Add(Me.Panel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FormCRptSalesReport"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Sales Report"
@@ -162,6 +183,8 @@ Partial Class FormCRptSalesReport
         Me.Panel2.ResumeLayout(False)
         Me.PanelHeader.ResumeLayout(False)
         Me.PanelHeader.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -176,4 +199,6 @@ Partial Class FormCRptSalesReport
     Friend WithEvents btnSearch As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents CrystalReportViewerSales As CrystalDecisions.Windows.Forms.CrystalReportViewer
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents ExportToExcelToolStripMenuItem As ToolStripMenuItem
 End Class

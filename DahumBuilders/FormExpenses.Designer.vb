@@ -503,8 +503,8 @@ Partial Class FormExpenses
         'ExcelToolStripMenuItem
         '
         Me.ExcelToolStripMenuItem.Name = "ExcelToolStripMenuItem"
-        Me.ExcelToolStripMenuItem.Size = New System.Drawing.Size(62, 29)
-        Me.ExcelToolStripMenuItem.Text = "Excel"
+        Me.ExcelToolStripMenuItem.Size = New System.Drawing.Size(140, 29)
+        Me.ExcelToolStripMenuItem.Text = "Export to Excel"
         '
         'ColumnHeaderTINex
         '
