@@ -31,6 +31,8 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.txtORNumber = New System.Windows.Forms.TextBox()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
@@ -57,16 +59,20 @@ Partial Class FormMyOREntries
         Me.btnOkayPassword = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtPenalty = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtDiscount = New System.Windows.Forms.TextBox()
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(11, 93)
-        Me.ListView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(843, 259)
         Me.ListView1.TabIndex = 3
@@ -116,10 +122,20 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderProject.Text = "Project"
         Me.ColumnHeaderProject.Width = 240
         '
+        'ColumnHeaderPanalty
+        '
+        Me.ColumnHeaderPanalty.Text = "Penalty"
+        Me.ColumnHeaderPanalty.Width = 80
+        '
+        'ColumnHeaderDiscount
+        '
+        Me.ColumnHeaderDiscount.Text = "Discount"
+        Me.ColumnHeaderDiscount.Width = 80
+        '
         'txtORNumber
         '
         Me.txtORNumber.Location = New System.Drawing.Point(79, 37)
-        Me.txtORNumber.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtORNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtORNumber.Name = "txtORNumber"
         Me.txtORNumber.Size = New System.Drawing.Size(96, 20)
         Me.txtORNumber.TabIndex = 1
@@ -127,7 +143,7 @@ Partial Class FormMyOREntries
         'txtAmount
         '
         Me.txtAmount.Location = New System.Drawing.Point(79, 58)
-        Me.txtAmount.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtAmount.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(96, 20)
         Me.txtAmount.TabIndex = 2
@@ -177,7 +193,7 @@ Partial Class FormMyOREntries
         'btCancel
         '
         Me.btCancel.Location = New System.Drawing.Point(526, 359)
-        Me.btCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btCancel.Name = "btCancel"
         Me.btCancel.Size = New System.Drawing.Size(107, 25)
         Me.btCancel.TabIndex = 8
@@ -187,7 +203,7 @@ Partial Class FormMyOREntries
         'btnUpdate
         '
         Me.btnUpdate.Location = New System.Drawing.Point(415, 359)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(107, 25)
         Me.btnUpdate.TabIndex = 7
@@ -281,7 +297,7 @@ Partial Class FormMyOREntries
         'txtORFilter
         '
         Me.txtORFilter.Location = New System.Drawing.Point(681, 14)
-        Me.txtORFilter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtORFilter.Margin = New System.Windows.Forms.Padding(2)
         Me.txtORFilter.Name = "txtORFilter"
         Me.txtORFilter.Size = New System.Drawing.Size(87, 20)
         Me.txtORFilter.TabIndex = 17
@@ -290,7 +306,7 @@ Partial Class FormMyOREntries
         '
         Me.chbORFilter.AutoSize = True
         Me.chbORFilter.Location = New System.Drawing.Point(775, 15)
-        Me.chbORFilter.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.chbORFilter.Margin = New System.Windows.Forms.Padding(2)
         Me.chbORFilter.Name = "chbORFilter"
         Me.chbORFilter.Size = New System.Drawing.Size(67, 17)
         Me.chbORFilter.TabIndex = 18
@@ -301,7 +317,7 @@ Partial Class FormMyOREntries
         '
         Me.btDeleteOR.Enabled = False
         Me.btDeleteOR.Location = New System.Drawing.Point(281, 359)
-        Me.btDeleteOR.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btDeleteOR.Margin = New System.Windows.Forms.Padding(2)
         Me.btDeleteOR.Name = "btDeleteOR"
         Me.btDeleteOR.Size = New System.Drawing.Size(107, 25)
         Me.btDeleteOR.TabIndex = 19
@@ -311,7 +327,7 @@ Partial Class FormMyOREntries
         'btnVoidOR
         '
         Me.btnVoidOR.Location = New System.Drawing.Point(169, 359)
-        Me.btnVoidOR.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnVoidOR.Margin = New System.Windows.Forms.Padding(2)
         Me.btnVoidOR.Name = "btnVoidOR"
         Me.btnVoidOR.Size = New System.Drawing.Size(107, 25)
         Me.btnVoidOR.TabIndex = 20
@@ -327,8 +343,8 @@ Partial Class FormMyOREntries
         Me.PanelPassword.Controls.Add(Me.btnOkayPassword)
         Me.PanelPassword.Controls.Add(Me.Label8)
         Me.PanelPassword.Controls.Add(Me.txtPassword)
-        Me.PanelPassword.Location = New System.Drawing.Point(169, 322)
-        Me.PanelPassword.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PanelPassword.Location = New System.Drawing.Point(169, 292)
+        Me.PanelPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelPassword.Name = "PanelPassword"
         Me.PanelPassword.Size = New System.Drawing.Size(465, 64)
         Me.PanelPassword.TabIndex = 21
@@ -347,7 +363,7 @@ Partial Class FormMyOREntries
         'btPassCancel
         '
         Me.btPassCancel.Location = New System.Drawing.Point(334, 12)
-        Me.btPassCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btPassCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btPassCancel.Name = "btPassCancel"
         Me.btPassCancel.Size = New System.Drawing.Size(107, 25)
         Me.btPassCancel.TabIndex = 3
@@ -357,7 +373,7 @@ Partial Class FormMyOREntries
         'btnOkayPassword
         '
         Me.btnOkayPassword.Location = New System.Drawing.Point(223, 12)
-        Me.btnOkayPassword.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnOkayPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.btnOkayPassword.Name = "btnOkayPassword"
         Me.btnOkayPassword.Size = New System.Drawing.Size(107, 25)
         Me.btnOkayPassword.TabIndex = 2
@@ -377,17 +393,61 @@ Partial Class FormMyOREntries
         'txtPassword
         '
         Me.txtPassword.Location = New System.Drawing.Point(95, 16)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(115, 20)
         Me.txtPassword.TabIndex = 0
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(677, 45)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(42, 13)
+        Me.Label9.TabIndex = 23
+        Me.Label9.Text = "Penalty"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtPenalty
+        '
+        Me.txtPenalty.Location = New System.Drawing.Point(725, 43)
+        Me.txtPenalty.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPenalty.Name = "txtPenalty"
+        Me.txtPenalty.Size = New System.Drawing.Size(96, 20)
+        Me.txtPenalty.TabIndex = 22
+        Me.txtPenalty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(670, 68)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(49, 13)
+        Me.Label10.TabIndex = 25
+        Me.Label10.Text = "Discount"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtDiscount
+        '
+        Me.txtDiscount.Location = New System.Drawing.Point(725, 66)
+        Me.txtDiscount.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtDiscount.Name = "txtDiscount"
+        Me.txtDiscount.Size = New System.Drawing.Size(96, 20)
+        Me.txtDiscount.TabIndex = 24
+        Me.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(861, 394)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.txtDiscount)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.txtPenalty)
         Me.Controls.Add(Me.PanelPassword)
         Me.Controls.Add(Me.btnVoidOR)
         Me.Controls.Add(Me.btDeleteOR)
@@ -411,7 +471,7 @@ Partial Class FormMyOREntries
         Me.Controls.Add(Me.txtORNumber)
         Me.Controls.Add(Me.ListView1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormMyOREntries"
@@ -459,4 +519,10 @@ Partial Class FormMyOREntries
     Friend WithEvents btPassCancel As Button
     Friend WithEvents btnOkayPassword As Button
     Friend WithEvents lblMessage As Label
+    Friend WithEvents ColumnHeaderPanalty As ColumnHeader
+    Friend WithEvents ColumnHeaderDiscount As ColumnHeader
+    Friend WithEvents Label9 As Label
+    Friend WithEvents txtPenalty As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtDiscount As TextBox
 End Class

@@ -23,7 +23,7 @@ Public Class FormMyOREntries
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`
         FROM `db_transaction` t WHERE t.`official_receipt_no` IS NOT NULL AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
@@ -42,6 +42,8 @@ Public Class FormMyOREntries
                 transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
                 transaction._particular_str = sqlDataReader("particular")
                 transaction._paymentType = sqlDataReader("payment_type")
+                transaction._penalty = sqlDataReader("penalty")
+                transaction._discountAmount = sqlDataReader("discount_amount")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -52,6 +54,8 @@ Public Class FormMyOREntries
                 item.SubItems.Add(transaction._paymentType)
                 item.SubItems.Add(transaction._particular_str)
                 item.SubItems.Add(transaction._description)
+                item.SubItems.Add(transaction._penalty)
+                item.SubItems.Add(transaction._discountAmount)
                 ListView1.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -69,8 +73,8 @@ Public Class FormMyOREntries
         Dim paymentKey As String = DirectCast(cbbPayment.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim particularKey As String = DirectCast(cbbParticular.SelectedItem, KeyValuePair(Of String, String)).Key
 
-        sql = "UPDATE `db_transaction` t SET t.`date_paid`=@DatePaid, t.`official_receipt_no`=@ORNumber,
-        t.`paid_amount`=@PaidAmount, `particular`=@Particular, `payment_type`=@PaymentType,  t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
+        sql = "UPDATE `db_transaction` t SET t.`date_paid`=@DatePaid, t.`official_receipt_no`=@ORNumber, t.`paid_amount`=@PaidAmount,
+        `particular`=@Particular, `payment_type`=@PaymentType, t.`penalty`=@Penalty, t.`discount_amount`=@DiscountAmount, t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -79,6 +83,8 @@ Public Class FormMyOREntries
             sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = txtAmount.Text.Trim
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularKey
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentKey
+            sqlCommand.Parameters.Add("@Penalty", MySqlDbType.Double).Value = txtPenalty.Text.Trim
+            sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = txtDiscount.Text.Trim
             sqlCommand.Parameters.Add("@UpdatedBy", MySqlDbType.Int64).Value = userLogon._id
             sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = transaction._id
 
@@ -110,6 +116,8 @@ Public Class FormMyOREntries
             transaction._paymentType = ListView1.SelectedItems.Item(0).SubItems(5).Text
             transaction._particular_str = ListView1.SelectedItems.Item(0).SubItems(6).Text
             transaction._description = ListView1.SelectedItems.Item(0).SubItems(7).Text
+            transaction._penalty = ListView1.SelectedItems.Item(0).SubItems(8).Text
+            transaction._discountAmount = ListView1.SelectedItems.Item(0).SubItems(9).Text
 
             dtpDatePaid.Value = transaction._datePaid
             txtORNumber.Text = transaction._or
@@ -118,6 +126,8 @@ Public Class FormMyOREntries
             lblProjectName.Text = transaction._description
             cbbPayment.Text = transaction._paymentType
             cbbParticular.Text = transaction._particular_str
+            txtPenalty.Text = transaction._penalty
+            txtDiscount.Text = transaction._discountAmount
         End If
 
         buttonVoidDelete()
@@ -353,4 +363,17 @@ Public Class FormMyOREntries
         PanelPassword.Visible = False
     End Sub
 
+    Private Sub txtPenalty_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPenalty.KeyPress
+        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
+        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
+                         Asc(e.KeyChar) = 8 Or
+                         (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
+    End Sub
+
+    Private Sub txtDiscount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtDiscount.KeyPress
+        Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
+        e.Handled = Not (Char.IsDigit(e.KeyChar) Or
+                         Asc(e.KeyChar) = 8 Or
+                         (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
+    End Sub
 End Class
