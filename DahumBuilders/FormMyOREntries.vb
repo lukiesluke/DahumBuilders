@@ -306,6 +306,7 @@ Public Class FormMyOREntries
         If result = DialogResult.Yes Then
             'deleteORMethod()
             PanelPassword.Visible = True
+            txtUsername.Text = userLogon._username
             tries = 0
             passwordVerification()
         End If
@@ -375,5 +376,13 @@ Public Class FormMyOREntries
         e.Handled = Not (Char.IsDigit(e.KeyChar) Or
                          Asc(e.KeyChar) = 8 Or
                          (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
+    End Sub
+
+    Private Sub txtPassword_TextChanged(sender As Object, e As EventArgs) Handles txtPassword.TextChanged
+
     End Sub
 End Class

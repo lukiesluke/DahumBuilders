@@ -63,6 +63,8 @@ Partial Class FormMyOREntries
         Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtDiscount = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -338,21 +340,23 @@ Partial Class FormMyOREntries
         'PanelPassword
         '
         Me.PanelPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PanelPassword.Controls.Add(Me.txtUsername)
+        Me.PanelPassword.Controls.Add(Me.Label11)
         Me.PanelPassword.Controls.Add(Me.lblMessage)
         Me.PanelPassword.Controls.Add(Me.btPassCancel)
         Me.PanelPassword.Controls.Add(Me.btnOkayPassword)
         Me.PanelPassword.Controls.Add(Me.Label8)
         Me.PanelPassword.Controls.Add(Me.txtPassword)
-        Me.PanelPassword.Location = New System.Drawing.Point(169, 292)
+        Me.PanelPassword.Location = New System.Drawing.Point(169, 301)
         Me.PanelPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelPassword.Name = "PanelPassword"
-        Me.PanelPassword.Size = New System.Drawing.Size(465, 64)
+        Me.PanelPassword.Size = New System.Drawing.Size(465, 83)
         Me.PanelPassword.TabIndex = 21
         '
         'lblMessage
         '
         Me.lblMessage.ForeColor = System.Drawing.Color.Maroon
-        Me.lblMessage.Location = New System.Drawing.Point(5, 44)
+        Me.lblMessage.Location = New System.Drawing.Point(5, 60)
         Me.lblMessage.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(451, 13)
@@ -362,7 +366,7 @@ Partial Class FormMyOREntries
         '
         'btPassCancel
         '
-        Me.btPassCancel.Location = New System.Drawing.Point(334, 12)
+        Me.btPassCancel.Location = New System.Drawing.Point(334, 28)
         Me.btPassCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btPassCancel.Name = "btPassCancel"
         Me.btPassCancel.Size = New System.Drawing.Size(107, 25)
@@ -372,7 +376,7 @@ Partial Class FormMyOREntries
         '
         'btnOkayPassword
         '
-        Me.btnOkayPassword.Location = New System.Drawing.Point(223, 12)
+        Me.btnOkayPassword.Location = New System.Drawing.Point(223, 28)
         Me.btnOkayPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.btnOkayPassword.Name = "btnOkayPassword"
         Me.btnOkayPassword.Size = New System.Drawing.Size(107, 25)
@@ -383,7 +387,7 @@ Partial Class FormMyOREntries
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(39, 18)
+        Me.Label8.Location = New System.Drawing.Point(37, 34)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(53, 13)
@@ -392,7 +396,7 @@ Partial Class FormMyOREntries
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(95, 16)
+        Me.txtPassword.Location = New System.Drawing.Point(95, 32)
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -438,6 +442,26 @@ Partial Class FormMyOREntries
         Me.txtDiscount.Size = New System.Drawing.Size(96, 20)
         Me.txtDiscount.TabIndex = 24
         Me.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(35, 11)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(55, 13)
+        Me.Label11.TabIndex = 5
+        Me.Label11.Text = "Username"
+        '
+        'txtUsername
+        '
+        Me.txtUsername.Enabled = False
+        Me.txtUsername.Location = New System.Drawing.Point(95, 8)
+        Me.txtUsername.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.ReadOnly = True
+        Me.txtUsername.Size = New System.Drawing.Size(115, 20)
+        Me.txtUsername.TabIndex = 6
         '
         'FormMyOREntries
         '
@@ -525,4 +549,6 @@ Partial Class FormMyOREntries
     Friend WithEvents txtPenalty As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents txtDiscount As TextBox
+    Friend WithEvents txtUsername As TextBox
+    Friend WithEvents Label11 As Label
 End Class
