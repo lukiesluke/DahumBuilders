@@ -41,13 +41,13 @@ Public Class FormUserList
             If ComboBoxSearch.SelectedIndex = 0 Then
                 sql = "SELECT `id`,`last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,`date_birth`,`mobile_number`,
                 (SELECT `type` FROM `db_user_type` WHERE `id`=u.`user_type`) user_type, 
-                IF(`agent_id`=0, '',  CONCAT(`first_name`, ' ', `last_name`)) `agent_name`,
+                IFNULL((SELECT  CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `id`=u.`agent_id`), '') `agent_name`,
                 IF(`agent_id`=0, '',  `mobile_number`) `agent_contact`,
                 `file_location_image` FROM `db_user_profile` u WHERE u.`last_name` LIKE @valueSearch ORDER BY u.`user_type`, u.`last_name`"
             ElseIf ComboBoxSearch.SelectedIndex = 1 Then
                 sql = "SELECT `id`,`last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,`date_birth`,`mobile_number`,
                 (SELECT `type` FROM `db_user_type` WHERE `id`=u.`user_type`) user_type,
-                IF(`agent_id`=0, '',  CONCAT(`first_name`, ' ', `last_name`)) `agent_name`,
+                IFNULL((SELECT  CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `id`=u.`agent_id`), '') `agent_name`,
                 IF(`agent_id`=0, '',  `mobile_number`) `agent_contact`,
                 `file_location_image` FROM `db_user_profile` u WHERE u.`first_name` LIKE @valueSearch ORDER BY u.`user_type`, u.`last_name`"
             End If
@@ -55,9 +55,8 @@ Public Class FormUserList
             txtSearch.Text = ""
             sql = "SELECT `id`, `last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,
             `date_birth`,`mobile_number`,`file_location_image`, (SELECT `type` FROM `db_user_type` WHERE `id`=p.`user_type`) user_type,
-            IF(`agent_id`=0, '',  CONCAT(`first_name`, ' ', `last_name`)) `agent_name`,
-            IF(`agent_id`=0, '',  `mobile_number`) `agent_contact`
-            FROM `db_user_profile` p
+            IFNULL((SELECT  CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `id`=p.`agent_id`), '') `agent_name`,
+            IF(`agent_id`=0, '',  `mobile_number`) `agent_contact` FROM `db_user_profile` p
             INNER JOIN `db_project_item` i ON i.`assigned_userid`=p.`id` AND i.`proj_id`=@ProjID GROUP BY p.`id` ORDER BY p.`last_name`"
         End If
 
@@ -303,6 +302,8 @@ Public Class FormUserList
             Exit Sub
         End If
 
+        cbbProjectList.SelectedIndex = 0
+
         Dim key As Integer = DirectCast(cbbUserType.SelectedItem, KeyValuePair(Of Integer, String)).Key
         If -1 = key Then
             selectPerUserType(key)
@@ -319,7 +320,7 @@ Public Class FormUserList
 
             sql = "SELECT `id`,`last_name`,`first_name`,`middle_name`,`gender`,`civil_status`,`address`,`date_birth`,`mobile_number`,
                 (SELECT `type` FROM `db_user_type` WHERE `id`=u.`user_type`) user_type, 
-                IF(`agent_id`=0, '',  CONCAT(`first_name`, ' ', `last_name`)) `agent_name`,
+                IFNULL((SELECT  CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `id`=u.`agent_id`), '') `agent_name`,
                 IF(`agent_id`=0, '',  `mobile_number`) `agent_contact`,
                 `file_location_image` FROM `db_user_profile` u {0} ORDER BY u.`user_type`, u.`last_name`"
 

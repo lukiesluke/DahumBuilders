@@ -339,6 +339,7 @@ Partial Class FormMyOREntries
         '
         'PanelPassword
         '
+        Me.PanelPassword.BackColor = System.Drawing.Color.White
         Me.PanelPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PanelPassword.Controls.Add(Me.txtUsername)
         Me.PanelPassword.Controls.Add(Me.Label11)
@@ -347,16 +348,16 @@ Partial Class FormMyOREntries
         Me.PanelPassword.Controls.Add(Me.btnOkayPassword)
         Me.PanelPassword.Controls.Add(Me.Label8)
         Me.PanelPassword.Controls.Add(Me.txtPassword)
-        Me.PanelPassword.Location = New System.Drawing.Point(169, 301)
+        Me.PanelPassword.Location = New System.Drawing.Point(169, 264)
         Me.PanelPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelPassword.Name = "PanelPassword"
-        Me.PanelPassword.Size = New System.Drawing.Size(465, 83)
+        Me.PanelPassword.Size = New System.Drawing.Size(473, 120)
         Me.PanelPassword.TabIndex = 21
         '
         'lblMessage
         '
         Me.lblMessage.ForeColor = System.Drawing.Color.Maroon
-        Me.lblMessage.Location = New System.Drawing.Point(5, 60)
+        Me.lblMessage.Location = New System.Drawing.Point(10, 82)
         Me.lblMessage.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblMessage.Name = "lblMessage"
         Me.lblMessage.Size = New System.Drawing.Size(451, 13)
@@ -366,7 +367,7 @@ Partial Class FormMyOREntries
         '
         'btPassCancel
         '
-        Me.btPassCancel.Location = New System.Drawing.Point(334, 28)
+        Me.btPassCancel.Location = New System.Drawing.Point(334, 49)
         Me.btPassCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btPassCancel.Name = "btPassCancel"
         Me.btPassCancel.Size = New System.Drawing.Size(107, 25)
@@ -376,7 +377,7 @@ Partial Class FormMyOREntries
         '
         'btnOkayPassword
         '
-        Me.btnOkayPassword.Location = New System.Drawing.Point(223, 28)
+        Me.btnOkayPassword.Location = New System.Drawing.Point(223, 49)
         Me.btnOkayPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.btnOkayPassword.Name = "btnOkayPassword"
         Me.btnOkayPassword.Size = New System.Drawing.Size(107, 25)
@@ -387,7 +388,7 @@ Partial Class FormMyOREntries
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(37, 34)
+        Me.Label8.Location = New System.Drawing.Point(37, 55)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(53, 13)
@@ -396,7 +397,7 @@ Partial Class FormMyOREntries
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(95, 32)
+        Me.txtPassword.Location = New System.Drawing.Point(95, 53)
         Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
@@ -446,7 +447,7 @@ Partial Class FormMyOREntries
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(35, 11)
+        Me.Label11.Location = New System.Drawing.Point(35, 32)
         Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(55, 13)
@@ -456,7 +457,7 @@ Partial Class FormMyOREntries
         'txtUsername
         '
         Me.txtUsername.Enabled = False
-        Me.txtUsername.Location = New System.Drawing.Point(95, 8)
+        Me.txtUsername.Location = New System.Drawing.Point(95, 29)
         Me.txtUsername.Margin = New System.Windows.Forms.Padding(2)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.ReadOnly = True

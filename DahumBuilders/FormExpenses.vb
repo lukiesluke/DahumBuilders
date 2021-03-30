@@ -378,18 +378,25 @@ Public Class FormExpenses
             Dim objExcel As New Excel.Application
             Dim bkWorkBook As Workbook
             Dim shWorkSheet As Worksheet
+            Dim chartRange As Excel.Range
             Dim i As Integer
             Dim j As Integer
 
             objExcel = New Excel.Application
             bkWorkBook = objExcel.Workbooks.Add
             shWorkSheet = CType(bkWorkBook.ActiveSheet, Worksheet)
+
+            chartRange = shWorkSheet.Range("A1", "J1")
+            chartRange.Merge()
+            chartRange.HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Cells(1, 1) = "Expenses Report"
+
             For i = 0 To Me.ListViewExpenses.Columns.Count - 1
-                shWorkSheet.Cells(1, i + 1) = Me.ListViewExpenses.Columns(i).Text
+                shWorkSheet.Cells(2, i + 1) = Me.ListViewExpenses.Columns(i).Text
             Next
             For i = 0 To Me.ListViewExpenses.Items.Count - 1
                 For j = 0 To Me.ListViewExpenses.Items(i).SubItems.Count - 1
-                    shWorkSheet.Cells(i + 2, j + 1) = Me.ListViewExpenses.Items(i).SubItems(j).Text
+                    shWorkSheet.Cells(i + 3, j + 1) = Me.ListViewExpenses.Items(i).SubItems(j).Text
                 Next
             Next
 

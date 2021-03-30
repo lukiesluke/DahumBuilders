@@ -146,15 +146,15 @@ Public Class FormCRptSalesReport
         Dim projectID As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim HeaderSaleReport As String = "Daily Sales Report"
 
-        sql = "SELECT `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
+        sql = "SELECT t.`date_paid`, `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
         t.`penalty`,  t.`discount_amount`, `paid_amount`,  pt.`short_name`, pa.`short_name` AS `particular`, l.`proj_name`, 
-        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, it.`block`, it.`lot`, it.`sqm`, t.`date_paid` FROM `db_transaction` t 
+        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, it.`block`, it.`lot`, it.`sqm` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         LEFT JOIN `db_project_list` l ON l.`id` = t.`proj_id`
         WHERE t.`proj_id`{0} @projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
-        ORDER BY date_paid DESC, lot ASC, official_receipt_no ASC"
+        ORDER BY date_paid DESC, official_receipt_no ASC"
 
 
         If projectID.Equals("0") Then
@@ -195,19 +195,19 @@ Public Class FormCRptSalesReport
             chartRange.HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Cells(1, 1) = HeaderSaleReport
 
-            shWorkSheet.Cells(2, 1) = "OR"
-            shWorkSheet.Cells(2, 2) = "Name"
-            shWorkSheet.Cells(2, 3) = "Penalty"
-            shWorkSheet.Cells(2, 4) = "Discount Amount"
-            shWorkSheet.Cells(2, 5) = "Paid Amount"
-            shWorkSheet.Cells(2, 6) = "Payment Type"
-            shWorkSheet.Cells(2, 7) = "Particular"
-            shWorkSheet.Cells(2, 8) = "Project Name"
-            shWorkSheet.Cells(2, 9) = "Part No"
-            shWorkSheet.Cells(2, 10) = "BLOCK"
-            shWorkSheet.Cells(2, 11) = "LOT"
-            shWorkSheet.Cells(2, 12) = "SQM"
-            shWorkSheet.Cells(2, 13) = "Date Paid"
+            shWorkSheet.Cells(2, 1) = "Date Paid"
+            shWorkSheet.Cells(2, 2) = "OR"
+            shWorkSheet.Cells(2, 3) = "Name"
+            shWorkSheet.Cells(2, 4) = "Penalty"
+            shWorkSheet.Cells(2, 5) = "Discount Amount"
+            shWorkSheet.Cells(2, 6) = "Paid Amount"
+            shWorkSheet.Cells(2, 7) = "Payment Type"
+            shWorkSheet.Cells(2, 8) = "Particular"
+            shWorkSheet.Cells(2, 9) = "Project Name"
+            shWorkSheet.Cells(2, 10) = "Part No"
+            shWorkSheet.Cells(2, 11) = "BLOCK"
+            shWorkSheet.Cells(2, 12) = "LOT"
+            shWorkSheet.Cells(2, 13) = "SQM"
 
             For i = 0 To ds.Tables(0).Rows.Count - 1
                 For j = 0 To ds.Tables(0).Columns.Count - 1
