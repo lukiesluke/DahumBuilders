@@ -58,6 +58,9 @@ Public Class FormSendReportFirebase
                 summaryList.Add(summaryReport)
             Loop
 
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+
             For Each summary In summaryList
                 summary.details = generateDetailReport(summary.datePaid)
             Next
@@ -109,6 +112,9 @@ Public Class FormSendReportFirebase
         Catch ex As Exception
             Return New List(Of FirebaseDetail)()
             MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         End Try
     End Function
 
