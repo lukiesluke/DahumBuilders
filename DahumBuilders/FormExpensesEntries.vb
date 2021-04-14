@@ -5,6 +5,8 @@ Public Class FormExpensesEntries
     Private Sub FormExpensesEntries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblClientName.Text = ""
         generate_report()
+        loadParticularCombobox()
+        loadPaymentTypeCombobox()
     End Sub
 
     Private Sub generate_report()
@@ -80,5 +82,62 @@ Public Class FormExpensesEntries
             cbbParticular.Text = transaction._particular_str
         End If
     End Sub
+    Private Sub loadParticularCombobox()
+        sql = "SELECT id, `short_name` FROM `db_particular_type` WHERE `id` >5"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
 
+            cbbParticular.DataSource = Nothing
+            cbbParticular.Items.Clear()
+
+            Dim comboSourceParticular As New Dictionary(Of String, String)()
+            Do While sqlDataReader.Read = True
+                comboSourceParticular.Add(sqlDataReader("id"), sqlDataReader("short_name"))
+            Loop
+
+            cbbParticular.DataSource = New BindingSource(comboSourceParticular, Nothing)
+            cbbParticular.DisplayMember = "Value"
+            cbbParticular.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
+    Private Sub loadPaymentTypeCombobox()
+        sql = "SELECT id, `short_name` FROM `db_payment_type`"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            cbbPayment.DataSource = Nothing
+            cbbPayment.Items.Clear()
+
+            Dim comboSourcePayment As New Dictionary(Of String, String)()
+            Do While sqlDataReader.Read = True
+                comboSourcePayment.Add(sqlDataReader("id"), sqlDataReader("short_name"))
+            Loop
+
+            cbbPayment.DataSource = New BindingSource(comboSourcePayment, Nothing)
+            cbbPayment.DisplayMember = "Value"
+            cbbPayment.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
 End Class
