@@ -3,6 +3,7 @@ Public Class FormExpensesEntries
     Private transaction As Transaction = New Transaction()
 
     Private Sub FormExpensesEntries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblClientName.Text = ""
         generate_report()
     End Sub
 
@@ -73,6 +74,7 @@ Public Class FormExpensesEntries
             dtpDatePaid.Value = transaction._datePaid
             txtORNumber.Text = transaction._or
             txtVoucher.Text = transaction._voucher
+            lblClientName.Text = transaction._clientName
             txtAmount.Text = transaction._commission.ToString("N2")
             cbbPayment.Text = transaction._paymentType
             cbbParticular.Text = transaction._particular_str

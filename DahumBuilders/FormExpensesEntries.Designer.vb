@@ -46,6 +46,8 @@ Partial Class FormExpensesEntries
         Me.txtORNumber = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtVoucher = New System.Windows.Forms.TextBox()
+        Me.lblClientName = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ListView
@@ -115,7 +117,7 @@ Partial Class FormExpensesEntries
         '
         'Label7
         '
-        Me.Label7.Location = New System.Drawing.Point(225, 57)
+        Me.Label7.Location = New System.Drawing.Point(193, 61)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(56, 23)
@@ -125,7 +127,7 @@ Partial Class FormExpensesEntries
         '
         'Label6
         '
-        Me.Label6.Location = New System.Drawing.Point(233, 32)
+        Me.Label6.Location = New System.Drawing.Point(201, 36)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(48, 23)
@@ -137,7 +139,7 @@ Partial Class FormExpensesEntries
         '
         Me.cbbParticular.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbParticular.FormattingEnabled = True
-        Me.cbbParticular.Location = New System.Drawing.Point(285, 60)
+        Me.cbbParticular.Location = New System.Drawing.Point(253, 64)
         Me.cbbParticular.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.cbbParticular.Name = "cbbParticular"
         Me.cbbParticular.Size = New System.Drawing.Size(156, 21)
@@ -147,7 +149,7 @@ Partial Class FormExpensesEntries
         '
         Me.cbbPayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbPayment.FormattingEnabled = True
-        Me.cbbPayment.Location = New System.Drawing.Point(285, 35)
+        Me.cbbPayment.Location = New System.Drawing.Point(253, 39)
         Me.cbbPayment.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.cbbPayment.Name = "cbbPayment"
         Me.cbbPayment.Size = New System.Drawing.Size(156, 21)
@@ -229,11 +231,35 @@ Partial Class FormExpensesEntries
         Me.txtVoucher.Size = New System.Drawing.Size(96, 20)
         Me.txtVoucher.TabIndex = 27
         '
+        'lblClientName
+        '
+        Me.lblClientName.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblClientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblClientName.Location = New System.Drawing.Point(253, 12)
+        Me.lblClientName.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblClientName.Name = "lblClientName"
+        Me.lblClientName.Size = New System.Drawing.Size(399, 23)
+        Me.lblClientName.TabIndex = 30
+        Me.lblClientName.Text = "ClientName"
+        Me.lblClientName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(199, 12)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(48, 23)
+        Me.Label5.TabIndex = 29
+        Me.Label5.Text = "Name"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FormExpensesEntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(867, 405)
+        Me.Controls.Add(Me.lblClientName)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtVoucher)
         Me.Controls.Add(Me.Label7)
@@ -282,4 +308,6 @@ Partial Class FormExpensesEntries
     Friend WithEvents txtORNumber As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents txtVoucher As TextBox
+    Friend WithEvents lblClientName As Label
+    Friend WithEvents Label5 As Label
 End Class
