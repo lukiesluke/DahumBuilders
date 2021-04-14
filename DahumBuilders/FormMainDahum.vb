@@ -217,4 +217,13 @@ Public Class FormMainDahum
             mFormCRptExpenses.Show()
         End If
     End Sub
+
+    Private Sub ExpensesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExpensesToolStripMenuItem1.Click
+        If Application.OpenForms().OfType(Of FormExpensesEntries).Any Then
+            mFormExpensesEntries.Focus()
+        Else
+            mFormExpensesEntries = New FormExpensesEntries
+            mFormExpensesEntries.ShowDialog()
+        End If
+    End Sub
 End Class

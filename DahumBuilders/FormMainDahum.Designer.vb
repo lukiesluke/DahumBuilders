@@ -90,7 +90,7 @@ Partial Class FormMainDahum
         '
         Me.EntriesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OfficialRecieptToolStripMenuItem, Me.ExpensesToolStripMenuItem1})
         Me.EntriesToolStripMenuItem.Name = "EntriesToolStripMenuItem"
-        Me.EntriesToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.EntriesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.EntriesToolStripMenuItem.Text = "Entries"
         '
         'OfficialRecieptToolStripMenuItem
@@ -108,7 +108,7 @@ Partial Class FormMainDahum
         'UpdateToolStripMenuItem
         '
         Me.UpdateToolStripMenuItem.Name = "UpdateToolStripMenuItem"
-        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(112, 22)
+        Me.UpdateToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.UpdateToolStripMenuItem.Text = "Update"
         '
         'OpenToolStripMenuItem
@@ -252,7 +252,7 @@ Partial Class FormMainDahum
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "FormMainDahum"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MenuStrip1.ResumeLayout(False)

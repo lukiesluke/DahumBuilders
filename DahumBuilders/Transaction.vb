@@ -1,10 +1,13 @@
 ﻿Public Class Transaction
     Public Property _id As String = ""
     Public Property _or As String = ""
+    Public Property _voucher As String = ""
     Public Property _datePaid As Date = New Date
     Public Property _clientName As String = ""
     Public Property _tcp As String = ""
     Public Property _paidAmount As Double = 0
+    Public Property _commission As Double = 0
+
     Public Property _penalty As Double = 0
     Public Property _discountAmount As Double = 0
     Public Property _particular As Integer = 0

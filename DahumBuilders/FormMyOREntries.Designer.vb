@@ -22,6 +22,7 @@ Partial Class FormMyOREntries
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMyOREntries))
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -54,6 +55,8 @@ Partial Class FormMyOREntries
         Me.btDeleteOR = New System.Windows.Forms.Button()
         Me.btnVoidOR = New System.Windows.Forms.Button()
         Me.PanelPassword = New System.Windows.Forms.Panel()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.btPassCancel = New System.Windows.Forms.Button()
         Me.btnOkayPassword = New System.Windows.Forms.Button()
@@ -63,8 +66,6 @@ Partial Class FormMyOREntries
         Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtDiscount = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -354,6 +355,26 @@ Partial Class FormMyOREntries
         Me.PanelPassword.Size = New System.Drawing.Size(473, 120)
         Me.PanelPassword.TabIndex = 21
         '
+        'txtUsername
+        '
+        Me.txtUsername.Enabled = False
+        Me.txtUsername.Location = New System.Drawing.Point(95, 29)
+        Me.txtUsername.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.ReadOnly = True
+        Me.txtUsername.Size = New System.Drawing.Size(115, 20)
+        Me.txtUsername.TabIndex = 6
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(35, 32)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(55, 13)
+        Me.Label11.TabIndex = 5
+        Me.Label11.Text = "Username"
+        '
         'lblMessage
         '
         Me.lblMessage.ForeColor = System.Drawing.Color.Maroon
@@ -444,26 +465,6 @@ Partial Class FormMyOREntries
         Me.txtDiscount.TabIndex = 24
         Me.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(35, 32)
-        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(55, 13)
-        Me.Label11.TabIndex = 5
-        Me.Label11.Text = "Username"
-        '
-        'txtUsername
-        '
-        Me.txtUsername.Enabled = False
-        Me.txtUsername.Location = New System.Drawing.Point(95, 29)
-        Me.txtUsername.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.ReadOnly = True
-        Me.txtUsername.Size = New System.Drawing.Size(115, 20)
-        Me.txtUsername.TabIndex = 6
-        '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -496,10 +497,12 @@ Partial Class FormMyOREntries
         Me.Controls.Add(Me.txtORNumber)
         Me.Controls.Add(Me.ListView1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormMyOREntries"
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "OR Entries"
         Me.PanelPassword.ResumeLayout(False)

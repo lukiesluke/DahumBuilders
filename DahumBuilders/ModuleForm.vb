@@ -18,7 +18,7 @@ Module ModuleForm
     Public mFormCRptSalesReport As FormCRptSalesReport
     Public mFormCRptSummaryReport As FormCRptSummaryReport
     Public mFormCRptExpenses As FormCRptExpenses
-
+    Public mFormExpensesEntries As FormExpensesEntries
     Public Function computePercentage(totalPrice As Double, value As ComboBox) As Double
         Dim percentageDownpayment As Double = Double.Parse(value.Text) / 100
         Return totalPrice * percentageDownpayment
