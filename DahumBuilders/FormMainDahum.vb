@@ -115,7 +115,10 @@ Public Class FormMainDahum
     End Sub
 
     Function generateProjectList(id As Integer) As List(Of FirebaseProjectList)
-        sql = "SELECT `block`,`lot`,`sqm`,`price`,`assigned_userid` FROM `db_project_item` WHERE `proj_id`=@ID ORDER BY `block`, `lot` ASC"
+        sql = "SELECT i.`block`, i.`lot`, i.`sqm`, i.`price`, assigned_userid,
+        IFNULL((SELECT CONCAT(`first_name`, ' ' ,`last_name`) FROM `db_user_profile` WHERE `id`=i.`assigned_userid`),'') AS NAME
+        FROM `db_project_item` i WHERE i.`proj_id`=@ID ORDER BY i.`block`, i.`lot` ASC"
+
         Dim projectList As New List(Of FirebaseProjectList)()
 
         Connection()
@@ -130,13 +133,19 @@ Public Class FormMainDahum
                         .lot = sqlDataReader("lot"),
                         .sqm = sqlDataReader("sqm"),
                         .tcp = sqlDataReader("price"),
-                        .assignStat = sqlDataReader("assigned_userid")
+                        .assignStat = sqlDataReader("assigned_userid"),
+                        .name = sqlDataReader("NAME")
                     }
                 projectList.Add(project)
             Loop
+            sqlCommand.Dispose()
+            sqlConnection.Close()
             Return projectList
         Catch ex As Exception
             Return New List(Of FirebaseProjectList)()
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         End Try
     End Function
 

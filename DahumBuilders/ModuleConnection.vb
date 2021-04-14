@@ -25,15 +25,15 @@ Module ModuleConnection
     Public pathProject As String = "project/"
     Public pathProjectTest As String = "projectTest/"
 
-    'Public fireCon As New FirebaseConfig() With {
-    '    .AuthSecret = "3zPFq1X41jpyd8jGBdk6dM50tXG3vO0x7LQGNFj8",
-    '    .BasePath = "https://tprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com/"
-    '    }
-
     Public fireCon As New FirebaseConfig() With {
-        .AuthSecret = "g8tKN67dcGPFLnYw7bLXIivT3j3cd7SEpYbBoOFZ",
-        .BasePath = "https://dahum-builders-corporation-default-rtdb.firebaseio.com/"
+        .AuthSecret = "3zPFq1X41jpyd8jGBdk6dM50tXG3vO0x7LQGNFj8",
+        .BasePath = "https://tprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com/"
         }
+
+    'Public fireCon As New FirebaseConfig() With {
+    '    .AuthSecret = "g8tKN67dcGPFLnYw7bLXIivT3j3cd7SEpYbBoOFZ",
+    '    .BasePath = "https://dahum-builders-corporation-default-rtdb.firebaseio.com/"
+    '    }
 
     Public Sub Connection()
         Try
