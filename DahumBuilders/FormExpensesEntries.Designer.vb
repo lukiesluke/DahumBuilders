@@ -48,6 +48,14 @@ Partial Class FormExpensesEntries
         Me.txtVoucher = New System.Windows.Forms.TextBox()
         Me.lblClientName = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btCancel = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtReference = New System.Windows.Forms.TextBox()
+        Me.cbbBankName = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.chbORFilter = New System.Windows.Forms.CheckBox()
+        Me.txtORFilter = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'ListView
@@ -59,7 +67,7 @@ Partial Class FormExpensesEntries
         Me.ListView.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView.Name = "ListView"
         Me.ListView.Size = New System.Drawing.Size(843, 259)
-        Me.ListView.TabIndex = 4
+        Me.ListView.TabIndex = 10
         Me.ListView.UseCompatibleStateImageBehavior = False
         Me.ListView.View = System.Windows.Forms.View.Details
         '
@@ -117,7 +125,7 @@ Partial Class FormExpensesEntries
         '
         'Label7
         '
-        Me.Label7.Location = New System.Drawing.Point(193, 61)
+        Me.Label7.Location = New System.Drawing.Point(193, 66)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(56, 23)
@@ -127,7 +135,7 @@ Partial Class FormExpensesEntries
         '
         'Label6
         '
-        Me.Label6.Location = New System.Drawing.Point(201, 36)
+        Me.Label6.Location = New System.Drawing.Point(201, 41)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(48, 23)
@@ -139,21 +147,21 @@ Partial Class FormExpensesEntries
         '
         Me.cbbParticular.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbParticular.FormattingEnabled = True
-        Me.cbbParticular.Location = New System.Drawing.Point(253, 64)
+        Me.cbbParticular.Location = New System.Drawing.Point(253, 69)
         Me.cbbParticular.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.cbbParticular.Name = "cbbParticular"
         Me.cbbParticular.Size = New System.Drawing.Size(156, 21)
-        Me.cbbParticular.TabIndex = 24
+        Me.cbbParticular.TabIndex = 5
         '
         'cbbPayment
         '
         Me.cbbPayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbPayment.FormattingEnabled = True
-        Me.cbbPayment.Location = New System.Drawing.Point(253, 39)
+        Me.cbbPayment.Location = New System.Drawing.Point(253, 44)
         Me.cbbPayment.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.cbbPayment.Name = "cbbPayment"
         Me.cbbPayment.Size = New System.Drawing.Size(156, 21)
-        Me.cbbPayment.TabIndex = 23
+        Me.cbbPayment.TabIndex = 4
         '
         'Label3
         '
@@ -194,7 +202,7 @@ Partial Class FormExpensesEntries
         Me.dtpDatePaid.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.dtpDatePaid.Name = "dtpDatePaid"
         Me.dtpDatePaid.Size = New System.Drawing.Size(96, 22)
-        Me.dtpDatePaid.TabIndex = 17
+        Me.dtpDatePaid.TabIndex = 0
         '
         'txtAmount
         '
@@ -202,7 +210,7 @@ Partial Class FormExpensesEntries
         Me.txtAmount.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(96, 20)
-        Me.txtAmount.TabIndex = 19
+        Me.txtAmount.TabIndex = 3
         Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtORNumber
@@ -211,7 +219,7 @@ Partial Class FormExpensesEntries
         Me.txtORNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtORNumber.Name = "txtORNumber"
         Me.txtORNumber.Size = New System.Drawing.Size(96, 20)
-        Me.txtORNumber.TabIndex = 18
+        Me.txtORNumber.TabIndex = 1
         '
         'Label4
         '
@@ -229,7 +237,7 @@ Partial Class FormExpensesEntries
         Me.txtVoucher.Margin = New System.Windows.Forms.Padding(2)
         Me.txtVoucher.Name = "txtVoucher"
         Me.txtVoucher.Size = New System.Drawing.Size(96, 20)
-        Me.txtVoucher.TabIndex = 27
+        Me.txtVoucher.TabIndex = 2
         '
         'lblClientName
         '
@@ -238,7 +246,7 @@ Partial Class FormExpensesEntries
         Me.lblClientName.Location = New System.Drawing.Point(253, 12)
         Me.lblClientName.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblClientName.Name = "lblClientName"
-        Me.lblClientName.Size = New System.Drawing.Size(399, 23)
+        Me.lblClientName.Size = New System.Drawing.Size(440, 23)
         Me.lblClientName.TabIndex = 30
         Me.lblClientName.Text = "ClientName"
         Me.lblClientName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -253,11 +261,98 @@ Partial Class FormExpensesEntries
         Me.Label5.Text = "Name"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(440, 375)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(107, 25)
+        Me.btnUpdate.TabIndex = 11
+        Me.btnUpdate.Text = "&Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btCancel
+        '
+        Me.btCancel.Location = New System.Drawing.Point(551, 375)
+        Me.btCancel.Margin = New System.Windows.Forms.Padding(2)
+        Me.btCancel.Name = "btCancel"
+        Me.btCancel.Size = New System.Drawing.Size(107, 25)
+        Me.btCancel.TabIndex = 12
+        Me.btCancel.Text = "&Cancel"
+        Me.btCancel.UseVisualStyleBackColor = True
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(420, 71)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(113, 13)
+        Me.Label8.TabIndex = 34
+        Me.Label8.Text = "Check/Reference No."
+        '
+        'txtReference
+        '
+        Me.txtReference.Location = New System.Drawing.Point(537, 68)
+        Me.txtReference.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtReference.Name = "txtReference"
+        Me.txtReference.Size = New System.Drawing.Size(156, 20)
+        Me.txtReference.TabIndex = 7
+        Me.txtReference.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'cbbBankName
+        '
+        Me.cbbBankName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbBankName.FormattingEnabled = True
+        Me.cbbBankName.Items.AddRange(New Object() {"Select Bank Name", "RCBC", "PSBank", "BPI", "BDO", "MetroBank", "Security Bank", "Unionbank", "ChinaBank", "Citibank"})
+        Me.cbbBankName.Location = New System.Drawing.Point(537, 44)
+        Me.cbbBankName.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbBankName.Name = "cbbBankName"
+        Me.cbbBankName.Size = New System.Drawing.Size(156, 21)
+        Me.cbbBankName.TabIndex = 6
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(470, 47)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(63, 13)
+        Me.Label9.TabIndex = 36
+        Me.Label9.Text = "Bank Name"
+        '
+        'chbORFilter
+        '
+        Me.chbORFilter.AutoSize = True
+        Me.chbORFilter.Location = New System.Drawing.Point(798, 45)
+        Me.chbORFilter.Margin = New System.Windows.Forms.Padding(2)
+        Me.chbORFilter.Name = "chbORFilter"
+        Me.chbORFilter.Size = New System.Drawing.Size(67, 17)
+        Me.chbORFilter.TabIndex = 9
+        Me.chbORFilter.Text = "Filter OR"
+        Me.chbORFilter.UseVisualStyleBackColor = True
+        '
+        'txtORFilter
+        '
+        Me.txtORFilter.Location = New System.Drawing.Point(704, 44)
+        Me.txtORFilter.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtORFilter.Name = "txtORFilter"
+        Me.txtORFilter.Size = New System.Drawing.Size(87, 20)
+        Me.txtORFilter.TabIndex = 8
+        '
         'FormExpensesEntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(867, 405)
+        Me.ClientSize = New System.Drawing.Size(867, 408)
+        Me.Controls.Add(Me.chbORFilter)
+        Me.Controls.Add(Me.txtORFilter)
+        Me.Controls.Add(Me.cbbBankName)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.txtReference)
+        Me.Controls.Add(Me.btnUpdate)
+        Me.Controls.Add(Me.btCancel)
         Me.Controls.Add(Me.lblClientName)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
@@ -310,4 +405,12 @@ Partial Class FormExpensesEntries
     Friend WithEvents txtVoucher As TextBox
     Friend WithEvents lblClientName As Label
     Friend WithEvents Label5 As Label
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btCancel As Button
+    Friend WithEvents Label8 As Label
+    Friend WithEvents txtReference As TextBox
+    Friend WithEvents cbbBankName As ComboBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents chbORFilter As CheckBox
+    Friend WithEvents txtORFilter As TextBox
 End Class

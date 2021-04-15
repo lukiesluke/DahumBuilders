@@ -24,7 +24,7 @@ Public Class FormMyOREntries
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`
-        FROM `db_transaction` t WHERE t.`official_receipt_no` IS NOT NULL AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
+        FROM `db_transaction` t WHERE t.`particular`<=5 AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -79,7 +79,7 @@ Public Class FormMyOREntries
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
-            sqlCommand.Parameters.Add("@ORNumber", MySqlDbType.Double).Value = txtORNumber.Text.Trim
+            sqlCommand.Parameters.Add("@ORNumber", MySqlDbType.VarChar).Value = txtORNumber.Text.Trim
             sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = txtAmount.Text.Trim
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularKey
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentKey
@@ -92,7 +92,8 @@ Public Class FormMyOREntries
                 MessageBox.Show("Official Reciept Entry Successfully Updated")
                 sqlCommand.Dispose()
                 sqlConnection.Close()
-                Me.Close()
+                load_my_entries()
+                Exit Sub
             Else
                 MessageBox.Show("Data was not updated. Please try again.")
             End If

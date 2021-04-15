@@ -349,7 +349,7 @@ Partial Class FormMyOREntries
         Me.PanelPassword.Controls.Add(Me.btnOkayPassword)
         Me.PanelPassword.Controls.Add(Me.Label8)
         Me.PanelPassword.Controls.Add(Me.txtPassword)
-        Me.PanelPassword.Location = New System.Drawing.Point(169, 264)
+        Me.PanelPassword.Location = New System.Drawing.Point(166, 266)
         Me.PanelPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelPassword.Name = "PanelPassword"
         Me.PanelPassword.Size = New System.Drawing.Size(473, 120)
