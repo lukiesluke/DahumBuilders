@@ -235,7 +235,7 @@ Public Class FormMyOREntries
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`
         FROM `db_transaction` t WHERE t.`official_receipt_no` LIKE @OREntry"
 
         Connection()
@@ -257,6 +257,8 @@ Public Class FormMyOREntries
                 transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
                 transaction._particular_str = sqlDataReader("particular")
                 transaction._paymentType = sqlDataReader("payment_type")
+                transaction._penalty = sqlDataReader("penalty")
+                transaction._discountAmount = sqlDataReader("discount_amount")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -267,6 +269,8 @@ Public Class FormMyOREntries
                 item.SubItems.Add(transaction._paymentType)
                 item.SubItems.Add(transaction._particular_str)
                 item.SubItems.Add(transaction._description)
+                item.SubItems.Add(transaction._penalty)
+                item.SubItems.Add(transaction._discountAmount)
                 ListView1.Items.Add(item)
             Loop
 
