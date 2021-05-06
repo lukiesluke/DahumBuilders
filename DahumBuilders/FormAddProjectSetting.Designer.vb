@@ -36,7 +36,7 @@ Partial Class FormAddProjectSetting
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.cbbLotType = New System.Windows.Forms.ComboBox()
+        Me.cbbPhaseInfo = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.txtBlockFilter = New System.Windows.Forms.TextBox()
@@ -45,7 +45,7 @@ Partial Class FormAddProjectSetting
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PanelLotUpdate = New System.Windows.Forms.Panel()
         Me.Label18 = New System.Windows.Forms.Label()
-        Me.cbbLotTypeUpdate = New System.Windows.Forms.ComboBox()
+        Me.cbbPhaseInfoUpdate = New System.Windows.Forms.ComboBox()
         Me.cbSQMUpdate = New System.Windows.Forms.ComboBox()
         Me.lblClose = New System.Windows.Forms.Label()
         Me.btnUpdateLot = New System.Windows.Forms.Button()
@@ -225,7 +225,7 @@ Partial Class FormAddProjectSetting
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label17)
-        Me.Panel1.Controls.Add(Me.cbbLotType)
+        Me.Panel1.Controls.Add(Me.cbbPhaseInfo)
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Controls.Add(Me.cbSQM)
         Me.Panel1.Controls.Add(Me.Panel6)
@@ -250,28 +250,28 @@ Partial Class FormAddProjectSetting
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(39, 66)
+        Me.Label17.Location = New System.Drawing.Point(47, 66)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(49, 13)
+        Me.Label17.Size = New System.Drawing.Size(37, 13)
         Me.Label17.TabIndex = 21
-        Me.Label17.Text = "Lot Type"
+        Me.Label17.Text = "Phase"
         '
-        'cbbLotType
+        'cbbPhaseInfo
         '
-        Me.cbbLotType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbbLotType.FormattingEnabled = True
-        Me.cbbLotType.Location = New System.Drawing.Point(92, 63)
-        Me.cbbLotType.Margin = New System.Windows.Forms.Padding(2)
-        Me.cbbLotType.Name = "cbbLotType"
-        Me.cbbLotType.Size = New System.Drawing.Size(181, 21)
-        Me.cbbLotType.TabIndex = 12
+        Me.cbbPhaseInfo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbPhaseInfo.FormattingEnabled = True
+        Me.cbbPhaseInfo.Location = New System.Drawing.Point(92, 63)
+        Me.cbbPhaseInfo.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbPhaseInfo.Name = "cbbPhaseInfo"
+        Me.cbbPhaseInfo.Size = New System.Drawing.Size(181, 21)
+        Me.cbbPhaseInfo.TabIndex = 12
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.btnFilter)
         Me.GroupBox1.Controls.Add(Me.txtBlockFilter)
         Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Location = New System.Drawing.Point(286, 11)
+        Me.GroupBox1.Location = New System.Drawing.Point(409, 13)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
@@ -315,7 +315,7 @@ Partial Class FormAddProjectSetting
         Me.cbSQM.Location = New System.Drawing.Point(228, 38)
         Me.cbSQM.Margin = New System.Windows.Forms.Padding(2)
         Me.cbSQM.Name = "cbSQM"
-        Me.cbSQM.Size = New System.Drawing.Size(45, 21)
+        Me.cbSQM.Size = New System.Drawing.Size(177, 21)
         Me.cbSQM.TabIndex = 11
         '
         'Panel6
@@ -335,7 +335,7 @@ Partial Class FormAddProjectSetting
         Me.PanelLotUpdate.BackColor = System.Drawing.Color.White
         Me.PanelLotUpdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PanelLotUpdate.Controls.Add(Me.Label18)
-        Me.PanelLotUpdate.Controls.Add(Me.cbbLotTypeUpdate)
+        Me.PanelLotUpdate.Controls.Add(Me.cbbPhaseInfoUpdate)
         Me.PanelLotUpdate.Controls.Add(Me.cbSQMUpdate)
         Me.PanelLotUpdate.Controls.Add(Me.lblClose)
         Me.PanelLotUpdate.Controls.Add(Me.btnUpdateLot)
@@ -362,24 +362,24 @@ Partial Class FormAddProjectSetting
         Me.Label18.TabIndex = 26
         Me.Label18.Text = "Lot Type"
         '
-        'cbbLotTypeUpdate
+        'cbbPhaseInfoUpdate
         '
-        Me.cbbLotTypeUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbbLotTypeUpdate.FormattingEnabled = True
-        Me.cbbLotTypeUpdate.Location = New System.Drawing.Point(57, 40)
-        Me.cbbLotTypeUpdate.Margin = New System.Windows.Forms.Padding(2)
-        Me.cbbLotTypeUpdate.Name = "cbbLotTypeUpdate"
-        Me.cbbLotTypeUpdate.Size = New System.Drawing.Size(217, 21)
-        Me.cbbLotTypeUpdate.TabIndex = 21
+        Me.cbbPhaseInfoUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbPhaseInfoUpdate.FormattingEnabled = True
+        Me.cbbPhaseInfoUpdate.Location = New System.Drawing.Point(57, 40)
+        Me.cbbPhaseInfoUpdate.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbPhaseInfoUpdate.Name = "cbbPhaseInfoUpdate"
+        Me.cbbPhaseInfoUpdate.Size = New System.Drawing.Size(181, 21)
+        Me.cbbPhaseInfoUpdate.TabIndex = 21
         '
         'cbSQMUpdate
         '
         Me.cbSQMUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbSQMUpdate.FormattingEnabled = True
-        Me.cbSQMUpdate.Location = New System.Drawing.Point(229, 14)
+        Me.cbSQMUpdate.Location = New System.Drawing.Point(221, 14)
         Me.cbSQMUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.cbSQMUpdate.Name = "cbSQMUpdate"
-        Me.cbSQMUpdate.Size = New System.Drawing.Size(45, 21)
+        Me.cbSQMUpdate.Size = New System.Drawing.Size(177, 21)
         Me.cbSQMUpdate.TabIndex = 20
         '
         'lblClose
@@ -406,7 +406,7 @@ Partial Class FormAddProjectSetting
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(194, 17)
+        Me.Label13.Location = New System.Drawing.Point(186, 17)
         Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(31, 13)
@@ -905,8 +905,8 @@ Partial Class FormAddProjectSetting
     Friend WithEvents lblProjectName As Label
     Friend WithEvents ColumnHeaderRemark As ColumnHeader
     Friend WithEvents Label17 As Label
-    Friend WithEvents cbbLotType As ComboBox
+    Friend WithEvents cbbPhaseInfo As ComboBox
     Friend WithEvents ColumnHeaderLotType As ColumnHeader
     Friend WithEvents Label18 As Label
-    Friend WithEvents cbbLotTypeUpdate As ComboBox
+    Friend WithEvents cbbPhaseInfoUpdate As ComboBox
 End Class

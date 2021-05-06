@@ -62,6 +62,9 @@ Public Class FormAddProjectSetting
             Exit Sub
         End If
 
+        Dim s As String = cbSQM.Text.Trim
+        Dim words As String() = s.Split(New Char() {";"c})
+
         sql = "INSERT INTO `db_project_item` ( `block`, `lot`,`sqm`, `lot_type`, `price`, `proj_id`,`autoID`) VALUES 
         (@Block, @Lot, @Sqm, @LotType, @TCP, (SELECT `id` FROM `db_project_list` WHERE `proj_name` LIKE @ProjectName),
         CONCAT(`proj_id`,'.',`block`,'.',`lot`))"
@@ -70,8 +73,8 @@ Public Class FormAddProjectSetting
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@Block", MySqlDbType.Int24).Value = Double.Parse(txtBlock.Text.Trim)
             sqlCommand.Parameters.Add("@Lot", MySqlDbType.Int24).Value = Double.Parse(txtLot.Text.Trim)
-            sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = cbSQM.Text
-            sqlCommand.Parameters.Add("@LotType", MySqlDbType.VarChar).Value = cbbLotType.Text.Trim
+            sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = words(0)
+            sqlCommand.Parameters.Add("@LotType", MySqlDbType.VarChar).Value = words(1)
             sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = Double.Parse(txtTCP.Text.Trim)
             sqlCommand.Parameters.Add("@ProjectName", MySqlDbType.VarChar).Value = cbbProjectName.Text.Trim
             If sqlCommand.ExecuteNonQuery() = 1 Then
@@ -161,12 +164,15 @@ Public Class FormAddProjectSetting
             Dim comboSource As New Dictionary(Of String, String)()
             If sqlDataReader.HasRows Then
                 Do While sqlDataReader.Read = True
-                    comboSource.Add(sqlDataReader("id"), sqlDataReader("sqm"))
+
+                    Dim sqmType As String = sqlDataReader("sqm").ToString + "; " + sqlDataReader("lot_type")
+
+                    comboSource.Add(sqlDataReader("id"), sqmType)
                     dataPriceList.Add(sqlDataReader("id"), sqlDataReader("tcp"))
                     dataPriceListLotType.Add(sqlDataReader("id"), sqlDataReader("lot_type"))
                 Loop
             Else
-                comboSource.Add("1", "0")
+                comboSource.Add("1", "0;INNER")
                 dataPriceList.Add("1", "0")
                 dataPriceListLotType.Add("1", "INNER")
             End If
@@ -197,7 +203,7 @@ Public Class FormAddProjectSetting
                 If dataPriceList.ContainsKey(key) Then
                     Dim price As Double = dataPriceList.Item(key)
                     txtTCP.Text = price.ToString("N2")
-                    cbbLotType.Text = dataPriceListLotType.Item(key)
+                    cbbPhaseInfo.SelectedIndex = 0
                 End If
             Catch ex As Exception
             End Try
@@ -213,7 +219,7 @@ Public Class FormAddProjectSetting
             If dataPriceList.ContainsKey(key) Then
                 Dim price As Double = dataPriceList.Item(key)
                 txtTcpUp.Text = price.ToString("N2")
-                cbbLotTypeUpdate.Text = dataPriceListLotType.Item(key)
+                cbbPhaseInfoUpdate.SelectedIndex = 0
             End If
         End If
     End Sub
@@ -330,7 +336,7 @@ Public Class FormAddProjectSetting
             txtLotUp.Text = lot._lot
             cbSQMUpdate.Text = lot._sqm
             txtTcpUp.Text = lot._tcp.ToString("N2")
-            cbbLotTypeUpdate.Text = lot._lotType
+            cbbPhaseInfoUpdate.Text = lot._lotType
         End If
         PanelProjectNameUpdate.Visible = False
     End Sub
@@ -353,15 +359,21 @@ Public Class FormAddProjectSetting
     End Sub
 
     Private Sub btnUpdateLot_Click(sender As Object, e As EventArgs) Handles btnUpdateLot.Click
+
+        Dim s As String = cbSQMUpdate.Text.Trim
+        Dim words As String() = s.Split(New Char() {";"c})
+
         sql = "UPDATE `db_project_item` SET `block`=@block, `lot`=@lot,`sqm`=@Sqm, `lot_type`=@lotType,
         `price`=@price, `autoID`=@autoID WHERE `item_id`=@ItemID"
         Connection()
+
+        MessageBox.Show("sqm: " + words(0) + " type: " + words(1))
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         Try
             sqlCommand.Parameters.Add("@block", MySqlDbType.Int24).Value = txtBlockUp.Text.Trim
             sqlCommand.Parameters.Add("@lot", MySqlDbType.Int24).Value = txtLotUp.Text.Trim
-            sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = cbSQMUpdate.Text
-            sqlCommand.Parameters.Add("@lotType", MySqlDbType.VarChar).Value = cbbLotTypeUpdate.Text
+            sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = words(0)
+            sqlCommand.Parameters.Add("@lotType", MySqlDbType.VarChar).Value = words(1)
             sqlCommand.Parameters.Add("@price", MySqlDbType.Double).Value = txtTcpUp.Text.Trim
             sqlCommand.Parameters.Add("@autoID", MySqlDbType.VarChar).Value = lot._projID & "." & txtBlockUp.Text.Trim & "." & txtLotUp.Text.Trim
             sqlCommand.Parameters.Add("@ItemID", MySqlDbType.Int64).Value = lot._id
@@ -468,36 +480,36 @@ Public Class FormAddProjectSetting
         End If
     End Sub
     Private Sub load_Project_lot_type_combobox()
-        sql = "SELECT * FROM `db_project_lot_type` ORDER BY lottype"
+        sql = "SELECT * FROM `db_project_lot_phase` ORDER BY phase"
         Connection()
         Try
             Cursor = Cursors.WaitCursor
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlDataReader = sqlCommand.ExecuteReader()
 
-            cbbLotType.DataSource = Nothing
-            cbbLotType.Items.Clear()
+            cbbPhaseInfo.DataSource = Nothing
+            cbbPhaseInfo.Items.Clear()
 
-            cbbLotTypeUpdate.DataSource = Nothing
-            cbbLotTypeUpdate.Items.Clear()
+            cbbPhaseInfoUpdate.DataSource = Nothing
+            cbbPhaseInfoUpdate.Items.Clear()
 
             Dim comboSourceProjectLotType As New Dictionary(Of String, String)()
             If sqlDataReader.HasRows Then
                 comboSourceProjectLotType.Add("0", "")
                 Do While sqlDataReader.Read = True
-                    comboSourceProjectLotType.Add(sqlDataReader("id"), sqlDataReader("lotType"))
+                    comboSourceProjectLotType.Add(sqlDataReader("id"), sqlDataReader("phase"))
                 Loop
             Else
                 comboSourceProjectLotType.Add("0", "Empty")
             End If
 
-            cbbLotType.DataSource = New BindingSource(comboSourceProjectLotType, Nothing)
-            cbbLotType.DisplayMember = "Value"
-            cbbLotType.ValueMember = "Key"
+            cbbPhaseInfo.DataSource = New BindingSource(comboSourceProjectLotType, Nothing)
+            cbbPhaseInfo.DisplayMember = "Value"
+            cbbPhaseInfo.ValueMember = "Key"
 
-            cbbLotTypeUpdate.DataSource = New BindingSource(comboSourceProjectLotType, Nothing)
-            cbbLotTypeUpdate.DisplayMember = "Value"
-            cbbLotTypeUpdate.ValueMember = "Key"
+            cbbPhaseInfoUpdate.DataSource = New BindingSource(comboSourceProjectLotType, Nothing)
+            cbbPhaseInfoUpdate.DisplayMember = "Value"
+            cbbPhaseInfoUpdate.ValueMember = "Key"
 
             sqlDataReader.Dispose()
         Catch ex As Exception
