@@ -6,4 +6,5 @@
     Public Property _lotType As String = ""
     Public Property _tcp As Double = 0
     Public Property _projID As Integer = 0
+    Public Property _phase As String = ""
 End Class

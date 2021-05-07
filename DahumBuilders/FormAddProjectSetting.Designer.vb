@@ -44,7 +44,6 @@ Partial Class FormAddProjectSetting
         Me.cbSQM = New System.Windows.Forms.ComboBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PanelLotUpdate = New System.Windows.Forms.Panel()
-        Me.Label18 = New System.Windows.Forms.Label()
         Me.cbbPhaseInfoUpdate = New System.Windows.Forms.ComboBox()
         Me.cbSQMUpdate = New System.Windows.Forms.ComboBox()
         Me.lblClose = New System.Windows.Forms.Label()
@@ -94,6 +93,8 @@ Partial Class FormAddProjectSetting
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.ColumnHeaderPhase = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -194,7 +195,7 @@ Partial Class FormAddProjectSetting
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(60, 92)
+        Me.Label5.Location = New System.Drawing.Point(56, 92)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(28, 13)
@@ -271,7 +272,7 @@ Partial Class FormAddProjectSetting
         Me.GroupBox1.Controls.Add(Me.btnFilter)
         Me.GroupBox1.Controls.Add(Me.txtBlockFilter)
         Me.GroupBox1.Controls.Add(Me.Label14)
-        Me.GroupBox1.Location = New System.Drawing.Point(409, 13)
+        Me.GroupBox1.Location = New System.Drawing.Point(433, 13)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
@@ -353,15 +354,6 @@ Partial Class FormAddProjectSetting
         Me.PanelLotUpdate.Size = New System.Drawing.Size(705, 132)
         Me.PanelLotUpdate.TabIndex = 11
         '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(4, 43)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(49, 13)
-        Me.Label18.TabIndex = 26
-        Me.Label18.Text = "Lot Type"
-        '
         'cbbPhaseInfoUpdate
         '
         Me.cbbPhaseInfoUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -416,7 +408,7 @@ Partial Class FormAddProjectSetting
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(27, 73)
+        Me.Label10.Location = New System.Drawing.Point(25, 73)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(28, 13)
@@ -471,7 +463,7 @@ Partial Class FormAddProjectSetting
         'ListViewProjectLot
         '
         Me.ListViewProjectLot.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnHeaderLotType, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID, Me.ColumnHeaderClient, Me.ColumnHeaderRemark})
+        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnHeaderLotType, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID, Me.ColumnHeaderClient, Me.ColumnHeaderPhase, Me.ColumnHeaderRemark})
         Me.ListViewProjectLot.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewProjectLot.FullRowSelect = True
         Me.ListViewProjectLot.GridLines = True
@@ -803,6 +795,19 @@ Partial Class FormAddProjectSetting
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "Project Lot Setting"
         '
+        'ColumnHeaderPhase
+        '
+        Me.ColumnHeaderPhase.Text = "Phase"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(16, 43)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(37, 13)
+        Me.Label18.TabIndex = 25
+        Me.Label18.Text = "Phase"
+        '
         'FormAddProjectSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -907,6 +912,7 @@ Partial Class FormAddProjectSetting
     Friend WithEvents Label17 As Label
     Friend WithEvents cbbPhaseInfo As ComboBox
     Friend WithEvents ColumnHeaderLotType As ColumnHeader
-    Friend WithEvents Label18 As Label
     Friend WithEvents cbbPhaseInfoUpdate As ComboBox
+    Friend WithEvents ColumnHeaderPhase As ColumnHeader
+    Friend WithEvents Label18 As Label
 End Class

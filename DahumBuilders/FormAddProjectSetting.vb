@@ -8,7 +8,7 @@ Public Class FormAddProjectSetting
 
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Size(1150, 500)
-        load_Project_lot_type_combobox()
+        load_Project_lot_phase_combobox()
         load_ProjectName_combobox()
 
         PanelLotUpdate.Visible = False
@@ -64,22 +64,24 @@ Public Class FormAddProjectSetting
 
         Dim s As String = cbSQM.Text.Trim
         Dim words As String() = s.Split(New Char() {";"c})
+        Dim cbbPhaseInfoID As String = DirectCast(cbbPhaseInfo.SelectedItem, KeyValuePair(Of String, String)).Key
 
-        sql = "INSERT INTO `db_project_item` ( `block`, `lot`,`sqm`, `lot_type`, `price`, `proj_id`,`autoID`) VALUES 
+        sql = "INSERT INTO `db_project_item` ( `block`, `lot`,`sqm`, `lot_type`, `price`, `proj_id`,`autoID`, `phase_id`) VALUES 
         (@Block, @Lot, @Sqm, @LotType, @TCP, (SELECT `id` FROM `db_project_list` WHERE `proj_name` LIKE @ProjectName),
-        CONCAT(`proj_id`,'.',`block`,'.',`lot`))"
+        CONCAT(`proj_id`,'.',`block`,'.',`lot`), @PhaseId)"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@Block", MySqlDbType.Int24).Value = Double.Parse(txtBlock.Text.Trim)
             sqlCommand.Parameters.Add("@Lot", MySqlDbType.Int24).Value = Double.Parse(txtLot.Text.Trim)
             sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = words(0)
-            sqlCommand.Parameters.Add("@LotType", MySqlDbType.VarChar).Value = words(1)
+            sqlCommand.Parameters.Add("@LotType", MySqlDbType.VarChar).Value = words(1).Trim
             sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = Double.Parse(txtTCP.Text.Trim)
             sqlCommand.Parameters.Add("@ProjectName", MySqlDbType.VarChar).Value = cbbProjectName.Text.Trim
+            sqlCommand.Parameters.Add("@PhaseId", MySqlDbType.Int32).Value = cbbPhaseInfoID
+
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 loadProjectLots("")
-                'MessageBox.Show("Successfully added new lot.")
             Else
                 MessageBox.Show("Data NOT Inserted. Please try again.")
             End If
@@ -240,12 +242,14 @@ Public Class FormAddProjectSetting
         Dim item As ListViewItem
         If blockNumber.Length > 0 Then
             sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
-            IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`, i.`proj_id`
+            IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`,
+            IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID {0} ORDER BY i.`block` ASC, i.`lot` ASC"
             sql = String.Format(sql, " AND i.`block` LIKE '" + blockNumber + "'")
         Else
             sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
-            IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`, i.`proj_id`
+            IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`,
+            IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID ORDER BY i.`block` ASC, i.`lot` ASC"
         End If
         Connection()
@@ -280,6 +284,7 @@ Public Class FormAddProjectSetting
                 item.SubItems.Add(sqlDataReader("autoID"))
                 item.SubItems.Add(sqlDataReader("proj_id"))
                 item.SubItems.Add(sqlDataReader("clientName"))
+                item.SubItems.Add(sqlDataReader("phase"))
                 item.SubItems.Add(sqlDataReader("remark"))
                 ListViewProjectLot.Items.Add(item)
             Loop
@@ -330,13 +335,14 @@ Public Class FormAddProjectSetting
                 ._lotType = ListViewProjectLot.SelectedItems.Item(0).SubItems(5).Text
                 ._tcp = ListViewProjectLot.SelectedItems.Item(0).SubItems(6).Text
                 ._projID = ListViewProjectLot.SelectedItems.Item(0).SubItems(9).Text
+                ._phase = ListViewProjectLot.SelectedItems.Item(0).SubItems(11).Text
             End With
 
             txtBlockUp.Text = lot._block
             txtLotUp.Text = lot._lot
-            cbSQMUpdate.Text = lot._sqm
+            cbSQMUpdate.Text = lot._sqm + "; " + lot._lotType
             txtTcpUp.Text = lot._tcp.ToString("N2")
-            cbbPhaseInfoUpdate.Text = lot._lotType
+            cbbPhaseInfoUpdate.Text = lot._phase
         End If
         PanelProjectNameUpdate.Visible = False
     End Sub
@@ -362,21 +368,23 @@ Public Class FormAddProjectSetting
 
         Dim s As String = cbSQMUpdate.Text.Trim
         Dim words As String() = s.Split(New Char() {";"c})
+        Dim cbbPhaseInfoID As String = DirectCast(cbbPhaseInfoUpdate.SelectedItem, KeyValuePair(Of String, String)).Key
 
         sql = "UPDATE `db_project_item` SET `block`=@block, `lot`=@lot,`sqm`=@Sqm, `lot_type`=@lotType,
-        `price`=@price, `autoID`=@autoID WHERE `item_id`=@ItemID"
+        `price`=@price, `autoID`=@autoID, `phase_id`=@PhaseId WHERE `item_id`=@ItemID"
         Connection()
 
-        MessageBox.Show("sqm: " + words(0) + " type: " + words(1))
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         Try
             sqlCommand.Parameters.Add("@block", MySqlDbType.Int24).Value = txtBlockUp.Text.Trim
             sqlCommand.Parameters.Add("@lot", MySqlDbType.Int24).Value = txtLotUp.Text.Trim
             sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = words(0)
-            sqlCommand.Parameters.Add("@lotType", MySqlDbType.VarChar).Value = words(1)
+            sqlCommand.Parameters.Add("@lotType", MySqlDbType.VarChar).Value = words(1).Trim
             sqlCommand.Parameters.Add("@price", MySqlDbType.Double).Value = txtTcpUp.Text.Trim
             sqlCommand.Parameters.Add("@autoID", MySqlDbType.VarChar).Value = lot._projID & "." & txtBlockUp.Text.Trim & "." & txtLotUp.Text.Trim
             sqlCommand.Parameters.Add("@ItemID", MySqlDbType.Int64).Value = lot._id
+            sqlCommand.Parameters.Add("@PhaseId", MySqlDbType.Int32).Value = cbbPhaseInfoID
+
 
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 txtProjectName.Text = String.Empty
@@ -479,7 +487,7 @@ Public Class FormAddProjectSetting
             PanelProjectNameUpdate.Visible = False
         End If
     End Sub
-    Private Sub load_Project_lot_type_combobox()
+    Private Sub load_Project_lot_phase_combobox()
         sql = "SELECT * FROM `db_project_lot_phase` ORDER BY phase"
         Connection()
         Try
@@ -500,7 +508,7 @@ Public Class FormAddProjectSetting
                     comboSourceProjectLotType.Add(sqlDataReader("id"), sqlDataReader("phase"))
                 Loop
             Else
-                comboSourceProjectLotType.Add("0", "Empty")
+                comboSourceProjectLotType.Add("0", "")
             End If
 
             cbbPhaseInfo.DataSource = New BindingSource(comboSourceProjectLotType, Nothing)
