@@ -85,14 +85,20 @@ Public Class FormPaymentMethod
     Private Sub dtpEquityStart_ValueChanged(sender As Object, e As EventArgs) Handles dtpEquityStart.ValueChanged
         If txtEquityTerm.Text.Trim IsNot String.Empty Then
             dtpEquityEnd.Value = dtpEquityStart.Value
-            dtpEquityEnd.Value = dtpEquityEnd.Value.AddMonths(txtEquityTerm.Text)
+            If Int32.Parse(txtEquityTerm.Text) = 0 Then
+            Else
+                dtpEquityEnd.Value = dtpEquityEnd.Value.AddMonths(Int32.Parse(txtEquityTerm.Text) - 1)
+            End If
         End If
     End Sub
 
     Private Sub txtEquityTerm_KeyUp(sender As Object, e As KeyEventArgs) Handles txtEquityTerm.KeyUp
         If txtEquityTerm.Text.Trim IsNot String.Empty Then
             dtpEquityEnd.Value = dtpEquityStart.Value
-            dtpEquityEnd.Value = dtpEquityEnd.Value.AddMonths(txtEquityTerm.Text)
+            If Int32.Parse(txtEquityTerm.Text) = 0 Then
+            Else
+                dtpEquityEnd.Value = dtpEquityEnd.Value.AddMonths(Int32.Parse(txtEquityTerm.Text) - 1)
+            End If
 
             dtpMonthlyStart.Value = dtpEquityEnd.Value.AddMonths(1)
         End If
@@ -101,14 +107,20 @@ Public Class FormPaymentMethod
     Private Sub txtMATerm_KeyUp(sender As Object, e As KeyEventArgs) Handles txtMATerm.KeyUp
         If txtMATerm.Text.Trim IsNot String.Empty Then
             dtpMonthlyEnd.Value = dtpMonthlyStart.Value
-            dtpMonthlyEnd.Value = dtpMonthlyEnd.Value.AddMonths(txtMATerm.Text)
+            If Int32.Parse(txtMATerm.Text) = 0 Then
+            Else
+                dtpMonthlyEnd.Value = dtpMonthlyEnd.Value.AddMonths(Int32.Parse(txtMATerm.Text) - 1)
+            End If
         End If
     End Sub
 
     Private Sub dtpMonthlyStart_ValueChanged(sender As Object, e As EventArgs) Handles dtpMonthlyStart.ValueChanged
         If txtMATerm.Text.Trim IsNot String.Empty Then
             dtpMonthlyEnd.Value = dtpMonthlyStart.Value
-            dtpMonthlyEnd.Value = dtpMonthlyEnd.Value.AddMonths(txtMATerm.Text)
+            If Int32.Parse(txtMATerm.Text) = 0 Then
+            Else
+                dtpMonthlyEnd.Value = dtpMonthlyEnd.Value.AddMonths(Int32.Parse(txtMATerm.Text) - 1)
+            End If
         End If
     End Sub
     Private Sub dtpEquityEnd_ValueChanged(sender As Object, e As EventArgs) Handles dtpEquityEnd.ValueChanged

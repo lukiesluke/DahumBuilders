@@ -537,7 +537,7 @@ Partial Class FormAddProjectSetting
         'ColumnHeaderRemark
         '
         Me.ColumnHeaderRemark.Text = "Remark"
-        Me.ColumnHeaderRemark.Width = 200
+        Me.ColumnHeaderRemark.Width = 100
         '
         'lblProjID
         '
