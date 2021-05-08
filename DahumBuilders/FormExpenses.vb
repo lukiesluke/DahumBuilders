@@ -8,7 +8,7 @@ Public Class FormExpenses
     Dim messageInfo As String = "Please select name..."
     Dim mDisableLoadUserType As Boolean = False
     Private Sub FormExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(1020, 530)
+        Me.Size = New Size(1020, 550)
         lblProjectID.Text = 0
         lblClientID.Text = 0
         lblIssueTo.Text = messageInfo
@@ -123,7 +123,8 @@ Public Class FormExpenses
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`,
-        IFNULL((SELECT `tin` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') tin
+        IFNULL((SELECT `tin` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') tin,
+        IFNULL((SELECT `address` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') address
         FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"
 
         Connection()
@@ -143,13 +144,14 @@ Public Class FormExpenses
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(sqlDataReader("date_paid"))
                 item.SubItems.Add(sqlDataReader("voucher_no"))
-                item.SubItems.Add(sqlDataReader("description"))
-                item.SubItems.Add(Double.Parse(sqlDataReader("commission")).ToString("N2"))
                 item.SubItems.Add(sqlDataReader("NAME"))
+                item.SubItems.Add(sqlDataReader("tin"))
+                item.SubItems.Add(sqlDataReader("address"))
                 item.SubItems.Add(sqlDataReader("particular"))
                 item.SubItems.Add(sqlDataReader("paymentType"))
                 item.SubItems.Add(sqlDataReader("check_number"))
-                item.SubItems.Add(sqlDataReader("tin"))
+                item.SubItems.Add(sqlDataReader("description"))
+                item.SubItems.Add(Double.Parse(sqlDataReader("commission")).ToString("N2"))
                 ListViewExpenses.Items.Add(item)
             Loop
 
@@ -239,6 +241,7 @@ Public Class FormExpenses
                 txtDescription.Text = ""
                 btnSave.Enabled = False
                 txtCheckNo.Text = ""
+                txtVoucherNo.Text = ""
                 cbbBankName.SelectedIndex = 0
                 MessageBox.Show("Expenses successfully save.")
                 lblIssueTo.Text = messageInfo
