@@ -264,7 +264,7 @@ Partial Class FormExpenses
         '
         'ColumnHeaderEmpName
         '
-        Me.ColumnHeaderEmpName.Text = "Name"
+        Me.ColumnHeaderEmpName.Text = "Payee"
         Me.ColumnHeaderEmpName.Width = 130
         '
         'ColumnHeaderTINex
