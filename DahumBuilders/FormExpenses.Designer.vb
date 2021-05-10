@@ -44,13 +44,14 @@ Partial Class FormExpenses
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderExpDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderVoucherNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderEmpName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTINex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderAdd = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCheckNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderTINex = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblIssueTo = New System.Windows.Forms.Label()
         Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
@@ -76,10 +77,17 @@ Partial Class FormExpenses
         Me.Label11 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ColumnHeaderAdd = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnSearchDate = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.dtpStart = New System.Windows.Forms.DateTimePicker()
+        Me.dtpEnd = New System.Windows.Forms.DateTimePicker()
+        Me.cbbExpensesTypeSearch = New System.Windows.Forms.ComboBox()
         Me.PanelPayeeName.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
@@ -89,7 +97,7 @@ Partial Class FormExpenses
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(2, 53)
-        Me.ListView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(628, 250)
         Me.ListView1.TabIndex = 14
@@ -128,7 +136,7 @@ Partial Class FormExpenses
         'btnSearch
         '
         Me.btnSearch.Location = New System.Drawing.Point(232, 16)
-        Me.btnSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(60, 21)
         Me.btnSearch.TabIndex = 13
@@ -140,7 +148,7 @@ Partial Class FormExpenses
         Me.dt.CustomFormat = "MM/dd/yyyy"
         Me.dt.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dt.Location = New System.Drawing.Point(107, 23)
-        Me.dt.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dt.Margin = New System.Windows.Forms.Padding(2)
         Me.dt.Name = "dt"
         Me.dt.Size = New System.Drawing.Size(81, 20)
         Me.dt.TabIndex = 0
@@ -150,7 +158,7 @@ Partial Class FormExpenses
         Me.cbbExpensesType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbExpensesType.FormattingEnabled = True
         Me.cbbExpensesType.Location = New System.Drawing.Point(107, 49)
-        Me.cbbExpensesType.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbbExpensesType.Margin = New System.Windows.Forms.Padding(2)
         Me.cbbExpensesType.Name = "cbbExpensesType"
         Me.cbbExpensesType.Size = New System.Drawing.Size(225, 21)
         Me.cbbExpensesType.TabIndex = 3
@@ -159,7 +167,7 @@ Partial Class FormExpenses
         '
         Me.txtDescription.BackColor = System.Drawing.Color.White
         Me.txtDescription.Location = New System.Drawing.Point(107, 209)
-        Me.txtDescription.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtDescription.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(225, 90)
@@ -188,7 +196,7 @@ Partial Class FormExpenses
         'btnSave
         '
         Me.btnSave.Location = New System.Drawing.Point(107, 302)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(107, 27)
         Me.btnSave.TabIndex = 10
@@ -198,7 +206,7 @@ Partial Class FormExpenses
         'btnCancel
         '
         Me.btnCancel.Location = New System.Drawing.Point(223, 302)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(107, 27)
         Me.btnCancel.TabIndex = 11
@@ -209,7 +217,7 @@ Partial Class FormExpenses
         '
         Me.txtCashoutAmount.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.txtCashoutAmount.Location = New System.Drawing.Point(107, 185)
-        Me.txtCashoutAmount.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtCashoutAmount.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCashoutAmount.Name = "txtCashoutAmount"
         Me.txtCashoutAmount.Size = New System.Drawing.Size(225, 20)
         Me.txtCashoutAmount.TabIndex = 8
@@ -228,12 +236,13 @@ Partial Class FormExpenses
         'ListViewExpenses
         '
         Me.ListViewExpenses.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderExpDate, Me.ColumnHeaderVoucherNo, Me.ColumnHeaderEmpName, Me.ColumnHeaderTINex, Me.ColumnHeaderAdd, Me.ColumnHeaderType, Me.ColumnHeaderPaymentType, Me.ColumnHeaderCheckNo, Me.ColumnHeaderDescription, Me.ColumnHeaderAmount})
+        Me.ListViewExpenses.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ListViewExpenses.FullRowSelect = True
         Me.ListViewExpenses.GridLines = True
-        Me.ListViewExpenses.Location = New System.Drawing.Point(8, 337)
-        Me.ListViewExpenses.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ListViewExpenses.Location = New System.Drawing.Point(3, 48)
+        Me.ListViewExpenses.Margin = New System.Windows.Forms.Padding(2)
         Me.ListViewExpenses.Name = "ListViewExpenses"
-        Me.ListViewExpenses.Size = New System.Drawing.Size(964, 153)
+        Me.ListViewExpenses.Size = New System.Drawing.Size(952, 139)
         Me.ListViewExpenses.TabIndex = 15
         Me.ListViewExpenses.UseCompatibleStateImageBehavior = False
         Me.ListViewExpenses.View = System.Windows.Forms.View.Details
@@ -253,21 +262,20 @@ Partial Class FormExpenses
         Me.ColumnHeaderVoucherNo.Text = "Voucher No."
         Me.ColumnHeaderVoucherNo.Width = 75
         '
-        'ColumnHeaderDescription
-        '
-        Me.ColumnHeaderDescription.Text = "Description"
-        Me.ColumnHeaderDescription.Width = 150
-        '
-        'ColumnHeaderAmount
-        '
-        Me.ColumnHeaderAmount.Text = "Amount"
-        Me.ColumnHeaderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeaderAmount.Width = 80
-        '
         'ColumnHeaderEmpName
         '
         Me.ColumnHeaderEmpName.Text = "Name"
         Me.ColumnHeaderEmpName.Width = 130
+        '
+        'ColumnHeaderTINex
+        '
+        Me.ColumnHeaderTINex.Text = "TIN"
+        Me.ColumnHeaderTINex.Width = 80
+        '
+        'ColumnHeaderAdd
+        '
+        Me.ColumnHeaderAdd.Text = "Address"
+        Me.ColumnHeaderAdd.Width = 80
         '
         'ColumnHeaderType
         '
@@ -284,10 +292,16 @@ Partial Class FormExpenses
         Me.ColumnHeaderCheckNo.Text = "Check No"
         Me.ColumnHeaderCheckNo.Width = 80
         '
-        'ColumnHeaderTINex
+        'ColumnHeaderDescription
         '
-        Me.ColumnHeaderTINex.Text = "TIN"
-        Me.ColumnHeaderTINex.Width = 80
+        Me.ColumnHeaderDescription.Text = "Description"
+        Me.ColumnHeaderDescription.Width = 150
+        '
+        'ColumnHeaderAmount
+        '
+        Me.ColumnHeaderAmount.Text = "Amount"
+        Me.ColumnHeaderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderAmount.Width = 80
         '
         'Label6
         '
@@ -317,7 +331,7 @@ Partial Class FormExpenses
         Me.cbbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbPaymentType.FormattingEnabled = True
         Me.cbbPaymentType.Location = New System.Drawing.Point(107, 73)
-        Me.cbbPaymentType.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbbPaymentType.Margin = New System.Windows.Forms.Padding(2)
         Me.cbbPaymentType.Name = "cbbPaymentType"
         Me.cbbPaymentType.Size = New System.Drawing.Size(225, 21)
         Me.cbbPaymentType.TabIndex = 4
@@ -335,7 +349,7 @@ Partial Class FormExpenses
         'txtCheckNo
         '
         Me.txtCheckNo.Location = New System.Drawing.Point(107, 129)
-        Me.txtCheckNo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtCheckNo.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCheckNo.Name = "txtCheckNo"
         Me.txtCheckNo.Size = New System.Drawing.Size(225, 20)
         Me.txtCheckNo.TabIndex = 6
@@ -363,7 +377,7 @@ Partial Class FormExpenses
         'txtSearch
         '
         Me.txtSearch.Location = New System.Drawing.Point(44, 18)
-        Me.txtSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(185, 20)
         Me.txtSearch.TabIndex = 12
@@ -417,7 +431,7 @@ Partial Class FormExpenses
         Me.cbbBankName.FormattingEnabled = True
         Me.cbbBankName.Items.AddRange(New Object() {"Select Bank Name", "RCBC", "PSBank", "BPI", "BDO", "MetroBank", "Security Bank", "Unionbank", "ChinaBank", "Citibank"})
         Me.cbbBankName.Location = New System.Drawing.Point(107, 103)
-        Me.cbbBankName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbbBankName.Margin = New System.Windows.Forms.Padding(2)
         Me.cbbBankName.Name = "cbbBankName"
         Me.cbbBankName.Size = New System.Drawing.Size(225, 21)
         Me.cbbBankName.TabIndex = 5
@@ -430,7 +444,7 @@ Partial Class FormExpenses
         Me.PanelPayeeName.Controls.Add(Me.txtPayeeName)
         Me.PanelPayeeName.Controls.Add(Me.Label10)
         Me.PanelPayeeName.Location = New System.Drawing.Point(334, 123)
-        Me.PanelPayeeName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PanelPayeeName.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelPayeeName.Name = "PanelPayeeName"
         Me.PanelPayeeName.Size = New System.Drawing.Size(336, 79)
         Me.PanelPayeeName.TabIndex = 31
@@ -439,7 +453,7 @@ Partial Class FormExpenses
         'btnSetPayeeName
         '
         Me.btnSetPayeeName.Location = New System.Drawing.Point(103, 41)
-        Me.btnSetPayeeName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnSetPayeeName.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSetPayeeName.Name = "btnSetPayeeName"
         Me.btnSetPayeeName.Size = New System.Drawing.Size(107, 27)
         Me.btnSetPayeeName.TabIndex = 32
@@ -449,7 +463,7 @@ Partial Class FormExpenses
         'btnPayeeCancel
         '
         Me.btnPayeeCancel.Location = New System.Drawing.Point(214, 41)
-        Me.btnPayeeCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnPayeeCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btnPayeeCancel.Name = "btnPayeeCancel"
         Me.btnPayeeCancel.Size = New System.Drawing.Size(107, 27)
         Me.btnPayeeCancel.TabIndex = 33
@@ -459,7 +473,7 @@ Partial Class FormExpenses
         'txtPayeeName
         '
         Me.txtPayeeName.Location = New System.Drawing.Point(85, 12)
-        Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPayeeName.Name = "txtPayeeName"
         Me.txtPayeeName.Size = New System.Drawing.Size(237, 20)
         Me.txtPayeeName.TabIndex = 32
@@ -484,9 +498,9 @@ Partial Class FormExpenses
         Me.GroupBox1.Controls.Add(Me.lblClientID)
         Me.GroupBox1.Controls.Add(Me.ListView1)
         Me.GroupBox1.Location = New System.Drawing.Point(340, 23)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Size = New System.Drawing.Size(632, 305)
         Me.GroupBox1.TabIndex = 32
         Me.GroupBox1.TabStop = False
@@ -547,16 +561,88 @@ Partial Class FormExpenses
         Me.ExcelToolStripMenuItem.Size = New System.Drawing.Size(97, 22)
         Me.ExcelToolStripMenuItem.Text = "Export to Excel"
         '
-        'ColumnHeaderAdd
+        'GroupBox2
         '
-        Me.ColumnHeaderAdd.Text = "Address"
-        Me.ColumnHeaderAdd.Width = 80
+        Me.GroupBox2.Controls.Add(Me.cbbExpensesTypeSearch)
+        Me.GroupBox2.Controls.Add(Me.btnSearchDate)
+        Me.GroupBox2.Controls.Add(Me.Label14)
+        Me.GroupBox2.Controls.Add(Me.Label13)
+        Me.GroupBox2.Controls.Add(Me.dtpStart)
+        Me.GroupBox2.Controls.Add(Me.dtpEnd)
+        Me.GroupBox2.Controls.Add(Me.ListViewExpenses)
+        Me.GroupBox2.Location = New System.Drawing.Point(14, 334)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(958, 190)
+        Me.GroupBox2.TabIndex = 36
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Expenses list"
+        '
+        'btnSearchDate
+        '
+        Me.btnSearchDate.Location = New System.Drawing.Point(596, 17)
+        Me.btnSearchDate.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSearchDate.Name = "btnSearchDate"
+        Me.btnSearchDate.Size = New System.Drawing.Size(60, 21)
+        Me.btnSearchDate.TabIndex = 31
+        Me.btnSearchDate.Text = "S&earch"
+        Me.btnSearchDate.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(106, 20)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(67, 13)
+        Me.Label14.TabIndex = 28
+        Me.Label14.Text = "Search Date"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(262, 20)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(16, 13)
+        Me.Label13.TabIndex = 27
+        Me.Label13.Text = "to"
+        '
+        'dtpStart
+        '
+        Me.dtpStart.CustomFormat = "MM/dd/yyyy"
+        Me.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpStart.Location = New System.Drawing.Point(177, 17)
+        Me.dtpStart.Margin = New System.Windows.Forms.Padding(2)
+        Me.dtpStart.Name = "dtpStart"
+        Me.dtpStart.Size = New System.Drawing.Size(81, 20)
+        Me.dtpStart.TabIndex = 17
+        '
+        'dtpEnd
+        '
+        Me.dtpEnd.CustomFormat = "MM/dd/yyyy"
+        Me.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpEnd.Location = New System.Drawing.Point(282, 17)
+        Me.dtpEnd.Margin = New System.Windows.Forms.Padding(2)
+        Me.dtpEnd.Name = "dtpEnd"
+        Me.dtpEnd.Size = New System.Drawing.Size(81, 20)
+        Me.dtpEnd.TabIndex = 16
+        '
+        'cbbExpensesTypeSearch
+        '
+        Me.cbbExpensesTypeSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbExpensesTypeSearch.FormattingEnabled = True
+        Me.cbbExpensesTypeSearch.Location = New System.Drawing.Point(367, 17)
+        Me.cbbExpensesTypeSearch.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbExpensesTypeSearch.Name = "cbbExpensesTypeSearch"
+        Me.cbbExpensesTypeSearch.Size = New System.Drawing.Size(225, 21)
+        Me.cbbExpensesTypeSearch.TabIndex = 32
         '
         'FormExpenses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(983, 502)
+        Me.ClientSize = New System.Drawing.Size(983, 526)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.txtVoucherNo)
         Me.Controls.Add(Me.PanelPayeeName)
@@ -569,7 +655,6 @@ Partial Class FormExpenses
         Me.Controls.Add(Me.cbbPaymentType)
         Me.Controls.Add(Me.lblIssueTo)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.ListViewExpenses)
         Me.Controls.Add(Me.lblProjectID)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtCashoutAmount)
@@ -585,7 +670,7 @@ Partial Class FormExpenses
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.Name = "FormExpenses"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -596,6 +681,8 @@ Partial Class FormExpenses
         Me.GroupBox1.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -655,4 +742,11 @@ Partial Class FormExpenses
     Friend WithEvents ExcelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderTINex As ColumnHeader
     Friend WithEvents ColumnHeaderAdd As ColumnHeader
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents dtpStart As DateTimePicker
+    Friend WithEvents dtpEnd As DateTimePicker
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents btnSearchDate As Button
+    Friend WithEvents cbbExpensesTypeSearch As ComboBox
 End Class

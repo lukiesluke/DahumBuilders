@@ -8,7 +8,7 @@ Public Class FormExpenses
     Dim messageInfo As String = "Please select name..."
     Dim mDisableLoadUserType As Boolean = False
     Private Sub FormExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(1020, 550)
+        Me.Size = New Size(1020, 570)
         lblProjectID.Text = 0
         lblClientID.Text = 0
         lblIssueTo.Text = messageInfo
@@ -16,6 +16,7 @@ Public Class FormExpenses
         txtCheckNo.Text = ""
         loadPaymentType()
         loadCombo()
+        loadComboExpensesSearch()
         loadComboBoxUserType()
         enableExportToExcel()
     End Sub
@@ -61,8 +62,6 @@ Public Class FormExpenses
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
-
-        loadDeduction(dt)
 
     End Sub
 
@@ -118,21 +117,61 @@ Public Class FormExpenses
             Cursor = Cursors.Default
         End Try
     End Sub
-    Private Sub loadDeduction(dt As DateTimePicker)
+    Private Sub loadComboExpensesSearch()
+        sql = "SELECT `id`,`name` FROM `db_particular_type` WHERE id>5"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            cbbExpensesTypeSearch.DataSource = Nothing
+            cbbExpensesTypeSearch.Items.Clear()
+
+            Dim comboSourceExpeneseType As New Dictionary(Of String, String)()
+            comboSourceExpeneseType.Add("0", "All")
+            Do While sqlDataReader.Read = True
+                comboSourceExpeneseType.Add(sqlDataReader("id"), sqlDataReader("name"))
+            Loop
+
+            cbbExpensesTypeSearch.DataSource = New BindingSource(comboSourceExpeneseType, Nothing)
+            cbbExpensesTypeSearch.DisplayMember = "Value"
+            cbbExpensesTypeSearch.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
+    Private Sub loadDeduction(keyId As String, dtStart As DateTimePicker, dtEnd As DateTimePicker)
+
+        Dim particulID As String = keyId
+
         sql = "SELECT `id`, `date_paid`, `commission`, `voucher_no`, `description`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`,
         IFNULL((SELECT `tin` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') tin,
         IFNULL((SELECT `address` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') address
-        FROM `db_transaction` WHERE `particular`>5 AND `date_paid`=@dt"
+        FROM `db_transaction` WHERE {0} AND `date_paid` BETWEEN @dtStart AND @dtEnd ORDER BY date_paid"
+
+        If 0 = cbbExpensesTypeSearch.SelectedIndex Then
+            particulID = "5"
+            sql = String.Format(sql, "`particular`>@Particular")
+        Else
+            sql = String.Format(sql, "`particular`=@Particular")
+        End If
 
         Connection()
-
-
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@dt", MySqlDbType.VarChar).Value = dt.Value.ToString(format)
+            sqlCommand.Parameters.Add("@dtStart", MySqlDbType.VarChar).Value = dtStart.Value.ToString(format)
+            sqlCommand.Parameters.Add("@dtEnd", MySqlDbType.VarChar).Value = dtEnd.Value.ToString(format)
+            sqlCommand.Parameters.Add("@Particular", MySqlDbType.VarChar).Value = particulID
             sqlDataReader = sqlCommand.ExecuteReader()
 
             Cursor = Cursors.WaitCursor
@@ -236,7 +275,6 @@ Public Class FormExpenses
 
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 sqlCommand.Dispose()
-                loadDeduction(dt)
                 txtCashoutAmount.Text = 0.ToString("N2")
                 txtDescription.Text = ""
                 btnSave.Enabled = False
@@ -417,5 +455,11 @@ Public Class FormExpenses
         Else
             ExcelToolStripMenuItem.Enabled = False
         End If
+    End Sub
+
+    Private Sub btnSearchDate_Click(sender As Object, e As EventArgs) Handles btnSearchDate.Click
+        Dim expensesID As String = DirectCast(cbbExpensesTypeSearch.SelectedItem, KeyValuePair(Of String, String)).Key
+
+        loadDeduction(expensesID, dtpStart, dtpEnd)
     End Sub
 End Class
