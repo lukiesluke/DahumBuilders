@@ -227,7 +227,7 @@ FinallyLine:
                             cellDP.ReadOnly = False
                             cellDiscount.Style.BackColor = Color.White
                             cellDiscount.ReadOnly = False
-                            DataGridView1.Rows(e.RowIndex).Cells(3).Value = "50" 'cbbDownpayment
+                            DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             If p._total_balance = 0 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
@@ -257,6 +257,7 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(13).Value = 1 'Advance Payment
                             EnableDataGridViewCell(DataGridView1, e) 'Part
+                            DataGridView1.Rows(e.RowIndex).Cells(10).Value = "1" 'Part No
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._equity.ToString("N2") 'Amount to pay
                         Case "Monthly"
                             DataGridView1.Rows(e.RowIndex).Cells(11).ReadOnly = False
@@ -268,6 +269,7 @@ FinallyLine:
                             DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(13).Value = 1 'Advance Payment
                             EnableDataGridViewCell(DataGridView1, e) 'Part
+                            DataGridView1.Rows(e.RowIndex).Cells(10).Value = "1" 'Part No
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._amortization.ToString("N2") 'Amount to pay
                         Case "Reservation"
                             With DataGridView1.Rows(e.RowIndex).Cells(11)
@@ -924,6 +926,9 @@ FinallyLine:
     End Sub
 
     Private Sub btnClearEntry_Click(sender As Object, e As EventArgs) Handles btnClearEntry.Click
+        lblTotalAmount.Text = 0.ToString("N2")
+        lblChange.Text = 0.ToString("N2")
+        txtTenderedAmount.Text = 0.ToString("N2")
         DataGridView1.Rows.Clear()
         DataGridView1.Refresh()
     End Sub

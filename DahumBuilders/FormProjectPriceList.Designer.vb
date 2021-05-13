@@ -26,6 +26,7 @@ Partial Class FormProjectPriceList
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderSQM = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTCP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderLotType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.cbbProjectName = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAdd = New System.Windows.Forms.Button()
@@ -36,6 +37,8 @@ Partial Class FormProjectPriceList
         Me.lblProjectName = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PanelUpdate = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.cbbLotTypeUpdate = New System.Windows.Forms.ComboBox()
         Me.ID = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblUpProjectName = New System.Windows.Forms.Label()
@@ -46,11 +49,8 @@ Partial Class FormProjectPriceList
         Me.txtUpdateSQM = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.cbbLotType = New System.Windows.Forms.ComboBox()
-        Me.cbbLotTypeUpdate = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderLotType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cbbLotType = New System.Windows.Forms.ComboBox()
         Me.PanelUpdate.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -61,7 +61,7 @@ Partial Class FormProjectPriceList
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(10, 35)
-        Me.ListView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(512, 324)
         Me.ListView1.TabIndex = 0
@@ -71,7 +71,7 @@ Partial Class FormProjectPriceList
         'ColumnHeaderID
         '
         Me.ColumnHeaderID.Text = "ID"
-        Me.ColumnHeaderID.Width = 70
+        Me.ColumnHeaderID.Width = 0
         '
         'ColumnHeaderSQM
         '
@@ -85,12 +85,17 @@ Partial Class FormProjectPriceList
         Me.ColumnHeaderTCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderTCP.Width = 100
         '
+        'ColumnHeaderLotType
+        '
+        Me.ColumnHeaderLotType.Text = "Lot Type"
+        Me.ColumnHeaderLotType.Width = 150
+        '
         'cbbProjectName
         '
         Me.cbbProjectName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbProjectName.FormattingEnabled = True
         Me.cbbProjectName.Location = New System.Drawing.Point(54, 10)
-        Me.cbbProjectName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cbbProjectName.Margin = New System.Windows.Forms.Padding(2)
         Me.cbbProjectName.Name = "cbbProjectName"
         Me.cbbProjectName.Size = New System.Drawing.Size(324, 21)
         Me.cbbProjectName.TabIndex = 1
@@ -108,7 +113,7 @@ Partial Class FormProjectPriceList
         'btnAdd
         '
         Me.btnAdd.Location = New System.Drawing.Point(73, 104)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(181, 21)
         Me.btnAdd.TabIndex = 27
@@ -128,7 +133,7 @@ Partial Class FormProjectPriceList
         'txtTcp
         '
         Me.txtTcp.Location = New System.Drawing.Point(73, 54)
-        Me.txtTcp.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtTcp.Margin = New System.Windows.Forms.Padding(2)
         Me.txtTcp.Name = "txtTcp"
         Me.txtTcp.Size = New System.Drawing.Size(123, 20)
         Me.txtTcp.TabIndex = 24
@@ -137,7 +142,7 @@ Partial Class FormProjectPriceList
         'txtSQM
         '
         Me.txtSQM.Location = New System.Drawing.Point(73, 30)
-        Me.txtSQM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtSQM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSQM.Name = "txtSQM"
         Me.txtSQM.Size = New System.Drawing.Size(58, 20)
         Me.txtSQM.TabIndex = 23
@@ -188,10 +193,30 @@ Partial Class FormProjectPriceList
         Me.PanelUpdate.Controls.Add(Me.txtUpdateSQM)
         Me.PanelUpdate.Controls.Add(Me.Label4)
         Me.PanelUpdate.Location = New System.Drawing.Point(526, 199)
-        Me.PanelUpdate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PanelUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelUpdate.Name = "PanelUpdate"
         Me.PanelUpdate.Size = New System.Drawing.Size(270, 160)
         Me.PanelUpdate.TabIndex = 30
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(30, 95)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(31, 13)
+        Me.Label7.TabIndex = 37
+        Me.Label7.Text = "Type"
+        '
+        'cbbLotTypeUpdate
+        '
+        Me.cbbLotTypeUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbLotTypeUpdate.FormattingEnabled = True
+        Me.cbbLotTypeUpdate.Location = New System.Drawing.Point(70, 92)
+        Me.cbbLotTypeUpdate.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbLotTypeUpdate.Name = "cbbLotTypeUpdate"
+        Me.cbbLotTypeUpdate.Size = New System.Drawing.Size(181, 21)
+        Me.cbbLotTypeUpdate.TabIndex = 31
         '
         'ID
         '
@@ -236,7 +261,7 @@ Partial Class FormProjectPriceList
         'btnUpdate
         '
         Me.btnUpdate.Location = New System.Drawing.Point(70, 118)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(181, 21)
         Me.btnUpdate.TabIndex = 32
@@ -256,7 +281,7 @@ Partial Class FormProjectPriceList
         'txtUpdateTCP
         '
         Me.txtUpdateTCP.Location = New System.Drawing.Point(70, 68)
-        Me.txtUpdateTCP.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtUpdateTCP.Margin = New System.Windows.Forms.Padding(2)
         Me.txtUpdateTCP.Name = "txtUpdateTCP"
         Me.txtUpdateTCP.Size = New System.Drawing.Size(123, 20)
         Me.txtUpdateTCP.TabIndex = 29
@@ -265,7 +290,7 @@ Partial Class FormProjectPriceList
         'txtUpdateSQM
         '
         Me.txtUpdateSQM.Location = New System.Drawing.Point(70, 45)
-        Me.txtUpdateSQM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtUpdateSQM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtUpdateSQM.Name = "txtUpdateSQM"
         Me.txtUpdateSQM.Size = New System.Drawing.Size(58, 20)
         Me.txtUpdateSQM.TabIndex = 28
@@ -294,30 +319,10 @@ Partial Class FormProjectPriceList
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.btnAdd)
         Me.Panel1.Location = New System.Drawing.Point(526, 35)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(270, 160)
         Me.Panel1.TabIndex = 31
-        '
-        'cbbLotType
-        '
-        Me.cbbLotType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbbLotType.FormattingEnabled = True
-        Me.cbbLotType.Location = New System.Drawing.Point(73, 78)
-        Me.cbbLotType.Margin = New System.Windows.Forms.Padding(2)
-        Me.cbbLotType.Name = "cbbLotType"
-        Me.cbbLotType.Size = New System.Drawing.Size(181, 21)
-        Me.cbbLotType.TabIndex = 30
-        '
-        'cbbLotTypeUpdate
-        '
-        Me.cbbLotTypeUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbbLotTypeUpdate.FormattingEnabled = True
-        Me.cbbLotTypeUpdate.Location = New System.Drawing.Point(70, 92)
-        Me.cbbLotTypeUpdate.Margin = New System.Windows.Forms.Padding(2)
-        Me.cbbLotTypeUpdate.Name = "cbbLotTypeUpdate"
-        Me.cbbLotTypeUpdate.Size = New System.Drawing.Size(181, 21)
-        Me.cbbLotTypeUpdate.TabIndex = 31
         '
         'Label5
         '
@@ -329,20 +334,15 @@ Partial Class FormProjectPriceList
         Me.Label5.TabIndex = 31
         Me.Label5.Text = "Type"
         '
-        'Label7
+        'cbbLotType
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(30, 95)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(31, 13)
-        Me.Label7.TabIndex = 37
-        Me.Label7.Text = "Type"
-        '
-        'ColumnHeaderLotType
-        '
-        Me.ColumnHeaderLotType.Text = "Lot Type"
-        Me.ColumnHeaderLotType.Width = 150
+        Me.cbbLotType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbLotType.FormattingEnabled = True
+        Me.cbbLotType.Location = New System.Drawing.Point(73, 78)
+        Me.cbbLotType.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbLotType.Name = "cbbLotType"
+        Me.cbbLotType.Size = New System.Drawing.Size(181, 21)
+        Me.cbbLotType.TabIndex = 30
         '
         'FormProjectPriceList
         '
@@ -355,7 +355,7 @@ Partial Class FormProjectPriceList
         Me.Controls.Add(Me.cbbProjectName)
         Me.Controls.Add(Me.ListView1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormProjectPriceList"
