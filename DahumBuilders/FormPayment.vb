@@ -692,10 +692,9 @@ FinallyLine:
 
         cbPaymentType.SelectedIndex = -1
         txtOfficialReceipt.Text = String.Empty
-        DataGridView1.Rows.Clear()
         load_userId_info_data_reader()
         MessageBox.Show(Me, "OR transaction successfully saved.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Me.Close()
+        btnClearEntry.PerformClick()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
