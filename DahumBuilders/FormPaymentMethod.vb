@@ -73,9 +73,72 @@ Public Class FormPaymentMethod
             If UpdatePaymetMethod(mProject, "MA", txtAmountMA.Text, txtMATerm.Text, dtpMonthlyStart.Value, dtpMonthlyEnd.Value) = 1 Then
                 MessageBox.Show("Successfully Updated.")
                 mFormPayment.load_userId_info_data_reader()
-                Me.Close()
             End If
         End If
+
+        deleteCurrentDueDate()
+        Connection()
+        Try
+            If Integer.Parse(txtMATerm.Text.Trim) > 0 Then
+                For index As Integer = 0 To Integer.Parse(txtMATerm.Text.Trim) - 1
+                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`) 
+                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId)"
+                    sqlCommand = New MySqlCommand(sql, sqlConnection)
+                    With sqlCommand
+                        .CommandText = sql
+                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = userLogon._id
+                        .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "MA"
+                        .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpMonthlyStart.Value)
+                        .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountMA.Text.Trim
+                        .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
+                        .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+                    End With
+                    sqlCommand.ExecuteNonQuery()
+                Next
+            End If
+
+            If Integer.Parse(txtEquityTerm.Text.Trim) > 0 Then
+                For index As Integer = 0 To Integer.Parse(txtEquityTerm.Text.Trim) - 1
+                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`) 
+                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId)"
+                    sqlCommand = New MySqlCommand(sql, sqlConnection)
+                    With sqlCommand
+                        .CommandText = sql
+                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = userLogon._id
+                        .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "EQ"
+                        .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpEquityStart.Value)
+                        .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountMA.Text.Trim
+                        .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
+                        .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+                    End With
+                    sqlCommand.ExecuteNonQuery()
+                Next
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        Me.Close()
+    End Sub
+
+    Private Sub deleteCurrentDueDate()
+
+        Connection()
+        sql = "DELETE FROM `db_payment_collection` WHERE `userid`=@Userid AND `item_id`=@ItemId AND `proj_id`=@ProjId"
+
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = userLogon._id
+            sqlCommand.Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
+            sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+            sqlCommand.ExecuteNonQuery()
+        Catch ex As Exception
+            MessageBox.Show("DELETE Official Reciept ERROR: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click

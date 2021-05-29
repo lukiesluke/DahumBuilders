@@ -59,18 +59,20 @@ Partial Class FormPaymentMethod
         '
         'txtAmountEQ
         '
-        Me.txtAmountEQ.Location = New System.Drawing.Point(120, 30)
+        Me.txtAmountEQ.Location = New System.Drawing.Point(80, 19)
+        Me.txtAmountEQ.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtAmountEQ.Name = "txtAmountEQ"
-        Me.txtAmountEQ.Size = New System.Drawing.Size(143, 26)
+        Me.txtAmountEQ.Size = New System.Drawing.Size(97, 20)
         Me.txtAmountEQ.TabIndex = 0
         Me.txtAmountEQ.Text = "0"
         Me.txtAmountEQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtAmountMA
         '
-        Me.txtAmountMA.Location = New System.Drawing.Point(121, 29)
+        Me.txtAmountMA.Location = New System.Drawing.Point(81, 19)
+        Me.txtAmountMA.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtAmountMA.Name = "txtAmountMA"
-        Me.txtAmountMA.Size = New System.Drawing.Size(143, 26)
+        Me.txtAmountMA.Size = New System.Drawing.Size(97, 20)
         Me.txtAmountMA.TabIndex = 4
         Me.txtAmountMA.Text = "0"
         Me.txtAmountMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -79,18 +81,20 @@ Partial Class FormPaymentMethod
         '
         Me.dtpEquityStart.CustomFormat = "MM/dd/yyyy"
         Me.dtpEquityStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpEquityStart.Location = New System.Drawing.Point(120, 115)
+        Me.dtpEquityStart.Location = New System.Drawing.Point(80, 75)
+        Me.dtpEquityStart.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.dtpEquityStart.Name = "dtpEquityStart"
-        Me.dtpEquityStart.Size = New System.Drawing.Size(143, 26)
+        Me.dtpEquityStart.Size = New System.Drawing.Size(97, 20)
         Me.dtpEquityStart.TabIndex = 2
         '
         'dtpMonthlyStart
         '
         Me.dtpMonthlyStart.CustomFormat = "MM/dd/yyyy"
         Me.dtpMonthlyStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpMonthlyStart.Location = New System.Drawing.Point(121, 116)
+        Me.dtpMonthlyStart.Location = New System.Drawing.Point(81, 75)
+        Me.dtpMonthlyStart.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.dtpMonthlyStart.Name = "dtpMonthlyStart"
-        Me.dtpMonthlyStart.Size = New System.Drawing.Size(143, 26)
+        Me.dtpMonthlyStart.Size = New System.Drawing.Size(97, 20)
         Me.dtpMonthlyStart.TabIndex = 6
         '
         'TableLayoutPanel1
@@ -103,12 +107,13 @@ Partial Class FormPaymentMethod
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 1, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 58)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(8, 38)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.06369!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.9363!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(797, 315)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(531, 205)
         Me.TableLayoutPanel1.TabIndex = 4
         '
         'Panel1
@@ -123,16 +128,18 @@ Partial Class FormPaymentMethod
         Me.Panel1.Controls.Add(Me.txtAmountEQ)
         Me.Panel1.Controls.Add(Me.dtpEquityStart)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(4, 67)
+        Me.Panel1.Location = New System.Drawing.Point(3, 44)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(391, 244)
+        Me.Panel1.Size = New System.Drawing.Size(260, 158)
         Me.Panel1.TabIndex = 0
         '
         'txtEquityTerm
         '
-        Me.txtEquityTerm.Location = New System.Drawing.Point(120, 72)
+        Me.txtEquityTerm.Location = New System.Drawing.Point(80, 47)
+        Me.txtEquityTerm.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtEquityTerm.Name = "txtEquityTerm"
-        Me.txtEquityTerm.Size = New System.Drawing.Size(71, 26)
+        Me.txtEquityTerm.Size = New System.Drawing.Size(49, 20)
         Me.txtEquityTerm.TabIndex = 1
         Me.txtEquityTerm.Text = "0"
         Me.txtEquityTerm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -140,9 +147,10 @@ Partial Class FormPaymentMethod
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(25, 76)
+        Me.Label10.Location = New System.Drawing.Point(17, 49)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(53, 20)
+        Me.Label10.Size = New System.Drawing.Size(36, 13)
         Me.Label10.TabIndex = 13
         Me.Label10.Text = "Terms"
         '
@@ -151,35 +159,39 @@ Partial Class FormPaymentMethod
         Me.dtpEquityEnd.CustomFormat = "MM/dd/yyyy"
         Me.dtpEquityEnd.Enabled = False
         Me.dtpEquityEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpEquityEnd.Location = New System.Drawing.Point(120, 162)
+        Me.dtpEquityEnd.Location = New System.Drawing.Point(80, 105)
+        Me.dtpEquityEnd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.dtpEquityEnd.Name = "dtpEquityEnd"
-        Me.dtpEquityEnd.Size = New System.Drawing.Size(143, 26)
+        Me.dtpEquityEnd.Size = New System.Drawing.Size(97, 20)
         Me.dtpEquityEnd.TabIndex = 3
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(25, 162)
+        Me.Label6.Location = New System.Drawing.Point(17, 105)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(77, 20)
+        Me.Label6.Size = New System.Drawing.Size(52, 13)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "End Date"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(25, 121)
+        Me.Label5.Location = New System.Drawing.Point(17, 79)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(83, 20)
+        Me.Label5.Size = New System.Drawing.Size(55, 13)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Start Date"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(25, 35)
+        Me.Label3.Location = New System.Drawing.Point(17, 23)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 20)
+        Me.Label3.Size = New System.Drawing.Size(43, 13)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Amount"
         '
@@ -195,16 +207,18 @@ Partial Class FormPaymentMethod
         Me.Panel2.Controls.Add(Me.dtpMonthlyStart)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(402, 67)
+        Me.Panel2.Location = New System.Drawing.Point(268, 44)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(391, 244)
+        Me.Panel2.Size = New System.Drawing.Size(260, 158)
         Me.Panel2.TabIndex = 1
         '
         'txtMATerm
         '
-        Me.txtMATerm.Location = New System.Drawing.Point(121, 74)
+        Me.txtMATerm.Location = New System.Drawing.Point(81, 48)
+        Me.txtMATerm.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtMATerm.Name = "txtMATerm"
-        Me.txtMATerm.Size = New System.Drawing.Size(71, 26)
+        Me.txtMATerm.Size = New System.Drawing.Size(49, 20)
         Me.txtMATerm.TabIndex = 5
         Me.txtMATerm.Text = "0"
         Me.txtMATerm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -212,9 +226,10 @@ Partial Class FormPaymentMethod
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(26, 78)
+        Me.Label9.Location = New System.Drawing.Point(17, 51)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(53, 20)
+        Me.Label9.Size = New System.Drawing.Size(36, 13)
         Me.Label9.TabIndex = 11
         Me.Label9.Text = "Terms"
         '
@@ -223,35 +238,39 @@ Partial Class FormPaymentMethod
         Me.dtpMonthlyEnd.CustomFormat = "MM/dd/yyyy"
         Me.dtpMonthlyEnd.Enabled = False
         Me.dtpMonthlyEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpMonthlyEnd.Location = New System.Drawing.Point(121, 158)
+        Me.dtpMonthlyEnd.Location = New System.Drawing.Point(81, 103)
+        Me.dtpMonthlyEnd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.dtpMonthlyEnd.Name = "dtpMonthlyEnd"
-        Me.dtpMonthlyEnd.Size = New System.Drawing.Size(143, 26)
+        Me.dtpMonthlyEnd.Size = New System.Drawing.Size(97, 20)
         Me.dtpMonthlyEnd.TabIndex = 7
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(26, 161)
+        Me.Label4.Location = New System.Drawing.Point(17, 105)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(77, 20)
+        Me.Label4.Size = New System.Drawing.Size(52, 13)
         Me.Label4.TabIndex = 8
         Me.Label4.Text = "End Date"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(26, 120)
+        Me.Label7.Location = New System.Drawing.Point(17, 78)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(83, 20)
+        Me.Label7.Size = New System.Drawing.Size(55, 13)
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "Start Date"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(26, 33)
+        Me.Label8.Location = New System.Drawing.Point(17, 21)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(65, 20)
+        Me.Label8.Size = New System.Drawing.Size(43, 13)
         Me.Label8.TabIndex = 6
         Me.Label8.Text = "Amount"
         '
@@ -260,18 +279,20 @@ Partial Class FormPaymentMethod
         Me.Panel3.BackColor = System.Drawing.Color.White
         Me.Panel3.Controls.Add(Me.Label1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(4, 4)
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(391, 56)
+        Me.Panel3.Size = New System.Drawing.Size(260, 36)
         Me.Panel3.TabIndex = 2
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(27, 19)
+        Me.Label1.Location = New System.Drawing.Point(18, 12)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(127, 22)
+        Me.Label1.Size = New System.Drawing.Size(86, 15)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Monthly Equity"
         '
@@ -280,35 +301,39 @@ Partial Class FormPaymentMethod
         Me.Panel4.BackColor = System.Drawing.Color.White
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(402, 4)
+        Me.Panel4.Location = New System.Drawing.Point(268, 3)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(391, 56)
+        Me.Panel4.Size = New System.Drawing.Size(260, 36)
         Me.Panel4.TabIndex = 3
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(26, 19)
+        Me.Label2.Location = New System.Drawing.Point(17, 12)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(175, 22)
+        Me.Label2.Size = New System.Drawing.Size(121, 15)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Monthly Amortization"
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(561, 380)
+        Me.btnUpdate.Location = New System.Drawing.Point(374, 247)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(121, 46)
+        Me.btnUpdate.Size = New System.Drawing.Size(81, 30)
         Me.btnUpdate.TabIndex = 8
         Me.btnUpdate.Text = "Save"
         Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(688, 380)
+        Me.btnCancel.Location = New System.Drawing.Point(459, 247)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(121, 46)
+        Me.btnCancel.Size = New System.Drawing.Size(81, 30)
         Me.btnCancel.TabIndex = 9
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -316,9 +341,10 @@ Partial Class FormPaymentMethod
         'lblProjectDetails
         '
         Me.lblProjectDetails.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblProjectDetails.Location = New System.Drawing.Point(16, 15)
+        Me.lblProjectDetails.Location = New System.Drawing.Point(11, 10)
+        Me.lblProjectDetails.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblProjectDetails.Name = "lblProjectDetails"
-        Me.lblProjectDetails.Size = New System.Drawing.Size(618, 40)
+        Me.lblProjectDetails.Size = New System.Drawing.Size(412, 26)
         Me.lblProjectDetails.TabIndex = 10
         Me.lblProjectDetails.Text = "lblProjectDetails"
         Me.lblProjectDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -326,18 +352,19 @@ Partial Class FormPaymentMethod
         'lblTCP
         '
         Me.lblTCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTCP.Location = New System.Drawing.Point(640, 15)
+        Me.lblTCP.Location = New System.Drawing.Point(427, 10)
+        Me.lblTCP.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblTCP.Name = "lblTCP"
-        Me.lblTCP.Size = New System.Drawing.Size(169, 40)
+        Me.lblTCP.Size = New System.Drawing.Size(113, 26)
         Me.lblTCP.TabIndex = 11
         Me.lblTCP.Text = "lblTCP"
         Me.lblTCP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FormPaymentMethod
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(831, 441)
+        Me.ClientSize = New System.Drawing.Size(554, 287)
         Me.Controls.Add(Me.lblTCP)
         Me.Controls.Add(Me.lblProjectDetails)
         Me.Controls.Add(Me.btnCancel)
@@ -345,6 +372,7 @@ Partial Class FormPaymentMethod
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaximizeBox = False
         Me.Name = "FormPaymentMethod"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
