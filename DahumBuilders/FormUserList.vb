@@ -21,6 +21,7 @@ Public Class FormUserList
         enableDisableClientButton(False)
         loadProjectListCombobox()
         loadComboBoxUserType()
+        loadDueDate()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -32,6 +33,7 @@ Public Class FormUserList
         searchUser("")
         mDisableLoadUserType = False
         mDisableLoadProject = False
+        loadDueDate()
     End Sub
 
     Private Sub searchUser(value As String)
@@ -380,4 +382,35 @@ Public Class FormUserList
         labelRows.Text = "Row's: " & ListViewUser.Items.Count
     End Sub
 
+    Private Sub loadDueDate()
+        Connection()
+        sql = "SELECT  c.`userid`, (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`) AS `name`, 
+        (SELECT `mobile_number` FROM `db_user_profile` WHERE id= c.`userid`) AS `mobile`, 
+        `type`, `due_date`, `amount` FROM `db_payment_collection` c 
+        WHERE `due_date` BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND DATE_ADD(CURDATE(), INTERVAL 5 DAY)"
+
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+            Dim item As ListViewItem
+            ListView1.Items.Clear()
+            Do While sqlDataReader.Read = True
+                item = New ListViewItem(sqlDataReader("userid").ToString)
+                item.UseItemStyleForSubItems = False
+                Dim price As Double = sqlDataReader("amount")
+                item.SubItems.Add(sqlDataReader("name"))
+                item.SubItems.Add(sqlDataReader("mobile"))
+                item.SubItems.Add(sqlDataReader("type"))
+                item.SubItems.Add(sqlDataReader("due_date"))
+                item.SubItems.Add(price.ToString("N2"))
+                ListView1.Items.Add(item)
+            Loop
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
 End Class

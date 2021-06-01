@@ -67,6 +67,7 @@ Public Class FormPaymentMethod
 
         txtAmountMA.Text = Double.Parse(txtAmountMA.Text).ToString("N2")
         txtAmountEQ.Text = Double.Parse(txtAmountEQ.Text).ToString("N2")
+        loadDueDate()
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If UpdatePaymetMethod(mProject, "EQ", txtAmountEQ.Text, txtEquityTerm.Text, dtpEquityStart.Value, dtpEquityEnd.Value) = 1 Then
@@ -86,7 +87,7 @@ Public Class FormPaymentMethod
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
                     With sqlCommand
                         .CommandText = sql
-                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = userLogon._id
+                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = mProject._userID
                         .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "MA"
                         .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpMonthlyStart.Value)
                         .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountMA.Text.Trim
@@ -104,10 +105,10 @@ Public Class FormPaymentMethod
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
                     With sqlCommand
                         .CommandText = sql
-                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = userLogon._id
+                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = mProject._userID
                         .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "EQ"
                         .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpEquityStart.Value)
-                        .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountMA.Text.Trim
+                        .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountEQ.Text.Trim
                         .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
                         .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
                     End With
@@ -119,7 +120,8 @@ Public Class FormPaymentMethod
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
-        Me.Close()
+        loadDueDate()
+        'Me.Close()
     End Sub
 
     Private Sub deleteCurrentDueDate()
@@ -129,7 +131,7 @@ Public Class FormPaymentMethod
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = userLogon._id
+            sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = mProject._userID
             sqlCommand.Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
             sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
             sqlCommand.ExecuteNonQuery()
@@ -240,4 +242,32 @@ Public Class FormPaymentMethod
         txtAmountEQ.SelectAll()
     End Sub
 
+    Private Sub loadDueDate()
+        Connection()
+        sql = "SELECT `userid`, `type`, `due_date`, `amount` FROM `db_payment_collection` WHERE userid=@UserId ORDER BY `due_date`, `type`"
+
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@UserId", MySqlDbType.Int64).Value = mProject._userID
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            Dim item As ListViewItem
+            ListView1.Items.Clear()
+            Do While sqlDataReader.Read = True
+                item = New ListViewItem(sqlDataReader("userid").ToString)
+                item.UseItemStyleForSubItems = False
+                Dim price As Double = sqlDataReader("amount")
+                item.SubItems.Add(sqlDataReader("type"))
+                item.SubItems.Add(sqlDataReader("due_date"))
+                item.SubItems.Add(price.ToString("N2"))
+                ListView1.Items.Add(item)
+            Loop
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
 End Class

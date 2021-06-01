@@ -50,6 +50,11 @@ Partial Class FormPaymentMethod
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.lblProjectDetails = New System.Windows.Forms.Label()
         Me.lblTCP = New System.Windows.Forms.Label()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2DueDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3Amount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1Id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -60,7 +65,7 @@ Partial Class FormPaymentMethod
         'txtAmountEQ
         '
         Me.txtAmountEQ.Location = New System.Drawing.Point(80, 19)
-        Me.txtAmountEQ.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtAmountEQ.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAmountEQ.Name = "txtAmountEQ"
         Me.txtAmountEQ.Size = New System.Drawing.Size(97, 20)
         Me.txtAmountEQ.TabIndex = 0
@@ -70,7 +75,7 @@ Partial Class FormPaymentMethod
         'txtAmountMA
         '
         Me.txtAmountMA.Location = New System.Drawing.Point(81, 19)
-        Me.txtAmountMA.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtAmountMA.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAmountMA.Name = "txtAmountMA"
         Me.txtAmountMA.Size = New System.Drawing.Size(97, 20)
         Me.txtAmountMA.TabIndex = 4
@@ -82,7 +87,7 @@ Partial Class FormPaymentMethod
         Me.dtpEquityStart.CustomFormat = "MM/dd/yyyy"
         Me.dtpEquityStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEquityStart.Location = New System.Drawing.Point(80, 75)
-        Me.dtpEquityStart.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpEquityStart.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpEquityStart.Name = "dtpEquityStart"
         Me.dtpEquityStart.Size = New System.Drawing.Size(97, 20)
         Me.dtpEquityStart.TabIndex = 2
@@ -92,7 +97,7 @@ Partial Class FormPaymentMethod
         Me.dtpMonthlyStart.CustomFormat = "MM/dd/yyyy"
         Me.dtpMonthlyStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpMonthlyStart.Location = New System.Drawing.Point(81, 75)
-        Me.dtpMonthlyStart.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpMonthlyStart.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpMonthlyStart.Name = "dtpMonthlyStart"
         Me.dtpMonthlyStart.Size = New System.Drawing.Size(97, 20)
         Me.dtpMonthlyStart.TabIndex = 6
@@ -108,7 +113,7 @@ Partial Class FormPaymentMethod
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 1, 0)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(8, 38)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(2)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.06369!))
@@ -129,7 +134,7 @@ Partial Class FormPaymentMethod
         Me.Panel1.Controls.Add(Me.dtpEquityStart)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 44)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(260, 158)
         Me.Panel1.TabIndex = 0
@@ -137,7 +142,7 @@ Partial Class FormPaymentMethod
         'txtEquityTerm
         '
         Me.txtEquityTerm.Location = New System.Drawing.Point(80, 47)
-        Me.txtEquityTerm.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtEquityTerm.Margin = New System.Windows.Forms.Padding(2)
         Me.txtEquityTerm.Name = "txtEquityTerm"
         Me.txtEquityTerm.Size = New System.Drawing.Size(49, 20)
         Me.txtEquityTerm.TabIndex = 1
@@ -160,7 +165,7 @@ Partial Class FormPaymentMethod
         Me.dtpEquityEnd.Enabled = False
         Me.dtpEquityEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEquityEnd.Location = New System.Drawing.Point(80, 105)
-        Me.dtpEquityEnd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpEquityEnd.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpEquityEnd.Name = "dtpEquityEnd"
         Me.dtpEquityEnd.Size = New System.Drawing.Size(97, 20)
         Me.dtpEquityEnd.TabIndex = 3
@@ -208,7 +213,7 @@ Partial Class FormPaymentMethod
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(268, 44)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(260, 158)
         Me.Panel2.TabIndex = 1
@@ -216,7 +221,7 @@ Partial Class FormPaymentMethod
         'txtMATerm
         '
         Me.txtMATerm.Location = New System.Drawing.Point(81, 48)
-        Me.txtMATerm.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtMATerm.Margin = New System.Windows.Forms.Padding(2)
         Me.txtMATerm.Name = "txtMATerm"
         Me.txtMATerm.Size = New System.Drawing.Size(49, 20)
         Me.txtMATerm.TabIndex = 5
@@ -239,7 +244,7 @@ Partial Class FormPaymentMethod
         Me.dtpMonthlyEnd.Enabled = False
         Me.dtpMonthlyEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpMonthlyEnd.Location = New System.Drawing.Point(81, 103)
-        Me.dtpMonthlyEnd.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.dtpMonthlyEnd.Margin = New System.Windows.Forms.Padding(2)
         Me.dtpMonthlyEnd.Name = "dtpMonthlyEnd"
         Me.dtpMonthlyEnd.Size = New System.Drawing.Size(97, 20)
         Me.dtpMonthlyEnd.TabIndex = 7
@@ -280,7 +285,7 @@ Partial Class FormPaymentMethod
         Me.Panel3.Controls.Add(Me.Label1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(260, 36)
         Me.Panel3.TabIndex = 2
@@ -302,7 +307,7 @@ Partial Class FormPaymentMethod
         Me.Panel4.Controls.Add(Me.Label2)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(268, 3)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(260, 36)
         Me.Panel4.TabIndex = 3
@@ -321,7 +326,7 @@ Partial Class FormPaymentMethod
         'btnUpdate
         '
         Me.btnUpdate.Location = New System.Drawing.Point(374, 247)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(81, 30)
         Me.btnUpdate.TabIndex = 8
@@ -331,7 +336,7 @@ Partial Class FormPaymentMethod
         'btnCancel
         '
         Me.btnCancel.Location = New System.Drawing.Point(459, 247)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(81, 30)
         Me.btnCancel.TabIndex = 9
@@ -360,11 +365,44 @@ Partial Class FormPaymentMethod
         Me.lblTCP.Text = "lblTCP"
         Me.lblTCP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'ListView1
+        '
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1Id, Me.ColumnHeader1Type, Me.ColumnHeader2DueDate, Me.ColumnHeader3Amount})
+        Me.ListView1.FullRowSelect = True
+        Me.ListView1.GridLines = True
+        Me.ListView1.Location = New System.Drawing.Point(545, 38)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(257, 237)
+        Me.ListView1.TabIndex = 12
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1Type
+        '
+        Me.ColumnHeader1Type.Text = "Type"
+        '
+        'ColumnHeader2DueDate
+        '
+        Me.ColumnHeader2DueDate.Text = "Due Date"
+        Me.ColumnHeader2DueDate.Width = 80
+        '
+        'ColumnHeader3Amount
+        '
+        Me.ColumnHeader3Amount.Text = "Amount"
+        Me.ColumnHeader3Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeader3Amount.Width = 80
+        '
+        'ColumnHeader1Id
+        '
+        Me.ColumnHeader1Id.Text = "ID"
+        Me.ColumnHeader1Id.Width = 0
+        '
         'FormPaymentMethod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(554, 287)
+        Me.ClientSize = New System.Drawing.Size(808, 287)
+        Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.lblTCP)
         Me.Controls.Add(Me.lblProjectDetails)
         Me.Controls.Add(Me.btnCancel)
@@ -372,7 +410,7 @@ Partial Class FormPaymentMethod
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.Name = "FormPaymentMethod"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -417,4 +455,9 @@ Partial Class FormPaymentMethod
     Friend WithEvents Label10 As Label
     Friend WithEvents lblProjectDetails As Label
     Friend WithEvents lblTCP As Label
+    Friend WithEvents ListView1 As ListView
+    Friend WithEvents ColumnHeader1Type As ColumnHeader
+    Friend WithEvents ColumnHeader2DueDate As ColumnHeader
+    Friend WithEvents ColumnHeader3Amount As ColumnHeader
+    Friend WithEvents ColumnHeader1Id As ColumnHeader
 End Class
