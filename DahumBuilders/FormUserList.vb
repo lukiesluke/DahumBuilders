@@ -386,8 +386,10 @@ Public Class FormUserList
         Connection()
         sql = "SELECT  c.`userid`, (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`) AS `name`, 
         (SELECT `mobile_number` FROM `db_user_profile` WHERE id= c.`userid`) AS `mobile`, 
-        `type`, `due_date`, `amount` FROM `db_payment_collection` c 
-        WHERE `due_date` BETWEEN DATE_SUB(NOW(), INTERVAL 30 DAY) AND DATE_ADD(CURDATE(), INTERVAL 5 DAY)"
+        `type`, `due_date`, `amount`,
+        (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id` = c.`proj_id`) proj_name, 
+        (SELECT CONCAT('Block ', `block`, ' Lot ', `lot`) FROM `db_project_item` WHERE `db_project_item`.`item_id`=c.`item_id`) blockLot FROM `db_payment_collection` c 
+        WHERE `due_date` BETWEEN DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND DATE_ADD(CURDATE(), INTERVAL 5 DAY)"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -403,6 +405,8 @@ Public Class FormUserList
                 item.SubItems.Add(sqlDataReader("type"))
                 item.SubItems.Add(sqlDataReader("due_date"))
                 item.SubItems.Add(price.ToString("N2"))
+                item.SubItems.Add(sqlDataReader("proj_name"))
+                item.SubItems.Add(sqlDataReader("blockLot"))
                 ListView1.Items.Add(item)
             Loop
             sqlDataReader.Dispose()

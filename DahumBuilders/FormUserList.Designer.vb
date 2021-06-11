@@ -61,6 +61,15 @@ Partial Class FormUserList
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1Id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1Name = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1Mobile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2DueDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3Amount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.cbbUserType = New System.Windows.Forms.ComboBox()
@@ -74,23 +83,16 @@ Partial Class FormUserList
         Me.btnProfileInfo = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.ListView1 = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1Id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader1Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2DueDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3Amount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader1Name = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader1Mobile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.ColumnHeader1PName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2BlockLot = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel7.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListViewUser
@@ -416,10 +418,71 @@ Partial Class FormUserList
         Me.Panel5.Controls.Add(Me.Panel6)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(13, 13, 13, 13)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(13)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(1080, 487)
         Me.Panel5.TabIndex = 8
+        '
+        'ListView1
+        '
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1Id, Me.ColumnHeader1Name, Me.ColumnHeader1Mobile, Me.ColumnHeader1Type, Me.ColumnHeader2DueDate, Me.ColumnHeader3Amount, Me.ColumnHeader1PName, Me.ColumnHeader2BlockLot})
+        Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListView1.FullRowSelect = True
+        Me.ListView1.GridLines = True
+        Me.ListView1.Location = New System.Drawing.Point(399, 388)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(681, 99)
+        Me.ListView1.TabIndex = 13
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1Id
+        '
+        Me.ColumnHeader1Id.Text = "ID"
+        Me.ColumnHeader1Id.Width = 0
+        '
+        'ColumnHeader1Name
+        '
+        Me.ColumnHeader1Name.Text = "Name"
+        Me.ColumnHeader1Name.Width = 150
+        '
+        'ColumnHeader1Mobile
+        '
+        Me.ColumnHeader1Mobile.Text = "Mobile"
+        Me.ColumnHeader1Mobile.Width = 80
+        '
+        'ColumnHeader1Type
+        '
+        Me.ColumnHeader1Type.Text = "Type"
+        '
+        'ColumnHeader2DueDate
+        '
+        Me.ColumnHeader2DueDate.Text = "Due Date"
+        Me.ColumnHeader2DueDate.Width = 80
+        '
+        'ColumnHeader3Amount
+        '
+        Me.ColumnHeader3Amount.Text = "Due Amount"
+        Me.ColumnHeader3Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeader3Amount.Width = 80
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.Label13)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(399, 358)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(681, 30)
+        Me.Panel2.TabIndex = 10
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(3, 9)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(107, 13)
+        Me.Label13.TabIndex = 0
+        Me.Label13.Text = "Due Date Collections"
         '
         'Panel8
         '
@@ -435,7 +498,7 @@ Partial Class FormUserList
         Me.Panel8.Controls.Add(Me.txtSearch)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel8.Location = New System.Drawing.Point(399, 0)
-        Me.Panel8.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(681, 64)
         Me.Panel8.TabIndex = 9
@@ -489,7 +552,7 @@ Partial Class FormUserList
         Me.Panel6.Controls.Add(Me.Panel7)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(399, 487)
         Me.Panel6.TabIndex = 8
@@ -501,7 +564,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 124.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -522,7 +585,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(3, 2)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(83, 86)
+        Me.btnPayment.Size = New System.Drawing.Size(82, 86)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -533,10 +596,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(91, 2)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(90, 2)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(79, 86)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(78, 86)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -547,7 +610,7 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(175, 2)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(173, 2)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
         Me.btnUpdateRecord.Size = New System.Drawing.Size(89, 86)
@@ -561,10 +624,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(269, 2)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(267, 2)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(121, 86)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(123, 86)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -577,7 +640,7 @@ Partial Class FormUserList
         Me.Panel7.Controls.Add(Me.Label9)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel7.Location = New System.Drawing.Point(0, 0)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(399, 64)
         Me.Panel7.TabIndex = 8
@@ -597,66 +660,15 @@ Partial Class FormUserList
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Panel2
+        'ColumnHeader1PName
         '
-        Me.Panel2.Controls.Add(Me.Label13)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(399, 358)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(681, 30)
-        Me.Panel2.TabIndex = 10
+        Me.ColumnHeader1PName.Text = "Project Name"
+        Me.ColumnHeader1PName.Width = 150
         '
-        'ListView1
+        'ColumnHeader2BlockLot
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1Id, Me.ColumnHeader1Name, Me.ColumnHeader1Mobile, Me.ColumnHeader1Type, Me.ColumnHeader2DueDate, Me.ColumnHeader3Amount})
-        Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListView1.FullRowSelect = True
-        Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(399, 388)
-        Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(681, 99)
-        Me.ListView1.TabIndex = 13
-        Me.ListView1.UseCompatibleStateImageBehavior = False
-        Me.ListView1.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1Id
-        '
-        Me.ColumnHeader1Id.Text = "ID"
-        Me.ColumnHeader1Id.Width = 0
-        '
-        'ColumnHeader1Type
-        '
-        Me.ColumnHeader1Type.Text = "Type"
-        '
-        'ColumnHeader2DueDate
-        '
-        Me.ColumnHeader2DueDate.Text = "Due Date"
-        Me.ColumnHeader2DueDate.Width = 80
-        '
-        'ColumnHeader3Amount
-        '
-        Me.ColumnHeader3Amount.Text = "Amount"
-        Me.ColumnHeader3Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeader3Amount.Width = 80
-        '
-        'ColumnHeader1Name
-        '
-        Me.ColumnHeader1Name.Text = "Name"
-        Me.ColumnHeader1Name.Width = 150
-        '
-        'ColumnHeader1Mobile
-        '
-        Me.ColumnHeader1Mobile.Text = "Mobile"
-        Me.ColumnHeader1Mobile.Width = 80
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(3, 9)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(107, 13)
-        Me.Label13.TabIndex = 0
-        Me.Label13.Text = "Due Date Collections"
+        Me.ColumnHeader2BlockLot.Text = "Block and Lot"
+        Me.ColumnHeader2BlockLot.Width = 120
         '
         'FormUserList
         '
@@ -676,14 +688,14 @@ Partial Class FormUserList
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -748,4 +760,6 @@ Partial Class FormUserList
     Friend WithEvents ColumnHeader1Name As ColumnHeader
     Friend WithEvents ColumnHeader1Mobile As ColumnHeader
     Friend WithEvents Label13 As Label
+    Friend WithEvents ColumnHeader1PName As ColumnHeader
+    Friend WithEvents ColumnHeader2BlockLot As ColumnHeader
 End Class
