@@ -22,6 +22,7 @@ Partial Class FormUserList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormUserList))
         Me.ListViewUser = New System.Windows.Forms.ListView()
         Me.ColumnHeaderId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -63,12 +64,18 @@ Partial Class FormUserList
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeader1Id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1UserId = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1Name = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1Mobile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2DueDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3Amount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1PName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader2BlockLot = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ContextMenuDue = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.HideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -83,11 +90,10 @@ Partial Class FormUserList
         Me.btnProfileInfo = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.ColumnHeader1PName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2BlockLot = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
+        Me.ContextMenuDue.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -425,13 +431,14 @@ Partial Class FormUserList
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1Id, Me.ColumnHeader1Name, Me.ColumnHeader1Mobile, Me.ColumnHeader1Type, Me.ColumnHeader2DueDate, Me.ColumnHeader3Amount, Me.ColumnHeader1PName, Me.ColumnHeader2BlockLot})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1Id, Me.ColumnHeader1UserId, Me.ColumnHeader1Name, Me.ColumnHeader1Mobile, Me.ColumnHeader1Type, Me.ColumnHeader2DueDate, Me.ColumnHeader3Amount, Me.ColumnHeader1PName, Me.ColumnHeader2BlockLot})
+        Me.ListView1.ContextMenuStrip = Me.ContextMenuDue
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(399, 388)
+        Me.ListView1.Location = New System.Drawing.Point(399, 392)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(681, 99)
+        Me.ListView1.Size = New System.Drawing.Size(681, 95)
         Me.ListView1.TabIndex = 13
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -440,6 +447,11 @@ Partial Class FormUserList
         '
         Me.ColumnHeader1Id.Text = "ID"
         Me.ColumnHeader1Id.Width = 0
+        '
+        'ColumnHeader1UserId
+        '
+        Me.ColumnHeader1UserId.Text = "UserID"
+        Me.ColumnHeader1UserId.Width = 0
         '
         'ColumnHeader1Name
         '
@@ -466,19 +478,51 @@ Partial Class FormUserList
         Me.ColumnHeader3Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeader3Amount.Width = 80
         '
+        'ColumnHeader1PName
+        '
+        Me.ColumnHeader1PName.Text = "Project Name"
+        Me.ColumnHeader1PName.Width = 150
+        '
+        'ColumnHeader2BlockLot
+        '
+        Me.ColumnHeader2BlockLot.Text = "Block and Lot"
+        Me.ColumnHeader2BlockLot.Width = 120
+        '
+        'ContextMenuDue
+        '
+        Me.ContextMenuDue.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HideToolStripMenuItem})
+        Me.ContextMenuDue.Name = "ContextMenuDue"
+        Me.ContextMenuDue.Size = New System.Drawing.Size(153, 48)
+        '
+        'HideToolStripMenuItem
+        '
+        Me.HideToolStripMenuItem.Name = "HideToolStripMenuItem"
+        Me.HideToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HideToolStripMenuItem.Text = "Hide"
+        '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.btnRefresh)
         Me.Panel2.Controls.Add(Me.Label13)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(399, 358)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(681, 30)
+        Me.Panel2.Size = New System.Drawing.Size(681, 34)
         Me.Panel2.TabIndex = 10
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Location = New System.Drawing.Point(116, 6)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(75, 23)
+        Me.btnRefresh.TabIndex = 1
+        Me.btnRefresh.Text = "&Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(3, 9)
+        Me.Label13.Location = New System.Drawing.Point(3, 11)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(107, 13)
         Me.Label13.TabIndex = 0
@@ -564,7 +608,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -585,7 +629,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(3, 2)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(82, 86)
+        Me.btnPayment.Size = New System.Drawing.Size(80, 86)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -596,10 +640,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(90, 2)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(88, 2)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(78, 86)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(76, 86)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -610,7 +654,7 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(173, 2)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(169, 2)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
         Me.btnUpdateRecord.Size = New System.Drawing.Size(89, 86)
@@ -624,10 +668,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(267, 2)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(263, 2)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(123, 86)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(127, 86)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -660,16 +704,6 @@ Partial Class FormUserList
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'ColumnHeader1PName
-        '
-        Me.ColumnHeader1PName.Text = "Project Name"
-        Me.ColumnHeader1PName.Width = 150
-        '
-        'ColumnHeader2BlockLot
-        '
-        Me.ColumnHeader2BlockLot.Text = "Block and Lot"
-        Me.ColumnHeader2BlockLot.Width = 120
-        '
         'FormUserList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -688,6 +722,7 @@ Partial Class FormUserList
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
+        Me.ContextMenuDue.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel8.ResumeLayout(False)
@@ -762,4 +797,8 @@ Partial Class FormUserList
     Friend WithEvents Label13 As Label
     Friend WithEvents ColumnHeader1PName As ColumnHeader
     Friend WithEvents ColumnHeader2BlockLot As ColumnHeader
+    Friend WithEvents btnRefresh As Button
+    Friend WithEvents ColumnHeader1UserId As ColumnHeader
+    Friend WithEvents ContextMenuDue As ContextMenuStrip
+    Friend WithEvents HideToolStripMenuItem As ToolStripMenuItem
 End Class

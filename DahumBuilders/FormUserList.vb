@@ -383,13 +383,16 @@ Public Class FormUserList
     End Sub
 
     Private Sub loadDueDate()
+        ListView1.Columns(0).Width = 0
+        ListView1.Columns(1).Width = 0
+
         Connection()
-        sql = "SELECT  c.`userid`, (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`) AS `name`, 
+        sql = "SELECT c.`id`,  c.`userid`, (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`) AS `name`, 
         (SELECT `mobile_number` FROM `db_user_profile` WHERE id= c.`userid`) AS `mobile`, 
         `type`, `due_date`, `amount`,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id` = c.`proj_id`) proj_name, 
         (SELECT CONCAT('Block ', `block`, ' Lot ', `lot`) FROM `db_project_item` WHERE `db_project_item`.`item_id`=c.`item_id`) blockLot FROM `db_payment_collection` c 
-        WHERE `due_date` BETWEEN DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND DATE_ADD(CURDATE(), INTERVAL 5 DAY)"
+        WHERE `due_date` BETWEEN DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND c.`status`=FALSE"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -397,9 +400,10 @@ Public Class FormUserList
             Dim item As ListViewItem
             ListView1.Items.Clear()
             Do While sqlDataReader.Read = True
-                item = New ListViewItem(sqlDataReader("userid").ToString)
+                item = New ListViewItem(sqlDataReader("id").ToString)
                 item.UseItemStyleForSubItems = False
                 Dim price As Double = sqlDataReader("amount")
+                item.SubItems.Add(sqlDataReader("userid"))
                 item.SubItems.Add(sqlDataReader("name"))
                 item.SubItems.Add(sqlDataReader("mobile"))
                 item.SubItems.Add(sqlDataReader("type"))
@@ -416,5 +420,41 @@ Public Class FormUserList
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        loadDueDate()
+    End Sub
+
+    Private Sub HideToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideToolStripMenuItem.Click
+        If ListView1.SelectedItems.Count > 0 Then
+            Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to hide " + ListView1.SelectedItems(0).SubItems(2).Text + "?", "Hide Due date", MessageBoxButtons.YesNo)
+
+            If result1 = DialogResult.Yes Then
+                Dim rowsAffected As Integer = 0
+                Dim mDueDateID As Int64
+
+                mDueDateID = ListView1.SelectedItems(0).Text
+                sql = "UPDATE `db_payment_collection` SET `status`=TRUE WHERE `id`=@ID"
+                Connection()
+                Try
+                    sqlCommand = New MySqlCommand(sql, sqlConnection)
+                    sqlCommand.Parameters.Add("@ID", MySqlDbType.Bit).Value = mDueDateID
+                    rowsAffected = sqlCommand.ExecuteNonQuery()
+
+                Catch ex As Exception
+                    MessageBox.Show("Hide: " & ex.Message)
+                Finally
+                    sqlCommand.Dispose()
+                    sqlConnection.Close()
+                End Try
+
+                If rowsAffected > 0 Then
+                    btnRefresh.PerformClick()
+                    MessageBox.Show("Successfully hide.")
+                End If
+            End If
+
+        End If
     End Sub
 End Class
