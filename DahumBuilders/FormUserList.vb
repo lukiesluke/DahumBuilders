@@ -428,7 +428,7 @@ Public Class FormUserList
 
     Private Sub HideToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HideToolStripMenuItem.Click
         If ListView1.SelectedItems.Count > 0 Then
-            Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to hide " + ListView1.SelectedItems(0).SubItems(2).Text + "?", "Hide Due date", MessageBoxButtons.YesNo)
+            Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to hide " + ListView1.SelectedItems(0).SubItems(2).Text + "?", "Hide Due date", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
             If result1 = DialogResult.Yes Then
                 Dim rowsAffected As Integer = 0
@@ -451,7 +451,7 @@ Public Class FormUserList
 
                 If rowsAffected > 0 Then
                     btnRefresh.PerformClick()
-                    MessageBox.Show("Successfully hide.")
+                    MessageBox.Show("Successfully hide.", "", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             End If
 
@@ -488,7 +488,7 @@ Public Class FormUserList
             Try
                 Dim id = ListViewUser.SelectedItems(0).Text
                 userName = ListViewUser.SelectedItems(0).SubItems(1).Text + ", " + ListViewUser.SelectedItems(0).SubItems(2).Text
-                Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to User? " + vbNewLine + userName, "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+                Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to Delete User? " + vbNewLine + userName, "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
                 If result1 = DialogResult.Yes Then
                     Dim rowsAffected As Integer = 0
