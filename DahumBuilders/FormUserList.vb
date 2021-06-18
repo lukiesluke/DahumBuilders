@@ -461,8 +461,11 @@ Public Class FormUserList
     Private Sub DeleteUserToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteUserToolStripMenuItem.Click
         If ListViewUser.Items.Count > 0 Then
             Dim totalEntry As Integer = 0
+            Dim userName As String = ""
             Try
                 Dim id = ListViewUser.SelectedItems(0).Text
+                userName = ListViewUser.SelectedItems(0).SubItems(1).Text + ", " + ListViewUser.SelectedItems(0).SubItems(2).Text
+
                 sql = "SELECT COUNT(`userid`) AS total FROM `db_transaction` WHERE `userid` = @Userid"
                 Connection()
                 sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -478,14 +481,14 @@ Public Class FormUserList
             End Try
 
             If totalEntry > 0 Then
-                MessageBox.Show("Unable to delete user. " + vbNewLine + "User has OR entries.")
+                MessageBox.Show("Unable to delete " + userName + vbNewLine + "User has OR entries.", "Delete User", MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Exit Sub
             End If
 
             Try
                 Dim id = ListViewUser.SelectedItems(0).Text
-                Dim userName As String = ListViewUser.SelectedItems(0).SubItems(1).Text + ", " + ListViewUser.SelectedItems(0).SubItems(2).Text
-                Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to User? " + vbNewLine + userName, "Delete User", MessageBoxButtons.YesNo)
+                userName = ListViewUser.SelectedItems(0).SubItems(1).Text + ", " + ListViewUser.SelectedItems(0).SubItems(2).Text
+                Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to User? " + vbNewLine + userName, "Delete User", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
 
                 If result1 = DialogResult.Yes Then
                     Dim rowsAffected As Integer = 0
