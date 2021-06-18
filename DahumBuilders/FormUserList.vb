@@ -457,4 +457,56 @@ Public Class FormUserList
 
         End If
     End Sub
+
+    Private Sub DeleteUserToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteUserToolStripMenuItem.Click
+        If ListViewUser.Items.Count > 0 Then
+            Dim totalEntry As Integer = 0
+            Try
+                Dim id = ListViewUser.SelectedItems(0).Text
+                sql = "SELECT COUNT(`userid`) AS total FROM `db_transaction` WHERE `userid` = @Userid"
+                Connection()
+                sqlCommand = New MySqlCommand(sql, sqlConnection)
+                sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = id
+                sqlDataReader = sqlCommand.ExecuteReader()
+                Do While sqlDataReader.Read = True
+                    totalEntry = sqlDataReader("total")
+                Loop
+            Catch ex As Exception
+            Finally
+                sqlCommand.Dispose()
+                sqlConnection.Close()
+            End Try
+
+            If totalEntry > 0 Then
+                MessageBox.Show("Unable to delete user. " + vbNewLine + "User has OR entries.")
+                Exit Sub
+            End If
+
+            Try
+                Dim id = ListViewUser.SelectedItems(0).Text
+                Dim userName As String = ListViewUser.SelectedItems(0).SubItems(1).Text + ", " + ListViewUser.SelectedItems(0).SubItems(2).Text
+                Dim result1 As DialogResult = MessageBox.Show("Are you sure you want to User? " + vbNewLine + userName, "Delete User", MessageBoxButtons.YesNo)
+
+                If result1 = DialogResult.Yes Then
+                    Dim rowsAffected As Integer = 0
+                    sql = "DELETE FROM `db_user_profile` WHERE `id`=@ID"
+                    Connection()
+
+                    sqlCommand = New MySqlCommand(sql, sqlConnection)
+                    sqlCommand.Parameters.Add("@ID", MySqlDbType.Int64).Value = id
+                    rowsAffected = sqlCommand.ExecuteNonQuery()
+
+                    If rowsAffected > 0 Then
+                        btnSearch.PerformClick()
+                        MessageBox.Show("Successfully deleted user: " + userName)
+                    End If
+
+                End If
+            Catch ex As Exception
+            Finally
+                sqlCommand.Dispose()
+                sqlConnection.Close()
+            End Try
+        End If
+    End Sub
 End Class

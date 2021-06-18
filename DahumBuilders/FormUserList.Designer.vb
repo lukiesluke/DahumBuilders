@@ -38,6 +38,7 @@ Partial Class FormUserList
         Me.ColumnHeaderUserType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAgentName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAgentContact = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ContextMenuUser = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -90,6 +91,8 @@ Partial Class FormUserList
         Me.btnProfileInfo = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.DeleteUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ContextMenuUser.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
@@ -105,6 +108,7 @@ Partial Class FormUserList
         '
         Me.ListViewUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ListViewUser.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderId, Me.ColumnHeaderLastName, Me.ColumnHeaderName, Me.ColumnHeaderMiddleName, Me.ColumnHeaderGender, Me.ColumnHeaderCivilStatus, Me.ColumnHeaderDateOfBirth, Me.ColumnHeaderAddress, Me.ColumnHeaderImageLocation, Me.ColumnHeaderMobile, Me.ColumnHeaderUserType, Me.ColumnHeaderAgentName, Me.ColumnHeaderAgentContact})
+        Me.ListViewUser.ContextMenuStrip = Me.ContextMenuUser
         Me.ListViewUser.Dock = System.Windows.Forms.DockStyle.Top
         Me.ListViewUser.FullRowSelect = True
         Me.ListViewUser.GridLines = True
@@ -181,6 +185,12 @@ Partial Class FormUserList
         '
         Me.ColumnHeaderAgentContact.Text = "Agent Mobile"
         Me.ColumnHeaderAgentContact.Width = 80
+        '
+        'ContextMenuUser
+        '
+        Me.ContextMenuUser.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteUserToolStripMenuItem})
+        Me.ContextMenuUser.Name = "ContextMenuUser"
+        Me.ContextMenuUser.Size = New System.Drawing.Size(153, 48)
         '
         'Label1
         '
@@ -492,12 +502,12 @@ Partial Class FormUserList
         '
         Me.ContextMenuDue.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HideToolStripMenuItem})
         Me.ContextMenuDue.Name = "ContextMenuDue"
-        Me.ContextMenuDue.Size = New System.Drawing.Size(153, 48)
+        Me.ContextMenuDue.Size = New System.Drawing.Size(100, 26)
         '
         'HideToolStripMenuItem
         '
         Me.HideToolStripMenuItem.Name = "HideToolStripMenuItem"
-        Me.HideToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HideToolStripMenuItem.Size = New System.Drawing.Size(99, 22)
         Me.HideToolStripMenuItem.Text = "Hide"
         '
         'Panel2
@@ -608,7 +618,7 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -629,7 +639,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(3, 2)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(80, 86)
+        Me.btnPayment.Size = New System.Drawing.Size(77, 86)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -640,10 +650,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(88, 2)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(85, 2)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(76, 86)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(73, 86)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -654,7 +664,7 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(169, 2)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(163, 2)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
         Me.btnUpdateRecord.Size = New System.Drawing.Size(89, 86)
@@ -668,10 +678,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(263, 2)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(257, 2)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(127, 86)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(133, 86)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -704,6 +714,12 @@ Partial Class FormUserList
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'DeleteUserToolStripMenuItem
+        '
+        Me.DeleteUserToolStripMenuItem.Name = "DeleteUserToolStripMenuItem"
+        Me.DeleteUserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteUserToolStripMenuItem.Text = "&Delete User"
+        '
         'FormUserList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -718,6 +734,7 @@ Partial Class FormUserList
         Me.ShowIcon = False
         Me.Text = "User List"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.ContextMenuUser.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -801,4 +818,6 @@ Partial Class FormUserList
     Friend WithEvents ColumnHeader1UserId As ColumnHeader
     Friend WithEvents ContextMenuDue As ContextMenuStrip
     Friend WithEvents HideToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ContextMenuUser As ContextMenuStrip
+    Friend WithEvents DeleteUserToolStripMenuItem As ToolStripMenuItem
 End Class
