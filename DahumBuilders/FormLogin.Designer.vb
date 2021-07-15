@@ -40,7 +40,7 @@ Partial Class FormLogin
         '
         Me.txtUsername.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUsername.Location = New System.Drawing.Point(149, 64)
-        Me.txtUsername.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtUsername.Margin = New System.Windows.Forms.Padding(2)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(160, 23)
         Me.txtUsername.TabIndex = 0
@@ -49,7 +49,7 @@ Partial Class FormLogin
         '
         Me.txtPassword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(149, 91)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPassword.Size = New System.Drawing.Size(160, 23)
@@ -81,7 +81,7 @@ Partial Class FormLogin
         '
         Me.btnLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.Location = New System.Drawing.Point(149, 122)
-        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 27)
         Me.btnLogin.TabIndex = 4
@@ -92,7 +92,7 @@ Partial Class FormLogin
         '
         Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Location = New System.Drawing.Point(232, 122)
-        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 27)
         Me.btnCancel.TabIndex = 5
@@ -123,7 +123,7 @@ Partial Class FormLogin
         '
         'lblIP
         '
-        Me.lblIP.Location = New System.Drawing.Point(275, 184)
+        Me.lblIP.Location = New System.Drawing.Point(275, 186)
         Me.lblIP.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblIP.Name = "lblIP"
         Me.lblIP.Size = New System.Drawing.Size(131, 15)
@@ -134,7 +134,7 @@ Partial Class FormLogin
         'chBoxCustomIP
         '
         Me.chBoxCustomIP.AutoSize = True
-        Me.chBoxCustomIP.Location = New System.Drawing.Point(10, 182)
+        Me.chBoxCustomIP.Location = New System.Drawing.Point(10, 184)
         Me.chBoxCustomIP.Name = "chBoxCustomIP"
         Me.chBoxCustomIP.Size = New System.Drawing.Size(74, 17)
         Me.chBoxCustomIP.TabIndex = 9
@@ -143,9 +143,9 @@ Partial Class FormLogin
         '
         'txtCustomeIP
         '
-        Me.txtCustomeIP.Location = New System.Drawing.Point(82, 179)
+        Me.txtCustomeIP.Location = New System.Drawing.Point(82, 181)
         Me.txtCustomeIP.Name = "txtCustomeIP"
-        Me.txtCustomeIP.Size = New System.Drawing.Size(131, 20)
+        Me.txtCustomeIP.Size = New System.Drawing.Size(114, 20)
         Me.txtCustomeIP.TabIndex = 10
         Me.txtCustomeIP.Visible = False
         '
@@ -154,7 +154,7 @@ Partial Class FormLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(417, 206)
+        Me.ClientSize = New System.Drawing.Size(417, 211)
         Me.Controls.Add(Me.txtCustomeIP)
         Me.Controls.Add(Me.chBoxCustomIP)
         Me.Controls.Add(Me.lblIP)
@@ -168,7 +168,7 @@ Partial Class FormLogin
         Me.Controls.Add(Me.txtUsername)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormLogin"

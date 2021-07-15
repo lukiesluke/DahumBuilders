@@ -39,6 +39,7 @@ Partial Class FormUserList
         Me.ColumnHeaderAgentName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAgentContact = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuUser = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.btnSearch = New System.Windows.Forms.Button()
@@ -91,7 +92,6 @@ Partial Class FormUserList
         Me.btnProfileInfo = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.DeleteUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContextMenuUser.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -190,7 +190,13 @@ Partial Class FormUserList
         '
         Me.ContextMenuUser.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteUserToolStripMenuItem})
         Me.ContextMenuUser.Name = "ContextMenuUser"
-        Me.ContextMenuUser.Size = New System.Drawing.Size(153, 48)
+        Me.ContextMenuUser.Size = New System.Drawing.Size(134, 26)
+        '
+        'DeleteUserToolStripMenuItem
+        '
+        Me.DeleteUserToolStripMenuItem.Name = "DeleteUserToolStripMenuItem"
+        Me.DeleteUserToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.DeleteUserToolStripMenuItem.Text = "&Delete User"
         '
         'Label1
         '
@@ -617,8 +623,8 @@ Partial Class FormUserList
         Me.TableLayoutPanel2.ColumnCount = 4
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.21951!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.78049!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 93.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.btnPayment, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnStatementAccount, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.btnUpdateRecord, 2, 0)
@@ -639,7 +645,7 @@ Partial Class FormUserList
         Me.btnPayment.Location = New System.Drawing.Point(3, 2)
         Me.btnPayment.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnPayment.Name = "btnPayment"
-        Me.btnPayment.Size = New System.Drawing.Size(77, 86)
+        Me.btnPayment.Size = New System.Drawing.Size(91, 86)
         Me.btnPayment.TabIndex = 0
         Me.btnPayment.Text = "Payment"
         Me.btnPayment.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -650,10 +656,10 @@ Partial Class FormUserList
         Me.btnStatementAccount.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnStatementAccount.Image = CType(resources.GetObject("btnStatementAccount.Image"), System.Drawing.Image)
         Me.btnStatementAccount.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnStatementAccount.Location = New System.Drawing.Point(85, 2)
+        Me.btnStatementAccount.Location = New System.Drawing.Point(99, 2)
         Me.btnStatementAccount.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnStatementAccount.Name = "btnStatementAccount"
-        Me.btnStatementAccount.Size = New System.Drawing.Size(73, 86)
+        Me.btnStatementAccount.Size = New System.Drawing.Size(87, 86)
         Me.btnStatementAccount.TabIndex = 1
         Me.btnStatementAccount.Text = "SOA"
         Me.btnStatementAccount.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -664,10 +670,10 @@ Partial Class FormUserList
         Me.btnUpdateRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnUpdateRecord.Image = CType(resources.GetObject("btnUpdateRecord.Image"), System.Drawing.Image)
         Me.btnUpdateRecord.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnUpdateRecord.Location = New System.Drawing.Point(163, 2)
+        Me.btnUpdateRecord.Location = New System.Drawing.Point(191, 2)
         Me.btnUpdateRecord.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnUpdateRecord.Name = "btnUpdateRecord"
-        Me.btnUpdateRecord.Size = New System.Drawing.Size(89, 86)
+        Me.btnUpdateRecord.Size = New System.Drawing.Size(95, 86)
         Me.btnUpdateRecord.TabIndex = 2
         Me.btnUpdateRecord.Text = "Update Record"
         Me.btnUpdateRecord.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -678,10 +684,10 @@ Partial Class FormUserList
         Me.btnProfileInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnProfileInfo.Image = Global.DahumBuilders.My.Resources.Resources.profiles_a_icon
         Me.btnProfileInfo.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.btnProfileInfo.Location = New System.Drawing.Point(257, 2)
+        Me.btnProfileInfo.Location = New System.Drawing.Point(291, 2)
         Me.btnProfileInfo.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.btnProfileInfo.Name = "btnProfileInfo"
-        Me.btnProfileInfo.Size = New System.Drawing.Size(133, 86)
+        Me.btnProfileInfo.Size = New System.Drawing.Size(99, 86)
         Me.btnProfileInfo.TabIndex = 3
         Me.btnProfileInfo.Text = "Profile Info"
         Me.btnProfileInfo.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -713,12 +719,6 @@ Partial Class FormUserList
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "Client Information"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'DeleteUserToolStripMenuItem
-        '
-        Me.DeleteUserToolStripMenuItem.Name = "DeleteUserToolStripMenuItem"
-        Me.DeleteUserToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.DeleteUserToolStripMenuItem.Text = "&Delete User"
         '
         'FormUserList
         '

@@ -37,7 +37,7 @@ Module ModuleConnection
 
     Public Sub Connection()
         Try
-            Dim connStr As String = String.Format("Server={0}; Uid={1}; Pwd=; Port=3306; Database=dahum_builders;", serverSetting._ip, serverSetting._username)
+            Dim connStr As String = String.Format("Server={0}; Uid={1}; Pwd=; Port=3306; Database=dahum_builders; Connect Timeout={2}", serverSetting._ip, serverSetting._username, serverSetting._connTimeout)
             sqlConnection = New MySqlConnection(connStr)
             sqlConnection.Open()
         Catch ex As Exception
@@ -57,6 +57,7 @@ Module ModuleConnection
 
         serverSetting._ip = ip
         serverSetting._username = ini.GetString("server_setting", "username", "")
+        serverSetting._connTimeout = ini.GetString("server_setting", "connect-timeout", "28800")
     End Sub
 
     Public Sub DahumConfiguration()
@@ -65,5 +66,6 @@ Module ModuleConnection
 
         serverSetting._ip = ini.GetString("server_setting", "ip-address", "")
         serverSetting._username = ini.GetString("server_setting", "username", "")
+        serverSetting._connTimeout = ini.GetString("server_setting", "connect-timeout", "28800")
     End Sub
 End Module
