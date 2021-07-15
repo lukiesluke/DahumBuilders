@@ -27,12 +27,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_0B078F4FF62D4C4EB3D44CEE2219A4D0"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_0B7D7BBAD8350E11FFBA1015B69F3FC1"
         "OwnerKey" = "8:_0563EE369C714E4CA1475A684C92D885"
         "MsmSig" = "8:_UNDEFINED"
@@ -1335,26 +1329,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B078F4FF62D4C4EB3D44CEE2219A4D0"
-            {
-            "SourcePath" = "8:..\\DahumBuilders\\bin\\Debug\\customip.txt"
-            "TargetName" = "8:customip.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_EE91D4E6FDD64CC7A36E4DB763B4B040"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0B7D7BBAD8350E11FFBA1015B69F3FC1"
@@ -4156,7 +4130,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Dahum Builders Corp"
         "ProductCode" = "8:{B3786440-1352-4DCE-8F9D-F15FA298DE23}"
-        "PackageCode" = "8:{40E03C52-1954-400F-A875-6B2065B07CF5}"
+        "PackageCode" = "8:{AE09EDF6-C521-492D-80C1-6255D4C51D2C}"
         "UpgradeCode" = "8:{F0B45AC0-A222-4EC1-8EAC-CFC5AF9B9DAE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
