@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.IO
+Imports System.Text
 Imports MySql.Data.MySqlClient
 
 Public Class FormLogin
@@ -12,7 +14,8 @@ Public Class FormLogin
         lblIP.Text = String.Format("server: {0}", serverSetting._ip)
     End Sub
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        DahumConfiguration()
+        DahumConfiguration(chBoxCustomIP, txtCustomeIP.Text.Trim)
+        updateCustomIp()
         If validateLogin() = False Then
             lblMessage.Text = "Please enter username/password."
             lblMessage.Visible = True
@@ -84,4 +87,27 @@ Public Class FormLogin
         End If
         Return pass
     End Function
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles chBoxCustomIP.CheckedChanged
+        If chBoxCustomIP.Checked Then
+            Dim sr As New StreamReader("customip.txt")
+            txtCustomeIP.Visible = True
+            lblIP.Visible = False
+
+            txtCustomeIP.Text = sr.ReadToEnd()
+            txtCustomeIP.Focus()
+            sr.Close()
+        Else
+            txtCustomeIP.Visible = False
+            lblIP.Visible = True
+        End If
+    End Sub
+
+    Private Sub updateCustomIp()
+        Dim file As System.IO.StreamWriter
+        Dim filePath = My.Computer.FileSystem.CurrentDirectory
+        file = My.Computer.FileSystem.OpenTextFileWriter(filePath & "\customip.txt", False)
+        file.WriteLine(txtCustomeIP.Text.Trim)
+        file.Close()
+    End Sub
 End Class
