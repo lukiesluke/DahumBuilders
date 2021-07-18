@@ -234,36 +234,36 @@ Public Class FormEmployeeRegistration
 
         If txtName.Text.Trim.Length < 1 Then
             ShowMessageBox(txtName, "Please Enter Employee Name", MessageBoxIcon.Question)
-            pass = False
+            Return pass = False
             Exit Function
         ElseIf txtSurname.Text.Trim.Length < 1 And ComboBoxEmpType.SelectedIndex < 4 Then
             ShowMessageBox(txtSurname, "Please Enter Employee Surname", MessageBoxIcon.Question)
-            pass = False
+            Return pass = False
             Exit Function
         ElseIf ComboBoxEmpType.SelectedIndex = 0 Then
-            pass = False
             ShowMessageBox(Nothing, "Please Select Employee type", MessageBoxIcon.Question)
             ComboBoxEmpType.DroppedDown = True
             ComboBoxEmpType.Focus()
+            Return pass = False
             Exit Function
         End If
 
         If ComboBoxEmpType.SelectedIndex < 4 Then
             If txtUsername.Text.Trim.Length < 4 Then
                 ShowMessageBox(txtUsername, "Please Enter Employee username of minimum of 5 characters.", MessageBoxIcon.Question)
-                pass = False
+                Return pass = False
                 Exit Function
             ElseIf txtPass1.Text.Trim.Length < 5 Then
                 ShowMessageBox(txtPass1, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
-                pass = False
+                Return pass = False
                 Exit Function
             ElseIf txtPass2.Text.Trim.Length < 5 Then
                 ShowMessageBox(txtPass2, "Please enter Password of minimum of 5 characters.", MessageBoxIcon.Question)
-                pass = False
+                Return pass = False
                 Exit Function
             ElseIf txtPass1.Text.Trim <> txtPass2.Text.Trim Then
                 ShowMessageBox(txtName, "Password does not match. Please enter again.", MessageBoxIcon.Question)
-                pass = False
+                Return pass = False
                 Exit Function
             End If
         End If

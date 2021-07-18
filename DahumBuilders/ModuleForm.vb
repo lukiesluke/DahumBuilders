@@ -10,7 +10,6 @@ Module ModuleForm
     Public mFormAddProjectSetting As FormAddProjectSetting
     Public mFormLogin As FormLogin
     Public mFormEmployeeRegistration As FormEmployeeRegistration
-    Public mFormOREntries As FormOREntries
     Public mFormExpenses As FormExpenses
     Public mFormMyOREntries As FormMyOREntries
 

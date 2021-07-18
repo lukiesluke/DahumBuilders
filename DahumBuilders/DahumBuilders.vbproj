@@ -260,12 +260,6 @@
     <Compile Include="FormMyOREntries.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormOREntries.Designer.vb">
-      <DependentUpon>FormOREntries.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FormOREntries.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FormPaymentMethod.Designer.vb">
       <DependentUpon>FormPaymentMethod.vb</DependentUpon>
     </Compile>
@@ -427,9 +421,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMyOREntries.resx">
       <DependentUpon>FormMyOREntries.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormOREntries.resx">
-      <DependentUpon>FormOREntries.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPayment.resx">
       <DependentUpon>FormPayment.vb</DependentUpon>
