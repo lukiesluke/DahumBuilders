@@ -24,8 +24,6 @@ Partial Class FormMainDahum
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMainDahum))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
-        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UserSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MyProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EntriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OfficialRecieptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,26 +56,13 @@ Partial Class FormMainDahum
         'MenuStrip1
         '
         Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.MyProfileToolStripMenuItem, Me.OpenToolStripMenuItem, Me.ProjectSettingToolStripMenuItem, Me.ReportToolStripMenuItem, Me.SyncToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MyProfileToolStripMenuItem, Me.OpenToolStripMenuItem, Me.ProjectSettingToolStripMenuItem, Me.ReportToolStripMenuItem, Me.SyncToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(4, 1, 0, 1)
         Me.MenuStrip1.Size = New System.Drawing.Size(843, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
-        '
-        'FileToolStripMenuItem
-        '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserSettingToolStripMenuItem})
-        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 22)
-        Me.FileToolStripMenuItem.Text = "File"
-        '
-        'UserSettingToolStripMenuItem
-        '
-        Me.UserSettingToolStripMenuItem.Name = "UserSettingToolStripMenuItem"
-        Me.UserSettingToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
-        Me.UserSettingToolStripMenuItem.Text = "User Setting"
         '
         'MyProfileToolStripMenuItem
         '
@@ -265,8 +250,6 @@ Partial Class FormMainDahum
     End Sub
 
     Friend WithEvents MenuStrip1 As MenuStrip
-    Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UserSettingToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents StatusStrip As StatusStrip
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusUsername As ToolStripStatusLabel
