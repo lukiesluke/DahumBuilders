@@ -4,12 +4,10 @@ Public Class FormCRptExpenses
     Dim format As String = "yyyy-MM-dd"
     Dim MMddyyyy As String = "MMMM dd, yyyy"
 
-    Private Sub FormCRptExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Cursor = Cursors.WaitCursor
         generate_report()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub generate_report()

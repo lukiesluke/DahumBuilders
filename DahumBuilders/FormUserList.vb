@@ -4,6 +4,7 @@ Public Class FormUserList
     Dim mUser As User
     Dim mDisableLoadUserType As Boolean = False
     Dim mDisableLoadProject As Boolean = False
+    Private mouseDownClicked As Boolean
 
     Private Sub FormUserList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Location = New Point(My.Computer.Screen.Bounds.Top)
@@ -21,7 +22,6 @@ Public Class FormUserList
         enableDisableClientButton(False)
         loadProjectListCombobox()
         loadComboBoxUserType()
-        loadDueDate()
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -37,6 +37,7 @@ Public Class FormUserList
     End Sub
 
     Private Sub searchUser(value As String)
+        Cursor = Cursors.WaitCursor
         ListViewUser.Items.Clear()
         Dim item As ListViewItem
         If value.Equals("All") Or value.Length < 1 Then
@@ -116,6 +117,7 @@ Public Class FormUserList
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
         labelRows.Text = "Row's: " & ListViewUser.Items.Count
     End Sub
@@ -308,14 +310,19 @@ Public Class FormUserList
 
         Dim key As Integer = DirectCast(cbbUserType.SelectedItem, KeyValuePair(Of Integer, String)).Key
         If -1 = key Then
-            selectPerUserType(key)
+            If mouseDownClicked = True Then
+                selectPerUserType(key)
+            End If
         Else
-            selectPerUserType(key)
+            If mouseDownClicked = True Then
+                selectPerUserType(key)
+            End If
         End If
     End Sub
 
     Private Sub selectPerUserType(key As String)
         Dim item As ListViewItem
+        Cursor = Cursors.WaitCursor
         ListViewUser.Items.Clear()
         Connection()
         Try
@@ -378,6 +385,7 @@ Public Class FormUserList
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
         labelRows.Text = "Row's: " & ListViewUser.Items.Count
     End Sub
@@ -386,6 +394,7 @@ Public Class FormUserList
         ListView1.Columns(0).Width = 0
         ListView1.Columns(1).Width = 0
 
+        Cursor = Cursors.WaitCursor
         Connection()
         sql = "SELECT c.`id`,  c.`userid`, (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`) AS `name`, 
         (SELECT `mobile_number` FROM `db_user_profile` WHERE id= c.`userid`) AS `mobile`, 
@@ -419,6 +428,7 @@ Public Class FormUserList
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
     End Sub
 
@@ -511,5 +521,13 @@ Public Class FormUserList
                 sqlConnection.Close()
             End Try
         End If
+    End Sub
+
+    Private Sub cbbUserType_MouseUp(sender As Object, e As MouseEventArgs) Handles cbbUserType.MouseUp
+        mouseDownClicked = True
+    End Sub
+
+    Private Sub FormUserList_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        loadDueDate()
     End Sub
 End Class

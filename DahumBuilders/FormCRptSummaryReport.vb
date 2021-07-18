@@ -4,10 +4,6 @@ Public Class FormCRptSummaryReport
     Dim format As String = "yyyy-MM-dd"
     Dim MMddyyyy As String = "MMMM dd, yyyy"
 
-    Private Sub FormCRptSummaryReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Function generate_expenses() As String
         Dim table As New DataTable()
         Dim totalExpenses As String = 0.ToString("N2")
@@ -135,7 +131,9 @@ Public Class FormCRptSummaryReport
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Cursor = Cursors.WaitCursor
         generate_report()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged

@@ -55,6 +55,7 @@ Public Class FormCRptTransaction
         INNER JOIN `db_particular_type` pa ON t.`particular` = pa.`id` INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         WHERE t.`userid`=@userId ORDER BY date_paid DESC, proj_name ASC, lot ASC"
+        Cursor = Cursors.WaitCursor
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -115,6 +116,7 @@ Public Class FormCRptTransaction
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
 
     End Sub
@@ -128,6 +130,7 @@ Public Class FormCRptTransaction
         INNER JOIN `db_particular_type` pa ON t.`particular` = pa.`id` INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         WHERE t.`userid`=@userId AND t.`proj_itemId`=@ItemID ORDER BY date_paid DESC, proj_name ASC, lot ASC"
+        Cursor = Cursors.WaitCursor
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -190,6 +193,7 @@ Public Class FormCRptTransaction
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
 
     End Sub

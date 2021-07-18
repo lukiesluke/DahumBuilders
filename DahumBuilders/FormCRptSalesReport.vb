@@ -135,7 +135,9 @@ Public Class FormCRptSalesReport
     End Sub
 
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Cursor = Cursors.WaitCursor
         generate_report()
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged

@@ -19,9 +19,10 @@ Public Class FormProjectPriceList
         'Refrence source http://vb.net-informations.com/dataset/bind-combobox.htm
 
         Dim item As ListViewItem
+        cbbProjectName.Enabled = False
+        Cursor = Cursors.WaitCursor
 
         sql = "SELECT `id`,`sqm`,`tcp`,`lot_type` FROM `db_project_list_price` WHERE `lid`=@listID ORDER BY `sqm` ASC"
-
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -47,6 +48,8 @@ Public Class FormProjectPriceList
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            cbbProjectName.Enabled = True
+            Cursor = Cursors.Default
         End Try
     End Sub
 

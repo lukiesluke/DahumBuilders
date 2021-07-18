@@ -37,28 +37,28 @@ Public Class FormProjectList
             checkAvailable = " AND p.`assigned_userid` <= 0"
         End If
         Connection()
-        If cbbProjectName.SelectedIndex = -1 Then
-            sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price, 
+        Try
+            If cbbProjectName.SelectedIndex = -1 Then
+                sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price, 
             IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
             FROM `db_project_item` p INNER JOIN `db_project_list` l ON p.`proj_id`=l.`id` 
             WHERE block LIKE @Block " & checkAvailable
 
-            sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@Block", MySqlDbType.VarChar).Value = txtBlock.Text.Trim
-            sqlDataReader = sqlCommand.ExecuteReader()
-        Else
-            sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price, 
+                sqlCommand = New MySqlCommand(sql, sqlConnection)
+                sqlCommand.Parameters.Add("@Block", MySqlDbType.VarChar).Value = txtBlock.Text.Trim
+                sqlDataReader = sqlCommand.ExecuteReader()
+            Else
+                sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price, 
             IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
             FROM `db_project_item` p INNER JOIN `db_project_list` l ON p.`proj_id`=l.`id`
             WHERE `proj_name` LIKE @projName AND block LIKE @Block " & checkAvailable
 
-            sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@projName", MySqlDbType.VarChar).Value = "%" & cbbProjectName.SelectedItem & "%"
-            sqlCommand.Parameters.Add("@Block", MySqlDbType.VarChar).Value = "%" & txtBlock.Text.Trim & "%"
-            sqlDataReader = sqlCommand.ExecuteReader()
-        End If
+                sqlCommand = New MySqlCommand(sql, sqlConnection)
+                sqlCommand.Parameters.Add("@projName", MySqlDbType.VarChar).Value = "%" & cbbProjectName.SelectedItem & "%"
+                sqlCommand.Parameters.Add("@Block", MySqlDbType.VarChar).Value = "%" & txtBlock.Text.Trim & "%"
+                sqlDataReader = sqlCommand.ExecuteReader()
+            End If
 
-        Try
             Dim item As ListViewItem
             ListViewProject.Items.Clear()
             Do While sqlDataReader.Read = True
@@ -146,6 +146,7 @@ Public Class FormProjectList
     Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
         Dim rowsAffected As Integer = 0
         sql = "UPDATE `db_project_item` SET `assigned_userid`=@UserID, `remark`='' WHERE `item_id`=@ItemId AND `assigned_userid`<1"
+        Cursor = Cursors.WaitCursor
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -157,6 +158,7 @@ Public Class FormProjectList
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
 
         If rowsAffected < 1 Then
