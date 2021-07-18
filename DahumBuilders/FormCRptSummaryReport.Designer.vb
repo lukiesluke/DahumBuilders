@@ -43,17 +43,19 @@ Partial Class FormCRptSummaryReport
         Me.PanelMain.Controls.Add(Me.PanelHeader)
         Me.PanelMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelMain.Location = New System.Drawing.Point(0, 0)
+        Me.PanelMain.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanelMain.Name = "PanelMain"
-        Me.PanelMain.Size = New System.Drawing.Size(1321, 643)
+        Me.PanelMain.Size = New System.Drawing.Size(881, 418)
         Me.PanelMain.TabIndex = 0
         '
         'PanelBody
         '
         Me.PanelBody.Controls.Add(Me.CrystalReportViewerSummary)
         Me.PanelBody.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelBody.Location = New System.Drawing.Point(0, 68)
+        Me.PanelBody.Location = New System.Drawing.Point(0, 44)
+        Me.PanelBody.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanelBody.Name = "PanelBody"
-        Me.PanelBody.Size = New System.Drawing.Size(1321, 575)
+        Me.PanelBody.Size = New System.Drawing.Size(881, 374)
         Me.PanelBody.TabIndex = 1
         '
         'CrystalReportViewerSummary
@@ -63,8 +65,9 @@ Partial Class FormCRptSummaryReport
         Me.CrystalReportViewerSummary.Cursor = System.Windows.Forms.Cursors.Default
         Me.CrystalReportViewerSummary.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CrystalReportViewerSummary.Location = New System.Drawing.Point(0, 0)
+        Me.CrystalReportViewerSummary.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.CrystalReportViewerSummary.Name = "CrystalReportViewerSummary"
-        Me.CrystalReportViewerSummary.Size = New System.Drawing.Size(1321, 575)
+        Me.CrystalReportViewerSummary.Size = New System.Drawing.Size(881, 374)
         Me.CrystalReportViewerSummary.TabIndex = 0
         Me.CrystalReportViewerSummary.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
         '
@@ -77,24 +80,27 @@ Partial Class FormCRptSummaryReport
         Me.PanelHeader.Controls.Add(Me.dtpFrom)
         Me.PanelHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.PanelHeader.Location = New System.Drawing.Point(0, 0)
+        Me.PanelHeader.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PanelHeader.Name = "PanelHeader"
-        Me.PanelHeader.Size = New System.Drawing.Size(1321, 68)
+        Me.PanelHeader.Size = New System.Drawing.Size(881, 44)
         Me.PanelHeader.TabIndex = 0
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(428, 17)
+        Me.Label3.Location = New System.Drawing.Point(285, 11)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(46, 20)
+        Me.Label3.Size = New System.Drawing.Size(30, 13)
         Me.Label3.TabIndex = 11
         Me.Label3.Text = "From"
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(803, 11)
+        Me.btnSearch.Location = New System.Drawing.Point(535, 7)
+        Me.btnSearch.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(90, 47)
+        Me.btnSearch.Size = New System.Drawing.Size(60, 31)
         Me.btnSearch.TabIndex = 10
         Me.btnSearch.Text = "S&earch"
         Me.btnSearch.UseVisualStyleBackColor = True
@@ -102,9 +108,10 @@ Partial Class FormCRptSummaryReport
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(625, 19)
+        Me.Label2.Location = New System.Drawing.Point(417, 12)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(27, 20)
+        Me.Label2.Size = New System.Drawing.Size(20, 13)
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "To"
         '
@@ -112,27 +119,30 @@ Partial Class FormCRptSummaryReport
         '
         Me.dtpTo.CustomFormat = "MM/dd/yyyy"
         Me.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpTo.Location = New System.Drawing.Point(658, 14)
+        Me.dtpTo.Location = New System.Drawing.Point(439, 9)
+        Me.dtpTo.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.dtpTo.Name = "dtpTo"
-        Me.dtpTo.Size = New System.Drawing.Size(139, 26)
+        Me.dtpTo.Size = New System.Drawing.Size(94, 20)
         Me.dtpTo.TabIndex = 8
         '
         'dtpFrom
         '
         Me.dtpFrom.CustomFormat = "MM/dd/yyyy"
         Me.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFrom.Location = New System.Drawing.Point(480, 14)
+        Me.dtpFrom.Location = New System.Drawing.Point(320, 9)
+        Me.dtpFrom.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.dtpFrom.Name = "dtpFrom"
-        Me.dtpFrom.Size = New System.Drawing.Size(139, 26)
+        Me.dtpFrom.Size = New System.Drawing.Size(94, 20)
         Me.dtpFrom.TabIndex = 7
         '
         'FormCRptSummaryReport
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1321, 643)
+        Me.ClientSize = New System.Drawing.Size(881, 418)
         Me.Controls.Add(Me.PanelMain)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "FormCRptSummaryReport"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Summary Report"

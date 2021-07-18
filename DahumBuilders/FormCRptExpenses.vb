@@ -47,7 +47,10 @@ Public Class FormCRptExpenses
             CrystalReportViewerExpenses.Refresh()
             CrystalReportViewerExpenses.Zoom(90)
         Catch ex As Exception
-
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         End Try
     End Sub
 

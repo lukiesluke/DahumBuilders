@@ -167,6 +167,7 @@ Public Class FormCRptSalesReport
             HeaderSaleReport = "Daily Sales Report"
         End If
 
+        Cursor = Cursors.WaitCursor
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -229,6 +230,10 @@ Public Class FormCRptSalesReport
             objExcel.Visible = True
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
     End Sub
 End Class

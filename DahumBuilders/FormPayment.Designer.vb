@@ -92,6 +92,7 @@ Partial Class FormPayment
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDisc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -99,7 +100,6 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -748,7 +748,7 @@ Partial Class FormPayment
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(743, 281)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Transaction History"
+        Me.TabPage2.Text = "Transaction List"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'ListView1
@@ -807,6 +807,11 @@ Partial Class FormPayment
         Me.ColumnHeaderAmount.Text = "Amount"
         Me.ColumnHeaderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderAmount.Width = 80
+        '
+        'ColumnHeaderProject
+        '
+        Me.ColumnHeaderProject.Text = "Project Description"
+        Me.ColumnHeaderProject.Width = 200
         '
         'DataGridView1
         '
@@ -881,11 +886,6 @@ Partial Class FormPayment
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ColumnHeaderProject
-        '
-        Me.ColumnHeaderProject.Text = "Project Description"
-        Me.ColumnHeaderProject.Width = 200
         '
         'FormPayment
         '

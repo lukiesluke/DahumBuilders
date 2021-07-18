@@ -33,6 +33,9 @@ Public Class FormCRptSummaryReport
             End If
         Catch ex As Exception
             totalExpenses = 0.ToString("N2")
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         End Try
 
         Return totalExpenses
@@ -138,5 +141,9 @@ Public Class FormCRptSummaryReport
 
     Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged
         dtpTo.Value = dtpFrom.Value
+    End Sub
+
+    Private Sub FormCRptSummaryReport_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
