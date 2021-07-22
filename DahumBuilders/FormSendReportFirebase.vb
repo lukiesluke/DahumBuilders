@@ -40,6 +40,7 @@ Public Class FormSendReportFirebase
         SUM(IF(`payment_type` = 0, `paid_amount`-`commission`,0)) AS TotalCashOnHand
         FROM `db_transaction` t GROUP BY `date_paid` ORDER BY `date_paid` DESC"
 
+        Cursor = Cursors.WaitCursor
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -67,6 +68,12 @@ Public Class FormSendReportFirebase
 
             client.Set(pathSummaryTest, summaryList)
 
+            Dim summaryLogs As New FirebaseLogs() With {
+                .datetimeLog = "Report Date: " & Format(Now, "MMMM dd, yyyy h:mm:ss tt")
+                }
+
+            client.Set(pathSummaryLogs, summaryLogs)
+
             sqlDataReader.Dispose()
             lblStatus.Text = "Report Successfully submitted."
 
@@ -76,6 +83,7 @@ Public Class FormSendReportFirebase
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
 
     End Sub

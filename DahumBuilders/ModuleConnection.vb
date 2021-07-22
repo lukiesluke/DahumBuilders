@@ -21,9 +21,11 @@ Module ModuleConnection
     'Firebase variable
     Public pathSummary As String = "summary/"
     Public pathSummaryTest As String = "summaryTest/"
+    Public pathSummaryLogs As String = "summaryLogs/"
 
     Public pathProject As String = "project/"
     Public pathProjectTest As String = "projectTest/"
+    Public pathProjectLogs As String = "projectLogs/"
 
     Public fireCon As New FirebaseConfig() With {
         .AuthSecret = "3zPFq1X41jpyd8jGBdk6dM50tXG3vO0x7LQGNFj8",

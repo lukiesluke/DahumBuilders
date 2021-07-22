@@ -819,13 +819,13 @@ Partial Class FormPayment
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.BackgroundColor = System.Drawing.Color.White
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 18)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 1)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(1087, 272)
+        Me.DataGridView1.Size = New System.Drawing.Size(1087, 138)
         Me.DataGridView1.TabIndex = 6
         '
         'MenuStrip1

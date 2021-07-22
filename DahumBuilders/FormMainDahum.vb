@@ -192,6 +192,12 @@ Public Class FormMainDahum
 
             client.Set(pathProjectTest, projectList)
 
+            Dim projectLogs As New FirebaseLogs() With {
+                .datetimeLog = "Report Date: " & Format(Now, "MMMM dd, yyyy h:mm:ss tt")
+                }
+
+            client.Set(pathProjectLogs, projectLogs)
+
             Cursor = Cursors.Default
             MessageBox.Show("Successfully synce to live database.")
         Catch ex As Exception
