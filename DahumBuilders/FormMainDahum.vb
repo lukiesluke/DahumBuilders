@@ -203,7 +203,7 @@ Public Class FormMainDahum
             MessageBox.Show("Successfully synce to live database.")
         Catch ex As Exception
             Cursor = Cursors.Default
-            MessageBox.Show(ex.Message)
+            MessageBox.Show("Failed to send report. Please try again. " & vbNewLine & "Error message: " & ex.Message)
         End Try
     End Sub
 

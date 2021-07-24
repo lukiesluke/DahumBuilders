@@ -80,7 +80,7 @@ Public Class FormSendReportFirebase
 
         Catch ex As Exception
             lblStatus.Text = ex.Message
-            MessageBox.Show(ex.Message)
+            MessageBox.Show("Failed to send report. Please try again. " & vbNewLine & "Error message: " & ex.Message)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
