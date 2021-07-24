@@ -177,23 +177,24 @@ Public Class FormMainDahum
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlDataReader = sqlCommand.ExecuteReader()
 
-            Do While sqlDataReader.Read = True
-                Dim project = New FirebaseProject() With {
-                        .id = sqlDataReader("id"),
-                        .projName = sqlDataReader("proj_name"),
-                        .address = sqlDataReader("proj_address")
-                    }
-                projectList.Add(project)
-            Loop
+            'Do While sqlDataReader.Read = True
+            '    Dim project = New FirebaseProject() With {
+            '            .id = sqlDataReader("id"),
+            '            .projName = sqlDataReader("proj_name"),
+            '            .address = sqlDataReader("proj_address")
+            '        }
+            '    projectList.Add(project)
+            'Loop
 
-            For Each project In projectList
-                project.projectList = generateProjectList(project.id)
-            Next
+            'For Each project In projectList
+            '    project.projectList = generateProjectList(project.id)
+            'Next
 
-            client.Set(pathProjectTest, projectList)
+            'client.Set(pathProjectTest, projectList)
 
             Dim projectLogs As New FirebaseLogs() With {
-                .datetimeLog = "Report Date: " & Format(Now, "MMMM dd, yyyy h:mm:ss tt")
+                .datetimeLog = "Report Date: " & Format(Now, "MMMM dd, yyyy h:mm:ss tt"),
+                .userInfo = userLogon._name
                 }
 
             client.Set(pathProjectLogs, projectLogs)

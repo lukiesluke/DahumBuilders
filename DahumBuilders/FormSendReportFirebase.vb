@@ -46,30 +46,31 @@ Public Class FormSendReportFirebase
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlDataReader = sqlCommand.ExecuteReader()
 
-            Dim summaryList As New List(Of FirebaseSummaryReport)()
-            Do While sqlDataReader.Read = True
-                Dim dateVal As String = Format(sqlDataReader("DatePaid"), "yyyy-MM-dd").ToString
-                Dim summaryReport As New FirebaseSummaryReport() With {
-                    .datePaid = dateVal,
-                    .totalCash = sqlDataReader("TotalCash"),
-                    .totalCheck = sqlDataReader("TotalCheck"),
-                    .totalBankTransfer = sqlDataReader("TotalBankTransfer"),
-                    .expenses = sqlDataReader("Expenses")
-                }
-                summaryList.Add(summaryReport)
-            Loop
+            'Dim summaryList As New List(Of FirebaseSummaryReport)()
+            'Do While sqlDataReader.Read = True
+            '    Dim dateVal As String = Format(sqlDataReader("DatePaid"), "yyyy-MM-dd").ToString
+            '    Dim summaryReport As New FirebaseSummaryReport() With {
+            '        .datePaid = dateVal,
+            '        .totalCash = sqlDataReader("TotalCash"),
+            '        .totalCheck = sqlDataReader("TotalCheck"),
+            '        .totalBankTransfer = sqlDataReader("TotalBankTransfer"),
+            '        .expenses = sqlDataReader("Expenses")
+            '    }
+            '    summaryList.Add(summaryReport)
+            'Loop
 
-            sqlCommand.Dispose()
-            sqlConnection.Close()
+            'sqlCommand.Dispose()
+            'sqlConnection.Close()
 
-            For Each summary In summaryList
-                summary.details = generateDetailReport(summary.datePaid)
-            Next
+            'For Each summary In summaryList
+            '    summary.details = generateDetailReport(summary.datePaid)
+            'Next
 
-            client.Set(pathSummaryTest, summaryList)
+            'client.Set(pathSummaryTest, summaryList)
 
             Dim summaryLogs As New FirebaseLogs() With {
-                .datetimeLog = "Report Date: " & Format(Now, "MMMM dd, yyyy h:mm:ss tt")
+                .datetimeLog = "Report Date: " & Format(Now, "MMMM dd, yyyy h:mm:ss tt"),
+                .userInfo = userLogon._name
                 }
 
             client.Set(pathSummaryLogs, summaryLogs)
