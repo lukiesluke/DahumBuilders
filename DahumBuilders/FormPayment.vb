@@ -219,6 +219,8 @@ FinallyLine:
                         Case "Select"
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(5).Value = "0" 'cbbDiscount
+                            DataGridView1.Rows(e.RowIndex).Cells(6).Value = "0" 'Discount Amount
+                            DataGridView1.Rows(e.RowIndex).Cells(6).ReadOnly = True 'Discount Amount
                             DataGridView1.Rows(e.RowIndex).Cells(11).Value = "0" 'Amount to pay
                         Case "Downpayment"
 
@@ -229,6 +231,7 @@ FinallyLine:
                             cellDiscount.Style.BackColor = Color.White
                             cellDiscount.ReadOnly = False
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
+                            DataGridView1.Rows(e.RowIndex).Cells(6).ReadOnly = False 'Discount Amount
                             If p._total_balance = 0 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
@@ -396,6 +399,13 @@ FinallyLine:
                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(4).Value).ToString("N2") 'Penalty Amount
             Else
                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = 0.ToString("N2") 'Penalty Amount
+            End If
+        End If
+        If e.ColumnIndex = 6 Then 'Discount Amount
+            If DataGridView1.Rows(e.RowIndex).Cells(6).Value IsNot Nothing Then
+                DataGridView1.Rows(e.RowIndex).Cells(6).Value = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(6).Value).ToString("N2") 'Discount Amount
+            Else
+                DataGridView1.Rows(e.RowIndex).Cells(6).Value = 0.ToString("N2") 'Discount Amount
             End If
         End If
         If e.ColumnIndex = 9 Then 'Penalty Amount
