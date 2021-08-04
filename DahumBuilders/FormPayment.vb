@@ -623,13 +623,13 @@ FinallyLine:
                 End Select
                 txtBankName.Focus()
                 Exit Sub
-            ElseIf txtCheckNo.Text.Trim.Length < 1 Then
-                Dim ret As DialogResult = MessageBox.Show(Me, "Please Enter reference number.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Select Case ret
-                    Case DialogResult.OK
-                End Select
-                txtCheckNo.Focus()
-                Exit Sub
+                'ElseIf txtCheckNo.Text.Trim.Length < 1 Then
+                '    Dim ret As DialogResult = MessageBox.Show(Me, "Please Enter reference number.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                '    Select Case ret
+                '        Case DialogResult.OK
+                '    End Select
+                '    txtCheckNo.Focus()
+                '    Exit Sub
             End If
         End If
 
