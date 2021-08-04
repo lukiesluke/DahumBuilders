@@ -23,7 +23,9 @@ Public Class FormMyOREntries
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
+        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
         FROM `db_transaction` t WHERE t.`particular`<=5 AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
@@ -44,6 +46,8 @@ Public Class FormMyOREntries
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._penalty = sqlDataReader("penalty")
                 transaction._discountAmount = sqlDataReader("discount_amount")
+                transaction._createdBy = sqlDataReader("created_by")
+                transaction._updatedBy = sqlDataReader("updated_by")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -56,6 +60,8 @@ Public Class FormMyOREntries
                 item.SubItems.Add(transaction._description)
                 item.SubItems.Add(transaction._penalty)
                 item.SubItems.Add(transaction._discountAmount)
+                item.SubItems.Add(transaction._createdBy)
+                item.SubItems.Add(transaction._updatedBy)
                 ListView1.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -235,7 +241,9 @@ Public Class FormMyOREntries
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
+        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
         FROM `db_transaction` t WHERE t.`official_receipt_no` LIKE @OREntry"
 
         Connection()
@@ -259,6 +267,8 @@ Public Class FormMyOREntries
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._penalty = sqlDataReader("penalty")
                 transaction._discountAmount = sqlDataReader("discount_amount")
+                transaction._createdBy = sqlDataReader("created_by")
+                transaction._updatedBy = sqlDataReader("updated_by")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -271,6 +281,8 @@ Public Class FormMyOREntries
                 item.SubItems.Add(transaction._description)
                 item.SubItems.Add(transaction._penalty)
                 item.SubItems.Add(transaction._discountAmount)
+                item.SubItems.Add(transaction._createdBy)
+                item.SubItems.Add(transaction._updatedBy)
                 ListView1.Items.Add(item)
             Loop
 

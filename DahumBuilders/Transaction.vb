@@ -23,5 +23,6 @@
     Public Property _check_number As String = ""
     Public Property _check_date As Date = Nothing
     Public Property _created_by As Integer = 0
-
+    Public Property _createdBy As String = ""
+    Public Property _updatedBy As String = ""
 End Class

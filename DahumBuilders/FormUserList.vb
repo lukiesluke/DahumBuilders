@@ -396,8 +396,9 @@ Public Class FormUserList
 
         Cursor = Cursors.WaitCursor
         Connection()
-        sql = "SELECT c.`id`,  c.`userid`, (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`) AS `name`, 
-        (SELECT `mobile_number` FROM `db_user_profile` WHERE id= c.`userid`) AS `mobile`, 
+        sql = "SELECT c.`id`,  c.`userid`, 
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`),'') AS `name`,
+        IFNULL((SELECT `mobile_number` FROM `db_user_profile` WHERE id= c.`userid`),'') AS `mobile`, 
         `type`, `due_date`, `amount`,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id` = c.`proj_id`) proj_name, 
         (SELECT CONCAT('Block ', `block`, ' Lot ', `lot`) FROM `db_project_item` WHERE `db_project_item`.`item_id`=c.`item_id`) blockLot FROM `db_payment_collection` c 

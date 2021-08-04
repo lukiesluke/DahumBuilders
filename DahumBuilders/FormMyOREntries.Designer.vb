@@ -66,12 +66,14 @@ Partial Class FormMyOREntries
         Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtDiscount = New System.Windows.Forms.TextBox()
+        Me.ColumnHeaderCreatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderUpdatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(11, 93)
@@ -465,6 +467,16 @@ Partial Class FormMyOREntries
         Me.txtDiscount.TabIndex = 24
         Me.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'ColumnHeaderCreatedBy
+        '
+        Me.ColumnHeaderCreatedBy.Text = "Created by"
+        Me.ColumnHeaderCreatedBy.Width = 150
+        '
+        'ColumnHeaderUpdatedBy
+        '
+        Me.ColumnHeaderUpdatedBy.Text = "Updated by"
+        Me.ColumnHeaderUpdatedBy.Width = 150
+        '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -555,4 +567,6 @@ Partial Class FormMyOREntries
     Friend WithEvents txtDiscount As TextBox
     Friend WithEvents txtUsername As TextBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents ColumnHeaderCreatedBy As ColumnHeader
+    Friend WithEvents ColumnHeaderUpdatedBy As ColumnHeader
 End Class
