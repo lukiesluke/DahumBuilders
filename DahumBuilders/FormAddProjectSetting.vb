@@ -1,13 +1,13 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class FormAddProjectSetting
+    Dim itemIDDelete As Integer
     Private lot As New LotClass()
     Dim dataPriceList As New Dictionary(Of String, Double)()
     Dim dataPriceListLotType As New Dictionary(Of String, String)()
 
-
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(1150, 500)
+        Me.Size = New Size(1150, 560)
         load_Project_lot_phase_combobox()
         load_ProjectName_combobox()
 
@@ -325,26 +325,30 @@ Public Class FormAddProjectSetting
     End Sub
 
     Private Sub ListViewProjectLot_Click(sender As Object, e As EventArgs) Handles ListViewProjectLot.Click
-        If ListViewProjectLot.Items.Count > 0 And ListViewProjectLot.SelectedItems.Item(0).Text IsNot String.Empty Then
-            lot = New LotClass()
-            With lot
-                ._id = ListViewProjectLot.SelectedItems.Item(0).Text
-                ._block = ListViewProjectLot.SelectedItems.Item(0).SubItems(2).Text
-                ._lot = ListViewProjectLot.SelectedItems.Item(0).SubItems(3).Text
-                ._sqm = ListViewProjectLot.SelectedItems.Item(0).SubItems(4).Text
-                ._lotType = ListViewProjectLot.SelectedItems.Item(0).SubItems(5).Text
-                ._tcp = ListViewProjectLot.SelectedItems.Item(0).SubItems(6).Text
-                ._projID = ListViewProjectLot.SelectedItems.Item(0).SubItems(9).Text
-                ._phase = ListViewProjectLot.SelectedItems.Item(0).SubItems(11).Text
-            End With
+        Try
+            If ListViewProjectLot.Items.Count > 0 And ListViewProjectLot.SelectedItems.Item(0).Text IsNot String.Empty Then
+                lot = New LotClass()
+                With lot
+                    ._id = ListViewProjectLot.SelectedItems.Item(0).Text
+                    ._block = ListViewProjectLot.SelectedItems.Item(0).SubItems(2).Text
+                    ._lot = ListViewProjectLot.SelectedItems.Item(0).SubItems(3).Text
+                    ._sqm = ListViewProjectLot.SelectedItems.Item(0).SubItems(4).Text
+                    ._lotType = ListViewProjectLot.SelectedItems.Item(0).SubItems(5).Text
+                    ._tcp = ListViewProjectLot.SelectedItems.Item(0).SubItems(6).Text
+                    ._projID = ListViewProjectLot.SelectedItems.Item(0).SubItems(9).Text
+                    ._phase = ListViewProjectLot.SelectedItems.Item(0).SubItems(11).Text
+                End With
 
-            txtBlockUp.Text = lot._block
-            txtLotUp.Text = lot._lot
-            cbSQMUpdate.Text = lot._sqm + "; " + lot._lotType
-            txtTcpUp.Text = lot._tcp.ToString("N2")
-            cbbPhaseInfoUpdate.Text = lot._phase
-        End If
-        PanelProjectNameUpdate.Visible = False
+                txtBlockUp.Text = lot._block
+                txtLotUp.Text = lot._lot
+                cbSQMUpdate.Text = lot._sqm + "; " + lot._lotType
+                txtTcpUp.Text = lot._tcp.ToString("N2")
+                cbbPhaseInfoUpdate.Text = lot._phase
+            End If
+            PanelProjectNameUpdate.Visible = False
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub ListViewProjectLot_KeyUp(sender As Object, e As KeyEventArgs) Handles ListViewProjectLot.KeyUp
@@ -528,4 +532,5 @@ Public Class FormAddProjectSetting
             Cursor = Cursors.Default
         End Try
     End Sub
+
 End Class

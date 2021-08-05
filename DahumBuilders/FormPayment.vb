@@ -2,6 +2,7 @@
 
 Public Class FormPayment
     Public Property mUser As User = New User()
+    Dim itemIDDelete As Integer
     Dim mProject As Project = New Project()
     Dim cbb As New DataGridViewComboBoxColumn() With {.HeaderText = "Particular", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
@@ -1016,55 +1017,94 @@ FinallyLine:
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
         If TabControl1.SelectedIndex = 1 Then
-            sql = "SELECT `id`,`date_paid`,`official_receipt_no`,
-        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,`paid_amount`,
-        (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
-        (SELECT CONCAT('B',`block`, ' L', `lot`, ' ') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes
-        FROM `db_transaction` t WHERE t.`userid`=@Userid ORDER BY  t.`proj_id`, t.`proj_itemId`, date_paid DESC"
-
-            Connection()
-            sqlCommand = New MySqlCommand(sql, sqlConnection)
-            sqlCommand.Parameters.Add("@Userid", MySqlDbType.VarChar).Value = mUser._id
-            sqlDataReader = sqlCommand.ExecuteReader()
-
-            Try
-                Cursor = Cursors.WaitCursor
-                Dim item As ListViewItem
-                ListView1.Items.Clear()
-                Do While sqlDataReader.Read = True
-                    Transaction = New Transaction()
-                    Transaction._id = sqlDataReader("id")
-                    Transaction._datePaid = sqlDataReader("date_paid")
-                    transaction._or = sqlDataReader("official_receipt_no")
-                    transaction._particular_str = sqlDataReader("particular")
-                    Transaction._paymentType = sqlDataReader("payment_type")
-                    Transaction._penalty = sqlDataReader("penalty")
-                    transaction._discountAmount = sqlDataReader("discount_amount")
-                    transaction._paidAmount = sqlDataReader("paid_amount")
-                    transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
-
-                    item = New ListViewItem(Transaction._id)
-                    item.UseItemStyleForSubItems = False
-                    item.SubItems.Add(transaction._datePaid.ToString("MMMM dd, yyyy"))
-                    item.SubItems.Add(transaction._or)
-                    item.SubItems.Add(Transaction._paymentType)
-                    item.SubItems.Add(transaction._particular_str)
-                    item.SubItems.Add(Transaction._penalty)
-                    item.SubItems.Add(transaction._discountAmount)
-                    item.SubItems.Add(transaction._paidAmount.ToString("N2"))
-                    item.SubItems.Add(transaction._description)
-                    ListView1.Items.Add(item)
-                Loop
-
-                sqlDataReader.Dispose()
-            Catch ex As Exception
-                MessageBox.Show(ex.Message)
-            Finally
-                sqlCommand.Dispose()
-                sqlConnection.Close()
-                Cursor = Cursors.Default
-            End Try
+            loadTransactionList()
         End If
+    End Sub
+
+    Private Sub ListView1_ColumnWidthChanging(sender As Object, e As ColumnWidthChangingEventArgs) Handles ListView1.ColumnWidthChanging
+        Dim DisableColumn As Integer = 1
+        If e.ColumnIndex <= DisableColumn Then
+            e.Cancel = True
+            e.NewWidth = ListView1.Columns(DisableColumn).Width
+        End If
+    End Sub
+
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        itemIDDelete = 0
+        For Each item In ListView1.CheckedItems
+            deleteORMethod(item.Text)
+        Next
+
+        If itemIDDelete > 0 Then
+            loadTransactionList()
+            MessageBox.Show("OR Successfully deleted.")
+        End If
+    End Sub
+    Private Sub deleteORMethod(id As String)
+        Connection()
+        sql = "DELETE FROM `db_transaction` WHERE `id`=@ID"
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
+
+            If sqlCommand.ExecuteNonQuery() > 0 Then
+                itemIDDelete += 1
+            End If
+        Catch ex As Exception
+            MessageBox.Show("DELETE Official Reciept ERROR: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
+    Private Sub loadTransactionList()
+        sql = "SELECT `id`,`date_paid`,`official_receipt_no`,
+            (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
+            (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,`paid_amount`,
+            (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
+            (SELECT CONCAT('B',`block`, ' L', `lot`, ' ') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes
+            FROM `db_transaction` t WHERE t.`userid`=@Userid ORDER BY  t.`proj_id`, t.`proj_itemId`, date_paid DESC"
+
+        Connection()
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        sqlCommand.Parameters.Add("@Userid", MySqlDbType.VarChar).Value = mUser._id
+        sqlDataReader = sqlCommand.ExecuteReader()
+
+        Try
+            Cursor = Cursors.WaitCursor
+            Dim item As ListViewItem
+            ListView1.Items.Clear()
+            Do While sqlDataReader.Read = True
+                transaction = New Transaction()
+                transaction._id = sqlDataReader("id")
+                transaction._datePaid = sqlDataReader("date_paid")
+                transaction._or = sqlDataReader("official_receipt_no")
+                transaction._particular_str = sqlDataReader("particular")
+                transaction._paymentType = sqlDataReader("payment_type")
+                transaction._penalty = sqlDataReader("penalty")
+                transaction._discountAmount = sqlDataReader("discount_amount")
+                transaction._paidAmount = sqlDataReader("paid_amount")
+                transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
+
+                item = New ListViewItem(transaction._id)
+                item.UseItemStyleForSubItems = False
+                item.SubItems.Add(transaction._datePaid.ToString("MMMM dd, yyyy"))
+                item.SubItems.Add(transaction._or)
+                item.SubItems.Add(transaction._paymentType)
+                item.SubItems.Add(transaction._particular_str)
+                item.SubItems.Add(transaction._penalty)
+                item.SubItems.Add(transaction._discountAmount)
+                item.SubItems.Add(transaction._paidAmount.ToString("N2"))
+                item.SubItems.Add(transaction._description)
+                ListView1.Items.Add(item)
+            Loop
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
     End Sub
 End Class

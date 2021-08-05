@@ -100,6 +100,7 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -753,6 +754,7 @@ Partial Class FormPayment
         '
         'ListView1
         '
+        Me.ListView1.CheckBoxes = True
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.FullRowSelect = True
@@ -768,7 +770,7 @@ Partial Class FormPayment
         'ColumnHeader1
         '
         Me.ColumnHeader1.Text = "ID"
-        Me.ColumnHeader1.Width = 0
+        Me.ColumnHeader1.Width = 23
         '
         'ColumnHeaderDate
         '
@@ -841,7 +843,7 @@ Partial Class FormPayment
         '
         'ViewToolStripMenuItem
         '
-        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransactionHistoryToolStripMenuItem})
+        Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TransactionHistoryToolStripMenuItem, Me.DeleteToolStripMenuItem})
         Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
         Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 22)
         Me.ViewToolStripMenuItem.Text = "View"
@@ -886,6 +888,12 @@ Partial Class FormPayment
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'DeleteToolStripMenuItem
+        '
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.DeleteToolStripMenuItem.Text = "&Delete"
         '
         'FormPayment
         '
@@ -1005,4 +1013,5 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderParticular As ColumnHeader
     Friend WithEvents ColumnHeaderAmount As ColumnHeader
     Friend WithEvents ColumnHeaderProject As ColumnHeader
+    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
 End Class
