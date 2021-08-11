@@ -12,6 +12,7 @@ Module ModuleForm
     Public mFormEmployeeRegistration As FormEmployeeRegistration
     Public mFormExpenses As FormExpenses
     Public mFormMyOREntries As FormMyOREntries
+    Public mFormVerification As FormVerification
 
     Public mFormCRptTransaction As FormCRptTransaction
     Public mFormCRptSalesReport As FormCRptSalesReport

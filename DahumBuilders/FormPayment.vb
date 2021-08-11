@@ -1031,6 +1031,29 @@ FinallyLine:
 
     Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
         itemIDDelete = 0
+        mVerification = False
+
+        Dim countORCheck As Integer = 0
+        For Each item In ListView1.CheckedItems
+            countORCheck += 1
+        Next
+
+        If countORCheck < 1 Then
+            MessageBox.Show("Please select OR to deleted.")
+            Exit Sub
+        End If
+
+        If Application.OpenForms().OfType(Of FormVerification).Any Then
+            mFormVerification.Focus()
+        Else
+            mFormVerification = New FormVerification
+            mFormVerification.ShowDialog()
+        End If
+
+        If mVerification = False Then
+            Exit Sub
+        End If
+
         For Each item In ListView1.CheckedItems
             deleteORMethod(item.Text)
         Next
@@ -1039,12 +1062,18 @@ FinallyLine:
             loadTransactionList()
             MessageBox.Show("OR Successfully deleted.")
         End If
+        mVerification = False
     End Sub
     Private Sub deleteORMethod(id As String)
         Connection()
-        sql = "DELETE FROM `db_transaction` WHERE `id`=@ID"
+        sql = "INSERT INTO `db_history_delete` (`OR`,`userID`,`name`) 
+        SELECT `official_receipt_no`, @UserID, @Name FROM `db_transaction` WHERE id=@ID;
+        DELETE FROM `db_transaction` WHERE `id`=@ID"
+
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@UserID", MySqlDbType.VarChar).Value = userLogon._id
+            sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = userLogon._name
             sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
 
             If sqlCommand.ExecuteNonQuery() > 0 Then
@@ -1107,4 +1136,5 @@ FinallyLine:
             Cursor = Cursors.Default
         End Try
     End Sub
+
 End Class

@@ -291,6 +291,12 @@
     <Compile Include="FormSendReportFirebase.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormVerification.Designer.vb">
+      <DependentUpon>FormVerification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormVerification.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="LotClass.vb" />
     <Compile Include="PaymentMethod.vb" />
     <Compile Include="Project.vb" />
@@ -449,6 +455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormUserProfile.resx">
       <DependentUpon>FormUserProfile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormVerification.resx">
+      <DependentUpon>FormVerification.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
