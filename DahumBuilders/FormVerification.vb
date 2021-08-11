@@ -1,5 +1,6 @@
 ﻿Public Class FormVerification
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        mVerification = False
         Me.Close()
     End Sub
 

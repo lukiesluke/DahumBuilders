@@ -1066,8 +1066,8 @@ FinallyLine:
     End Sub
     Private Sub deleteORMethod(id As String)
         Connection()
-        sql = "INSERT INTO `db_history_delete` (`OR`,`userID`,`name`) 
-        SELECT `official_receipt_no`, @UserID, @Name FROM `db_transaction` WHERE id=@ID;
+        sql = "INSERT INTO `db_history_delete` (`OR`,`amount`,`userID`,`name`) 
+        SELECT `official_receipt_no`, `paid_amount`, @UserID, @Name FROM `db_transaction` WHERE id=@ID;
         DELETE FROM `db_transaction` WHERE `id`=@ID"
 
         Try
