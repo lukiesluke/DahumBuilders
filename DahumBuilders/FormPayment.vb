@@ -8,6 +8,7 @@ Public Class FormPayment
     Dim cbbDownpayment As New DataGridViewComboBoxColumn() With {.HeaderText = "Downpayment", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Dim cbbDiscount As New DataGridViewComboBoxColumn() With {.HeaderText = "Discount", .AutoComplete = DataGridViewAutoSizeColumnMode.DisplayedCells, .FlatStyle = FlatStyle.Flat}
     Private transaction As Transaction = New Transaction()
+    Private mORNumber As String = ""
 
     Private Sub FormPayment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Size(1114, 670)
@@ -1021,7 +1022,7 @@ FinallyLine:
         End If
     End Sub
 
-    Private Sub ListView1_ColumnWidthChanging(sender As Object, e As ColumnWidthChangingEventArgs) Handles ListView1.ColumnWidthChanging
+    Private Sub ListView1_ColumnWidthChanging(sender As Object, e As ColumnWidthChangingEventArgs)
         Dim DisableColumn As Integer = 1
         If e.ColumnIndex <= DisableColumn Then
             e.Cancel = True
@@ -1137,4 +1138,19 @@ FinallyLine:
         End Try
     End Sub
 
+    Private Sub ToolStripMenuItemTransEdit_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransEdit.Click
+        If Application.OpenForms().OfType(Of FormMyOREntries).Any Then
+            mFormMyOREntries.Focus()
+        Else
+            mFormMyOREntries = New FormMyOREntries
+            mFormMyOREntries.mORNumber = mORNumber
+            mFormMyOREntries.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click
+        If ListView1.Items.Count > 0 And ListView1.SelectedItems.Item(0).Text IsNot String.Empty Then
+            mORNumber = ListView1.SelectedItems.Item(0).SubItems(2).Text
+        End If
+    End Sub
 End Class

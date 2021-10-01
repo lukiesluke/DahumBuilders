@@ -1,16 +1,29 @@
 ﻿Imports MySql.Data.MySqlClient
 Public Class FormMyOREntries
     Private transaction As Transaction = New Transaction()
+    Public Property mORNumber As String = ""
     Dim tries As Integer = 0
 
     Private Sub FormMyOREntries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblProjectName.Text = ""
         lblClientName.Text = ""
         PanelPassword.Visible = False
+        txtORFilter.Text = mORNumber
 
         load_my_entries()
         loadParticularCombobox()
         loadPaymentTypeCombobox()
+
+        If txtORFilter.Text.Trim.Length > 0 Then
+            chbORFilter.Checked = True
+            chbORFilter.Enabled = False
+            txtORFilter.Enabled = False
+
+            ListView1.Items(0).Selected = True
+            ListView1.Items(0).Focused = True
+            ListView1.Select()
+            ListView1_Click(Me, Nothing)
+        End If
     End Sub
 
     Private Sub load_my_entries()
@@ -98,7 +111,6 @@ Public Class FormMyOREntries
                 MessageBox.Show("Official Reciept Entry Successfully Updated")
                 sqlCommand.Dispose()
                 sqlConnection.Close()
-                load_my_entries()
                 Exit Sub
             Else
                 MessageBox.Show("Data was not updated. Please try again.")
@@ -395,11 +407,4 @@ Public Class FormMyOREntries
                          (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
-
-    End Sub
-
-    Private Sub txtPassword_TextChanged(sender As Object, e As EventArgs) Handles txtPassword.TextChanged
-
-    End Sub
 End Class

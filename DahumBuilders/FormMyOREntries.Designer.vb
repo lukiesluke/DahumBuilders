@@ -34,6 +34,8 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCreatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderUpdatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.txtORNumber = New System.Windows.Forms.TextBox()
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.dtpDatePaid = New System.Windows.Forms.DateTimePicker()
@@ -66,8 +68,6 @@ Partial Class FormMyOREntries
         Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtDiscount = New System.Windows.Forms.TextBox()
-        Me.ColumnHeaderCreatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeaderUpdatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -137,8 +137,19 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderDiscount.Text = "Discount"
         Me.ColumnHeaderDiscount.Width = 80
         '
+        'ColumnHeaderCreatedBy
+        '
+        Me.ColumnHeaderCreatedBy.Text = "Created by"
+        Me.ColumnHeaderCreatedBy.Width = 150
+        '
+        'ColumnHeaderUpdatedBy
+        '
+        Me.ColumnHeaderUpdatedBy.Text = "Updated by"
+        Me.ColumnHeaderUpdatedBy.Width = 150
+        '
         'txtORNumber
         '
+        Me.txtORNumber.BackColor = System.Drawing.SystemColors.Info
         Me.txtORNumber.Location = New System.Drawing.Point(79, 37)
         Me.txtORNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtORNumber.Name = "txtORNumber"
@@ -147,6 +158,7 @@ Partial Class FormMyOREntries
         '
         'txtAmount
         '
+        Me.txtAmount.BackColor = System.Drawing.SystemColors.Info
         Me.txtAmount.Location = New System.Drawing.Point(79, 58)
         Me.txtAmount.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAmount.Name = "txtAmount"
@@ -351,7 +363,7 @@ Partial Class FormMyOREntries
         Me.PanelPassword.Controls.Add(Me.btnOkayPassword)
         Me.PanelPassword.Controls.Add(Me.Label8)
         Me.PanelPassword.Controls.Add(Me.txtPassword)
-        Me.PanelPassword.Location = New System.Drawing.Point(166, 266)
+        Me.PanelPassword.Location = New System.Drawing.Point(169, 235)
         Me.PanelPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelPassword.Name = "PanelPassword"
         Me.PanelPassword.Size = New System.Drawing.Size(473, 120)
@@ -440,6 +452,7 @@ Partial Class FormMyOREntries
         '
         'txtPenalty
         '
+        Me.txtPenalty.BackColor = System.Drawing.SystemColors.Info
         Me.txtPenalty.Location = New System.Drawing.Point(725, 43)
         Me.txtPenalty.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPenalty.Name = "txtPenalty"
@@ -460,22 +473,13 @@ Partial Class FormMyOREntries
         '
         'txtDiscount
         '
+        Me.txtDiscount.BackColor = System.Drawing.SystemColors.Info
         Me.txtDiscount.Location = New System.Drawing.Point(725, 66)
         Me.txtDiscount.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDiscount.Name = "txtDiscount"
         Me.txtDiscount.Size = New System.Drawing.Size(96, 20)
         Me.txtDiscount.TabIndex = 24
         Me.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'ColumnHeaderCreatedBy
-        '
-        Me.ColumnHeaderCreatedBy.Text = "Created by"
-        Me.ColumnHeaderCreatedBy.Width = 150
-        '
-        'ColumnHeaderUpdatedBy
-        '
-        Me.ColumnHeaderUpdatedBy.Text = "Updated by"
-        Me.ColumnHeaderUpdatedBy.Width = 150
         '
         'FormMyOREntries
         '

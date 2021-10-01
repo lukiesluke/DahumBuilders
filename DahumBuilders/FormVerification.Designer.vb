@@ -26,18 +26,19 @@ Partial Class FormVerification
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.lblErrorMessage = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(66, 35)
+        Me.txtPassword.Location = New System.Drawing.Point(84, 35)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(156, 20)
         Me.txtPassword.TabIndex = 0
         '
         'btnLogin
         '
-        Me.btnLogin.Location = New System.Drawing.Point(66, 61)
+        Me.btnLogin.Location = New System.Drawing.Point(84, 61)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(75, 23)
         Me.btnLogin.TabIndex = 1
@@ -46,7 +47,7 @@ Partial Class FormVerification
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(147, 61)
+        Me.btnCancel.Location = New System.Drawing.Point(165, 61)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 2
@@ -56,18 +57,28 @@ Partial Class FormVerification
         'lblErrorMessage
         '
         Me.lblErrorMessage.ForeColor = System.Drawing.Color.Maroon
-        Me.lblErrorMessage.Location = New System.Drawing.Point(12, 87)
+        Me.lblErrorMessage.Location = New System.Drawing.Point(28, 87)
         Me.lblErrorMessage.Name = "lblErrorMessage"
         Me.lblErrorMessage.Size = New System.Drawing.Size(264, 34)
         Me.lblErrorMessage.TabIndex = 3
         Me.lblErrorMessage.Text = "lblErrorMessage"
         Me.lblErrorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(28, 38)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(53, 13)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Password"
+        '
         'FormVerification
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(305, 130)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblErrorMessage)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnLogin)
@@ -77,7 +88,7 @@ Partial Class FormVerification
         Me.MinimizeBox = False
         Me.Name = "FormVerification"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "FormVerification"
+        Me.Text = "Password Verification"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -87,4 +98,5 @@ Partial Class FormVerification
     Friend WithEvents btnLogin As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents lblErrorMessage As Label
+    Friend WithEvents Label1 As Label
 End Class

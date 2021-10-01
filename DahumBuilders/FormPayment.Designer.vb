@@ -93,6 +93,8 @@ Partial Class FormPayment
         Me.ColumnHeaderDisc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ContextMenuTransaction = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItemTransEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -115,6 +117,7 @@ Partial Class FormPayment
         Me.Panel5.SuspendLayout()
         Me.ContextMenuProjectList.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.ContextMenuTransaction.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip1.SuspendLayout()
         Me.PanelBodyDataEntry.SuspendLayout()
@@ -756,6 +759,7 @@ Partial Class FormPayment
         '
         Me.ListView1.CheckBoxes = True
         Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
+        Me.ListView1.ContextMenuStrip = Me.ContextMenuTransaction
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
@@ -814,6 +818,18 @@ Partial Class FormPayment
         '
         Me.ColumnHeaderProject.Text = "Project Description"
         Me.ColumnHeaderProject.Width = 200
+        '
+        'ContextMenuTransaction
+        '
+        Me.ContextMenuTransaction.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemTransEdit})
+        Me.ContextMenuTransaction.Name = "ContextMenuTransaction"
+        Me.ContextMenuTransaction.Size = New System.Drawing.Size(95, 26)
+        '
+        'ToolStripMenuItemTransEdit
+        '
+        Me.ToolStripMenuItemTransEdit.Name = "ToolStripMenuItemTransEdit"
+        Me.ToolStripMenuItemTransEdit.Size = New System.Drawing.Size(94, 22)
+        Me.ToolStripMenuItemTransEdit.Text = "&Edit"
         '
         'DataGridView1
         '
@@ -928,6 +944,7 @@ Partial Class FormPayment
         Me.Panel5.ResumeLayout(False)
         Me.ContextMenuProjectList.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
+        Me.ContextMenuTransaction.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
@@ -1014,4 +1031,6 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderAmount As ColumnHeader
     Friend WithEvents ColumnHeaderProject As ColumnHeader
     Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ContextMenuTransaction As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItemTransEdit As ToolStripMenuItem
 End Class

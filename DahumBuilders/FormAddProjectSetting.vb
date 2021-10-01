@@ -533,4 +533,69 @@ Public Class FormAddProjectSetting
         End Try
     End Sub
 
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        mVerification = False
+        Dim countLotPrjCheck As Integer = 0
+        For Each item In ListViewProjectLot.CheckedItems
+            countLotPrjCheck += 1
+        Next
+
+        If countLotPrjCheck < 1 Then
+            MessageBox.Show("Please select Project Lot to delete.")
+            Exit Sub
+        End If
+
+        If Application.OpenForms().OfType(Of FormVerification).Any Then
+            mFormVerification.Focus()
+        Else
+            mFormVerification = New FormVerification
+            mFormVerification.ShowDialog()
+        End If
+
+        If mVerification = False Then
+            Exit Sub
+        End If
+
+        itemIDDelete = 0
+        For Each item In ListViewProjectLot.CheckedItems
+            'deleteProjectLotMethod(item.Text)
+        Next
+
+        If itemIDDelete > 0 Then
+            MessageBox.Show("OR Successfully deleted.")
+        End If
+        mVerification = False
+    End Sub
+
+    Private Sub deleteProjectLotMethod(id As String)
+        Connection()
+        sql = "CALL checkProjLot(5438, 'UserID', 'Name', @result);
+               SELECT @result AS record;"
+
+        Try
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            'sqlCommand.Parameters.Add("@UserID", MySqlDbType.VarChar).Value = userLogon._id
+            'sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = userLogon._name
+            'sqlCommand.Parameters.Add("@result", MySqlDbType.VarChar).Value = "record"
+            'sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
+
+            sqlDataReader = sqlCommand.ExecuteReader()
+            Dim record As String = ""
+            Do While sqlDataReader.Read = True
+                record = sqlDataReader("record")
+            Loop
+
+            If record.Equals("500") Then
+                itemIDDelete = 0
+            Else
+                itemIDDelete = 1
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("DELETE Project Item Lot ERROR: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+    End Sub
 End Class

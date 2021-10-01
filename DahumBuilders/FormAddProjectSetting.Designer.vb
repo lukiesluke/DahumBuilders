@@ -826,6 +826,7 @@ Partial Class FormAddProjectSetting
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.DeleteToolStripMenuItem.Text = "&Delete"
+        Me.DeleteToolStripMenuItem.Visible = False
         '
         'FormAddProjectSetting
         '
