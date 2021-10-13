@@ -56,17 +56,20 @@ Partial Class FormExpensesEntries
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chbORFilter = New System.Windows.Forms.CheckBox()
         Me.txtORFilter = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
+        Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.SuspendLayout()
         '
         'ListView
         '
-        Me.ListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderVoucher, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderBank, Me.ColumnHeaderReference})
+        Me.ListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderVoucher, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderBank, Me.ColumnHeaderReference, Me.ColumnHeaderDescription})
         Me.ListView.FullRowSelect = True
         Me.ListView.GridLines = True
-        Me.ListView.Location = New System.Drawing.Point(13, 109)
+        Me.ListView.Location = New System.Drawing.Point(13, 147)
         Me.ListView.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView.Name = "ListView"
-        Me.ListView.Size = New System.Drawing.Size(843, 259)
+        Me.ListView.Size = New System.Drawing.Size(843, 246)
         Me.ListView.TabIndex = 10
         Me.ListView.UseCompatibleStateImageBehavior = False
         Me.ListView.View = System.Windows.Forms.View.Details
@@ -206,6 +209,7 @@ Partial Class FormExpensesEntries
         '
         'txtAmount
         '
+        Me.txtAmount.BackColor = System.Drawing.SystemColors.Info
         Me.txtAmount.Location = New System.Drawing.Point(94, 82)
         Me.txtAmount.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAmount.Name = "txtAmount"
@@ -215,6 +219,7 @@ Partial Class FormExpensesEntries
         '
         'txtORNumber
         '
+        Me.txtORNumber.BackColor = System.Drawing.SystemColors.Info
         Me.txtORNumber.Location = New System.Drawing.Point(94, 36)
         Me.txtORNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtORNumber.Name = "txtORNumber"
@@ -233,6 +238,7 @@ Partial Class FormExpensesEntries
         '
         'txtVoucher
         '
+        Me.txtVoucher.BackColor = System.Drawing.SystemColors.Info
         Me.txtVoucher.Location = New System.Drawing.Point(94, 59)
         Me.txtVoucher.Margin = New System.Windows.Forms.Padding(2)
         Me.txtVoucher.Name = "txtVoucher"
@@ -263,7 +269,7 @@ Partial Class FormExpensesEntries
         '
         'btnUpdate
         '
-        Me.btnUpdate.Location = New System.Drawing.Point(440, 375)
+        Me.btnUpdate.Location = New System.Drawing.Point(440, 400)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(107, 25)
@@ -273,7 +279,7 @@ Partial Class FormExpensesEntries
         '
         'btCancel
         '
-        Me.btCancel.Location = New System.Drawing.Point(551, 375)
+        Me.btCancel.Location = New System.Drawing.Point(551, 400)
         Me.btCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btCancel.Name = "btCancel"
         Me.btCancel.Size = New System.Drawing.Size(107, 25)
@@ -293,6 +299,7 @@ Partial Class FormExpensesEntries
         '
         'txtReference
         '
+        Me.txtReference.BackColor = System.Drawing.SystemColors.Info
         Me.txtReference.Location = New System.Drawing.Point(537, 68)
         Me.txtReference.Margin = New System.Windows.Forms.Padding(2)
         Me.txtReference.Name = "txtReference"
@@ -340,11 +347,37 @@ Partial Class FormExpensesEntries
         Me.txtORFilter.Size = New System.Drawing.Size(87, 20)
         Me.txtORFilter.TabIndex = 8
         '
+        'Label10
+        '
+        Me.Label10.Location = New System.Drawing.Point(183, 104)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(66, 23)
+        Me.Label10.TabIndex = 37
+        Me.Label10.Text = "Description"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtDescription
+        '
+        Me.txtDescription.BackColor = System.Drawing.SystemColors.Info
+        Me.txtDescription.Location = New System.Drawing.Point(253, 95)
+        Me.txtDescription.Multiline = True
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(440, 47)
+        Me.txtDescription.TabIndex = 38
+        '
+        'ColumnHeaderDescription
+        '
+        Me.ColumnHeaderDescription.Text = "Description"
+        '
         'FormExpensesEntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(867, 408)
+        Me.ClientSize = New System.Drawing.Size(867, 432)
+        Me.Controls.Add(Me.txtDescription)
+        Me.Controls.Add(Me.txtAmount)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.chbORFilter)
         Me.Controls.Add(Me.txtORFilter)
         Me.Controls.Add(Me.cbbBankName)
@@ -365,7 +398,6 @@ Partial Class FormExpensesEntries
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.dtpDatePaid)
-        Me.Controls.Add(Me.txtAmount)
         Me.Controls.Add(Me.txtORNumber)
         Me.Controls.Add(Me.ListView)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -413,4 +445,7 @@ Partial Class FormExpensesEntries
     Friend WithEvents Label9 As Label
     Friend WithEvents chbORFilter As CheckBox
     Friend WithEvents txtORFilter As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtDescription As TextBox
+    Friend WithEvents ColumnHeaderDescription As ColumnHeader
 End Class

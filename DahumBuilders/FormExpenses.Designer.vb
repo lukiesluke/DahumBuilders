@@ -55,6 +55,7 @@ Partial Class FormExpenses
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuEditExpenses = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItemEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblIssueTo = New System.Windows.Forms.Label()
         Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
@@ -310,15 +311,21 @@ Partial Class FormExpenses
         '
         'ContextMenuEditExpenses
         '
-        Me.ContextMenuEditExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEdit})
+        Me.ContextMenuEditExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEdit, Me.DeleteToolStripMenuItem})
         Me.ContextMenuEditExpenses.Name = "ContextMenuEditExpenses"
-        Me.ContextMenuEditExpenses.Size = New System.Drawing.Size(95, 26)
+        Me.ContextMenuEditExpenses.Size = New System.Drawing.Size(108, 48)
         '
         'ToolStripMenuItemEdit
         '
         Me.ToolStripMenuItemEdit.Name = "ToolStripMenuItemEdit"
-        Me.ToolStripMenuItemEdit.Size = New System.Drawing.Size(94, 22)
+        Me.ToolStripMenuItemEdit.Size = New System.Drawing.Size(107, 22)
         Me.ToolStripMenuItemEdit.Text = "&Edit"
+        '
+        'DeleteToolStripMenuItem
+        '
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(107, 22)
+        Me.DeleteToolStripMenuItem.Text = "&Delete"
         '
         'Label6
         '
@@ -769,4 +776,5 @@ Partial Class FormExpenses
     Friend WithEvents cbbExpensesTypeSearch As ComboBox
     Friend WithEvents ContextMenuEditExpenses As ContextMenuStrip
     Friend WithEvents ToolStripMenuItemEdit As ToolStripMenuItem
+    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -13,6 +13,9 @@ Module ModuleConnection
     Public ini As New clsIni
     Public mVerification As Boolean
 
+    'Delete Constant
+    Public delExpensesID As String = "delExpensesID"
+
     'Public CompanyName As String = "Dahum Builders and Development Corporation"
     'Public CompanyAddress As String = "3rd floor, T. De Castro Bldg, Emilio Aguinaldo Hwy, Palico 1, Imus, 4103 Cavite"
 

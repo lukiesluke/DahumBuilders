@@ -475,4 +475,11 @@ Public Class FormExpenses
             mIdNumber = ListViewExpenses.SelectedItems(0).Text
         End If
     End Sub
+
+    Private Sub DeleteToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteToolStripMenuItem.Click
+        mFormVerification = New FormVerification
+        mFormVerification.deleteExpensesEntry = delExpensesID
+        mFormVerification.mId = mIdNumber
+        mFormVerification.ShowDialog()
+    End Sub
 End Class

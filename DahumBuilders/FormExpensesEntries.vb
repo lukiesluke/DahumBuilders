@@ -11,6 +11,10 @@ Public Class FormExpensesEntries
 
         If mIdNumber.Length > 0 Then
             searchIdEntry(mIdNumber)
+            ListView.Items(0).Selected = True
+            ListView.Items(0).Focused = True
+            ListView.Select()
+            ListView_Click(Me, Nothing)
         End If
     End Sub
 
@@ -19,7 +23,7 @@ Public Class FormExpensesEntries
         sql = "SELECT `id`,`date_paid`,IFNULL(`official_receipt_no`,'') official_receipt_no, t.`voucher_no` , t.`commission`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`),t.`payee_name`) AS clientName,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`, t.`description`
         FROM `db_transaction` t WHERE t.`particular`>5 AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
@@ -40,6 +44,7 @@ Public Class FormExpensesEntries
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._check_bank_name = sqlDataReader("check_bank_name")
                 transaction._check_number = sqlDataReader("check_number")
+                transaction._description = sqlDataReader("description")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -52,6 +57,7 @@ Public Class FormExpensesEntries
                 item.SubItems.Add(transaction._particular_str)
                 item.SubItems.Add(transaction._check_bank_name)
                 item.SubItems.Add(transaction._check_number)
+                item.SubItems.Add(transaction._description)
                 ListView.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -77,6 +83,7 @@ Public Class FormExpensesEntries
             transaction._particular_str = ListView.SelectedItems.Item(0).SubItems(7).Text
             transaction._check_bank_name = ListView.SelectedItems.Item(0).SubItems(8).Text
             transaction._check_number = ListView.SelectedItems.Item(0).SubItems(9).Text
+            transaction._description = ListView.SelectedItems.Item(0).SubItems(10).Text
 
             dtpDatePaid.Value = transaction._datePaid
             txtORNumber.Text = transaction._or
@@ -87,6 +94,7 @@ Public Class FormExpensesEntries
             cbbParticular.Text = transaction._particular_str
             txtReference.Text = transaction._check_number
             cbbBankName.Text = transaction._check_bank_name
+            txtDescription.Text = transaction._description
         End If
     End Sub
     Private Sub loadParticularCombobox()
@@ -164,7 +172,7 @@ Public Class FormExpensesEntries
         Dim particularKey As String = DirectCast(cbbParticular.SelectedItem, KeyValuePair(Of String, String)).Key
 
         sql = "UPDATE `db_transaction` t SET t.`date_paid`=@DatePaid, t.`official_receipt_no`=@ORNumber, t.`voucher_no`=@Voucher, t.`commission`=@Commission,
-        `particular`=@Particular, `payment_type`=@PaymentType, t.`check_number`=@CheckNumber, t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
+        `particular`=@Particular, `payment_type`=@PaymentType, t.`check_number`=@CheckNumber, t.`description`=@Description, t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -175,6 +183,7 @@ Public Class FormExpensesEntries
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularKey
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentKey
             sqlCommand.Parameters.Add("@CheckNumber", MySqlDbType.VarChar).Value = txtReference.Text.Trim
+            sqlCommand.Parameters.Add("@Description", MySqlDbType.VarChar).Value = txtDescription.Text.Trim
             sqlCommand.Parameters.Add("@UpdatedBy", MySqlDbType.Int64).Value = userLogon._id
             sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = transaction._id
 
@@ -199,7 +208,7 @@ Public Class FormExpensesEntries
         sql = "SELECT `id`,`date_paid`,IFNULL(`official_receipt_no`,'') official_receipt_no, t.`voucher_no` , t.`commission`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`),t.`payee_name`) AS clientName,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`, t.`description`
         FROM `db_transaction` t WHERE t.`particular`>5 AND t.`id`=@FindId"
 
         Connection()
@@ -222,6 +231,7 @@ Public Class FormExpensesEntries
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._check_bank_name = sqlDataReader("check_bank_name")
                 transaction._check_number = sqlDataReader("check_number")
+                transaction._description = sqlDataReader("description")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -234,6 +244,7 @@ Public Class FormExpensesEntries
                 item.SubItems.Add(transaction._particular_str)
                 item.SubItems.Add(transaction._check_bank_name)
                 item.SubItems.Add(transaction._check_number)
+                item.SubItems.Add(transaction._description)
                 ListView.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -257,7 +268,7 @@ Public Class FormExpensesEntries
         sql = "SELECT `id`,`date_paid`,IFNULL(`official_receipt_no`,'') official_receipt_no, t.`voucher_no` , t.`commission`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`),t.`payee_name`) AS clientName,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
-        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`, t.`description`
         FROM `db_transaction` t WHERE t.`particular`>5 AND t.`voucher_no`=@FindOR OR t.`official_receipt_no`=@FindOR ORDER BY t.`date_paid` DESC LIMIT 500"
 
         Connection()
@@ -280,6 +291,7 @@ Public Class FormExpensesEntries
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._check_bank_name = sqlDataReader("check_bank_name")
                 transaction._check_number = sqlDataReader("check_number")
+                transaction._description = sqlDataReader("description")
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -292,6 +304,7 @@ Public Class FormExpensesEntries
                 item.SubItems.Add(transaction._particular_str)
                 item.SubItems.Add(transaction._check_bank_name)
                 item.SubItems.Add(transaction._check_number)
+                item.SubItems.Add(transaction._description)
                 ListView.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
