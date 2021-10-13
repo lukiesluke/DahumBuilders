@@ -22,6 +22,7 @@ Partial Class FormExpenses
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormExpenses))
         Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -52,6 +53,8 @@ Partial Class FormExpenses
         Me.ColumnHeaderCheckNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ContextMenuEditExpenses = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.ToolStripMenuItemEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblIssueTo = New System.Windows.Forms.Label()
         Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
@@ -78,12 +81,13 @@ Partial Class FormExpenses
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ExcelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbbExpensesTypeSearch = New System.Windows.Forms.ComboBox()
         Me.btnSearchDate = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.dtpStart = New System.Windows.Forms.DateTimePicker()
         Me.dtpEnd = New System.Windows.Forms.DateTimePicker()
-        Me.cbbExpensesTypeSearch = New System.Windows.Forms.ComboBox()
+        Me.ContextMenuEditExpenses.SuspendLayout()
         Me.PanelPayeeName.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
@@ -236,6 +240,7 @@ Partial Class FormExpenses
         'ListViewExpenses
         '
         Me.ListViewExpenses.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderExpDate, Me.ColumnHeaderVoucherNo, Me.ColumnHeaderEmpName, Me.ColumnHeaderTINex, Me.ColumnHeaderAdd, Me.ColumnHeaderType, Me.ColumnHeaderPaymentType, Me.ColumnHeaderCheckNo, Me.ColumnHeaderDescription, Me.ColumnHeaderAmount})
+        Me.ListViewExpenses.ContextMenuStrip = Me.ContextMenuEditExpenses
         Me.ListViewExpenses.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ListViewExpenses.FullRowSelect = True
         Me.ListViewExpenses.GridLines = True
@@ -302,6 +307,18 @@ Partial Class FormExpenses
         Me.ColumnHeaderAmount.Text = "Amount"
         Me.ColumnHeaderAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderAmount.Width = 80
+        '
+        'ContextMenuEditExpenses
+        '
+        Me.ContextMenuEditExpenses.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEdit})
+        Me.ContextMenuEditExpenses.Name = "ContextMenuEditExpenses"
+        Me.ContextMenuEditExpenses.Size = New System.Drawing.Size(95, 26)
+        '
+        'ToolStripMenuItemEdit
+        '
+        Me.ToolStripMenuItemEdit.Name = "ToolStripMenuItemEdit"
+        Me.ToolStripMenuItemEdit.Size = New System.Drawing.Size(94, 22)
+        Me.ToolStripMenuItemEdit.Text = "&Edit"
         '
         'Label6
         '
@@ -577,6 +594,16 @@ Partial Class FormExpenses
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Expenses list"
         '
+        'cbbExpensesTypeSearch
+        '
+        Me.cbbExpensesTypeSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbExpensesTypeSearch.FormattingEnabled = True
+        Me.cbbExpensesTypeSearch.Location = New System.Drawing.Point(367, 17)
+        Me.cbbExpensesTypeSearch.Margin = New System.Windows.Forms.Padding(2)
+        Me.cbbExpensesTypeSearch.Name = "cbbExpensesTypeSearch"
+        Me.cbbExpensesTypeSearch.Size = New System.Drawing.Size(225, 21)
+        Me.cbbExpensesTypeSearch.TabIndex = 32
+        '
         'btnSearchDate
         '
         Me.btnSearchDate.Location = New System.Drawing.Point(596, 17)
@@ -627,16 +654,6 @@ Partial Class FormExpenses
         Me.dtpEnd.Size = New System.Drawing.Size(81, 20)
         Me.dtpEnd.TabIndex = 16
         '
-        'cbbExpensesTypeSearch
-        '
-        Me.cbbExpensesTypeSearch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbbExpensesTypeSearch.FormattingEnabled = True
-        Me.cbbExpensesTypeSearch.Location = New System.Drawing.Point(367, 17)
-        Me.cbbExpensesTypeSearch.Margin = New System.Windows.Forms.Padding(2)
-        Me.cbbExpensesTypeSearch.Name = "cbbExpensesTypeSearch"
-        Me.cbbExpensesTypeSearch.Size = New System.Drawing.Size(225, 21)
-        Me.cbbExpensesTypeSearch.TabIndex = 32
-        '
         'FormExpenses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -675,6 +692,7 @@ Partial Class FormExpenses
         Me.Name = "FormExpenses"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Commission / Expenses"
+        Me.ContextMenuEditExpenses.ResumeLayout(False)
         Me.PanelPayeeName.ResumeLayout(False)
         Me.PanelPayeeName.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -749,4 +767,6 @@ Partial Class FormExpenses
     Friend WithEvents Label13 As Label
     Friend WithEvents btnSearchDate As Button
     Friend WithEvents cbbExpensesTypeSearch As ComboBox
+    Friend WithEvents ContextMenuEditExpenses As ContextMenuStrip
+    Friend WithEvents ToolStripMenuItemEdit As ToolStripMenuItem
 End Class

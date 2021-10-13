@@ -7,6 +7,7 @@ Public Class FormExpenses
     Dim format As String = "yyyy-MM-dd"
     Dim messageInfo As String = "Please select name..."
     Dim mDisableLoadUserType As Boolean = False
+    Private mIdNumber As String = ""
     Private Sub FormExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Size = New Size(1020, 570)
         lblProjectID.Text = 0
@@ -461,5 +462,17 @@ Public Class FormExpenses
         Dim expensesID As String = DirectCast(cbbExpensesTypeSearch.SelectedItem, KeyValuePair(Of String, String)).Key
 
         loadDeduction(expensesID, dtpStart, dtpEnd)
+    End Sub
+
+    Private Sub ToolStripMenuItemEdit_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEdit.Click
+        mFormExpensesEntries = New FormExpensesEntries
+        mFormExpensesEntries.mIdNumber = mIdNumber
+        mFormExpensesEntries.ShowDialog()
+    End Sub
+
+    Private Sub ListViewExpenses_Click(sender As Object, e As EventArgs) Handles ListViewExpenses.Click
+        If ListView1.Items.Count > 0 Then
+            mIdNumber = ListViewExpenses.SelectedItems(0).Text
+        End If
     End Sub
 End Class
