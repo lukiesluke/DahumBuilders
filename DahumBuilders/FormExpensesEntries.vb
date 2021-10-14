@@ -10,6 +10,8 @@ Public Class FormExpensesEntries
         loadPaymentTypeCombobox()
 
         If mIdNumber.Length > 0 Then
+            txtORFilter.Visible = False
+            chbORFilter.Visible = False
             searchIdEntry(mIdNumber)
             ListView.Items(0).Selected = True
             ListView.Items(0).Focused = True

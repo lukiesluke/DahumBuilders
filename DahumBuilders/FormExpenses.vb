@@ -9,7 +9,7 @@ Public Class FormExpenses
     Dim mDisableLoadUserType As Boolean = False
     Private mIdNumber As String = ""
     Private Sub FormExpenses_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(1020, 570)
+        Me.Size = New Size(1020, 630)
         lblProjectID.Text = 0
         lblClientID.Text = 0
         lblIssueTo.Text = messageInfo
@@ -152,7 +152,7 @@ Public Class FormExpenses
 
         Dim particulID As String = keyId
 
-        sql = "SELECT `id`, `date_paid`, `commission`, `voucher_no`, `description`,
+        sql = "SELECT `id`, `date_paid`, `official_receipt_no`, `commission`, `voucher_no`, `description`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`,
@@ -183,6 +183,7 @@ Public Class FormExpenses
                 item = New ListViewItem(sqlDataReader("id").ToString)
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(sqlDataReader("date_paid"))
+                item.SubItems.Add(sqlDataReader("official_receipt_no"))
                 item.SubItems.Add(sqlDataReader("voucher_no"))
                 item.SubItems.Add(sqlDataReader("NAME"))
                 item.SubItems.Add(sqlDataReader("tin"))
@@ -241,8 +242,8 @@ Public Class FormExpenses
         End If
 
         sql = "INSERT INTO `db_transaction` 
-        (`date_paid`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
-        (@DatePaid, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+        (`date_paid`,`official_receipt_no`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
+        (@DatePaid, @ORNo, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
 
         Dim dateCheck As Date = Nothing
         If "commission".Equals(cbbExpensesType.Text.Trim.ToLower) Then
@@ -261,6 +262,7 @@ Public Class FormExpenses
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.VarChar).Value = dt.Value.ToString(format)
+            sqlCommand.Parameters.Add("@ORNo", MySqlDbType.VarChar).Value = txtORNumber.Text.Trim
             sqlCommand.Parameters.Add("@Commission", MySqlDbType.Double).Value = Double.Parse(txtCashoutAmount.Text.Trim)
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularIdValue
             sqlCommand.Parameters.Add("@Description", MySqlDbType.VarChar).Value = txtDescription.Text.Trim
@@ -276,6 +278,7 @@ Public Class FormExpenses
 
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 sqlCommand.Dispose()
+                txtORNumber.Text = ""
                 txtCashoutAmount.Text = 0.ToString("N2")
                 txtDescription.Text = ""
                 btnSave.Enabled = False
