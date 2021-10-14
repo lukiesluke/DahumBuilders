@@ -36,6 +36,7 @@ Partial Class FormMainDahum
         Me.ProjectSettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddProjectToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProjectPriceListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddUpdateCategoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SalesReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SummaryReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -123,7 +124,7 @@ Partial Class FormMainDahum
         '
         'ProjectSettingToolStripMenuItem
         '
-        Me.ProjectSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddProjectToolStripMenuItem1, Me.ProjectPriceListToolStripMenuItem})
+        Me.ProjectSettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddProjectToolStripMenuItem1, Me.ProjectPriceListToolStripMenuItem, Me.AddUpdateCategoryToolStripMenuItem})
         Me.ProjectSettingToolStripMenuItem.Name = "ProjectSettingToolStripMenuItem"
         Me.ProjectSettingToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
         Me.ProjectSettingToolStripMenuItem.Text = "Project Setting"
@@ -139,6 +140,12 @@ Partial Class FormMainDahum
         Me.ProjectPriceListToolStripMenuItem.Name = "ProjectPriceListToolStripMenuItem"
         Me.ProjectPriceListToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.ProjectPriceListToolStripMenuItem.Text = "Project Price List"
+        '
+        'AddUpdateCategoryToolStripMenuItem
+        '
+        Me.AddUpdateCategoryToolStripMenuItem.Name = "AddUpdateCategoryToolStripMenuItem"
+        Me.AddUpdateCategoryToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.AddUpdateCategoryToolStripMenuItem.Text = "Category Setting"
         '
         'ReportToolStripMenuItem
         '
@@ -275,4 +282,5 @@ Partial Class FormMainDahum
     Friend WithEvents ProjectListToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReportToolStripMenuItemExpensesReport As ToolStripMenuItem
     Friend WithEvents EntriesToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents AddUpdateCategoryToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -233,4 +233,13 @@ Public Class FormMainDahum
             mFormExpensesEntries.ShowDialog()
         End If
     End Sub
+
+    Private Sub AddUpdateCategoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddUpdateCategoryToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormCategorySetting).Any Then
+            mFormExpensesEntries.Focus()
+        Else
+            mFormCategorySetting = New FormCategorySetting
+            mFormCategorySetting.ShowDialog()
+        End If
+    End Sub
 End Class

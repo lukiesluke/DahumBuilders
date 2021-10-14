@@ -213,6 +213,12 @@
     <Compile Include="FirebaseProjectList.vb" />
     <Compile Include="FirebaseLogs.vb" />
     <Compile Include="FirebaseSummaryReport.vb" />
+    <Compile Include="FormCategorySetting.Designer.vb">
+      <DependentUpon>FormCategorySetting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCategorySetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormCRptExpenses.Designer.vb">
       <DependentUpon>FormCRptExpenses.vb</DependentUpon>
     </Compile>
@@ -398,6 +404,9 @@
     <EmbeddedResource Include="crptTransaction.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crptTransaction.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCategorySetting.resx">
+      <DependentUpon>FormCategorySetting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCRptExpenses.resx">
       <DependentUpon>FormCRptExpenses.vb</DependentUpon>
