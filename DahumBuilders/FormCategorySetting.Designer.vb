@@ -185,7 +185,7 @@ Partial Class FormCategorySetting
         'ColumnHeaderType
         '
         Me.ColumnHeaderType.Text = "Type"
-        Me.ColumnHeaderType.Width = 200
+        Me.ColumnHeaderType.Width = 250
         '
         'ContextMenuEmpType
         '
@@ -315,9 +315,9 @@ Partial Class FormCategorySetting
         Me.ListViewExpType.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ListViewExpType.FullRowSelect = True
         Me.ListViewExpType.GridLines = True
-        Me.ListViewExpType.Location = New System.Drawing.Point(3, 90)
+        Me.ListViewExpType.Location = New System.Drawing.Point(3, 78)
         Me.ListViewExpType.Name = "ListViewExpType"
-        Me.ListViewExpType.Size = New System.Drawing.Size(336, 217)
+        Me.ListViewExpType.Size = New System.Drawing.Size(336, 229)
         Me.ListViewExpType.TabIndex = 0
         Me.ListViewExpType.UseCompatibleStateImageBehavior = False
         Me.ListViewExpType.View = System.Windows.Forms.View.Details
@@ -325,7 +325,7 @@ Partial Class FormCategorySetting
         'ColumnID
         '
         Me.ColumnID.Text = "ID"
-        Me.ColumnID.Width = 30
+        Me.ColumnID.Width = 0
         '
         'ColumnNameType
         '
