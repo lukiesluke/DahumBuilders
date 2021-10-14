@@ -1153,4 +1153,8 @@ FinallyLine:
             mORNumber = ListView1.SelectedItems.Item(0).SubItems(2).Text
         End If
     End Sub
+
+    Private Sub lblTotalAmount_Click(sender As Object, e As EventArgs) Handles lblTotalAmount.Click
+        txtTenderedAmount.Text = lblTotalAmount.Text
+    End Sub
 End Class
