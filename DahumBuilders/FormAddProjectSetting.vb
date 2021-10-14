@@ -558,7 +558,7 @@ Public Class FormAddProjectSetting
 
         itemIDDelete = 0
         For Each item In ListViewProjectLot.CheckedItems
-            'deleteProjectLotMethod(item.Text)
+            deleteProjectLotMethod(item.Text)
         Next
 
         If itemIDDelete > 0 Then
@@ -568,31 +568,51 @@ Public Class FormAddProjectSetting
     End Sub
 
     Private Sub deleteProjectLotMethod(id As String)
+        Dim record As Integer = 0
         Connection()
-        sql = "CALL checkProjLot(5438, 'UserID', 'Name', @result);
-               SELECT @result AS record;"
-
         Try
+            sql = "SELECT COUNT(`assigned_userid`) AS result FROM `db_project_item` WHERE `item_id`=@ID AND `assigned_userid`=0"
+
             sqlCommand = New MySqlCommand(sql, sqlConnection)
-            'sqlCommand.Parameters.Add("@UserID", MySqlDbType.VarChar).Value = userLogon._id
-            'sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = userLogon._name
-            'sqlCommand.Parameters.Add("@result", MySqlDbType.VarChar).Value = "record"
-            'sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
-
+            sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
             sqlDataReader = sqlCommand.ExecuteReader()
-            Dim record As String = ""
-            Do While sqlDataReader.Read = True
-                record = sqlDataReader("record")
-            Loop
 
-            If record.Equals("500") Then
-                itemIDDelete = 0
+            If sqlDataReader.Read = True Then
+                record = sqlDataReader("result")
+            End If
+            'Delete record found assigned_userid ZERO value
+            If record = 1 Then
+                sqlDataReader.Dispose()
+                Dim deleteRecord As Integer = 0
+
+                sql = "SELECT COUNT(`id`) AS result FROM `db_transaction` WHERE `proj_itemId`=@ID"
+                sqlCommand = New MySqlCommand(sql, sqlConnection)
+                sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
+                sqlDataReader = sqlCommand.ExecuteReader()
+
+                If sqlDataReader.Read = True Then
+                    deleteRecord = sqlDataReader("result")
+                End If
+
+                'Found value on transaction table and unble to delete this record
+                If deleteRecord = 1 Then
+                    MessageBox.Show("Unable to delete Record. Lot has a transaction entries" & vbNewLine & "ID No.: " & id)
+                Else
+                    sqlDataReader.Dispose()
+                    sql = "DELETE FROM `db_project_item` WHERE `item_id`=@ID"
+                    sqlCommand = New MySqlCommand(sql, sqlConnection)
+                    sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
+
+                    If sqlCommand.ExecuteNonQuery() > 0 Then
+                        cbbProjectName_SelectedIndexChanged(Me, Nothing)
+                    End If
+                End If
             Else
-                itemIDDelete = 1
+                MessageBox.Show("Unable to delete Record. Lot is currently assiged to client/buyer" & vbNewLine & "ID No.: " & id)
             End If
 
         Catch ex As Exception
-            MessageBox.Show("DELETE Project Item Lot ERROR: " & ex.Message)
+            MessageBox.Show("Failed to update record!")
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
