@@ -477,7 +477,7 @@ Public Class FormUserList
                 Dim id = ListViewUser.SelectedItems(0).Text
                 userName = ListViewUser.SelectedItems(0).SubItems(1).Text + ", " + ListViewUser.SelectedItems(0).SubItems(2).Text
 
-                sql = "SELECT COUNT(`userid`) AS total FROM `db_transaction` WHERE `userid` = @Userid"
+                sql = "SELECT COUNT(`userid`) AS total FROM `db_transaction` WHERE `userid`=@Userid OR `created_by`=@Userid OR `updated_by`=@Userid"
                 Connection()
                 sqlCommand = New MySqlCommand(sql, sqlConnection)
                 sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = id

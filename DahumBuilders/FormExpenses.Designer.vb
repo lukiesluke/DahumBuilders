@@ -113,10 +113,10 @@ Partial Class FormExpenses
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(2, 39)
+        Me.ListView1.Location = New System.Drawing.Point(2, 43)
         Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(628, 275)
+        Me.ListView1.Size = New System.Drawing.Size(628, 271)
         Me.ListView1.TabIndex = 17
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -437,7 +437,7 @@ Partial Class FormExpenses
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 20)
+        Me.Label8.Location = New System.Drawing.Point(7, 20)
         Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(35, 13)
@@ -573,7 +573,7 @@ Partial Class FormExpenses
         '
         Me.cbbUserType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbbUserType.FormattingEnabled = True
-        Me.cbbUserType.Location = New System.Drawing.Point(402, 15)
+        Me.cbbUserType.Location = New System.Drawing.Point(402, 18)
         Me.cbbUserType.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
         Me.cbbUserType.Name = "cbbUserType"
         Me.cbbUserType.Size = New System.Drawing.Size(115, 21)
