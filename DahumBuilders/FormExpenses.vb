@@ -460,7 +460,7 @@ Public Class FormExpenses
                 Next
             Next
 
-            shWorkSheet.Range("A1:L1").EntireColumn.AutoFit()
+            shWorkSheet.Range("A1:O1").EntireColumn.AutoFit()
             objExcel.Visible = True
         Catch ex As Exception
             MsgBox(ex.Message)
