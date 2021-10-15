@@ -503,10 +503,14 @@ Public Class FormUserList
 
                 If result1 = DialogResult.Yes Then
                     Dim rowsAffected As Integer = 0
-                    sql = "DELETE FROM `db_user_profile` WHERE `id`=@ID"
-                    Connection()
+                    sql = "INSERT INTO `db_history_delete` (`OR`, `userID`, `name`) 
+                    SELECT CONCAT('USER_ID:1 ', `first_name`,' ', `last_name`), @UserID, @Name FROM `db_user_profile` WHERE `id`=@ID;
+                    DELETE FROM `db_transaction` WHERE `id`=@ID"
 
+                    Connection()
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
+                    sqlCommand.Parameters.Add("@UserID", MySqlDbType.VarChar).Value = userLogon._id
+                    sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = userLogon._name
                     sqlCommand.Parameters.Add("@ID", MySqlDbType.Int64).Value = id
                     rowsAffected = sqlCommand.ExecuteNonQuery()
 

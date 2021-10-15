@@ -1068,7 +1068,7 @@ FinallyLine:
     Private Sub deleteORMethod(id As String)
         Connection()
         sql = "INSERT INTO `db_history_delete` (`OR`,`amount`,`userID`,`name`) 
-        SELECT `official_receipt_no`, `paid_amount`, @UserID, @Name FROM `db_transaction` WHERE id=@ID;
+        SELECT CONCAT('OR_NUMBER:',`official_receipt_no`), `paid_amount`, @UserID, @Name FROM `db_transaction` WHERE id=@ID;
         DELETE FROM `db_transaction` WHERE `id`=@ID"
 
         Try
@@ -1149,9 +1149,13 @@ FinallyLine:
     End Sub
 
     Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click
-        If ListView1.Items.Count > 0 And ListView1.SelectedItems.Item(0).Text IsNot String.Empty Then
-            mORNumber = ListView1.SelectedItems.Item(0).SubItems(2).Text
-        End If
+        Try
+            If ListView1.Items.Count > 0 And ListView1.SelectedItems.Item(0).Text IsNot String.Empty Then
+                mORNumber = ListView1.SelectedItems.Item(0).SubItems(2).Text
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub lblTotalAmount_Click(sender As Object, e As EventArgs) Handles lblTotalAmount.Click

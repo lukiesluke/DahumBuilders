@@ -344,10 +344,14 @@ Public Class FormMyOREntries
     Private Sub deleteORMethod()
 
         Connection()
-        sql = "DELETE FROM `db_transaction` WHERE `id`=@ID"
+        sql = "INSERT INTO `db_history_delete` (`OR`,`amount`,`userID`,`name`) 
+        SELECT CONCAT('OR_NUMBER:',`official_receipt_no`), `paid_amount`, @UserID, @Name FROM `db_transaction` WHERE id=@ID;
+        DELETE FROM `db_transaction` WHERE `id`=@ID"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@UserID", MySqlDbType.VarChar).Value = userLogon._id
+            sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = userLogon._name
             sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = transaction._id
 
             If sqlCommand.ExecuteNonQuery() > 0 Then

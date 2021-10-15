@@ -599,8 +599,13 @@ Public Class FormAddProjectSetting
                     MessageBox.Show("Unable to delete Record. Lot has a transaction entries" & vbNewLine & "ID No.: " & id)
                 Else
                     sqlDataReader.Dispose()
-                    sql = "DELETE FROM `db_project_item` WHERE `item_id`=@ID"
+                    sql = "INSERT INTO `db_history_delete` (`OR`,`amount`,`userID`,`name`) 
+                    SELECT CONCAT('BLK ', `block`,' L ',`lot`,' SQM ',`sqm`), `price`, @UserID, @Name FROM `db_project_item` WHERE `item_id`=@ID;
+                    DELETE FROM `db_project_item` WHERE `item_id`=@ID"
+
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
+                    sqlCommand.Parameters.Add("@UserID", MySqlDbType.VarChar).Value = userLogon._id
+                    sqlCommand.Parameters.Add("@Name", MySqlDbType.VarChar).Value = userLogon._name
                     sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = id
 
                     If sqlCommand.ExecuteNonQuery() > 0 Then
@@ -612,7 +617,7 @@ Public Class FormAddProjectSetting
             End If
 
         Catch ex As Exception
-            MessageBox.Show("Failed to update record!")
+            MessageBox.Show("Failed to delete record!")
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
