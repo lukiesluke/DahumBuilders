@@ -157,7 +157,8 @@ Public Class FormExpenses
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`,
         IFNULL((SELECT `tin` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') tin,
-        IFNULL((SELECT `address` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') address
+        IFNULL((SELECT `address` FROM `db_user_profile` WHERE `id`=`db_transaction`.`userid`),'') address,
+        `gross_val`, `tax_base`, `input_val`
         FROM `db_transaction` WHERE {0} AND `date_paid` BETWEEN @dtStart AND @dtEnd ORDER BY date_paid"
 
         If 0 = cbbExpensesTypeSearch.SelectedIndex Then
@@ -183,15 +184,18 @@ Public Class FormExpenses
                 item = New ListViewItem(sqlDataReader("id").ToString)
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(sqlDataReader("date_paid"))
-                item.SubItems.Add(sqlDataReader("official_receipt_no"))
                 item.SubItems.Add(sqlDataReader("voucher_no"))
                 item.SubItems.Add(sqlDataReader("NAME"))
                 item.SubItems.Add(sqlDataReader("tin"))
                 item.SubItems.Add(sqlDataReader("address"))
+                item.SubItems.Add(Double.Parse(sqlDataReader("gross_val")).ToString("N2"))
+                item.SubItems.Add(Double.Parse(sqlDataReader("tax_base")).ToString("N2"))
+                item.SubItems.Add(Double.Parse(sqlDataReader("input_val")).ToString("N2"))
+                item.SubItems.Add(sqlDataReader("official_receipt_no"))
                 item.SubItems.Add(sqlDataReader("particular"))
+                item.SubItems.Add(sqlDataReader("description"))
                 item.SubItems.Add(sqlDataReader("paymentType"))
                 item.SubItems.Add(sqlDataReader("check_number"))
-                item.SubItems.Add(sqlDataReader("description"))
                 item.SubItems.Add(Double.Parse(sqlDataReader("commission")).ToString("N2"))
                 ListViewExpenses.Items.Add(item)
             Loop
@@ -242,8 +246,8 @@ Public Class FormExpenses
         End If
 
         sql = "INSERT INTO `db_transaction` 
-        (`date_paid`,`official_receipt_no`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
-        (@DatePaid, @ORNo, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+        (`date_paid`,`official_receipt_no`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `gross_val`, `tax_base`, `input_val`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
+        (@DatePaid, @ORNo, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @GrossVal, @TaxBase, @InputVal, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
 
         Dim dateCheck As Date = Nothing
         If "commission".Equals(cbbExpensesType.Text.Trim.ToLower) Then
@@ -270,6 +274,9 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@BankName", MySqlDbType.VarChar).Value = bankName
             sqlCommand.Parameters.Add("@DateCheck", MySqlDbType.VarChar).Value = dateCheck.ToString(format)
             sqlCommand.Parameters.Add("@VoucherNo", MySqlDbType.VarChar).Value = txtVoucherNo.Text.Trim
+            sqlCommand.Parameters.Add("@GrossVal", MySqlDbType.Double).Value = Double.Parse(txtGross.Text.Trim)
+            sqlCommand.Parameters.Add("@TaxBase", MySqlDbType.Double).Value = Double.Parse(txtTaxBase.Text.Trim)
+            sqlCommand.Parameters.Add("@InputVal", MySqlDbType.Double).Value = Double.Parse(txtInput.Text.Trim)
             sqlCommand.Parameters.Add("@PayeeName", MySqlDbType.VarChar).Value = payeeName
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = lblClientID.Text.Trim
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = PaymentType
@@ -280,6 +287,9 @@ Public Class FormExpenses
                 sqlCommand.Dispose()
                 txtORNumber.Text = ""
                 txtCashoutAmount.Text = 0.ToString("N2")
+                txtGross.Text = 0.ToString("N2")
+                txtTaxBase.Text = 0.ToString("N2")
+                txtInput.Text = 0.ToString("N2")
                 txtDescription.Text = ""
                 btnSave.Enabled = False
                 txtCheckNo.Text = ""
@@ -340,10 +350,15 @@ Public Class FormExpenses
     End Sub
 
     Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click
-        If ListView1.Items.Count > 0 Then
-            lblClientID.Text = ListView1.SelectedItems(0).Text
-            lblIssueTo.Text = ListView1.SelectedItems(0).SubItems(1).Text
-        End If
+        Try
+            If ListView1.Items.Count > 0 Then
+                lblClientID.Text = ListView1.SelectedItems(0).Text
+                lblIssueTo.Text = ListView1.SelectedItems(0).SubItems(1).Text
+            End If
+        Catch ex As Exception
+
+        End Try
+
     End Sub
 
     Private Sub ListView1_KeyUp(sender As Object, e As KeyEventArgs) Handles ListView1.KeyUp
@@ -463,7 +478,6 @@ Public Class FormExpenses
 
     Private Sub btnSearchDate_Click(sender As Object, e As EventArgs) Handles btnSearchDate.Click
         Dim expensesID As String = DirectCast(cbbExpensesTypeSearch.SelectedItem, KeyValuePair(Of String, String)).Key
-
         loadDeduction(expensesID, dtpStart, dtpEnd)
     End Sub
 
@@ -484,5 +498,23 @@ Public Class FormExpenses
         mFormVerification.deleteExpensesEntry = delExpensesID
         mFormVerification.mId = mIdNumber
         mFormVerification.ShowDialog()
+    End Sub
+
+    Private Sub txtGross_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtGross.KeyPress
+        If (Not e.KeyChar = ChrW(Keys.Back) And ("0123456789.").IndexOf(e.KeyChar) = -1) Or (e.KeyChar = "." And txtGross.Text.ToCharArray().Count(Function(c) c = ".") > 0) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtTaxBase_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTaxBase.KeyPress
+        If (Not e.KeyChar = ChrW(Keys.Back) And ("0123456789.").IndexOf(e.KeyChar) = -1) Or (e.KeyChar = "." And txtTaxBase.Text.ToCharArray().Count(Function(c) c = ".") > 0) Then
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub txtInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtInput.KeyPress
+        If (Not e.KeyChar = ChrW(Keys.Back) And ("0123456789.").IndexOf(e.KeyChar) = -1) Or (e.KeyChar = "." And txtInput.Text.ToCharArray().Count(Function(c) c = ".") > 0) Then
+            e.Handled = True
+        End If
     End Sub
 End Class

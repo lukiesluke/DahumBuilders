@@ -7,7 +7,9 @@
     Public Property _tcp As String = ""
     Public Property _paidAmount As Double = 0
     Public Property _commission As Double = 0
-
+    Public Property _gross As Double = 0
+    Public Property _tax_base As Double = 0
+    Public Property _input_val As Double = 0
     Public Property _penalty As Double = 0
     Public Property _discountAmount As Double = 0
     Public Property _particular As Integer = 0
