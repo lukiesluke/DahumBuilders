@@ -600,7 +600,7 @@ Public Class FormAddProjectSetting
                 Else
                     sqlDataReader.Dispose()
                     sql = "INSERT INTO `db_history_delete` (`OR`,`amount`,`userID`,`name`) 
-                    SELECT CONCAT('BLK ', `block`,' L ',`lot`,' SQM ',`sqm`), `price`, @UserID, @Name FROM `db_project_item` WHERE `item_id`=@ID;
+                    SELECT CONCAT('ITEM_LOT: BLK(', `block`,') L(',`lot`,') SQM',`sqm`), `price`, @UserID, @Name FROM `db_project_item` WHERE `item_id`=@ID;
                     DELETE FROM `db_project_item` WHERE `item_id`=@ID"
 
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
