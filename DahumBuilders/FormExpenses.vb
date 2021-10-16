@@ -152,7 +152,7 @@ Public Class FormExpenses
 
         Dim particulID As String = keyId
 
-        sql = "SELECT `id`, `date_paid`, `official_receipt_no`, `commission`, `voucher_no`, `description`,
+        sql = "SELECT `id`, `date_paid`, IFNULL(`official_receipt_no`,'') AS `official_receipt_no`, `commission`, `voucher_no`, `description`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_transaction`.`userid`= `db_user_profile`.`id`), `payee_name`) AS NAME,
         (SELECT `name` FROM `db_payment_type` WHERE `id`= `db_transaction`.`payment_type`) AS paymentType,
         (SELECT `name` FROM `db_particular_type` WHERE `id`= `particular`) AS particular, `check_number`,

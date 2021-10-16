@@ -171,7 +171,14 @@ Public Class FormExpensesEntries
                 MessageBox.Show("Official Reciept Entry Successfully Updated")
                 sqlCommand.Dispose()
                 sqlConnection.Close()
-                generate_report()
+                If mIdNumber.Length > 0 Then
+                    txtORFilter.Visible = False
+                    chbORFilter.Visible = False
+                    searchIdEntry(mIdNumber)
+                    ListView_Click(Me, Nothing)
+                Else
+                    generate_report()
+                End If
             Else
                 MessageBox.Show("Data was not updated. Please try again.")
             End If
