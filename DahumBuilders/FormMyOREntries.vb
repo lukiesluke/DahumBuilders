@@ -62,8 +62,8 @@ Public Class FormMyOREntries
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._penalty = sqlDataReader("penalty")
                 transaction._discountAmount = sqlDataReader("discount_amount")
-                transaction._createdBy = sqlDataReader("created_by")
-                transaction._updatedBy = sqlDataReader("updated_by")
+                transaction._createdBy = sqlDataReader("created_by").ToString
+                transaction._updatedBy = sqlDataReader("updated_by").ToString
 
                 item = New ListViewItem(transaction._id)
                 item.UseItemStyleForSubItems = False
@@ -82,7 +82,7 @@ Public Class FormMyOREntries
             Loop
             sqlDataReader.Dispose()
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MessageBox.Show(ex.Message, "")
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
