@@ -148,14 +148,14 @@ Public Class FormCRptSalesReport
         Dim projectID As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim HeaderSaleReport As String = "Daily Sales Report"
 
-        sql = "SELECT t.`date_paid`, `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
+        sql = "SELECT t.`date_paid`, `official_receipt_no`, `ar_number`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
         t.`penalty`,  t.`discount_amount`, `paid_amount`,  pt.`short_name`, pa.`short_name` AS `particular`, l.`proj_name`, 
         IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, it.`block`, it.`lot`, it.`sqm` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         LEFT JOIN `db_project_list` l ON l.`id` = t.`proj_id`
-        WHERE t.`proj_id`{0} @projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
+        WHERE t.`proj_id`=@projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
         ORDER BY date_paid DESC, official_receipt_no ASC"
 
 
@@ -200,17 +200,18 @@ Public Class FormCRptSalesReport
 
             shWorkSheet.Cells(2, 1) = "Date Paid"
             shWorkSheet.Cells(2, 2) = "OR"
-            shWorkSheet.Cells(2, 3) = "Name"
-            shWorkSheet.Cells(2, 4) = "Penalty"
-            shWorkSheet.Cells(2, 5) = "Discount Amount"
-            shWorkSheet.Cells(2, 6) = "Paid Amount"
-            shWorkSheet.Cells(2, 7) = "Payment Type"
-            shWorkSheet.Cells(2, 8) = "Particular"
-            shWorkSheet.Cells(2, 9) = "Project Name"
-            shWorkSheet.Cells(2, 10) = "Part No"
-            shWorkSheet.Cells(2, 11) = "BLOCK"
-            shWorkSheet.Cells(2, 12) = "LOT"
-            shWorkSheet.Cells(2, 13) = "SQM"
+            shWorkSheet.Cells(2, 3) = "AR"
+            shWorkSheet.Cells(2, 4) = "Name"
+            shWorkSheet.Cells(2, 5) = "Penalty"
+            shWorkSheet.Cells(2, 6) = "Discount Amount"
+            shWorkSheet.Cells(2, 7) = "Paid Amount"
+            shWorkSheet.Cells(2, 8) = "Payment Type"
+            shWorkSheet.Cells(2, 9) = "Particular"
+            shWorkSheet.Cells(2, 10) = "Project Name"
+            shWorkSheet.Cells(2, 11) = "Part No"
+            shWorkSheet.Cells(2, 12) = "BLOCK"
+            shWorkSheet.Cells(2, 13) = "LOT"
+            shWorkSheet.Cells(2, 14) = "SQM"
 
             For i = 0 To ds.Tables(0).Rows.Count - 1
                 For j = 0 To ds.Tables(0).Columns.Count - 1
@@ -219,12 +220,12 @@ Public Class FormCRptSalesReport
             Next
 
             shWorkSheet.Columns(1).HorizontalAlignment = Excel.Constants.xlLeft
-            shWorkSheet.Columns(6).HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Columns(7).HorizontalAlignment = Excel.Constants.xlCenter
-            shWorkSheet.Columns(9).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(8).HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Columns(10).HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Columns(11).HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Columns(12).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(13).HorizontalAlignment = Excel.Constants.xlCenter
 
             shWorkSheet.Range("A1:P1").EntireColumn.AutoFit()
             objExcel.Visible = True
