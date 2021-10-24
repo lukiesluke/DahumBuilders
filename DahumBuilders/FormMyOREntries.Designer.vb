@@ -68,18 +68,21 @@ Partial Class FormMyOREntries
         Me.txtPenalty = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtDiscount = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtARNumber = New System.Windows.Forms.TextBox()
+        Me.ColumnHeaderAR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(11, 93)
+        Me.ListView1.Location = New System.Drawing.Point(11, 113)
         Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(843, 259)
+        Me.ListView1.Size = New System.Drawing.Size(843, 239)
         Me.ListView1.TabIndex = 3
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -159,7 +162,7 @@ Partial Class FormMyOREntries
         'txtAmount
         '
         Me.txtAmount.BackColor = System.Drawing.SystemColors.Info
-        Me.txtAmount.Location = New System.Drawing.Point(79, 58)
+        Me.txtAmount.Location = New System.Drawing.Point(79, 84)
         Me.txtAmount.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAmount.Name = "txtAmount"
         Me.txtAmount.Size = New System.Drawing.Size(96, 20)
@@ -180,7 +183,7 @@ Partial Class FormMyOREntries
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(22, 18)
+        Me.Label1.Location = New System.Drawing.Point(21, 18)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(49, 13)
@@ -190,7 +193,7 @@ Partial Class FormMyOREntries
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 39)
+        Me.Label2.Location = New System.Drawing.Point(7, 39)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(63, 13)
@@ -200,7 +203,7 @@ Partial Class FormMyOREntries
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 60)
+        Me.Label3.Location = New System.Drawing.Point(3, 86)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(67, 13)
@@ -481,11 +484,36 @@ Partial Class FormMyOREntries
         Me.txtDiscount.TabIndex = 24
         Me.txtDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(38, 62)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(32, 13)
+        Me.Label12.TabIndex = 27
+        Me.Label12.Text = "AR #"
+        '
+        'txtARNumber
+        '
+        Me.txtARNumber.BackColor = System.Drawing.SystemColors.Info
+        Me.txtARNumber.Location = New System.Drawing.Point(79, 60)
+        Me.txtARNumber.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtARNumber.Name = "txtARNumber"
+        Me.txtARNumber.Size = New System.Drawing.Size(96, 20)
+        Me.txtARNumber.TabIndex = 26
+        '
+        'ColumnHeaderAR
+        '
+        Me.ColumnHeaderAR.Text = "AR #"
+        '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(861, 394)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.txtARNumber)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.txtDiscount)
         Me.Controls.Add(Me.Label9)
@@ -573,4 +601,7 @@ Partial Class FormMyOREntries
     Friend WithEvents Label11 As Label
     Friend WithEvents ColumnHeaderCreatedBy As ColumnHeader
     Friend WithEvents ColumnHeaderUpdatedBy As ColumnHeader
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtARNumber As TextBox
+    Friend WithEvents ColumnHeaderAR As ColumnHeader
 End Class

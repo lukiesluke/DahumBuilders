@@ -593,6 +593,16 @@ FinallyLine:
             End Select
         End If
 
+        If txtARNumber.Text.Trim.Length > 1 And txtOfficialReceipt.Text.Length < 1 Then
+            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter Official Receipt number.", "Official Receipt", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            Select Case ret
+                Case DialogResult.OK
+                    txtOfficialReceipt.Text = String.Empty
+                    txtOfficialReceipt.Focus()
+                    Exit Sub
+            End Select
+        End If
+
         If cbPaymentType.SelectedIndex < 0 Then
             Dim ret As DialogResult = MessageBox.Show(Me, "Please select Payment type.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Select Case ret
@@ -685,6 +695,7 @@ FinallyLine:
             trans._paymentType = cbPaymentType.SelectedIndex
             trans._clientId = mUser._id
             trans._or = txtOfficialReceipt.Text.Trim
+            trans._ar_no = txtARNumber.Text.Trim
             trans._datePaid = Format(dtpDatePaid.Value, "yyyy-MM-dd").ToString
             trans._tcp = row.Cells(1).Value
             trans._discountAmount = row.Cells(6).Value
@@ -705,6 +716,7 @@ FinallyLine:
 
         cbPaymentType.SelectedIndex = -1
         txtOfficialReceipt.Text = String.Empty
+        txtARNumber.Text = String.Empty
         load_userId_info_data_reader()
         MessageBox.Show(Me, "OR transaction successfully saved.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information)
         btnClearEntry.PerformClick()
@@ -720,8 +732,8 @@ FinallyLine:
     End Sub
 
     Private Sub insertPurchase(ByVal trans As Transaction)
-        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `date_paid`, `paid_amount`, `discount_amount`, `penalty`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`, `created_by`) VALUES (@OR, @DatePaid, @PaidAmount, 
+        sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `ar_number`, `date_paid`, `paid_amount`, `discount_amount`, `penalty`, `tcp`, `particular`, 
+        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`, `created_by`) VALUES (@OR, @AR, @DatePaid, @PaidAmount, 
         @DiscountAmount, @Penalty, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId, @CreatedBy)"
 
         If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
@@ -732,6 +744,7 @@ FinallyLine:
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@OR", MySqlDbType.VarChar).Value = trans._or
+            sqlCommand.Parameters.Add("@AR", MySqlDbType.VarChar).Value = trans._ar_no
             sqlCommand.Parameters.Add("@DatePaid", MySqlDbType.Date).Value = Format(trans._datePaid, "yyyy-MM-dd").ToString
             sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = trans._paidAmount
             sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = trans._discountAmount

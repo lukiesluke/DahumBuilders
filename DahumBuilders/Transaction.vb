@@ -1,6 +1,7 @@
 ﻿Public Class Transaction
     Public Property _id As String = ""
     Public Property _or As String = ""
+    Public Property _ar_no As String = ""
     Public Property _voucher As String = ""
     Public Property _datePaid As Date = New Date
     Public Property _clientName As String = ""
