@@ -50,6 +50,8 @@ Partial Class FormMainDahum
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusUsername = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusIP = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripMyIP = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -207,7 +209,7 @@ Partial Class FormMainDahum
         'StatusStrip
         '
         Me.StatusStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusUsername, Me.ToolStripStatusIP})
+        Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1, Me.ToolStripStatusUsername, Me.ToolStripStatusIP, Me.ToolStripStatusLabel2, Me.ToolStripMyIP})
         Me.StatusStrip.Location = New System.Drawing.Point(0, 296)
         Me.StatusStrip.Name = "StatusStrip"
         Me.StatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 9, 0)
@@ -232,6 +234,18 @@ Partial Class FormMainDahum
         Me.ToolStripStatusIP.Name = "ToolStripStatusIP"
         Me.ToolStripStatusIP.Size = New System.Drawing.Size(17, 17)
         Me.ToolStripStatusIP.Text = "IP"
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(82, 17)
+        Me.ToolStripStatusLabel2.Text = "My IP Address"
+        '
+        'ToolStripMyIP
+        '
+        Me.ToolStripMyIP.Name = "ToolStripMyIP"
+        Me.ToolStripMyIP.Size = New System.Drawing.Size(80, 17)
+        Me.ToolStripMyIP.Text = "ToolStripMyIP"
         '
         'FormMainDahum
         '
@@ -283,4 +297,6 @@ Partial Class FormMainDahum
     Friend WithEvents ReportToolStripMenuItemExpensesReport As ToolStripMenuItem
     Friend WithEvents EntriesToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents AddUpdateCategoryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
+    Friend WithEvents ToolStripMyIP As ToolStripStatusLabel
 End Class

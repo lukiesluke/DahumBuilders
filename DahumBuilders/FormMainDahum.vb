@@ -4,18 +4,23 @@ Imports FireSharp.Config
 Imports FireSharp.Response
 
 Imports System.Linq
+Imports System.Net
 
 Public Class FormMainDahum
 
     Private client As IFirebaseClient
 
     Private Sub FormMainDahum_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = ModuleConnection.CompanyName
+        Dim host_name As String = Dns.GetHostName()
+        Dim ip_address As String = Dns.GetHostByName(host_name).AddressList(0).ToString()
+
+        Me.Text = ModuleConnection.CompanyName & "  IP: " & ip_address
         DahumConfiguration()
         showLoginForm()
 
         If userLogon IsNot Nothing Then
             ToolStripStatusUsername.Text = userLogon._username
+            ToolStripMyIP.Text = ip_address
         End If
 
         ToolStripStatusIP.Text = String.Format("IP: {0}", serverSetting._ip)

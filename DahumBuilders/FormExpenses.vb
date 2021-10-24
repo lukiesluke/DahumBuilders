@@ -245,6 +245,18 @@ Public Class FormExpenses
             Exit Sub
         End If
 
+        If txtGross.Text.Length = 0 Then
+            txtGross.Text = "0"
+        End If
+
+        If txtTaxBase.Text.Length = 0 Then
+            txtTaxBase.Text = "0"
+        End If
+
+        If txtInput.Text.Length = 0 Then
+            txtInput.Text = "0"
+        End If
+
         sql = "INSERT INTO `db_transaction` 
         (`date_paid`,`official_receipt_no`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `gross_val`, `tax_base`, `input_val`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
         (@DatePaid, @ORNo, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @GrossVal, @TaxBase, @InputVal, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"

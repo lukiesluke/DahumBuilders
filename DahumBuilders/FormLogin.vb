@@ -1,11 +1,19 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Net
+Imports MySql.Data.MySqlClient
 
 Public Class FormLogin
     Private onCancelClick As Boolean = False
     Private tries As Integer = 0
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim host_name As String = Dns.GetHostName()
+        Dim ip_address As String = Dns.GetHostByName(host_name).AddressList(0).ToString()
+        FormMainDahum.ToolStripMyIP.Text = ip_address
+
         lblCompanyName.Text = ModuleConnection.CompanyName
         mFormMainDahum.Text = ModuleConnection.CompanyName
+
+
         tries = 0
         lblMessage.Visible = False
         lblIP.Text = String.Format("server: {0}", serverSetting._ip)

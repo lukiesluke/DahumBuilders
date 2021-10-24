@@ -1143,7 +1143,7 @@ FinallyLine:
             mFormMyOREntries.Focus()
         Else
             mFormMyOREntries = New FormMyOREntries
-            mFormMyOREntries.mORNumber = mORNumber
+            mFormMyOREntries.mID = mORNumber
             mFormMyOREntries.ShowDialog()
         End If
     End Sub
@@ -1151,7 +1151,7 @@ FinallyLine:
     Private Sub ListView1_Click(sender As Object, e As EventArgs) Handles ListView1.Click
         Try
             If ListView1.Items.Count > 0 And ListView1.SelectedItems.Item(0).Text IsNot String.Empty Then
-                mORNumber = ListView1.SelectedItems.Item(0).SubItems(2).Text
+                mORNumber = ListView1.SelectedItems(0).Text
             End If
         Catch ex As Exception
 

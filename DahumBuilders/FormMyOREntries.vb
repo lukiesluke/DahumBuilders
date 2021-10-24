@@ -2,6 +2,7 @@
 Public Class FormMyOREntries
     Private transaction As Transaction = New Transaction()
     Public Property mORNumber As String = ""
+    Public Property mID As String = ""
     Dim tries As Integer = 0
 
     Private Sub FormMyOREntries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -14,15 +15,17 @@ Public Class FormMyOREntries
         loadParticularCombobox()
         loadPaymentTypeCombobox()
 
-        If txtORFilter.Text.Trim.Length > 0 Then
-            chbORFilter.Checked = True
-            chbORFilter.Enabled = False
-            txtORFilter.Enabled = False
+        If mID.Trim.Length > 0 Then
 
+            txtORFilter.Visible = False
+            chbORFilter.Visible = False
+
+            load_OR_search()
             ListView1.Items(0).Selected = True
             ListView1.Items(0).Focused = True
             ListView1.Select()
             ListView1_Click(Me, Nothing)
+
         End If
     End Sub
 
@@ -234,7 +237,67 @@ Public Class FormMyOREntries
     Private Sub cbbPayment_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbPayment.SelectedIndexChanged
         Dim paymentKey As String = DirectCast(cbbPayment.SelectedItem, KeyValuePair(Of String, String)).Key
     End Sub
+    Private Sub load_OR_search()
+        Connection()
 
+        sql = "SELECT `id`,`date_paid`, IFNULL(`official_receipt_no`,'') AS `official_receipt_no`,`paid_amount`,
+        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
+        (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
+        (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
+        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
+        (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
+        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
+        FROM `db_transaction` t WHERE t.`id` = @OREntry"
+
+        sqlCommand = New MySqlCommand(sql, sqlConnection)
+        sqlCommand.Parameters.Add("@OREntry", MySqlDbType.Int32).Value = mID
+        sqlDataReader = sqlCommand.ExecuteReader()
+
+        Try
+            Cursor = Cursors.WaitCursor
+            Dim item As ListViewItem
+            ListView1.Items.Clear()
+            Do While sqlDataReader.Read = True
+                transaction = New Transaction()
+                transaction._id = sqlDataReader("id")
+                transaction._datePaid = sqlDataReader("date_paid")
+                transaction._or = sqlDataReader("official_receipt_no")
+                transaction._clientName = sqlDataReader("clientName")
+                transaction._paidAmount = sqlDataReader("paid_amount")
+                transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
+                transaction._particular_str = sqlDataReader("particular")
+                transaction._paymentType = sqlDataReader("payment_type")
+                transaction._penalty = sqlDataReader("penalty")
+                transaction._discountAmount = sqlDataReader("discount_amount")
+                transaction._createdBy = sqlDataReader("created_by")
+                transaction._updatedBy = sqlDataReader("updated_by")
+
+                item = New ListViewItem(transaction._id)
+                item.UseItemStyleForSubItems = False
+                item.SubItems.Add(transaction._datePaid)
+                item.SubItems.Add(transaction._or)
+                item.SubItems.Add(transaction._clientName)
+                item.SubItems.Add(transaction._paidAmount.ToString("N2"))
+                item.SubItems.Add(transaction._paymentType)
+                item.SubItems.Add(transaction._particular_str)
+                item.SubItems.Add(transaction._description)
+                item.SubItems.Add(transaction._penalty)
+                item.SubItems.Add(transaction._discountAmount)
+                item.SubItems.Add(transaction._createdBy)
+                item.SubItems.Add(transaction._updatedBy)
+                ListView1.Items.Add(item)
+            Loop
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
+    End Sub
     Private Sub chbORFilter_CheckedChanged(sender As Object, e As EventArgs) Handles chbORFilter.CheckedChanged
         clearFields()
         buttonVoidDelete()
@@ -248,7 +311,7 @@ Public Class FormMyOREntries
             Exit Sub
         End If
 
-        sql = "SELECT `id`,`date_paid`,`official_receipt_no`,`paid_amount`,
+        sql = "SELECT `id`,`date_paid`, IFNULL(`official_receipt_no`,'') AS `official_receipt_no`,`paid_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
