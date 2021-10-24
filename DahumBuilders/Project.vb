@@ -15,5 +15,5 @@
     Public Property _projID As String = ""
     Public Property _description As String = ""
     Public Property _assignedToUserName As String = ""
-
+    Public Property _status As String = ""
 End Class

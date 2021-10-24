@@ -37,8 +37,8 @@ Public Class FormPayment
         IFNULL((SELECT SUM(`penalty`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPenalty',
         IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount',
         IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='EQ' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'EQ',
-        IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='MA' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'MA'
-        FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
+        IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='MA' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'MA',
+        i.`status` FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
         ListViewUserItem.Items.Clear()
         Connection()
         Try
@@ -73,6 +73,7 @@ Public Class FormPayment
                     ._total_paidAmount = table.Rows(i)("totalPaidAmount")
                     ._equity = table.Rows(i)("EQ")
                     ._amortization = table.Rows(i)("MA")
+                    ._status = table.Rows(i)("status")
                 End With
 
                 item = New ListViewItem(project._itemID)
@@ -93,6 +94,7 @@ Public Class FormPayment
                 With item.SubItems.Add(project._amortization.ToString("N2"))
                     .BackColor = Color.LightSkyBlue
                 End With
+                item.SubItems.Add(project._status)
                 ListViewUserItem.Items.Add(item)
             Next
 
@@ -813,6 +815,8 @@ FinallyLine:
     Private Sub ListViewUserItem_MouseClick(sender As Object, e As MouseEventArgs) Handles ListViewUserItem.MouseClick
         If ListViewUserItem.Items.Count > 0 And ListViewUserItem.SelectedItems.Item(0).Text IsNot String.Empty Then
             Dim totalPaid As Double = ListViewUserItem.SelectedItems.Item(0).SubItems(10).Text 'Paid Amount
+            Dim status As String = ListViewUserItem.SelectedItems.Item(0).SubItems(13).Text 'Status
+
             If totalPaid > 0 Then
                 ContextMenuProjectList.Items(0).Enabled = False 'Removed
                 ContextMenuProjectList.Items(2).Enabled = True 'Cancelled
@@ -823,6 +827,17 @@ FinallyLine:
 
             End If
             ContextMenuProjectList.Items(1).Enabled = True
+
+            If "SOLD".Equals(status) Then
+                ContextMenuProjectList.Items(2).Enabled = False 'Cancelled
+                ContextMenuProjectList.Items(3).Visible = False 'Set SOlD
+                ContextMenuProjectList.Items(4).Visible = True 'Cancel SOlD
+            Else
+                ContextMenuProjectList.Items(2).Enabled = True 'Cancelled
+                ContextMenuProjectList.Items(3).Visible = True 'Set SOlD
+                ContextMenuProjectList.Items(4).Visible = False 'Set SOlD
+            End If
+
         ElseIf ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
             ContextMenuProjectList.Items(0).Enabled = False
             ContextMenuProjectList.Items(1).Enabled = False
@@ -1002,12 +1017,43 @@ FinallyLine:
         If ListViewUserItem.Items.Count < 1 Or ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
             Exit Sub
         End If
-        Dim result As DialogResult = MessageBox.Show("Are you sure you want to cancel this lot", "Cancel Lot", MessageBoxButtons.YesNoCancel)
+        Dim result As DialogResult = MessageBox.Show("Are you sure you want to cancel this lot?", "Cancel Lot", MessageBoxButtons.YesNoCancel)
         If result = DialogResult.Yes Then
             CancelLotMethod()
         End If
     End Sub
+    Private Sub SetAsSoldToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetAsSoldToolStripMenuItem.Click
+        If ListViewUserItem.Items.Count < 1 Or ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
+            Exit Sub
+        End If
+        Dim blk As String = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+        Dim lot As String = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
 
+        Dim result As DialogResult = MessageBox.Show("Set block " & blk & " lot " & lot & " as SOLD?", "Sold", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Yes Then
+            setSold("SOLD")
+        End If
+    End Sub
+    Private Sub setSold(value As String)
+        sql = "UPDATE `db_project_item` SET `status`=@Status, `remark`='' WHERE `item_id`=@ItemId"
+        Connection()
+        Dim rowsAffected As Integer = 0
+        Try
+            Dim projItemId As Int64 = ListViewUserItem.SelectedItems.Item(0).Text
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@ItemId", MySqlDbType.Int32).Value = projItemId
+            sqlCommand.Parameters.Add("@Status", MySqlDbType.VarChar).Value = value
+            rowsAffected = sqlCommand.ExecuteNonQuery()
+        Catch ex As Exception
+            MessageBox.Show("Sold error: " & ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        End Try
+        If rowsAffected > 0 Then
+            load_userId_info_data_reader()
+        End If
+    End Sub
     Private Sub CancelLotMethod()
 
         Dim projItemId As Int64 = ListViewUserItem.SelectedItems.Item(0).Text
@@ -1173,5 +1219,18 @@ FinallyLine:
 
     Private Sub lblTotalAmount_Click(sender As Object, e As EventArgs) Handles lblTotalAmount.Click
         txtTenderedAmount.Text = lblTotalAmount.Text
+    End Sub
+
+    Private Sub CancelSoldToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancelSoldToolStripMenuItem.Click
+        If ListViewUserItem.Items.Count < 1 Or ListViewUserItem.SelectedItems.Item(0).Text Is String.Empty Then
+            Exit Sub
+        End If
+        Dim blk As String = ListViewUserItem.SelectedItems.Item(0).SubItems(2).Text
+        Dim lot As String = ListViewUserItem.SelectedItems.Item(0).SubItems(3).Text
+
+        Dim result As DialogResult = MessageBox.Show("Cancel block " & blk & " lot " & lot & " as SOLD?", "Sold", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Yes Then
+            setSold("")
+        End If
     End Sub
 End Class

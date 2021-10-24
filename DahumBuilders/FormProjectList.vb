@@ -39,7 +39,8 @@ Public Class FormProjectList
         Connection()
         Try
             If cbbProjectName.SelectedIndex = -1 Then
-                sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price, 
+                sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price,
+            IF(STRCMP(p.`status`,'SOLD') = 0, 'SOLD', IF(p.`assigned_userid`<1,'Available', 'Occupied')) AS 'status',
             IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
             FROM `db_project_item` p INNER JOIN `db_project_list` l ON p.`proj_id`=l.`id` 
             WHERE block LIKE @Block " & checkAvailable
@@ -49,6 +50,7 @@ Public Class FormProjectList
                 sqlDataReader = sqlCommand.ExecuteReader()
             Else
                 sql = "SELECT  p.`item_id`, l.`proj_name`, block , lot, sqm, price, 
+            IF(STRCMP(p.`status`,'SOLD') = 0, 'SOLD', IF(p.`assigned_userid`<1,'Available', 'Occupied')) AS 'status',
             IFNULL((SELECT CONCAT(last_name , ', ', first_name ) FROM `db_user_profile` WHERE `db_user_profile`.`id`= assigned_userid),'') AS assigned_name  
             FROM `db_project_item` p INNER JOIN `db_project_list` l ON p.`proj_id`=l.`id`
             WHERE `proj_name` LIKE @projName AND block LIKE @Block " & checkAvailable
@@ -71,10 +73,15 @@ Public Class FormProjectList
                 item.SubItems.Add(sqlDataReader("lot"))
                 item.SubItems.Add(sqlDataReader("sqm"))
                 item.SubItems.Add(price.ToString("N2"))
-                If sqlDataReader("assigned_name").ToString.Length < 1 Then
+                If sqlDataReader("status").ToString.Equals("Available") Then
                     With item.SubItems.Add("Available")
                         .Font = New Font(ListViewProject.Font, FontStyle.Bold)
                         .ForeColor = Color.Green
+                    End With
+                ElseIf sqlDataReader("status").ToString.Equals("SOLD") Then
+                    With item.SubItems.Add("SOLD")
+                        .Font = New Font(ListViewProject.Font, FontStyle.Bold)
+                        .ForeColor = Color.Red
                     End With
                 Else
                     With item.SubItems.Add("Occupied")

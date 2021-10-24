@@ -241,13 +241,15 @@ Public Class FormAddProjectSetting
 
         Dim item As ListViewItem
         If blockNumber.Length > 0 Then
-            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
+            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, 
+            IF(STRCMP(i.`status`,'SOLD') = 0, 'SOLD', IF(i.`assigned_userid`<1,'Available', 'Occupied')) AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`,
             IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID {0} ORDER BY i.`block` ASC, i.`lot` ASC"
             sql = String.Format(sql, " AND i.`block` LIKE '" + blockNumber + "'")
         Else
-            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, IF(i.`assigned_userid`<1,'Available', 'Occupied') AS 'status', `remark`,
+            sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, 
+            IF(STRCMP(i.`status`,'SOLD') = 0, 'SOLD', IF(i.`assigned_userid`<1,'Available', 'Occupied')) AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`,
             IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID ORDER BY i.`block` ASC, i.`lot` ASC"
@@ -276,6 +278,8 @@ Public Class FormAddProjectSetting
                     .Font = New Font(ListViewProjectLot.Font, FontStyle.Bold)
                     If sqlDataReader("status").Equals("Available") Then
                         .ForeColor = Color.Green
+                    ElseIf sqlDataReader("status").Equals("SOLD") Then
+                        .ForeColor = Color.Red
                     Else
                         .ForeColor = Color.Orange
                     End If

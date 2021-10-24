@@ -26,6 +26,8 @@ Partial Class FormPayment
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPayment))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ORInformation = New System.Windows.Forms.Panel()
+        Me.txtARNumber = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.txtTenderedAmount = New System.Windows.Forms.TextBox()
         Me.lblChange = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -70,10 +72,12 @@ Partial Class FormPayment
         Me.ColumnHeaderTotalPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderEQ = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderMA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderStatus = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuProjectList = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.RemoveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PaymentMethodToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancelLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SetAsSoldToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -103,8 +107,7 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtARNumber = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.CancelSoldToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -172,6 +175,28 @@ Partial Class FormPayment
         Me.ORInformation.Name = "ORInformation"
         Me.ORInformation.Size = New System.Drawing.Size(333, 213)
         Me.ORInformation.TabIndex = 1
+        '
+        'txtARNumber
+        '
+        Me.txtARNumber.BackColor = System.Drawing.Color.MistyRose
+        Me.txtARNumber.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtARNumber.Location = New System.Drawing.Point(118, 82)
+        Me.txtARNumber.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
+        Me.txtARNumber.MaxLength = 12
+        Me.txtARNumber.Name = "txtARNumber"
+        Me.txtARNumber.Size = New System.Drawing.Size(156, 22)
+        Me.txtARNumber.TabIndex = 3
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(7, 88)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(33, 14)
+        Me.Label4.TabIndex = 45
+        Me.Label4.Text = "AR #"
         '
         'txtTenderedAmount
         '
@@ -534,7 +559,7 @@ Partial Class FormPayment
         '
         'ListViewUserItem
         '
-        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderPenalty, Me.ColumnHeaderTotalPaid, Me.ColumnHeaderEQ, Me.ColumnHeaderMA})
+        Me.ListViewUserItem.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderProjectName, Me.ColumnHeaderBlock, Me.ColumnHeaderLot, Me.ColumnHeaderSQM, Me.ColumnHeaderTCP, Me.ColumnHeaderProjID, Me.ColumnHeaderBalance, Me.ColumnHeaderDiscount, Me.ColumnHeaderPenalty, Me.ColumnHeaderTotalPaid, Me.ColumnHeaderEQ, Me.ColumnHeaderMA, Me.ColumnHeaderStatus})
         Me.ListViewUserItem.ContextMenuStrip = Me.ContextMenuProjectList
         Me.ListViewUserItem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewUserItem.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -624,12 +649,16 @@ Partial Class FormPayment
         Me.ColumnHeaderMA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderMA.Width = 80
         '
+        'ColumnHeaderStatus
+        '
+        Me.ColumnHeaderStatus.Text = "Status"
+        '
         'ContextMenuProjectList
         '
         Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.PaymentMethodToolStripMenuItem, Me.CancelLotToolStripMenuItem})
+        Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.PaymentMethodToolStripMenuItem, Me.CancelLotToolStripMenuItem, Me.SetAsSoldToolStripMenuItem, Me.CancelSoldToolStripMenuItem})
         Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
-        Me.ContextMenuProjectList.Size = New System.Drawing.Size(167, 70)
+        Me.ContextMenuProjectList.Size = New System.Drawing.Size(167, 136)
         '
         'RemoveToolStripMenuItem
         '
@@ -648,6 +677,12 @@ Partial Class FormPayment
         Me.CancelLotToolStripMenuItem.Name = "CancelLotToolStripMenuItem"
         Me.CancelLotToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.CancelLotToolStripMenuItem.Text = "Cancel Lot"
+        '
+        'SetAsSoldToolStripMenuItem
+        '
+        Me.SetAsSoldToolStripMenuItem.Name = "SetAsSoldToolStripMenuItem"
+        Me.SetAsSoldToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.SetAsSoldToolStripMenuItem.Text = "Set as Sold"
         '
         'Button1
         '
@@ -754,7 +789,7 @@ Partial Class FormPayment
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(743, 281)
+        Me.TabPage2.Size = New System.Drawing.Size(743, 307)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Transaction List"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -770,7 +805,7 @@ Partial Class FormPayment
         Me.ListView1.Location = New System.Drawing.Point(3, 3)
         Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(737, 275)
+        Me.ListView1.Size = New System.Drawing.Size(737, 301)
         Me.ListView1.TabIndex = 4
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -915,27 +950,11 @@ Partial Class FormPayment
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'txtARNumber
+        'CancelSoldToolStripMenuItem
         '
-        Me.txtARNumber.BackColor = System.Drawing.Color.MistyRose
-        Me.txtARNumber.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtARNumber.Location = New System.Drawing.Point(118, 82)
-        Me.txtARNumber.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
-        Me.txtARNumber.MaxLength = 12
-        Me.txtARNumber.Name = "txtARNumber"
-        Me.txtARNumber.Size = New System.Drawing.Size(156, 22)
-        Me.txtARNumber.TabIndex = 3
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(7, 88)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(33, 14)
-        Me.Label4.TabIndex = 45
-        Me.Label4.Text = "AR #"
+        Me.CancelSoldToolStripMenuItem.Name = "CancelSoldToolStripMenuItem"
+        Me.CancelSoldToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.CancelSoldToolStripMenuItem.Text = "Cancel Sold"
         '
         'FormPayment
         '
@@ -1061,4 +1080,7 @@ Partial Class FormPayment
     Friend WithEvents ToolStripMenuItemTransEdit As ToolStripMenuItem
     Friend WithEvents txtARNumber As TextBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents SetAsSoldToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderStatus As ColumnHeader
+    Friend WithEvents CancelSoldToolStripMenuItem As ToolStripMenuItem
 End Class
