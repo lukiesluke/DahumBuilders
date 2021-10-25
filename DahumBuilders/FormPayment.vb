@@ -595,16 +595,6 @@ FinallyLine:
             End Select
         End If
 
-        If txtARNumber.Text.Trim.Length > 1 And txtOfficialReceipt.Text.Length < 1 Then
-            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter Official Receipt number.", "Official Receipt", MessageBoxButtons.OK, MessageBoxIcon.Question)
-            Select Case ret
-                Case DialogResult.OK
-                    txtOfficialReceipt.Text = String.Empty
-                    txtOfficialReceipt.Focus()
-                    Exit Sub
-            End Select
-        End If
-
         If cbPaymentType.SelectedIndex < 0 Then
             Dim ret As DialogResult = MessageBox.Show(Me, "Please select Payment type.", "Payment type", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Select Case ret

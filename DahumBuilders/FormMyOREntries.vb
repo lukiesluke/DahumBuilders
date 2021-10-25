@@ -46,8 +46,8 @@ Public Class FormMyOREntries
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
-        sqlDataReader = sqlCommand.ExecuteReader()
         Try
+            sqlDataReader = sqlCommand.ExecuteReader()
             Cursor = Cursors.WaitCursor
             ListView1.Items.Clear()
 
