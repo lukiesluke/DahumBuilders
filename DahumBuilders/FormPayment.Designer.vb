@@ -78,6 +78,7 @@ Partial Class FormPayment
         Me.PaymentMethodToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CancelLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetAsSoldToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CancelSoldToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lblContact = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -107,7 +108,7 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.CancelSoldToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderAR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -658,7 +659,7 @@ Partial Class FormPayment
         Me.ContextMenuProjectList.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.ContextMenuProjectList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoveToolStripMenuItem, Me.PaymentMethodToolStripMenuItem, Me.CancelLotToolStripMenuItem, Me.SetAsSoldToolStripMenuItem, Me.CancelSoldToolStripMenuItem})
         Me.ContextMenuProjectList.Name = "ContextMenuProjectList"
-        Me.ContextMenuProjectList.Size = New System.Drawing.Size(167, 136)
+        Me.ContextMenuProjectList.Size = New System.Drawing.Size(167, 114)
         '
         'RemoveToolStripMenuItem
         '
@@ -683,6 +684,12 @@ Partial Class FormPayment
         Me.SetAsSoldToolStripMenuItem.Name = "SetAsSoldToolStripMenuItem"
         Me.SetAsSoldToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.SetAsSoldToolStripMenuItem.Text = "Set as Sold"
+        '
+        'CancelSoldToolStripMenuItem
+        '
+        Me.CancelSoldToolStripMenuItem.Name = "CancelSoldToolStripMenuItem"
+        Me.CancelSoldToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.CancelSoldToolStripMenuItem.Text = "Cancel Sold"
         '
         'Button1
         '
@@ -797,7 +804,7 @@ Partial Class FormPayment
         'ListView1
         '
         Me.ListView1.CheckBoxes = True
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
         Me.ListView1.ContextMenuStrip = Me.ContextMenuTransaction
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.FullRowSelect = True
@@ -950,11 +957,9 @@ Partial Class FormPayment
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'CancelSoldToolStripMenuItem
+        'ColumnHeaderAR
         '
-        Me.CancelSoldToolStripMenuItem.Name = "CancelSoldToolStripMenuItem"
-        Me.CancelSoldToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
-        Me.CancelSoldToolStripMenuItem.Text = "Cancel Sold"
+        Me.ColumnHeaderAR.Text = "AR #"
         '
         'FormPayment
         '
@@ -1083,4 +1088,5 @@ Partial Class FormPayment
     Friend WithEvents SetAsSoldToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderStatus As ColumnHeader
     Friend WithEvents CancelSoldToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderAR As ColumnHeader
 End Class

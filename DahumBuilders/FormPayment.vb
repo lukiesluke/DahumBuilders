@@ -1137,7 +1137,7 @@ FinallyLine:
         End Try
     End Sub
     Private Sub loadTransactionList()
-        sql = "SELECT `id`,`date_paid`,`official_receipt_no`,
+        sql = "SELECT `id`,`date_paid`,`official_receipt_no`, `ar_number`,
             (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
             (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,`paid_amount`,
             (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
@@ -1158,6 +1158,7 @@ FinallyLine:
                 transaction._id = sqlDataReader("id")
                 transaction._datePaid = sqlDataReader("date_paid")
                 transaction._or = sqlDataReader("official_receipt_no")
+                transaction._ar_no = sqlDataReader("ar_number")
                 transaction._particular_str = sqlDataReader("particular")
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._penalty = sqlDataReader("penalty")
@@ -1169,6 +1170,7 @@ FinallyLine:
                 item.UseItemStyleForSubItems = False
                 item.SubItems.Add(transaction._datePaid.ToString("MMMM dd, yyyy"))
                 item.SubItems.Add(transaction._or)
+                item.SubItems.Add(transaction._ar_no)
                 item.SubItems.Add(transaction._paymentType)
                 item.SubItems.Add(transaction._particular_str)
                 item.SubItems.Add(transaction._penalty)
