@@ -145,18 +145,24 @@ Public Class FormCRptSalesReport
     End Sub
 
     Private Sub ExportToExcelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToExcelToolStripMenuItem.Click
+        If cbbProjectName.SelectedIndex < 1 Then
+
+            MessageBox.Show("Please select one Project Name")
+            cbbProjectName.DroppedDown = True
+            Exit Sub
+        End If
+
         Dim projectID As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim HeaderSaleReport As String = "Daily Sales Report"
 
-        sql = "SELECT t.`date_paid`, `official_receipt_no`, `ar_number`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
-        t.`penalty`,  t.`discount_amount`, `paid_amount`,  pt.`short_name`, pa.`short_name` AS `particular`, l.`proj_name`, 
-        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, it.`block`, it.`lot`, it.`sqm` FROM `db_transaction` t 
+        sql = "SELECT it.`block`, it.`lot`, it.`sqm`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name',
+        it.`price`, pa.`short_name` AS `particular`, l.`proj_name`, `official_receipt_no`, t.`date_paid`,  `paid_amount`, pt.`short_name`, `ar_number` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         LEFT JOIN `db_project_list` l ON l.`id` = t.`proj_id`
         WHERE t.`proj_id`=@projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
-        ORDER BY date_paid DESC, official_receipt_no ASC"
+        ORDER BY CAST(official_receipt_no AS UNSIGNED) ASC"
 
 
         If projectID.Equals("0") Then
@@ -198,20 +204,18 @@ Public Class FormCRptSalesReport
             chartRange.HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Cells(1, 1) = HeaderSaleReport
 
-            shWorkSheet.Cells(2, 1) = "Date Paid"
-            shWorkSheet.Cells(2, 2) = "OR"
-            shWorkSheet.Cells(2, 3) = "AR"
-            shWorkSheet.Cells(2, 4) = "Name"
-            shWorkSheet.Cells(2, 5) = "Penalty"
-            shWorkSheet.Cells(2, 6) = "Discount Amount"
-            shWorkSheet.Cells(2, 7) = "Paid Amount"
-            shWorkSheet.Cells(2, 8) = "Payment Type"
-            shWorkSheet.Cells(2, 9) = "Particular"
-            shWorkSheet.Cells(2, 10) = "Project Name"
-            shWorkSheet.Cells(2, 11) = "Part No"
-            shWorkSheet.Cells(2, 12) = "BLOCK"
-            shWorkSheet.Cells(2, 13) = "LOT"
-            shWorkSheet.Cells(2, 14) = "SQM"
+            shWorkSheet.Cells(2, 1) = "BLK"
+            shWorkSheet.Cells(2, 2) = "LOT"
+            shWorkSheet.Cells(2, 3) = "SQM"
+            shWorkSheet.Cells(2, 4) = "Customer Name"
+            shWorkSheet.Cells(2, 5) = "TCP"
+            shWorkSheet.Cells(2, 6) = "Particular"
+            shWorkSheet.Cells(2, 7) = "Property"
+            shWorkSheet.Cells(2, 8) = "OR #"
+            shWorkSheet.Cells(2, 9) = "Date Payment"
+            shWorkSheet.Cells(2, 10) = "Paid Amount"
+            shWorkSheet.Cells(2, 11) = "Payment Type"
+            shWorkSheet.Cells(2, 12) = "AR"
 
             For i = 0 To ds.Tables(0).Rows.Count - 1
                 For j = 0 To ds.Tables(0).Columns.Count - 1
