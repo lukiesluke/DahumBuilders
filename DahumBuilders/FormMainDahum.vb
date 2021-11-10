@@ -106,6 +106,7 @@ Public Class FormMainDahum
         Else
             mFormEmployeeRegistration = New FormEmployeeRegistration
             mFormEmployeeRegistration.mUpdate = True
+            mFormEmployeeRegistration.mUserType = userLogon._userTypeStr
             mFormEmployeeRegistration.ShowDialog()
         End If
     End Sub

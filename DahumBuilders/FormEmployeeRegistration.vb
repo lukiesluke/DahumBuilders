@@ -2,16 +2,24 @@
 Public Class FormEmployeeRegistration
     Public Property mUser As User = New User()
     Public Property mUpdate As Boolean = False
+    Public Property mUserType As String = ""
 
     Private Sub FormEmployeeRegistration_Load(sender As Object, e As EventArgs) Handles Me.Load
+        chbRequireUP.Checked = True
         comboBoxSetting()
+        loadComboEmployeeType()
         If mUpdate = True Then
             btnSearch.PerformClick()
             btnSave.Visible = False
             btnUpdate.Visible = True
+            chbRequireUP.Visible = False
         Else
             btnUpdate.Visible = False
             btnSave.Visible = True
+        End If
+
+        If mUserType.Length > 0 Then
+            ComboBoxEmpType.Text = mUserType
         End If
     End Sub
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -60,11 +68,11 @@ Public Class FormEmployeeRegistration
             txtUsername.Text = mUser._username
             txtPass1.Text = mUser._password
             txtPass2.Text = mUser._password
-            ComboBoxEmpType.SelectedIndex = mUser._userType
+            ComboBoxEmpType.SelectedText = mUserType
             sqlDataReader.Dispose()
 
         Catch ex As Exception
-            MessageBox.Show("Saving error: " & ex.Message)
+            MessageBox.Show("Fetch Query Error: " & ex.Message)
         Finally
         sqlCommand.Dispose()
         sqlConnection.Close()
@@ -75,6 +83,8 @@ Public Class FormEmployeeRegistration
         If validation() = False Then
             Exit Sub
         End If
+
+        Dim EmployeeId As String = DirectCast(ComboBoxEmpType.SelectedItem, KeyValuePair(Of String, String)).Key
 
         If txtPass1.Text.Trim.Equals(txtPass2.Text.Trim) Then
             sql = "UPDATE `db_user_profile` SET `first_name`=@first_name, `middle_name`= @middle_name, `last_name`=@last_name,
@@ -101,7 +111,7 @@ Public Class FormEmployeeRegistration
 
             sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim.ToLower
             sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPass1.Text.Trim
-            sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = ComboBoxEmpType.SelectedIndex
+            sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = EmployeeId
             sqlCommand.Parameters.Add("@ModifiedBy", MySqlDbType.VarChar).Value = userLogon._username
             sqlCommand.Parameters.Add("@ID", MySqlDbType.VarChar).Value = userLogon._id
             sqlCommand.Parameters.Add("@ModifiedDate", MySqlDbType.DateTime).Value = DateTime.Now
@@ -111,6 +121,7 @@ Public Class FormEmployeeRegistration
                     ShowMessageBox(Nothing, "Employee Profile Successfully Saved.", MessageBoxIcon.Information)
                     sqlCommand.Dispose()
                     sqlConnection.Close()
+                    userLogon._userTypeStr = ComboBoxEmpType.Text
                     Me.Close()
                 Else
                     ShowMessageBox(Nothing, "Data NOT Inserted. Please try again.", MessageBoxIcon.Exclamation)
@@ -124,9 +135,12 @@ Public Class FormEmployeeRegistration
         End If
     End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
         If validation() = False Then
             Exit Sub
         End If
+
+        Dim EmployeeId As String = DirectCast(ComboBoxEmpType.SelectedItem, KeyValuePair(Of String, String)).Key
 
         If txtPass1.Text.Trim.Equals(txtPass2.Text.Trim) Then
 
@@ -186,7 +200,7 @@ Public Class FormEmployeeRegistration
 
             sqlCommand.Parameters.Add("@username", MySqlDbType.VarChar).Value = txtUsername.Text.Trim.ToLower
             sqlCommand.Parameters.Add("@Password", MySqlDbType.VarChar).Value = txtPass1.Text.Trim
-            sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = ComboBoxEmpType.SelectedIndex
+            sqlCommand.Parameters.Add("@userType", MySqlDbType.Int16).Value = EmployeeId
             sqlCommand.Parameters.Add("@CreatedBy", MySqlDbType.VarChar).Value = userLogon._username
 
             Try
@@ -210,7 +224,38 @@ Public Class FormEmployeeRegistration
                 sqlCommand.Dispose()
                 sqlConnection.Close()
             End Try
-            End If
+        End If
+    End Sub
+
+    Private Sub loadComboEmployeeType()
+        sql = "SELECT `id`, `type` FROM `db_user_type` WHERE id>0"
+        Connection()
+        Try
+            Cursor = Cursors.WaitCursor
+            sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlDataReader = sqlCommand.ExecuteReader()
+
+            ComboBoxEmpType.DataSource = Nothing
+            ComboBoxEmpType.Items.Clear()
+
+            Dim comboSourceExpeneseType As New Dictionary(Of String, String)()
+            comboSourceExpeneseType.Add("0", "[Select]")
+            Do While sqlDataReader.Read = True
+                comboSourceExpeneseType.Add(sqlDataReader("id"), sqlDataReader("type"))
+            Loop
+
+            ComboBoxEmpType.DataSource = New BindingSource(comboSourceExpeneseType, Nothing)
+            ComboBoxEmpType.DisplayMember = "Value"
+            ComboBoxEmpType.ValueMember = "Key"
+
+            sqlDataReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+            Cursor = Cursors.Default
+        End Try
     End Sub
 
     Private Sub comboBoxSetting()
@@ -248,7 +293,7 @@ Public Class FormEmployeeRegistration
             Exit Function
         End If
 
-        If ComboBoxEmpType.SelectedIndex < 4 Then
+        If chbRequireUP.Checked = True Then
             If txtUsername.Text.Trim.Length < 4 Then
                 ShowMessageBox(txtUsername, "Please Enter Employee username of minimum of 5 characters.", MessageBoxIcon.Question)
                 Return pass = False
@@ -284,15 +329,19 @@ Public Class FormEmployeeRegistration
         End Select
     End Sub
 
-    Private Sub ComboBoxEmpType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBoxEmpType.SelectedIndexChanged
-        If ComboBoxEmpType.SelectedIndex = 4 Then
-            txtUsername.Enabled = False
-            txtPass1.Enabled = False
-            txtPass2.Enabled = False
-        Else
+    Private Sub chbRequireUP_CheckedChanged(sender As Object, e As EventArgs) Handles chbRequireUP.CheckedChanged
+        If chbRequireUP.CheckState = CheckState.Checked Then
             txtUsername.Enabled = True
             txtPass1.Enabled = True
             txtPass2.Enabled = True
+        Else
+            txtUsername.Text = ""
+            txtPass1.Text = ""
+            txtPass2.Text = ""
+
+            txtUsername.Enabled = False
+            txtPass1.Enabled = False
+            txtPass2.Enabled = False
         End If
     End Sub
 End Class

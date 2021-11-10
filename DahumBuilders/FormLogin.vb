@@ -38,7 +38,8 @@ Public Class FormLogin
             Exit Sub
         End If
 
-        sql = "SELECT `id`, CONCAT(`first_name`, ' ', `middle_name`, ' ', `last_name`) AS 'name', `username`, `password`,`user_type` FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
+        sql = "SELECT `id`, CONCAT(`first_name`, ' ', `middle_name`, ' ', `last_name`) AS 'name', 
+        `username`, `password`,`user_type`, (SELECT `type` FROM `db_user_type` WHERE `id`=`user_type`) nameType FROM `db_user_profile` WHERE `username` LIKE @Username AND `password` LIKE @Password"
         Cursor = Cursors.WaitCursor
         Connection()
 
@@ -54,6 +55,7 @@ Public Class FormLogin
                     ._name = sqlDataReader("name")
                     ._username = sqlDataReader("username")
                     ._password = sqlDataReader("password")
+                    ._userTypeStr = sqlDataReader("nameType")
                 End With
                 Exit Do
             Loop

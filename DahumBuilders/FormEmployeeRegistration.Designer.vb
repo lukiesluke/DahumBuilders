@@ -24,6 +24,10 @@ Partial Class FormEmployeeRegistration
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.txtSSS = New System.Windows.Forms.TextBox()
+        Me.txtTIN = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.ComboBoxEmpType = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -58,10 +62,7 @@ Partial Class FormEmployeeRegistration
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
-        Me.txtSSS = New System.Windows.Forms.TextBox()
-        Me.txtTIN = New System.Windows.Forms.TextBox()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.chbRequireUP = New System.Windows.Forms.CheckBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -72,7 +73,7 @@ Partial Class FormEmployeeRegistration
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Location = New System.Drawing.Point(12, 9)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(601, 376)
@@ -103,13 +104,49 @@ Partial Class FormEmployeeRegistration
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.Label1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Size = New System.Drawing.Size(593, 350)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Personal Information"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'txtSSS
+        '
+        Me.txtSSS.Location = New System.Drawing.Point(101, 203)
+        Me.txtSSS.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtSSS.Name = "txtSSS"
+        Me.txtSSS.Size = New System.Drawing.Size(183, 20)
+        Me.txtSSS.TabIndex = 39
+        '
+        'txtTIN
+        '
+        Me.txtTIN.Location = New System.Drawing.Point(101, 179)
+        Me.txtTIN.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtTIN.Name = "txtTIN"
+        Me.txtTIN.Size = New System.Drawing.Size(183, 20)
+        Me.txtTIN.TabIndex = 38
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(17, 204)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(28, 13)
+        Me.Label15.TabIndex = 37
+        Me.Label15.Text = "SSS"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(17, 181)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(25, 13)
+        Me.Label16.TabIndex = 36
+        Me.Label16.Text = "TIN"
         '
         'Label14
         '
@@ -126,9 +163,9 @@ Partial Class FormEmployeeRegistration
         Me.ComboBoxEmpType.FormattingEnabled = True
         Me.ComboBoxEmpType.Items.AddRange(New Object() {"[Select]", "Admin", "Staff", "Agent", "Vendor"})
         Me.ComboBoxEmpType.Location = New System.Drawing.Point(101, 155)
-        Me.ComboBoxEmpType.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBoxEmpType.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxEmpType.Name = "ComboBoxEmpType"
-        Me.ComboBoxEmpType.Size = New System.Drawing.Size(200, 21)
+        Me.ComboBoxEmpType.Size = New System.Drawing.Size(183, 21)
         Me.ComboBoxEmpType.TabIndex = 34
         '
         'Label13
@@ -152,22 +189,23 @@ Partial Class FormEmployeeRegistration
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.chbRequireUP)
         Me.GroupBox1.Controls.Add(Me.txtPass2)
         Me.GroupBox1.Controls.Add(Me.txtPass1)
         Me.GroupBox1.Controls.Add(Me.txtUsername)
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.Label9)
-        Me.GroupBox1.Location = New System.Drawing.Point(301, 239)
+        Me.GroupBox1.Location = New System.Drawing.Point(301, 203)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(267, 106)
+        Me.GroupBox1.Size = New System.Drawing.Size(267, 142)
         Me.GroupBox1.TabIndex = 31
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "User Account Setting"
         '
         'txtPass2
         '
-        Me.txtPass2.Location = New System.Drawing.Point(71, 75)
+        Me.txtPass2.Location = New System.Drawing.Point(73, 79)
         Me.txtPass2.Name = "txtPass2"
         Me.txtPass2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPass2.Size = New System.Drawing.Size(179, 20)
@@ -175,7 +213,7 @@ Partial Class FormEmployeeRegistration
         '
         'txtPass1
         '
-        Me.txtPass1.Location = New System.Drawing.Point(71, 49)
+        Me.txtPass1.Location = New System.Drawing.Point(73, 53)
         Me.txtPass1.Name = "txtPass1"
         Me.txtPass1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPass1.Size = New System.Drawing.Size(179, 20)
@@ -183,7 +221,7 @@ Partial Class FormEmployeeRegistration
         '
         'txtUsername
         '
-        Me.txtUsername.Location = New System.Drawing.Point(71, 23)
+        Me.txtUsername.Location = New System.Drawing.Point(73, 27)
         Me.txtUsername.Name = "txtUsername"
         Me.txtUsername.Size = New System.Drawing.Size(179, 20)
         Me.txtUsername.TabIndex = 11
@@ -191,7 +229,7 @@ Partial Class FormEmployeeRegistration
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(8, 77)
+        Me.Label7.Location = New System.Drawing.Point(10, 81)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(53, 13)
         Me.Label7.TabIndex = 2
@@ -200,7 +238,7 @@ Partial Class FormEmployeeRegistration
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(8, 51)
+        Me.Label8.Location = New System.Drawing.Point(10, 55)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(53, 13)
         Me.Label8.TabIndex = 1
@@ -209,7 +247,7 @@ Partial Class FormEmployeeRegistration
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(8, 25)
+        Me.Label9.Location = New System.Drawing.Point(10, 29)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(55, 13)
         Me.Label9.TabIndex = 0
@@ -301,7 +339,7 @@ Partial Class FormEmployeeRegistration
         Me.ComboBoxCivilStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxCivilStatus.FormattingEnabled = True
         Me.ComboBoxCivilStatus.Location = New System.Drawing.Point(101, 107)
-        Me.ComboBoxCivilStatus.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBoxCivilStatus.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxCivilStatus.Name = "ComboBoxCivilStatus"
         Me.ComboBoxCivilStatus.Size = New System.Drawing.Size(199, 21)
         Me.ComboBoxCivilStatus.TabIndex = 27
@@ -311,7 +349,7 @@ Partial Class FormEmployeeRegistration
         Me.ComboBoxGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.ComboBoxGender.FormattingEnabled = True
         Me.ComboBoxGender.Location = New System.Drawing.Point(101, 83)
-        Me.ComboBoxGender.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.ComboBoxGender.Margin = New System.Windows.Forms.Padding(2)
         Me.ComboBoxGender.Name = "ComboBoxGender"
         Me.ComboBoxGender.Size = New System.Drawing.Size(200, 21)
         Me.ComboBoxGender.TabIndex = 26
@@ -319,7 +357,7 @@ Partial Class FormEmployeeRegistration
         'txtAddress
         '
         Me.txtAddress.Location = New System.Drawing.Point(101, 130)
-        Me.txtAddress.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtAddress.Margin = New System.Windows.Forms.Padding(2)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(467, 20)
         Me.txtAddress.TabIndex = 25
@@ -327,7 +365,7 @@ Partial Class FormEmployeeRegistration
         'txtSurname
         '
         Me.txtSurname.Location = New System.Drawing.Point(101, 61)
-        Me.txtSurname.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtSurname.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSurname.Name = "txtSurname"
         Me.txtSurname.Size = New System.Drawing.Size(200, 20)
         Me.txtSurname.TabIndex = 24
@@ -335,7 +373,7 @@ Partial Class FormEmployeeRegistration
         'txtMiddleName
         '
         Me.txtMiddleName.Location = New System.Drawing.Point(101, 39)
-        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(2)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(200, 20)
         Me.txtMiddleName.TabIndex = 23
@@ -343,7 +381,7 @@ Partial Class FormEmployeeRegistration
         'txtName
         '
         Me.txtName.Location = New System.Drawing.Point(101, 17)
-        Me.txtName.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtName.Margin = New System.Windows.Forms.Padding(2)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(200, 20)
         Me.txtName.TabIndex = 22
@@ -424,41 +462,15 @@ Partial Class FormEmployeeRegistration
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
-        'txtSSS
+        'chbRequireUP
         '
-        Me.txtSSS.Location = New System.Drawing.Point(101, 203)
-        Me.txtSSS.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtSSS.Name = "txtSSS"
-        Me.txtSSS.Size = New System.Drawing.Size(200, 20)
-        Me.txtSSS.TabIndex = 39
-        '
-        'txtTIN
-        '
-        Me.txtTIN.Location = New System.Drawing.Point(101, 179)
-        Me.txtTIN.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtTIN.Name = "txtTIN"
-        Me.txtTIN.Size = New System.Drawing.Size(200, 20)
-        Me.txtTIN.TabIndex = 38
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(17, 204)
-        Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(28, 13)
-        Me.Label15.TabIndex = 37
-        Me.Label15.Text = "SSS"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(17, 181)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(25, 13)
-        Me.Label16.TabIndex = 36
-        Me.Label16.Text = "TIN"
+        Me.chbRequireUP.AutoSize = True
+        Me.chbRequireUP.Location = New System.Drawing.Point(73, 111)
+        Me.chbRequireUP.Name = "chbRequireUP"
+        Me.chbRequireUP.Size = New System.Drawing.Size(166, 17)
+        Me.chbRequireUP.TabIndex = 40
+        Me.chbRequireUP.Text = "Require Username & Password"
+        Me.chbRequireUP.UseVisualStyleBackColor = True
         '
         'FormEmployeeRegistration
         '
@@ -471,7 +483,7 @@ Partial Class FormEmployeeRegistration
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FormEmployeeRegistration"
@@ -529,4 +541,5 @@ Partial Class FormEmployeeRegistration
     Friend WithEvents txtTIN As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
+    Friend WithEvents chbRequireUP As CheckBox
 End Class
