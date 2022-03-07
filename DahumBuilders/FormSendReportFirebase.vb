@@ -31,19 +31,23 @@ Public Class FormSendReportFirebase
     End Sub
 
     Private Sub generateSummaryReport()
+        Dim last6Month = Now().AddMonths(-8).ToString("yyyy-MM-dd")
 
         sql = "SELECT `date_paid` DatePaid,  
         SUM(CASE WHEN `payment_type`=0 THEN `paid_amount` ELSE 0 END) TotalCash,
         SUM(CASE WHEN `payment_type`=1 THEN `paid_amount` ELSE 0 END) TotalCheck,
         SUM(CASE WHEN `payment_type`=2 THEN `paid_amount` ELSE 0 END) TotalBankTransfer,
-        SUM(`commission`) AS Expenses, 
+        SUM(`commission`) AS Expenses,
         SUM(IF(`payment_type` = 0, `paid_amount`-`commission`,0)) AS TotalCashOnHand
-        FROM `db_transaction` t GROUP BY `date_paid` ORDER BY `date_paid` DESC"
+        FROM `db_transaction`
+        WHERE `date_paid` >= @last6Month
+        GROUP BY `date_paid` ORDER BY `date_paid` DESC"
 
         Cursor = Cursors.WaitCursor
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
+            sqlCommand.Parameters.Add("@last6Month", MySqlDbType.VarChar).Value = last6Month
             sqlDataReader = sqlCommand.ExecuteReader()
 
             Dim summaryList As New List(Of FirebaseSummaryReport)()
@@ -63,6 +67,7 @@ Public Class FormSendReportFirebase
             sqlConnection.Close()
 
             For Each summary In summaryList
+                Console.WriteLine(summary.datePaid)
                 summary.details = generateDetailReport(summary.datePaid)
             Next
 

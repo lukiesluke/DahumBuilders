@@ -16,11 +16,11 @@ Module ModuleConnection
     'Delete Constant
     Public delExpensesID As String = "delExpensesID"
 
-    'Public CompanyName As String = "Dahum Builders and Development Corporation"
-    'Public CompanyAddress As String = "3rd floor, T. De Castro Bldg, Emilio Aguinaldo Hwy, Palico 1, Imus, 4103 Cavite"
+    Public CompanyName As String = "Dahum Builders and Development Corporation"
+    Public CompanyAddress As String = "3rd floor, T. De Castro Bldg, Emilio Aguinaldo Hwy, Palico 1, Imus, 4103 Cavite"
 
-    Public CompanyName As String = "TP Realty And Development Corporation"
-    Public CompanyAddress As String = "General Trias Cavite Cas Dela Torre Village"
+    'Public CompanyName As String = "TP Realty And Development Corporation"
+    'Public CompanyAddress As String = "General Trias Cavite Cas Dela Torre Village"
 
     'Firebase variable
     Public pathSummary As String = "summary/"
@@ -31,15 +31,15 @@ Module ModuleConnection
     Public pathProjectTest As String = "projectTest/"
     Public pathProjectLogs As String = "projectLogs/"
 
-    Public fireCon As New FirebaseConfig() With {
-        .AuthSecret = "3zPFq1X41jpyd8jGBdk6dM50tXG3vO0x7LQGNFj8",
-        .BasePath = "https://tprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com/"
-        }
-
     'Public fireCon As New FirebaseConfig() With {
-    '    .AuthSecret = "g8tKN67dcGPFLnYw7bLXIivT3j3cd7SEpYbBoOFZ",
-    '    .BasePath = "https://dahum-builders-corporation-default-rtdb.firebaseio.com/"
+    '    .AuthSecret = "3zPFq1X41jpyd8jGBdk6dM50tXG3vO0x7LQGNFj8",
+    '    .BasePath = "https://tprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com/"
     '    }
+
+    Public fireCon As New FirebaseConfig() With {
+        .AuthSecret = "g8tKN67dcGPFLnYw7bLXIivT3j3cd7SEpYbBoOFZ",
+        .BasePath = "https://dahum-builders-corporation-default-rtdb.firebaseio.com/"
+        }
 
     Public Sub Connection()
         Try
