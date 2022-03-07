@@ -92,6 +92,7 @@ Partial Class FormPayment
         Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderOR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderAR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -108,7 +109,7 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderAR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPartNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -804,7 +805,7 @@ Partial Class FormPayment
         'ListView1
         '
         Me.ListView1.CheckBoxes = True
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPartNo, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
         Me.ListView1.ContextMenuStrip = Me.ContextMenuTransaction
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.FullRowSelect = True
@@ -831,6 +832,10 @@ Partial Class FormPayment
         '
         Me.ColumnHeaderOR.Text = "OR Number"
         Me.ColumnHeaderOR.Width = 80
+        '
+        'ColumnHeaderAR
+        '
+        Me.ColumnHeaderAR.Text = "AR #"
         '
         'ColumnHeaderPaymentType
         '
@@ -957,9 +962,10 @@ Partial Class FormPayment
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'ColumnHeaderAR
+        'ColumnHeaderPartNo
         '
-        Me.ColumnHeaderAR.Text = "AR #"
+        Me.ColumnHeaderPartNo.Text = "Part (#)"
+        Me.ColumnHeaderPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'FormPayment
         '
@@ -1089,4 +1095,5 @@ Partial Class FormPayment
     Friend WithEvents ColumnHeaderStatus As ColumnHeader
     Friend WithEvents CancelSoldToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColumnHeaderAR As ColumnHeader
+    Friend WithEvents ColumnHeaderPartNo As ColumnHeader
 End Class

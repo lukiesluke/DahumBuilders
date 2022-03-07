@@ -27,6 +27,7 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderID = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderOR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderAR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -70,16 +71,18 @@ Partial Class FormMyOREntries
         Me.txtDiscount = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtARNumber = New System.Windows.Forms.TextBox()
-        Me.ColumnHeaderAR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtPartNo = New System.Windows.Forms.TextBox()
+        Me.ColumnHeaderPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPart, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
-        Me.ListView1.Location = New System.Drawing.Point(11, 113)
+        Me.ListView1.Location = New System.Drawing.Point(11, 117)
         Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(843, 239)
@@ -101,6 +104,10 @@ Partial Class FormMyOREntries
         '
         Me.ColumnHeaderOR.Text = "OR Number"
         Me.ColumnHeaderOR.Width = 80
+        '
+        'ColumnHeaderAR
+        '
+        Me.ColumnHeaderAR.Text = "AR #"
         '
         'ColumnHeaderName
         '
@@ -366,7 +373,7 @@ Partial Class FormMyOREntries
         Me.PanelPassword.Controls.Add(Me.btnOkayPassword)
         Me.PanelPassword.Controls.Add(Me.Label8)
         Me.PanelPassword.Controls.Add(Me.txtPassword)
-        Me.PanelPassword.Location = New System.Drawing.Point(169, 235)
+        Me.PanelPassword.Location = New System.Drawing.Point(169, 237)
         Me.PanelPassword.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelPassword.Name = "PanelPassword"
         Me.PanelPassword.Size = New System.Drawing.Size(473, 120)
@@ -503,15 +510,38 @@ Partial Class FormMyOREntries
         Me.txtARNumber.Size = New System.Drawing.Size(96, 20)
         Me.txtARNumber.TabIndex = 26
         '
-        'ColumnHeaderAR
+        'Label13
         '
-        Me.ColumnHeaderAR.Text = "AR #"
+        Me.Label13.Location = New System.Drawing.Point(395, 89)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(90, 23)
+        Me.Label13.TabIndex = 28
+        Me.Label13.Text = "Part MA/EQ (#)"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtPartNo
+        '
+        Me.txtPartNo.BackColor = System.Drawing.SystemColors.Info
+        Me.txtPartNo.Location = New System.Drawing.Point(487, 92)
+        Me.txtPartNo.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPartNo.Name = "txtPartNo"
+        Me.txtPartNo.Size = New System.Drawing.Size(96, 20)
+        Me.txtPartNo.TabIndex = 29
+        Me.txtPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'ColumnHeaderPart
+        '
+        Me.ColumnHeaderPart.Text = "Part (#)"
+        Me.ColumnHeaderPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(861, 394)
+        Me.Controls.Add(Me.txtPartNo)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.txtARNumber)
         Me.Controls.Add(Me.Label10)
@@ -604,4 +634,7 @@ Partial Class FormMyOREntries
     Friend WithEvents Label12 As Label
     Friend WithEvents txtARNumber As TextBox
     Friend WithEvents ColumnHeaderAR As ColumnHeader
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txtPartNo As TextBox
+    Friend WithEvents ColumnHeaderPart As ColumnHeader
 End Class

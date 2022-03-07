@@ -81,6 +81,7 @@ Public Class FormMyOREntries
             transaction._discountAmount = sqlDataReader("discount_amount")
             transaction._createdBy = sqlDataReader("created_by").ToString
             transaction._updatedBy = sqlDataReader("updated_by").ToString
+            transaction._partNo = sqlDataReader("part_no")
 
             item = New ListViewItem(transaction._id)
             item.UseItemStyleForSubItems = False
@@ -91,6 +92,11 @@ Public Class FormMyOREntries
             item.SubItems.Add(transaction._paidAmount.ToString("N2"))
             item.SubItems.Add(transaction._paymentType)
             item.SubItems.Add(transaction._particular_str)
+            If transaction._particular_str = "EQ" Or transaction._particular_str = "MA" Then
+                item.SubItems.Add(transaction._partNo)
+            Else
+                item.SubItems.Add("")
+            End If
             item.SubItems.Add(transaction._description)
             item.SubItems.Add(transaction._penalty)
             item.SubItems.Add(transaction._discountAmount)
@@ -105,9 +111,28 @@ Public Class FormMyOREntries
         Connection()
         Dim paymentKey As String = DirectCast(cbbPayment.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim particularKey As String = DirectCast(cbbParticular.SelectedItem, KeyValuePair(Of String, String)).Key
+        Dim partNo As Int64
+
+        If cbbParticular.Text = "EQ" Or cbbParticular.Text = "MA" Then
+            If txtPartNo.Text.Length < 1 Then
+                txtPartNo.Focus()
+                MessageBox.Show("Please enter Part number of EQ/MA.")
+                Exit Sub
+            Else
+                partNo = txtPartNo.Text.Trim
+            End If
+
+            If partNo < 1 Then
+                txtPartNo.Focus()
+                MessageBox.Show("Please enter Part number of EQ/MA. Greater then zero (0)")
+                Exit Sub
+            End If
+        Else
+            partNo = 0
+        End If
 
         sql = "UPDATE `db_transaction` t SET t.`date_paid`=@DatePaid, t.`official_receipt_no`=@ORNumber, t.`ar_number`=@ARNumber, t.`paid_amount`=@PaidAmount,
-        `particular`=@Particular, `payment_type`=@PaymentType, t.`penalty`=@Penalty, t.`discount_amount`=@DiscountAmount, t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
+        `particular`=@Particular, `part_no`=@PartNo, `payment_type`=@PaymentType, t.`penalty`=@Penalty, t.`discount_amount`=@DiscountAmount, t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -116,6 +141,7 @@ Public Class FormMyOREntries
             sqlCommand.Parameters.Add("@ARNumber", MySqlDbType.VarChar).Value = txtARNumber.Text.Trim
             sqlCommand.Parameters.Add("@PaidAmount", MySqlDbType.Double).Value = txtAmount.Text.Trim
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int64).Value = particularKey
+            sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int64).Value = partNo
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = paymentKey
             sqlCommand.Parameters.Add("@Penalty", MySqlDbType.Double).Value = txtPenalty.Text.Trim
             sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = txtDiscount.Text.Trim
@@ -153,9 +179,10 @@ Public Class FormMyOREntries
             transaction._paidAmount = ListView1.SelectedItems.Item(0).SubItems(5).Text
             transaction._paymentType = ListView1.SelectedItems.Item(0).SubItems(6).Text
             transaction._particular_str = ListView1.SelectedItems.Item(0).SubItems(7).Text
-            transaction._description = ListView1.SelectedItems.Item(0).SubItems(8).Text
-            transaction._penalty = ListView1.SelectedItems.Item(0).SubItems(9).Text
-            transaction._discountAmount = ListView1.SelectedItems.Item(0).SubItems(9).Text
+            transaction._partNo = ListView1.SelectedItems.Item(0).SubItems(8).Text
+            transaction._description = ListView1.SelectedItems.Item(0).SubItems(9).Text
+            transaction._penalty = ListView1.SelectedItems.Item(0).SubItems(10).Text
+            transaction._discountAmount = ListView1.SelectedItems.Item(0).SubItems(11).Text
 
             dtpDatePaid.Value = transaction._datePaid
             txtORNumber.Text = transaction._or
@@ -166,6 +193,7 @@ Public Class FormMyOREntries
             lblProjectName.Text = transaction._description
             cbbPayment.Text = transaction._paymentType
             cbbParticular.Text = transaction._particular_str
+            txtPartNo.Text = transaction._partNo
             txtPenalty.Text = transaction._penalty
             txtDiscount.Text = transaction._discountAmount
         End If
@@ -262,7 +290,7 @@ Public Class FormMyOREntries
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
-        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
+        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
@@ -304,7 +332,7 @@ Public Class FormMyOREntries
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
-        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
+        (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
@@ -435,4 +463,21 @@ Public Class FormMyOREntries
                          (e.KeyChar = DecimalSeparator And sender.Text.IndexOf(DecimalSeparator) = -1))
     End Sub
 
+    Private Sub cbbParticular_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbbParticular.SelectedIndexChanged
+        If cbbParticular.Text = "EQ" Or cbbParticular.Text = "MA" Then
+            txtPartNo.Enabled = True
+            txtPartNo.Text = transaction._partNo
+        Else
+            txtPartNo.Text = ""
+            txtPartNo.Enabled = False
+        End If
+    End Sub
+
+    Private Sub txtPartNo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPartNo.KeyPress
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
 End Class

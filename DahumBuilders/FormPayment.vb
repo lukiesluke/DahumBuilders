@@ -1138,7 +1138,7 @@ FinallyLine:
     End Sub
     Private Sub loadTransactionList()
         sql = "SELECT `id`,`date_paid`,`official_receipt_no`, `ar_number`,
-            (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
+            (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,
             (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,`paid_amount`,
             (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
             (SELECT CONCAT('B',`block`, ' L', `lot`, ' ') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes
@@ -1160,6 +1160,7 @@ FinallyLine:
                 transaction._or = sqlDataReader("official_receipt_no")
                 transaction._ar_no = sqlDataReader("ar_number")
                 transaction._particular_str = sqlDataReader("particular")
+                transaction._partNo = sqlDataReader("part_no")
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._penalty = sqlDataReader("penalty")
                 transaction._discountAmount = sqlDataReader("discount_amount")
@@ -1173,6 +1174,13 @@ FinallyLine:
                 item.SubItems.Add(transaction._ar_no)
                 item.SubItems.Add(transaction._paymentType)
                 item.SubItems.Add(transaction._particular_str)
+
+                If String.Compare(transaction._particular_str, "EQ") And String.Compare(transaction._particular_str, "MA") Then
+                    item.SubItems.Add("")
+                Else
+                    item.SubItems.Add(transaction._partNo)
+                End If
+
                 item.SubItems.Add(transaction._penalty)
                 item.SubItems.Add(transaction._discountAmount)
                 item.SubItems.Add(transaction._paidAmount.ToString("N2"))
