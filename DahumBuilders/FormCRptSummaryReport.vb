@@ -72,6 +72,7 @@ Public Class FormCRptSummaryReport
             Dim txtLoginName As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtLoginName")
             Dim txtTotalExpenses As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalExpenses")
             Dim txtNetProfit As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtNetProfit")
+            Dim txtCashOnHand As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtCashOnHand")
 
             Dim totalExpenses As Double = generate_expenses()
 
@@ -110,12 +111,20 @@ Public Class FormCRptSummaryReport
                     txtNetProfit.Text = Convert.ToDouble(total - totalExpenses).ToString("N2")
                 End If
 
+                If IsDBNull(table.Compute("SUM(total)", "")) Then
+                    txtCashOnHand.Text = 0.ToString("N2")
+                Else
+                    Dim cash As Double = table.Compute("SUM(cash)", "")
+                    txtCashOnHand.Text = Convert.ToDouble(cash - totalExpenses).ToString("N2")
+                End If
+
                 txtTotalCash.Text = (Convert.ToDouble(txtTotalCash.Text)).ToString("N2")
             Else
                 txtTotalCash.Text = 0.ToString("N2")
                 txtCheck.Text = 0.ToString("N2")
                 txtBankTransfer.Text = 0.ToString("N2")
                 txtNetProfit.Text = 0.ToString("N2")
+                txtCashOnHand.Text = 0.ToString("N2")
             End If
 
             txtLoginName.Text = userLogon._name
