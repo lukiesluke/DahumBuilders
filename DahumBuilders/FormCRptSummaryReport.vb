@@ -107,8 +107,10 @@ Public Class FormCRptSummaryReport
                 If IsDBNull(table.Compute("SUM(total)", "")) Then
                     txtNetProfit.Text = 0.ToString("N2")
                 Else
-                    Dim total As Double = table.Compute("SUM(total)", "")
-                    txtNetProfit.Text = Convert.ToDouble(total - totalExpenses).ToString("N2")
+                    Dim bankTrans As Double = table.Compute("SUM(bankTransfer)", "")
+                    Dim check As Double = table.Compute("SUM(check)", "")
+                    'txtNetProfit.Text = Convert.ToDouble(total - totalExpenses).ToString("N2")
+                    txtNetProfit.Text = Convert.ToDouble(bankTrans + check).ToString("N2")
                 End If
 
                 If IsDBNull(table.Compute("SUM(total)", "")) Then
