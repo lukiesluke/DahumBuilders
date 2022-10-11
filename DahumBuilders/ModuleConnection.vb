@@ -44,7 +44,7 @@ Module ModuleConnection
     Public Sub Connection()
         Try
             'Pwd=admin88@2021
-            Dim connStr As String = String.Format("Server={0}; Uid={1}; Pwd=admin88@2021; Port=3306; Database=dahum_builders; Connect Timeout={2}", serverSetting._ip, serverSetting._username, serverSetting._connTimeout)
+            Dim connStr As String = String.Format("Server={0}; Uid={1}; Pwd=; Port=3306; Database=dahum_builders; Connect Timeout={2}", serverSetting._ip, serverSetting._username, serverSetting._connTimeout)
             sqlConnection = New MySqlConnection(connStr)
             sqlConnection.Open()
         Catch ex As Exception
