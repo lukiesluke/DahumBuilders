@@ -68,12 +68,12 @@ Public Class FormAddProjectSetting
 
         sql = "INSERT INTO `db_project_item` ( `block`, `lot`,`sqm`, `lot_type`, `price`, `proj_id`,`autoID`, `phase_id`) VALUES 
         (@Block, @Lot, @Sqm, @LotType, @TCP, (SELECT `id` FROM `db_project_list` WHERE `proj_name` LIKE @ProjectName),
-        CONCAT(`proj_id`,'.',`block`,'.',`lot`), @PhaseId)"
+        CONCAT(`proj_id`,'.',`block`,'.',TRIM(`lot`)), @PhaseId)"
         Connection()
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@Block", MySqlDbType.Int24).Value = Double.Parse(txtBlock.Text.Trim)
-            sqlCommand.Parameters.Add("@Lot", MySqlDbType.Int24).Value = Double.Parse(txtLot.Text.Trim)
+            sqlCommand.Parameters.Add("@Lot", MySqlDbType.VarChar).Value = txtLot.Text.Trim
             sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = words(0)
             sqlCommand.Parameters.Add("@LotType", MySqlDbType.VarChar).Value = words(1).Trim
             sqlCommand.Parameters.Add("@TCP", MySqlDbType.Double).Value = Double.Parse(txtTCP.Text.Trim)
@@ -385,7 +385,7 @@ Public Class FormAddProjectSetting
         sqlCommand = New MySqlCommand(sql, sqlConnection)
         Try
             sqlCommand.Parameters.Add("@block", MySqlDbType.Int24).Value = txtBlockUp.Text.Trim
-            sqlCommand.Parameters.Add("@lot", MySqlDbType.Int24).Value = txtLotUp.Text.Trim
+            sqlCommand.Parameters.Add("@lot", MySqlDbType.VarChar).Value = txtLotUp.Text.Trim
             sqlCommand.Parameters.Add("@Sqm", MySqlDbType.VarChar).Value = words(0)
             sqlCommand.Parameters.Add("@lotType", MySqlDbType.VarChar).Value = words(1).Trim
             sqlCommand.Parameters.Add("@price", MySqlDbType.Double).Value = txtTcpUp.Text.Trim
@@ -426,20 +426,11 @@ Public Class FormAddProjectSetting
         txtBlock.SelectAll()
     End Sub
 
-    Private Sub txtLot_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLot.KeyPress, txtBlock.KeyPress, txtLotUp.KeyPress, txtBlockUp.KeyPress, txtBlockFilter.KeyPress
-        If Asc(e.KeyChar) <> 8 Then
-            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
-                e.Handled = True
-            End If
-        End If
-    End Sub
-
-    Private Sub txtLot_KeyUp(sender As Object, e As KeyEventArgs) Handles txtLot.KeyUp, txtBlock.KeyUp
+    Private Sub txtLot_KeyUp(sender As Object, e As KeyEventArgs) Handles txtBlock.KeyUp
         If e.KeyCode = Keys.Enter Then
             btnAddLot.PerformClick()
         End If
     End Sub
-
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
         loadProjectLots(txtBlockFilter.Text.Trim)
     End Sub
@@ -627,4 +618,23 @@ Public Class FormAddProjectSetting
             sqlConnection.Close()
         End Try
     End Sub
+
+    Private Sub txtBlock_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBlock.KeyPress, txtBlockFilter.KeyPress
+        If Asc(e.KeyChar) <> 8 Then
+            If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
+    Private Sub txtLot_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLot.KeyPress, txtLotUp.KeyPress
+        If Not (Asc(e.KeyChar) = 8) Then
+            Dim allowedChars As String = "1234567890-ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            If Not allowedChars.Contains(e.KeyChar.ToString.ToUpper) Then
+                e.KeyChar = ChrW(0)
+                e.Handled = True
+            End If
+        End If
+    End Sub
+
 End Class

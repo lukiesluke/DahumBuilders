@@ -130,6 +130,7 @@ Partial Class FormAddProjectSetting
         '
         'txtLot
         '
+        Me.txtLot.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtLot.Location = New System.Drawing.Point(157, 39)
         Me.txtLot.Margin = New System.Windows.Forms.Padding(2)
         Me.txtLot.Name = "txtLot"
@@ -507,7 +508,6 @@ Partial Class FormAddProjectSetting
         'ColumnLot
         '
         Me.ColumnLot.Text = "Lot"
-        Me.ColumnLot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnLot.Width = 40
         '
         'ColumnSQM
