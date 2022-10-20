@@ -41,7 +41,8 @@ Public Class FormMyOREntries
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
-        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by,
+        DATE_FORMAT(t.`date_created`,'%m-%d-%Y %H:%i %p') AS date_created, IFNULL(DATE_FORMAT(t.`date_update`,'%m-%d-%Y %H:%i %p'), '') AS date_update
         FROM `db_transaction` t WHERE t.`particular`<=5 AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
@@ -82,6 +83,8 @@ Public Class FormMyOREntries
             transaction._createdBy = sqlDataReader("created_by").ToString
             transaction._updatedBy = sqlDataReader("updated_by").ToString
             transaction._partNo = sqlDataReader("part_no")
+            transaction._dateCreated = sqlDataReader("date_created")
+            transaction._dateUpdate = sqlDataReader("date_update")
 
             item = New ListViewItem(transaction._id)
             item.UseItemStyleForSubItems = False
@@ -102,6 +105,8 @@ Public Class FormMyOREntries
             item.SubItems.Add(transaction._discountAmount)
             item.SubItems.Add(transaction._createdBy)
             item.SubItems.Add(transaction._updatedBy)
+            item.SubItems.Add(transaction._dateCreated)
+            item.SubItems.Add(transaction._dateUpdate)
             ListView1.Items.Add(item)
         Loop
     End Sub
@@ -293,7 +298,8 @@ Public Class FormMyOREntries
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
-        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by,
+        DATE_FORMAT(t.`date_created`,'%m-%d-%Y %H:%i %p') AS date_created, IFNULL(DATE_FORMAT(t.`date_update`,'%m-%d-%Y %H:%i %p'), '') AS date_update
         FROM `db_transaction` t WHERE t.`id` = @OREntry"
 
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -335,7 +341,8 @@ Public Class FormMyOREntries
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`created_by`) AS created_by,
-        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE `db_user_profile`.`id`= t.`updated_by`),'') AS updated_by,
+        DATE_FORMAT(t.`date_created`,'%m-%d-%Y %H:%i %p') AS date_created, IFNULL(DATE_FORMAT(t.`date_update`,'%m-%d-%Y %H:%i %p'), '') AS date_update
         FROM `db_transaction` t WHERE t.`official_receipt_no` LIKE @OREntry ORDER BY `date_paid` DESC"
 
         Connection()

@@ -32,6 +32,7 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -73,13 +74,14 @@ Partial Class FormMyOREntries
         Me.txtARNumber = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtPartNo = New System.Windows.Forms.TextBox()
-        Me.ColumnHeaderPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderCDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderUDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPart, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPart, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy, Me.ColumnHeaderCDate, Me.ColumnHeaderUDate})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(11, 117)
@@ -131,6 +133,11 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderParticular.Text = "Particular"
         Me.ColumnHeaderParticular.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnHeaderParticular.Width = 70
+        '
+        'ColumnHeaderPart
+        '
+        Me.ColumnHeaderPart.Text = "Part (#)"
+        Me.ColumnHeaderPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'ColumnHeaderProject
         '
@@ -530,10 +537,15 @@ Partial Class FormMyOREntries
         Me.txtPartNo.TabIndex = 29
         Me.txtPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'ColumnHeaderPart
+        'ColumnHeaderCDate
         '
-        Me.ColumnHeaderPart.Text = "Part (#)"
-        Me.ColumnHeaderPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderCDate.Text = "Date Created"
+        Me.ColumnHeaderCDate.Width = 120
+        '
+        'ColumnHeaderUDate
+        '
+        Me.ColumnHeaderUDate.Text = "Date Update"
+        Me.ColumnHeaderUDate.Width = 120
         '
         'FormMyOREntries
         '
@@ -637,4 +649,6 @@ Partial Class FormMyOREntries
     Friend WithEvents Label13 As Label
     Friend WithEvents txtPartNo As TextBox
     Friend WithEvents ColumnHeaderPart As ColumnHeader
+    Friend WithEvents ColumnHeaderCDate As ColumnHeader
+    Friend WithEvents ColumnHeaderUDate As ColumnHeader
 End Class

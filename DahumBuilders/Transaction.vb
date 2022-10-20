@@ -28,4 +28,6 @@
     Public Property _created_by As Integer = 0
     Public Property _createdBy As String = ""
     Public Property _updatedBy As String = ""
+    Public Property _dateCreated As String = ""
+    Public Property _dateUpdate As String = ""
 End Class
