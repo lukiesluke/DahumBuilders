@@ -32,7 +32,7 @@ Public Class FormPayment
 
     Public Sub load_userId_info_data_reader()
         sql = "SELECT i.`item_id`, i.`proj_id`, l.`proj_name`, l.`proj_address`, i.`block`, i.`lot`, i.`sqm`, i.`price`,
-        IFNULL((SELECT (`tcp`-SUM(`paid_amount`))-SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price`) AS 'totalBalance',
+        IFNULL((SELECT (i.`price`-SUM(`paid_amount`))-SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price`) AS 'totalBalance',
         IFNULL((SELECT SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalDiscount',
         IFNULL((SELECT SUM(`penalty`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPenalty',
         IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount',
