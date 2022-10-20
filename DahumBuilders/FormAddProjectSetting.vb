@@ -636,5 +636,4 @@ Public Class FormAddProjectSetting
             End If
         End If
     End Sub
-
 End Class
