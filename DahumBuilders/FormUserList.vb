@@ -505,7 +505,7 @@ Public Class FormUserList
                     Dim rowsAffected As Integer = 0
                     sql = "INSERT INTO `db_history_delete` (`OR`, `userID`, `name`) 
                     SELECT CONCAT('USER_ID:1 ', `first_name`,' ', `last_name`), @UserID, @Name FROM `db_user_profile` WHERE `id`=@ID;
-                    DELETE FROM `db_transaction` WHERE `id`=@ID"
+                    DELETE FROM `db_user_profile` WHERE `id`=@ID"
 
                     Connection()
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
