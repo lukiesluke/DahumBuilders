@@ -95,6 +95,7 @@ Partial Class FormPayment
         Me.ColumnHeaderAR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPartNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDisc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -109,7 +110,6 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderPartNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -595,7 +595,6 @@ Partial Class FormPayment
         'ColumnHeaderLot
         '
         Me.ColumnHeaderLot.Text = "Lot"
-        Me.ColumnHeaderLot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnHeaderLot.Width = 50
         '
         'ColumnHeaderSQM
@@ -849,6 +848,11 @@ Partial Class FormPayment
         Me.ColumnHeaderParticular.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnHeaderParticular.Width = 70
         '
+        'ColumnHeaderPartNo
+        '
+        Me.ColumnHeaderPartNo.Text = "Part (#)"
+        Me.ColumnHeaderPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'ColumnHeaderPanalty
         '
         Me.ColumnHeaderPanalty.Text = "Penalty"
@@ -961,11 +965,6 @@ Partial Class FormPayment
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ColumnHeaderPartNo
-        '
-        Me.ColumnHeaderPartNo.Text = "Part (#)"
-        Me.ColumnHeaderPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'FormPayment
         '

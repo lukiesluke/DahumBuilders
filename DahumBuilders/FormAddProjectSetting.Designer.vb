@@ -130,6 +130,7 @@ Partial Class FormAddProjectSetting
         '
         'txtLot
         '
+        Me.txtLot.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtLot.Location = New System.Drawing.Point(157, 39)
         Me.txtLot.Margin = New System.Windows.Forms.Padding(2)
         Me.txtLot.Name = "txtLot"
@@ -446,6 +447,7 @@ Partial Class FormAddProjectSetting
         '
         'txtLotUp
         '
+        Me.txtLotUp.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtLotUp.Location = New System.Drawing.Point(129, 14)
         Me.txtLotUp.Margin = New System.Windows.Forms.Padding(2)
         Me.txtLotUp.Name = "txtLotUp"
