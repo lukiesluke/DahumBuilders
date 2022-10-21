@@ -66,7 +66,7 @@ Public Class FormCRptTransaction
                 .Fill(table)
             End With
 
-            sql = "SELECT SUM(i.`price`) AS tcp, SUM(IFNULL((SELECT i.`price`-(SUM(`paid_amount`)-(SUM(`discount_amount`)+SUM(`penalty`))) 
+            sql = "SELECT SUM(i.`price`) AS tcp, SUM(IFNULL((SELECT i.`price`-((SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`))
             FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price` )) AS 'totalBalance'
             FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
 
@@ -142,7 +142,7 @@ Public Class FormCRptTransaction
                 .Fill(table)
             End With
 
-            sql = "SELECT SUM(i.`price`) AS tcp, SUM(IFNULL((SELECT i.`price`-(SUM(`paid_amount`)-(SUM(`discount_amount`)+SUM(`penalty`))) 
+            sql = "SELECT SUM(i.`price`) AS tcp, SUM(IFNULL((SELECT i.`price`-((SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`))
             FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`), i.`price` )) AS 'totalBalance'
             FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId  AND i.`item_id`=@ItemID"
 
@@ -230,4 +230,5 @@ Public Class FormCRptTransaction
             End If
         End If
     End Sub
+
 End Class
