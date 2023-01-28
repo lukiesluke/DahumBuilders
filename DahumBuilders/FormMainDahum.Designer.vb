@@ -190,6 +190,7 @@ Partial Class FormMainDahum
         'SyncToolStripMenuItem
         '
         Me.SyncToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SummaryReportToolStripMenuItem1, Me.ProjectListToolStripMenuItem})
+        Me.SyncToolStripMenuItem.Enabled = False
         Me.SyncToolStripMenuItem.Name = "SyncToolStripMenuItem"
         Me.SyncToolStripMenuItem.Size = New System.Drawing.Size(95, 22)
         Me.SyncToolStripMenuItem.Text = "Sync Database"

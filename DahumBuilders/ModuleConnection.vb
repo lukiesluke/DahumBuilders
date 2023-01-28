@@ -19,8 +19,8 @@ Module ModuleConnection
     'Public CompanyName As String = "Dahum Builders and Development Corporation"
     'Public CompanyAddress As String = "3rd floor, T. De Castro Bldg, Emilio Aguinaldo Hwy, Palico 1, Imus, 4103 Cavite"
 
-    Public CompanyName As String = "TP Realty And Development Corporation"
-    Public CompanyAddress As String = "General Trias Cavite Cas Dela Torre Village"
+    Public CompanyName As String = "BayLeaf Development and Real Estate Corporation"
+    Public CompanyAddress As String = "Brgy Halang, Naic, Cavite City"
 
     'Firebase variable
     Public pathSummary As String = "summary/"
