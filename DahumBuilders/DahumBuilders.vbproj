@@ -175,7 +175,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsIni.vb" />
+    <Compile Include="CollectibleReport.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectibleReport.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CollectibleReport.vb">
+      <DependentUpon>CollectibleReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="configurationSetting.vb" />
+    <Compile Include="crpCollectible.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crpCollectible.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="crpExpensesReport.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,6 +231,12 @@
       <DependentUpon>FormCategorySetting.vb</DependentUpon>
     </Compile>
     <Compile Include="FormCategorySetting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCRptCollectibleReport.Designer.vb">
+      <DependentUpon>FormCRptCollectibleReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormCRptCollectibleReport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormCRptExpenses.Designer.vb">
@@ -389,6 +409,10 @@
     <Compile Include="User.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="crpCollectible.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crpCollectible.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="crpExpensesReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crpExpensesReport.vb</LastGenOutput>
@@ -407,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCategorySetting.resx">
       <DependentUpon>FormCategorySetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCRptCollectibleReport.resx">
+      <DependentUpon>FormCRptCollectibleReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCRptExpenses.resx">
       <DependentUpon>FormCRptExpenses.vb</DependentUpon>
@@ -477,6 +504,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="CollectibleReport.xsc">
+      <DependentUpon>CollectibleReport.xsd</DependentUpon>
+    </None>
+    <None Include="CollectibleReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CollectibleReport.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="CollectibleReport.xss">
+      <DependentUpon>CollectibleReport.xsd</DependentUpon>
+    </None>
     <None Include="DataCustomer.xsc">
       <DependentUpon>DataCustomer.xsd</DependentUpon>
     </None>

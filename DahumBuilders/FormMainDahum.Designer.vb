@@ -52,6 +52,7 @@ Partial Class FormMainDahum
         Me.ToolStripStatusIP = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripMyIP = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.CollectibleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -151,7 +152,7 @@ Partial Class FormMainDahum
         '
         'ReportToolStripMenuItem
         '
-        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem, Me.ExpensesToolStripMenuItem})
+        Me.ReportToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalesReportToolStripMenuItem, Me.SummaryReportToolStripMenuItem, Me.ExpensesToolStripMenuItem, Me.CollectibleToolStripMenuItem})
         Me.ReportToolStripMenuItem.Name = "ReportToolStripMenuItem"
         Me.ReportToolStripMenuItem.Size = New System.Drawing.Size(54, 22)
         Me.ReportToolStripMenuItem.Text = "Report"
@@ -247,6 +248,12 @@ Partial Class FormMainDahum
         Me.ToolStripMyIP.Size = New System.Drawing.Size(80, 17)
         Me.ToolStripMyIP.Text = "ToolStripMyIP"
         '
+        'CollectibleToolStripMenuItem
+        '
+        Me.CollectibleToolStripMenuItem.Name = "CollectibleToolStripMenuItem"
+        Me.CollectibleToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.CollectibleToolStripMenuItem.Text = "Collectible"
+        '
         'FormMainDahum
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -299,4 +306,5 @@ Partial Class FormMainDahum
     Friend WithEvents AddUpdateCategoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Friend WithEvents ToolStripMyIP As ToolStripStatusLabel
+    Friend WithEvents CollectibleToolStripMenuItem As ToolStripMenuItem
 End Class

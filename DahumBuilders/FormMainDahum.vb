@@ -248,4 +248,13 @@ Public Class FormMainDahum
             mFormCategorySetting.ShowDialog()
         End If
     End Sub
+
+    Private Sub CollectibleToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CollectibleToolStripMenuItem.Click
+        If Application.OpenForms().OfType(Of FormCRptCollectibleReport).Any Then
+            mFormCollectibleReport.Focus()
+        Else
+            mFormCollectibleReport = New FormCRptCollectibleReport
+            mFormCollectibleReport.ShowDialog()
+        End If
+    End Sub
 End Class

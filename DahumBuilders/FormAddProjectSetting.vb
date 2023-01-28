@@ -7,7 +7,7 @@ Public Class FormAddProjectSetting
     Dim dataPriceListLotType As New Dictionary(Of String, String)()
 
     Private Sub FormProjectSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Size = New Size(1150, 560)
+        Me.Size = New Size(1320, 560)
         load_Project_lot_phase_combobox()
         load_ProjectName_combobox()
 
@@ -244,18 +244,36 @@ Public Class FormAddProjectSetting
             sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, 
             IF(STRCMP(i.`status`,'SOLD') = 0, 'SOLD', IF(i.`assigned_userid`<1,'Available', 'Occupied')) AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`,
-            IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`
+            IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`,
+
+            IFNULL((SELECT SUM(`penalty`) FROM `db_transaction` t WHERE t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_penalty,
+            IFNULL((SELECT (SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`) FROM `db_transaction` t WHERE t.`payment_type`=0 AND t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_cash,
+            IFNULL((SELECT (SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`) FROM `db_transaction` t WHERE t.`payment_type`=1 AND t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_cheque,
+            IFNULL((SELECT (SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`) FROM `db_transaction` t WHERE t.`payment_type`=2 AND t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_bankTransfer,            
+            IFNULL((SELECT i.`price`-((SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`)) FROM `db_transaction` t WHERE t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_balance,
+            IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` t WHERE t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_paid
+
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID {0} ORDER BY i.`block` ASC, i.`lot` ASC"
+
             sql = String.Format(sql, " AND i.`block` LIKE '" + blockNumber + "'")
         Else
             sql = "SELECT i.`item_id`, l.`id`, l.`proj_name`, i.`block`, i.`lot`, i.`sqm`, i.`lot_type`, i.`price`, 
             IF(STRCMP(i.`status`,'SOLD') = 0, 'SOLD', IF(i.`assigned_userid`<1,'Available', 'Occupied')) AS 'status', `remark`,
             IFNULL((SELECT `last_name` FROM `db_user_profile` WHERE db_user_profile.`id`=i.`assigned_userid`),'') AS 'clientName', i.`autoID`,
-            IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`
+            IFNULL((SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=i.`phase_id`),'') phase, i.`proj_id`,
+
+            IFNULL((SELECT SUM(`penalty`) FROM `db_transaction` t WHERE t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_penalty,
+            IFNULL((SELECT (SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`) FROM `db_transaction` t WHERE t.`payment_type`=0 AND t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_cash,
+            IFNULL((SELECT (SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`) FROM `db_transaction` t WHERE t.`payment_type`=1 AND t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_cheque,
+            IFNULL((SELECT (SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`) FROM `db_transaction` t WHERE t.`payment_type`=2 AND t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_bankTransfer,
+            IFNULL((SELECT i.`price`-((SUM(`paid_amount`)-SUM(`penalty`))+SUM(`discount_amount`)) FROM `db_transaction` t WHERE t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_balance,
+            IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` t WHERE t.`userid`=i.`assigned_userid` AND t.`proj_itemId`=i.`item_id`), 0) AS total_paid
+
             FROM `db_project_item` i INNER JOIN `db_project_list` l ON i.`proj_id`=l.`id` WHERE l.`id`=@ProjID ORDER BY i.`block` ASC, i.`lot` ASC"
         End If
         Connection()
         Try
+            Cursor = Cursors.WaitCursor
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@ProjID", MySqlDbType.VarChar).Value = projectID
             If blockNumber.Length > 0 Then
@@ -290,6 +308,27 @@ Public Class FormAddProjectSetting
                 item.SubItems.Add(sqlDataReader("clientName"))
                 item.SubItems.Add(sqlDataReader("phase"))
                 item.SubItems.Add(sqlDataReader("remark"))
+
+                Dim ttlPenalty As Double
+                Dim ttlCash As Double
+                Dim ttlCheque As Double
+                Dim ttlBankTransfer As Double
+                Dim ttlBalance As Double
+                Dim ttlPaid As Double
+
+                ttlPenalty = sqlDataReader("total_penalty")
+                ttlCash = sqlDataReader("total_cash")
+                ttlCheque = sqlDataReader("total_cheque")
+                ttlBankTransfer = sqlDataReader("total_bankTransfer")
+                ttlBalance = sqlDataReader("total_balance")
+                ttlPaid = sqlDataReader("total_paid")
+
+                item.SubItems.Add(ttlPenalty.ToString("N2"))
+                item.SubItems.Add(ttlCash.ToString("N2"))
+                item.SubItems.Add(ttlCheque.ToString("N2"))
+                item.SubItems.Add(ttlBankTransfer.ToString("N2"))
+                item.SubItems.Add(ttlBalance.ToString("N2"))
+                item.SubItems.Add(ttlPaid.ToString("N2"))
                 ListViewProjectLot.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
@@ -298,6 +337,7 @@ Public Class FormAddProjectSetting
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
+            Cursor = Cursors.Default
         End Try
     End Sub
 

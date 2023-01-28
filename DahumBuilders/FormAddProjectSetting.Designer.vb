@@ -97,6 +97,12 @@ Partial Class FormAddProjectSetting
         Me.Label9 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ColumnHeaderTTLPenalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTTLCash = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTTLCheck = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTTLBankTransfer = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTTLBalance = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTTLPaid = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -209,8 +215,8 @@ Partial Class FormAddProjectSetting
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.64357!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.35644!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.99141!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.00859!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 0)
@@ -222,7 +228,7 @@ Partial Class FormAddProjectSetting
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 442.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1111, 483)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1281, 483)
         Me.TableLayoutPanel1.TabIndex = 15
         '
         'Panel1
@@ -246,10 +252,10 @@ Partial Class FormAddProjectSetting
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(398, 43)
+        Me.Panel1.Location = New System.Drawing.Point(399, 43)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(711, 438)
+        Me.Panel1.Size = New System.Drawing.Size(880, 438)
         Me.Panel1.TabIndex = 0
         '
         'Label17
@@ -332,7 +338,7 @@ Partial Class FormAddProjectSetting
         Me.Panel6.Location = New System.Drawing.Point(0, 132)
         Me.Panel6.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(709, 304)
+        Me.Panel6.Size = New System.Drawing.Size(878, 304)
         Me.Panel6.TabIndex = 17
         '
         'PanelLotUpdate
@@ -355,7 +361,7 @@ Partial Class FormAddProjectSetting
         Me.PanelLotUpdate.Location = New System.Drawing.Point(0, 168)
         Me.PanelLotUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelLotUpdate.Name = "PanelLotUpdate"
-        Me.PanelLotUpdate.Size = New System.Drawing.Size(705, 132)
+        Me.PanelLotUpdate.Size = New System.Drawing.Size(874, 132)
         Me.PanelLotUpdate.TabIndex = 11
         '
         'Label18
@@ -477,14 +483,14 @@ Partial Class FormAddProjectSetting
         '
         Me.ListViewProjectLot.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.ListViewProjectLot.CheckBoxes = True
-        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnHeaderLotType, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID, Me.ColumnHeaderClient, Me.ColumnHeaderPhase, Me.ColumnHeaderRemark})
+        Me.ListViewProjectLot.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnID, Me.ColumnName, Me.ColumnBlock, Me.ColumnLot, Me.ColumnSQM, Me.ColumnHeaderLotType, Me.ColumnTCP, Me.ColumnStatus, Me.ColumnHeaderAutoID, Me.ColumnHeaderProjID, Me.ColumnHeaderClient, Me.ColumnHeaderPhase, Me.ColumnHeaderRemark, Me.ColumnHeaderTTLPenalty, Me.ColumnHeaderTTLCash, Me.ColumnHeaderTTLCheck, Me.ColumnHeaderTTLBankTransfer, Me.ColumnHeaderTTLBalance, Me.ColumnHeaderTTLPaid})
         Me.ListViewProjectLot.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListViewProjectLot.FullRowSelect = True
         Me.ListViewProjectLot.GridLines = True
         Me.ListViewProjectLot.Location = New System.Drawing.Point(0, 0)
         Me.ListViewProjectLot.Margin = New System.Windows.Forms.Padding(2)
         Me.ListViewProjectLot.Name = "ListViewProjectLot"
-        Me.ListViewProjectLot.Size = New System.Drawing.Size(705, 300)
+        Me.ListViewProjectLot.Size = New System.Drawing.Size(874, 300)
         Me.ListViewProjectLot.TabIndex = 17
         Me.ListViewProjectLot.UseCompatibleStateImageBehavior = False
         Me.ListViewProjectLot.View = System.Windows.Forms.View.Details
@@ -581,7 +587,7 @@ Partial Class FormAddProjectSetting
         Me.Panel2.Location = New System.Drawing.Point(2, 43)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(392, 438)
+        Me.Panel2.Size = New System.Drawing.Size(393, 438)
         Me.Panel2.TabIndex = 1
         '
         'Panel5
@@ -593,7 +599,7 @@ Partial Class FormAddProjectSetting
         Me.Panel5.Location = New System.Drawing.Point(0, 132)
         Me.Panel5.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(390, 304)
+        Me.Panel5.Size = New System.Drawing.Size(391, 304)
         Me.Panel5.TabIndex = 13
         '
         'PanelProjectNameUpdate
@@ -611,7 +617,7 @@ Partial Class FormAddProjectSetting
         Me.PanelProjectNameUpdate.Location = New System.Drawing.Point(0, 168)
         Me.PanelProjectNameUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.PanelProjectNameUpdate.Name = "PanelProjectNameUpdate"
-        Me.PanelProjectNameUpdate.Size = New System.Drawing.Size(386, 132)
+        Me.PanelProjectNameUpdate.Size = New System.Drawing.Size(387, 132)
         Me.PanelProjectNameUpdate.TabIndex = 4
         '
         'lblProjectName
@@ -693,7 +699,7 @@ Partial Class FormAddProjectSetting
         Me.ListViewProject.Location = New System.Drawing.Point(0, 0)
         Me.ListViewProject.Margin = New System.Windows.Forms.Padding(2)
         Me.ListViewProject.Name = "ListViewProject"
-        Me.ListViewProject.Size = New System.Drawing.Size(386, 300)
+        Me.ListViewProject.Size = New System.Drawing.Size(387, 300)
         Me.ListViewProject.TabIndex = 3
         Me.ListViewProject.UseCompatibleStateImageBehavior = False
         Me.ListViewProject.View = System.Windows.Forms.View.Details
@@ -775,7 +781,7 @@ Partial Class FormAddProjectSetting
         Me.Panel3.Location = New System.Drawing.Point(2, 2)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(392, 37)
+        Me.Panel3.Size = New System.Drawing.Size(393, 37)
         Me.Panel3.TabIndex = 2
         '
         'Label8
@@ -795,10 +801,10 @@ Partial Class FormAddProjectSetting
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel4.Controls.Add(Me.Label9)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(398, 2)
+        Me.Panel4.Location = New System.Drawing.Point(399, 2)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(2)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(711, 37)
+        Me.Panel4.Size = New System.Drawing.Size(880, 37)
         Me.Panel4.TabIndex = 3
         '
         'Label9
@@ -817,7 +823,7 @@ Partial Class FormAddProjectSetting
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1130, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1300, 24)
         Me.MenuStrip1.TabIndex = 16
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -827,11 +833,47 @@ Partial Class FormAddProjectSetting
         Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.DeleteToolStripMenuItem.Text = "&Delete"
         '
+        'ColumnHeaderTTLPenalty
+        '
+        Me.ColumnHeaderTTLPenalty.Text = "Total Penalty"
+        Me.ColumnHeaderTTLPenalty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTTLPenalty.Width = 100
+        '
+        'ColumnHeaderTTLCash
+        '
+        Me.ColumnHeaderTTLCash.Text = "Total Cash"
+        Me.ColumnHeaderTTLCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTTLCash.Width = 100
+        '
+        'ColumnHeaderTTLCheck
+        '
+        Me.ColumnHeaderTTLCheck.Text = "Total Cheque"
+        Me.ColumnHeaderTTLCheck.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTTLCheck.Width = 100
+        '
+        'ColumnHeaderTTLBankTransfer
+        '
+        Me.ColumnHeaderTTLBankTransfer.Text = "Total Bank Transfer"
+        Me.ColumnHeaderTTLBankTransfer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTTLBankTransfer.Width = 110
+        '
+        'ColumnHeaderTTLBalance
+        '
+        Me.ColumnHeaderTTLBalance.Text = "Total Banlance"
+        Me.ColumnHeaderTTLBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTTLBalance.Width = 100
+        '
+        'ColumnHeaderTTLPaid
+        '
+        Me.ColumnHeaderTTLPaid.Text = "Total Paid"
+        Me.ColumnHeaderTTLPaid.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.ColumnHeaderTTLPaid.Width = 100
+        '
         'FormAddProjectSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1130, 512)
+        Me.ClientSize = New System.Drawing.Size(1300, 512)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
@@ -941,4 +983,10 @@ Partial Class FormAddProjectSetting
     Friend WithEvents Label18 As Label
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColumnHeaderTTLPenalty As ColumnHeader
+    Friend WithEvents ColumnHeaderTTLCash As ColumnHeader
+    Friend WithEvents ColumnHeaderTTLCheck As ColumnHeader
+    Friend WithEvents ColumnHeaderTTLBankTransfer As ColumnHeader
+    Friend WithEvents ColumnHeaderTTLBalance As ColumnHeader
+    Friend WithEvents ColumnHeaderTTLPaid As ColumnHeader
 End Class
