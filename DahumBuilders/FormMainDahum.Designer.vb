@@ -194,6 +194,7 @@ Partial Class FormMainDahum
         Me.SyncToolStripMenuItem.Name = "SyncToolStripMenuItem"
         Me.SyncToolStripMenuItem.Size = New System.Drawing.Size(95, 22)
         Me.SyncToolStripMenuItem.Text = "Sync Database"
+        Me.SyncToolStripMenuItem.Visible = False
         '
         'SummaryReportToolStripMenuItem1
         '

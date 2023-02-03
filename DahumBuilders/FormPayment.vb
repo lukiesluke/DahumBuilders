@@ -22,6 +22,8 @@ Public Class FormPayment
         DataGridView1.DefaultCellStyle.Font = New Font("Consolas", 9)
         SplitContainer1.IsSplitterFixed = True
         SplitContainer1.SplitterDistance = 250
+        lblTotalAmount.Text = 0
+        chkbxTaxAmount.Text = taxAmount.ToString() + "%"
         load_userId_info_data_reader()
         setDataGridView()
     End Sub
@@ -971,6 +973,18 @@ FinallyLine:
 
     Private Sub lblTotalAmount_TextChanged(sender As Object, e As EventArgs) Handles lblTotalAmount.TextChanged
         enablePaymentBotton()
+        Dim TotalAmount As Double
+        Try
+            TotalAmount = Convert.ToDouble(lblTotalAmount.Text)
+            If chkbxTaxAmount.Checked = True Then
+                lblTaxAmount.Text = (TotalAmount * taxAmount).ToString("N2")
+            Else
+                lblTaxAmount.Text = 0.ToString("N2")
+            End If
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtTenderedAmount_LostFocus(sender As Object, e As EventArgs) Handles txtTenderedAmount.LostFocus
@@ -986,17 +1000,21 @@ FinallyLine:
     End Sub
 
     Private Sub enablePaymentBotton()
-        If lblTotalAmount.Text.Length > 0 And txtTenderedAmount.Text.Length > 0 And txtTenderedAmount.Text <> "." Then
-            If Convert.ToDouble(txtTenderedAmount.Text) >= Convert.ToDouble(lblTotalAmount.Text) And txtTenderedAmount.Text <> "0.00" Then
-                btnPayment.Enabled = True
-                btnPayment.BackColor = Color.Lime
-                lblChange.Text = (Convert.ToDouble(txtTenderedAmount.Text) - Convert.ToDouble(lblTotalAmount.Text)).ToString("N2")
-            Else
-                btnPayment.Enabled = False
-                btnPayment.BackColor = Color.LightGray
-                lblChange.Text = 0.ToString("N2")
+        Try
+            If lblTotalAmount.Text.Length > 0 And txtTenderedAmount.Text.Length > 0 And txtTenderedAmount.Text <> "." Then
+                If Convert.ToDouble(txtTenderedAmount.Text) >= Convert.ToDouble(lblTotalAmount.Text) And txtTenderedAmount.Text <> "0.00" Then
+                    btnPayment.Enabled = True
+                    btnPayment.BackColor = Color.Lime
+                    lblChange.Text = (Convert.ToDouble(txtTenderedAmount.Text) - Convert.ToDouble(lblTotalAmount.Text)).ToString("N2")
+                Else
+                    btnPayment.Enabled = False
+                    btnPayment.BackColor = Color.LightGray
+                    lblChange.Text = 0.ToString("N2")
+                End If
             End If
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub txtTenderedAmount_GotFocus(sender As Object, e As EventArgs) Handles txtTenderedAmount.GotFocus, txtTenderedAmount.MouseClick
@@ -1231,6 +1249,38 @@ FinallyLine:
         Dim result As DialogResult = MessageBox.Show("Cancel block " & blk & " lot " & lot & " as SOLD?", "Sold", MessageBoxButtons.YesNoCancel)
         If result = DialogResult.Yes Then
             setSold("")
+        End If
+    End Sub
+
+    Private Sub chkbxTaxAmount_CheckStateChanged(sender As Object, e As EventArgs) Handles chkbxTaxAmount.CheckStateChanged
+        Try
+            If chkbxTaxAmount.Checked = True Then
+                Dim TotalAmount As Double
+                TotalAmount = Convert.ToDouble(lblTotalAmount.Text)
+                lblTaxAmount.Text = (TotalAmount * taxAmount).ToString("N2")
+            Else
+                lblTaxAmount.Text = 0.ToString("N2")
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub txtOfficialReceipt_KeyUp(sender As Object, e As KeyEventArgs) Handles txtOfficialReceipt.KeyUp
+        If txtOfficialReceipt.Text.Length > 0 Then
+            txtARNumber.Enabled = False
+            chkbxTaxAmount.Checked = True
+        Else
+            txtARNumber.Enabled = True
+        End If
+    End Sub
+
+    Private Sub txtARNumber_KeyUp(sender As Object, e As KeyEventArgs) Handles txtARNumber.KeyUp
+        If txtARNumber.Text.Length > 0 Then
+            txtOfficialReceipt.Enabled = False
+            chkbxTaxAmount.Checked = False
+        Else
+            txtOfficialReceipt.Enabled = True
         End If
     End Sub
 End Class

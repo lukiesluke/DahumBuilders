@@ -453,7 +453,7 @@ Public Class FormAddProjectSetting
                 PanelLotUpdate.Visible = False
                 PanelProjectNameUpdate.Visible = False
                 MessageBox.Show("Successfully Project updated.")
-                mFormMainDahum.ProjectListToolStripMenuItem.PerformClick()
+                'mFormMainDahum.ProjectListToolStripMenuItem.PerformClick()
             End If
         Catch ex As Exception
             MessageBox.Show("Project Add Lot: " & ex.Message)

@@ -12,6 +12,7 @@ Module ModuleConnection
     Public serverSetting As configurationSetting
     Public ini As New clsIni
     Public mVerification As Boolean
+    Public taxAmount As Double = 0.12
 
     'Delete Constant
     Public delExpensesID As String = "delExpensesID"
@@ -33,7 +34,7 @@ Module ModuleConnection
 
     Public fireCon As New FirebaseConfig() With {
         .AuthSecret = "3zPFq1X41jpyd8jGBdk6dM50tXG3vO0x7LQGNFj8",
-        .BasePath = "https://tprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com/"
+        .BasePath = "https://xxxtprealtydevelopmentcorp-28101-default-rtdb.firebaseio.com/"
         }
 
     'Public fireCon As New FirebaseConfig() With {
@@ -44,6 +45,7 @@ Module ModuleConnection
     Public Sub Connection()
         Try
             'Pwd=admin88@2021
+            'BayLeafPWD=admin88
             Dim connStr As String = String.Format("Server={0}; Uid={1}; Pwd=; Port=3306; Database=dahum_builders; Connect Timeout={2}", serverSetting._ip, serverSetting._username, serverSetting._connTimeout)
             sqlConnection = New MySqlConnection(connStr)
             sqlConnection.Open()
