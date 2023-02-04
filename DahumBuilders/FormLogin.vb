@@ -13,7 +13,6 @@ Public Class FormLogin
         lblCompanyName.Text = ModuleConnection.CompanyName
         mFormMainDahum.Text = ModuleConnection.CompanyName
 
-
         tries = 0
         lblMessage.Visible = False
         lblIP.Text = String.Format("server: {0}", serverSetting._ip)

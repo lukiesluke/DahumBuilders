@@ -23,9 +23,12 @@ Public Class FormPayment
         SplitContainer1.IsSplitterFixed = True
         SplitContainer1.SplitterDistance = 250
         lblTotalAmount.Text = 0
-        chkbxTaxAmount.Text = taxAmount.ToString() + "%"
         load_userId_info_data_reader()
         setDataGridView()
+
+        ini = New clsIni
+        taxAmount = ini.GetString("server_setting", "tax_base", "0.00")
+        chkbxTaxAmount.Text = taxAmount.ToString("N2") + "%"
     End Sub
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs)
