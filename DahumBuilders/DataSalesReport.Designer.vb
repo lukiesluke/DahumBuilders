@@ -313,6 +313,8 @@ Partial Public Class SalesReport
         
         Private columntax_base As Global.System.Data.DataColumn
         
+        Private columnar_number As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -469,6 +471,14 @@ Partial Public Class SalesReport
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ar_numberColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnar_number
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -505,9 +515,25 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddSalesReportRow(ByVal official_receipt_no As String, ByVal name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal paid_amount As Double, ByVal particular As String, ByVal short_name As String, ByVal penalty As Double, ByVal discount_amount As String, ByVal date_paid As Date, ByVal commission As Double, ByVal payment_type As String, ByVal proj_name As String, ByVal tax_base As Double) As SalesReportRow
+        Public Overloads Function AddSalesReportRow( _
+                    ByVal official_receipt_no As String,  _
+                    ByVal name As String,  _
+                    ByVal block As String,  _
+                    ByVal lot As String,  _
+                    ByVal sqm As String,  _
+                    ByVal paid_amount As Double,  _
+                    ByVal particular As String,  _
+                    ByVal short_name As String,  _
+                    ByVal penalty As Double,  _
+                    ByVal discount_amount As String,  _
+                    ByVal date_paid As Date,  _
+                    ByVal commission As Double,  _
+                    ByVal payment_type As String,  _
+                    ByVal proj_name As String,  _
+                    ByVal tax_base As Double,  _
+                    ByVal ar_number As String) As SalesReportRow
             Dim rowSalesReportRow As SalesReportRow = CType(Me.NewRow,SalesReportRow)
-            Dim columnValuesArray() As Object = New Object() {official_receipt_no, name, block, lot, sqm, paid_amount, particular, short_name, penalty, discount_amount, date_paid, commission, payment_type, proj_name, tax_base}
+            Dim columnValuesArray() As Object = New Object() {official_receipt_no, name, block, lot, sqm, paid_amount, particular, short_name, penalty, discount_amount, date_paid, commission, payment_type, proj_name, tax_base, ar_number}
             rowSalesReportRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSalesReportRow)
             Return rowSalesReportRow
@@ -545,6 +571,7 @@ Partial Public Class SalesReport
             Me.columnpayment_type = MyBase.Columns("payment_type")
             Me.columnproj_name = MyBase.Columns("proj_name")
             Me.columntax_base = MyBase.Columns("tax_base")
+            Me.columnar_number = MyBase.Columns("ar_number")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -580,6 +607,8 @@ Partial Public Class SalesReport
             MyBase.Columns.Add(Me.columnproj_name)
             Me.columntax_base = New Global.System.Data.DataColumn("tax_base", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columntax_base)
+            Me.columnar_number = New Global.System.Data.DataColumn("ar_number", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnar_number)
             Me.ExtendedProperties.Add("Generator_TablePropName", "_SalesReport")
             Me.ExtendedProperties.Add("Generator_UserTableName", "SalesReport")
         End Sub
@@ -953,6 +982,21 @@ Partial Public Class SalesReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ar_number() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableSalesReport.ar_numberColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'ar_number' in table 'SalesReport' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSalesReport.ar_numberColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Isofficial_receipt_noNull() As Boolean
             Return Me.IsNull(Me.tableSalesReport.official_receipt_noColumn)
         End Function
@@ -1129,6 +1173,18 @@ Partial Public Class SalesReport
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Settax_baseNull()
             Me(Me.tableSalesReport.tax_baseColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Isar_numberNull() As Boolean
+            Return Me.IsNull(Me.tableSalesReport.ar_numberColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Setar_numberNull()
+            Me(Me.tableSalesReport.ar_numberColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

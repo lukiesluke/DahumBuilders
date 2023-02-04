@@ -30,6 +30,7 @@
               <xs:element name="payment_type" msprop:Generator_ColumnVarNameInTable="columnpayment_type" msprop:Generator_ColumnPropNameInRow="payment_type" msprop:Generator_ColumnPropNameInTable="payment_typeColumn" msprop:Generator_UserColumnName="payment_type" type="xs:string" minOccurs="0" />
               <xs:element name="proj_name" msprop:Generator_ColumnVarNameInTable="columnproj_name" msprop:Generator_ColumnPropNameInRow="proj_name" msprop:Generator_ColumnPropNameInTable="proj_nameColumn" msprop:Generator_UserColumnName="proj_name" type="xs:string" minOccurs="0" />
               <xs:element name="tax_base" msprop:Generator_ColumnVarNameInTable="columntax_base" msprop:Generator_ColumnPropNameInRow="tax_base" msprop:Generator_ColumnPropNameInTable="tax_baseColumn" msprop:Generator_UserColumnName="tax_base" type="xs:double" minOccurs="0" />
+              <xs:element name="ar_number" msprop:Generator_ColumnVarNameInTable="columnar_number" msprop:Generator_ColumnPropNameInRow="ar_number" msprop:Generator_ColumnPropNameInTable="ar_numberColumn" msprop:Generator_UserColumnName="ar_number" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

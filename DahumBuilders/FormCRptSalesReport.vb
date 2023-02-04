@@ -45,8 +45,8 @@ Public Class FormCRptSalesReport
         Dim HeaderSaleReport As String = "Daily Sales Report"
         Dim table As New DataTable()
 
-        sql = "SELECT `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
-        t.`penalty`,  t.`discount_amount`, `paid_amount`,  pt.`short_name`, pa.`short_name` AS `particular`, l.`proj_name`, pt.`id` AS `payment_type`, 
+        sql = "SELECT `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', t.`ar_number`, 
+        t.`penalty`,  t.`discount_amount`, `paid_amount`, CONCAT (pa.`short_name`,' - ' ,pt.`short_name`) AS short_name, pa.`short_name` AS `particular`, l.`proj_name`, pt.`id` AS `payment_type`, 
         IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, t.`id`, t.`proj_id`, it.`block`, it.`lot`, it.`sqm`, t.`date_paid`, t.`tax_base` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
