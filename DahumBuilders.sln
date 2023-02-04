@@ -9,6 +9,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TP Realty and Development C
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DahumBuildersCorp", "DahumBuildersCorp\DahumBuildersCorp.vdproj", "{1B89F5EB-58F2-4B3E-B3A5-DAD7890C8236}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BayLeafDevCorp", "BayLeafDevCorp\BayLeafDevCorp.vdproj", "{4DB5E689-0739-41EE-8C3D-8301C7FE3FDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,8 @@ Global
 		{E2AF56DB-4E48-4009-80A7-4CB5B3E324F8}.Release|Any CPU.ActiveCfg = Release
 		{1B89F5EB-58F2-4B3E-B3A5-DAD7890C8236}.Debug|Any CPU.ActiveCfg = Debug
 		{1B89F5EB-58F2-4B3E-B3A5-DAD7890C8236}.Release|Any CPU.ActiveCfg = Release
+		{4DB5E689-0739-41EE-8C3D-8301C7FE3FDE}.Debug|Any CPU.ActiveCfg = Debug
+		{4DB5E689-0739-41EE-8C3D-8301C7FE3FDE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
