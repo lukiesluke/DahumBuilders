@@ -12,7 +12,7 @@
   <xs:element name="SummaryReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SummaryReport" msprop:Generator_UserDSName="SummaryReport">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SummaryReport" msprop:Generator_TableClassName="SummaryReportDataTable" msprop:Generator_TableVarName="tableSummaryReport" msprop:Generator_RowChangedName="SummaryReportRowChanged" msprop:Generator_TablePropName="_SummaryReport" msprop:Generator_RowDeletingName="SummaryReportRowDeleting" msprop:Generator_RowChangingName="SummaryReportRowChanging" msprop:Generator_RowEvHandlerName="SummaryReportRowChangeEventHandler" msprop:Generator_RowDeletedName="SummaryReportRowDeleted" msprop:Generator_RowClassName="SummaryReportRow" msprop:Generator_UserTableName="SummaryReport" msprop:Generator_RowEvArgName="SummaryReportRowChangeEvent">
+        <xs:element name="SummaryReport" msprop:Generator_TableClassName="SummaryReportDataTable" msprop:Generator_TableVarName="tableSummaryReport" msprop:Generator_TablePropName="_SummaryReport" msprop:Generator_RowDeletingName="SummaryReportRowDeleting" msprop:Generator_RowChangingName="SummaryReportRowChanging" msprop:Generator_RowEvHandlerName="SummaryReportRowChangeEventHandler" msprop:Generator_RowDeletedName="SummaryReportRowDeleted" msprop:Generator_UserTableName="SummaryReport" msprop:Generator_RowChangedName="SummaryReportRowChanged" msprop:Generator_RowEvArgName="SummaryReportRowChangeEvent" msprop:Generator_RowClassName="SummaryReportRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="id" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:string" minOccurs="0" />
@@ -22,6 +22,7 @@
               <xs:element name="bankTransfer" msprop:Generator_ColumnVarNameInTable="columnbankTransfer" msprop:Generator_ColumnPropNameInRow="bankTransfer" msprop:Generator_ColumnPropNameInTable="bankTransferColumn" msprop:Generator_UserColumnName="bankTransfer" type="xs:double" minOccurs="0" />
               <xs:element name="commission" msprop:Generator_ColumnVarNameInTable="columncommission" msprop:Generator_ColumnPropNameInRow="commission" msprop:Generator_ColumnPropNameInTable="commissionColumn" msprop:Generator_UserColumnName="commission" type="xs:double" minOccurs="0" />
               <xs:element name="total" msprop:Generator_ColumnVarNameInTable="columntotal" msprop:Generator_ColumnPropNameInRow="total" msprop:Generator_ColumnPropNameInTable="totalColumn" msprop:Generator_UserColumnName="total" type="xs:double" minOccurs="0" />
+              <xs:element name="tax_base" msprop:Generator_ColumnVarNameInTable="columntax_base" msprop:Generator_ColumnPropNameInRow="tax_base" msprop:Generator_ColumnPropNameInTable="tax_baseColumn" msprop:Generator_UserColumnName="tax_base" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

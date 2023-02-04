@@ -43,6 +43,7 @@ Public Class FormCRptSummaryReport
     Private Sub generate_report()
         Dim table As New DataTable()
         sql = "SELECT l.`id`, l.`proj_name`,
+        (SELECT IFNULL(SUM(it.tax_base),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS tax_base,
         (SELECT IFNULL(SUM(it.`paid_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND  it.`payment_type`=0 AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS cash,
         (SELECT IFNULL(SUM(it.`paid_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND  it.`payment_type`=1 AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'check',
         (SELECT IFNULL(SUM(it.`paid_amount`),0) FROM `db_transaction` it WHERE it.`proj_id`=t.`proj_id` AND  it.`payment_type`=2 AND it.`date_paid` BETWEEN @DateFrom AND @DateTo) AS 'bankTransfer',
@@ -72,6 +73,7 @@ Public Class FormCRptSummaryReport
             Dim txtLoginName As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtLoginName")
             Dim txtTotalExpenses As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTotalExpenses")
             Dim txtNetProfit As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtNetProfit")
+            Dim txtTaxAmount As TextObject = report.ReportDefinition.Sections("Section4").ReportObjects("txtTaxAmount")
 
             Dim totalExpenses As Double = generate_expenses()
 
@@ -84,7 +86,8 @@ Public Class FormCRptSummaryReport
             End If
 
             If table.Rows.Count > 0 Then
-
+                Dim total As Double = 0
+                Dim totalTaxAmout As Double = 0
                 If IsDBNull(table.Compute("SUM(cash)", "")) Then
                     txtTotalCash.Text = 0.ToString("N2")
                 Else
@@ -103,11 +106,18 @@ Public Class FormCRptSummaryReport
                     txtBankTransfer.Text = Convert.ToDouble(table.Compute("SUM(bankTransfer)", "")).ToString("N2")
                 End If
 
+                If IsDBNull(table.Compute("SUM(tax_base)", "")) Then
+                    txtTaxAmount.Text = 0.ToString("N2")
+                Else
+                    totalTaxAmout = table.Compute("SUM(tax_base)", "")
+                    txtTaxAmount.Text = Convert.ToDouble(totalTaxAmout).ToString("N2")
+                End If
+
                 If IsDBNull(table.Compute("SUM(total)", "")) Then
                     txtNetProfit.Text = 0.ToString("N2")
                 Else
-                    Dim total As Double = table.Compute("SUM(total)", "")
-                    txtNetProfit.Text = Convert.ToDouble(total - totalExpenses).ToString("N2")
+                    total = table.Compute("SUM(total)", "")
+                    txtNetProfit.Text = Convert.ToDouble((total - totalExpenses) - totalTaxAmout).ToString("N2")
                 End If
 
                 txtTotalCash.Text = (Convert.ToDouble(txtTotalCash.Text)).ToString("N2")

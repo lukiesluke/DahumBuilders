@@ -22,7 +22,7 @@ Option Explicit On
  Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema"),  _
  Global.System.Xml.Serialization.XmlRootAttribute("SummaryReport"),  _
  Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")>  _
-Partial Public Class DataSummaryReport
+Partial Public Class SummaryReport
     Inherits Global.System.Data.DataSet
     
     Private tableSummaryReport As SummaryReportDataTable
@@ -128,7 +128,7 @@ Partial Public Class DataSummaryReport
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Overrides Function Clone() As Global.System.Data.DataSet
-        Dim cln As DataSummaryReport = CType(MyBase.Clone,DataSummaryReport)
+        Dim cln As SummaryReport = CType(MyBase.Clone,SummaryReport)
         cln.InitVars
         cln.SchemaSerializationMode = Me.SchemaSerializationMode
         Return cln
@@ -225,7 +225,7 @@ Partial Public Class DataSummaryReport
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Shared Function GetTypedDataSetSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-        Dim ds As DataSummaryReport = New DataSummaryReport()
+        Dim ds As SummaryReport = New SummaryReport()
         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
         Dim any As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
@@ -296,6 +296,8 @@ Partial Public Class DataSummaryReport
         Private columncommission As Global.System.Data.DataColumn
         
         Private columntotal As Global.System.Data.DataColumn
+        
+        Private columntax_base As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -389,6 +391,14 @@ Partial Public Class DataSummaryReport
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property tax_baseColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columntax_base
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -425,9 +435,9 @@ Partial Public Class DataSummaryReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddSummaryReportRow(ByVal id As String, ByVal proj_name As String, ByVal cash As Double, ByVal check As Double, ByVal bankTransfer As Double, ByVal commission As Double, ByVal total As Double) As SummaryReportRow
+        Public Overloads Function AddSummaryReportRow(ByVal id As String, ByVal proj_name As String, ByVal cash As Double, ByVal check As Double, ByVal bankTransfer As Double, ByVal commission As Double, ByVal total As Double, ByVal tax_base As Double) As SummaryReportRow
             Dim rowSummaryReportRow As SummaryReportRow = CType(Me.NewRow,SummaryReportRow)
-            Dim columnValuesArray() As Object = New Object() {id, proj_name, cash, check, bankTransfer, commission, total}
+            Dim columnValuesArray() As Object = New Object() {id, proj_name, cash, check, bankTransfer, commission, total, tax_base}
             rowSummaryReportRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowSummaryReportRow)
             Return rowSummaryReportRow
@@ -457,6 +467,7 @@ Partial Public Class DataSummaryReport
             Me.columnbankTransfer = MyBase.Columns("bankTransfer")
             Me.columncommission = MyBase.Columns("commission")
             Me.columntotal = MyBase.Columns("total")
+            Me.columntax_base = MyBase.Columns("tax_base")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -476,6 +487,8 @@ Partial Public Class DataSummaryReport
             MyBase.Columns.Add(Me.columncommission)
             Me.columntotal = New Global.System.Data.DataColumn("total", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columntotal)
+            Me.columntax_base = New Global.System.Data.DataColumn("tax_base", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntax_base)
             Me.ExtendedProperties.Add("Generator_TablePropName", "_SummaryReport")
             Me.ExtendedProperties.Add("Generator_UserTableName", "SummaryReport")
         End Sub
@@ -545,7 +558,7 @@ Partial Public Class DataSummaryReport
         Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
             Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
             Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-            Dim ds As DataSummaryReport = New DataSummaryReport()
+            Dim ds As SummaryReport = New SummaryReport()
             Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
             any1.Namespace = "http://www.w3.org/2001/XMLSchema"
             any1.MinOccurs = New Decimal(0)
@@ -729,6 +742,21 @@ Partial Public Class DataSummaryReport
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property tax_base() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tableSummaryReport.tax_baseColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'tax_base' in table 'SummaryReport' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSummaryReport.tax_baseColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsidNull() As Boolean
             Return Me.IsNull(Me.tableSummaryReport.idColumn)
         End Function
@@ -809,6 +837,18 @@ Partial Public Class DataSummaryReport
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SettotalNull()
             Me(Me.tableSummaryReport.totalColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Istax_baseNull() As Boolean
+            Return Me.IsNull(Me.tableSummaryReport.tax_baseColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Settax_baseNull()
+            Me(Me.tableSummaryReport.tax_baseColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
