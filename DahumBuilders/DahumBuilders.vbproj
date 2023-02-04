@@ -200,6 +200,12 @@
       <DependentUpon>crptTransaction.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="crptTransactionSingle1.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crptTransactionSingle.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DataExpensesReport.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -404,6 +410,10 @@
     <EmbeddedResource Include="crptTransaction.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crptTransaction.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crptTransactionSingle.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crptTransactionSingle1.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCategorySetting.resx">
       <DependentUpon>FormCategorySetting.vb</DependentUpon>

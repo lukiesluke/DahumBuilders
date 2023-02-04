@@ -307,6 +307,8 @@ Partial Public Class Customer
         
         Private columnpenalty As Global.System.Data.DataColumn
         
+        Private columntax_base As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -439,6 +441,14 @@ Partial Public Class Customer
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property tax_baseColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columntax_base
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -475,9 +485,9 @@ Partial Public Class Customer
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddCustomerRow(ByVal official_receipt_no As String, ByVal paid_amount As Double, ByVal payment_type As String, ByVal particular As String, ByVal date_paid As Date, ByVal part_no As String, ByVal discount_amount As Double, ByVal proj_name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal penalty As Double) As CustomerRow
+        Public Overloads Function AddCustomerRow(ByVal official_receipt_no As String, ByVal paid_amount As Double, ByVal payment_type As String, ByVal particular As String, ByVal date_paid As Date, ByVal part_no As String, ByVal discount_amount As Double, ByVal proj_name As String, ByVal block As String, ByVal lot As String, ByVal sqm As String, ByVal penalty As Double, ByVal tax_base As Double) As CustomerRow
             Dim rowCustomerRow As CustomerRow = CType(Me.NewRow,CustomerRow)
-            Dim columnValuesArray() As Object = New Object() {official_receipt_no, paid_amount, payment_type, particular, date_paid, part_no, discount_amount, proj_name, block, lot, sqm, penalty}
+            Dim columnValuesArray() As Object = New Object() {official_receipt_no, paid_amount, payment_type, particular, date_paid, part_no, discount_amount, proj_name, block, lot, sqm, penalty, tax_base}
             rowCustomerRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCustomerRow)
             Return rowCustomerRow
@@ -512,6 +522,7 @@ Partial Public Class Customer
             Me.columnlot = MyBase.Columns("lot")
             Me.columnsqm = MyBase.Columns("sqm")
             Me.columnpenalty = MyBase.Columns("penalty")
+            Me.columntax_base = MyBase.Columns("tax_base")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -541,6 +552,8 @@ Partial Public Class Customer
             MyBase.Columns.Add(Me.columnsqm)
             Me.columnpenalty = New Global.System.Data.DataColumn("penalty", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnpenalty)
+            Me.columntax_base = New Global.System.Data.DataColumn("tax_base", GetType(Double), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntax_base)
             Me.ExtendedProperties.Add("Generator_TablePropName", "_Customer")
             Me.ExtendedProperties.Add("Generator_UserTableName", "Customer")
         End Sub
@@ -869,6 +882,21 @@ Partial Public Class Customer
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property tax_base() As Double
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomer.tax_baseColumn),Double)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'tax_base' in table 'Customer' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomer.tax_baseColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Isofficial_receipt_noNull() As Boolean
             Return Me.IsNull(Me.tableCustomer.official_receipt_noColumn)
         End Function
@@ -1009,6 +1037,18 @@ Partial Public Class Customer
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetpenaltyNull()
             Me(Me.tableCustomer.penaltyColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function Istax_baseNull() As Boolean
+            Return Me.IsNull(Me.tableCustomer.tax_baseColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub Settax_baseNull()
+            Me(Me.tableCustomer.tax_baseColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

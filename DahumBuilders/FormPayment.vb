@@ -587,8 +587,8 @@ FinallyLine:
     End Sub
 
     Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
-        If txtOfficialReceipt.Text.Trim.Length < 1 Or txtOfficialReceipt.Text.Trim.Equals(String.Empty) Then
-            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter Official Receipt number.", "Official Receipt", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        If txtOfficialReceipt.Text.Trim.Length < 1 And txtOfficialReceipt.Text.Trim.Equals(String.Empty) And txtARNumber.Text.Trim.Length < 0 And txtARNumber.Text.Trim.Equals(String.Empty) Then
+            Dim ret As DialogResult = MessageBox.Show(Me, "Please enter OR/AR Receipt number.", "Official Receipt", MessageBoxButtons.OK, MessageBoxIcon.Question)
             Select Case ret
                 Case DialogResult.OK
                     txtOfficialReceipt.Text = String.Empty
@@ -699,6 +699,7 @@ FinallyLine:
             trans._partNo = row.Cells(10).Value
             trans._paidAmount = row.Cells(11).Value 'Amount to Pay
             trans._check_bank_name = txtBankName.Text.Trim
+            trans._tax_base = lblTaxAmount.Text.Trim
             If cbPaymentType.SelectedIndex > 0 Then
                 trans._check_bank_name = txtBankName.Text.Trim
                 trans._check_number = txtCheckNo.Text.Trim
@@ -714,6 +715,9 @@ FinallyLine:
         load_userId_info_data_reader()
         MessageBox.Show(Me, "OR transaction successfully saved.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Information)
         btnClearEntry.PerformClick()
+
+        txtOfficialReceipt.Enabled = True
+        txtARNumber.Enabled = True
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -727,8 +731,8 @@ FinallyLine:
 
     Private Sub insertPurchase(ByVal trans As Transaction)
         sql = "INSERT INTO `db_transaction` (`official_receipt_no`, `ar_number`, `date_paid`, `paid_amount`, `discount_amount`, `penalty`, `tcp`, `particular`, 
-        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `userid`, `proj_id`, `proj_itemId`, `created_by`) VALUES (@OR, @AR, @DatePaid, @PaidAmount, 
-        @DiscountAmount, @Penalty, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @userid, @ProjId, @ProjItemId, @CreatedBy)"
+        `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `tax_base`, `userid`, `proj_id`, `proj_itemId`, `created_by`) VALUES (@OR, @AR, @DatePaid, @PaidAmount, 
+        @DiscountAmount, @Penalty, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @taxBase, @userid, @ProjId, @ProjItemId, @CreatedBy)"
 
         If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
             trans._partNo = 0
@@ -747,6 +751,7 @@ FinallyLine:
             sqlCommand.Parameters.Add("@Particular", MySqlDbType.Int24).Value = trans._particular
             sqlCommand.Parameters.Add("@PartNo", MySqlDbType.Int24).Value = trans._partNo
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int24).Value = trans._paymentType
+            sqlCommand.Parameters.Add("@taxBase", MySqlDbType.Double).Value = trans._tax_base 'taxBase
             sqlCommand.Parameters.Add("@userid", MySqlDbType.Int24).Value = trans._clientId 'userId
             sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int24).Value = trans._projectId
             sqlCommand.Parameters.Add("@ProjItemId", MySqlDbType.Int24).Value = trans._projectItemId
@@ -1157,7 +1162,7 @@ FinallyLine:
     Private Sub loadTransactionList()
         sql = "SELECT `id`,`date_paid`,`official_receipt_no`, `ar_number`,
             (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,
-            (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`,`paid_amount`,
+            (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, `penalty`, `discount_amount`, `tax_base`, `paid_amount`,
             (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
             (SELECT CONCAT('B',`block`, ' L', `lot`, ' ') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes
             FROM `db_transaction` t WHERE t.`userid`=@Userid ORDER BY  t.`proj_id`, t.`proj_itemId`, date_paid DESC"
@@ -1182,6 +1187,7 @@ FinallyLine:
                 transaction._paymentType = sqlDataReader("payment_type")
                 transaction._penalty = sqlDataReader("penalty")
                 transaction._discountAmount = sqlDataReader("discount_amount")
+                transaction._tax_base = sqlDataReader("tax_base")
                 transaction._paidAmount = sqlDataReader("paid_amount")
                 transaction._description = sqlDataReader("projectNam") & " " & sqlDataReader("lotDes")
 
@@ -1201,6 +1207,7 @@ FinallyLine:
 
                 item.SubItems.Add(transaction._penalty)
                 item.SubItems.Add(transaction._discountAmount)
+                item.SubItems.Add(transaction._tax_base.ToString("N2"))
                 item.SubItems.Add(transaction._paidAmount.ToString("N2"))
                 item.SubItems.Add(transaction._description)
                 ListView1.Items.Add(item)

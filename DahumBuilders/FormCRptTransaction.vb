@@ -48,13 +48,17 @@ Public Class FormCRptTransaction
     End Sub
     Private Sub generate_report()
         Dim table As New DataTable()
-        sql = "SELECT `official_receipt_no`,`paid_amount`, t.`discount_amount`, t.`penalty`, pt.`short_name` AS `payment_type`, 
+        sql = "SELECT (CASE 
+        WHEN LENGTH(TRIM(`official_receipt_no`)) < 1 && LENGTH(TRIM(`ar_number`)) > 0  THEN `ar_number`
+        WHEN LENGTH(TRIM(`official_receipt_no`)) > 0 && LENGTH(TRIM(`ar_number`)) < 1  THEN `official_receipt_no`
+        ELSE CONCAT(TRIM(`official_receipt_no`), '/', TRIM(`ar_number`))
+        END) AS `official_receipt_no`,`paid_amount`, t.`discount_amount`, t.`penalty`, t.`tax_base`, CONCAT(pa.`short_name`,' - ', pt.`short_name`) AS `payment_type`, 
         IF(t.`part_no`=0,'',t.`part_no`) AS part_no, pa.`short_name` AS `particular`, `date_paid`, 
         pl.`proj_name` , it.`block` , it.`lot` , it.`sqm` FROM `db_transaction` t 
         INNER JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         INNER JOIN `db_particular_type` pa ON t.`particular` = pa.`id` INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
-        WHERE t.`userid`=@userId ORDER BY date_paid DESC, proj_name ASC, lot ASC"
+        WHERE t.`userid`=@userId ORDER BY date_paid DESC, official_receipt_no DESC, proj_name ASC, lot ASC"
         Cursor = Cursors.WaitCursor
         Connection()
         Try
@@ -85,7 +89,7 @@ Public Class FormCRptTransaction
                 End If
             Loop
 
-            Dim report As New crptTransaction
+            Dim report As New crptTransactionSingle
             report.Load()
 
             Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtHeaderCompanyName")
@@ -123,13 +127,17 @@ Public Class FormCRptTransaction
     Private Sub generate_report(itemID As String)
 
         Dim table As New DataTable()
-        sql = "SELECT `official_receipt_no`,`paid_amount`, t.`discount_amount`, t.`penalty`, pt.`short_name` AS `payment_type`, 
+        sql = "SELECT (CASE 
+        WHEN LENGTH(TRIM(`official_receipt_no`)) < 1 && LENGTH(TRIM(`ar_number`)) > 0  THEN `ar_number`
+        WHEN LENGTH(TRIM(`official_receipt_no`)) > 0 && LENGTH(TRIM(`ar_number`)) < 1  THEN `official_receipt_no`
+        ELSE CONCAT(TRIM(`official_receipt_no`), '/', TRIM(`ar_number`))
+        END) AS `official_receipt_no`,`paid_amount`, t.`discount_amount`, t.`penalty`, t.`tax_base`, CONCAT(pa.`short_name`,' - ', pt.`short_name`) AS `payment_type`, 
         IF(t.`part_no`=0,'',t.`part_no`) AS part_no, pa.`short_name` AS `particular`, `date_paid`, 
         pl.`proj_name` , it.`block` , it.`lot` , it.`sqm` FROM `db_transaction` t 
         INNER JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         INNER JOIN `db_particular_type` pa ON t.`particular` = pa.`id` INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
-        WHERE t.`userid`=@userId AND t.`proj_itemId`=@ItemID ORDER BY date_paid DESC, proj_name ASC, lot ASC"
+        WHERE t.`userid`=@userId AND t.`proj_itemId`=@ItemID ORDER BY date_paid DESC, official_receipt_no DESC, proj_name ASC, lot ASC"
         Cursor = Cursors.WaitCursor
         Connection()
         Try
@@ -162,11 +170,11 @@ Public Class FormCRptTransaction
                 End If
             Loop
 
-            Dim report As New crptTransaction
+            Dim report As New crptTransactionSingle
             report.Load()
 
-            Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtHeaderCompanyName")
-            Dim txtHeaderCompanyAddress As TextObject = report.ReportDefinition.Sections("Section1").ReportObjects("txtCompanyAddress")
+            Dim txtHeaderCompanyName As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtHeaderCompanyName")
+            Dim txtHeaderCompanyAddress As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtCompanyAddress")
 
             Dim name As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtName")
             Dim mobile As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtMobile")

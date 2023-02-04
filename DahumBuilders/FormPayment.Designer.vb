@@ -26,6 +26,9 @@ Partial Class FormPayment
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPayment))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.ORInformation = New System.Windows.Forms.Panel()
+        Me.chkbxTaxAmount = New System.Windows.Forms.CheckBox()
+        Me.lblTaxAmount = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.txtARNumber = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtTenderedAmount = New System.Windows.Forms.TextBox()
@@ -110,9 +113,7 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.lblTaxAmount = New System.Windows.Forms.Label()
-        Me.chkbxTaxAmount = New System.Windows.Forms.CheckBox()
+        Me.ColumnHeaderTaxBase = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -183,6 +184,40 @@ Partial Class FormPayment
         Me.ORInformation.Name = "ORInformation"
         Me.ORInformation.Size = New System.Drawing.Size(333, 239)
         Me.ORInformation.TabIndex = 1
+        '
+        'chkbxTaxAmount
+        '
+        Me.chkbxTaxAmount.AutoSize = True
+        Me.chkbxTaxAmount.Checked = True
+        Me.chkbxTaxAmount.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkbxTaxAmount.Font = New System.Drawing.Font("Rockwell", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkbxTaxAmount.Location = New System.Drawing.Point(84, 136)
+        Me.chkbxTaxAmount.Name = "chkbxTaxAmount"
+        Me.chkbxTaxAmount.Size = New System.Drawing.Size(15, 14)
+        Me.chkbxTaxAmount.TabIndex = 5
+        Me.chkbxTaxAmount.UseVisualStyleBackColor = True
+        '
+        'lblTaxAmount
+        '
+        Me.lblTaxAmount.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTaxAmount.Location = New System.Drawing.Point(121, 137)
+        Me.lblTaxAmount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblTaxAmount.Name = "lblTaxAmount"
+        Me.lblTaxAmount.Size = New System.Drawing.Size(153, 23)
+        Me.lblTaxAmount.TabIndex = 47
+        Me.lblTaxAmount.Text = "TAX Amount"
+        Me.lblTaxAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(7, 137)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(76, 14)
+        Me.Label14.TabIndex = 46
+        Me.Label14.Text = "TAX Amount"
         '
         'txtARNumber
         '
@@ -802,7 +837,7 @@ Partial Class FormPayment
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(743, 307)
+        Me.TabPage2.Size = New System.Drawing.Size(743, 333)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Transaction List"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -810,7 +845,7 @@ Partial Class FormPayment
         'ListView1
         '
         Me.ListView1.CheckBoxes = True
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPartNo, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPartNo, Me.ColumnHeaderPanalty, Me.ColumnHeaderDisc, Me.ColumnHeaderTaxBase, Me.ColumnHeaderAmount, Me.ColumnHeaderProject})
         Me.ListView1.ContextMenuStrip = Me.ContextMenuTransaction
         Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ListView1.FullRowSelect = True
@@ -818,7 +853,7 @@ Partial Class FormPayment
         Me.ListView1.Location = New System.Drawing.Point(3, 3)
         Me.ListView1.Margin = New System.Windows.Forms.Padding(2)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(737, 301)
+        Me.ListView1.Size = New System.Drawing.Size(737, 327)
         Me.ListView1.TabIndex = 4
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
@@ -972,39 +1007,9 @@ Partial Class FormPayment
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label14
+        'ColumnHeaderTaxBase
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Rockwell", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(7, 137)
-        Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(76, 14)
-        Me.Label14.TabIndex = 46
-        Me.Label14.Text = "TAX Amount"
-        '
-        'lblTaxAmount
-        '
-        Me.lblTaxAmount.Font = New System.Drawing.Font("Consolas", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTaxAmount.Location = New System.Drawing.Point(121, 137)
-        Me.lblTaxAmount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.lblTaxAmount.Name = "lblTaxAmount"
-        Me.lblTaxAmount.Size = New System.Drawing.Size(153, 23)
-        Me.lblTaxAmount.TabIndex = 47
-        Me.lblTaxAmount.Text = "TAX Amount"
-        Me.lblTaxAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'chkbxTaxAmount
-        '
-        Me.chkbxTaxAmount.AutoSize = True
-        Me.chkbxTaxAmount.Checked = True
-        Me.chkbxTaxAmount.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkbxTaxAmount.Font = New System.Drawing.Font("Rockwell", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkbxTaxAmount.Location = New System.Drawing.Point(84, 136)
-        Me.chkbxTaxAmount.Name = "chkbxTaxAmount"
-        Me.chkbxTaxAmount.Size = New System.Drawing.Size(15, 14)
-        Me.chkbxTaxAmount.TabIndex = 5
-        Me.chkbxTaxAmount.UseVisualStyleBackColor = True
+        Me.ColumnHeaderTaxBase.Text = "VAT"
         '
         'FormPayment
         '
@@ -1138,4 +1143,5 @@ Partial Class FormPayment
     Friend WithEvents Label14 As Label
     Friend WithEvents lblTaxAmount As Label
     Friend WithEvents chkbxTaxAmount As CheckBox
+    Friend WithEvents ColumnHeaderTaxBase As ColumnHeader
 End Class
