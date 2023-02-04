@@ -34,7 +34,7 @@ Public Class FormMyOREntries
         transaction._id = 0
 
         buttonVoidDelete()
-        sql = "SELECT `id`,`date_paid`,`official_receipt_no`, `ar_number`, `paid_amount`,
+        sql = "SELECT `id`,`date_paid`,`official_receipt_no`, `ar_number`, t.`tax_base`, `paid_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
@@ -82,6 +82,7 @@ Public Class FormMyOREntries
             transaction._createdBy = sqlDataReader("created_by").ToString
             transaction._updatedBy = sqlDataReader("updated_by").ToString
             transaction._partNo = sqlDataReader("part_no")
+            transaction._tax_base = sqlDataReader("tax_base")
 
             item = New ListViewItem(transaction._id)
             item.UseItemStyleForSubItems = False
@@ -100,6 +101,7 @@ Public Class FormMyOREntries
             item.SubItems.Add(transaction._description)
             item.SubItems.Add(transaction._penalty)
             item.SubItems.Add(transaction._discountAmount)
+            item.SubItems.Add(transaction._tax_base)
             item.SubItems.Add(transaction._createdBy)
             item.SubItems.Add(transaction._updatedBy)
             ListView1.Items.Add(item)
@@ -131,7 +133,7 @@ Public Class FormMyOREntries
             partNo = 0
         End If
 
-        sql = "UPDATE `db_transaction` t SET t.`date_paid`=@DatePaid, t.`official_receipt_no`=@ORNumber, t.`ar_number`=@ARNumber, t.`paid_amount`=@PaidAmount,
+        sql = "UPDATE `db_transaction` t SET t.`date_paid`=@DatePaid, t.`official_receipt_no`=@ORNumber, t.`ar_number`=@ARNumber, t.`tax_base`=@TaxAmount, t.`paid_amount`=@PaidAmount,
         `particular`=@Particular, `part_no`=@PartNo, `payment_type`=@PaymentType, t.`penalty`=@Penalty, t.`discount_amount`=@DiscountAmount, t.`updated_by`=@UpdatedBy WHERE t.`id`=@ID"
 
         Try
@@ -147,6 +149,7 @@ Public Class FormMyOREntries
             sqlCommand.Parameters.Add("@DiscountAmount", MySqlDbType.Double).Value = txtDiscount.Text.Trim
             sqlCommand.Parameters.Add("@UpdatedBy", MySqlDbType.Int64).Value = userLogon._id
             sqlCommand.Parameters.Add("@ID", MySqlDbType.Int32).Value = transaction._id
+            sqlCommand.Parameters.Add("@TaxAmount", MySqlDbType.Double).Value = txtTax.Text.Trim
 
             If sqlCommand.ExecuteNonQuery() = 1 Then
                 MessageBox.Show("Official Reciept Entry Successfully Updated")
@@ -183,6 +186,7 @@ Public Class FormMyOREntries
             transaction._description = ListView1.SelectedItems.Item(0).SubItems(9).Text
             transaction._penalty = ListView1.SelectedItems.Item(0).SubItems(10).Text
             transaction._discountAmount = ListView1.SelectedItems.Item(0).SubItems(11).Text
+            transaction._tax_base = ListView1.SelectedItems.Item(0).SubItems(12).Text
 
             dtpDatePaid.Value = transaction._datePaid
             txtORNumber.Text = transaction._or
@@ -196,6 +200,7 @@ Public Class FormMyOREntries
             txtPartNo.Text = transaction._partNo
             txtPenalty.Text = transaction._penalty
             txtDiscount.Text = transaction._discountAmount
+            txtTax.Text = transaction._tax_base
         End If
 
         buttonVoidDelete()
@@ -214,7 +219,7 @@ Public Class FormMyOREntries
         txtAmount.SelectAll()
     End Sub
 
-    Private Sub txtAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmount.KeyPress
+    Private Sub txtAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAmount.KeyPress, txtTax.KeyPress, txtDiscount.KeyPress
         Dim DecimalSeparator As String = Application.CurrentCulture.NumberFormat.NumberDecimalSeparator
         e.Handled = Not (Char.IsDigit(e.KeyChar) Or
                          Asc(e.KeyChar) = 8 Or
@@ -286,7 +291,7 @@ Public Class FormMyOREntries
     Private Sub load_OR_search()
         Connection()
 
-        sql = "SELECT `id`,`date_paid`, IFNULL(`official_receipt_no`,'') AS `official_receipt_no`, `ar_number`, `paid_amount`,
+        sql = "SELECT `id`,`date_paid`, IFNULL(`official_receipt_no`,'') AS `official_receipt_no`, `ar_number`, t.`tax_base`, `paid_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
@@ -328,7 +333,7 @@ Public Class FormMyOREntries
             Exit Sub
         End If
 
-        sql = "SELECT `id`,`date_paid`, IFNULL(`official_receipt_no`,'') AS `official_receipt_no`, `ar_number`, `paid_amount`,
+        sql = "SELECT `id`,`date_paid`, IFNULL(`official_receipt_no`,'') AS `official_receipt_no`, `ar_number`, t.`tax_base`, `paid_amount`,
         (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
@@ -478,6 +483,38 @@ Public Class FormMyOREntries
             If Asc(e.KeyChar) < 48 Or Asc(e.KeyChar) > 57 Then
                 e.Handled = True
             End If
+        End If
+    End Sub
+
+    Private Sub lblTaxAmount_Click(sender As Object, e As EventArgs) Handles lblTaxAmount.Click
+        Try
+            txtTax.Text = taxAmount * Convert.ToDouble(txtAmount.Text)
+        Catch ex As Exception
+            txtTax.Text = 0
+        End Try
+    End Sub
+
+    Private Sub txtAmount_Leave(sender As Object, e As EventArgs) Handles txtAmount.Leave
+        If txtAmount.Text.Trim.Length < 1 Then
+            txtAmount.Text = 0
+        End If
+    End Sub
+
+    Private Sub txtTax_Leave(sender As Object, e As EventArgs) Handles txtTax.Leave
+        If txtTax.Text.Trim.Length < 1 Then
+            txtTax.Text = 0
+        End If
+    End Sub
+
+    Private Sub txtDiscount_Leave(sender As Object, e As EventArgs) Handles txtDiscount.Leave
+        If txtDiscount.Text.Trim.Length < 1 Then
+            txtDiscount.Text = 0
+        End If
+    End Sub
+
+    Private Sub txtPenalty_Leave(sender As Object, e As EventArgs) Handles txtPenalty.Leave
+        If txtPenalty.Text.Trim.Length < 1 Then
+            txtPenalty.Text = 0
         End If
     End Sub
 End Class

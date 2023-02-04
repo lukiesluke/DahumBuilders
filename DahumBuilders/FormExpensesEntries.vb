@@ -26,7 +26,7 @@ Public Class FormExpensesEntries
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`),t.`payee_name`) AS clientName,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`, t.`description`,
-        `gross_val`,`tax_base`, `input_val` FROM `db_transaction` t WHERE t.`particular`>5 AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
+        `gross_val`,`tax_base`, `input_val` FROM `db_transaction` t WHERE t.`particular`>6 AND t.`date_paid` > DATE_SUB((DATE_SUB(CURDATE(), INTERVAL 2 MONTH)), INTERVAL 1 DAY) ORDER BY t.`date_paid` DESC"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -74,7 +74,7 @@ Public Class FormExpensesEntries
         End Try
     End Sub
     Private Sub loadParticularCombobox()
-        sql = "SELECT id, `short_name` FROM `db_particular_type` WHERE `id` >5"
+        sql = "SELECT id, `short_name` FROM `db_particular_type` WHERE `id` >6"
         Connection()
         Try
             Cursor = Cursors.WaitCursor
@@ -196,7 +196,7 @@ Public Class FormExpensesEntries
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`),t.`payee_name`) AS clientName,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`, t.`description`,
-        `gross_val`,`tax_base`, `input_val` FROM `db_transaction` t WHERE t.`particular`>5 AND t.`id`=@FindId"
+        `gross_val`,`tax_base`, `input_val` FROM `db_transaction` t WHERE t.`particular`>6 AND t.`id`=@FindId"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -219,7 +219,7 @@ Public Class FormExpensesEntries
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`),t.`payee_name`) AS clientName,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, 
         (SELECT `short_name` FROM `db_payment_type` WHERE `id`=t.`payment_type`) AS payment_type, t.`check_bank_name`, t.`check_number`, t.`description`,
-        `gross_val`,`tax_base`, `input_val` FROM `db_transaction` t WHERE t.`particular`>5 AND t.`voucher_no`=@FindOR OR t.`official_receipt_no`=@FindOR ORDER BY t.`date_paid` DESC LIMIT 500"
+        `gross_val`,`tax_base`, `input_val` FROM `db_transaction` t WHERE t.`particular`>6 AND t.`voucher_no`=@FindOR OR t.`official_receipt_no`=@FindOR ORDER BY t.`date_paid` DESC LIMIT 500"
 
         Connection()
         sqlCommand = New MySqlCommand(sql, sqlConnection)

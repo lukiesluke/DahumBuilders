@@ -32,6 +32,7 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPaymentType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderParticular = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -73,13 +74,15 @@ Partial Class FormMyOREntries
         Me.txtARNumber = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtPartNo = New System.Windows.Forms.TextBox()
-        Me.ColumnHeaderPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTax = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.txtTax = New System.Windows.Forms.TextBox()
+        Me.lblTaxAmount = New System.Windows.Forms.Label()
         Me.PanelPassword.SuspendLayout()
         Me.SuspendLayout()
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPart, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeaderID, Me.ColumnHeaderDate, Me.ColumnHeaderOR, Me.ColumnHeaderAR, Me.ColumnHeaderName, Me.ColumnHeaderAmount, Me.ColumnHeaderPaymentType, Me.ColumnHeaderParticular, Me.ColumnHeaderPart, Me.ColumnHeaderProject, Me.ColumnHeaderPanalty, Me.ColumnHeaderDiscount, Me.ColumnHeaderTax, Me.ColumnHeaderCreatedBy, Me.ColumnHeaderUpdatedBy})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(11, 117)
@@ -131,6 +134,11 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderParticular.Text = "Particular"
         Me.ColumnHeaderParticular.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.ColumnHeaderParticular.Width = 70
+        '
+        'ColumnHeaderPart
+        '
+        Me.ColumnHeaderPart.Text = "Part (#)"
+        Me.ColumnHeaderPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'ColumnHeaderProject
         '
@@ -452,7 +460,7 @@ Partial Class FormMyOREntries
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(677, 45)
+        Me.Label9.Location = New System.Drawing.Point(679, 45)
         Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(42, 13)
@@ -473,7 +481,7 @@ Partial Class FormMyOREntries
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(670, 68)
+        Me.Label10.Location = New System.Drawing.Point(672, 68)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(49, 13)
@@ -530,16 +538,38 @@ Partial Class FormMyOREntries
         Me.txtPartNo.TabIndex = 29
         Me.txtPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'ColumnHeaderPart
+        'ColumnHeaderTax
         '
-        Me.ColumnHeaderPart.Text = "Part (#)"
-        Me.ColumnHeaderPart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.ColumnHeaderTax.Text = "Tax"
+        '
+        'txtTax
+        '
+        Me.txtTax.BackColor = System.Drawing.SystemColors.Info
+        Me.txtTax.Location = New System.Drawing.Point(725, 89)
+        Me.txtTax.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtTax.Name = "txtTax"
+        Me.txtTax.Size = New System.Drawing.Size(96, 20)
+        Me.txtTax.TabIndex = 30
+        Me.txtTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'lblTaxAmount
+        '
+        Me.lblTaxAmount.AutoSize = True
+        Me.lblTaxAmount.Location = New System.Drawing.Point(696, 92)
+        Me.lblTaxAmount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblTaxAmount.Name = "lblTaxAmount"
+        Me.lblTaxAmount.Size = New System.Drawing.Size(25, 13)
+        Me.lblTaxAmount.TabIndex = 31
+        Me.lblTaxAmount.Text = "Tax"
+        Me.lblTaxAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FormMyOREntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(861, 394)
+        Me.Controls.Add(Me.lblTaxAmount)
+        Me.Controls.Add(Me.txtTax)
         Me.Controls.Add(Me.txtPartNo)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
@@ -637,4 +667,7 @@ Partial Class FormMyOREntries
     Friend WithEvents Label13 As Label
     Friend WithEvents txtPartNo As TextBox
     Friend WithEvents ColumnHeaderPart As ColumnHeader
+    Friend WithEvents ColumnHeaderTax As ColumnHeader
+    Friend WithEvents txtTax As TextBox
+    Friend WithEvents lblTaxAmount As Label
 End Class

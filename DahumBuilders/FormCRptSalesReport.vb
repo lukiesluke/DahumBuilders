@@ -52,7 +52,7 @@ Public Class FormCRptSalesReport
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         LEFT JOIN `db_project_list` l ON l.`id` = t.`proj_id`
-        WHERE t.`proj_id`{0} @projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
+        WHERE t.`proj_id`{0} @projectID AND t.`particular`<=6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
         ORDER BY date_paid DESC, lot ASC, official_receipt_no ASC"
 
         If projectID.Equals("0") Then
@@ -161,7 +161,7 @@ Public Class FormCRptSalesReport
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         LEFT JOIN `db_project_list` l ON l.`id` = t.`proj_id`
-        WHERE t.`proj_id`=@projectID AND t.`particular`<6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
+        WHERE t.`proj_id`=@projectID AND t.`particular`<=6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
         ORDER BY CAST(official_receipt_no AS UNSIGNED) ASC"
 
 
@@ -227,10 +227,10 @@ Public Class FormCRptSalesReport
             shWorkSheet.Columns(1).HorizontalAlignment = Excel.Constants.xlLeft
             shWorkSheet.Columns(7).HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Columns(8).HorizontalAlignment = Excel.Constants.xlCenter
-            shWorkSheet.Columns(10).HorizontalAlignment = Excel.Constants.xlCenter
-            shWorkSheet.Columns(11).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(10).HorizontalAlignment = Excel.Constants.xlRight
+            shWorkSheet.Columns(11).HorizontalAlignment = Excel.Constants.xlRight
             shWorkSheet.Columns(12).HorizontalAlignment = Excel.Constants.xlCenter
-            shWorkSheet.Columns(13).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(13).HorizontalAlignment = Excel.Constants.xlLeft
 
             shWorkSheet.Range("A1:P1").EntireColumn.AutoFit()
             objExcel.Visible = True

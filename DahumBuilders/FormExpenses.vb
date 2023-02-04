@@ -90,7 +90,7 @@ Public Class FormExpenses
     End Sub
 
     Private Sub loadCombo()
-        sql = "SELECT `id`,`name` FROM `db_particular_type` WHERE id>5"
+        sql = "SELECT `id`,`name` FROM `db_particular_type` WHERE id>6"
         Connection()
         Try
             Cursor = Cursors.WaitCursor
@@ -119,7 +119,7 @@ Public Class FormExpenses
         End Try
     End Sub
     Private Sub loadComboExpensesSearch()
-        sql = "SELECT `id`,`name` FROM `db_particular_type` WHERE id>5"
+        sql = "SELECT `id`,`name` FROM `db_particular_type` WHERE id>6"
         Connection()
         Try
             Cursor = Cursors.WaitCursor
