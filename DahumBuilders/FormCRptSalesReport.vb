@@ -47,7 +47,7 @@ Public Class FormCRptSalesReport
 
         sql = "SELECT `official_receipt_no`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
         t.`penalty`,  t.`discount_amount`, `paid_amount`,  pt.`short_name`, pa.`short_name` AS `particular`, l.`proj_name`, pt.`id` AS `payment_type`, 
-        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, t.`id`, t.`proj_id`, it.`block`, it.`lot`, it.`sqm`, t.`date_paid` FROM `db_transaction` t 
+        IF(IFNULL(t.`part_no`, 0)=0,'',t.`part_no`) AS part_no, t.`id`, t.`proj_id`, it.`block`, it.`lot`, it.`sqm`, t.`date_paid`, t.`tax_base` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
@@ -156,7 +156,7 @@ Public Class FormCRptSalesReport
         Dim HeaderSaleReport As String = "Daily Sales Report"
 
         sql = "SELECT it.`block`, it.`lot`, it.`sqm`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name',
-        it.`price`, pa.`short_name` AS `particular`, l.`proj_name`, `official_receipt_no`, t.`date_paid`,  `paid_amount`, pt.`short_name`, `ar_number` FROM `db_transaction` t 
+        it.`price`, pa.`short_name` AS `particular`, l.`proj_name`, `official_receipt_no`, t.`date_paid`, t.`tax_base`, `paid_amount`, pt.`short_name`, `ar_number` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
@@ -213,9 +213,10 @@ Public Class FormCRptSalesReport
             shWorkSheet.Cells(2, 7) = "Property"
             shWorkSheet.Cells(2, 8) = "OR #"
             shWorkSheet.Cells(2, 9) = "Date Payment"
-            shWorkSheet.Cells(2, 10) = "Paid Amount"
-            shWorkSheet.Cells(2, 11) = "Payment Type"
-            shWorkSheet.Cells(2, 12) = "AR"
+            shWorkSheet.Cells(2, 10) = "VAT"
+            shWorkSheet.Cells(2, 11) = "Paid Amount"
+            shWorkSheet.Cells(2, 12) = "Payment Type"
+            shWorkSheet.Cells(2, 13) = "AR"
 
             For i = 0 To ds.Tables(0).Rows.Count - 1
                 For j = 0 To ds.Tables(0).Columns.Count - 1
