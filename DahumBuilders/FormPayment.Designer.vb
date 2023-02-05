@@ -101,6 +101,7 @@ Partial Class FormPayment
         Me.ColumnHeaderPartNo = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDisc = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTaxBase = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderAmount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ContextMenuTransaction = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -113,7 +114,6 @@ Partial Class FormPayment
         Me.PanelBodyDataEntry = New System.Windows.Forms.Panel()
         Me.PanelHeaderDataEntry = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.ColumnHeaderTaxBase = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -222,6 +222,7 @@ Partial Class FormPayment
         'txtARNumber
         '
         Me.txtARNumber.BackColor = System.Drawing.Color.MistyRose
+        Me.txtARNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtARNumber.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtARNumber.Location = New System.Drawing.Point(118, 82)
         Me.txtARNumber.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
@@ -376,6 +377,7 @@ Partial Class FormPayment
         'txtOfficialReceipt
         '
         Me.txtOfficialReceipt.BackColor = System.Drawing.Color.MistyRose
+        Me.txtOfficialReceipt.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtOfficialReceipt.Font = New System.Drawing.Font("Consolas", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOfficialReceipt.Location = New System.Drawing.Point(118, 57)
         Me.txtOfficialReceipt.Margin = New System.Windows.Forms.Padding(2, 1, 2, 1)
@@ -904,6 +906,10 @@ Partial Class FormPayment
         Me.ColumnHeaderDisc.Text = "Discount"
         Me.ColumnHeaderDisc.Width = 80
         '
+        'ColumnHeaderTaxBase
+        '
+        Me.ColumnHeaderTaxBase.Text = "VAT"
+        '
         'ColumnHeaderAmount
         '
         Me.ColumnHeaderAmount.Text = "Amount"
@@ -1006,10 +1012,6 @@ Partial Class FormPayment
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "Official Receipt Entry"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ColumnHeaderTaxBase
-        '
-        Me.ColumnHeaderTaxBase.Text = "VAT"
         '
         'FormPayment
         '

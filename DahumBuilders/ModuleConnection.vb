@@ -83,6 +83,6 @@ Module ModuleConnection
 
     Public Sub TaxConfiguration()
         iniTax = New clsIniTax
-        taxAmount = Convert.ToDouble(iniTax.GetString("server_setting", "tax_base", "0.00"))
+        taxAmount = Convert.ToDouble(iniTax.GetString("server_setting", "tax_base", "0.12"))
     End Sub
 End Module

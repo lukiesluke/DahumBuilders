@@ -172,6 +172,7 @@ Partial Class FormMyOREntries
         'txtORNumber
         '
         Me.txtORNumber.BackColor = System.Drawing.SystemColors.Info
+        Me.txtORNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtORNumber.Location = New System.Drawing.Point(79, 37)
         Me.txtORNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtORNumber.Name = "txtORNumber"
@@ -516,6 +517,7 @@ Partial Class FormMyOREntries
         'txtARNumber
         '
         Me.txtARNumber.BackColor = System.Drawing.SystemColors.Info
+        Me.txtARNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtARNumber.Location = New System.Drawing.Point(79, 60)
         Me.txtARNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtARNumber.Name = "txtARNumber"
