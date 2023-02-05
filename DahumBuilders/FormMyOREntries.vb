@@ -25,8 +25,10 @@ Public Class FormMyOREntries
             ListView1.Items(0).Focused = True
             ListView1.Select()
             ListView1_Click(Me, Nothing)
-
         End If
+
+        TaxConfiguration()
+        lblTaxAmount.Text = "Tax " & taxAmount & "%"
     End Sub
 
     Private Sub load_my_entries()

@@ -26,8 +26,7 @@ Public Class FormPayment
         load_userId_info_data_reader()
         setDataGridView()
 
-        ini = New clsIni
-        taxAmount = ini.GetString("server_setting", "tax_base", "0.00")
+        taxAmount = iniTax.GetString("server_setting", "tax_base", "0.00")
         chkbxTaxAmount.Text = taxAmount.ToString("N2") + "%"
     End Sub
 

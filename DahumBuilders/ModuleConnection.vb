@@ -11,6 +11,7 @@ Module ModuleConnection
     Public userLogon As User
     Public serverSetting As configurationSetting
     Public ini As New clsIni
+    Public iniTax As New clsIniTax
     Public mVerification As Boolean
     Public taxAmount As Double = 0.12
 
@@ -68,8 +69,6 @@ Module ModuleConnection
         serverSetting._username = ini.GetString("server_setting", "username", "")
         serverSetting._connTimeout = ini.GetString("server_setting", "connect-timeout", "28800")
         serverSetting._database = ini.GetString("server_setting", "database", "")
-        serverSetting._tax_base = ini.GetString("server_setting", "tax_base", "0.00")
-        taxAmount = serverSetting._tax_base
     End Sub
 
     Public Sub DahumConfiguration()
@@ -80,7 +79,10 @@ Module ModuleConnection
         serverSetting._username = ini.GetString("server_setting", "username", "")
         serverSetting._connTimeout = ini.GetString("server_setting", "connect-timeout", "28800")
         serverSetting._database = ini.GetString("server_setting", "database", "")
-        serverSetting._tax_base = ini.GetString("server_setting", "tax_base", "0.00")
-        taxAmount = serverSetting._tax_base
+    End Sub
+
+    Public Sub TaxConfiguration()
+        iniTax = New clsIniTax
+        taxAmount = Convert.ToDouble(iniTax.GetString("server_setting", "tax_base", "0.00"))
     End Sub
 End Module

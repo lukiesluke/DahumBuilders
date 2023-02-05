@@ -16,6 +16,8 @@ Public Class FormLogin
         tries = 0
         lblMessage.Visible = False
         lblIP.Text = String.Format("server: {0}", serverSetting._ip)
+
+        TaxConfiguration()
     End Sub
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         txtCustomeIP.Text = txtCustomeIP.Text.Trim.Replace(" ", "")

@@ -36,6 +36,7 @@ Partial Class FormMyOREntries
         Me.ColumnHeaderProject = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderPanalty = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDiscount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderTax = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderCreatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderUpdatedBy = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.txtORNumber = New System.Windows.Forms.TextBox()
@@ -74,7 +75,6 @@ Partial Class FormMyOREntries
         Me.txtARNumber = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtPartNo = New System.Windows.Forms.TextBox()
-        Me.ColumnHeaderTax = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.txtTax = New System.Windows.Forms.TextBox()
         Me.lblTaxAmount = New System.Windows.Forms.Label()
         Me.PanelPassword.SuspendLayout()
@@ -154,6 +154,10 @@ Partial Class FormMyOREntries
         '
         Me.ColumnHeaderDiscount.Text = "Discount"
         Me.ColumnHeaderDiscount.Width = 80
+        '
+        'ColumnHeaderTax
+        '
+        Me.ColumnHeaderTax.Text = "Tax"
         '
         'ColumnHeaderCreatedBy
         '
@@ -538,10 +542,6 @@ Partial Class FormMyOREntries
         Me.txtPartNo.TabIndex = 29
         Me.txtPartNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'ColumnHeaderTax
-        '
-        Me.ColumnHeaderTax.Text = "Tax"
-        '
         'txtTax
         '
         Me.txtTax.BackColor = System.Drawing.SystemColors.Info
@@ -554,11 +554,10 @@ Partial Class FormMyOREntries
         '
         'lblTaxAmount
         '
-        Me.lblTaxAmount.AutoSize = True
-        Me.lblTaxAmount.Location = New System.Drawing.Point(696, 92)
+        Me.lblTaxAmount.Location = New System.Drawing.Point(660, 92)
         Me.lblTaxAmount.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblTaxAmount.Name = "lblTaxAmount"
-        Me.lblTaxAmount.Size = New System.Drawing.Size(25, 13)
+        Me.lblTaxAmount.Size = New System.Drawing.Size(61, 13)
         Me.lblTaxAmount.TabIndex = 31
         Me.lblTaxAmount.Text = "Tax"
         Me.lblTaxAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
