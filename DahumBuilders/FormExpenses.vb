@@ -20,6 +20,12 @@ Public Class FormExpenses
         loadComboExpensesSearch()
         loadComboBoxUserType()
         enableExportToExcel()
+
+        TaxConfiguration()
+        lblTaxbase.Text = "Tax " & taxAmount.ToString("N2") & "%"
+        txtTaxBase.Text = 0.ToString("N2")
+        txtInput.Text = 0.ToString("N2")
+        txtGross.Text = 0.ToString("N2")
     End Sub
 
     Private Sub loadEmployeeList(type As String)
@@ -527,6 +533,51 @@ Public Class FormExpenses
     Private Sub txtInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtInput.KeyPress
         If (Not e.KeyChar = ChrW(Keys.Back) And ("0123456789.").IndexOf(e.KeyChar) = -1) Or (e.KeyChar = "." And txtInput.Text.ToCharArray().Count(Function(c) c = ".") > 0) Then
             e.Handled = True
+        End If
+    End Sub
+
+    Private Sub lblTaxbase_Click(sender As Object, e As EventArgs) Handles lblTaxbase.Click
+        Dim cashAmount As Double = Convert.ToDouble(txtCashoutAmount.Text.Trim)
+        txtTaxBase.Text = (cashAmount * taxAmount).ToString("N2")
+    End Sub
+
+    Private Sub txtCashoutAmount_Leave(sender As Object, e As EventArgs) Handles txtCashoutAmount.Leave
+        If txtCashoutAmount.Text.Trim.Length < 1 Then
+            txtCashoutAmount.Text = 0.ToString("N2")
+        End If
+
+        If txtCashoutAmount.Text.Trim.Equals(".") Then
+            txtCashoutAmount.Text = 0.ToString("N2")
+        End If
+    End Sub
+
+    Private Sub txtTaxBase_Leave(sender As Object, e As EventArgs) Handles txtTaxBase.Leave
+        If txtTaxBase.Text.Trim.Length < 1 Then
+            txtTaxBase.Text = 0.ToString("N2")
+        End If
+
+        If txtTaxBase.Text.Trim.Equals(".") Then
+            txtTaxBase.Text = 0.ToString("N2")
+        End If
+    End Sub
+
+    Private Sub txtGross_Leave(sender As Object, e As EventArgs) Handles txtGross.Leave
+        If txtGross.Text.Trim.Length < 1 Then
+            txtGross.Text = 0.ToString("N2")
+        End If
+
+        If txtGross.Text.Trim.Equals(".") Then
+            txtGross.Text = 0.ToString("N2")
+        End If
+    End Sub
+
+    Private Sub txtInput_Leave(sender As Object, e As EventArgs) Handles txtInput.Leave
+        If txtInput.Text.Trim.Length < 1 Then
+            txtInput.Text = 0.ToString("N2")
+        End If
+
+        If txtInput.Text.Trim.Equals(".") Then
+            txtInput.Text = 0.ToString("N2")
         End If
     End Sub
 End Class

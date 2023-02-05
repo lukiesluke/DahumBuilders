@@ -94,7 +94,7 @@ Partial Class FormExpenses
         Me.dtpEnd = New System.Windows.Forms.DateTimePicker()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtORNumber = New System.Windows.Forms.TextBox()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.lblTaxbase = New System.Windows.Forms.Label()
         Me.txtTaxBase = New System.Windows.Forms.TextBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.txtInput = New System.Windows.Forms.TextBox()
@@ -581,6 +581,7 @@ Partial Class FormExpenses
         '
         'txtVoucherNo
         '
+        Me.txtVoucherNo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVoucherNo.Location = New System.Drawing.Point(107, 69)
         Me.txtVoucherNo.Name = "txtVoucherNo"
         Me.txtVoucherNo.Size = New System.Drawing.Size(223, 20)
@@ -701,20 +702,21 @@ Partial Class FormExpenses
         '
         'txtORNumber
         '
+        Me.txtORNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtORNumber.Location = New System.Drawing.Point(107, 46)
         Me.txtORNumber.Name = "txtORNumber"
         Me.txtORNumber.Size = New System.Drawing.Size(223, 20)
         Me.txtORNumber.TabIndex = 4
         '
-        'Label16
+        'lblTaxbase
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(347, 28)
-        Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(55, 13)
-        Me.Label16.TabIndex = 40
-        Me.Label16.Text = "Tax Base:"
+        Me.lblTaxbase.AutoSize = True
+        Me.lblTaxbase.Location = New System.Drawing.Point(347, 28)
+        Me.lblTaxbase.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblTaxbase.Name = "lblTaxbase"
+        Me.lblTaxbase.Size = New System.Drawing.Size(55, 13)
+        Me.lblTaxbase.TabIndex = 40
+        Me.lblTaxbase.Text = "Tax Base:"
         '
         'txtTaxBase
         '
@@ -722,6 +724,7 @@ Partial Class FormExpenses
         Me.txtTaxBase.Name = "txtTaxBase"
         Me.txtTaxBase.Size = New System.Drawing.Size(91, 20)
         Me.txtTaxBase.TabIndex = 2
+        Me.txtTaxBase.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label17
         '
@@ -739,6 +742,7 @@ Partial Class FormExpenses
         Me.txtInput.Name = "txtInput"
         Me.txtInput.Size = New System.Drawing.Size(91, 20)
         Me.txtInput.TabIndex = 3
+        Me.txtInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label18
         '
@@ -756,6 +760,7 @@ Partial Class FormExpenses
         Me.txtGross.Name = "txtGross"
         Me.txtGross.Size = New System.Drawing.Size(91, 20)
         Me.txtGross.TabIndex = 1
+        Me.txtGross.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'FormExpenses
         '
@@ -766,7 +771,7 @@ Partial Class FormExpenses
         Me.Controls.Add(Me.txtGross)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.txtInput)
-        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.lblTaxbase)
         Me.Controls.Add(Me.txtTaxBase)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.txtORNumber)
@@ -884,7 +889,7 @@ Partial Class FormExpenses
     Friend WithEvents Label15 As Label
     Friend WithEvents txtORNumber As TextBox
     Friend WithEvents ColumnHeaderORNumber As ColumnHeader
-    Friend WithEvents Label16 As Label
+    Friend WithEvents lblTaxbase As Label
     Friend WithEvents txtTaxBase As TextBox
     Friend WithEvents Label17 As Label
     Friend WithEvents txtInput As TextBox
