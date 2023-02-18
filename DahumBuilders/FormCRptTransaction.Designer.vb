@@ -67,7 +67,7 @@ Partial Class FormCRptTransaction
         '
         'btnShow
         '
-        Me.btnShow.Location = New System.Drawing.Point(378, 8)
+        Me.btnShow.Location = New System.Drawing.Point(431, 9)
         Me.btnShow.Name = "btnShow"
         Me.btnShow.Size = New System.Drawing.Size(75, 23)
         Me.btnShow.TabIndex = 1
@@ -80,7 +80,7 @@ Partial Class FormCRptTransaction
         Me.cbbProjectName.FormattingEnabled = True
         Me.cbbProjectName.Location = New System.Drawing.Point(90, 9)
         Me.cbbProjectName.Name = "cbbProjectName"
-        Me.cbbProjectName.Size = New System.Drawing.Size(282, 21)
+        Me.cbbProjectName.Size = New System.Drawing.Size(335, 21)
         Me.cbbProjectName.TabIndex = 0
         '
         'Panel2

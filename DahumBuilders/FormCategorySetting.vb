@@ -38,7 +38,7 @@ Public Class FormCategorySetting
         Dim item As ListViewItem
         Try
             ListViewExpType.Items.Clear()
-            sql = "SELECT `id`,`name`,`short_name` FROM `db_particular_type` WHERE `id`>5"
+            sql = "SELECT `id`,`name`,`short_name` FROM `db_particular_type` WHERE `id`>6"
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlDataReader = sqlCommand.ExecuteReader()
             Do While sqlDataReader.Read = True

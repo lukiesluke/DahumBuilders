@@ -12,7 +12,8 @@ Public Class FormCRptTransaction
         mouseDownClicked = False
     End Sub
     Private Sub generate_listProjectCombo()
-        sql = "SELECT it.`item_id`, CONCAT( pl.`proj_name` ,' BLK', it.`block`,' L', it.`lot`) projectName FROM `db_transaction` t
+        sql = "SELECT it.`item_id`, CONCAT( pl.`proj_name` ,' BLK ', it.`block`,' - L', it.`lot`, ' ', it.`sqm`,' sqm' )
+        projectName FROM `db_transaction` t
         INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
         WHERE t.`userid`=@userId AND t.`proj_itemId` GROUP BY item_id"
@@ -100,6 +101,7 @@ Public Class FormCRptTransaction
             Dim address As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtAddress")
             Dim txtTotalTCP As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtTotalTCP")
             Dim txtTotalBalance As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtTotalBalance")
+            Dim lotInfo As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("lotInfo")
 
             txtHeaderCompanyName.Text = ModuleConnection.CompanyName
             txtHeaderCompanyAddress.Text = ModuleConnection.CompanyAddress
@@ -109,6 +111,7 @@ Public Class FormCRptTransaction
             address.Text = mUser._address
             txtTotalTCP.Text = totalTcp.ToString("N2")
             txtTotalBalance.Text = totalBalance.ToString("N2")
+            lotInfo.Text = cbbProjectName.Text
 
             report.SetDataSource(table)
 
@@ -181,6 +184,7 @@ Public Class FormCRptTransaction
             Dim address As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("txtAddress")
             Dim txtTotalTCP As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtTotalTCP")
             Dim txtTotalBalance As TextObject = report.ReportDefinition.Sections("Section5").ReportObjects("txtTotalBalance")
+            Dim lotInfo As TextObject = report.ReportDefinition.Sections("Section2").ReportObjects("lotInfo")
 
             txtHeaderCompanyName.Text = ModuleConnection.CompanyName
             txtHeaderCompanyAddress.Text = ModuleConnection.CompanyAddress
@@ -190,6 +194,7 @@ Public Class FormCRptTransaction
             address.Text = mUser._address
             txtTotalTCP.Text = totalTcp.ToString("N2")
             txtTotalBalance.Text = totalBalance.ToString("N2")
+            lotInfo.Text = cbbProjectName.Text
 
             report.SetDataSource(table)
 
