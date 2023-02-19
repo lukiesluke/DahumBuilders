@@ -12,10 +12,11 @@ Public Class FormCRptTransaction
         mouseDownClicked = False
     End Sub
     Private Sub generate_listProjectCombo()
-        sql = "SELECT it.`item_id`, CONCAT( pl.`proj_name` ,' BLK ', it.`block`,' - L', it.`lot`, ' ', it.`sqm`,' sqm' )
+        sql = "SELECT it.`item_id`, CONCAT( pl.`proj_name` , ' ' , ph.`phase`, ' Block ', it.`block`,' - lot ', it.`lot`, ' ', it.`sqm`,'sqm')
         projectName FROM `db_transaction` t
         INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
+        INNER JOIN `db_project_lot_phase` ph ON  ph.`id` = t.`proj_id`
         WHERE t.`userid`=@userId AND t.`proj_itemId` GROUP BY item_id"
         Connection()
         Try
@@ -52,7 +53,7 @@ Public Class FormCRptTransaction
         sql = "SELECT (CASE 
         WHEN LENGTH(TRIM(`official_receipt_no`)) < 1 && LENGTH(TRIM(`ar_number`)) > 0  THEN `ar_number`
         WHEN LENGTH(TRIM(`official_receipt_no`)) > 0 && LENGTH(TRIM(`ar_number`)) < 1  THEN `official_receipt_no`
-        ELSE CONCAT(TRIM(`official_receipt_no`), '/', TRIM(`ar_number`))
+        ELSE CONCAT(TRIM(`ar_number`), '/', TRIM(`official_receipt_no`))
         END) AS `official_receipt_no`,`paid_amount`, t.`discount_amount`, t.`penalty`, t.`tax_base`, CONCAT(pa.`short_name`,' - ', pt.`short_name`) AS `payment_type`, 
         IF(t.`part_no`=0,'',t.`part_no`) AS part_no, pa.`short_name` AS `particular`, `date_paid`, 
         pl.`proj_name` , it.`block` , it.`lot` , it.`sqm` FROM `db_transaction` t 
@@ -133,7 +134,7 @@ Public Class FormCRptTransaction
         sql = "SELECT (CASE 
         WHEN LENGTH(TRIM(`official_receipt_no`)) < 1 && LENGTH(TRIM(`ar_number`)) > 0  THEN `ar_number`
         WHEN LENGTH(TRIM(`official_receipt_no`)) > 0 && LENGTH(TRIM(`ar_number`)) < 1  THEN `official_receipt_no`
-        ELSE CONCAT(TRIM(`official_receipt_no`), '/', TRIM(`ar_number`))
+        ELSE CONCAT(TRIM(`ar_number`), '/', TRIM(`official_receipt_no`))
         END) AS `official_receipt_no`,`paid_amount`, t.`discount_amount`, t.`penalty`, t.`tax_base`, CONCAT(pa.`short_name`,' - ', pt.`short_name`) AS `payment_type`, 
         IF(t.`part_no`=0,'',t.`part_no`) AS part_no, pa.`short_name` AS `particular`, `date_paid`, 
         pl.`proj_name` , it.`block` , it.`lot` , it.`sqm` FROM `db_transaction` t 
