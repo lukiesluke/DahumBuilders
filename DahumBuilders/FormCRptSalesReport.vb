@@ -155,8 +155,9 @@ Public Class FormCRptSalesReport
         Dim projectID As String = DirectCast(cbbProjectName.SelectedItem, KeyValuePair(Of String, String)).Key
         Dim HeaderSaleReport As String = "Daily Sales Report"
 
-        sql = "SELECT it.`block`, it.`lot`, it.`sqm`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name',
-        it.`price`, pa.`short_name` AS `particular`, l.`proj_name`, `official_receipt_no`, t.`date_paid`, t.`tax_base`, `paid_amount`, pt.`short_name`, `ar_number` FROM `db_transaction` t 
+        sql = "SELECT  t.`date_paid`, (SELECT CONCAT(`first_name`,' ',`last_name`) FROM `db_user_profile` WHERE id= t.`userid`) AS 'name', 
+        it.`block`, it.`lot`, it.`sqm`,`ar_number`, `official_receipt_no`, it.`price`, `paid_amount`, 
+        t.`part_no`, pa.`short_name` AS `particular`, pt.`short_name`, l.`proj_name` FROM `db_transaction` t 
         LEFT JOIN `db_payment_type` pt ON t.`payment_type` = pt.`id`
         LEFT JOIN `db_particular_type` pa ON t.`particular` = pa.`id` 
         LEFT JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
@@ -204,19 +205,19 @@ Public Class FormCRptSalesReport
             chartRange.HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Cells(1, 1) = HeaderSaleReport
 
-            shWorkSheet.Cells(2, 1) = "BLK"
-            shWorkSheet.Cells(2, 2) = "LOT"
-            shWorkSheet.Cells(2, 3) = "SQM"
-            shWorkSheet.Cells(2, 4) = "Customer Name"
-            shWorkSheet.Cells(2, 5) = "TCP"
-            shWorkSheet.Cells(2, 6) = "Particular"
-            shWorkSheet.Cells(2, 7) = "Property"
-            shWorkSheet.Cells(2, 8) = "OR #"
-            shWorkSheet.Cells(2, 9) = "Date Payment"
-            shWorkSheet.Cells(2, 10) = "VAT"
-            shWorkSheet.Cells(2, 11) = "Paid Amount"
-            shWorkSheet.Cells(2, 12) = "Payment Type"
-            shWorkSheet.Cells(2, 13) = "AR"
+            shWorkSheet.Cells(2, 1) = "Date Payment"
+            shWorkSheet.Cells(2, 2) = "Customer Name"
+            shWorkSheet.Cells(2, 3) = "BLK"
+            shWorkSheet.Cells(2, 4) = "LOT"
+            shWorkSheet.Cells(2, 5) = "SQM"
+            shWorkSheet.Cells(2, 6) = "AR"
+            shWorkSheet.Cells(2, 7) = "OR #"
+            shWorkSheet.Cells(2, 8) = "TCP"
+            shWorkSheet.Cells(2, 9) = "Paid Amount"
+            shWorkSheet.Cells(2, 10) = "Particular"
+            shWorkSheet.Cells(2, 11) = "Payment Type"
+            shWorkSheet.Cells(2, 12) = "Payment Mode"
+            shWorkSheet.Cells(2, 13) = "Property"
 
             For i = 0 To ds.Tables(0).Rows.Count - 1
                 For j = 0 To ds.Tables(0).Columns.Count - 1
@@ -225,10 +226,13 @@ Public Class FormCRptSalesReport
             Next
 
             shWorkSheet.Columns(1).HorizontalAlignment = Excel.Constants.xlLeft
-            shWorkSheet.Columns(7).HorizontalAlignment = Excel.Constants.xlCenter
-            shWorkSheet.Columns(8).HorizontalAlignment = Excel.Constants.xlCenter
-            shWorkSheet.Columns(10).HorizontalAlignment = Excel.Constants.xlRight
-            shWorkSheet.Columns(11).HorizontalAlignment = Excel.Constants.xlRight
+            shWorkSheet.Columns(3).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(4).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(7).HorizontalAlignment = Excel.Constants.xlLeft
+            shWorkSheet.Columns(8).HorizontalAlignment = Excel.Constants.xlLeft
+            shWorkSheet.Columns(9).HorizontalAlignment = Excel.Constants.xlRight
+            shWorkSheet.Columns(10).HorizontalAlignment = Excel.Constants.xlCenter
+            shWorkSheet.Columns(11).HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Columns(12).HorizontalAlignment = Excel.Constants.xlCenter
             shWorkSheet.Columns(13).HorizontalAlignment = Excel.Constants.xlLeft
 

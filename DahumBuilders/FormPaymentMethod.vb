@@ -19,7 +19,7 @@ Public Class FormPaymentMethod
 
         btnCancel.Select()
         lblProjectDetails.Text = String.Format("{0} Block {1} Lot {2} ({3} sqm)", mProject._name, mProject._block, mProject._lot, mProject._sqm)
-        lblTCP.Text = mProject._tcp.ToString("N2") + " item ID: " + mProject._itemID + " PrjID: " + mProject._projID
+        lblTCP.Text = mProject._tcp.ToString("N2") '+ " item ID: " + mProject._itemID + " PrjID: " + mProject._projID
         Dim count As Integer = 0
         Connection()
         Try
