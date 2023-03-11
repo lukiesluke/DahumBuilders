@@ -205,6 +205,9 @@ Module ModuleForm
             MessageBox.Show(ex.Message)
             sqlCommand.Dispose()
             sqlConnection.Close()
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         End Try
         Return result
     End Function

@@ -396,13 +396,17 @@ Public Class FormUserList
 
         Cursor = Cursors.WaitCursor
         Connection()
-        sql = "SELECT c.`id`,  c.`userid`, 
+        sql = "SELECT c.`id`,  c.`userid`,
         IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE id= c.`userid`),'') AS `name`,
         IFNULL((SELECT `mobile_number` FROM `db_user_profile` WHERE id= c.`userid`),'') AS `mobile`, 
-        `type`, `due_date`, `amount`,
+        IFNULL(c.`part_no`,'') part_no, `type`, `due_date`, `amount`,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id` = c.`proj_id`) proj_name, 
-        (SELECT CONCAT('Block ', `block`, ' Lot ', `lot`) FROM `db_project_item` WHERE `db_project_item`.`item_id`=c.`item_id`) blockLot FROM `db_payment_collection` c 
-        WHERE `due_date` BETWEEN DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND DATE_ADD(CURDATE(), INTERVAL 5 DAY) AND c.`status`=FALSE"
+        IFNULL((SELECT CONCAT('Block ', `block`, ' Lot ', `lot`) FROM `db_project_item` WHERE `db_project_item`.`item_id`=c.`item_id`),'') blockLot FROM `db_payment_collection` c 
+	    LEFT JOIN `db_transaction` t
+        ON c.`userid`=t.`userid` AND c.`proj_id`=t.`proj_id`
+        WHERE c.`due_date` BETWEEN DATE_SUB(CURDATE(), INTERVAL 5 DAY) AND DATE_ADD(CURDATE(), INTERVAL 5 DAY) 
+        AND t.`date_paid` BETWEEN DATE_SUB(CURDATE(), INTERVAL 25 DAY) AND DATE_ADD(CURDATE(), INTERVAL 25 DAY)
+        AND YEAR(CURDATE()) AND (c.`part_no` <> t.`part_no` OR c.`part_no` IS NULL) ORDER BY c.`part_no` DESC, NAME ASC"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -416,6 +420,7 @@ Public Class FormUserList
                 item.SubItems.Add(sqlDataReader("userid"))
                 item.SubItems.Add(sqlDataReader("name"))
                 item.SubItems.Add(sqlDataReader("mobile"))
+                item.SubItems.Add(sqlDataReader("part_no"))
                 item.SubItems.Add(sqlDataReader("type"))
                 item.SubItems.Add(sqlDataReader("due_date"))
                 item.SubItems.Add(price.ToString("N2"))

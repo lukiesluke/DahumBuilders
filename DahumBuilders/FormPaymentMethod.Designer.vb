@@ -51,10 +51,12 @@ Partial Class FormPaymentMethod
         Me.lblProjectDetails = New System.Windows.Forms.Label()
         Me.lblTCP = New System.Windows.Forms.Label()
         Me.ListView1 = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1Id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader1Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2DueDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3Amount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader1Id = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
+        Me.ColumnHeaderPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -319,9 +321,9 @@ Partial Class FormPaymentMethod
         Me.Label2.Location = New System.Drawing.Point(17, 12)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(121, 15)
+        Me.Label2.Size = New System.Drawing.Size(128, 15)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Monthly Amortization"
+        Me.Label2.Text = "Monthly Amorthization"
         '
         'btnUpdate
         '
@@ -360,22 +362,27 @@ Partial Class FormPaymentMethod
         Me.lblTCP.Location = New System.Drawing.Point(427, 10)
         Me.lblTCP.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblTCP.Name = "lblTCP"
-        Me.lblTCP.Size = New System.Drawing.Size(113, 26)
+        Me.lblTCP.Size = New System.Drawing.Size(424, 26)
         Me.lblTCP.TabIndex = 11
         Me.lblTCP.Text = "lblTCP"
         Me.lblTCP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'ListView1
         '
-        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1Id, Me.ColumnHeader1Type, Me.ColumnHeader2DueDate, Me.ColumnHeader3Amount})
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1Id, Me.ColumnHeader1Type, Me.ColumnHeader2DueDate, Me.ColumnHeader3Amount, Me.ColumnHeaderPart})
         Me.ListView1.FullRowSelect = True
         Me.ListView1.GridLines = True
         Me.ListView1.Location = New System.Drawing.Point(545, 38)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(257, 237)
+        Me.ListView1.Size = New System.Drawing.Size(305, 237)
         Me.ListView1.TabIndex = 12
         Me.ListView1.UseCompatibleStateImageBehavior = False
         Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1Id
+        '
+        Me.ColumnHeader1Id.Text = "ID"
+        Me.ColumnHeader1Id.Width = 0
         '
         'ColumnHeader1Type
         '
@@ -392,16 +399,25 @@ Partial Class FormPaymentMethod
         Me.ColumnHeader3Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeader3Amount.Width = 80
         '
-        'ColumnHeader1Id
+        'cbbPaymentType
         '
-        Me.ColumnHeader1Id.Text = "ID"
-        Me.ColumnHeader1Id.Width = 0
+        Me.cbbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbbPaymentType.FormattingEnabled = True
+        Me.cbbPaymentType.Location = New System.Drawing.Point(248, 253)
+        Me.cbbPaymentType.Name = "cbbPaymentType"
+        Me.cbbPaymentType.Size = New System.Drawing.Size(121, 21)
+        Me.cbbPaymentType.TabIndex = 2
+        '
+        'ColumnHeaderPart
+        '
+        Me.ColumnHeaderPart.Text = "Part No"
         '
         'FormPaymentMethod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(808, 287)
+        Me.ClientSize = New System.Drawing.Size(862, 287)
+        Me.Controls.Add(Me.cbbPaymentType)
         Me.Controls.Add(Me.ListView1)
         Me.Controls.Add(Me.lblTCP)
         Me.Controls.Add(Me.lblProjectDetails)
@@ -460,4 +476,6 @@ Partial Class FormPaymentMethod
     Friend WithEvents ColumnHeader2DueDate As ColumnHeader
     Friend WithEvents ColumnHeader3Amount As ColumnHeader
     Friend WithEvents ColumnHeader1Id As ColumnHeader
+    Friend WithEvents cbbPaymentType As ComboBox
+    Friend WithEvents ColumnHeaderPart As ColumnHeader
 End Class

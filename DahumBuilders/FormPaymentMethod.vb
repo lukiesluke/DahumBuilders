@@ -2,10 +2,24 @@
 
 Public Class FormPaymentMethod
     Public Property mProject As Project = New Project()
+    Dim comboSourceProject As New Dictionary(Of String, String)()
+
     Private Sub FormPaymentMethod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        cbbPaymentType.DataSource = Nothing
+        cbbPaymentType.Items.Clear()
+        comboSourceProject.Add("SE", "Select")
+        comboSourceProject.Add("DP", "Downpayment")
+        comboSourceProject.Add("MA", "Monthly Amorthization")
+        comboSourceProject.Add("EQ", "Monthly Equity")
+
+        cbbPaymentType.DataSource = New BindingSource(comboSourceProject, Nothing)
+        cbbPaymentType.DisplayMember = "Value"
+        cbbPaymentType.ValueMember = "Key"
+
         btnCancel.Select()
         lblProjectDetails.Text = String.Format("{0} Block {1} Lot {2} ({3} sqm)", mProject._name, mProject._block, mProject._lot, mProject._sqm)
-        lblTCP.Text = mProject._tcp.ToString("N2")
+        lblTCP.Text = mProject._tcp.ToString("N2") + " item ID: " + mProject._itemID + " PrjID: " + mProject._projID
         Dim count As Integer = 0
         Connection()
         Try
@@ -22,6 +36,9 @@ Public Class FormPaymentMethod
                 count = sqlReader("count")
             End While
         Catch ex As Exception
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
@@ -63,6 +80,9 @@ Public Class FormPaymentMethod
             MessageBox.Show("On Load: " & ex.Message)
             sqlCommand.Dispose()
             sqlConnection.Close()
+        Finally
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         End Try
 
         txtAmountMA.Text = Double.Parse(txtAmountMA.Text).ToString("N2")
@@ -70,6 +90,7 @@ Public Class FormPaymentMethod
         loadDueDate()
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
         If UpdatePaymetMethod(mProject, "EQ", txtAmountEQ.Text, txtEquityTerm.Text, dtpEquityStart.Value, dtpEquityEnd.Value) = 1 Then
             If UpdatePaymetMethod(mProject, "MA", txtAmountMA.Text, txtMATerm.Text, dtpMonthlyStart.Value, dtpMonthlyEnd.Value) = 1 Then
                 MessageBox.Show("Successfully Updated.")
@@ -78,12 +99,16 @@ Public Class FormPaymentMethod
         End If
 
         deleteCurrentDueDate()
+
         Connection()
+
+        Dim keyType As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
+
         Try
             If Integer.Parse(txtMATerm.Text.Trim) > 0 Then
                 For index As Integer = 0 To Integer.Parse(txtMATerm.Text.Trim) - 1
-                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`) 
-                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId)"
+                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`, `part_no`) 
+                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId, @PartNo)"
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
                     With sqlCommand
                         .CommandText = sql
@@ -93,6 +118,7 @@ Public Class FormPaymentMethod
                         .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountMA.Text.Trim
                         .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
                         .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+                        .Parameters.Add("@PartNo", MySqlDbType.Int64).Value = index + 1
                     End With
                     sqlCommand.ExecuteNonQuery()
                 Next
@@ -100,8 +126,8 @@ Public Class FormPaymentMethod
 
             If Integer.Parse(txtEquityTerm.Text.Trim) > 0 Then
                 For index As Integer = 0 To Integer.Parse(txtEquityTerm.Text.Trim) - 1
-                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`) 
-                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId)"
+                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`, `part_no`) 
+                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId, @PartNo)"
                     sqlCommand = New MySqlCommand(sql, sqlConnection)
                     With sqlCommand
                         .CommandText = sql
@@ -111,12 +137,18 @@ Public Class FormPaymentMethod
                         .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountEQ.Text.Trim
                         .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
                         .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+                        .Parameters.Add("@PartNo", MySqlDbType.Int64).Value = index + 1
                     End With
                     sqlCommand.ExecuteNonQuery()
                 Next
             End If
+            sqlCommand.Dispose()
+            sqlConnection.Close()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
+            sqlCommand.Dispose()
+            sqlConnection.Close()
+        Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
@@ -126,14 +158,17 @@ Public Class FormPaymentMethod
 
     Private Sub deleteCurrentDueDate()
 
-        Connection()
-        sql = "DELETE FROM `db_payment_collection` WHERE `userid`=@Userid AND `item_id`=@ItemId AND `proj_id`=@ProjId"
+        Dim key As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
 
+        Connection()
+        sql = "DELETE FROM `db_payment_collection` WHERE `type`=@Type AND `userid`=@Userid AND `item_id`=@ItemId AND `proj_id`=@ProjId"
+        MessageBox.Show(key)
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = mProject._userID
             sqlCommand.Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
             sqlCommand.Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+            sqlCommand.Parameters.Add("@Type", MySqlDbType.VarChar).Value = key
             sqlCommand.ExecuteNonQuery()
         Catch ex As Exception
             MessageBox.Show("DELETE Official Reciept ERROR: " & ex.Message)
@@ -244,7 +279,7 @@ Public Class FormPaymentMethod
 
     Private Sub loadDueDate()
         Connection()
-        sql = "SELECT `userid`, `type`, `due_date`, `amount` FROM `db_payment_collection` WHERE userid=@UserId ORDER BY `due_date`, `type`"
+        sql = "SELECT `item_id`,`userid`, `type`, `due_date`,IFNULL(`part_no`,'') part_no, `amount` FROM `db_payment_collection` WHERE userid=@UserId ORDER BY `item_id`, `due_date`"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
@@ -260,14 +295,26 @@ Public Class FormPaymentMethod
                 item.SubItems.Add(sqlDataReader("type"))
                 item.SubItems.Add(sqlDataReader("due_date"))
                 item.SubItems.Add(price.ToString("N2"))
+                item.SubItems.Add(sqlDataReader("part_no"))
                 ListView1.Items.Add(item)
             Loop
             sqlDataReader.Dispose()
+            sqlConnection.Close()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         Finally
             sqlCommand.Dispose()
             sqlConnection.Close()
         End Try
+    End Sub
+
+    Private Sub cbbPaymentType_SelectedValueChanged(sender As Object, e As EventArgs) Handles cbbPaymentType.SelectedValueChanged
+        Dim key As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
+        If key.Equals("SE") Then
+            btnUpdate.Enabled = False
+        Else
+            btnUpdate.Enabled = True
+            MessageBox.Show(key)
+        End If
     End Sub
 End Class
