@@ -314,7 +314,7 @@ Public Class FormPaymentMethod
             btnUpdate.Enabled = False
         Else
             btnUpdate.Enabled = True
-            MessageBox.Show(key)
         End If
     End Sub
+
 End Class

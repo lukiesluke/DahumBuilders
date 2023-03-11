@@ -37,7 +37,7 @@ Public Class FormMyOREntries
 
         buttonVoidDelete()
         sql = "SELECT `id`,`date_paid`,`official_receipt_no`, `ar_number`, t.`tax_base`, `paid_amount`,
-        (SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`) AS clientName,
+        IFNULL((SELECT CONCAT(`first_name`, ' ', `last_name`) FROM `db_user_profile` WHERE t.`userid`= `db_user_profile`.`id`),'Null') AS clientName,
         (SELECT `proj_name` FROM `db_project_list` WHERE `db_project_list`.`id`=t.`proj_id`) AS projectNam,
         (SELECT CONCAT('B',`block`, ' L', `lot`, ' ' ,`sqm`,' sqm') FROM `db_project_item` WHERE `db_project_item`.`proj_id`=t.`proj_id` AND `db_project_item`.`item_id`=t.`proj_itemId`) AS lotDes,
         (SELECT `short_name` FROM `db_particular_type` WHERE `id`= t.`particular`) AS particular, `part_no`,

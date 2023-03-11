@@ -55,8 +55,8 @@ Partial Class FormPaymentMethod
         Me.ColumnHeader1Type = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader2DueDate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader3Amount = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
         Me.ColumnHeaderPart = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.cbbPaymentType = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -399,6 +399,10 @@ Partial Class FormPaymentMethod
         Me.ColumnHeader3Amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeader3Amount.Width = 80
         '
+        'ColumnHeaderPart
+        '
+        Me.ColumnHeaderPart.Text = "Part No"
+        '
         'cbbPaymentType
         '
         Me.cbbPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -407,10 +411,6 @@ Partial Class FormPaymentMethod
         Me.cbbPaymentType.Name = "cbbPaymentType"
         Me.cbbPaymentType.Size = New System.Drawing.Size(121, 21)
         Me.cbbPaymentType.TabIndex = 2
-        '
-        'ColumnHeaderPart
-        '
-        Me.ColumnHeaderPart.Text = "Part No"
         '
         'FormPaymentMethod
         '
