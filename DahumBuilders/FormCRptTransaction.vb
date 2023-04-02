@@ -12,12 +12,11 @@ Public Class FormCRptTransaction
         mouseDownClicked = False
     End Sub
     Private Sub generate_listProjectCombo()
-        sql = "SELECT it.`item_id`, CONCAT( pl.`proj_name` , ' ' , ph.`phase`, ' Block ', it.`block`,' - lot ', it.`lot`, ' ', it.`sqm`,'sqm')
+        sql = "SELECT it.`item_id`, CONCAT( pl.`proj_name` , ' ' ,(SELECT `phase` FROM `db_project_lot_phase` WHERE `id`=it.`phase_id`),  ' Block ', it.`block`,' - lot ', it.`lot`, ' ', it.`sqm`,'sqm')
         projectName FROM `db_transaction` t
         INNER JOIN `db_project_list` pl ON pl.`id`= t.`proj_id`
         INNER JOIN `db_project_item` it ON it.`item_id` = t.`proj_itemId`
-        INNER JOIN `db_project_lot_phase` ph ON  ph.`id` = t.`proj_id`
-        WHERE t.`userid`=@userId AND t.`proj_itemId` GROUP BY item_id"
+        WHERE t.`userid`=172 AND t.`proj_itemId` GROUP BY item_id"
         Connection()
         Try
             Cursor = Cursors.WaitCursor
