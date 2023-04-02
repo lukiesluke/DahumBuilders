@@ -162,7 +162,7 @@ Public Class FormPaymentMethod
 
         Connection()
         sql = "DELETE FROM `db_payment_collection` WHERE `type`=@Type AND `userid`=@Userid AND `item_id`=@ItemId AND `proj_id`=@ProjId"
-        MessageBox.Show(key)
+        'MessageBox.Show(key)
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = mProject._userID

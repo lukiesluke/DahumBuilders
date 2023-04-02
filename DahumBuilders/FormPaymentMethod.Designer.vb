@@ -351,7 +351,7 @@ Partial Class FormPaymentMethod
         Me.lblProjectDetails.Location = New System.Drawing.Point(11, 10)
         Me.lblProjectDetails.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblProjectDetails.Name = "lblProjectDetails"
-        Me.lblProjectDetails.Size = New System.Drawing.Size(412, 26)
+        Me.lblProjectDetails.Size = New System.Drawing.Size(528, 26)
         Me.lblProjectDetails.TabIndex = 10
         Me.lblProjectDetails.Text = "lblProjectDetails"
         Me.lblProjectDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -359,13 +359,13 @@ Partial Class FormPaymentMethod
         'lblTCP
         '
         Me.lblTCP.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTCP.Location = New System.Drawing.Point(427, 10)
+        Me.lblTCP.Location = New System.Drawing.Point(545, 9)
         Me.lblTCP.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblTCP.Name = "lblTCP"
-        Me.lblTCP.Size = New System.Drawing.Size(424, 26)
+        Me.lblTCP.Size = New System.Drawing.Size(306, 26)
         Me.lblTCP.TabIndex = 11
         Me.lblTCP.Text = "lblTCP"
-        Me.lblTCP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblTCP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'ListView1
         '
