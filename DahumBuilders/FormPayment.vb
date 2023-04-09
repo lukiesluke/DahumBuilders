@@ -983,11 +983,12 @@ FinallyLine:
         Dim TotalAmount As Double
         Try
             TotalAmount = Convert.ToDouble(lblTotalAmount.Text)
-            If chkbxTaxAmount.Checked = True Then
-                lblTaxAmount.Text = (TotalAmount * taxAmount).ToString("N2")
-            Else
-                lblTaxAmount.Text = 0.ToString("N2")
-            End If
+            lblTaxAmount.Text = (TotalAmount * taxAmount).ToString("N2")
+            'If chkbxTaxAmount.Checked = True Then
+            '    lblTaxAmount.Text = (TotalAmount * taxAmount).ToString("N2")
+            'Else
+            '    lblTaxAmount.Text = 0.ToString("N2")
+            'End If
 
         Catch ex As Exception
 
