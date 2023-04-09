@@ -165,13 +165,19 @@ Public Class FormCRptSalesReport
         WHERE t.`proj_id`=@projectID AND t.`particular`<=6 AND t.`date_paid` BETWEEN @DateFrom AND @DateTo
         ORDER BY CAST(official_receipt_no AS UNSIGNED) ASC"
 
+        Dim dateRangePicker As String
+        If dtpFrom.Value.Date = dtpTo.Value.Date Then
+            dateRangePicker = dtpFrom.Value.Date.ToString("MM/dd/yyyy")
+        Else
+            dateRangePicker = dtpFrom.Value.Date.ToString("MM/dd/yyyy") & " - " & dtpTo.Value.Date.ToString("MM/dd/yyyy")
+        End If
 
         If projectID.Equals("0") Then
             sql = String.Format(sql, ">=")
-            HeaderSaleReport = "Sales Report"
+            HeaderSaleReport = "Sales Report " & dateRangePicker
         Else
             sql = String.Format(sql, "=")
-            HeaderSaleReport = "Daily Sales Report"
+            HeaderSaleReport = "Daily Sales Report " & dateRangePicker
         End If
 
         Cursor = Cursors.WaitCursor
