@@ -40,7 +40,7 @@ Public Class FormPayment
         IFNULL((SELECT SUM(`discount_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalDiscount',
         IFNULL((SELECT SUM(`penalty`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPenalty',
         IFNULL((SELECT SUM(`paid_amount`) FROM `db_transaction` WHERE db_transaction.`proj_id`=i.`proj_id` AND db_transaction.`proj_itemId`=i.`item_id` AND i.`assigned_userid`=db_transaction.`userid`),0) AS 'totalPaidAmount',
-        IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='EQ' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'EQ',
+        IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='DP' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'DP',
         IFNULL((SELECT `monthly` FROM `db_payment_method` WHERE i.`item_id`=db_payment_method.`item_id` AND db_payment_method.`type`='MA' AND i.`assigned_userid`=db_payment_method.`userid`),0) AS 'MA',
         i.`status` FROM `db_project_list` l INNER JOIN `db_project_item` i ON l.`id`=i.`proj_id` WHERE i.`assigned_userid`=@userId"
         ListViewUserItem.Items.Clear()
@@ -75,7 +75,7 @@ Public Class FormPayment
                     ._total_discount = table.Rows(i)("totalDiscount")
                     ._total_penalty = table.Rows(i)("totalPenalty")
                     ._total_paidAmount = table.Rows(i)("totalPaidAmount")
-                    ._equity = table.Rows(i)("EQ")
+                    ._equity = table.Rows(i)("DP")
                     ._amortization = table.Rows(i)("MA")
                     ._status = table.Rows(i)("status")
                 End With
@@ -240,6 +240,8 @@ FinallyLine:
                             cellDiscount.ReadOnly = False
                             DataGridView1.Rows(e.RowIndex).Cells(3).Value = "0" 'cbbDownpayment
                             DataGridView1.Rows(e.RowIndex).Cells(6).ReadOnly = False 'Discount Amount
+                            EnableDataGridViewCell(DataGridView1, e)
+
                             If p._total_balance = 0 Then
                                 downpamentAmount = (p._tcp * Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(3).Value) / 100).ToString("N2")
                                 discount = Double.Parse(DataGridView1.Rows(e.RowIndex).Cells(5).Value) / 100
@@ -257,7 +259,9 @@ FinallyLine:
 
                                 DataGridView1.Rows(e.RowIndex).Cells(4).Value = downpamentAmount.ToString("N2") 'Downpayment Amount
                                 DataGridView1.Rows(e.RowIndex).Cells(6).Value = (downpamentAmount * discount).ToString("N2") 'Discount Amount
-                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
+                                'DataGridView1.Rows(e.RowIndex).Cells(11).Value = (downpamentAmount - (downpamentAmount * discount)).ToString("N2") 'Amount to pay
+                                EnableDataGridViewCell(DataGridView1, e) 'Part
+                                DataGridView1.Rows(e.RowIndex).Cells(11).Value = p._equity.ToString("N2") 'Amount to pay
                             End If
                         Case "Equity"
                             DataGridView1.Rows(e.RowIndex).Cells(11).ReadOnly = False
@@ -669,7 +673,7 @@ FinallyLine:
             End If
 
             Dim c As DataGridViewComboBoxCell = DirectCast(DataGridView1.Item(2, row.Index), DataGridViewComboBoxCell)
-            If c.Items.IndexOf(c.Value) = 2 Or c.Items.IndexOf(c.Value) = 3 Then
+            If c.Items.IndexOf(c.Value) = 1 Or c.Items.IndexOf(c.Value) = 2 Or c.Items.IndexOf(c.Value) = 3 Then
                 If row.Cells(10).Value Is Nothing Then
                     MessageBox.Show(Me, "Please enter Part No. of Equity/Monthly Amortization.", "Payment", MessageBoxButtons.OK, MessageBoxIcon.Question)
                     DataGridView1.Focus()
@@ -698,7 +702,7 @@ FinallyLine:
             trans._projectItemId = row.Cells(7).Value
             trans._projectId = row.Cells(8).Value
             trans._penalty = row.Cells(9).Value 'Penalty
-            trans._partNo = row.Cells(10).Value
+            trans._partNo = row.Cells(10).Value 'Part
             trans._paidAmount = row.Cells(11).Value 'Amount to Pay
             trans._check_bank_name = txtBankName.Text.Trim
             trans._tax_base = lblTaxAmount.Text.Trim
@@ -736,7 +740,7 @@ FinallyLine:
         `part_no`, `payment_type`, `check_bank_name`, `check_number`, `check_date`, `tax_base`, `userid`, `proj_id`, `proj_itemId`, `created_by`) VALUES (@OR, @AR, @DatePaid, @PaidAmount, 
         @DiscountAmount, @Penalty, @TCP, @Particular, @PartNo, @PaymentType, @CheckBankName, @CheckNumber, @CheckDate, @taxBase, @userid, @ProjId, @ProjItemId, @CreatedBy)"
 
-        If trans._particular = 0 Or trans._particular = 1 Or trans._particular = 4 Or trans._particular = 5 Then
+        If trans._particular = 0 Or trans._particular = 4 Or trans._particular = 5 Then
             trans._partNo = 0
         End If
 
@@ -1202,7 +1206,7 @@ FinallyLine:
                 item.SubItems.Add(transaction._paymentType)
                 item.SubItems.Add(transaction._particular_str)
 
-                If String.Compare(transaction._particular_str, "EQ") And String.Compare(transaction._particular_str, "MA") Then
+                If String.Compare(transaction._particular_str, "DP") And String.Compare(transaction._particular_str, "MA") Then
                     item.SubItems.Add("")
                 Else
                     item.SubItems.Add(transaction._partNo)

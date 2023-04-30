@@ -85,6 +85,7 @@ Public Class FormExpenses
 
     Private Sub loadPaymentType()
         Dim comboSourceEwtTaxType As New Dictionary(Of Double, String)()
+        comboSourceEwtTaxType.Add("0.00", "0%")
         comboSourceEwtTaxType.Add("0.01", "1%")
         comboSourceEwtTaxType.Add("0.02", "2%")
         comboSourceEwtTaxType.Add("0.05", "5%")
@@ -277,8 +278,8 @@ Public Class FormExpenses
         End If
 
         sql = "INSERT INTO `db_transaction` 
-        (`date_paid`,`official_receipt_no`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `gross_val`, `tax_base`, `input_val`, `ewt_val`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
-        (@DatePaid, @ORNo, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @GrossVal, @TaxBase, @InputVal, @EwtVal, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
+        (`date_paid`,`official_receipt_no`,`commission`,`particular`, `description`, `proj_id`, `check_bank_name`, `check_date`, `voucher_no`, `gross_val`, `tax_base`, `input_val`, `ewt_val`, `ewt_percent_val`, `payee_name`, `userid`, `payment_type`, `check_number`, `created_by`) VALUES
+        (@DatePaid, @ORNo, @Commission, @Particular, @Description, @ProjID, @BankName, @DateCheck, @VoucherNo, @GrossVal, @TaxBase, @InputVal, @EwtVal, @EwtPercentVal, @PayeeName, @Userid, @PaymentType, @CheckNumber, @CreatedBy)"
 
         Dim dateCheck As Date = Nothing
         If "commission".Equals(cbbExpensesType.Text.Trim.ToLower) Then
@@ -292,6 +293,8 @@ Public Class FormExpenses
         If lblClientID.Text.Equals("0") Then
             payeeName = lblIssueTo.Text.Trim
         End If
+
+        Dim ewtPercent As Double = DirectCast(cbxEwt.SelectedItem, KeyValuePair(Of Double, String)).Key
 
         Connection()
         Try
@@ -309,6 +312,7 @@ Public Class FormExpenses
             sqlCommand.Parameters.Add("@TaxBase", MySqlDbType.Double).Value = Double.Parse(txtTaxBase.Text.Trim)
             sqlCommand.Parameters.Add("@InputVal", MySqlDbType.Double).Value = Double.Parse(txtInput.Text.Trim)
             sqlCommand.Parameters.Add("@EwtVal", MySqlDbType.Double).Value = Double.Parse(txtEwt.Text.Trim)
+            sqlCommand.Parameters.Add("@EwtPercentVal", MySqlDbType.Double).Value = ewtPercent * 100
             sqlCommand.Parameters.Add("@PayeeName", MySqlDbType.VarChar).Value = payeeName
             sqlCommand.Parameters.Add("@Userid", MySqlDbType.Int64).Value = lblClientID.Text.Trim
             sqlCommand.Parameters.Add("@PaymentType", MySqlDbType.Int64).Value = PaymentType
@@ -603,56 +607,52 @@ Public Class FormExpenses
     Private Sub txtGross_TextChanged(sender As Object, e As EventArgs) Handles txtGross.TextChanged
         If cbxType.SelectedIndex = 0 Then
             computInputTax()
-        Else
             computEwtTax()
         End If
     End Sub
 
     Private Sub cbxType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxType.SelectedIndexChanged
+        cbxEwt.SelectedIndex = 0
         If cbxType.SelectedIndex = 0 Then
             computInputTax()
         Else
-            computEwtTax()
+            txtCashoutAmount.Text = txtGross.Text
+            txtAmountDue.Text = txtGross.Text
+            txtInput.Text = 0.ToString("N2")
+            txtEwt.Text = 0.ToString("N2")
         End If
     End Sub
     Private Sub computInputTax()
         Dim TotalAmount As Double
         Dim GrossAmount As Double
-        GrossAmount = Convert.ToDouble(txtGross.Text)
-        TotalAmount = ((GrossAmount / 1.12) * 0.12)
+        Try
+            GrossAmount = Convert.ToDouble(txtGross.Text)
+            TotalAmount = ((GrossAmount / 1.12) * 0.12)
 
-        txtInput.Enabled = True
-        txtInput.Text = TotalAmount.ToString("N2")
-        txtCashoutAmount.Text = (GrossAmount - TotalAmount).ToString("N2")
+            txtInput.Enabled = True
+            txtInput.Text = TotalAmount.ToString("N2")
+            txtCashoutAmount.Text = (GrossAmount - TotalAmount).ToString("N2")
+        Catch ex As Exception
 
-        cbxEwt.Enabled = False
-        txtEwt.Text = 0.ToString("N2")
-        txtEwt.Enabled = False
+        End Try
+
     End Sub
 
     Private Sub computEwtTax()
         Dim ewtPercent As Double = DirectCast(cbxEwt.SelectedItem, KeyValuePair(Of Double, String)).Key
-        Dim TotalAmount As Double
+        Dim TotalEWTAmount As Double
         Dim GrossAmount As Double
+        Dim NetAmount As Double
         Try
             GrossAmount = Convert.ToDouble(txtGross.Text)
-            TotalAmount = ((GrossAmount / 1.12) * ewtPercent)
+            TotalEWTAmount = ((GrossAmount / 1.12) * ewtPercent)
 
-            txtInput.Text = 0.ToString("N2")
-            txtInput.Enabled = False
-
-            txtEwt.Text = TotalAmount.ToString("N2")
-            txtCashoutAmount.Text = (GrossAmount - TotalAmount).ToString("N2")
-
-            cbxEwt.Enabled = True
-            txtEwt.Enabled = True
+            txtEwt.Text = TotalEWTAmount.ToString("N2")
+            NetAmount = Convert.ToDouble(txtCashoutAmount.Text)
+            txtAmountDue.Text = (GrossAmount - TotalEWTAmount).ToString("N2")
         Catch ex As Exception
 
         End Try
-    End Sub
-
-    Private Sub cbxEwt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxEwt.SelectedIndexChanged
-        computEwtTax()
     End Sub
 
     Private Sub txtEwt_Leave(sender As Object, e As EventArgs) Handles txtEwt.Leave
@@ -673,5 +673,9 @@ Public Class FormExpenses
                 btnSave.Enabled = False
             End If
         End If
+    End Sub
+
+    Private Sub cbxEwt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxEwt.SelectedIndexChanged
+        computEwtTax()
     End Sub
 End Class

@@ -683,7 +683,7 @@ Partial Class FormPayment
         '
         'ColumnHeaderEQ
         '
-        Me.ColumnHeaderEQ.Text = "EQ"
+        Me.ColumnHeaderEQ.Text = "DP"
         Me.ColumnHeaderEQ.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.ColumnHeaderEQ.Width = 80
         '

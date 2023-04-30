@@ -51,6 +51,7 @@ Partial Class FormExpenses
         Me.ColumnHeaderGross = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderTaxBase = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderInput = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeaderEwt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderORNumber = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderType = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeaderDescription = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -104,7 +105,8 @@ Partial Class FormExpenses
         Me.txtEwt = New System.Windows.Forms.TextBox()
         Me.cbxType = New System.Windows.Forms.ComboBox()
         Me.cbxEwt = New System.Windows.Forms.ComboBox()
-        Me.ColumnHeaderEwt = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.txtAmountDue = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.ContextMenuEditExpenses.SuspendLayout()
         Me.PanelPayeeName.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -188,27 +190,27 @@ Partial Class FormExpenses
         'txtDescription
         '
         Me.txtDescription.BackColor = System.Drawing.Color.White
-        Me.txtDescription.Location = New System.Drawing.Point(107, 245)
+        Me.txtDescription.Location = New System.Drawing.Point(107, 271)
         Me.txtDescription.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(223, 89)
+        Me.txtDescription.Size = New System.Drawing.Size(223, 63)
         Me.txtDescription.TabIndex = 11
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(40, 94)
+        Me.Label1.Location = New System.Drawing.Point(23, 94)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 13)
+        Me.Label1.Size = New System.Drawing.Size(73, 13)
         Me.Label1.TabIndex = 10
-        Me.Label1.Text = "Expenses:"
+        Me.Label1.Text = "Account Title:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(33, 247)
+        Me.Label2.Location = New System.Drawing.Point(33, 271)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(63, 13)
@@ -248,12 +250,12 @@ Partial Class FormExpenses
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(20, 223)
+        Me.Label3.Location = New System.Drawing.Point(30, 223)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(76, 13)
+        Me.Label3.Size = New System.Drawing.Size(66, 13)
         Me.Label3.TabIndex = 15
-        Me.Label3.Text = "Gross Amount:"
+        Me.Label3.Text = "Net Amount:"
         '
         'ListViewExpenses
         '
@@ -311,6 +313,10 @@ Partial Class FormExpenses
         'ColumnHeaderInput
         '
         Me.ColumnHeaderInput.Text = "Input"
+        '
+        'ColumnHeaderEwt
+        '
+        Me.ColumnHeaderEwt.Text = "EWT"
         '
         'ColumnHeaderORNumber
         '
@@ -464,7 +470,7 @@ Partial Class FormExpenses
         'lblProjectID
         '
         Me.lblProjectID.AutoSize = True
-        Me.lblProjectID.Location = New System.Drawing.Point(35, 274)
+        Me.lblProjectID.Location = New System.Drawing.Point(35, 298)
         Me.lblProjectID.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblProjectID.Name = "lblProjectID"
         Me.lblProjectID.Size = New System.Drawing.Size(61, 13)
@@ -698,12 +704,12 @@ Partial Class FormExpenses
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(50, 49)
+        Me.Label15.Location = New System.Drawing.Point(16, 49)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(46, 13)
+        Me.Label15.Size = New System.Drawing.Size(80, 13)
         Me.Label15.TabIndex = 38
-        Me.Label15.Text = "OR No.:"
+        Me.Label15.Text = "Reference No.:"
         '
         'txtORNumber
         '
@@ -789,7 +795,7 @@ Partial Class FormExpenses
         '
         Me.cbxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbxType.FormattingEnabled = True
-        Me.cbxType.Items.AddRange(New Object() {"Input", "EWT"})
+        Me.cbxType.Items.AddRange(New Object() {"Input", "No Input"})
         Me.cbxType.Location = New System.Drawing.Point(350, 22)
         Me.cbxType.Name = "cbxType"
         Me.cbxType.Size = New System.Drawing.Size(117, 21)
@@ -804,15 +810,33 @@ Partial Class FormExpenses
         Me.cbxEwt.Size = New System.Drawing.Size(59, 21)
         Me.cbxEwt.TabIndex = 48
         '
-        'ColumnHeaderEwt
+        'txtAmountDue
         '
-        Me.ColumnHeaderEwt.Text = "EWT"
+        Me.txtAmountDue.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtAmountDue.Location = New System.Drawing.Point(107, 247)
+        Me.txtAmountDue.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtAmountDue.Name = "txtAmountDue"
+        Me.txtAmountDue.Size = New System.Drawing.Size(223, 20)
+        Me.txtAmountDue.TabIndex = 49
+        Me.txtAmountDue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(27, 250)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(69, 13)
+        Me.Label19.TabIndex = 50
+        Me.Label19.Text = "Amount Due:"
         '
         'FormExpenses
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(983, 587)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.txtAmountDue)
         Me.Controls.Add(Me.cbxEwt)
         Me.Controls.Add(Me.cbxType)
         Me.Controls.Add(Me.Label16)
@@ -953,4 +977,6 @@ Partial Class FormExpenses
     Friend WithEvents cbxType As ComboBox
     Friend WithEvents cbxEwt As ComboBox
     Friend WithEvents ColumnHeaderEwt As ColumnHeader
+    Friend WithEvents txtAmountDue As TextBox
+    Friend WithEvents Label19 As Label
 End Class

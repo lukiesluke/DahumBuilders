@@ -95,7 +95,7 @@ Public Class FormMyOREntries
             item.SubItems.Add(transaction._paidAmount.ToString("N2"))
             item.SubItems.Add(transaction._paymentType)
             item.SubItems.Add(transaction._particular_str)
-            If transaction._particular_str = "EQ" Or transaction._particular_str = "MA" Then
+            If transaction._particular_str = "DP" Or transaction._particular_str = "EQ" Or transaction._particular_str = "MA" Then
                 item.SubItems.Add(transaction._partNo)
             Else
                 item.SubItems.Add("")

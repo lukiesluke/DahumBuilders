@@ -47,7 +47,7 @@ Public Class FormPaymentMethod
         Try
             If count < 1 Then
                 sql = "INSERT INTO `db_payment_method` (`type`,`monthly`,`terms`,`item_id`,`userid`) VALUES 
-            ('EQ', 0, 0, @ItemIDE, @UserIDE), ('MA', 0, 0, @ItemIDM, @UserIDM)"
+            ('DP', 0, 0, @ItemIDE, @UserIDE), ('MA', 0, 0, @ItemIDM, @UserIDM)"
                 sqlCommand = New MySqlCommand(sql, sqlConnection)
                 With sqlCommand
                     .CommandText = sql
@@ -63,7 +63,7 @@ Public Class FormPaymentMethod
                 Dim values As Dictionary(Of String, PaymentMethod) = New Dictionary(Of String, PaymentMethod)
                 Dim pm As New PaymentMethod
                 values = getPaymentMethod(mProject._itemID, mProject._userID)
-                If values.TryGetValue("EQ", pm) Then
+                If values.TryGetValue("DP", pm) Then
                     txtAmountEQ.Text = pm._monthly
                     txtEquityTerm.Text = pm._term
                     dtpEquityStart.Value = pm._startDate
@@ -91,57 +91,61 @@ Public Class FormPaymentMethod
     End Sub
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
-        If UpdatePaymetMethod(mProject, "EQ", txtAmountEQ.Text, txtEquityTerm.Text, dtpEquityStart.Value, dtpEquityEnd.Value) = 1 Then
+        deleteCurrentDueDate()
+
+        If UpdatePaymetMethod(mProject, "DP", txtAmountEQ.Text, txtEquityTerm.Text, dtpEquityStart.Value, dtpEquityEnd.Value) = 1 Then
             If UpdatePaymetMethod(mProject, "MA", txtAmountMA.Text, txtMATerm.Text, dtpMonthlyStart.Value, dtpMonthlyEnd.Value) = 1 Then
                 MessageBox.Show("Successfully Updated.")
                 mFormPayment.load_userId_info_data_reader()
             End If
         End If
 
-        deleteCurrentDueDate()
 
         Connection()
 
         Dim keyType As String = DirectCast(cbbPaymentType.SelectedItem, KeyValuePair(Of String, String)).Key
 
         Try
-            If Integer.Parse(txtMATerm.Text.Trim) > 0 Then
-                For index As Integer = 0 To Integer.Parse(txtMATerm.Text.Trim) - 1
-                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`, `part_no`) 
+            If cbbPaymentType.SelectedIndex = 2 Then
+                If Integer.Parse(txtMATerm.Text.Trim) > 0 Then
+                    For index As Integer = 0 To Integer.Parse(txtMATerm.Text.Trim) - 1
+                        sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`, `part_no`) 
                     VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId, @PartNo)"
-                    sqlCommand = New MySqlCommand(sql, sqlConnection)
-                    With sqlCommand
-                        .CommandText = sql
-                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = mProject._userID
-                        .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "MA"
-                        .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpMonthlyStart.Value)
-                        .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountMA.Text.Trim
-                        .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
-                        .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
-                        .Parameters.Add("@PartNo", MySqlDbType.Int64).Value = index + 1
-                    End With
-                    sqlCommand.ExecuteNonQuery()
-                Next
+                        sqlCommand = New MySqlCommand(sql, sqlConnection)
+                        With sqlCommand
+                            .CommandText = sql
+                            .Parameters.Add("@UserId", MySqlDbType.Int64).Value = mProject._userID
+                            .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "MA"
+                            .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpMonthlyStart.Value)
+                            .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountMA.Text.Trim
+                            .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
+                            .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+                            .Parameters.Add("@PartNo", MySqlDbType.Int64).Value = index + 1
+                        End With
+                        sqlCommand.ExecuteNonQuery()
+                    Next
+                End If
+            Else
+                If Integer.Parse(txtEquityTerm.Text.Trim) > 0 Then
+                    For index As Integer = 0 To Integer.Parse(txtEquityTerm.Text.Trim) - 1
+                        sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`, `part_no`) 
+                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId, @PartNo)"
+                        sqlCommand = New MySqlCommand(sql, sqlConnection)
+                        With sqlCommand
+                            .CommandText = sql
+                            .Parameters.Add("@UserId", MySqlDbType.Int64).Value = mProject._userID
+                            .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "DP"
+                            .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpEquityStart.Value)
+                            .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountEQ.Text.Trim
+                            .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
+                            .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
+                            .Parameters.Add("@PartNo", MySqlDbType.Int64).Value = index + 1
+                        End With
+                        sqlCommand.ExecuteNonQuery()
+                    Next
+                End If
             End If
 
-            If Integer.Parse(txtEquityTerm.Text.Trim) > 0 Then
-                For index As Integer = 0 To Integer.Parse(txtEquityTerm.Text.Trim) - 1
-                    sql = "INSERT INTO `db_payment_collection` (`userid`, `type`, `due_date`, `amount`, `item_id`, `proj_id`, `part_no`) 
-                    VALUES (@UserId, @TYPE, @DueDate, @Amount, @ItemId, @ProjId, @PartNo)"
-                    sqlCommand = New MySqlCommand(sql, sqlConnection)
-                    With sqlCommand
-                        .CommandText = sql
-                        .Parameters.Add("@UserId", MySqlDbType.Int64).Value = mProject._userID
-                        .Parameters.Add("@TYPE", MySqlDbType.VarChar).Value = "EQ"
-                        .Parameters.Add("@DueDate", MySqlDbType.Date).Value = DateAdd("m", index, dtpEquityStart.Value)
-                        .Parameters.Add("@Amount", MySqlDbType.Double).Value = txtAmountEQ.Text.Trim
-                        .Parameters.Add("@ItemId", MySqlDbType.Int64).Value = mProject._itemID
-                        .Parameters.Add("@ProjId", MySqlDbType.Int64).Value = mProject._projID
-                        .Parameters.Add("@PartNo", MySqlDbType.Int64).Value = index + 1
-                    End With
-                    sqlCommand.ExecuteNonQuery()
-                Next
-            End If
             sqlCommand.Dispose()
             sqlConnection.Close()
         Catch ex As Exception
@@ -279,7 +283,7 @@ Public Class FormPaymentMethod
 
     Private Sub loadDueDate()
         Connection()
-        sql = "SELECT `item_id`,`userid`, `type`, `due_date`,IFNULL(`part_no`,'') part_no, `amount` FROM `db_payment_collection` WHERE userid=@UserId ORDER BY `item_id`, `due_date`"
+        sql = "SELECT `item_id`,`userid`, `type`, `due_date`,IFNULL(`part_no`,'') part_no, `amount` FROM `db_payment_collection` WHERE userid=@UserId ORDER BY `type`, `due_date`"
 
         Try
             sqlCommand = New MySqlCommand(sql, sqlConnection)

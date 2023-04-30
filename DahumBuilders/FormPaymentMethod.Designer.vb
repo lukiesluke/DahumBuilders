@@ -299,9 +299,9 @@ Partial Class FormPaymentMethod
         Me.Label1.Location = New System.Drawing.Point(18, 12)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(86, 15)
+        Me.Label1.Size = New System.Drawing.Size(135, 15)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Monthly Equity"
+        Me.Label1.Text = "Downpayment  Monthly"
         '
         'Panel4
         '
